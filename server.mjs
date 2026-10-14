@@ -8,7 +8,7 @@ const port = Number(process.env.PORT || 3000);
 http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, 'http://localhost');
-    const filename = path.resolve(root, '.' + decodeURIComponent(url.pathname === '/' ? '/index.html' : url.pathname));
+    const filename = path.resolve(root, '.' + decodeURIComponent(url.pathname === '/' ? '/src/index.html' : url.pathname));
     if (!filename.startsWith(root + path.sep)) { res.writeHead(403); return res.end(); }
     const data = await readFile(filename);
     res.writeHead(200, { 'Content-Type': types[path.extname(filename)] || 'application/octet-stream', 'Cache-Control': 'no-cache' });

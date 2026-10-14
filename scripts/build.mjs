@@ -2,7 +2,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 const root=path.resolve(fileURLToPath(new URL('..',import.meta.url)));
-let html=await readFile(path.join(root,'index.html'),'utf8');
+let html=await readFile(path.join(root,'src/index.html'),'utf8');
 let css=await readFile(path.join(root,'src/style.css'),'utf8');
 for(const name of ['dm-sans','outfit']){
  const data=await readFile(path.join(root,`assets/fonts/${name}.ttf`));
@@ -16,5 +16,6 @@ const licenses=await Promise.all(['DM-Sans-OFL.txt','Outfit-OFL.txt'].map(name=>
 html=html.replace('</body>',()=>`<script type="text/plain" id="font-licenses">${licenses.join('\n\n')}</script></body>`);
 html=html.replace('href="/" aria-label="Simm avaleht"','href="#" aria-label="Simm avaleht"');
 await mkdir(path.join(root,'play'),{recursive:true});
+await writeFile(path.join(root,'index.html'),html);
 await writeFile(path.join(root,'play/index.html'),html);
-console.log('Built play/index.html — open directly in a browser, or upload play/ to a static host.');
+console.log('Built index.html and play/index.html — open directly in a browser, or upload play/ to a static host.');

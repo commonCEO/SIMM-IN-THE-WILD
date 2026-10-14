@@ -6,9 +6,11 @@ An Estonian browser survival adventure designed with Mattis. Local pixel graphic
 
 ## Try without installation
 
-Download [play/index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/play/index.html) from this repository and open it in a current desktop browser. This self-contained build includes all game code, fonts, graphics and sound. It works without a server. WASD/mouse works locally; controller availability on file URLs depends on your browser, so use the HTTP version if needed. Local save storage on file URLs also depends on the browser.
+Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) from this repository and open it in a current desktop browser. This self-contained build includes all game code, fonts, graphics and sound. It works without a server. WASD/mouse works locally; controller availability on file URLs depends on your browser, so use the HTTP version if needed. Local save storage on file URLs also depends on the browser.
 
-Rebuild after editing with `npm run build`. `play/` can also be uploaded as a static website or zipped for an itch.io HTML game.
+If you download the repository ZIP, extract it and open the root `index.html`. The `play/index.html` copy also works.
+
+Developers edit `src/index.html` and files in `src/`; the development server uses this template. Rebuild both standalone HTML files after editing with `npm run build`. `play/` can also be uploaded as a static website or zipped for an itch.io HTML game.
 
 ## Run
 
