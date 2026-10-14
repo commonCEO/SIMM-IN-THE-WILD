@@ -4,7 +4,7 @@ export const names = {wood:'Puit',stone:'Kivi',berries:'Marjad',crystal:'Kristal
 export const icons = {wood:'🪵',stone:'🪨',berries:'🫐',crystal:'💎',star:'✦',herbs:'🌿',meat:'🥩',roast:'🍗',stew:'🍲',ironOre:'◈',copperOre:'◆',iron:'▰',copper:'▰',slab:'▱',fish:'🐟',cookedFish:'🍢'};
 export const tools = [{id:'hand',icon:'✋',name:'Käsi'},{id:'axe',icon:'🪓',name:'Kirves'},{id:'pickaxe',icon:'⛏️',name:'Kirka'},{id:'bow',icon:'🏹',name:'Vibu'},{id:'torch',icon:'🔥',name:'Tõrvik'},{id:'rod',icon:'🎣',name:'Õng'}];
 export function freshState() {
-  return {inventory:Object.fromEntries(Object.keys(names).map(k=>[k,0])),bagSlots:20,gathered:{wood:0,stone:0,berries:0},tools:['hand','axe'],buildings:[],skills:{combat:0,craft:0,gather:0,star:0},level:1,xp:0,points:0,health:5,hunger:100,day:1,time:0,worldAge:0,drops:[],crystalFound:false,alienFriend:false,alienFollowing:true,alien:null,meteorArrived:false,inCave:false,stumpsRemoved:[]};
+  return {inventory:Object.fromEntries(Object.keys(names).map(k=>[k,0])),bagSlots:20,gathered:{wood:0,stone:0,berries:0},tools:['hand','axe'],buildings:[],skills:{combat:0,craft:0,gather:0,star:0},level:1,xp:0,points:0,health:5,hunger:100,day:1,time:0,worldAge:0,drops:[],crystalFound:false,alienFriend:false,alienFollowing:true,alien:null,shelterFound:false,nightsSurvived:0,beaconBuilt:false,meteorArrived:false,inCave:false,stumpsRemoved:[]};
 }
 export const recipes = [
 {id:'pickaxe',name:'Kivikirka',icon:'⛏️',cost:{wood:5}},
@@ -26,6 +26,7 @@ export const recipes = [
 {id:'wall',name:'Puitsein',icon:'▤',cost:{wood:2},build:true},
 {id:'door',name:'Uks',icon:'▥',cost:{wood:3},build:true},
 {id:'stoneFloor',name:'Kivipõrand',icon:'▱',cost:{slab:1},build:true},
+{id:'beacon',name:'Tähemajakas',icon:'✦',cost:{wood:10,star:4,crystal:2,iron:2,copper:2},build:true},
 {id:'nest',name:'Tulnuka pesa',icon:'🛸',cost:{wood:8,star:2},build:true}
 ];
 export const skills = [
@@ -56,3 +57,14 @@ export function dropItem(s,id,x,y,inCave=false){if(!s.inventory[id])return false
 export function bowStats(s,charge){const power=Math.min(1,Math.max(0,charge)/(s.skills.quickdraw ? .78 : 1.2));return {power,range:120+power*300,speed:220+power*220,damage:1+power*3+(s.skills.combat||0)+(s.skills.quickdraw?1:0)};}
 export function inWater(x,y){const tx=x/32,ty=y/32;return ((tx-15)**2/36+(ty-19)**2/65<1)||((tx-53)**2/32+(ty-39)**2/27<1);}
 export function wallOrientation(b,buildings){if(b.rotation)return b.rotation;const neighbor=(dx,dy)=>buildings.some(n=>n!==b&&(n.type==='wall'||n.type==='door')&&n.x===b.x+dx&&n.y===b.y+dy);return neighbor(0,1)||neighbor(0,-1)?'v':'h';}
+
+export function questSteps(s){return [
+ {title:'Esimesed varud',text:'Vali kirves ja korja puust vähemalt viis puitu.',done:(s.gathered.wood||0)>=5},
+ {title:'Tööriistad seikluseks',text:'Mine meisterdamislaua kõrvale ja valmista kirka.',done:s.tools.includes('pickaxe')},
+ {title:'Valgus pimeduses',text:'Meisterda tõrvik: vajad kolme puitu ja ühte marja.',done:s.tools.includes('torch')},
+ {title:'Metsa saladus',text:'Mine põhja pool asuvasse koopasse ja leia metsakristall.',done:s.crystalFound},
+ {title:'Sõber tähtedelt',text:'Leia ida poolt meteoriit ja ütle Nupsile tere.',done:s.alienFriend},
+ {title:'Oma paik maailmas',text:'Ehita suletud tuba seinte ja uksega, siis astu oma koju sisse.',done:s.shelterFound},
+ {title:'Kolm tähistaevast',text:`Ela üle kolm ööd. Seni üle elatud: ${s.nightsSurvived||0}/3.`,done:(s.nightsSurvived||0)>=3},
+ {title:'Tähemajakas',text:'Sulata metallid ja ehita kristallist tähemajakas — sinu baasi särav süda.',done:s.beaconBuilt}
+];}

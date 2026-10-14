@@ -7,6 +7,8 @@ test('root HTML in the repository ZIP is the self-contained playable build',asyn
  assert.equal(html,alternate);
  assert.ok(html.includes('<style>'));
  assert.ok(html.includes('data:font/ttf;base64,'));
+ assert.ok(html.includes('data:image/png;base64,'));
+ assert.doesNotMatch(html,/['"]\/assets\/art\//);
  assert.ok(html.includes('function freshState()'));
  assert.ok(html.includes('function frame(time)'));
  assert.ok(html.includes('id="font-licenses"'));

@@ -1,6 +1,6 @@
 {
   "name": "simm-in-the-wild",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,7 +9,9 @@
     "test": "node --test tests/*.test.mjs",
     "check": "node --check src/game.js && node --check src/model.js && node --check src/audio.js && node --check server.mjs && node --check scripts/build.mjs",
     "test:browser": "node tests/browser-smoke.mjs",
-    "build": "node scripts/build.mjs"
+    "build": "node scripts/build.mjs",
+    "test:menus": "node tests/menu-ux.mjs",
+    "test:standalone": "node tests/standalone.mjs"
   },
   "devDependencies": {
     "playwright": "1.64.0"

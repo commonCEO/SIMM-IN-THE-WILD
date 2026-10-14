@@ -1,5 +1,5 @@
 import { toggleAudio, sound, updateAudio, setVolume } from './audio.js';
-import { freshState, recipes, skills, names, icons, tools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, cook, dropItem, bowStats, inWater, wallOrientation } from './model.js';
+import { freshState, recipes, skills, names, icons, tools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, cook, dropItem, bowStats, inWater, wallOrientation, questSteps } from './model.js';
 const $ = id => document.getElementById(id);
 const canvas = $('game'), ctx = canvas.getContext('2d');
 const TILE=32, W=64, H=48;
@@ -20,8 +20,9 @@ try {
     saveFound=true;
   }
 }catch{}
-let started=false,paused=false,last=0,elapsed=0,cam={x:0,y:0},keys={},tool=0,buildType=null,rotation='auto',toastTime=0,actionCooldown=0,autosave=0,padPrevious={},padMoveAt=0,menuIndex=0;
-let aim={x:1,y:0},charge=null,invulnerable=0,damageFlash=0,death=null,fishing=null,currentTarget=null;
+let assetsReady=false;
+let started=false,paused=false,last=0,elapsed=0,cam={x:0,y:0},keys={},tool=0,buildType=null,rotation='auto',toastTime=0,actionCooldown=0,autosave=0,padPrevious={},padMoveAt=0,menuIndex=0,menuKind=null,menuCache=[],menuDirection=null,menuRepeatAt=0,selectedSkill=null;
+let aim={x:1,y:0},charge=null,invulnerable=0,damageFlash=0,death=null,fishing=null,currentTarget=null,meteorFall=null;
 const particles=[],resources=[],animals=[],zombies=[],bats=[],arrows=[];
 const water=inWater;
 for(let i=0;i<290;i++){
@@ -37,69 +38,147 @@ for(let i=0;i<14;i++){
   do{x=(12+rand()*38)*TILE;y=(12+rand()*25)*TILE;}while(water(x,y)||water(x-8,y)||water(x+8,y)||water(x,y-6)||water(x,y+6));
   animals.push({x,y,type:i%3?'rabbit':'deer',dir:rand()*6.28,timer:rand()*3,step:rand()*6,hp:i%3?1:3});
 }
+const initialWildlife=animals.map(a=>({...a}));
 if(Array.isArray(state.wildlife)){animals.length=0;for(const a of state.wildlife){if(Number.isFinite(a.x)&&Number.isFinite(a.y)&&['rabbit','deer'].includes(a.type)&&!water(a.x,a.y))animals.push({...a});}}
 for(let i=0;i<3;i++)bats.push({x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,phase:rand()*6.28,hit:0});
 for(const [id,x,y,type]of[[600,29,22,'ironOre'],[601,35,23,'copperOre'],[602,28,26,'ironOre'],[603,36,27,'copperOre'],[604,28,19,'stone']])resources.push({id,x:x*TILE,y:y*TILE,type,hp:3,inCave:true,alive:!state.depleted?.includes(id)});
 if(state.alienFriend&&!state.alien)state.alien={x:state.player.x+35,y:state.player.y+25,inCave:state.inCave};
 function notify(text){$('toast').textContent=text;$('toast').classList.remove('hidden');toastTime=4;}
-function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:2,state}));}catch{}}
-function start(){started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?'Tere tagasi, Simm!':'Metsakristall ootab põhja pool. A / E suhtleb; Y / B ehitab.');refresh();}
-$('startButton').onclick=start;
-if(saveFound){$('startButton').textContent='Jätka seiklust →';document.querySelector('.intro-card p').textContent='Sinu mets, varud ja ehitised on alles. Versioon 0.2 ootab uut seiklust.';}
+function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:3,state}));}catch{}}
+function start(){if(!assetsReady)return;started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?'Tere tagasi, Simm!':'Metsakristall ootab põhja pool. A / E suhtleb; Y / B ehitab.');refresh();}
+$('startButton').onclick=start;$('newGameButton').onclick=()=>saveFound?openModal('newgame'):startNewGame();$('pauseButton').onclick=()=>openModal('pause');
+if(saveFound){$('startButton').textContent='Jätka seiklust →';document.querySelector('.intro-card p').textContent='Sinu mets, varud ja ehitised on alles. Versioon 0.3 ootab uut seiklust.';}
 $('audioButton').onclick=async()=>{try{const enabled=await toggleAudio();setVolume(Number($('volume').value)/100);$('audioButton').textContent=enabled?'♫ Heli sees':'♫ Heli väljas';$('audioButton').setAttribute('aria-pressed',String(enabled));}catch{notify('Brauser ei saanud heli käivitada.');}};
 $('volume').oninput=()=>setVolume(Number($('volume').value)/100);
 $('fullscreenButton').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{notify('Kasuta brauseri täisekraani klahvi F11.');}};
-$('helpButton').onclick=()=>openModal('help');$('skillsButton').onclick=()=>openModal('skills');$('craftButton').onclick=()=>openModal('craft');$('buildButton').onclick=()=>openModal('build');$('bagButton').onclick=()=>openModal('bag');$('eatButton').onclick=eat;
-function closeModal(){if($('modal').open)$('modal').close();paused=false;canvas.focus();}
-$('closeModal').onclick=closeModal;$('modal').addEventListener('cancel',()=>{paused=false;});
+$('journalButton').onclick=()=>openModal('journal');$('helpButton').onclick=()=>openModal('help');$('skillsButton').onclick=()=>openModal('skills');$('craftButton').onclick=()=>openModal('craft');$('buildButton').onclick=()=>openModal('build');$('bagButton').onclick=()=>openModal('bag');$('eatButton').onclick=eat;
+function closeModal(){if($('modal').open)$('modal').close();paused=false;menuKind=null;menuCache=[];menuDirection=null;canvas.focus({preventScroll:true});}
+$('closeModal').onclick=closeModal;$('modal').addEventListener('cancel',e=>{e.preventDefault();closeModal();});
 $('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
-function menuButtons(){return [...$('modalContent').querySelectorAll('button:not(:disabled)')];}
-function focusMenu(index){const buttons=menuButtons();if(!buttons.length){$('closeModal').focus();return;}menuIndex=(index+buttons.length)%buttons.length;for(const b of $('modal').querySelectorAll('.pad-focused'))b.classList.remove('pad-focused');buttons[menuIndex].classList.add('pad-focused');buttons[menuIndex].focus();buttons[menuIndex].scrollIntoView({block:'nearest'});}
+function uiGlyph(id){
+ const colors={gold:'#e8ce87',mint:'#a3cab0',wood:'#bd9759',steel:'#bdcfbf',dark:'#324b36'};
+ const paths={
+  wood:'<path d="M15 15h36v13H15zM10 36h36v13H10z" fill="wood"/><ellipse cx="15" cy="22" rx="8" ry="7" fill="gold"/><ellipse cx="10" cy="43" rx="8" ry="7" fill="gold"/><ellipse cx="15" cy="22" rx="4" ry="3" fill="wood"/><ellipse cx="10" cy="43" rx="4" ry="3" fill="wood"/>',
+  hand:'<path d="M21 52V31c0-5 6-5 6 0V16c0-5 6-5 6 0v15-18c0-5 6-5 6 0v19-14c0-5 6-5 6 0v19l5-5c5-4 9 1 5 6L43 55H25z" fill="gold"/>',
+  axe:'<path d="M18 55L39 10" stroke="wood" stroke-width="7"/><path d="M29 12l14-6 14 9-7 13-19-6z" fill="steel"/><path d="M46 8l11 7-7 13" fill="mint"/>',
+  pickaxe:'<path d="M17 55L39 15" stroke="wood" stroke-width="7"/><path d="M9 24Q34-7 57 17L36 13z" fill="steel"/>',
+  bow:'<path d="M17 8Q61 31 17 56" fill="none" stroke="wood" stroke-width="6"/><path d="M17 8L25 32 17 56M9 32h46" fill="none" stroke="gold" stroke-width="2"/><path d="M48 28l8 4-8 4" fill="steel"/>',
+  torch:'<path d="M27 38h10l-2 20h-6z" fill="wood"/><path d="M31 5c-9 13-20 20-13 31 8 15 28 11 31-3 3-11-8-18-10-25 0 12-7 14-8-3z" fill="gold"/><path d="M32 20c-6 7-10 11-6 18 4 7 13 4 13-3 0-6-4-9-7-15z" fill="#f2edb5"/>',
+  rod:'<path d="M13 57L34 8Q43 11 51 23" fill="none" stroke="wood" stroke-width="4"/><path d="M51 23v24q0 10-8 7" fill="none" stroke="mint" stroke-width="2"/><circle cx="51" cy="31" r="3" fill="gold"/>',
+  combat:'<path d="M14 10l35 36-6 7-35-36zM50 10L15 46l6 7 35-36z" fill="steel"/><path d="M10 40l14 14M40 54l14-14" stroke="gold" stroke-width="5"/><path d="M9 55l7-8M48 47l7 8" stroke="wood" stroke-width="6"/>',
+  craft:'<path d="M17 56L38 20" stroke="wood" stroke-width="7"/><path d="M24 13l19-8 14 13-7 10-24-8z" fill="steel"/><path d="M9 10l29 44" stroke="gold" stroke-width="4"/>',
+  gather:'<path d="M13 55Q19 12 55 8C59 39 34 55 13 55z" fill="gold"/><path d="M13 55l33-37M27 40l-3-11M36 30l13 1" stroke="dark" stroke-width="2" fill="none"/>',
+  star:'<path d="M32 5l8 18 19 9-19 8-8 19-8-19-19-8 19-9z" fill="gold"/><circle cx="32" cy="32" r="5" fill="#f4ecd1"/>',
+  guardian:'<path d="M32 55C-8 30 12 0 32 18 52 0 72 30 32 55z" fill="gold"/>',
+  mason:'<path d="M6 44l27 11 25-14-27-9zM6 31l27 11 25-14-27-9zM6 18l27 11 25-14L31 6z" fill="steel" stroke="dark" stroke-width="2"/>',
+  frost:'<path d="M32 6v52M9 19l46 26M9 45l46-26M24 11l8 8 8-8M24 53l8-8 8 8M11 27l11-3-1-11M43 51l-1-12 11-3M11 37l11 3-1 11M43 13l-1 12 11 3" stroke="mint" stroke-width="3" fill="none"/>',
+  helper:'<ellipse cx="32" cy="37" rx="27" ry="10" fill="steel"/><path d="M16 34c0-23 32-23 32 0z" fill="mint"/><path d="M20 51l-4 7M32 51v9M44 51l4 7" stroke="gold" stroke-width="3"/><circle cx="15" cy="36" r="2" fill="gold"/><circle cx="32" cy="38" r="2" fill="gold"/><circle cx="49" cy="36" r="2" fill="gold"/>'
+ };
+ const aliases={quickdraw:'bow',logger:'axe',smelter:'torch',angler:'rod',ironAxe:'axe',copperPickaxe:'pickaxe'};
+ const p=paths[aliases[id]||id];if(!p)return null;
+ return `<svg class="ui-glyph" viewBox="0 0 64 64" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">${p.replace(/gold|mint|wood|steel|dark/g,k=>colors[k])}</svg>`;
+}
+
+function menuButtons(){return menuCache;}
+function cacheMenu(){
+  menuCache=[...$('modalContent').querySelectorAll('button[data-nav],button:not(:disabled)')];
+  for(const button of menuCache){button.addEventListener('pointermove',e=>{const i=menuCache.indexOf(button);if((e.movementX||e.movementY)&&i>=0&&i!==menuIndex)focusMenu(i,false);});}
+}
+function focusMenu(index,scroll=true){
+  if(!menuCache.length){$('closeModal').focus({preventScroll:true});return;}
+  const previous=menuCache[menuIndex];previous?.classList.remove('pad-focused');
+  menuIndex=Math.max(0,Math.min(menuCache.length-1,index));const button=menuCache[menuIndex];
+  button.classList.add('pad-focused');button.focus({preventScroll:true});
+  // Only scroll the content container, and only when the selected card is actually outside it.
+  if(scroll){const box=button.getBoundingClientRect(),container=$('modalContent'),bounds=container.getBoundingClientRect();if(box.top<bounds.top+8)container.scrollTop-=bounds.top-box.top+12;else if(box.bottom>bounds.bottom-8)container.scrollTop+=box.bottom-bounds.bottom+12;}
+  updateMenuDetail(button);
+}
+function moveMenu(dx,dy){
+  if(!menuCache.length)return;
+  const current=menuCache[menuIndex],a=current.getBoundingClientRect();let best=-1,score=Infinity;
+  if(menuKind==='skills'&&dy){const node=skills.find(s=>s.id===current.dataset.skill);const target=dy<0?node?.requires:node&&!node.requires?skills.find(s=>s.requires===node.id)?.id:null;if(target){const i=menuCache.findIndex(b=>b.dataset.skill===target);if(i>=0)focusMenu(i);}return;}
+  for(let i=0;i<menuCache.length;i++){
+    if(i===menuIndex)continue;const b=menuCache[i].getBoundingClientRect(),vx=(b.left+b.width/2)-(a.left+a.width/2),vy=(b.top+b.height/2)-(a.top+a.height/2);
+    const forward=dx*vx+dy*vy,side=Math.abs(dx?vy:vx);if(forward<=2)continue;
+    const value=forward+side*2.8;if(value<score){best=i;score=value;}
+  }
+  if(best>=0)focusMenu(best);
+}
+function switchSkillBranch(direction){
+ const current=skills.find(s=>s.id===menuCache[menuIndex]?.dataset.skill);if(!current)return;
+ const branches=['combat','craft','gather','star'],next=branches[(branches.indexOf(current.branch)+direction+4)%4];
+ const siblings=skills.filter(s=>s.branch===current.branch),row=siblings.findIndex(s=>s.id===current.id),target=skills.filter(s=>s.branch===next)[row]||skills.find(s=>s.id===next);
+ const i=menuCache.findIndex(b=>b.dataset.skill===target.id);if(i>=0)focusMenu(i);
+}
+function activateMenu(){const button=menuCache[menuIndex];if(!button&&document.activeElement===$('closeModal')){closeModal();return;}if(button?.dataset.skill){selectedSkill=button.dataset.skill;learnSelectedSkill();}else if(button&&!button.disabled)button.click();}
+function updateMenuDetail(button){
+  if(!button?.dataset.skill)return;
+  const s=skills.find(s=>s.id===button.dataset.skill),rank=state.skills[s.id]||0;
+  selectedSkill=s.id;
+  const available=canUpgrade(state,s.id),locked=s.requires&&!state.skills[s.requires];
+  $('modalDetail').innerHTML=`<span class="detail-icon">${uiGlyph(s.id)||s.icon}</span><div class="eyebrow">${{combat:'VÕITLUS',craft:'MEISTERDAMINE',gather:'KORJAMINE',star:'TÄHELEIUTAMINE'}[s.branch]}</div><h3>${s.name}</h3><p>${s.description}</p><div class="rank-meter">${Array.from({length:s.max},(_,i)=>`<i class="${i<rank?'filled':''}"></i>`).join('')}</div><strong>Aste ${rank} / ${s.max}</strong><p class="unlock-copy">${locked?'Kõigepealt õpi: '+skills.find(n=>n.id===s.requires).name:rank>=s.max?'See oskus on täielikult õpitud.':!state.points?'Järgmise tasemega teenid uue oskuspunkti.':'Sul on '+state.points+' oskuspunkti. Õpi, et oma seiklust muuta.'}</p><button id="learnSkillButton" class="primary" ${!available?'disabled':''}>${locked?'Esmalt põhioskus':rank>=s.max?'Õpitud':!state.points?'Vajad oskuspunkti':'A / Enter · Õpi (1 punkt)'}</button>`;
+  $('learnSkillButton').onclick=learnSelectedSkill;
+}
+function learnSelectedSkill(){if(!selectedSkill)return;if(upgrade(state,selectedSkill)){const keep=selectedSkill;sound('craft');refresh();save();openModal('skills');const i=menuCache.findIndex(b=>b.dataset.skill===keep);focusMenu(Math.max(0,i));notify('Õppisid uue oskuse!');}else sound('swing');}
+function startNewGame(){
+  if(!assetsReady)return;
+  for(const k of Object.keys(state))delete state[k];Object.assign(state,freshState());state.player={x:base.x,y:base.y+64,face:1,walk:0};
+  for(const r of resources){r.alive=true;r.removed=false;r.hp=3;}
+  animals.splice(0,animals.length,...initialWildlife.map(a=>({...a})));zombies.length=0;arrows.length=0;particles.length=0;
+  bats.forEach((b,i)=>Object.assign(b,{x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,hit:0}));
+  tool=0;buildType=null;charge=null;death=null;fishing=null;meteorFall=null;invulnerable=0;damageFlash=0;autosave=0;aim={x:1,y:0};canvas._pointer=null;saveFound=false;
+  $('deathOverlay').classList.add('hidden');closeModal();save();start();notify('Uus seiklus algab. Tere tulemast Rohelaande, Simm!');
+}
 function refresh(){
   const hotbar=$('hotbar');hotbar.replaceChildren();
-  tools.forEach((t,i)=>{const b=document.createElement('button');b.className='tool-slot'+(tool===i?' active':'')+(!state.tools.includes(t.id)?' locked':'');b.title=t.name;b.setAttribute('aria-label',t.name);b.setAttribute('aria-pressed',String(tool===i));b.innerHTML=`<kbd>${i+1}</kbd>${t.icon}`;b.onclick=()=>selectTool(i);hotbar.append(b);});
-  $('bagCount').textContent=`${usedSlots(state)}/${state.bagSlots}`;
+  tools.forEach((t,i)=>{const b=document.createElement('button');b.className='tool-slot'+(tool===i?' active':'')+(!state.tools.includes(t.id)?' locked':'');b.title=t.name;b.setAttribute('aria-label',t.name);b.setAttribute('aria-pressed',String(tool===i));b.innerHTML=`<kbd>${i+1}</kbd>${uiGlyph(t.id)||t.icon}`;b.onclick=()=>selectTool(i);hotbar.append(b);});
+  paintMenuArt();$('bagCount').textContent=`${usedSlots(state)}/${state.bagSlots}`;
   $('pointsLabel').textContent=`${state.points} OSKUSPUNKTI`;
   $('skillsButton').classList.toggle('has-points',state.points>0);
-  $('skillSubtitle').textContent=`Tase ${state.level} · K / Menu`;
-  $('questText').textContent=!state.crystalFound?'Leia metsa südames peituv kristall':!state.alienFriend?'Leia ida poolt tähekülaline':'Ehita oma kodu · avasta · arene';
+  $('skillSubtitle').textContent=`Tase ${state.level} · K / RS`;
+  $('questText').textContent=(questSteps(state).find(q=>!q.done)?.title||'Sinu seiklus jätkub')+' · Seikluspäevik ↑';
 }
 function costFor(r){return Object.fromEntries(Object.entries(r.cost).map(([k,v])=>[k,Math.max(1,Math.ceil(v*(1-.1*(state.skills.craft||0))))]));}
 function nearBench(){return !state.inCave&&Math.hypot(state.player.x-(base.x+35),state.player.y-base.y)<46;}
 function nearStation(type){return !state.inCave&&state.buildings.find(b=>b.type===type&&Math.hypot(state.player.x-(b.x+.5)*TILE,state.player.y-(b.y+.5)*TILE)<48);}
 function nearFire(){return nearStation('fire');}
 function openModal(kind){
-  if(death)return;
+  if(death)return;const previousKey=menuKind===kind?menuCache[menuIndex]?.dataset.key:null;
   charge=null;fishing=null;paused=true;keys={};
-  const modal=$('modal'),content=$('modalContent');modal.classList.toggle('wide',kind==='skills');content.replaceChildren();
-  $('modalEyebrow').textContent={skills:`TASE ${state.level}`,craft:'MEISTERDAMISLAUD',build:'OMA KODU, OMA REEGLID',bag:'KÕIK VAJALIK KAASAS',fire:'LÕKKE ÄÄRES',furnace:'MAAGIST METALLIKS',help:'VÄIKE SPIKKER'}[kind];
-  $('modalTitle').textContent={skills:'Vali oma rada',craft:'Valmista midagi head',build:'Ehita oma kodu',bag:'Sinu seljakott',fire:'Soe tuli, hea toit',furnace:'Sulatusahi',help:'Seiklus algab siit'}[kind];
-  if(kind==='bag'){
+  const modal=$('modal'),content=$('modalContent');menuKind=kind;menuDirection=null;menuRepeatAt=0;modal.dataset.kind=kind;modal.classList.toggle('wide',kind==='skills');$('modalDetail').classList.toggle('hidden',kind!=='skills');content.replaceChildren();
+  $('modalEyebrow').textContent={skills:`TASE ${state.level}`,craft:'MEISTERDAMISLAUD',build:'OMA KODU, OMA REEGLID',bag:'KÕIK VAJALIK KAASAS',fire:'LÕKKE ÄÄRES',furnace:'MAAGIST METALLIKS',help:'VÄIKE SPIKKER',pause:'VÕTA HETK ENDALE',newgame:'UUS ALGUS',journal:'IGA SAMM LOEB'}[kind];
+  $('modalTitle').textContent={skills:'Vali oma rada',craft:'Valmista midagi head',build:'Ehita oma kodu',bag:'Sinu seljakott',fire:'Soe tuli, hea toit',furnace:'Sulatusahi',help:'Seiklus algab siit',pause:'Seiklus ootab sind',newgame:'Alustame uut seiklust?',journal:'Sinu seikluse lugu'}[kind];
+  if(kind==='journal'){const steps=questSteps(state),active=steps.findIndex(q=>!q.done);content.innerHTML='<div class="journal-list">'+steps.map((q,i)=>`<article class="journal-step ${q.done?'complete':''} ${i===active?'active':''}"><span>${q.done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${q.title}</h3><p>${q.text}</p></div>${i===active?'<small>SINU JÄRGMINE SAMM</small>':''}</article>`).join('')+'</div>';
+  }else if(kind==='pause'){content.innerHTML='<div class="pause-grid"><button id="resumeGame" class="primary">Jätka seiklust</button><button id="pauseSkills">✦ Minu oskused</button><button id="pauseHelp">? Kuidas mängida</button><button id="pauseNew">Uus mäng</button><button id="pauseJournal">⚑ Seikluspäevik</button></div><p class="build-note">Mäng on pausil ja sinu seiklus salvestatud.</p>';save();$('resumeGame').onclick=closeModal;$('pauseSkills').onclick=()=>openModal('skills');$('pauseHelp').onclick=()=>openModal('help');$('pauseNew').onclick=()=>openModal('newgame');$('pauseJournal').onclick=()=>openModal('journal');
+  }else if(kind==='newgame'){content.innerHTML='<div class="newgame-confirm"><span>✧</span><h3>Üks mets. Tuhat uut võimalust.</h3><p>Alustad esimesest päevast tühja seljakotiga. Praegune seiklus asendatakse uuega.</p><div class="pause-grid"><button id="cancelNewGame">Jäta praegune seiklus alles</button><button id="confirmNewGame" class="primary">Jah, alusta uut mängu</button></div></div>';$('cancelNewGame').onclick=closeModal;$('confirmNewGame').onclick=startNewGame;
+  }else if(kind==='bag'){
     content.innerHTML=`<p class="build-note">${usedSlots(state)} / ${state.bagSlots} pesa · Virnas kuni ${STACK_SIZE} eset. Vali ese, et üks maha panna. Ese püsib 10 mänguminutit ja selle saab A / E-ga uuesti üles korjata.</p>`;
     const grid=document.createElement('div');grid.className='bag-grid';
-    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · pane üks maha`;slot.setAttribute('aria-label',`Pane maha: ${names[k]}`);slot.innerHTML=`${icons[k]}<small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
+    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · pane üks maha`;slot.setAttribute('aria-label',`Pane maha: ${names[k]}`);slot.dataset.key=k;slot.innerHTML=`${menuArt(k,icons[k])}<span class="slot-name">${names[k]}</span><small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
     while(grid.children.length<state.bagSlots){const d=document.createElement('div');d.className='inv-slot empty';grid.append(d);}content.append(grid);
   }else if(kind==='skills'){
-    content.innerHTML=`<div class="skill-points">✦ ${state.points} oskuspunkti — vali, millises suunas arened</div>`;
+    content.innerHTML=`<div class="skill-points">✦ <strong>${state.points}</strong> oskuspunkti <span>Vali rada. Vaata võimalusi. Kasva omas tempos.</span></div>`;
     const tree=document.createElement('div');tree.className='skill-tree';
     for(const branch of ['combat','craft','gather','star']){
-      const column=document.createElement('div');column.className='skill-branch';const children=document.createElement('div');children.className='tree-children';
+      const column=document.createElement('div');column.className='skill-branch';column.dataset.branch=branch;
+      const label=document.createElement('h3');label.className='branch-label';label.textContent={combat:'Vapper seikleja',craft:'Nutikas meister',gather:'Metsa sõber',star:'Täheleiutaja'}[branch];column.append(label);
+      const children=document.createElement('div');children.className='tree-children';
       for(const s of skills.filter(s=>s.branch===branch)){
         const rank=state.skills[s.id]||0,locked=s.requires&&!state.skills[s.requires],card=document.createElement('div');
         card.className='skill-node'+(rank?' owned':'')+(canUpgrade(state,s.id)?' available':'')+(locked?' locked':'');
-        card.innerHTML=`<span>${s.icon}</span><strong>${s.name} ${rank}/${s.max}</strong><p>${s.description}</p><button ${!canUpgrade(state,s.id)?'disabled':''}>${locked?'Õpi kõigepealt põhioskus':rank>=s.max?'Õpitud':'Õpi · 1 punkt'}</button>`;
-        card.querySelector('button').onclick=()=>{if(upgrade(state,s.id)){sound('craft');refresh();save();openModal('skills');}};if(s.requires)children.append(card);else column.append(card);
+        const button=document.createElement('button');button.dataset.skill=s.id;button.dataset.key=s.id;button.dataset.nav='true';button.setAttribute('aria-label',s.name);button.innerHTML=`<span class="node-icon">${uiGlyph(s.id)||s.icon}</span><strong>${s.name}</strong><span class="node-rank">${rank}/${s.max} ${locked?'· 🔒':rank>=s.max?'· ✓':canUpgrade(state,s.id)?'· +':''}</span>`;
+        button.onclick=()=>{focusMenu(menuCache.indexOf(button),false);};button.ondblclick=learnSelectedSkill;
+        card.append(button);if(s.requires)children.append(card);else column.append(card);
       }column.append(children);tree.append(column);
     }content.append(tree);
   }else if(kind==='help'){
-    content.innerHTML=`<div class="help-copy"><p><strong>Xbox:</strong> vasak kang liigub, parem kang sihib. A suhtleb ja kinnitab. View (nupp vasaku kangi kõrval) avab seljakoti. Y avab ehitamise. X / RT kasutab tööriista; hoia RT all ja vabasta, et vibuga lasta. B käsib Nupsil oodata või kaasa tulla. LT sööb, LB/RB valib tööriista, Menu avab oskused. Menüüdes vali vasaku kangi või ristnuppudega; A kinnitab, B sulgeb.</p><p><strong>Klaviatuur:</strong> WASD liigub; E tegutseb; tühik / hiir kasutab tööriista (vibu: hoia ja vabasta). I seljakott, C meisterda lähedal laua juures, B ehita, K oskused, R söö, T tulnuka käsk. Ehitamisel Q või puldi X pöörab seina; hiireklõps / A paigutab ja Esc / B lõpetab.</p><p><strong>Kodu:</strong> ruudustik ja roheline eelvaade näitavad paigutust. Seinad ühenduvad naabritega ja uks sulgeb turvalise toa. Kirvega saad seina lõhkuda; pool kulunud puidust jääb maha. Ka kändudest saab veidi puitu.</p><p><strong>Uued varud:</strong> koopas leidub raua- ja vasemaaki. Ehita ahi, lisa puitu ning sulata kange või valmista kiviplaate. Õngega saad veekogu kaldal kala püüda. Laetud nool lendab kaugemale ja tabab ainult sihitud suunas. Loomad annavad liha ilma veriste efektideta.</p><p><strong>Nups:</strong> B / T jätab ta ootama või kutsub lähedalt kaasa. Kaasas olev Nups aeglustab vastaseid. Pesaga baasi jäetud Nups kogub marju. Maailm salvestub automaatselt sellesse brauserisse.</p><button id="resetSave">Alusta uut seiklust</button></div>`;
-    $('resetSave').onclick=()=>{if(confirm('Kas alustame uut seiklust?')){localStorage.removeItem('simm-save-v1');location.reload();}};
+    content.innerHTML=`<div class="help-copy"><p><strong>Xbox:</strong> vasak kang liigub, parem kang sihib. A suhtleb ja kinnitab. View (nupp vasaku kangi kõrval) avab seljakoti. Y avab ehitamise. X / RT kasutab tööriista; hoia RT all ja vabasta, et vibuga lasta. B käsib Nupsil oodata või kaasa tulla. LT sööb, LB/RB valib tööriista, Menu avab pausi; RS (parema kangi vajutus) avab oskused. Menüüdes vali vasaku kangi või ristnuppudega; A kinnitab, B sulgeb.</p><p><strong>Klaviatuur:</strong> WASD liigub; E tegutseb; tühik / hiir kasutab tööriista (vibu: hoia ja vabasta). I seljakott, C meisterda lähedal laua juures, B ehita, K oskused, R söö, T tulnuka käsk. Ehitamisel Q või puldi X pöörab seina; hiireklõps / A paigutab ja Esc / B lõpetab.</p><p><strong>Kodu:</strong> ruudustik ja roheline eelvaade näitavad paigutust. Seinad ühenduvad naabritega ja uks sulgeb turvalise toa. Kirvega saad seina lõhkuda; pool kulunud puidust jääb maha. Ka kändudest saab veidi puitu.</p><p><strong>Uued varud:</strong> koopas leidub raua- ja vasemaaki. Ehita ahi, lisa puitu ning sulata kange või valmista kiviplaate. Õngega saad veekogu kaldal kala püüda. Laetud nool lendab kaugemale ja tabab ainult sihitud suunas. Loomad annavad liha ilma veriste efektideta.</p><p><strong>Nups:</strong> B / T jätab ta ootama või kutsub lähedalt kaasa. Kaasas olev Nups aeglustab vastaseid. Pesaga baasi jäetud Nups kogub marju. Maailm salvestub automaatselt sellesse brauserisse.</p></div>`;
   }else if(kind==='fire'||kind==='furnace'){
     const station=nearStation(kind);
     if(!station){content.innerHTML='<p class="build-note">Mine jaama kõrvale, et seda kasutada.</p>';}
     else{
       content.innerHTML=`<div class="station-fuel"><p class="build-note">Kütust: ${Math.ceil(station.fuel||0)} sekundit · 1 puit = ${state.skills.smelter?4:2} minutit.</p><button id="fuelButton" ${state.inventory.wood<1?'disabled':''}>Lisa 1 puit · süüta tuli</button></div>`;
-      $('fuelButton').onclick=()=>{if(pay(state,{wood:1})){station.fuel=(station.fuel||0)+120*(state.skills.smelter?2:1);refresh();save();openModal(kind);}};
+      $('fuelButton').dataset.key='fuel';$('fuelButton').onclick=()=>{if(pay(state,{wood:1})){station.fuel=(station.fuel||0)+120*(state.skills.smelter?2:1);refresh();save();openModal(kind);}};
       for(const r of recipes.filter(r=>kind==='fire'?r.cook:r.smelt)){
         const row=recipeRow(r,r.cost,!(station.fuel>0)||!canPay(state,r.cost),kind==='fire'?'Küpseta':'Sulata');
         row.querySelector('button').onclick=()=>{if(station.fuel>0&&cook(state,r)){station.fuel=Math.max(0,station.fuel-5);gainXP(state,8);sound('craft');refresh();save();openModal(kind);notify(`${r.name} valmis!`);}else notify('Seljakotis pole ruumi.');};content.append(row);
@@ -118,9 +197,9 @@ function openModal(kind){
     }
   }
   if(!modal.open)modal.showModal();
-  focusMenu(0);
+  cacheMenu();const keep=previousKey?menuCache.findIndex(b=>b.dataset.key===previousKey):-1;focusMenu(keep>=0?keep:0,!['help','journal'].includes(kind));paintMenuArt();document.querySelector('.modal-hint').textContent=kind==='skills'?'Vasak kang / ristnupud: vali · A: õpi · LB/RB: haru · B: tagasi':['help','journal'].includes(kind)?'Parem kang / hiireratas: keri · B: tagasi':'Vasak kang / ristnupud: vali · A: kinnita · B: tagasi';
 }
-function recipeRow(r,cost,disabled,label){const row=document.createElement('div');row.className='recipe';row.innerHTML=`<span>${r.icon}</span><div><strong>${r.name}</strong><p>${Object.entries(cost).map(([k,v])=>`${names[k]} ${v}`).join(' · ')}</p></div><button ${disabled?'disabled':''}>${label}</button>`;return row;}
+function recipeRow(r,cost,disabled,label){const row=document.createElement('div');row.className='recipe';row.innerHTML=`<span>${menuArt(r.id,r.icon)}</span><div><strong>${r.name}</strong><p>${Object.entries(cost).map(([k,v])=>`${names[k]} ${v} <small class="material-count ${state.inventory[k]>=v?'enough':'missing'}">(${state.inventory[k]||0} olemas)</small>`).join(' · ')}</p></div><button ${disabled?'disabled':''}>${label}</button>`;row.querySelector('button').dataset.key=r.id;return row;}
 function selectTool(i){if(state.tools.includes(tools[i]?.id)){charge=null;fishing=null;tool=i;refresh();}else notify('Meisterda kõigepealt see tööriist.');}
 function cycleTool(d){for(let i=0;i<tools.length;i++){const next=(tool+d+tools.length)%tools.length;tool=next;if(state.tools.includes(tools[tool].id))break;}charge=null;refresh();}
 function burst(x,y,color,count=8){for(let i=0;i<count;i++)particles.push({x,y,vx:(Math.random()-.5)*85,vy:-20-Math.random()*45,life:.7,color});}
@@ -192,7 +271,7 @@ function placement(x,y){
   const valid=!state.inCave&&Math.hypot(cx-state.player.x,cy-state.player.y)<145&&gx>=2&&gy>=2&&gx<W-2&&gy<H-2&&!water(cx,cy)&&Math.hypot(cx-cave.x,cy-cave.y)>75&&Math.hypot(cx-(base.x+35),cy-base.y)>32&&!resources.some(r=>!r.inCave&&(r.alive||r.type==='wood'&&!r.removed)&&!['berries','herbs'].includes(r.type)&&Math.hypot(r.x-cx,r.y-cy)<25)&&!state.buildings.some(b=>b.x===gx&&b.y===gy&&(floor?floors.includes(b.type):!floors.includes(b.type)))&&!(buildType==='wall'&&Math.hypot(cx-state.player.x,cy-state.player.y)<25);
   return {gx,gy,cx,cy,valid:valid&&canPay(state,costFor(recipes.find(r=>r.id===buildType)))};
 }
-function place(x,y){if(!buildType)return;const loc=placement(x,y);if(!loc.valid){notify('Punane koht: liiga kaugel, hõivatud või materjale napib.');return;}const r=recipes.find(r=>r.id===buildType),cost=costFor(r);if(!pay(state,cost))return;const b={x:loc.gx,y:loc.gy,type:buildType,paidWood:cost.wood||0};if(rotation!=='auto'&&['wall','door'].includes(buildType))b.rotation=rotation;if(['fire','furnace'].includes(buildType))b.fuel=0;state.buildings.push(b);gainXP(state,5);burst(loc.cx,loc.cy,'#e4c576');sound('build');refresh();save();}
+function place(x,y){if(!buildType)return;const loc=placement(x,y);if(!loc.valid){notify('Punane koht: liiga kaugel, hõivatud või materjale napib.');return;}const r=recipes.find(r=>r.id===buildType),cost=costFor(r);if(!pay(state,cost))return;const b={x:loc.gx,y:loc.gy,type:buildType,paidWood:cost.wood||0};if(rotation!=='auto'&&['wall','door'].includes(buildType))b.rotation=rotation;if(['fire','furnace'].includes(buildType))b.fuel=0;state.buildings.push(b);if(buildType==='beacon'){state.beaconBuilt=true;sound('crystal');notify('Tähemajakas särab! Ehitasid oma baasi südame.');}gainXP(state,5);burst(loc.cx,loc.cy,'#e4c576');sound('build');refresh();save();}
 function isSheltered(){if(state.inCave)return false;const sx=Math.floor(state.player.x/TILE),sy=Math.floor(state.player.y/TILE);const walls=state.buildings.filter(b=>b.type==='wall'||b.type==='door');if(walls.length<4)return false;const blocks=new Set(walls.map(b=>`${b.x},${b.y}`)),stack=[[sx,sy]],seen=new Set();if(blocks.has(`${sx},${sy}`))return false;while(stack.length){const[x,y]=stack.pop(),k=`${x},${y}`;if(blocks.has(k)||seen.has(k))continue;if(x<0||y<0||x>=W||y>=H)return false;seen.add(k);for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])stack.push([x+dx,y+dy]);}return true;}
 function blocked(x,y,enemy=false,inCave=state.inCave){if(inCave)return x<27*TILE||x>37*TILE||y<18*TILE||y>30*TILE;if(x<60||y<70||x>W*TILE-60||y>H*TILE-60||water(x,y))return true;return state.buildings.some(b=>(b.type==='wall'||enemy&&b.type==='door')&&Math.abs(x-(b.x+.5)*TILE)<21&&Math.abs(y-(b.y+.5)*TILE)<21);}
 function scaredByFire(x,y){if(tools[tool].id==='torch'&&Math.hypot(x-state.player.x,y-state.player.y)<110)return{x:state.player.x,y:state.player.y};if(!state.inCave)return state.buildings.filter(b=>b.type==='fire'&&b.fuel>0).map(b=>({x:(b.x+.5)*TILE,y:(b.y+.5)*TILE})).find(f=>Math.hypot(x-f.x,y-f.y)<150);return null;}
@@ -220,14 +299,15 @@ function update(dt,pad){
   let dx=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0)+pad.x,dy=(keys.KeyS||keys.ArrowDown?1:0)-(keys.KeyW||keys.ArrowUp?1:0)+pad.y,n=Math.hypot(dx,dy);
   if(n>0){if(n>1){dx/=n;dy/=n;}if(!blocked(p.x+dx*105*dt,p.y))p.x+=dx*105*dt;if(!blocked(p.x,p.y+dy*105*dt))p.y+=dy*105*dt;p.walk+=dt*10;if(dx)p.face=dx<0?-1:1;if(!canvas._pointer&&!pad.aimed&&!charge){const length=Math.hypot(dx,dy);aim={x:dx/length,y:dy/length};}}else p.walk=0;
   if(p.swing)p.swing-=dt;if(charge)charge.time=Math.min(1.5,charge.time+dt);
-  const wasNight=state.time>=300;advanceTime(state,dt);if(!wasNight&&state.time>=300){spawnZombies();notify('Öö saabus. Lõke, tõrvik ja kodu kaitsevad sind.');}if(wasNight&&state.time<300){zombies.length=0;notify('Algab uus päev!');}
-  if(!state.meteorArrived&&(state.time>55||state.day>1)){state.meteorArrived=true;notify('Meteoriit ida pool! Sealt saabus väike külaline.');save();}
+  const wasNight=state.time>=300;advanceTime(state,dt);if(!wasNight&&state.time>=300){spawnZombies();notify('Öö saabus. Lõke, tõrvik ja kodu kaitsevad sind.');}if(wasNight&&state.time<300){zombies.length=0;state.nightsSurvived=(state.nightsSurvived||0)+1;gainXP(state,20);refresh();notify('Algab uus päev! Elasid öö üle.');}
+  if(!state.meteorArrived&&(state.time>55||state.day>1)){state.meteorArrived=true;meteorFall={time:0};notify('Tähelangus ida pool! Sealt saabub väike külaline.');save();}
   if(state.hunger<=0){state.starve=(state.starve||0)+dt;if(state.starve>15){damagePlayer();state.starve=0;notify('Kõht on tühi! Söö marju.');}}
   if(fishing){fishing.time+=dt;if(Math.hypot(p.x-fishing.origin.x,p.y-fishing.origin.y)>12){fishing=null;notify('Liikusid eemale — püük katkes.');}else if(fishing.time>=3){addOrDrop('fish',state.skills.angler?2:1);gainXP(state,8);sound('fish');notify('Kala käes! Lõkkel saad selle küpsetada.');fishing=null;save();}}
+  if(meteorFall){meteorFall.time+=dt;if(meteorFall.time>=1.5){burst(meteor.x,meteor.y,'#e6d591',35);sound('crystal');meteorFall=null;}}
   updateAlien(dt);
   if(!state.inCave){
     for(const a of animals){a.timer-=dt;const d=Math.hypot(a.x-p.x,a.y-p.y),fire=scaredByFire(a.x,a.y);if(fire||d<100){const from=fire||p;a.dir=Math.atan2(a.y-from.y,a.x-from.x);a.timer=.4;}else if(a.timer<0){a.dir=rand()*6.28;a.timer=2+rand()*4;}const speed=fire||d<100?52:9;const nx=a.x+Math.cos(a.dir)*speed*dt,ny=a.y+Math.sin(a.dir)*speed*dt;if(!blocked(nx,ny,false,false)&&!water(nx-8,ny)&&!water(nx+8,ny)&&!water(nx,ny-6)&&!water(nx,ny+6)){a.x=nx;a.y=ny;a.step+=dt*8;}else a.dir+=2;}
-    const sheltered=isSheltered();for(const z of zombies)moveEnemy(z,dt,23,sheltered);
+    const sheltered=isSheltered();if(sheltered&&!state.shelterFound){state.shelterFound=true;gainXP(state,35);refresh();save();notify('Oma kodu! Sinu esimene turvaline tuba on valmis.');}for(const z of zombies)moveEnemy(z,dt,23,sheltered);
   }else for(const b of bats.filter(b=>b.hp>0))moveEnemy(b,dt,17);
   for(const b of state.buildings.filter(b=>['fire','furnace'].includes(b.type)))b.fuel=Math.max(0,(b.fuel||0)-dt);
   updateArrows(dt);
@@ -236,68 +316,102 @@ function update(dt,pad){
   updateHUD();
 }
 window.addEventListener('keydown',e=>{
-  if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
+  if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape'].includes(e.code))e.preventDefault();
   if(e.repeat)return;keys[e.code]=true;
-  if(paused){if(e.code==='Escape')closeModal();else if(['ArrowDown','ArrowRight','KeyS','KeyD'].includes(e.code))focusMenu(menuIndex+1);else if(['ArrowUp','ArrowLeft','KeyW','KeyA'].includes(e.code))focusMenu(menuIndex-1);else if(e.code==='Enter'||e.code==='Space')menuButtons()[menuIndex]?.click();return;}
-  if(e.code==='Escape'){buildType=null;return;}if(!started){if(e.code==='Enter')start();return;}if(death)return;
+  if(paused){if(e.code==='Escape')closeModal();else if(['ArrowDown','KeyS'].includes(e.code))moveMenu(0,1);else if(['ArrowUp','KeyW'].includes(e.code))moveMenu(0,-1);else if(['ArrowLeft','KeyA'].includes(e.code))moveMenu(-1,0);else if(['ArrowRight','KeyD'].includes(e.code))moveMenu(1,0);else if(e.code==='Enter'||e.code==='Space'){e.preventDefault();activateMenu();}return;}
+  if(e.code==='Escape'){if(buildType)buildType=null;else if(started)openModal('pause');return;}if(!started){if(e.code==='Enter'&&document.activeElement?.tagName!=='BUTTON')start();return;}if(death)return;
   if(/^Digit[1-6]$/.test(e.code)){selectTool(+e.code.slice(-1)-1);return;}
-  switch(e.code){case'KeyE':interact();break;case'Space':beginAction();break;case'KeyR':eat();break;case'KeyC':openModal('craft');break;case'KeyB':openModal('build');break;case'KeyK':openModal('skills');break;case'KeyI':openModal('bag');break;case'KeyT':alienCommand();break;case'KeyQ':rotateBuild();break;}
+  switch(e.code){case'KeyE':interact();break;case'Space':beginAction();break;case'KeyR':eat();break;case'KeyC':openModal('craft');break;case'KeyB':openModal('build');break;case'KeyK':openModal('skills');break;case'KeyI':openModal('bag');break;case'KeyT':alienCommand();break;case'KeyJ':openModal('journal');break;case'KeyQ':rotateBuild();break;}
 });
 window.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='Space')endAction();});
 window.addEventListener('blur',()=>{keys={};charge=null;save();});document.addEventListener('visibilitychange',()=>{last=0;keys={};charge=null;if(document.hidden)save();});window.addEventListener('pagehide',save);
-canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width+cam.x,y=(e.clientY-r.top)*canvas.height/r.height+cam.y,dx=x-state.player.x,dy=y-state.player.y,n=Math.hypot(dx,dy)||1;aim={x:dx/n,y:dy/n};canvas._pointer={x,y};});
+canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width+cam.x,y=(e.clientY-r.top)*canvas.height/r.height+cam.y,dx=x-state.player.x,dy=y-state.player.y,n=Math.hypot(dx,dy)||1;aim={x:dx/n,y:dy/n};if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer={x,y};});
 canvas.addEventListener('pointerdown',e=>{if(!started||paused||death)return;canvas.focus();canvas.setPointerCapture(e.pointerId);if(buildType){const r=canvas.getBoundingClientRect();place((e.clientX-r.left)*canvas.width/r.width+cam.x,(e.clientY-r.top)*canvas.height/r.height+cam.y);}else beginAction();});canvas.addEventListener('pointerup',endAction);canvas.addEventListener('pointercancel',()=>charge=null);
 function readPad(){
   const pad=[...(navigator.getGamepads?.()||[])].find(p=>p?.connected);
-  if(!pad){$('controllerStatus').textContent='KLAVIATUUR + HIIR';padPrevious={};return{x:0,y:0};}
-  $('controllerStatus').textContent='XBOX · VIEW KOTT · Y EHITA · RT TÖÖRIIST';
+  if(!pad){if($('controllerStatus').textContent!=='KLAVIATUUR + HIIR')$('controllerStatus').textContent='KLAVIATUUR + HIIR';padPrevious={};return{x:0,y:0};}
+  if($('controllerStatus').textContent!=='XBOX · VIEW KOTT · Y EHITA · RT TÖÖRIIST')$('controllerStatus').textContent='XBOX · VIEW KOTT · Y EHITA · RT TÖÖRIIST';
   const down=i=>!!pad.buttons[i]&&(pad.buttons[i].pressed||pad.buttons[i].value>.25),pressed=i=>down(i)&&!padPrevious[i],released=i=>!down(i)&&padPrevious[i];
   const lx=pad.axes[0]||0,ly=pad.axes[1]||0,ax=pad.axes[2]||0,ay=pad.axes[3]||0;
-  if(!started){if(pressed(0))start();}
-  else if(paused){
-    if(pressed(1))closeModal();
-    else{
-      const direction=pressed(12)||pressed(14)?-1:pressed(13)||pressed(15)?1:Math.abs(lx)>.55||Math.abs(ly)>.55?(Math.abs(ly)>=Math.abs(lx)?Math.sign(ly):Math.sign(lx)):0;
-      if(direction&&(performance.now()>padMoveAt||pressed(12)||pressed(13)||pressed(14)||pressed(15))){focusMenu(menuIndex+direction);padMoveAt=performance.now()+230;}
-      // Activate our own menu selection, never whichever unrelated element stole DOM focus.
-      if(pressed(0)){const buttons=menuButtons();buttons[Math.min(menuIndex,buttons.length-1)]?.click();}
+  if(!assetsReady){pad.buttons.forEach((_,i)=>padPrevious[i]=down(i));return{x:0,y:0};}
+  if(paused){
+    if(pressed(1)||pressed(9))closeModal();
+    else{if(Math.abs(ay)>.25){const panel=menuKind==='skills'?$('modalDetail'):$('modalContent');panel.scrollTop+=ay*12;}
+      let direction=null;
+      if(down(12))direction={x:0,y:-1};else if(down(13))direction={x:0,y:1};else if(down(14))direction={x:-1,y:0};else if(down(15))direction={x:1,y:0};
+      else if(Math.max(Math.abs(lx),Math.abs(ly))>.40)direction=Math.abs(ly)>=Math.abs(lx)?{x:0,y:Math.sign(ly)}:{x:Math.sign(lx),y:0};
+      const key=direction?`${direction.x},${direction.y}`:null,now=performance.now();
+      if(key&&key!==menuDirection){if(!menuCache.length&&direction.y)$('modalContent').scrollTop+=direction.y*110;else moveMenu(direction.x,direction.y);menuRepeatAt=now+260;}
+      else if(key&&now>=menuRepeatAt){if(!menuCache.length&&direction.y)$('modalContent').scrollTop+=direction.y*110;else moveMenu(direction.x,direction.y);menuRepeatAt=now+85;}
+      menuDirection=key;if(!key)menuRepeatAt=0;
+      if(pressed(0))activateMenu();
+      if(pressed(4)){if(menuKind==='skills')switchSkillBranch(-1);else moveMenu(-1,0);}if(pressed(5)){if(menuKind==='skills')switchSkillBranch(1);else moveMenu(1,0);}
     }
+  }else if(!started){if(pressed(0))start();if(pressed(3)){if(saveFound)openModal('newgame');else startNewGame();}
   }else if(!death){
     if(pressed(0))interact();if(pressed(2)){if(buildType)rotateBuild();else{beginAction();if(tools[tool].id==='bow')endAction();}}
-    if(pressed(3))openModal('build');if(pressed(8))openModal('bag');if(pressed(9))openModal('skills');
+    if(pressed(3))openModal('build');if(pressed(8))openModal('bag');if(pressed(9))openModal('pause');if(pressed(11))openModal('skills');if(pressed(12))openModal('journal');
     if(pressed(1)){if(buildType)buildType=null;else alienCommand();}
     if(pressed(4))cycleTool(-1);if(pressed(5))cycleTool(1);if(pressed(6))eat();
     if(pressed(7))beginAction();if(released(7))endAction();
   }
   pad.buttons.forEach((_,i)=>padPrevious[i]=down(i));
-  const aimed=Math.hypot(ax,ay)>.2;if(aimed&&!paused){const n=Math.hypot(ax,ay);aim={x:ax/n,y:ay/n};canvas._pointer=null;}
+  const aimed=Math.hypot(ax,ay)>.2;if(aimed&&!paused){const n=Math.hypot(ax,ay);aim={x:ax/n,y:ay/n};if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer=null;}
   if(Math.abs(lx)>.18||Math.abs(ly)>.18)canvas._pointer=null;
   return{x:Math.abs(lx)>.18?lx:0,y:Math.abs(ly)>.18?ly:0,aimed};
 }
 
+// Original generated artwork, with a procedural fallback while the sprite sheet loads.
+const atlasImage=new Image();atlasImage.onload=()=>{paintMenuArt();paintTitlePortrait();};atlasImage.src='/assets/art/woodland-atlas.png';
+const heroImage=new Image();heroImage.onload=paintTitlePortrait;heroImage.src='/assets/art/simm-walk.png';
+const extraImage=new Image();extraImage.onload=()=>{paintMenuArt();paintTitlePortrait();};extraImage.src='/assets/art/campsite-atlas.png';
+const artRects={
+ oak:[0,0,370,377],pine:[374,0,271,377],birch:[650,0,307,377],berries:[963,94,291,282],
+ rock:[9,397,343,264],ironOre:[361,405,290,242],copperOre:[649,391,308,266],crystal:[961,367,293,296],
+ bench:[8,670,352,277],furnace:[360,672,293,280],fire:[660,667,301,288],nest:[962,658,292,304],
+ alien:[35,948,265,305],rabbit:[365,951,287,303],deer:[675,946,277,307],zombie:[970,960,284,293],
+ cave:[15,10,552,501,'extra'],tent:[573,110,434,400,'extra'],bat:[1016,208,371,228,'extra'],stump:[1390,197,372,308,'extra'],
+ wallH:[69,589,454,239,'extra'],wallV:[612,533,222,309,'extra'],floor:[990,522,334,322,'extra'],stoneFloor:[1388,522,345,322,'extra']
+};
+const itemArt={beacon:'crystal',wall:'wallH',stoneFloor:'stoneFloor',floor:'floor',stone:'rock',berries:'berries',crystal:'crystal',ironOre:'ironOre',copperOre:'copperOre',iron:'ironOre',copper:'copperOre',nest:'nest',fire:'fire',furnace:'furnace'};
+function menuArt(id,fallback='✦'){const key=itemArt[id]||id;return artRects[key]?`<canvas class="menu-art" width="96" height="96" data-art="${key}" aria-hidden="true"></canvas>`:(uiGlyph(id)||fallback);}
+function paintMenuArt(){for(const c of document.querySelectorAll('canvas[data-art]')){const r=artRects[c.dataset.art];if(!r)continue;const image=r[4]==='extra'?extraImage:atlasImage;if(!image.complete||!image.naturalWidth)continue;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,96,96);const w=80*r[2]/r[3],h=w>86?80*86/w:80,width=w>86?86:w;g.drawImage(image,r[0],r[1],r[2],r[3],(96-width)/2,(96-h)/2,width,h);}}
+function paintTitlePortrait(){const c=$('titlePortrait');if(!c)return;const g=c.getContext('2d');g.imageSmoothingEnabled=false;g.clearRect(0,0,c.width,c.height);const glow=g.createRadialGradient(200,210,5,200,210,190);glow.addColorStop(0,'#e6d28435');glow.addColorStop(1,'#e6d28400');g.fillStyle=glow;g.fillRect(0,0,400,450);if(heroImage.complete&&heroImage.naturalWidth)g.drawImage(heroImage,120,88,300,545,80,30,185,337);if(atlasImage.complete&&atlasImage.naturalWidth){const r=artRects.alien;g.drawImage(atlasImage,r[0],r[1],r[2],r[3],245,275,115,130);}}
+function artSprite(id,x,y,height,flip=false){
+ const r=artRects[id],image=r[4]==='extra'?extraImage:atlasImage;if(!image.complete||!image.naturalWidth)return false;
+ const width=height*r[2]/r[3];ctx.save();ctx.translate(Math.round(x),Math.round(y));if(flip)ctx.scale(-1,1);ctx.drawImage(image,r[0],r[1],r[2],r[3],Math.round(-width/2),-height,Math.round(width),height);ctx.restore();return true;
+}
 // Small, hand-drawn pixel sprites. All scenery stays local and animates on canvas.
 function rect(x,y,w,h,c){ctx.fillStyle=c;ctx.fillRect(Math.round(x),Math.round(y),w,h);}
 function ellipse(x,y,rx,ry,c){ctx.fillStyle=c;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill();}
 function poly(points,c){ctx.fillStyle=c;ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill();}
 function shadow(x,y,rx=18,ry=6){ellipse(x,y,rx,ry,'#152c2040');}
-function tree(x,y,variant=0){const sway=Math.sin(elapsed*1.1+x)*1.2;shadow(x,y+3,27,9);rect(x-5,y-29,10,33,'#705038');rect(x-2,y-27,3,27,'#9c7247');rect(x+5,y-12,4,5,'#705038');if(variant===1){poly([[x+sway,y-101],[x-22+sway,y-61],[x-12+sway,y-61],[x-30+sway,y-39],[x-21+sway,y-39],[x-34+sway,y-17],[x+34+sway,y-17],[x+21+sway,y-39],[x+29+sway,y-39],[x+12+sway,y-61],[x+23+sway,y-61]],'#244f3b');poly([[x+sway,y-96],[x-15+sway,y-62],[x-8+sway,y-62],[x-24+sway,y-40],[x-13+sway,y-40],[x-24+sway,y-23],[x+3+sway,y-23],[x+10+sway,y-40],[x+2+sway,y-62]],'#39714a');rect(x-18+sway,y-41,12,3,'#548153');}else{const xx=x+sway;rect(xx-24,y-65,47,35,'#244e35');rect(xx-33,y-54,64,20,'#244e35');rect(xx-20,y-83,38,23,'#365d39');rect(xx-30,y-69,54,30,'#3c6f41');rect(xx-19,y-83,32,30,'#4b7b46');rect(xx-11,y-91,21,11,'#4b7b46');rect(xx-26,y-64,14,11,'#608b4e');rect(xx-15,y-76,11,8,'#70974f');rect(xx+3,y-60,21,10,'#538143');rect(xx+14,y-46,11,7,'#3c6136');rect(xx-21,y-41,25,9,'#315f37');rect(xx-4,y-78,8,3,'#86a65d');}}
-function rock(x,y,big=false){shadow(x,y+3,19,6);poly([[x-19,y],[x-15,y-18],[x-4,y-25],[x+11,y-20],[x+19,y-8],[x+14,y+5],[x-10,y+6]],'#61796b');poly([[x-15,y-17],[x-4,y-24],[x+10,y-20],[x+2,y-10],[x-12,y-6]],'#9aaa88');poly([[x+2,y-10],[x+11,y-19],[x+18,y-7],[x+13,y+4],[x+2,y+3]],'#718b79');rect(x-8,y-17,9,3,'#b9c2a0');if(big)rect(x+5,y-7,4,5,'#b8c7a1');}
-function bush(x,y){shadow(x,y+3,17,5);rect(x-13,y-16,26,17,'#305b36');rect(x-19,y-10,36,11,'#3c7140');rect(x-9,y-22,17,13,'#518347');rect(x-15,y-14,12,5,'#699047');for(const[dx,dy]of[[-10,-8],[-3,-17],[6,-10],[12,-5]]){rect(x+dx,y+dy,5,5,'#7473ad');rect(x+dx,y+dy,2,2,'#b2a3df');}}
-function simm(x,y){const p=state.player,bob=p.walk?Math.sin(p.walk)*1.5:0;shadow(x,y+2,12,4);const yy=y+bob,step=p.walk?Math.sin(p.walk)*3:0;rect(x-7,yy-8,5,9+step,'#384739');rect(x+2,yy-8,5,9-step,'#384739');rect(x-8,yy+step,6,3,'#332e23');rect(x+2,yy-step,6,3,'#332e23');rect(x-9,yy-23,18,16,'#d7ac43');rect(x-6,yy-22,9,13,'#ebc45d');rect(x-12,yy-21,4,12,'#b28b37');rect(x+8,yy-21,4,12,'#e4b854');rect(x-12,yy-10,4,4,'#f2c293');rect(x+8,yy-10,4,4,'#f2c293');rect(x-5,yy-33,12,11,'#dca776');rect(x-7,yy-38,14,7,'#695333');rect(x-8,yy-33,4,7,'#695333');rect(x-4,yy-37,9,3,'#937141');rect(x+(p.face<0?-4:3),yy-30,2,2,'#263629');rect(x-6,yy-24,12,3,'#e4c664');rect(x-5,yy-17,3,4,'#b98d38');if(p.swing>0){const sx=x+aim.x*19,sy=yy-15+aim.y*16;rect(sx-2,sy-10,3,21,'#b89259');poly([[sx-8,sy-11],[sx+5,sy-13],[sx+9,sy-6],[sx-7,sy-3]],'#bdc5a9');ellipse(x+aim.x*29,yy-12+aim.y*26,6,3,'#e5db8c80');}else if(tools[tool].id==='torch'){rect(x+12,yy-21,3,12,'#956d3c');ellipse(x+14,yy-26,4+Math.sin(elapsed*12),7,'#eab559');rect(x+12,yy-28,3,5,'#fff1ac');}}
-function rabbit(a){const x=a.x,y=a.y,b=Math.sin(a.step)*1;shadow(x,y+2,9,3);rect(x-7,y-9+b,13,8,'#d6cbb3');rect(x+3,y-13+b,8,9,'#e5ddc4');rect(x+4,y-23+b,3,12,'#e5ddc4');rect(x+8,y-21+b,3,9,'#c9bca3');rect(x+5,y-21+b,1,6,'#d7a79e');rect(x+9,y-11+b,2,2,'#343d2c');rect(x-10,y-7+b,4,4,'#eee7d0');rect(x-5,y,3,3,'#b5ad91');rect(x+5,y,3,3,'#b5ad91');}
-function deer(a){const x=a.x,y=a.y,b=Math.sin(a.step);shadow(x,y+1,17,5);for(const dx of[-11,-4,6,12])rect(x+dx,y-13,3,14+Math.sin(a.step+dx)*2,'#876346');rect(x-14,y-26+b,27,14,'#ae8150');rect(x-12,y-25+b,19,5,'#c29965');rect(x+9,y-35+b,7,20,'#b58a59');rect(x+11,y-39+b,14,10,'#bd9663');rect(x+20,y-36+b,2,2,'#293c2c');rect(x+10,y-44+b,4,7,'#a7784c');rect(x+18,y-43+b,4,7,'#a7784c');rect(x-17,y-25+b,5,5,'#e2d0a1');for(const dx of[-5,2,7])rect(x+dx,y-22+b,2,2,'#e5c995');}
-function alien(x,y){const float=Math.sin(elapsed*3)*2;shadow(x,y+2,11,4);rect(x-8,y-19+float,16,15,'#83b8aa');rect(x-11,y-29+float,22,15,'#a5d0b5');rect(x-8,y-33+float,16,8,'#a5d0b5');rect(x-7,y-26+float,4,6,'#27394a');rect(x+3,y-26+float,4,6,'#27394a');rect(x-6,y-26+float,1,2,'#f0ffdb');rect(x+4,y-26+float,1,2,'#f0ffdb');rect(x-3,y-17+float,6,6,'#d6c17b');rect(x-8,y-37+float,2,6,'#81af9c');rect(x+6,y-37+float,2,6,'#81af9c');rect(x-9,y-39+float,4,3,'#ecdb93');rect(x+5,y-39+float,4,3,'#ecdb93');}
-function zombie(z){const bob=Math.sin(elapsed*5+z.x)*1;shadow(z.x,z.y,11,4);rect(z.x-7,z.y-10,5,11,'#314c3b');rect(z.x+3,z.y-10,5,11,'#314c3b');rect(z.x-10,z.y-25+bob,20,17,'#637658');rect(z.x-7,z.y-38+bob,15,14,'#9ab678');rect(z.x-12,z.y-22+bob,4,13,'#8fa769');rect(z.x+9,z.y-22+bob,4,13,'#8fa769');rect(z.x-4,z.y-33+bob,3,3,'#354230');rect(z.x+3,z.y-33+bob,3,3,'#354230');rect(z.x-2,z.y-27+bob,6,2,'#4c633a');}
-function herb(x,y){shadow(x,y+2,10,3);rect(x-1,y-18,2,20,'#365f37');rect(x-8,y-16,8,5,'#a4ba69');rect(x+1,y-12,9,5,'#8ba75a');rect(x-7,y-7,7,4,'#b6c979');rect(x,y-24,4,7,'#91ac61');}
-function batSprite(b){const x=b.x,y=b.y+Math.sin(elapsed*4+b.phase)*3,wing=Math.sin(elapsed*10+b.phase)*8;shadow(x,y+25,9,3);poly([[x-4,y],[x-21,y-8-wing],[x-16,y+4],[x-6,y+7]],'#9f90b7');poly([[x+4,y],[x+21,y-8-wing],[x+16,y+4],[x+6,y+7]],'#9f90b7');rect(x-5,y-7,10,15,'#b8a8c9');rect(x-5,y-12,3,6,'#b8a8c9');rect(x+2,y-12,3,6,'#b8a8c9');rect(x-3,y-3,2,3,'#354347');rect(x+2,y-3,2,3,'#354347');rect(x-2,y+4,4,1,'#e9d8d8');}
-function bench(){const x=base.x+35,y=base.y;shadow(x,y+4,22,6);rect(x-16,y-17,5,23,'#65462e');rect(x+11,y-17,5,23,'#65462e');rect(x-22,y-25,44,10,'#a8804e');rect(x-22,y-26,44,3,'#d1ab6b');rect(x-17,y-23,2,7,'#785831');rect(x-14,y-32,8,7,'#7e9583');rect(x-9,y-36,3,5,'#aabc9a');rect(x+4,y-31,10,5,'#cfb579');rect(x+6,y-37,3,9,'#79664e');const tx=base.x-55,ty=base.y+6;shadow(tx,ty+1,33,8);poly([[tx,ty-42],[tx-31,ty],[tx+29,ty]],'#c3ab64');poly([[tx,ty-42],[tx+29,ty],[tx+6,ty]],'#a48f53');poly([[tx,ty-30],[tx-13,ty],[tx+11,ty]],'#3b4630');rect(tx-34,ty,68,3,'#765e3e');}
-function caveSprite(){const x=cave.x,y=cave.y;shadow(x,y+8,50,14);poly([[x-55,y+3],[x-46,y-38],[x-23,y-60],[x+19,y-63],[x+46,y-38],[x+53,y+3]],'#607d6a');poly([[x-44,y-37],[x-23,y-58],[x+16,y-60],[x+8,y-36],[x-15,y-28]],'#8aa18a');poly([[x-25,y+3],[x-24,y-23],[x-10,y-37],[x+10,y-36],[x+24,y-20],[x+26,y+3]],'#172c28');rect(x-21,y-9,44,14,'#172c28');rect(x-30,y-31,9,5,'#a8b49b');rect(x+26,y-22,12,4,'#81967a');rect(x-38,y+2,75,6,'#a3976b');bush(x+51,y+6);ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('SALAKOOBAS',x,y-72);}
-function crystal(x,y){const bob=Math.sin(elapsed*2)*3;ellipse(x,y,27,9,'#7bd2cc22');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y+1+bob],[x+13,y-18+bob]],'#5d9fc2');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y-13+bob]],'#b6f4e2');poly([[x,y-37+bob],[x,y-13+bob],[x+13,y-18+bob]],'#80ceda');poly([[x-13,y-18+bob],[x,y-13+bob],[x,y+1+bob]],'#6dbbcc');rect(x-21,y-27+Math.sin(elapsed*3)*6,3,3,'#cbfff1');rect(x+21,y-10+Math.sin(elapsed*2)*7,2,2,'#e4ffe1');}
+function tree(x,y,variant=0){const occluded=Math.abs(state.player.x-x)<36&&state.player.y<y&&state.player.y>y-85;ctx.save();if(occluded)ctx.globalAlpha*=.55;if(artSprite(variant===1?'pine':Math.round(x)%5===0?'birch':'oak',x+Math.sin(elapsed*1.1+x)*.6,y+6,variant===1?104:90)){ctx.restore();return;}ctx.restore();const sway=Math.sin(elapsed*1.1+x)*1.2;shadow(x,y+3,27,9);rect(x-5,y-29,10,33,'#705038');rect(x-2,y-27,3,27,'#9c7247');rect(x+5,y-12,4,5,'#705038');if(variant===1){poly([[x+sway,y-101],[x-22+sway,y-61],[x-12+sway,y-61],[x-30+sway,y-39],[x-21+sway,y-39],[x-34+sway,y-17],[x+34+sway,y-17],[x+21+sway,y-39],[x+29+sway,y-39],[x+12+sway,y-61],[x+23+sway,y-61]],'#244f3b');poly([[x+sway,y-96],[x-15+sway,y-62],[x-8+sway,y-62],[x-24+sway,y-40],[x-13+sway,y-40],[x-24+sway,y-23],[x+3+sway,y-23],[x+10+sway,y-40],[x+2+sway,y-62]],'#39714a');rect(x-18+sway,y-41,12,3,'#548153');}else{const xx=x+sway;rect(xx-24,y-65,47,35,'#244e35');rect(xx-33,y-54,64,20,'#244e35');rect(xx-20,y-83,38,23,'#365d39');rect(xx-30,y-69,54,30,'#3c6f41');rect(xx-19,y-83,32,30,'#4b7b46');rect(xx-11,y-91,21,11,'#4b7b46');rect(xx-26,y-64,14,11,'#608b4e');rect(xx-15,y-76,11,8,'#70974f');rect(xx+3,y-60,21,10,'#538143');rect(xx+14,y-46,11,7,'#3c6136');rect(xx-21,y-41,25,9,'#315f37');rect(xx-4,y-78,8,3,'#86a65d');}}
+function rock(x,y,big=false){if(artSprite('rock',x,y+5,big?42:34))return;shadow(x,y+3,19,6);poly([[x-19,y],[x-15,y-18],[x-4,y-25],[x+11,y-20],[x+19,y-8],[x+14,y+5],[x-10,y+6]],'#61796b');poly([[x-15,y-17],[x-4,y-24],[x+10,y-20],[x+2,y-10],[x-12,y-6]],'#9aaa88');poly([[x+2,y-10],[x+11,y-19],[x+18,y-7],[x+13,y+4],[x+2,y+3]],'#718b79');rect(x-8,y-17,9,3,'#b9c2a0');if(big)rect(x+5,y-7,4,5,'#b8c7a1');}
+function bush(x,y){if(artSprite('berries',x,y+3,35))return;shadow(x,y+3,17,5);rect(x-13,y-16,26,17,'#305b36');rect(x-19,y-10,36,11,'#3c7140');rect(x-9,y-22,17,13,'#518347');rect(x-15,y-14,12,5,'#699047');for(const[dx,dy]of[[-10,-8],[-3,-17],[6,-10],[12,-5]]){rect(x+dx,y+dy,5,5,'#7473ad');rect(x+dx,y+dy,2,2,'#b2a3df');}}
+function drawHeldTool(x,y){
+ const selected=tools[tool].id;
+ if(state.player.swing>0){const angle=Math.atan2(aim.y,aim.x)+(state.player.swing/.2-.5)*1.5;ctx.save();ctx.translate(x,y-14);ctx.rotate(angle);rect(8,-2,19,3,'#b8925b');poly([[23,-8],[31,-6],[31,4],[24,7]],'#cbd2b2');ctx.restore();}
+ else if(selected==='torch'){const tx=x+12,ty=y-18;rect(tx,ty,3,12,'#9b7545');ellipse(tx+1,ty-3,3.5+Math.sin(elapsed*13)*.6,6,'#f4b34d');ellipse(tx+1,ty-4,1.5,3,'#ffe1a0');}
+ else if(selected==='rod'){ctx.strokeStyle='#bda46b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+8,y-14);ctx.lineTo(x+18,y-39);ctx.stroke();}
+}
+function simm(x,y){if(heroImage.complete&&heroImage.naturalWidth){const moving=state.player.walk>0,frame=moving?Math.floor(state.player.walk*1.1)%4:0,bob=moving?Math.sin(state.player.walk)*.45:Math.sin(elapsed*2)*.15;ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));if(state.player.face<0)ctx.scale(-1,1);ctx.drawImage(heroImage,frame*(heroImage.naturalWidth/4)+120,88,300,545,-13,-45,27,49);ctx.restore();drawHeldTool(x,y);return;}const p=state.player,bob=p.walk?Math.sin(p.walk)*1.5:0;shadow(x,y+2,12,4);const yy=y+bob,step=p.walk?Math.sin(p.walk)*3:0;rect(x-7,yy-8,5,9+step,'#384739');rect(x+2,yy-8,5,9-step,'#384739');rect(x-8,yy+step,6,3,'#332e23');rect(x+2,yy-step,6,3,'#332e23');rect(x-9,yy-23,18,16,'#d7ac43');rect(x-6,yy-22,9,13,'#ebc45d');rect(x-12,yy-21,4,12,'#b28b37');rect(x+8,yy-21,4,12,'#e4b854');rect(x-12,yy-10,4,4,'#f2c293');rect(x+8,yy-10,4,4,'#f2c293');rect(x-5,yy-33,12,11,'#dca776');rect(x-7,yy-38,14,7,'#695333');rect(x-8,yy-33,4,7,'#695333');rect(x-4,yy-37,9,3,'#937141');rect(x+(p.face<0?-4:3),yy-30,2,2,'#263629');rect(x-6,yy-24,12,3,'#e4c664');rect(x-5,yy-17,3,4,'#b98d38');if(p.swing>0){const sx=x+aim.x*19,sy=yy-15+aim.y*16;rect(sx-2,sy-10,3,21,'#b89259');poly([[sx-8,sy-11],[sx+5,sy-13],[sx+9,sy-6],[sx-7,sy-3]],'#bdc5a9');ellipse(x+aim.x*29,yy-12+aim.y*26,6,3,'#e5db8c80');}else if(tools[tool].id==='torch'){rect(x+12,yy-21,3,12,'#956d3c');ellipse(x+14,yy-26,4+Math.sin(elapsed*12),7,'#eab559');rect(x+12,yy-28,3,5,'#fff1ac');}}
+function rabbit(a){if(artSprite('rabbit',a.x,a.y+2+Math.sin(a.step)*.8,24,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step)*1;shadow(x,y+2,9,3);rect(x-7,y-9+b,13,8,'#d6cbb3');rect(x+3,y-13+b,8,9,'#e5ddc4');rect(x+4,y-23+b,3,12,'#e5ddc4');rect(x+8,y-21+b,3,9,'#c9bca3');rect(x+5,y-21+b,1,6,'#d7a79e');rect(x+9,y-11+b,2,2,'#343d2c');rect(x-10,y-7+b,4,4,'#eee7d0');rect(x-5,y,3,3,'#b5ad91');rect(x+5,y,3,3,'#b5ad91');}
+function deer(a){if(artSprite('deer',a.x,a.y+3+Math.sin(a.step)*.6,44,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step);shadow(x,y+1,17,5);for(const dx of[-11,-4,6,12])rect(x+dx,y-13,3,14+Math.sin(a.step+dx)*2,'#876346');rect(x-14,y-26+b,27,14,'#ae8150');rect(x-12,y-25+b,19,5,'#c29965');rect(x+9,y-35+b,7,20,'#b58a59');rect(x+11,y-39+b,14,10,'#bd9663');rect(x+20,y-36+b,2,2,'#293c2c');rect(x+10,y-44+b,4,7,'#a7784c');rect(x+18,y-43+b,4,7,'#a7784c');rect(x-17,y-25+b,5,5,'#e2d0a1');for(const dx of[-5,2,7])rect(x+dx,y-22+b,2,2,'#e5c995');}
+function alien(x,y){if(artSprite('alien',x,y+3+Math.sin(elapsed*3)*1.4,35))return;const float=Math.sin(elapsed*3)*2;shadow(x,y+2,11,4);rect(x-8,y-19+float,16,15,'#83b8aa');rect(x-11,y-29+float,22,15,'#a5d0b5');rect(x-8,y-33+float,16,8,'#a5d0b5');rect(x-7,y-26+float,4,6,'#27394a');rect(x+3,y-26+float,4,6,'#27394a');rect(x-6,y-26+float,1,2,'#f0ffdb');rect(x+4,y-26+float,1,2,'#f0ffdb');rect(x-3,y-17+float,6,6,'#d6c17b');rect(x-8,y-37+float,2,6,'#81af9c');rect(x+6,y-37+float,2,6,'#81af9c');rect(x-9,y-39+float,4,3,'#ecdb93');rect(x+5,y-39+float,4,3,'#ecdb93');}
+function zombie(z){if(artSprite('zombie',z.x,z.y+4+Math.sin(elapsed*4+z.x)*.8,39,z.x>state.player.x))return;const bob=Math.sin(elapsed*5+z.x)*1;shadow(z.x,z.y,11,4);rect(z.x-7,z.y-10,5,11,'#314c3b');rect(z.x+3,z.y-10,5,11,'#314c3b');rect(z.x-10,z.y-25+bob,20,17,'#637658');rect(z.x-7,z.y-38+bob,15,14,'#9ab678');rect(z.x-12,z.y-22+bob,4,13,'#8fa769');rect(z.x+9,z.y-22+bob,4,13,'#8fa769');rect(z.x-4,z.y-33+bob,3,3,'#354230');rect(z.x+3,z.y-33+bob,3,3,'#354230');rect(z.x-2,z.y-27+bob,6,2,'#4c633a');}
+function herb(x,y){shadow(x,y+2,10,3);for(let i=0;i<7;i++){const a=i*Math.PI/3.5,dx=Math.cos(a)*8,dy=Math.sin(a)*4;poly([[x,y],[x+dx,y-12+dy],[x+dx+3,y-8+dy],[x+dx*.5,y-2]],i%2?'#9db965':'#728f4a');rect(x+dx,y-11+dy,2,2,'#bed184');}rect(x-1,y-5,2,6,'#526b34');}
+function batSprite(b){if(artSprite('bat',b.x,b.y+Math.sin(elapsed*4+b.phase)*2,22)){return;}const x=b.x,y=b.y+Math.sin(elapsed*4+b.phase)*3,wing=Math.sin(elapsed*10+b.phase)*8;shadow(x,y+25,9,3);poly([[x-4,y],[x-21,y-8-wing],[x-16,y+4],[x-6,y+7]],'#9f90b7');poly([[x+4,y],[x+21,y-8-wing],[x+16,y+4],[x+6,y+7]],'#9f90b7');rect(x-5,y-7,10,15,'#b8a8c9');rect(x-5,y-12,3,6,'#b8a8c9');rect(x+2,y-12,3,6,'#b8a8c9');rect(x-3,y-3,2,3,'#354347');rect(x+2,y-3,2,3,'#354347');rect(x-2,y+4,4,1,'#e9d8d8');}
+function bench(){const x=base.x+35,y=base.y;if(!artSprite('bench',x,y+5,43)){shadow(x,y+4,22,6);rect(x-16,y-17,5,23,'#65462e');rect(x+11,y-17,5,23,'#65462e');rect(x-22,y-25,44,10,'#a8804e');rect(x-22,y-26,44,3,'#d1ab6b');rect(x-17,y-23,2,7,'#785831');rect(x-14,y-32,8,7,'#7e9583');rect(x-9,y-36,3,5,'#aabc9a');rect(x+4,y-31,10,5,'#cfb579');rect(x+6,y-37,3,9,'#79664e');}const tx=base.x-55,ty=base.y+6;if(artSprite('tent',tx,ty+6,55))return;shadow(tx,ty+1,33,8);poly([[tx,ty-42],[tx-31,ty],[tx+29,ty]],'#c3ab64');poly([[tx,ty-42],[tx+29,ty],[tx+6,ty]],'#a48f53');poly([[tx,ty-30],[tx-13,ty],[tx+11,ty]],'#3b4630');rect(tx-34,ty,68,3,'#765e3e');}
+function caveSprite(){const x=cave.x,y=cave.y;if(artSprite('cave',x,y+12,92)){ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('SALAKOOBAS',x,y-86);return;}shadow(x,y+8,50,14);poly([[x-55,y+3],[x-46,y-38],[x-23,y-60],[x+19,y-63],[x+46,y-38],[x+53,y+3]],'#607d6a');poly([[x-44,y-37],[x-23,y-58],[x+16,y-60],[x+8,y-36],[x-15,y-28]],'#8aa18a');poly([[x-25,y+3],[x-24,y-23],[x-10,y-37],[x+10,y-36],[x+24,y-20],[x+26,y+3]],'#172c28');rect(x-21,y-9,44,14,'#172c28');rect(x-30,y-31,9,5,'#a8b49b');rect(x+26,y-22,12,4,'#81967a');rect(x-38,y+2,75,6,'#a3976b');bush(x+51,y+6);ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('SALAKOOBAS',x,y-72);}
+function crystal(x,y){if(artSprite('crystal',x,y+4+Math.sin(elapsed*2)*2,57)){ellipse(x,y,24,8,'#72dad028');return;}const bob=Math.sin(elapsed*2)*3;ellipse(x,y,27,9,'#7bd2cc22');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y+1+bob],[x+13,y-18+bob]],'#5d9fc2');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y-13+bob]],'#b6f4e2');poly([[x,y-37+bob],[x,y-13+bob],[x+13,y-18+bob]],'#80ceda');poly([[x-13,y-18+bob],[x,y-13+bob],[x,y+1+bob]],'#6dbbcc');rect(x-21,y-27+Math.sin(elapsed*3)*6,3,3,'#cbfff1');rect(x+21,y-10+Math.sin(elapsed*2)*7,2,2,'#e4ffe1');}
 function fireSprite(x,y,fuel){shadow(x,y+4,22,6);for(let i=0;i<7;i++){const a=i*Math.PI*2/7;rect(x+Math.cos(a)*17-4,y+Math.sin(a)*7-3,8,6,'#a0a28c');}rect(x-13,y-3,26,5,'#795234');rect(x-8,y-7,17,4,'#b38c4e');if(fuel>0){const flick=Math.sin(elapsed*13)*3;poly([[x-10,y-3],[x-7,y-17],[x-2,y-11],[x+2,y-29-flick],[x+8,y-14],[x+11,y-3]],'#e99045');poly([[x-5,y-4],[x-2,y-19],[x+2,y-13],[x+5,y-5]],'#ffe0a0');rect(x+5+Math.sin(elapsed*2)*5,y-34-(elapsed*12%12),2,2,'#f8cf88');}}
+function artWall(id,x,y,w,h){const r=artRects[id];if(!extraImage.complete||!extraImage.naturalWidth)return false;ctx.drawImage(extraImage,r[0],r[1],r[2],r[3],x,y,w,h);return true;}
 function building(b){
  const x=b.x*TILE,y=b.y*TILE,cx=x+16,cy=y+16;
  if(b.type==='floor'||b.type==='stoneFloor'){
-   const stone=b.type==='stoneFloor';rect(x,y,TILE,TILE,stone?'#959b87':'#9e804c');
+   const stone=b.type==='stoneFloor';const key=stone?'stoneFloor':'floor',r=artRects[key];if(extraImage.complete&&extraImage.naturalWidth){ctx.drawImage(extraImage,r[0],r[1],r[2],r[3],x,y,32,32);return;}rect(x,y,TILE,TILE,stone?'#959b87':'#9e804c');
    for(let i=0;i<4;i++){rect(x,y+i*8,TILE,1,stone?'#6f7a69':'#715b34');rect(x+3,y+2+i*8,25,1,stone?'#adb09b':'#bd9c5e');}
  }
  if(b.type==='wall'||b.type==='door'){
@@ -308,19 +422,57 @@ function building(b){
    }else{
      const horizontal=!v||state.buildings.some(n=>['wall','door'].includes(n.type)&&n.y===b.y&&Math.abs(n.x-b.x)===1);
      const vertical=v||state.buildings.some(n=>['wall','door'].includes(n.type)&&n.x===b.x&&Math.abs(n.y-b.y)===1);
-     if(horizontal){rect(x,cy-7,32,15,'#654b2c');rect(x,cy-11,32,12,'#a9864e');rect(x,cy-11,32,3,'#d6b36b');rect(x+3,cy-3,26,2,'#7e6037');}
-     if(vertical){rect(cx-6,y,14,32,'#654b2c');rect(cx-9,y,12,32,'#b69456');rect(cx-9,y,3,32,'#d9b972');rect(cx-2,y+3,2,26,'#8b6c3c');}
-     rect(cx-6,cy-10,12,12,'#c3a263');rect(cx-4,cy-9,8,3,'#e0c483');
+     if(horizontal){if(extraImage.complete&&extraImage.naturalWidth)rect(x,cy-5,32,6,'#795c39');if(!artWall('wallH',x,cy-15,32,24)){rect(x,cy-7,32,15,'#654b2c');rect(x,cy-11,32,12,'#a9864e');rect(x,cy-11,32,3,'#d6b36b');rect(x+3,cy-3,26,2,'#7e6037');}}
+     if(vertical){if(extraImage.complete&&extraImage.naturalWidth)rect(cx-3,y,7,32,'#795c39');if(!artWall('wallV',cx-9,y,18,32)){rect(cx-6,y,14,32,'#654b2c');rect(cx-9,y,12,32,'#b69456');rect(cx-9,y,3,32,'#d9b972');rect(cx-2,y+3,2,26,'#8b6c3c');}}
+     if(!extraImage.complete||!extraImage.naturalWidth){rect(cx-6,cy-10,12,12,'#c3a263');rect(cx-4,cy-9,8,3,'#e0c483');}else if(horizontal&&vertical){ellipse(cx,cy-8,4,3,'#b69a64');ellipse(cx,cy-8,2,1,'#d6b77a');}
    }
  }
- if(b.type==='fire')fireSprite(cx,cy,b.fuel);
- if(b.type==='furnace'){
+ if(b.type==='fire'){if(b.fuel>0){if(!artSprite('fire',cx+Math.sin(elapsed*11)*.2,cy+9,43+Math.sin(elapsed*13)*.6))fireSprite(cx,cy,b.fuel);else{const g=ctx.createRadialGradient(cx,cy-10,3,cx,cy-10,70);g.addColorStop(0,'#ffc7661b');g.addColorStop(1,'#ffc76600');ctx.fillStyle=g;ctx.fillRect(cx-70,cy-80,140,140);}}else fireSprite(cx,cy,0);}
+ if(b.type==='furnace'){if(!artSprite('furnace',cx,cy+12,55)){
    shadow(cx,cy+10,23,7);rect(x-1,y-18,34,40,'#65776b');rect(x+3,y-21,26,7,'#a0aa91');rect(x+7,y-15,18,10,'#81917e');rect(x+7,y+1,18,17,'#29372e');rect(x+5,y-1,22,3,'#a6a98b');
-   if(b.fuel>0){rect(x+10,y+6,12,10,'#e39552');rect(x+13,y+3,6,11,'#f8cf7e');}rect(x+9,y-31,14,12,'#758472');
+   if(b.fuel>0){rect(x+10,y+6,12,10,'#e39552');rect(x+13,y+3,6,11,'#f8cf7e');}rect(x+9,y-31,14,12,'#758472');}if(!(b.fuel>0))rect(cx-8,cy-5,16,10,'#23312ed9');
  }
- if(b.type==='nest'){shadow(cx,y+19,23,8);rect(x-2,y-5,36,29,'#717b71');rect(x+3,y-15,26,13,'#a5b39c');rect(x+8,y-21,16,8,'#bfc5a5');rect(x+6,y+4,20,20,'#244a44');rect(x+4,y-7,24,4,'#8fd0b1');rect(x+11,y-13,10,4,'#eed186');}
+ if(b.type==='beacon'){shadow(cx,cy+10,22,7);rect(cx-16,cy-5,32,14,'#596f5d');rect(cx-13,cy-8,26,5,'#b9a05d');rect(cx-9,cy-25,18,19,'#647d70');artSprite('crystal',cx,cy-16+Math.sin(elapsed*2)*1.3,46);const glow=ctx.createRadialGradient(cx,cy-30,2,cx,cy-30,65);glow.addColorStop(0,'#a0f0d02b');glow.addColorStop(1,'#a0f0d000');ctx.fillStyle=glow;ctx.fillRect(cx-65,cy-95,130,130);}
+ if(b.type==='nest'){if(artSprite('nest',cx,cy+16,65))return;shadow(cx,y+19,23,8);rect(x-2,y-5,36,29,'#717b71');rect(x+3,y-15,26,13,'#a5b39c');rect(x+8,y-21,16,8,'#bfc5a5');rect(x+6,y+4,20,20,'#244a44');rect(x+4,y-7,24,4,'#8fd0b1');rect(x+11,y-13,10,4,'#eed186');}
 }
-function terrain(){const sx=Math.max(0,Math.floor(cam.x/TILE)),sy=Math.max(0,Math.floor(cam.y/TILE)),ex=Math.min(W,Math.ceil((cam.x+canvas.width)/TILE)+1),ey=Math.min(H,Math.ceil((cam.y+canvas.height)/TILE)+1);for(let y=sy;y<ey;y++)for(let x=sx;x<ex;x++){const hash=((x*73856093)^(y*19349663))>>>0;const px=x*TILE,py=y*TILE;if(state.inCave){rect(px,py,TILE,TILE,(x<27||x>37||y<18||y>30)?(hash%3?'#263d39':'#30463e'):(hash%3?'#3b4941':'#414f46'));if(x>=27&&x<=37&&y>=18&&y<=30){rect(px+hash%20,py+hash%17,5,2,'#58644e');}continue;}if(water(px+16,py+16)){rect(px,py,TILE,TILE,['#487e78','#4b827a','#518a80'][hash%3]);const wave=Math.floor(Math.sin(elapsed*1.5+x)*2);rect(px+5+wave,py+10,12,1,'#84b3a066');rect(px+16-wave,py+23,10,1,'#96bd9b66');continue;}const path=(Math.abs(x-31)<2&&y>=16&&y<=32)||(Math.abs(y-28)<1.5&&x>30&&x<46);const clearing=Math.hypot(x-31,y-29)<4;rect(px,py,TILE,TILE,path||clearing?['#8b8b55','#91905a','#8d8d55'][hash%3]:['#6a864c','#718c50','#6d884b','#748e51'][hash%4]);if(path||clearing){rect(px+hash%23,py+hash%25,3,2,'#aa9e65');if(hash%4===0)rect(px+19,py+8,2,2,'#726d46');}else{const cx=px+hash%24+3,cy=py+(hash>>>5)%24+3;rect(cx,cy,1,4,'#4b7547');rect(cx-2,cy+1,1,2,'#4b7547');if(hash%8===0){rect(cx+10,cy-5,3,3,'#dcc878');rect(cx+11,cy-4,1,1,'#f5e7a5');}if(hash%11===0){rect(cx-3,cy+10,2,3,'#aeb785');}}}}
+const terrainCache={forest:null,cave:null};
+function groundNoise(x,y){const n=Math.sin(x*12.9898+y*78.233)*43758.5453;return n-Math.floor(n);}
+function makeGround(isCave){
+ const layer=document.createElement('canvas');layer.width=W*TILE;layer.height=H*TILE;const g=layer.getContext('2d');
+ for(let y=0;y<layer.height;y+=4)for(let x=0;x<layer.width;x+=4){
+  const grain=groundNoise(x,y),slow=Math.sin(x*.012)*Math.cos(y*.009),shift=Math.round((grain-.5)*9+slow*5);
+  if(isCave){const inside=x>=27*TILE&&x<=37*TILE&&y>=18*TILE&&y<=30*TILE;g.fillStyle=inside?`rgb(${48+shift},${63+shift},${58+shift})`:`rgb(${29+shift},${49+shift},${45+shift})`;}
+  else if(water(x+2,y+2)){const edge=!water(x+10,y+2)||!water(x-6,y+2)||!water(x+2,y+10)||!water(x+2,y-6);g.fillStyle=edge?`rgb(${83+shift},${135+shift},${119+shift})`:`rgb(${49+shift},${102+shift},${103+shift})`;}
+  else{
+   const tx=x/TILE,ty=y/TILE,clearing=Math.hypot(tx-31,ty-29)<3.7;
+   const path=(Math.abs(tx-31.2-Math.sin(ty*.45)*.22)<.85&&ty>=16&&ty<=31)||(Math.abs(ty-28.3-Math.sin(tx*.35)*.22)<.85&&tx>=31&&tx<=46);
+   const shore=water(x+10,y+2)||water(x-6,y+2)||water(x+2,y+10)||water(x+2,y-6);
+   if(path||clearing)g.fillStyle=`rgb(${132+shift},${125+shift},${79+shift})`;
+   else if(shore)g.fillStyle=`rgb(${132+shift},${143+shift},${99+shift})`;
+   else g.fillStyle=`rgb(${88+shift},${120+shift},${66+shift})`;
+  }
+  g.fillRect(x,y,4,4);
+ }
+ for(let y=8;y<layer.height-8;y+=16)for(let x=8;x<layer.width-8;x+=16){
+  const n=groundNoise(x,y),px=x+Math.floor(n*10),py=y+Math.floor(groundNoise(y,x)*10);
+  if(isCave){if(n>.6){g.fillStyle='#7a847453';g.fillRect(px,py,3,1);}continue;}
+  if(water(px,py))continue;
+  const path=(Math.abs(px/TILE-31)<1.3&&py/TILE>16&&py/TILE<32)||Math.hypot(px/TILE-31,py/TILE-29)<3.7||(Math.abs(py/TILE-28)<1.3&&px/TILE>31&&px/TILE<46);
+  if(path){if(n>.65){g.fillStyle='#b7ac745e';g.fillRect(px,py,2,1);g.fillStyle='#6d674430';g.fillRect(px+1,py+1,2,1);}continue;}
+  if(n<.55){g.fillStyle='#345d3a75';g.fillRect(px,py,1,4);g.fillRect(px-2,py+2,1,3);g.fillRect(px+2,py+1,1,3);g.fillStyle='#99b26355';g.fillRect(px+1,py,1,2);}
+  if(n>.89){const colors=['#eacb75','#b0bdce','#dabcba'];g.fillStyle=colors[Math.floor(n*100)%3];g.fillRect(px,py-3,2,2);g.fillRect(px-2,py-2,2,2);g.fillRect(px+2,py-2,2,2);g.fillStyle='#e5dcad';g.fillRect(px,py-2,1,1);}
+  else if(n>.79){g.fillStyle='#c4af6535';g.fillRect(px,py,3,1);g.fillRect(px+2,py+1,2,1);}
+ }
+ return layer;
+}
+function terrain(){
+ const key=state.inCave?'cave':'forest';if(!terrainCache[key])terrainCache[key]=makeGround(state.inCave);ctx.drawImage(terrainCache[key],0,0);
+ if(!state.inCave){
+  // Little water highlights share the exact collision boundary rather than square water tiles.
+  for(let i=0;i<36;i++){const x=365+(i*47%340),y=368+(i*73%470);if(water(x,y)&&water(x+16,y)){const alpha=.14+.07*Math.sin(elapsed*1.5+i);ctx.fillStyle=`rgba(174,218,184,${alpha})`;ctx.fillRect(x+Math.sin(elapsed*.6+i)*3,y,10+i%9,1);}}
+ }
+}
+
 function draw(){
  const p=state.player;
  cam.x=Math.round(Math.max(0,Math.min(W*TILE-canvas.width,p.x-canvas.width/2)));
@@ -343,14 +495,14 @@ function draw(){
    for(const b of state.buildings.filter(b=>!['floor','stoneFloor'].includes(b.type)))sprites.push({y:(b.y+.5)*TILE,draw:()=>building(b)});
    for(const a of animals)sprites.push({y:a.y,draw:()=>a.type==='rabbit'?rabbit(a):deer(a)});
    for(const z of zombies)sprites.push({y:z.y,draw:()=>{if(z.slowed)ellipse(z.x,z.y,22,8,'#a0d8d43d');zombie(z);}});
-   if(state.meteorArrived){sprites.push({y:meteor.y,draw:()=>{ellipse(meteor.x,meteor.y,42,15,'#5f645247');rock(meteor.x,meteor.y,true);rect(meteor.x-4,meteor.y-17,4,7,'#cfb3e5');rect(meteor.x+8,meteor.y-8,3,5,'#d9bded');}});if(!state.alienFriend)sprites.push({y:meteor.y+30,draw:()=>alien(meteor.x+30,meteor.y+30)});}
+   if(state.meteorArrived&&!meteorFall){sprites.push({y:meteor.y,draw:()=>{ellipse(meteor.x,meteor.y,42,15,'#5f645247');rock(meteor.x,meteor.y,true);rect(meteor.x-4,meteor.y-17,4,7,'#cfb3e5');rect(meteor.x+8,meteor.y-8,3,5,'#d9bded');}});if(!state.alienFriend)sprites.push({y:meteor.y+30,draw:()=>alien(meteor.x+30,meteor.y+30)});}
  }
  for(const r of resources.filter(r=>!!r.inCave===state.inCave)){
    if(r.x<cam.x-60||r.x>cam.x+canvas.width+60||r.y<cam.y-30||r.y>cam.y+canvas.height+110)continue;
    if(r.alive)sprites.push({y:r.y,draw:()=>{
-     if(r.type==='wood')tree(r.x,r.y,r.id%3===0?1:0);else if(['stone','ironOre','copperOre'].includes(r.type)){rock(r.x,r.y);if(r.type!=='stone'){const c=r.type==='ironOre'?'#c6cbd2':'#d79259';for(const[dx,dy]of[[-8,-15],[4,-10],[-1,-22]])rect(r.x+dx,r.y+dy,5,4,c);}}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);
+     if(r.type==='wood')tree(r.x,r.y,r.id%3===0?1:0);else if(['stone','ironOre','copperOre'].includes(r.type)){if(!artSprite(r.type==='stone'?'rock':r.type,r.x,r.y+5,36)){rock(r.x,r.y);if(r.type!=='stone'){const c=r.type==='ironOre'?'#c6cbd2':'#d79259';for(const[dx,dy]of[[-8,-15],[4,-10],[-1,-22]])rect(r.x+dx,r.y+dy,5,4,c);}}}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);
    }});
-   else if(r.type==='wood'&&!r.removed){rect(r.x-6,r.y-7,12,8,'#86653e');rect(r.x-5,r.y-9,10,3,'#bfa56e');}
+   else if(r.type==='wood'&&!r.removed){if(!artSprite('stump',r.x,r.y+5,20)){rect(r.x-6,r.y-7,12,8,'#86653e');rect(r.x-5,r.y-9,10,3,'#bfa56e');}}
  }
  for(const d of state.drops.filter(d=>!!d.inCave===state.inCave))sprites.push({y:d.y,draw:()=>{shadow(d.x,d.y+3,9,3);ellipse(d.x,d.y-3,11,9,'#f0d27c33');ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillStyle='#efe1b3';ctx.fillText(icons[d.id],d.x,d.y+1);}});
  if(state.alienFriend&&state.alien.inCave===state.inCave){const a=state.alien;if(state.alienFollowing){ellipse(a.x,a.y,(state.skills.frost?160:100),22,'#b0d6c215');ctx.strokeStyle='#9bccb344';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(a.x,a.y,36,12,0,0,Math.PI*2);ctx.stroke();}sprites.push({y:a.y,draw:()=>alien(a.x,a.y)});if(!state.alienFollowing){ctx.fillStyle='#e5d69e';ctx.font='8px monospace';ctx.textAlign='center';ctx.fillText('OOTA · B / T',a.x,a.y-47);}}
@@ -370,15 +522,19 @@ function draw(){
      if(charge){rect(p.x-17,p.y+11,34,4,'#243c2c');rect(p.x-17,p.y+11,Math.round(stats.power*34),4,'#edd38a');}
    }
  }
+ if(meteorFall&&!state.inCave){const t=meteorFall.time/1.5,x=meteor.x-250*(1-t),y=meteor.y-380*(1-t);ctx.strokeStyle='#f8d38ccc';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-26,y-40);ctx.lineTo(x,y);ctx.stroke();ellipse(x,y,7,7,'#ffedbd');ellipse(x,y,12,12,'#f2bd7344');}
  for(const a of arrows.filter(a=>a.inCave===state.inCave)){const n=Math.hypot(a.vx,a.vy);ctx.strokeStyle='#f3dda0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(a.x-a.vx/n*10,a.y-a.vy/n*10);ctx.lineTo(a.x,a.y);ctx.stroke();}
  if(fishing){ctx.strokeStyle='#e8d9a1';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.x+9,p.y-17);ctx.lineTo(fishing.x,fishing.y);ctx.stroke();ellipse(fishing.x,fishing.y,3,2,'#f0ba79');}
  for(const a of particles){ctx.globalAlpha=Math.max(0,a.life/.7);rect(a.x,a.y,3,3,a.color);}ctx.globalAlpha=1;
  if(buildType){const point=buildPoint(),loc=placement(point.x,point.y);ctx.globalAlpha=.5;building({x:loc.gx,y:loc.gy,type:buildType,...(rotation!=='auto'?{rotation}:{})});ctx.globalAlpha=1;ctx.strokeStyle=loc.valid?'#c7e795':'#f2aa8d';ctx.lineWidth=2;ctx.strokeRect(loc.gx*TILE+1,loc.gy*TILE+1,30,30);}
  for(let i=0;i<16;i++){const x=cam.x+((i*137+elapsed*3)%(canvas.width+30)),y=cam.y+(i*83%canvas.height)+Math.sin(elapsed+i)*7;ctx.globalAlpha=.2+Math.sin(elapsed*2+i)*.13;rect(x,y,2,2,state.time>=300?'#f0dc8c':'#e3dd9c');}ctx.globalAlpha=1;ctx.restore();
+ if(!state.inCave&&state.time<300){const sun=ctx.createLinearGradient(0,0,canvas.width,canvas.height);sun.addColorStop(0,'#ffe6a214');sun.addColorStop(.6,'#ffe6a200');sun.addColorStop(1,'#123c2515');ctx.fillStyle=sun;ctx.fillRect(0,0,canvas.width,canvas.height);}
  const night=state.time>=300,dark=state.inCave?.35:night?.40:state.time>270?(state.time-270)/30*.25:0;
  if(dark){ctx.fillStyle=`rgba(8,20,38,${dark})`;ctx.fillRect(0,0,canvas.width,canvas.height);const x=p.x-cam.x,y=p.y-cam.y,g=ctx.createRadialGradient(x,y-10,12,x,y-10,tools[tool].id==='torch'?150:80);g.addColorStop(0,'rgba(249,216,113,.16)');g.addColorStop(1,'rgba(249,216,113,0)');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);}
  if(started&&!state.crystalFound&&!state.inCave){const x=canvas.width-35,y=canvas.height-105,angle=Math.atan2(cave.y-p.y,cave.x-p.x);ellipse(x,y,16,16,'#173024be');ctx.save();ctx.translate(x,y);ctx.rotate(angle);poly([[10,0],[-5,-5],[-2,0],[-5,5]],'#e9d388');ctx.restore();ctx.fillStyle='#d5d5ad';ctx.font='7px monospace';ctx.textAlign='center';ctx.fillText('KOOBAS',x,y+26);}
 }
-function resize(){const r=canvas.getBoundingClientRect();canvas.width=Math.max(1,Math.round(r.width/2));canvas.height=Math.max(1,Math.round(r.height/2));ctx.imageSmoothingEnabled=false;}
+function resize(){const r=canvas.getBoundingClientRect(),scale=r.height>=1400?3:2;canvas.width=Math.max(1,Math.round(r.width/scale));canvas.height=Math.max(1,Math.round(r.height/scale));ctx.imageSmoothingEnabled=false;}
 new ResizeObserver(resize).observe(canvas);resize();refresh();
-function frame(time){const dt=last?Math.min((time-last)/1000,.05):0;last=time;const pad=readPad();if(!document.hidden){update(dt,pad);draw();}updateAudio({moving:state.player.walk>0,night:state.time>=300,inCave:state.inCave,nearFire:!!nearFire()?.fuel,paused:paused||!started||!!death||document.hidden});requestAnimationFrame(frame);}requestAnimationFrame(frame);
+$('startButton').disabled=true;$('newGameButton').disabled=true;
+Promise.allSettled([atlasImage.decode(),heroImage.decode(),extraImage.decode()]).then(()=>{updateHUD();draw();paintTitlePortrait();assetsReady=true;document.querySelector('.game-shell').dataset.ready='true';$('startButton').disabled=false;$('newGameButton').disabled=false;$('loadStatus').textContent='WASD + hiir või Xboxi pult · A alustab · Y uus mäng';});
+function frame(time){const dt=last?Math.min((time-last)/1000,.05):0;last=time;const pad=readPad();if(!document.hidden){if(!paused&&started&&assetsReady){update(dt,pad);draw();}}updateAudio({moving:state.player.walk>0,night:state.time>=300,inCave:state.inCave,nearFire:!!nearFire()?.fuel,paused:paused||!started||!!death||document.hidden});requestAnimationFrame(frame);}requestAnimationFrame(frame);
