@@ -1,47 +1,74 @@
-# Simm metsikus looduses
+# Simm metsikus looduses · 0.2
 
-An Estonian browser survival adventure designed with Mattis. Local pixel graphics are drawn on canvas; no runtime packages, accounts, or API keys are required. Fonts are bundled locally with their SIL Open Font License files.
+An Estonian browser survival adventure designed with Mattis. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
 ![Simm game preview](docs/preview.png)
 
 ## Try without installation
 
-Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) from this repository and open it in a current desktop browser. This self-contained build includes all game code, fonts, graphics and sound. It works without a server. WASD/mouse works locally; controller availability on file URLs depends on your browser, so use the HTTP version if needed. Local save storage on file URLs also depends on the browser.
+Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) and open it in a current desktop browser. Alternatively download the repository ZIP, extract it, and open the root `index.html`. `play/index.html` is an identical standalone copy. No server or asset downloads are required. Press the fullscreen button or F11 for browser fullscreen.
 
-If you download the repository ZIP, extract it and open the root `index.html`. The `play/index.html` copy also works.
+Saves use browser localStorage. Version 0.1 saves are migrated when available. Browsers may store file-URL saves separately when you change the downloaded filename or folder. Gamepad support and local save behavior on file URLs depend on the browser; an HTTP server provides a stable origin when needed. Physical Xbox playtesting is still needed for 0.2.
 
-Developers edit `src/index.html` and files in `src/`; the development server uses this template. Rebuild both standalone HTML files after editing with `npm run build`. `play/` can also be uploaded as a static website or zipped for an itch.io HTML game.
+## Controls
 
-## Run
+| Action | Keyboard / mouse | Xbox standard mapping |
+| --- | --- | --- |
+| Move | WASD / arrows | Left stick |
+| Aim | Mouse | Right stick |
+| Interact / place | E / click to place | A |
+| Tool / bow charge | Hold Space or mouse; release to shoot | Hold RT; release to shoot (X taps tool) |
+| Inventory | I | View, beside the left stick |
+| Building menu | B | Y |
+| Craft | C while beside workbench | A while beside workbench |
+| Skill tree | K | Menu |
+| Eat best food | R | LT |
+| Nups wait / follow | T | B |
+| Rotate wall / door | Q | X while building |
+| Select tool | 1–6 / toolbar | LB / RB |
+| Menu selection | Arrows / Enter / mouse | Left stick / D-pad / A |
+| Close / cancel building | Escape | B |
 
-Requires Node.js 20 or newer.
+Sound starts off. Toggle it using the sound button; its louder default is adjustable with the volume slider.
+
+## Version 0.2
+
+- Full-window game with an internal hotbar and prominent unspent skill points. Browser fullscreen is optional.
+- Controller menus manage their own visible selection and support both the stick and D-pad. RT reads analog values as well as the pressed flag.
+- Interactions require proximity and highlight the eligible object. The workbench is usable within 46 world pixels.
+- Buildings use a grid and green/red placement preview. Connected horizontal and vertical walls, corners and manually rotated walls/doors make the floor plan legible. Enclosing a room with walls and a door protects Simm.
+- The axe removes stumps for less wood and breaks a wood wall in three hits. Half its original wood cost is dropped for pickup.
+- Four skill roots each have two alternative specializations with visible prerequisites: combat, crafting, gathering and star invention.
+- Holding/releasing a bow action launches a real directional projectile. Charge increases distance and damage. A facing marker and aiming guide show the direction. Rabbits and deer can be hunted without blood or graphic effects.
+- Wildlife spawns on land, checks water boundaries while moving, and persists in saves.
+- Night enemies are fewer, slower and weaker. Damage flashes the screen and player, with a shared period of invulnerability to prevent multiple simultaneous hits. Defeat fades out, restores Simm at camp, then fades into the next morning, retaining inventory.
+- Nups follows at a distance. B/T leaves him waiting at his current position or recalls him when nearby. While following he slows nearby enemies; while waiting near a nest he brings berries. Skill specializations expand these abilities.
+- Cave deposits provide iron and copper ore. A fueled furnace creates ingots and stone slabs; ingots upgrade the axe/pickaxe at the workbench and slabs make stone flooring.
+- A crafted fishing rod catches fish from the shore. Campfires cook fish, meat and berry/herb stew.
+- The bag has 20 slots with stacks of 20, separate from tools. Workbench upgrades add five slots each, up to 40. Dropped items remain visible, can be picked up, and expire after 10 simulated minutes. Menus pause this timer along with the game.
+
+## Development and checks
+
+Requires Node.js 20+. No application API keys, accounts, or external services are required. Developers edit `src/index.html`, `src/game.js`, `src/model.js`, `src/audio.js` and `src/style.css`.
 
 ```sh
-npm ci --cache /workspace/.cache/npm
+npm ci
 npm run dev
 ```
 
-The HTTP server listens on port 3000 (override with `PORT`). Open the app in a browser. `npm test` checks crafting, skill progression, and the five-minute day / one-minute night cycle; `npm run check` checks JavaScript syntax. With the server running, `CHROMIUM_PATH=/usr/bin/chromium npm run test:browser` runs the browser smoke suite in this cloud machine. On other machines install Playwright Chromium with `npx playwright install chromium` and omit `CHROMIUM_PATH`.
+In this cloud machine use `npm ci --cache /workspace/.cache/npm` to keep the cache in a writable directory. The server listens on port 3000; `PORT` overrides it. The development server serves the source template at `/`; the generated standalone build is at `/index.html`.
 
-## Play
+```sh
+npm run check
+npm test
+npm run build
+CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
+```
 
-- WASD/arrows move; E gathers/interacts; Space or click uses the tool; 1–5 selects tools; R eats the best available food; I opens the backpack.
-- C opens crafting near the starting workbench, B building, K skills. Escape cancels placement or closes a menu.
-- Standard Xbox controller: left stick moves, right stick aims, A interacts/places, X uses tool, Y crafts, B eats/cancels, bumpers select tools, LT opens the bag, RT uses the tool, View builds, Menu opens skills. D-pad navigates modal buttons and A confirms. Browser Gamepad API requires a connected controller and a button press; physical hardware validation is still needed.
-- Gather wood with the starter axe, craft a pickaxe at the bench, gather stone, and craft a torch. The cave lies north of camp. Enter with E, walk north, collect the crystal, then leave through the southern exit.
-- Build a room by enclosing it with walls and a door. Floors alone do not prevent zombie attacks. Doors let Simm pass while blocking zombies.
-- A meteor arrives east of camp after 55 seconds. Befriend Nups, build an alien nest, and receive berries. Each skill branch has three upgrade ranks.
-- Backpacks have 20 slots with stacks of 20 items; tools live on the separate belt. Craft upgrades at the bench (+5 slots each, up to 40). The full bag menu lets you discard a single item.
-- Build a campfire, add wood (120 seconds of fire per log), and cook rabbit meat or stew (berries + rabbit meat + herbs). Fire and a held torch repel wildlife and monsters. R prioritizes stew, roast, then berries.
-- Rabbits and deer roam the forest and flee when approached. Deer are peaceful; hunting rabbits with the bow provides meat without blood or graphic effects. Friendly-looking bats inhabit the cave.
-- Saves automatically to browser localStorage. The help menu includes a reset button. Defeat preserves inventory and starts a new day at camp.
+The browser tests need the running server; `TEST_URL` can override its address. On other machines install Chromium with `npx playwright install chromium` and omit `CHROMIUM_PATH`. Build refreshes both standalone HTML files deterministically and embeds font license text. The normal suite checks capacity, crafting, progression, drops/expiry, bow charge and building orientation. Browser checks exercise controller crafting/menu navigation, real gathering, building/demolition, cave quest, cooking, smelting, fishing, bow hunting, companion behavior, nighttime protection, and saves.
 
-## Scope
+Cloud tasks already run in isolated environments; use the existing checkout rather than a Git worktree unless explicitly requested.
 
-First playable prototype: forest, cave quest, hunger, crafting, modular buildings, zombies, skill branches, alien helper, wildlife, keyboard/mouse and controller input. Mobile touch controls, additional biomes, copper/tin/bronze/gold, more quests, and generated sprite artwork are future additions. Graphics use small procedural walking, tool-swing, crystal, leaf-mote and wildlife animations. Optional original Web Audio music, footsteps, birds and action sounds are enabled using the sound button. No downloaded audio is used.
+## Future release
 
-Cloud tasks are already isolated; use the existing checkout rather than creating a Git worktree unless explicitly requested.
-
-## Release intent
-
-Design target: gentle, non-graphic adventure suitable for a PEGI 7 audience; no official age rating has been obtained. Planned itch.io price: €4.99. Not published yet. Before release: physical controller playtesting, balancing, expanded content, accessibility review, static ZIP packaging, and review of any added commercial asset licenses. Current code, graphics and synthesized sound do not require an external asset subscription.
+PEGI 7 is the art/content target; no official age rating has been obtained. Intended itch.io price: €4.99. The game has not been published there. Touch controls, ice/volcano biomes, more quests, gold/tin/bronze and release balancing remain future work. Fonts include their SIL Open Font License notices; no downloaded music or commercial asset subscriptions are used.
