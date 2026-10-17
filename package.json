@@ -1,6 +1,6 @@
 {
   "name": "simm-in-the-wild",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "test:browser": "node tests/browser-smoke.mjs",
     "build": "node scripts/build.mjs",
     "test:menus": "node tests/menu-ux.mjs",
+    "test:v04": "node tests/v04-browser.mjs",
     "test:standalone": "node tests/standalone.mjs"
   },
   "devDependencies": {

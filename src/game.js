@@ -1,5 +1,5 @@
 import { toggleAudio, sound, updateAudio, setVolume } from './audio.js';
-import { freshState, recipes, skills, names, icons, tools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, cook, dropItem, bowStats, inWater, wallOrientation, questSteps } from './model.js';
+import { freshState, recipes, skills, names, icons, tools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, dropItem, bowStats, inWater, lakeWater, wallOrientation, questSteps, biomeAt, heightAt, canStep, rotateVector, projectPoint, sceneBuildings, availableInventory, payNearby, transferItem, craftItem, crops, plantCrop, cropProgress, harvestCrop, usePotion, tickEffects, regrowResources, predatorIntent, findHouses, houseExitPoint, canAscend, npcData, finishNPCQuest, whaleStep } from './model.js';
 const $ = id => document.getElementById(id);
 const canvas = $('game'), ctx = canvas.getContext('2d');
 const TILE=32, W=64, H=48;
@@ -8,15 +8,15 @@ let seed=1742;
 function rand(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
 const state=freshState();
 state.player={x:base.x,y:base.y+64,face:1,walk:0};
-let saveFound=false;
+let saveFound=false,saveVersion=4;
 try {
   const saved=JSON.parse(localStorage.getItem('simm-save-v1')||'null');
   if(saved?.state?.inventory&&Number.isFinite(saved.state.player?.x)){
-    Object.assign(state,saved.state);
+    saveVersion=saved.version||1;Object.assign(state,saved.state);
     state.inventory={...freshState().inventory,...saved.state.inventory};
     state.skills={...freshState().skills,...saved.state.skills};
     state.drops=state.drops||[];state.stumpsRemoved=state.stumpsRemoved||[];
-    state.alienFollowing=state.alienFollowing??true;
+    state.alienFollowing=state.alienFollowing??true;state.camera=((state.camera||0)%4+4)%4;state.jump=0;
     saveFound=true;
   }
 }catch{}
@@ -25,12 +25,36 @@ let started=false,paused=false,last=0,elapsed=0,cam={x:0,y:0},keys={},tool=0,bui
 let aim={x:1,y:0},charge=null,invulnerable=0,damageFlash=0,death=null,fishing=null,currentTarget=null,meteorFall=null;
 const particles=[],resources=[],animals=[],zombies=[],bats=[],arrows=[];
 const water=inWater;
+const mainTabs=['bag','journal','craft','build','skills','map'];
+const tabNames=['SELJAKOTT','ÜLESANDED','MEISTERDAMINE','EHITAMINE','OSKUSED','KAART'];
+const menuSelections={};let chestOpen=null,gardenOpen=null,npcOpen=null,whaleGame=null,whaleHeld=false,worldTick=0;
+function canPayLocal(cost){return canPay({inventory:availableInventory(state)},cost);}
+function worldItems(){return sceneBuildings(state);}
+function isOutside(){return !state.inCave&&!state.interior;}
+function openMain(){openModal('bag');}
+function changeTab(direction){if(!mainTabs.includes(menuKind))return;const next=mainTabs[(mainTabs.indexOf(menuKind)+direction+6)%6];openModal(next);}
+function drawTabs(){const tabs=$('menuTabs');tabs.replaceChildren();tabs.classList.toggle('hidden',!mainTabs.includes(menuKind));if(!mainTabs.includes(menuKind))return;mainTabs.forEach((kind,i)=>{const b=document.createElement('button');b.textContent=tabNames[i];b.setAttribute('role','tab');b.setAttribute('aria-selected',String(kind===menuKind));b.tabIndex=kind===menuKind?0:-1;b.onclick=()=>openModal(kind);tabs.append(b);});}
+function rotateCamera(d){if(state.interior||state.inCave)return;state.camera=(state.camera+d+4)%4;canvas._pointer=null;draw();notify('Vaade: '+['PÕHI','IDA','LÕUNA','LÄÄS'][state.camera]+' · Z/V või D-pad ←/→');}
+function jump(){if(state.jump<=0&&!state.boatId){state.jumpOrigin=heightAt(state.player.x,state.player.y);state.jump=.65;state.jumps=(state.jumps||0)+1;sound('swing');}}
+function useBagItem(id){if(id==='water'){if(state.thirst>=100)return;state.inventory.water--;state.thirst=Math.min(100,state.thirst+60);}else if(!usePotion(state,id))return;refresh();save();openModal('bag');}
+function enterHouse(h){state.interior={id:h.id,level:0,outside:houseExitPoint(h)};state.player.x=6*32;state.player.y=7.5*32;state.boatId=null;charge=null;arrows.length=0;canvas._pointer=null;state.shelterFound=true;notify('SINU KODU · ehita mööblit, kaste, vahelagesid ja trepp.');save();}
+function leaveHouse(){const out=state.interior.outside;state.interior=null;state.player.x=out.x;state.player.y=out.y;canvas._pointer=null;save();}
+function respawnWildlife(){
+ for(let i=state.wildlifeReturns.length-1;i>=0;i--){const r=state.wildlifeReturns[i];if(state.worldAge<r.at)continue;
+  const a={...r.animal,x:r.animal.homeX??r.animal.x,y:r.animal.homeY??r.animal.y},home={x:a.x,y:a.y},region=biomeAt(a.x,a.y),points=[home];
+  for(let radius=64;radius<=192;radius+=64)for(let angle=0;angle<8;angle++)points.push({x:home.x+Math.cos(angle*Math.PI/4)*radius,y:home.y+Math.sin(angle*Math.PI/4)*radius});
+  const free=points.find(p=>p.x>=64&&p.y>=70&&p.x<W*32-64&&p.y<H*32-64&&!water(p.x,p.y)&&biomeAt(p.x,p.y)===region&&!state.buildings.some(b=>Math.hypot((b.x+.5)*32-p.x,(b.y+.5)*32-p.y)<55));
+  if(!free)continue;Object.assign(a,free);a.hp=a.type==='bear'?7:a.type==='wolf'?4:a.type==='deer'?3:1;a.chasing=false;animals.push(a);state.wildlifeReturns.splice(i,1);
+ }
+}
+
 for(let i=0;i<290;i++){
   const x=(3+rand()*(W-6))*TILE,y=(3+rand()*(H-6))*TILE;
-  if(Math.hypot(x-base.x,y-base.y)<150||Math.hypot(x-cave.x,y-cave.y)<110||Math.hypot(x-meteor.x,y-meteor.y)<100||water(x,y))continue;
+  if(Math.hypot(x-base.x,y-base.y)<150||Math.hypot(x-cave.x,y-cave.y)<110||Math.hypot(x-meteor.x,y-meteor.y)<100||lakeWater(x,y))continue;
   // Keep the original forest layout so version 0.1 saved resource IDs still match.
   const type=rand()<.60?'wood':rand()<.48?'stone':rand()<.7?'berries':'herbs';
-  resources.push({id:i,x,y,type,hp:3,alive:!state.depleted?.includes(i),removed:state.stumpsRemoved.includes(i)});
+  if(water(x,y))continue;
+  resources.push({id:i,x,y,type:biomeAt(x,y)==='desert'&&type==='wood'?'cactus':type,hp:3,alive:!state.depleted?.includes(i),removed:state.stumpsRemoved.includes(i)});
 }
 for(const [id,x,y,type]of[[500,-95,60,'wood'],[501,98,45,'stone'],[502,-65,110,'berries'],[503,130,-35,'wood'],[504,-120,-45,'stone'],[505,65,150,'herbs']])resources.push({id,x:base.x+x,y:base.y+y,type,hp:3,alive:!state.depleted?.includes(id),removed:state.stumpsRemoved.includes(id)});
 for(let i=0;i<14;i++){
@@ -38,21 +62,24 @@ for(let i=0;i<14;i++){
   do{x=(12+rand()*38)*TILE;y=(12+rand()*25)*TILE;}while(water(x,y)||water(x-8,y)||water(x+8,y)||water(x,y-6)||water(x,y+6));
   animals.push({x,y,type:i%3?'rabbit':'deer',dir:rand()*6.28,timer:rand()*3,step:rand()*6,hp:i%3?1:3});
 }
+for(const[type,x,y]of[['wolf',24,22],['wolf',40,32],['bear',39,12],['skeleton',49,12],['skeleton',52,8]])animals.push({type,x:x*TILE,y:y*TILE,homeX:x*TILE,homeY:y*TILE,hp:type==='bear'?7:4,dir:0,timer:1,step:0});
+for(const a of animals){a.homeX??=a.x;a.homeY??=a.y;}
 const initialWildlife=animals.map(a=>({...a}));
-if(Array.isArray(state.wildlife)){animals.length=0;for(const a of state.wildlife){if(Number.isFinite(a.x)&&Number.isFinite(a.y)&&['rabbit','deer'].includes(a.type)&&!water(a.x,a.y))animals.push({...a});}}
+if(Array.isArray(state.wildlife)){animals.length=0;for(const a of state.wildlife){if(Number.isFinite(a.x)&&Number.isFinite(a.y)&&['rabbit','deer','wolf','bear','skeleton'].includes(a.type)&&!water(a.x,a.y))animals.push({...a});}}
+if(saveVersion<4&&Array.isArray(state.wildlife))for(const a of initialWildlife.filter(a=>['wolf','bear','skeleton'].includes(a.type)))animals.push({...a});
 for(let i=0;i<3;i++)bats.push({x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,phase:rand()*6.28,hit:0});
 for(const [id,x,y,type]of[[600,29,22,'ironOre'],[601,35,23,'copperOre'],[602,28,26,'ironOre'],[603,36,27,'copperOre'],[604,28,19,'stone']])resources.push({id,x:x*TILE,y:y*TILE,type,hp:3,inCave:true,alive:!state.depleted?.includes(id)});
 if(state.alienFriend&&!state.alien)state.alien={x:state.player.x+35,y:state.player.y+25,inCave:state.inCave};
 function notify(text){$('toast').textContent=text;$('toast').classList.remove('hidden');toastTime=4;}
-function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:3,state}));}catch{}}
-function start(){if(!assetsReady)return;started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?'Tere tagasi, Simm!':'Metsakristall ootab põhja pool. A / E suhtleb; Y / B ehitab.');refresh();}
+function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:4,state}));}catch{}}
+function start(){if(!assetsReady)return;started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?'Tere tagasi, Simm!':'Metsakristall ootab põhja pool. A / E suhtleb või hüppab. View / I avab menüü.');refresh();}
 $('startButton').onclick=start;$('newGameButton').onclick=()=>saveFound?openModal('newgame'):startNewGame();$('pauseButton').onclick=()=>openModal('pause');
-if(saveFound){$('startButton').textContent='Jätka seiklust →';document.querySelector('.intro-card p').textContent='Sinu mets, varud ja ehitised on alles. Versioon 0.3 ootab uut seiklust.';}
+if(saveFound){$('startButton').textContent='Jätka seiklust →';document.querySelector('.intro-card p').textContent='Sinu mets, varud ja ehitised on alles. Versioon 0.4 ootab uut seiklust.';}
 $('audioButton').onclick=async()=>{try{const enabled=await toggleAudio();setVolume(Number($('volume').value)/100);$('audioButton').textContent=enabled?'♫ Heli sees':'♫ Heli väljas';$('audioButton').setAttribute('aria-pressed',String(enabled));}catch{notify('Brauser ei saanud heli käivitada.');}};
 $('volume').oninput=()=>setVolume(Number($('volume').value)/100);
 $('fullscreenButton').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{notify('Kasuta brauseri täisekraani klahvi F11.');}};
-$('journalButton').onclick=()=>openModal('journal');$('helpButton').onclick=()=>openModal('help');$('skillsButton').onclick=()=>openModal('skills');$('craftButton').onclick=()=>openModal('craft');$('buildButton').onclick=()=>openModal('build');$('bagButton').onclick=()=>openModal('bag');$('eatButton').onclick=eat;
-function closeModal(){if($('modal').open)$('modal').close();paused=false;menuKind=null;menuCache=[];menuDirection=null;canvas.focus({preventScroll:true});}
+$('journalButton').onclick=openMain;$('helpButton').onclick=()=>openModal('help');$('skillsButton').onclick=openMain;$('craftButton').onclick=openMain;$('buildButton').onclick=openMain;$('bagButton').onclick=openMain;$('eatButton').onclick=eat;
+function closeModal(){if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:$('modalContent').scrollTop};if($('modal').open)$('modal').close();paused=false;menuKind=null;menuCache=[];menuDirection=null;canvas.focus({preventScroll:true});}
 $('closeModal').onclick=closeModal;$('modal').addEventListener('cancel',e=>{e.preventDefault();closeModal();});
 $('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
 function uiGlyph(id){
@@ -81,7 +108,7 @@ function uiGlyph(id){
 
 function menuButtons(){return menuCache;}
 function cacheMenu(){
-  menuCache=[...$('modalContent').querySelectorAll('button[data-nav],button:not(:disabled)')];
+  menuCache=[...$('modalContent').querySelectorAll('button[data-nav],button:not(:disabled)')].filter(b=>!b.closest('.hidden'));
   for(const button of menuCache){button.addEventListener('pointermove',e=>{const i=menuCache.indexOf(button);if((e.movementX||e.movementY)&&i>=0&&i!==menuIndex)focusMenu(i,false);});}
 }
 function focusMenu(index,scroll=true){
@@ -96,19 +123,18 @@ function focusMenu(index,scroll=true){
 function moveMenu(dx,dy){
   if(!menuCache.length)return;
   const current=menuCache[menuIndex],a=current.getBoundingClientRect();let best=-1,score=Infinity;
-  if(menuKind==='skills'&&dy){const node=skills.find(s=>s.id===current.dataset.skill);const target=dy<0?node?.requires:node&&!node.requires?skills.find(s=>s.requires===node.id)?.id:null;if(target){const i=menuCache.findIndex(b=>b.dataset.skill===target);if(i>=0)focusMenu(i);}return;}
+  if(menuKind==='skills'&&dy){
+    const node=skills.find(s=>s.id===current.dataset.skill);let target=null;
+    if(dy>0&&!node?.requires)target=skills.find(s=>s.requires===node?.id)?.id;
+    else if(node?.requires){const siblings=menuCache.filter(b=>{const n=skills.find(s=>s.id===b.dataset.skill),r=b.getBoundingClientRect();return n?.requires===node.requires&&dy*(r.top-a.top)>8;});siblings.sort((l,r)=>{const score=b=>{const z=b.getBoundingClientRect();return Math.abs(z.left-a.left)*3+Math.abs(z.top-a.top);};return score(l)-score(r);});target=siblings[0]?.dataset.skill||(dy<0?node.requires:null);}
+    const i=menuCache.findIndex(b=>b.dataset.skill===target);if(i>=0)focusMenu(i);return;
+  }
   for(let i=0;i<menuCache.length;i++){
     if(i===menuIndex)continue;const b=menuCache[i].getBoundingClientRect(),vx=(b.left+b.width/2)-(a.left+a.width/2),vy=(b.top+b.height/2)-(a.top+a.height/2);
     const forward=dx*vx+dy*vy,side=Math.abs(dx?vy:vx);if(forward<=2)continue;
     const value=forward+side*2.8;if(value<score){best=i;score=value;}
   }
   if(best>=0)focusMenu(best);
-}
-function switchSkillBranch(direction){
- const current=skills.find(s=>s.id===menuCache[menuIndex]?.dataset.skill);if(!current)return;
- const branches=['combat','craft','gather','star'],next=branches[(branches.indexOf(current.branch)+direction+4)%4];
- const siblings=skills.filter(s=>s.branch===current.branch),row=siblings.findIndex(s=>s.id===current.id),target=skills.filter(s=>s.branch===next)[row]||skills.find(s=>s.id===next);
- const i=menuCache.findIndex(b=>b.dataset.skill===target.id);if(i>=0)focusMenu(i);
 }
 function activateMenu(){const button=menuCache[menuIndex];if(!button&&document.activeElement===$('closeModal')){closeModal();return;}if(button?.dataset.skill){selectedSkill=button.dataset.skill;learnSelectedSkill();}else if(button&&!button.disabled)button.click();}
 function updateMenuDetail(button){
@@ -126,7 +152,7 @@ function startNewGame(){
   for(const r of resources){r.alive=true;r.removed=false;r.hp=3;}
   animals.splice(0,animals.length,...initialWildlife.map(a=>({...a})));zombies.length=0;arrows.length=0;particles.length=0;
   bats.forEach((b,i)=>Object.assign(b,{x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,hit:0}));
-  tool=0;buildType=null;charge=null;death=null;fishing=null;meteorFall=null;invulnerable=0;damageFlash=0;autosave=0;aim={x:1,y:0};canvas._pointer=null;saveFound=false;
+  tool=0;buildType=null;chestOpen=null;gardenOpen=null;npcOpen=null;whaleGame=null;whaleHeld=false;worldTick=0;for(const key of Object.keys(menuSelections))delete menuSelections[key];charge=null;death=null;fishing=null;meteorFall=null;invulnerable=0;damageFlash=0;autosave=0;aim={x:1,y:0};canvas._pointer=null;saveFound=false;
   $('deathOverlay').classList.add('hidden');closeModal();save();start();notify('Uus seiklus algab. Tere tulemast Rohelaande, Simm!');
 }
 function refresh(){
@@ -135,26 +161,26 @@ function refresh(){
   paintMenuArt();$('bagCount').textContent=`${usedSlots(state)}/${state.bagSlots}`;
   $('pointsLabel').textContent=`${state.points} OSKUSPUNKTI`;
   $('skillsButton').classList.toggle('has-points',state.points>0);
-  $('skillSubtitle').textContent=`Tase ${state.level} · K / RS`;
+  $('skillSubtitle').textContent=`Tase ${state.level} · I / View`;
   $('questText').textContent=(questSteps(state).find(q=>!q.done)?.title||'Sinu seiklus jätkub')+' · Seikluspäevik ↑';
 }
 function costFor(r){return Object.fromEntries(Object.entries(r.cost).map(([k,v])=>[k,Math.max(1,Math.ceil(v*(1-.1*(state.skills.craft||0))))]));}
-function nearBench(){return !state.inCave&&Math.hypot(state.player.x-(base.x+35),state.player.y-base.y)<46;}
-function nearStation(type){return !state.inCave&&state.buildings.find(b=>b.type===type&&Math.hypot(state.player.x-(b.x+.5)*TILE,state.player.y-(b.y+.5)*TILE)<48);}
+function nearBench(){return isOutside()&&Math.hypot(state.player.x-(base.x+35),state.player.y-base.y)<46;}
+function nearStation(type){return !state.inCave&&worldItems().find(b=>b.type===type&&Math.hypot(state.player.x-(b.x+.5)*TILE,state.player.y-(b.y+.5)*TILE)<48);}
 function nearFire(){return nearStation('fire');}
 function openModal(kind){
-  if(death)return;const previousKey=menuKind===kind?menuCache[menuIndex]?.dataset.key:null;
+  if(death)return;if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:$('modalContent').scrollTop};const previousKey=menuSelections[kind]?.key;
   charge=null;fishing=null;paused=true;keys={};
-  const modal=$('modal'),content=$('modalContent');menuKind=kind;menuDirection=null;menuRepeatAt=0;modal.dataset.kind=kind;modal.classList.toggle('wide',kind==='skills');$('modalDetail').classList.toggle('hidden',kind!=='skills');content.replaceChildren();
-  $('modalEyebrow').textContent={skills:`TASE ${state.level}`,craft:'MEISTERDAMISLAUD',build:'OMA KODU, OMA REEGLID',bag:'KÕIK VAJALIK KAASAS',fire:'LÕKKE ÄÄRES',furnace:'MAAGIST METALLIKS',help:'VÄIKE SPIKKER',pause:'VÕTA HETK ENDALE',newgame:'UUS ALGUS',journal:'IGA SAMM LOEB'}[kind];
-  $('modalTitle').textContent={skills:'Vali oma rada',craft:'Valmista midagi head',build:'Ehita oma kodu',bag:'Sinu seljakott',fire:'Soe tuli, hea toit',furnace:'Sulatusahi',help:'Seiklus algab siit',pause:'Seiklus ootab sind',newgame:'Alustame uut seiklust?',journal:'Sinu seikluse lugu'}[kind];
-  if(kind==='journal'){const steps=questSteps(state),active=steps.findIndex(q=>!q.done);content.innerHTML='<div class="journal-list">'+steps.map((q,i)=>`<article class="journal-step ${q.done?'complete':''} ${i===active?'active':''}"><span>${q.done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${q.title}</h3><p>${q.text}</p></div>${i===active?'<small>SINU JÄRGMINE SAMM</small>':''}</article>`).join('')+'</div>';
+  const modal=$('modal'),content=$('modalContent');menuKind=kind;menuDirection=null;menuRepeatAt=0;modal.dataset.kind=kind;drawTabs();modal.classList.toggle('wide',kind==='skills');$('modalDetail').classList.toggle('hidden',kind!=='skills');content.replaceChildren();
+  $('modalEyebrow').textContent={skills:`TASE ${state.level}`,craft:'MEISTERDAMISLAUD',build:'OMA KODU, OMA REEGLID',bag:'KÕIK VAJALIK KAASAS',fire:'LÕKKE ÄÄRES',furnace:'MAAGIST METALLIKS',help:'VÄIKE SPIKKER',pause:'VÕTA HETK ENDALE',newgame:'UUS ALGUS',journal:'IGA SAMM LOEB',map:'SUUR MAAILM',chest:'IGA ASI OMA KOHALE',garden:'KASVAB ILMA KASTMATA',npc:'SÕBRAD JA ÜLESANDED',whale:'MERESÕBRA MÄNG'}[kind];
+  $('modalTitle').textContent={skills:'Vali oma rada',craft:'Valmista midagi head',build:'Ehita oma kodu',bag:'Sinu seljakott',fire:'Soe tuli, hea toit',furnace:'Sulatusahi',help:'Seiklus algab siit',pause:'Seiklus ootab sind',newgame:'Alustame uut seiklust?',journal:'Sinu seikluse lugu',map:'Sinu maailm',chest:'Hoiukast',garden:'Sinu kastpeenar',npc:npcOpen?.name,whale:'Sõbralik vaalapüük'}[kind];
+  if(extraMenu(kind,content)){}else if(kind==='journal'){const steps=questSteps(state),active=steps.findIndex(q=>!q.done);content.innerHTML='<div class="journal-list">'+steps.map((q,i)=>`<article class="journal-step ${q.done?'complete':''} ${i===active?'active':''}"><span>${q.done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${q.title}</h3><p>${q.text}</p></div>${i===active?'<small>SINU JÄRGMINE SAMM</small>':''}</article>`).join('')+'</div>'+npcData.map(n=>`<article class="journal-step"><span>${state.npcQuests[n.id]?'✓':'!'}</span><div><h3>${n.name}</h3><p>${n.task} ${state.npcQuests[n.id]?'TEHTUD!':''}</p></div></article>`).join('');
   }else if(kind==='pause'){content.innerHTML='<div class="pause-grid"><button id="resumeGame" class="primary">Jätka seiklust</button><button id="pauseSkills">✦ Minu oskused</button><button id="pauseHelp">? Kuidas mängida</button><button id="pauseNew">Uus mäng</button><button id="pauseJournal">⚑ Seikluspäevik</button></div><p class="build-note">Mäng on pausil ja sinu seiklus salvestatud.</p>';save();$('resumeGame').onclick=closeModal;$('pauseSkills').onclick=()=>openModal('skills');$('pauseHelp').onclick=()=>openModal('help');$('pauseNew').onclick=()=>openModal('newgame');$('pauseJournal').onclick=()=>openModal('journal');
   }else if(kind==='newgame'){content.innerHTML='<div class="newgame-confirm"><span>✧</span><h3>Üks mets. Tuhat uut võimalust.</h3><p>Alustad esimesest päevast tühja seljakotiga. Praegune seiklus asendatakse uuega.</p><div class="pause-grid"><button id="cancelNewGame">Jäta praegune seiklus alles</button><button id="confirmNewGame" class="primary">Jah, alusta uut mängu</button></div></div>';$('cancelNewGame').onclick=closeModal;$('confirmNewGame').onclick=startNewGame;
   }else if(kind==='bag'){
     content.innerHTML=`<p class="build-note">${usedSlots(state)} / ${state.bagSlots} pesa · Virnas kuni ${STACK_SIZE} eset. Vali ese, et üks maha panna. Ese püsib 10 mänguminutit ja selle saab A / E-ga uuesti üles korjata.</p>`;
     const grid=document.createElement('div');grid.className='bag-grid';
-    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · pane üks maha`;slot.setAttribute('aria-label',`Pane maha: ${names[k]}`);slot.dataset.key=k;slot.innerHTML=`${menuArt(k,icons[k])}<span class="slot-name">${names[k]}</span><small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
+    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · ${['water','healPotion','speedPotion','peacePotion'].includes(k)?'kasuta':'pane üks maha'}`;slot.setAttribute('aria-label',`${['water','healPotion','speedPotion','peacePotion'].includes(k)?'Kasuta':'Pane maha'}: ${names[k]}`);slot.dataset.key=k;slot.innerHTML=`${menuArt(k,icons[k])}<span class="slot-name">${names[k]}</span><small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{if(['water','healPotion','speedPotion','peacePotion'].includes(k)){useBagItem(k);return;}dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
     while(grid.children.length<state.bagSlots){const d=document.createElement('div');d.className='inv-slot empty';grid.append(d);}content.append(grid);
   }else if(kind==='skills'){
     content.innerHTML=`<div class="skill-points">✦ <strong>${state.points}</strong> oskuspunkti <span>Vali rada. Vaata võimalusi. Kasva omas tempos.</span></div>`;
@@ -172,52 +198,60 @@ function openModal(kind){
       }column.append(children);tree.append(column);
     }content.append(tree);
   }else if(kind==='help'){
-    content.innerHTML=`<div class="help-copy"><p><strong>Xbox:</strong> vasak kang liigub, parem kang sihib. A suhtleb ja kinnitab. View (nupp vasaku kangi kõrval) avab seljakoti. Y avab ehitamise. X / RT kasutab tööriista; hoia RT all ja vabasta, et vibuga lasta. B käsib Nupsil oodata või kaasa tulla. LT sööb, LB/RB valib tööriista, Menu avab pausi; RS (parema kangi vajutus) avab oskused. Menüüdes vali vasaku kangi või ristnuppudega; A kinnitab, B sulgeb.</p><p><strong>Klaviatuur:</strong> WASD liigub; E tegutseb; tühik / hiir kasutab tööriista (vibu: hoia ja vabasta). I seljakott, C meisterda lähedal laua juures, B ehita, K oskused, R söö, T tulnuka käsk. Ehitamisel Q või puldi X pöörab seina; hiireklõps / A paigutab ja Esc / B lõpetab.</p><p><strong>Kodu:</strong> ruudustik ja roheline eelvaade näitavad paigutust. Seinad ühenduvad naabritega ja uks sulgeb turvalise toa. Kirvega saad seina lõhkuda; pool kulunud puidust jääb maha. Ka kändudest saab veidi puitu.</p><p><strong>Uued varud:</strong> koopas leidub raua- ja vasemaaki. Ehita ahi, lisa puitu ning sulata kange või valmista kiviplaate. Õngega saad veekogu kaldal kala püüda. Laetud nool lendab kaugemale ja tabab ainult sihitud suunas. Loomad annavad liha ilma veriste efektideta.</p><p><strong>Nups:</strong> B / T jätab ta ootama või kutsub lähedalt kaasa. Kaasas olev Nups aeglustab vastaseid. Pesaga baasi jäetud Nups kogub marju. Maailm salvestub automaatselt sellesse brauserisse.</p></div>`;
+    content.innerHTML=`<div class="help-copy"><p><strong>Liikumine:</strong> WASD / vasak kang. A / E suhtleb lähedal oleva esemega, mujal hüppab. F hüppab alati. Z/V või D-pad vasak/parem pöörab kaamerat. Hüppa liikudes ühe astme peale; Kõrge hüpe oskus lubab kõrgemale.</p><p><strong>Menüü:</strong> I / View / Y avab SELJAKOTI. LB/RB või [ / ] / Tab vahetab vahelehti. Vali vasaku kangi või nooltega, A / Enter kinnitab, B / Esc sulgeb. Parem kang kerib. Seljakotis vali jook või vesi kasutamiseks; muud esemed saab maha panna.</p><p><strong>Tööriistad:</strong> RT / tühik / hiir kasutab tööriista. Vibu laeb hoides ning laseb vabastades. LB/RB valib tööriista. LT / R sööb. X / Q pöörab ehitatavat seina. B / T juhib Nupsi. Menu / Esc avab pausi.</p><p><strong>Kodu:</strong> ehita vähemalt 3×3 põrand. Pane igale servaruudule sein, aken või uks ning igale põrandaruudule katus. Aknad asendavad seina ja on vabatahtlikud. Valmis majja sisene ukse juures A-ga. Sees on 8×6 ehitusala. Täida see vahelagedega ja lisa trepp, et avada järgmine korrus. Trepi juures A viib üles, välisukse juures A alla või õue.</p><p><strong>Kast ja peenar:</strong> ehita ning ava A-ga. Kastimenüüs saad valida ühe eseme seljakotist kasti või kastist seljakotti. Meisterdamine kasutab kuni 120 sammu kaugusel sama ruumi ja korruse kaste. Peenras vali taim: seemnevaru on olemas, kasta pole vaja. Küpse saagi korjad A-ga.</p><p><strong>Kõrb ja meri:</strong> kirdeosas on kuum kõrb, kaktused, varemed ja oaas. Võta kaasa joogivett. Idarannas ehita paat vette, istu A-ga sisse ning aeruta merele. Vaal ootab ida pool. Stiliseeritud harpuun käivitab püügimängu: hoia RT / tühikut, et tõsta märki; vabastades märk langeb. Hoia märki kuldses alas. Pärast püüki saad vaala vabastada.</p><p><strong>Seiklus:</strong> metsavaht, kaevur ja kaupmees annavad ülesandeid. Hundist jookse kaugele, karu juurest lahku pesast eemale. Loomasõbra jook kaitseb loomade eest 120 sekundit, kiirusejook kestab 90 sekundit. Lambid põlevad püsivalt. Puud taastuvad kolme päevaga, taimed ühe ja loomad kahe päevaga; ehitised takistavad taastumist.</p></div>`;
   }else if(kind==='fire'||kind==='furnace'){
     const station=nearStation(kind);
     if(!station){content.innerHTML='<p class="build-note">Mine jaama kõrvale, et seda kasutada.</p>';}
     else{
-      content.innerHTML=`<div class="station-fuel"><p class="build-note">Kütust: ${Math.ceil(station.fuel||0)} sekundit · 1 puit = ${state.skills.smelter?4:2} minutit.</p><button id="fuelButton" ${state.inventory.wood<1?'disabled':''}>Lisa 1 puit · süüta tuli</button></div>`;
-      $('fuelButton').dataset.key='fuel';$('fuelButton').onclick=()=>{if(pay(state,{wood:1})){station.fuel=(station.fuel||0)+120*(state.skills.smelter?2:1);refresh();save();openModal(kind);}};
+      content.innerHTML=`<div class="station-fuel"><p class="build-note">Kütust: ${Math.ceil(station.fuel||0)} sekundit · 1 puit = ${state.skills.smelter?4:2} minutit.</p><button id="fuelButton" ${availableInventory(state).wood<1?'disabled':''}>Lisa 1 puit · süüta tuli</button></div>`;
+      $('fuelButton').dataset.key='fuel';$('fuelButton').onclick=()=>{if(payNearby(state,{wood:1})){station.fuel=(station.fuel||0)+120*(state.skills.smelter?2:1);refresh();save();openModal(kind);}};
       for(const r of recipes.filter(r=>kind==='fire'?r.cook:r.smelt)){
-        const row=recipeRow(r,r.cost,!(station.fuel>0)||!canPay(state,r.cost),kind==='fire'?'Küpseta':'Sulata');
-        row.querySelector('button').onclick=()=>{if(station.fuel>0&&cook(state,r)){station.fuel=Math.max(0,station.fuel-5);gainXP(state,8);sound('craft');refresh();save();openModal(kind);notify(`${r.name} valmis!`);}else notify('Seljakotis pole ruumi.');};content.append(row);
+        const row=recipeRow(r,r.cost,!(station.fuel>0)||!canPayLocal(r.cost),kind==='fire'?'Küpseta':'Sulata');
+        row.querySelector('button').onclick=()=>{if(station.fuel>0&&craftItem(state,r)){station.fuel=Math.max(0,station.fuel-5);gainXP(state,8);sound('craft');refresh();save();openModal(kind);notify(`${r.name} valmis!`);}else notify('Seljakotis pole ruumi.');};content.append(row);
       }
     }
-  }else if(kind==='craft'&&!nearBench())content.innerHTML='<p class="build-note">Mine meisterdamislaua kõrvale. Laua ümber ilmub kollane rõngas, kui see on käeulatuses.</p>';
+  }else if(kind==='craft'&&!nearBench()){
+    content.innerHTML='<p class="build-note">Mine meisterdamislaua kõrvale tööriistade ja võlujookide jaoks. Veekogu kaldal saad siin joogivett võtta.</p>';
+    const r=recipes.find(r=>r.id==='water'),row=recipeRow(r,{},!shorePoint(),'Täida');row.querySelector('button').onclick=()=>{if(shorePoint()&&craftItem(state,r)){refresh();save();openModal('craft');}else notify('Vajad veekogu lähedust ja seljakotis ruumi.');};content.append(row);
+  }
   else{
     if(kind==='build')content.innerHTML='<p class="build-note">Vali osa. Seejärel sihi maapinda: roheline eelvaade lubab ehitada, punane näitab takistust. Q / X pöörab seina. A / klõps paigutab. Seinad ühenduvad automaatselt; suletud tuba koos uksega kaitseb öösel.</p>';
     for(const r of recipes.filter(r=>!r.cook&&!r.smelt&&(kind==='build')===!!r.build)){
       const cost=costFor(r),owned=r.gear?!!state.gear?.[r.gear]:r.upgrade?state.bagSlots>=40:!r.build&&state.tools.includes(r.id);
-      const row=recipeRow(r,cost,owned||!canPay(state,cost),owned?'Olemas':r.build?'Vali':'Valmista');
+      const row=recipeRow(r,cost,owned||!canPayLocal(cost)||r.water&&!shorePoint(),owned?'Olemas':r.build?'Vali':'Valmista');
       row.querySelector('button').onclick=()=>{
         if(r.build){buildType=r.id;rotation='auto';closeModal();notify(`${r.name} · A paigutab · X pöörab · B lõpetab`);}
-        else if(pay(state,cost)){if(r.gear){state.gear=state.gear||{};state.gear[r.gear]=true;}else if(r.upgrade)state.bagSlots+=5;else state.tools.push(r.id);gainXP(state,12);sound('craft');refresh();save();openModal('craft');}
+        else if(r.item){if(r.water&&!shorePoint()){notify('Vee võtmiseks mine veekogu kaldale.');return;}if(craftItem(state,r,cost)){gainXP(state,8);refresh();save();openModal('craft');}else notify('Seljakotis pole ruumi.');}else if(payNearby(state,cost)){if(r.gear){state.gear=state.gear||{};state.gear[r.gear]=true;}else if(r.upgrade)state.bagSlots+=5;else state.tools.push(r.id);gainXP(state,12);sound('craft');refresh();save();openModal('craft');}
       };content.append(row);
     }
   }
   if(!modal.open)modal.showModal();
-  cacheMenu();const keep=previousKey?menuCache.findIndex(b=>b.dataset.key===previousKey):-1;focusMenu(keep>=0?keep:0,!['help','journal'].includes(kind));paintMenuArt();document.querySelector('.modal-hint').textContent=kind==='skills'?'Vasak kang / ristnupud: vali · A: õpi · LB/RB: haru · B: tagasi':['help','journal'].includes(kind)?'Parem kang / hiireratas: keri · B: tagasi':'Vasak kang / ristnupud: vali · A: kinnita · B: tagasi';
+  cacheMenu();$('modalContent').scrollTop=menuSelections[kind]?.scroll||0;const keep=previousKey?menuCache.findIndex(b=>b.dataset.key===previousKey):-1;focusMenu(keep>=0?keep:0,!['help','journal'].includes(kind));paintMenuArt();document.querySelector('.modal-hint').textContent=kind==='skills'?'Vasak kang / ristnupud: vali · A: õpi · LB/RB: vaheleht · B: tagasi':['help','journal'].includes(kind)?'Parem kang / hiireratas: keri · B: tagasi':mainTabs.includes(kind)?'LB/RB või [ / ]: vaheleht · A: kinnita · B: tagasi':'Vasak kang / ristnupud: vali · A: kinnita · B: tagasi';
 }
-function recipeRow(r,cost,disabled,label){const row=document.createElement('div');row.className='recipe';row.innerHTML=`<span>${menuArt(r.id,r.icon)}</span><div><strong>${r.name}</strong><p>${Object.entries(cost).map(([k,v])=>`${names[k]} ${v} <small class="material-count ${state.inventory[k]>=v?'enough':'missing'}">(${state.inventory[k]||0} olemas)</small>`).join(' · ')}</p></div><button ${disabled?'disabled':''}>${label}</button>`;row.querySelector('button').dataset.key=r.id;return row;}
+function recipeRow(r,cost,disabled,label){const row=document.createElement('div');row.className='recipe';row.innerHTML=`<span>${menuArt(r.id,r.icon)}</span><div><strong>${r.name}</strong><p>${Object.entries(cost).map(([k,v])=>`${names[k]} ${v} <small class="material-count ${availableInventory(state)[k]>=v?'enough':'missing'}">(${availableInventory(state)[k]||0} olemas)</small>`).join(' · ')}</p></div><button ${disabled?'disabled':''}>${label}</button>`;row.querySelector('button').dataset.key=r.id;return row;}
 function selectTool(i){if(state.tools.includes(tools[i]?.id)){charge=null;fishing=null;tool=i;refresh();}else notify('Meisterda kõigepealt see tööriist.');}
 function cycleTool(d){for(let i=0;i<tools.length;i++){const next=(tool+d+tools.length)%tools.length;tool=next;if(state.tools.includes(tools[tool].id))break;}charge=null;refresh();}
 function burst(x,y,color,count=8){for(let i=0;i<count;i++)particles.push({x,y,vx:(Math.random()-.5)*85,vy:-20-Math.random()*45,life:.7,color});}
-function addOrDrop(id,n,x=state.player.x,y=state.player.y){if(!addItem(state,id,n)){state.drops.push({id,amount:n,x,y,inCave:state.inCave,expires:state.worldAge+600});notify(`${names[id]} jäi maha — seljakott on täis.`);}refresh();}
+function addOrDrop(id,n,x=state.player.x,y=state.player.y){if(!addItem(state,id,n)){state.drops.push({id,amount:n,x,y,inCave:state.inCave,room:state.interior?.id||null,level:state.interior?.level||0,expires:state.worldAge+600});notify(`${names[id]} jäi maha — seljakott on täis.`);}refresh();}
 function collect(r){
   const selected=tools[tool].id,stump=!r.alive&&r.type==='wood'&&!r.removed;
   if((r.type==='wood'&&selected!=='axe')||(['stone','ironOre','copperOre'].includes(r.type)&&selected!=='pickaxe')){notify(r.type==='wood'?'Vali kirves.':'Vali kirka.');return;}
   if(stump){r.removed=true;addOrDrop('wood',state.skills.logger?3:2,r.x,r.y);sound('wood');burst(r.x,r.y,'#bd9864');gainXP(state,4);save();return;}
-  r.hp-=['berries','herbs'].includes(r.type)?3:1+(state.skills.gather||0)+(r.type==='wood'&&state.gear?.axe?1:0)+(['stone','ironOre','copperOre'].includes(r.type)&&state.gear?.pickaxe?1:0);sound(r.type==='wood'?'wood':r.type==='berries'?'berries':'stone');burst(r.x,r.y,r.type==='wood'?'#c7a36b':'#afbda3');
-  if(r.hp<=0){r.alive=false;const n=(r.type==='wood'?5:r.type==='stone'?4:3)+(state.skills.gather||0)+(r.type==='wood'&&state.skills.logger?2:0);addOrDrop(r.type,n,r.x,r.y);state.gathered[r.type]=(state.gathered[r.type]||0)+n;const level=state.level;gainXP(state,10);notify(`+${n} ${names[r.type].toLowerCase()}${state.level>level?' · Uus oskuspunkt!':''}`);refresh();save();}
+  r.hp-=['berries','herbs','cactus'].includes(r.type)?3:1+(state.skills.gather||0)+(r.type==='wood'&&state.gear?.axe?1:0)+(['stone','ironOre','copperOre'].includes(r.type)&&state.gear?.pickaxe?1:0);sound(r.type==='wood'?'wood':r.type==='berries'?'berries':'stone');burst(r.x,r.y,r.type==='wood'?'#c7a36b':'#afbda3');
+  if(r.hp<=0){r.alive=false;state.regrowth[r.id]=state.worldAge+(r.type==='wood'?1080:360);const n=(r.type==='wood'?5:r.type==='stone'?4:3)+(state.skills.gather||0)+(r.type==='wood'&&state.skills.logger?2:0);addOrDrop(r.type==='cactus'?'water':r.type,n,r.x,r.y);state.gathered[r.type]=(state.gathered[r.type]||0)+n;const level=state.level;gainXP(state,10);notify(`+${n} ${names[r.type==='cactus'?'water':r.type].toLowerCase()}${state.level>level?' · Uus oskuspunkt!':''}`);refresh();save();}
 }
 function getTarget(){
-  const p=state.player,candidates=[];
+  if(state.interior)return interiorTarget();
+  const p=state.player,candidates=[];if(state.boatId){if(p.x>59*32&&Math.hypot(p.x-61*32,p.y-25*32)<240)return {kind:'whale',x:61*32,y:25*32,label:'Sõbralik vaalapüük'};return {kind:'boatExit',x:p.x,y:p.y,label:'Astu kaldale'};}
   function candidate(kind,x,y,range,label,ref){const d=Math.hypot(p.x-x,p.y-y);if(d<range)candidates.push({kind,x,y,d,label,ref});}
-  for(const drop of state.drops.filter(d=>!!d.inCave===state.inCave))candidate('drop',drop.x,drop.y,40,`Korja ${names[drop.id].toLowerCase()} (${drop.amount})`,drop);
-  for(const r of resources.filter(r=>!!r.inCave===state.inCave&&(r.alive||r.type==='wood'&&!r.removed)))candidate('resource',r.x,r.y,45,!r.alive?'Eemalda känd':r.type==='wood'?'Raiu puud':['stone','ironOre','copperOre'].includes(r.type)?`Kaevanda ${names[r.type].toLowerCase()}`:r.type==='herbs'?'Korja maitsetaimi':'Korja marju',r);
+  for(const drop of state.drops.filter(d=>!!d.inCave===state.inCave&&!d.room))candidate('drop',drop.x,drop.y,40,`Korja ${names[drop.id].toLowerCase()} (${drop.amount})`,drop);
+  for(const r of resources.filter(r=>!!r.inCave===state.inCave&&(r.alive||r.type==='wood'&&!r.removed)))candidate('resource',r.x,r.y,45,!r.alive?'Eemalda känd':r.type==='wood'?'Raiu puud':['stone','ironOre','copperOre'].includes(r.type)?`Kaevanda ${names[r.type==='cactus'?'water':r.type].toLowerCase()}`:r.type==='herbs'?'Korja maitsetaimi':r.type==='cactus'?'Kogu kaktusevett':'Korja marju',r);
   if(state.inCave){if(!state.crystalFound)candidate('crystal',32*TILE,20*TILE,48,'Võta metsakristall');candidate('exit',32*TILE,29*TILE,48,'Mine metsa');}
   else{
+    for(const n of npcData)candidate('npc',n.x,n.y,44,n.name,n);
+    for(const b of state.buildings.filter(b=>['chest','garden','boat','door'].includes(b.type)))candidate(b.type,(b.x+.5)*32,(b.y+.5)*32,42,({chest:'Ava hoiukast',garden:'Vaata peenart',boat:state.boatId?'Astu kaldale':'Istu paati',door:'Ava uks / sisene majja'})[b.type],b);
+    if(state.boatId)candidate('boatExit',p.x,p.y,1,'Astu kaldale');
+    if(state.boatId&&p.x>59*32&&Math.hypot(p.x-61*32,p.y-25*32)<240)candidate('whale',61*32,25*32,240,'Sõbralik vaalapüük');
     candidate('bench',base.x+35,base.y,46,'Meisterdamislaud');candidate('cave',cave.x,cave.y,58,'Sisene salakoopasse');
     for(const b of state.buildings.filter(b=>['fire','furnace'].includes(b.type)))candidate(b.type,(b.x+.5)*TILE,(b.y+.5)*TILE,48,b.type==='fire'?'Lõke ja toiduvalmistamine':'Sulatusahi',b);
     if(state.meteorArrived&&!state.alienFriend)candidate('alien',meteor.x+30,meteor.y+30,55,'Ütle Nupsile tere');
@@ -227,7 +261,7 @@ function getTarget(){
 function interact(){
   if(!started||paused||death||actionCooldown>0)return;
   if(buildType){const p=buildPoint();place(p.x,p.y);return;}
-  const t=getTarget();if(!t){if(tools[tool].id==='rod')beginFishing();return;}
+  const t=getTarget();if(!t){jump();return;}if(extraInteract(t))return;
   if(t.kind==='resource'){collect(t.ref);actionCooldown=.28;}
   else if(t.kind==='drop'){if(addItem(state,t.ref.id,t.ref.amount)){state.drops.splice(state.drops.indexOf(t.ref),1);notify('Korjasid oma asjad üles.');refresh();save();}else notify('Seljakott on täis.');}
   else if(['bench','fire','furnace'].includes(t.kind))openModal(t.kind==='bench'?'craft':t.kind);
@@ -250,65 +284,86 @@ function endAction(){if(charge&&!paused&&!death){const stats=bowStats(state,char
 function attack(){
   if(actionCooldown>0)return;actionCooldown=.35;state.player.swing=.2;sound('swing');
   const p=state.player;
-  if(tools[tool].id==='axe'&&!state.inCave){
+  if(tools[tool].id==='axe'&&isOutside()){
     const wall=state.buildings.filter(b=>b.type==='wall'&&Math.hypot((b.x+.5)*TILE-p.x,(b.y+.5)*TILE-p.y)<53).sort((a,b)=>Math.hypot((a.x+.5)*TILE-p.x,(a.y+.5)*TILE-p.y)-Math.hypot((b.x+.5)*TILE-p.x,(b.y+.5)*TILE-p.y))[0];
     if(wall){wall.hp=(wall.hp??3)-1;if(wall.hp<=0){state.buildings.splice(state.buildings.indexOf(wall),1);const n=Math.floor((wall.paidWood??2)/2);if(n)state.drops.push({id:'wood',amount:n,x:(wall.x+.5)*TILE,y:(wall.y+.5)*TILE,inCave:false,expires:state.worldAge+600});notify('Sein lõhutud. Pool puidust jäi maha.');save();}burst((wall.x+.5)*TILE,(wall.y+.5)*TILE,'#b9975d');return;}
   }
-  const entities=state.inCave?bats.filter(b=>b.hp>0):[...zombies,...animals];
+  const entities=state.interior?[]:state.inCave?bats.filter(b=>b.hp>0):[...zombies,...animals];
   const target=entities.filter(e=>Math.hypot(e.x-p.x,e.y-p.y)<52).sort((a,b)=>Math.hypot(a.x-p.x,a.y-p.y)-Math.hypot(b.x-p.x,b.y-p.y))[0];
   if(target){hitEntity(target,1+(state.skills.combat||0)+(tools[tool].id==='axe'&&state.gear?.axe?1:0));return;}
   const t=getTarget();if(t?.kind==='resource')collect(t.ref);
 }
-function hitEntity(e,damage){e.hp-=damage;burst(e.x,e.y,e.type?'#e0d4ae':'#b6c998');if(e.hp<=0){if(animals.includes(e)){animals.splice(animals.indexOf(e),1);addOrDrop('meat',e.type==='deer'?3:1,e.x,e.y);notify('Metsloomalt said liha. Lõkkel saab süüa teha.');}else if(zombies.includes(e))zombies.splice(zombies.indexOf(e),1);gainXP(state,8);refresh();}else{e.x+=aim.x*12;e.y+=aim.y*12;}}
-function eat(){if(!started||death)return;const food=['stew','cookedFish','roast','berries'].find(k=>state.inventory[k]>0);if(!food){notify('Korja marju või valmista lõkkel süüa.');return;}if(state.hunger>=100&&state.health>=maxHealth(state))return;const value={stew:[65,3],roast:[40,2],cookedFish:[45,2],berries:[25,1]}[food];state.inventory[food]--;state.hunger=Math.min(100,state.hunger+value[0]);state.health=Math.min(maxHealth(state),state.health+value[1]);sound('eat');notify(`${names[food]} · +${value[0]} kõhtu`);refresh();save();}
-function shorePoint(){if(state.inCave)return null;const p=state.player;for(let radius=20;radius<=75;radius+=10)for(let a=0;a<16;a++){const angle=a*Math.PI/8,x=p.x+Math.cos(angle)*radius,y=p.y+Math.sin(angle)*radius;if(water(x,y))return{x,y};}return null;}
+function hitEntity(e,damage){e.hp-=damage;burst(e.x,e.y,e.type?'#e0d4ae':'#b6c998');if(e.hp<=0){if(animals.includes(e)){state.wildlifeReturns.push({at:state.worldAge+720,animal:{...e}});animals.splice(animals.indexOf(e),1);if(e.type!=='skeleton')addOrDrop('meat',e.type==='deer'?3:1,e.x,e.y);else addOrDrop('stone',2,e.x,e.y);notify('Metsloomalt said liha. Lõkkel saab süüa teha.');}else if(zombies.includes(e))zombies.splice(zombies.indexOf(e),1);gainXP(state,8);refresh();}else{e.x+=aim.x*12;e.y+=aim.y*12;}}
+function eat(){if(!started||death)return;const food=['stew','cookedFish','roast','potato','carrot','berries'].find(k=>state.inventory[k]>0);if(!food){notify('Korja marju või valmista lõkkel süüa.');return;}if(state.hunger>=100&&state.health>=maxHealth(state))return;const value={stew:[65,3],roast:[40,2],cookedFish:[45,2],berries:[25,1],carrot:[30,1],potato:[35,1]}[food];state.inventory[food]--;state.hunger=Math.min(100,state.hunger+value[0]);state.health=Math.min(maxHealth(state),state.health+value[1]);sound('eat');notify(`${names[food]} · +${value[0]} kõhtu`);refresh();save();}
+function shorePoint(){if(state.inCave||state.interior)return null;const p=state.player;for(let radius=20;radius<=75;radius+=10)for(let a=0;a<16;a++){const angle=a*Math.PI/8,x=p.x+Math.cos(angle)*radius,y=p.y+Math.sin(angle)*radius;if(water(x,y))return{x,y};}return null;}
 function beginFishing(){if(fishing){fishing=null;notify('Õng on kokku pandud.');return;}const shore=shorePoint();if(!shore){notify('Kalapüügiks mine veekogu kaldale.');return;}fishing={...shore,time:0,origin:{x:state.player.x,y:state.player.y}};notify('Õng vees… oota natuke ja hoia paigal.');}
 function rotateBuild(){if(!['wall','door'].includes(buildType))return;rotation=rotation==='v'?'h':'v';notify(rotation==='v'?'Sein: vertikaalne':'Sein: horisontaalne');}
 function buildPoint(){return canvas._pointer||{x:state.player.x+aim.x*48,y:state.player.y+aim.y*48};}
 function placement(x,y){
-  const gx=Math.floor(x/TILE),gy=Math.floor(y/TILE),cx=(gx+.5)*TILE,cy=(gy+.5)*TILE;
-  const floors=['floor','stoneFloor'],floor=floors.includes(buildType);
-  const valid=!state.inCave&&Math.hypot(cx-state.player.x,cy-state.player.y)<145&&gx>=2&&gy>=2&&gx<W-2&&gy<H-2&&!water(cx,cy)&&Math.hypot(cx-cave.x,cy-cave.y)>75&&Math.hypot(cx-(base.x+35),cy-base.y)>32&&!resources.some(r=>!r.inCave&&(r.alive||r.type==='wood'&&!r.removed)&&!['berries','herbs'].includes(r.type)&&Math.hypot(r.x-cx,r.y-cy)<25)&&!state.buildings.some(b=>b.x===gx&&b.y===gy&&(floor?floors.includes(b.type):!floors.includes(b.type)))&&!(buildType==='wall'&&Math.hypot(cx-state.player.x,cy-state.player.y)<25);
-  return {gx,gy,cx,cy,valid:valid&&canPay(state,costFor(recipes.find(r=>r.id===buildType)))};
+ const gx=Math.floor(x/32),gy=Math.floor(y/32),cx=(gx+.5)*32,cy=(gy+.5)*32,r=recipes.find(r=>r.id===buildType);if(!r)return {gx,gy,cx,cy,valid:false};
+ const items=worldItems(),layers=t=>['floor','stoneFloor'].includes(t)?'floor':t==='roof'?'roof':t==='ceiling'?'ceiling':['deskLamp','wallLamp'].includes(t)?'lamp':'object';
+ const interior=!!state.interior,home=findHouses(state.buildings).some(h=>h.tiles.some(t=>t.x===gx&&t.y===gy));
+ const interiorAllowed=['chest','bed','table','stairs','ceiling','deskLamp','wallLamp','crystalLamp','fire','furnace'];
+ const valid=!state.inCave&&Math.hypot(cx-state.player.x,cy-state.player.y)<145&&
+ (interior?gx>=2&&gx<=9&&gy>=2&&gy<=7&&interiorAllowed.includes(buildType):gx>=2&&gy>=2&&gx<W-2&&gy<H-2&&(!home)&&
+ (buildType==='boat'?water(cx,cy)&&cx>=58*32:!water(cx,cy))&&Math.hypot(cx-cave.x,cy-cave.y)>75&&Math.hypot(cx-(base.x+35),cy-base.y)>32&&
+ !npcData.some(n=>Math.hypot(cx-n.x,cy-n.y)<30)&&!resources.some(r=>!r.inCave&&(r.alive||r.type==='wood'&&!r.removed)&&!['berries','herbs'].includes(r.type)&&Math.hypot(r.x-cx,r.y-cy)<25))&&
+ !items.some(b=>b.x===gx&&b.y===gy&&layers(b.type)===layers(buildType))&&
+ (!['roof','wall','door','window'].includes(buildType)||items.some(b=>b.x===gx&&b.y===gy&&['floor','stoneFloor'].includes(b.type)))&&
+ !(buildType==='wall'&&Math.hypot(cx-state.player.x,cy-state.player.y)<25)&&canPayLocal(costFor(r));
+ return {gx,gy,cx,cy,valid};
 }
-function place(x,y){if(!buildType)return;const loc=placement(x,y);if(!loc.valid){notify('Punane koht: liiga kaugel, hõivatud või materjale napib.');return;}const r=recipes.find(r=>r.id===buildType),cost=costFor(r);if(!pay(state,cost))return;const b={x:loc.gx,y:loc.gy,type:buildType,paidWood:cost.wood||0};if(rotation!=='auto'&&['wall','door'].includes(buildType))b.rotation=rotation;if(['fire','furnace'].includes(buildType))b.fuel=0;state.buildings.push(b);if(buildType==='beacon'){state.beaconBuilt=true;sound('crystal');notify('Tähemajakas särab! Ehitasid oma baasi südame.');}gainXP(state,5);burst(loc.cx,loc.cy,'#e4c576');sound('build');refresh();save();}
-function isSheltered(){if(state.inCave)return false;const sx=Math.floor(state.player.x/TILE),sy=Math.floor(state.player.y/TILE);const walls=state.buildings.filter(b=>b.type==='wall'||b.type==='door');if(walls.length<4)return false;const blocks=new Set(walls.map(b=>`${b.x},${b.y}`)),stack=[[sx,sy]],seen=new Set();if(blocks.has(`${sx},${sy}`))return false;while(stack.length){const[x,y]=stack.pop(),k=`${x},${y}`;if(blocks.has(k)||seen.has(k))continue;if(x<0||y<0||x>=W||y>=H)return false;seen.add(k);for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])stack.push([x+dx,y+dy]);}return true;}
-function blocked(x,y,enemy=false,inCave=state.inCave){if(inCave)return x<27*TILE||x>37*TILE||y<18*TILE||y>30*TILE;if(x<60||y<70||x>W*TILE-60||y>H*TILE-60||water(x,y))return true;return state.buildings.some(b=>(b.type==='wall'||enemy&&b.type==='door')&&Math.abs(x-(b.x+.5)*TILE)<21&&Math.abs(y-(b.y+.5)*TILE)<21);}
+function place(x,y){if(!buildType)return;const loc=placement(x,y);if(!loc.valid){notify('Koht on hõivatud, kaugel või materjale napib. Sein ja katus vajavad põrandat.');return;}const r=recipes.find(r=>r.id===buildType),cost=costFor(r);if(!payNearby(state,cost))return;
+ const b={id:'b'+state.worldAge+':'+loc.gx+':'+loc.gy,x:loc.gx,y:loc.gy,type:buildType,paidWood:cost.wood||0};if(state.interior){b.room=state.interior.id;b.level=state.interior.level;state.roomItems.push(b);}else state.buildings.push(b);
+ if(rotation!=='auto'&&['wall','door','window'].includes(buildType))b.rotation=rotation;if(['fire','furnace'].includes(buildType))b.fuel=0;if(buildType==='chest')b.items={};if(!state.interior)for(const resource of resources.filter(r=>!r.inCave&&Math.hypot(r.x-loc.cx,r.y-loc.cy)<25&&['berries','herbs'].includes(r.type))){resource.alive=false;state.regrowth[resource.id]=state.worldAge+360;}
+ if(buildType==='beacon'){state.beaconBuilt=true;sound('crystal');notify('Tähemajakas särab!');}gainXP(state,5);burst(loc.cx,loc.cy,'#e4c576');sound('build');refresh();save();
+}
+function isSheltered(){if(state.interior)return true;if(state.inCave)return false;const sx=Math.floor(state.player.x/TILE),sy=Math.floor(state.player.y/TILE);const walls=state.buildings.filter(b=>b.type==='wall'||b.type==='window'||b.type==='door'&&!b.open);if(walls.length<4)return false;const blocks=new Set(walls.map(b=>`${b.x},${b.y}`)),stack=[[sx,sy]],seen=new Set();if(blocks.has(`${sx},${sy}`))return false;while(stack.length){const[x,y]=stack.pop(),k=`${x},${y}`;if(blocks.has(k)||seen.has(k))continue;if(x<0||y<0||x>=W||y>=H)return false;seen.add(k);for(const[dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]])stack.push([x+dx,y+dy]);}return true;}
+function blocked(x,y,enemy=false,inCave=state.inCave){
+ if(state.interior){return x<2*32||x>10*32||y<2*32||y>8*32||worldItems().some(b=>['chest','table','bed'].includes(b.type)&&Math.abs(x-(b.x+.5)*32)<19&&Math.abs(y-(b.y+.5)*32)<19);}
+ if(inCave)return x<27*TILE||x>37*TILE||y<18*TILE||y>30*TILE;
+ if(x<60||y<70||x>W*TILE-38||y>H*TILE-60)return true;
+ if(state.boatId&&!enemy)return !water(x,y)||x<58*32;
+ if(water(x,y))return true;
+ return state.buildings.some(b=>(b.type==='wall'||b.type==='window'||b.type==='door'&&!b.open||enemy&&b.type==='door')&&Math.abs(x-(b.x+.5)*TILE)<19&&Math.abs(y-(b.y+.5)*TILE)<19);
+}
 function scaredByFire(x,y){if(tools[tool].id==='torch'&&Math.hypot(x-state.player.x,y-state.player.y)<110)return{x:state.player.x,y:state.player.y};if(!state.inCave)return state.buildings.filter(b=>b.type==='fire'&&b.fuel>0).map(b=>({x:(b.x+.5)*TILE,y:(b.y+.5)*TILE})).find(f=>Math.hypot(x-f.x,y-f.y)<150);return null;}
 function damagePlayer(amount=1){if(invulnerable>0||death)return;state.health=Math.max(0,state.health-amount);invulnerable=state.skills.guardian?3:2;damageFlash=.55;sound('hurt');burst(state.player.x,state.player.y,'#efd39a',12);if(state.health<=0)beginDeath();}
 function beginDeath(){death={time:0,restored:false};charge=null;fishing=null;state.player.walk=0;keys={};$('deathOverlay').classList.remove('hidden');}
-function updateDeath(dt){death.time+=dt;$('deathOverlay').style.opacity=String(death.time<.8?death.time/.8:death.time<1.8?1:Math.max(0,1-(death.time-1.8)/.9));if(death.time>=1&&!death.restored){death.restored=true;state.player.x=base.x;state.player.y=base.y+64;state.inCave=false;state.health=maxHealth(state);state.hunger=100;state.day++;state.time=0;zombies.length=0;invulnerable=3;moveAlienScene();refresh();save();}if(death.time>=2.7){death=null;$('deathOverlay').classList.add('hidden');notify('Uus hommik. Kõik asjad on alles.');}}
+function updateDeath(dt){death.time+=dt;$('deathOverlay').style.opacity=String(death.time<.8?death.time/.8:death.time<1.8?1:Math.max(0,1-(death.time-1.8)/.9));if(death.time>=1&&!death.restored){death.restored=true;state.player.x=base.x;state.player.y=base.y+64;state.inCave=false;state.interior=null;state.boatId=null;state.health=maxHealth(state);state.hunger=100;state.thirst=100;state.day++;state.time=0;zombies.length=0;invulnerable=3;moveAlienScene();refresh();save();}if(death.time>=2.7){death=null;$('deathOverlay').classList.add('hidden');notify('Uus hommik. Kõik asjad on alles.');}}
 function spawnZombies(){zombies.length=0;const p=state.player;for(let i=0;i<4;i++){const a=i*Math.PI/2,x=Math.max(70,Math.min(W*TILE-70,p.x+Math.cos(a)*260)),y=Math.max(80,Math.min(H*TILE-70,p.y+Math.sin(a)*260));if(!water(x,y))zombies.push({x,y,hp:2,hit:0});}}
 function slowed(e){return state.alienFriend&&state.alienFollowing&&state.alien.inCave===state.inCave&&Math.hypot(e.x-state.alien.x,e.y-state.alien.y)<(state.skills.frost?160:100);}
 function moveEnemy(e,dt,speed,sheltered=false){const fire=scaredByFire(e.x,e.y),p=state.player;const dx=fire?e.x-fire.x:p.x-e.x,dy=fire?e.y-fire.y:p.y-e.y,n=Math.hypot(dx,dy)||1;e.slowed=slowed(e);if(fire||!sheltered){const v=fire?55:speed*(e.slowed?Math.max(.25,.6-.08*(state.skills.star||0)):1);const nx=e.x+dx/n*v*dt,ny=e.y+dy/n*v*dt;if(!blocked(nx,e.y,true))e.x=nx;if(!blocked(e.x,ny,true))e.y=ny;if(!fire&&n<25)damagePlayer();}}
-function updateAlien(dt){if(!state.alienFriend)return;const a=state.alien;if(state.alienFollowing&&a.inCave===state.inCave){const dx=state.player.x-aim.x*28-a.x,dy=state.player.y-aim.y*28-a.y,n=Math.hypot(dx,dy);if(n>10){const step=Math.min(n,105*dt);const nx=a.x+dx/n*step,ny=a.y+dy/n*step;if(!blocked(nx,a.y,false,a.inCave))a.x=nx;if(!blocked(a.x,ny,false,a.inCave))a.y=ny;}}else if(!a.inCave&&state.buildings.some(b=>b.type==='nest'&&Math.hypot((b.x+.5)*TILE-a.x,(b.y+.5)*TILE-a.y)<120)){state.alienWork=(state.alienWork||0)+dt;if(state.alienWork>=35/(1+(state.skills.star||0)*.5)){state.alienWork=0;addOrDrop('berries',state.skills.helper?4:2,a.x,a.y);notify('Nups tõi baasi marju!');}}}
+function updateAlien(dt){if(!state.alienFriend||state.interior)return;const a=state.alien;if(state.alienFollowing&&a.inCave===state.inCave){const dx=state.player.x-aim.x*28-a.x,dy=state.player.y-aim.y*28-a.y,n=Math.hypot(dx,dy);if(n>10){const step=Math.min(n,105*dt);const nx=a.x+dx/n*step,ny=a.y+dy/n*step;if(!blocked(nx,a.y,false,a.inCave))a.x=nx;if(!blocked(a.x,ny,false,a.inCave))a.y=ny;}}else if(!a.inCave&&state.buildings.some(b=>b.type==='nest'&&Math.hypot((b.x+.5)*TILE-a.x,(b.y+.5)*TILE-a.y)<120)){state.alienWork=(state.alienWork||0)+dt;if(state.alienWork>=35/(1+(state.skills.star||0)*.5)){state.alienWork=0;addOrDrop('berries',state.skills.helper?4:2,a.x,a.y);notify('Nups tõi baasi marju!');}}}
 function updateArrows(dt){for(let i=arrows.length-1;i>=0;i--){const a=arrows[i],distance=Math.hypot(a.vx,a.vy)*dt;const steps=Math.max(1,Math.ceil(distance/7));let gone=false;for(let j=0;j<steps;j++){a.x+=a.vx*dt/steps;a.y+=a.vy*dt/steps;a.remaining-=distance/steps;if(blocked(a.x,a.y,false,a.inCave)){gone=true;break;}const entities=a.inCave?bats.filter(b=>b.hp>0):[...zombies,...animals];const e=entities.find(e=>Math.hypot(e.x-a.x,e.y-10-a.y)<20);if(e){hitEntity(e,a.damage);gone=true;break;}}if(gone||a.remaining<=0)arrows.splice(i,1);}}
 function updateHUD(){
   $('hearts').textContent=Array.from({length:maxHealth(state)},(_,i)=>i<state.health?'♥':'♡').join(' ');$('foodBar').style.width=`${state.hunger}%`;$('foodText').textContent=`${Math.ceil(state.hunger)}%`;
-  const night=state.time>=300,left=Math.ceil((night?360:300)-state.time);$('sunIcon').textContent=night?'☾':'☀';$('dayLabel').textContent=`${state.day}. päev`;$('timeLabel').textContent=`${night?'Öö':'Päev'} · ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;$('areaName').textContent=state.inCave?'Metsakristalli salakoobas':isSheltered()?'Sinu turvaline kodu':'Rohelaane mets';
-  currentTarget=getTarget();let prompt=buildType?'A / klõps · Ehita   X / Q · Pööra   B / Esc · Lõpeta':fishing?'Õng vees… kala näkkab varsti':charge?`Vibu laeb · ${Math.round(bowStats(state,charge.time).power*100)}% · vabasta RT / tühik`:currentTarget?`A / E · ${currentTarget.label}`:tools[tool].id==='rod'&&shorePoint()?'RT / tühik · Püüa kala':'';
+  const night=state.time>=300,left=Math.ceil((night?360:300)-state.time);$('sunIcon').textContent=night?'☾':'☀';$('dayLabel').textContent=`${state.day}. päev`;$('timeLabel').textContent=`${night?'Öö':'Päev'} · ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;$('effectStatus').textContent=[state.effects.speed>0?'➤ KIIRUS '+Math.ceil(state.effects.speed)+' s':'',state.effects.peace>0?'❧ LOOMASÕBER '+Math.ceil(state.effects.peace)+' s':'',isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?'☀ KUUMUS '+Math.ceil(state.heat)+'% · VESI '+Math.ceil(state.thirst)+'%':''].filter(Boolean).join('\n');$('areaName').textContent=state.interior?'Sinu kodu · '+(state.interior.level+1)+'. korrus':isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?'Päikeseliiva kõrb':state.boatId?'Sõudepaat · Idameri':state.inCave?'Metsakristalli salakoobas':isSheltered()?'Sinu turvaline kodu':'Rohelaane mets';
+  currentTarget=getTarget();let prompt=buildType?'A / klõps · Ehita   X / Q · Pööra   B / Esc · Lõpeta':fishing?'Õng vees… kala näkkab varsti':charge?`Vibu laeb · ${Math.round(bowStats(state,charge.time).power*100)}% · vabasta RT / tühik`:currentTarget?`A / E · ${currentTarget.label}`:tools[tool].id==='rod'&&shorePoint()?'RT / tühik · Püüa kala':'A / E · Hüppa';
   $('interaction').textContent=prompt;$('interaction').classList.toggle('hidden',!prompt||paused||!!death);
   $('buildInfo').classList.toggle('hidden',!buildType);
   if(buildType){const r=recipes.find(r=>r.id===buildType);$('buildInfo').innerHTML=`<strong>${r.name}</strong>${Object.entries(costFor(r)).map(([k,v])=>`${names[k]}: ${v}`).join(' · ')}<br>Suund: ${rotation==='auto'?'ühendub naabritega':rotation==='v'?'vertikaalne':'horisontaalne'}<br>Roheline: vaba · punane: takistus`;}
   $('damageOverlay').style.opacity=String(Math.max(0,damageFlash/.55));
 }
 function update(dt,pad){
-  elapsed+=dt;toastTime-=dt;if(toastTime<=0)$('toast').classList.add('hidden');damageFlash=Math.max(0,damageFlash-dt);invulnerable=Math.max(0,invulnerable-dt);
+  elapsed+=dt;tickEffects(state,dt);toastTime-=dt;if(toastTime<=0)$('toast').classList.add('hidden');damageFlash=Math.max(0,damageFlash-dt);invulnerable=Math.max(0,invulnerable-dt);
   if(!started||paused){updateHUD();return;}if(death){updateDeath(dt);updateHUD();return;}if(state.health<=0){beginDeath();updateHUD();return;}
   actionCooldown=Math.max(0,actionCooldown-dt);const p=state.player;
   let dx=(keys.KeyD||keys.ArrowRight?1:0)-(keys.KeyA||keys.ArrowLeft?1:0)+pad.x,dy=(keys.KeyS||keys.ArrowDown?1:0)-(keys.KeyW||keys.ArrowUp?1:0)+pad.y,n=Math.hypot(dx,dy);
-  if(n>0){if(n>1){dx/=n;dy/=n;}if(!blocked(p.x+dx*105*dt,p.y))p.x+=dx*105*dt;if(!blocked(p.x,p.y+dy*105*dt))p.y+=dy*105*dt;p.walk+=dt*10;if(dx)p.face=dx<0?-1:1;if(!canvas._pointer&&!pad.aimed&&!charge){const length=Math.hypot(dx,dy);aim={x:dx/length,y:dy/length};}}else p.walk=0;
+  if(n>0){if(n>1){dx/=n;dy/=n;}const v=rotateVector(dx,dy,isOutside()?-(state.camera||0):0);dx=v.x;dy=v.y;const speed=(state.boatId?85:105)*(state.effects.speed>0?1.5:1),nx=p.x+dx*speed*dt,ny=p.y+dy*speed*dt;if(!blocked(nx,p.y)&&(state.interior||state.inCave||canStep(state,nx,p.y)))p.x=nx;if(!blocked(p.x,ny)&&(state.interior||state.inCave||canStep(state,p.x,ny)))p.y=ny;p.walk+=dt*10;if(dx)p.face=dx<0?-1:1;if(!canvas._pointer&&!pad.aimed&&!charge){const length=Math.hypot(dx,dy);aim={x:dx/length,y:dy/length};}}else p.walk=0;
   if(p.swing)p.swing-=dt;if(charge)charge.time=Math.min(1.5,charge.time+dt);
+  worldTick+=dt;if(worldTick>=1){worldTick=0;regrowResources(state,resources);respawnWildlife();}
+  if(isOutside()&&biomeAt(p.x,p.y)==='desert'){state.heat=Math.min(100,state.heat+dt*2);state.thirst=Math.max(0,state.thirst-dt*.8);if(lakeWaterNear())state.thirst=Math.min(100,state.thirst+dt*8);if(state.thirst===0){state.heatDamage=(state.heatDamage||0)+dt;if(state.heatDamage>8){damagePlayer();state.heatDamage=0;notify('PALAV! JOO VETT VÕI LEIA OAAS.');}}}else state.heat=Math.max(0,state.heat-dt*3);
   const wasNight=state.time>=300;advanceTime(state,dt);if(!wasNight&&state.time>=300){spawnZombies();notify('Öö saabus. Lõke, tõrvik ja kodu kaitsevad sind.');}if(wasNight&&state.time<300){zombies.length=0;state.nightsSurvived=(state.nightsSurvived||0)+1;gainXP(state,20);refresh();notify('Algab uus päev! Elasid öö üle.');}
   if(!state.meteorArrived&&(state.time>55||state.day>1)){state.meteorArrived=true;meteorFall={time:0};notify('Tähelangus ida pool! Sealt saabub väike külaline.');save();}
   if(state.hunger<=0){state.starve=(state.starve||0)+dt;if(state.starve>15){damagePlayer();state.starve=0;notify('Kõht on tühi! Söö marju.');}}
   if(fishing){fishing.time+=dt;if(Math.hypot(p.x-fishing.origin.x,p.y-fishing.origin.y)>12){fishing=null;notify('Liikusid eemale — püük katkes.');}else if(fishing.time>=3){addOrDrop('fish',state.skills.angler?2:1);gainXP(state,8);sound('fish');notify('Kala käes! Lõkkel saad selle küpsetada.');fishing=null;save();}}
   if(meteorFall){meteorFall.time+=dt;if(meteorFall.time>=1.5){burst(meteor.x,meteor.y,'#e6d591',35);sound('crystal');meteorFall=null;}}
   updateAlien(dt);
-  if(!state.inCave){
-    for(const a of animals){a.timer-=dt;const d=Math.hypot(a.x-p.x,a.y-p.y),fire=scaredByFire(a.x,a.y);if(fire||d<100){const from=fire||p;a.dir=Math.atan2(a.y-from.y,a.x-from.x);a.timer=.4;}else if(a.timer<0){a.dir=rand()*6.28;a.timer=2+rand()*4;}const speed=fire||d<100?52:9;const nx=a.x+Math.cos(a.dir)*speed*dt,ny=a.y+Math.sin(a.dir)*speed*dt;if(!blocked(nx,ny,false,false)&&!water(nx-8,ny)&&!water(nx+8,ny)&&!water(nx,ny-6)&&!water(nx,ny+6)){a.x=nx;a.y=ny;a.step+=dt*8;}else a.dir+=2;}
+  if(isOutside()){
+    for(const a of animals){if(['wolf','bear','skeleton'].includes(a.type)){updatePredator(a,dt);continue;}a.timer-=dt;const d=Math.hypot(a.x-p.x,a.y-p.y),fire=scaredByFire(a.x,a.y);if(fire||d<100){const from=fire||p;a.dir=Math.atan2(a.y-from.y,a.x-from.x);a.timer=.4;}else if(a.timer<0){a.dir=rand()*6.28;a.timer=2+rand()*4;}const speed=fire||d<100?52:9;const nx=a.x+Math.cos(a.dir)*speed*dt,ny=a.y+Math.sin(a.dir)*speed*dt;if(!blocked(nx,ny,false,false)&&!water(nx-8,ny)&&!water(nx+8,ny)&&!water(nx,ny-6)&&!water(nx,ny+6)){a.x=nx;a.y=ny;a.step+=dt*8;}else a.dir+=2;}
     const sheltered=isSheltered();if(sheltered&&!state.shelterFound){state.shelterFound=true;gainXP(state,35);refresh();save();notify('Oma kodu! Sinu esimene turvaline tuba on valmis.');}for(const z of zombies)moveEnemy(z,dt,23,sheltered);
-  }else for(const b of bats.filter(b=>b.hp>0))moveEnemy(b,dt,17);
+  }else if(state.inCave)for(const b of bats.filter(b=>b.hp>0))moveEnemy(b,dt,17);
   for(const b of state.buildings.filter(b=>['fire','furnace'].includes(b.type)))b.fuel=Math.max(0,(b.fuel||0)-dt);
   updateArrows(dt);
   for(let i=particles.length-1;i>=0;i--){const a=particles[i];a.life-=dt;a.x+=a.vx*dt;a.y+=a.vy*dt;a.vy+=90*dt;if(a.life<=0)particles.splice(i,1);}
@@ -319,15 +374,16 @@ window.addEventListener('keydown',e=>{
   if(e.ctrlKey||e.metaKey||e.altKey)return;
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape'].includes(e.code))e.preventDefault();
   if(e.repeat)return;keys[e.code]=true;
-  if(paused){if(e.code==='Escape')closeModal();else if(['ArrowDown','KeyS'].includes(e.code))moveMenu(0,1);else if(['ArrowUp','KeyW'].includes(e.code))moveMenu(0,-1);else if(['ArrowLeft','KeyA'].includes(e.code))moveMenu(-1,0);else if(['ArrowRight','KeyD'].includes(e.code))moveMenu(1,0);else if(e.code==='Enter'||e.code==='Space'){e.preventDefault();activateMenu();}return;}
+  if(paused){if(menuKind==='whale'&&whaleGame?.status==='playing'&&e.code==='Space'){e.preventDefault();whaleHeld=true;return;}if(e.code==='BracketLeft'){changeTab(-1);return;}if(e.code==='BracketRight'||e.code==='Tab'){e.preventDefault();changeTab(1);return;}if(e.code==='Escape')closeModal();else if(['ArrowDown','KeyS'].includes(e.code))moveMenu(0,1);else if(['ArrowUp','KeyW'].includes(e.code))moveMenu(0,-1);else if(['ArrowLeft','KeyA'].includes(e.code))moveMenu(-1,0);else if(['ArrowRight','KeyD'].includes(e.code))moveMenu(1,0);else if(e.code==='Enter'||e.code==='Space'){e.preventDefault();activateMenu();}return;}
   if(e.code==='Escape'){if(buildType)buildType=null;else if(started)openModal('pause');return;}if(!started){if(e.code==='Enter'&&document.activeElement?.tagName!=='BUTTON')start();return;}if(death)return;
   if(/^Digit[1-6]$/.test(e.code)){selectTool(+e.code.slice(-1)-1);return;}
-  switch(e.code){case'KeyE':interact();break;case'Space':beginAction();break;case'KeyR':eat();break;case'KeyC':openModal('craft');break;case'KeyB':openModal('build');break;case'KeyK':openModal('skills');break;case'KeyI':openModal('bag');break;case'KeyT':alienCommand();break;case'KeyJ':openModal('journal');break;case'KeyQ':rotateBuild();break;}
+  switch(e.code){case'KeyE':interact();break;case'Space':beginAction();break;case'KeyR':eat();break;case'KeyC':openMain();break;case'KeyB':openMain();break;case'KeyK':openMain();break;case'KeyI':openMain();break;case'KeyT':alienCommand();break;case'KeyJ':openMain();break;case'KeyZ':rotateCamera(-1);break;case'KeyV':rotateCamera(1);break;case'KeyF':jump();break;case'KeyQ':rotateBuild();break;}
 });
-window.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='Space')endAction();});
+window.addEventListener('keyup',e=>{keys[e.code]=false;if(e.code==='Space')whaleHeld=false;if(e.code==='Space')endAction();});
 window.addEventListener('blur',()=>{keys={};charge=null;save();});document.addEventListener('visibilitychange',()=>{last=0;keys={};charge=null;if(document.hidden)save();});window.addEventListener('pagehide',save);
-canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*canvas.width/r.width+cam.x,y=(e.clientY-r.top)*canvas.height/r.height+cam.y,dx=x-state.player.x,dy=y-state.player.y,n=Math.hypot(dx,dy)||1;aim={x:dx/n,y:dy/n};if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer={x,y};});
-canvas.addEventListener('pointerdown',e=>{if(!started||paused||death)return;canvas.focus();canvas.setPointerCapture(e.pointerId);if(buildType){const r=canvas.getBoundingClientRect();place((e.clientX-r.left)*canvas.width/r.width+cam.x,(e.clientY-r.top)*canvas.height/r.height+cam.y);}else beginAction();});canvas.addEventListener('pointerup',endAction);canvas.addEventListener('pointercancel',()=>charge=null);
+function pointerWorld(e){const r=canvas.getBoundingClientRect(),sx=(e.clientX-r.left)*canvas.width/r.width+cam.x,sy=(e.clientY-r.top)*canvas.height/r.height+cam.y;let pos=rotateVector(sx,sy/.62,isOutside()?-(state.camera||0):0);if(isOutside())for(let i=0;i<3;i++)pos=rotateVector(sx,(sy+heightAt(pos.x,pos.y)*12)/.62,-(state.camera||0));return pos;}
+canvas.addEventListener('pointermove',e=>{const pos=pointerWorld(e),dx=pos.x-state.player.x,dy=pos.y-state.player.y,n=Math.hypot(dx,dy)||1;aim={x:dx/n,y:dy/n};if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer=pos;});
+canvas.addEventListener('pointerdown',e=>{if(!started||paused||death)return;canvas.focus();canvas.setPointerCapture(e.pointerId);if(buildType){const pos=pointerWorld(e);place(pos.x,pos.y);}else beginAction();});canvas.addEventListener('pointerup',endAction);canvas.addEventListener('pointercancel',()=>charge=null);
 function readPad(){
   const pad=[...(navigator.getGamepads?.()||[])].find(p=>p?.connected);
   if(!pad){if($('controllerStatus').textContent!=='KLAVIATUUR + HIIR')$('controllerStatus').textContent='KLAVIATUUR + HIIR';padPrevious={};return{x:0,y:0};}
@@ -336,6 +392,7 @@ function readPad(){
   const lx=pad.axes[0]||0,ly=pad.axes[1]||0,ax=pad.axes[2]||0,ay=pad.axes[3]||0;
   if(!assetsReady){pad.buttons.forEach((_,i)=>padPrevious[i]=down(i));return{x:0,y:0};}
   if(paused){
+    whaleHeld=down(7)||!!keys.Space;
     if(pressed(1)||pressed(9))closeModal();
     else{if(Math.abs(ay)>.25){const panel=menuKind==='skills'?$('modalDetail'):$('modalContent');panel.scrollTop+=ay*12;}
       let direction=null;
@@ -345,21 +402,78 @@ function readPad(){
       if(key&&key!==menuDirection){if(!menuCache.length&&direction.y)$('modalContent').scrollTop+=direction.y*110;else moveMenu(direction.x,direction.y);menuRepeatAt=now+260;}
       else if(key&&now>=menuRepeatAt){if(!menuCache.length&&direction.y)$('modalContent').scrollTop+=direction.y*110;else moveMenu(direction.x,direction.y);menuRepeatAt=now+85;}
       menuDirection=key;if(!key)menuRepeatAt=0;
-      if(pressed(0))activateMenu();
-      if(pressed(4)){if(menuKind==='skills')switchSkillBranch(-1);else moveMenu(-1,0);}if(pressed(5)){if(menuKind==='skills')switchSkillBranch(1);else moveMenu(1,0);}
+      if(pressed(0)&&!(menuKind==='whale'&&whaleGame?.status==='playing'))activateMenu();
+      if(pressed(4))changeTab(-1);if(pressed(5))changeTab(1);
     }
   }else if(!started){if(pressed(0))start();if(pressed(3)){if(saveFound)openModal('newgame');else startNewGame();}
   }else if(!death){
     if(pressed(0))interact();if(pressed(2)){if(buildType)rotateBuild();else{beginAction();if(tools[tool].id==='bow')endAction();}}
-    if(pressed(3))openModal('build');if(pressed(8))openModal('bag');if(pressed(9))openModal('pause');if(pressed(11))openModal('skills');if(pressed(12))openModal('journal');
+    if(pressed(3))openMain();if(pressed(8))openMain();if(pressed(9))openModal('pause');if(pressed(11))openMain();if(pressed(12))openMain();if(pressed(14))rotateCamera(-1);if(pressed(15))rotateCamera(1);
     if(pressed(1)){if(buildType)buildType=null;else alienCommand();}
     if(pressed(4))cycleTool(-1);if(pressed(5))cycleTool(1);if(pressed(6))eat();
     if(pressed(7))beginAction();if(released(7))endAction();
   }
   pad.buttons.forEach((_,i)=>padPrevious[i]=down(i));
-  const aimed=Math.hypot(ax,ay)>.2;if(aimed&&!paused){const n=Math.hypot(ax,ay);aim={x:ax/n,y:ay/n};if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer=null;}
+  const aimed=Math.hypot(ax,ay)>.2;if(aimed&&!paused){const n=Math.hypot(ax,ay);aim=rotateVector(ax/n,ay/n,isOutside()?-(state.camera||0):0);if(Math.abs(aim.x)>.15)state.player.face=aim.x<0?-1:1;canvas._pointer=null;}
   if(Math.abs(lx)>.18||Math.abs(ly)>.18)canvas._pointer=null;
   return{x:Math.abs(lx)>.18?lx:0,y:Math.abs(ly)>.18?ly:0,aimed};
+}
+
+function extraMenu(kind,content){
+ if(kind==='map'){
+  content.innerHTML='<p class="build-note">PÕHI ↑ · Metsavaht laagri lähedal · Kaevur koopa kõrval · Kaupmees idas · Kõrb kirdes · Meri idas</p><canvas id="worldMap" width="768" height="576" aria-label="Maailmakaart"></canvas>';
+  const g=$('worldMap').getContext('2d');for(let y=0;y<H;y++)for(let x=0;x<W;x++){const biome=biomeAt((x+.5)*32,(y+.5)*32);g.fillStyle=water((x+.5)*32,(y+.5)*32)?'#397c93':biome==='desert'?'#d6b979':heightAt(x*32,y*32)>0?'#91a46b':'#50734b';g.fillRect(x*12,y*12,12,12);}
+  function marker(x,y,label,color){g.fillStyle=color;g.beginPath();g.arc(x/32*12,y/32*12,5,0,7);g.fill();g.font='bold 13px sans-serif';g.fillText(label,x/32*12+7,y/32*12-6);}
+  marker(base.x,base.y,'LAAGER','#ffdd8c');marker(cave.x,cave.y,'KOOBAS','#b7e5ef');npcData.forEach(n=>marker(n.x,n.y,n.name,'#ebdcaf'));marker(61*32,25*32,'VAAL','#89e0ed');marker(state.interior?.outside.x??state.player.x,state.interior?.outside.y??state.player.y,'SIMM','#fff');return true;
+ }
+ if(kind==='chest'){
+  content.innerHTML='<p class="build-note">A liigutab ühe eseme. Seljakotist → kasti või kastist → seljakotti. Sama ruumi ja korruse lähedasi kaste kasutatakse meisterdamisel automaatselt.</p><div class="storage-columns"><section><h3>SELJAKOTT → KAST</h3><div id="depositList"></div></section><section><h3>KAST → SELJAKOTT</h3><div id="withdrawList"></div></section></div>';
+  for(const[toChest,inventory,target]of[[true,state.inventory,'depositList'],[false,chestOpen.items||{},'withdrawList']])for(const[id,n]of Object.entries(inventory)){if(!n)continue;const b=document.createElement('button');b.className='storage-row';b.dataset.key=(toChest?'in:':'out:')+id;b.textContent=`${icons[id]} ${names[id]} · ${n} ${toChest?'→':'←'}`;b.onclick=()=>{if(transferItem(state,chestOpen,id,toChest)){save();refresh();openModal('chest');}else notify('Seljakotis pole ruumi.');};$(target).append(b);}return true;
+ }
+ if(kind==='garden'){
+  if(gardenOpen.crop){const progress=cropProgress(state,gardenOpen);content.innerHTML=`<p class="build-note">${crops[gardenOpen.crop].name} · ${Math.floor(progress*100)}% ${progress>=1?'SAAGIKÜPS!':'KASVAB'}</p><progress max="1" value="${progress}"></progress><button id="harvestButton" ${progress<1?'disabled':''}>Korista saak</button>`;if(progress<1)content.innerHTML+='<p class="build-note">Kasv jätkub mängu ajal. Sulge menüü ja tule hiljem tagasi.</p>';$('harvestButton').onclick=()=>{if(harvestCrop(state,gardenOpen)){refresh();save();openModal('garden');}else notify('Seljakotis pole ruumi.');};
+  }else{content.innerHTML='<p class="build-note">Vali taim. Seemned on peenraga kaasas ja kastmist pole vaja.</p>';for(const[id,crop]of Object.entries(crops)){const b=document.createElement('button');b.className='storage-row';b.dataset.key=id;b.textContent=`${icons[id]} ${crop.name} · ${crop.duration} s · saak ${crop.yield}`;b.onclick=()=>{plantCrop(state,gardenOpen,id);save();openModal('garden');};content.append(b);}}return true;
+ }
+ if(kind==='npc'){
+  const n=npcOpen,done=state.npcQuests[n.id];content.innerHTML=`<div class="npc-dialog"><span>${{ranger:'❧',miner:'⛏',trader:'◈'}[n.id]}</span><h3>${done?'AITÄH, SIMM! SA OLED TORE SÕBER.':n.line}</h3><p>${done?'HEAD SEIKLEMIST!':n.task}</p><p>${done?'':'TASU: '+Object.entries(n.reward).map(([k,v])=>`${names[k].toUpperCase()} ${v}`).join(' · ')}</p><button id="npcQuestButton" ${done||!canPay(state,n.request)?'disabled':''}>${done?'ÜLESANNE TEHTUD':'ANNA ASJAD JA VÕTA TASU'}</button></div>`;$('npcQuestButton').onclick=()=>{if(finishNPCQuest(state,n)){sound('craft');refresh();save();openModal('npc');}else notify('TEE SELJAKOTIS RUUMI.');};return true;
+ }
+ if(kind==='whale'){
+  if(!whaleGame)whaleGame={time:0,marker:.5,target:.5,progress:0,status:'ready'};
+  content.innerHTML='<div class="whale-copy"><div id="whaleScene" class="whale-scene"><span>⛵</span><i>──────────✦</i><span>🐋</span></div><h3 id="whaleTitle">TERE, MERESÕBER!</h3><p>PEHME VALGUSHARPUUN ALUSTAB MÄNGU. VAAL EI SAA VIGA.</p><button id="whaleStart">A · HEIDA VALGUSHARPUUN</button><div id="whaleTrack" class="whale-track hidden"><i id="whaleTarget"></i><b id="whaleMarker"></b></div><p id="whaleHint">Hoia RT / tühikut: märk tõuseb. Vabasta: märk langeb. Püsi kuldses alas.</p><progress id="whaleProgress" max="1" value="0"></progress><button id="whaleRelease" class="hidden">A · VABASTA VAAL</button></div>';
+  $('whaleStart').onclick=()=>{whaleHeld=false;whaleGame.status='playing';$('whaleScene').classList.add('harpooned');$('whaleStart').classList.add('hidden');$('whaleTrack').classList.remove('hidden');$('whaleTitle').textContent='HOIA MÄRKI KULDSES ALAS';cacheMenu();};
+  $('whaleRelease').onclick=()=>{state.whalesReleased++;addOrDrop('pearl',1);gainXP(state,20);whaleGame=null;closeModal();save();notify('VAAL LEHVITAB! LEIDSID MEREPÄRLI.');};return true;
+ }
+ return false;
+}
+function tickWhale(dt){if(menuKind!=='whale'||!whaleGame||whaleGame.status!=='playing')return;const result=whaleStep(whaleGame,dt,whaleHeld);$('whaleMarker').style.left=whaleGame.marker*100+'%';$('whaleTarget').style.left=(whaleGame.target-.2)*100+'%';$('whaleProgress').value=whaleGame.progress;
+ if(result==='caught'){whaleGame.status=result;$('whaleTitle').textContent='SAID HAKKAMA! VAAL OOTAB VABASTAMIST.';$('whaleRelease').classList.remove('hidden');$('whaleHint').textContent='Vajuta A / Enter, et sõber vabastada.';cacheMenu();focusMenu(menuCache.indexOf($('whaleRelease')));}
+ if(result==='escaped'){whaleGame=null;closeModal();notify('VAAL UJUS EDASI. PROOVI JÄLLE!');}
+}
+function interiorTarget(){const p=state.player,targets=[];
+ for(const d of state.drops.filter(d=>d.room===state.interior.id&&(d.level||0)===state.interior.level)){const distance=Math.hypot(p.x-d.x,p.y-d.y);if(distance<40)targets.push({kind:'drop',x:d.x,y:d.y,d:distance,ref:d,label:'Korja '+names[d.id]});}
+ for(const b of worldItems()){const d=Math.hypot(p.x-(b.x+.5)*32,p.y-(b.y+.5)*32);if(d<45&&['chest','stairs','bed','fire','furnace'].includes(b.type))targets.push({kind:b.type,x:(b.x+.5)*32,y:(b.y+.5)*32,d,ref:b,label:{chest:'Ava hoiukast',stairs:'Mine järgmisele korrusele',bed:'Puhka voodis',fire:'Valmista toitu',furnace:'Sulata'}[b.type]});}
+ if(Math.hypot(p.x-6*32,p.y-8*32)<50)targets.push({kind:'houseExit',x:6*32,y:8*32,d:Math.hypot(p.x-6*32,p.y-8*32),label:state.interior.level?'Mine alumisele korrusele':'Mine õue'});
+ return targets.sort((a,b)=>a.d-b.d)[0];
+}
+function extraInteract(t){
+ if(t.kind==='chest'){chestOpen=t.ref;chestOpen.items??={};openModal('chest');}
+ else if(t.kind==='garden'){gardenOpen=t.ref;openModal('garden');}
+ else if(t.kind==='npc'){npcOpen=t.ref;openModal('npc');}
+ else if(t.kind==='door'){const h=findHouses(state.buildings).find(h=>h.door===t.ref);if(h)enterHouse(h);else{t.ref.open=!t.ref.open;notify(t.ref.open?'Uks lahti.':'Uks kinni.');save();}}
+ else if(t.kind==='houseExit'){if(state.interior.level>0){state.interior.level--;state.player.y=7*32;save();}else leaveHouse();}
+ else if(t.kind==='stairs'){if(canAscend(state)){state.interior.level++;state.player.x=6*32;state.player.y=7*32;notify('KORRUS '+(state.interior.level+1));save();}else notify('Üles minekuks täida 8×6 ehitusala vahelagedega.');}
+ else if(t.kind==='bed'){state.health=maxHealth(state);state.hunger=Math.max(25,state.hunger);state.day++;state.time=0;state.worldAge+=360;state.thirst=Math.max(50,state.thirst);zombies.length=0;regrowResources(state,resources);save();notify('HEA HOMMIK!');}
+ else if(t.kind==='boat'){state.boatId=t.ref.id||('boat:'+t.ref.x+':'+t.ref.y);state.player.x=(t.ref.x+.5)*32;state.player.y=(t.ref.y+.5)*32;notify('Aeruta vasaku kangi või WASD-ga. A kaldal väljub.');save();}
+ else if(t.kind==='boatExit'){const p=state.player;let shore=null;for(let r=24;r<=90&&!shore;r+=12)for(let i=0;i<16;i++){const x=p.x+Math.cos(i*Math.PI/8)*r,y=p.y+Math.sin(i*Math.PI/8)*r;if(!water(x,y)&&!blocked(x,y,true)&&heightAt(x,y)===0){shore={x,y};break;}}if(!shore){notify('Väljumiseks aeruta ranna lähedale.');return true;}const boat=state.buildings.find(b=>(b.id||('boat:'+b.x+':'+b.y))===state.boatId);if(boat){boat.x=Math.floor(p.x/32);boat.y=Math.floor(p.y/32);}state.boatId=null;Object.assign(p,shore);save();}
+ else if(t.kind==='whale'){whaleGame=null;openModal('whale');}
+ else return false;return true;
+}
+function lakeWaterNear(){return Math.hypot(state.player.x-50*32,state.player.y-16*32)<70;}
+function updatePredator(a,dt){
+ const p=state.player,peace=state.effects.peace>0&&a.type!=='skeleton';const intent=predatorIntent(a,p,peace),target=intent==='chase'?p:{x:a.homeX,y:a.homeY};
+ if(a.type==='skeleton'){const d=Math.hypot(a.x-p.x,a.y-p.y);if(d<210){moveEnemy(a,dt,29,isSheltered());return;}}
+ const dx=target.x-a.x,dy=target.y-a.y,n=Math.hypot(dx,dy)||1;a.slowed=slowed(a);const speed=(intent==='chase'?(a.type==='wolf'?73:55):22)*(a.slowed?.45:1);if(n>10){const nx=a.x+dx/n*speed*dt,ny=a.y+dy/n*speed*dt;if(!blocked(nx,a.y,true,false))a.x=nx;if(!blocked(a.x,ny,true,false))a.y=ny;a.step+=dt*8;}
+ if(intent==='chase'&&n<26&&!isSheltered()&&!peace)damagePlayer();
 }
 
 // Original generated artwork, with a procedural fallback while the sprite sheet loads.
@@ -473,68 +587,97 @@ function terrain(){
  }
 }
 
-function draw(){
- const p=state.player;
- cam.x=Math.round(Math.max(0,Math.min(W*TILE-canvas.width,p.x-canvas.width/2)));
- cam.y=Math.round(Math.max(0,Math.min(H*TILE-canvas.height,p.y-canvas.height/2)));
- ctx.clearRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-cam.x,-cam.y);terrain();
- if(buildType){
-   ctx.strokeStyle='#ebdda333';ctx.lineWidth=.5;
-   for(let x=Math.floor(cam.x/TILE)*TILE;x<cam.x+canvas.width;x+=TILE){ctx.beginPath();ctx.moveTo(x,cam.y);ctx.lineTo(x,cam.y+canvas.height);ctx.stroke();}
-   for(let y=Math.floor(cam.y/TILE)*TILE;y<cam.y+canvas.height;y+=TILE){ctx.beginPath();ctx.moveTo(cam.x,y);ctx.lineTo(cam.x+canvas.width,y);ctx.stroke();}
- }
- const sprites=[];
- if(state.inCave){
-   for(const [x,y]of[[27.5,20],[36.5,23],[28,28],[36,19]])sprites.push({y:y*TILE,draw:()=>rock(x*TILE,y*TILE,true)});
-   for(const b of bats.filter(b=>b.hp>0))sprites.push({y:b.y,draw:()=>{if(b.slowed)ellipse(b.x,b.y+10,20,7,'#a0d8d43d');batSprite(b);}});
-   if(!state.crystalFound)sprites.push({y:20*TILE,draw:()=>crystal(32*TILE,20*TILE)});
-   rect(31*TILE,29*TILE,64,32,'#857c53');ctx.fillStyle='#d7d6a6';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('VÄLJAPÄÄS',32*TILE,30*TILE+16);
- }else{
-   for(const b of state.buildings.filter(b=>['floor','stoneFloor'].includes(b.type)))building(b);
-   sprites.push({y:base.y,draw:bench},{y:cave.y,draw:caveSprite});
-   for(const b of state.buildings.filter(b=>!['floor','stoneFloor'].includes(b.type)))sprites.push({y:(b.y+.5)*TILE,draw:()=>building(b)});
-   for(const a of animals)sprites.push({y:a.y,draw:()=>a.type==='rabbit'?rabbit(a):deer(a)});
-   for(const z of zombies)sprites.push({y:z.y,draw:()=>{if(z.slowed)ellipse(z.x,z.y,22,8,'#a0d8d43d');zombie(z);}});
-   if(state.meteorArrived&&!meteorFall){sprites.push({y:meteor.y,draw:()=>{ellipse(meteor.x,meteor.y,42,15,'#5f645247');rock(meteor.x,meteor.y,true);rect(meteor.x-4,meteor.y-17,4,7,'#cfb3e5');rect(meteor.x+8,meteor.y-8,3,5,'#d9bded');}});if(!state.alienFriend)sprites.push({y:meteor.y+30,draw:()=>alien(meteor.x+30,meteor.y+30)});}
- }
- for(const r of resources.filter(r=>!!r.inCave===state.inCave)){
-   if(r.x<cam.x-60||r.x>cam.x+canvas.width+60||r.y<cam.y-30||r.y>cam.y+canvas.height+110)continue;
-   if(r.alive)sprites.push({y:r.y,draw:()=>{
-     if(r.type==='wood')tree(r.x,r.y,r.id%3===0?1:0);else if(['stone','ironOre','copperOre'].includes(r.type)){if(!artSprite(r.type==='stone'?'rock':r.type,r.x,r.y+5,36)){rock(r.x,r.y);if(r.type!=='stone'){const c=r.type==='ironOre'?'#c6cbd2':'#d79259';for(const[dx,dy]of[[-8,-15],[4,-10],[-1,-22]])rect(r.x+dx,r.y+dy,5,4,c);}}}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);
-   }});
-   else if(r.type==='wood'&&!r.removed){if(!artSprite('stump',r.x,r.y+5,20)){rect(r.x-6,r.y-7,12,8,'#86653e');rect(r.x-5,r.y-9,10,3,'#bfa56e');}}
- }
- for(const d of state.drops.filter(d=>!!d.inCave===state.inCave))sprites.push({y:d.y,draw:()=>{shadow(d.x,d.y+3,9,3);ellipse(d.x,d.y-3,11,9,'#f0d27c33');ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillStyle='#efe1b3';ctx.fillText(icons[d.id],d.x,d.y+1);}});
- if(state.alienFriend&&state.alien.inCave===state.inCave){const a=state.alien;if(state.alienFollowing){ellipse(a.x,a.y,(state.skills.frost?160:100),22,'#b0d6c215');ctx.strokeStyle='#9bccb344';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(a.x,a.y,36,12,0,0,Math.PI*2);ctx.stroke();}sprites.push({y:a.y,draw:()=>alien(a.x,a.y)});if(!state.alienFollowing){ctx.fillStyle='#e5d69e';ctx.font='8px monospace';ctx.textAlign='center';ctx.fillText('OOTA · B / T',a.x,a.y-47);}}
- sprites.push({y:p.y,draw:()=>{if(invulnerable>0&&Math.floor(elapsed*10)%2===0)ctx.globalAlpha=.5;simm(p.x,p.y);ctx.globalAlpha=1;}});
- sprites.sort((a,b)=>a.y-b.y);for(const s of sprites)s.draw();
- if(currentTarget&&!paused&&!buildType){
-   const t=currentTarget;ctx.strokeStyle='#f4d887';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(t.x,t.y+2,t.kind==='cave'?47:t.kind==='bench'?28:20,7,0,0,Math.PI*2);ctx.stroke();
-   ctx.fillStyle='#ffe5a8';ctx.font='8px monospace';ctx.textAlign='center';ctx.fillText('A / E',t.x,t.y-((t.kind==='resource'&&t.ref.alive&&t.ref.type==='wood')?97:40));
- }
- // The facing marker is visible even when there is no enemy to target.
- if(started&&!paused){
-   const ax=p.x+aim.x*29,ay=p.y-10+aim.y*29;
-   ctx.save();ctx.translate(ax,ay);ctx.rotate(Math.atan2(aim.y,aim.x));poly([[6,0],[-4,-4],[-2,0],[-4,4]],'#ffe39bbf');ctx.restore();
-   if(tools[tool].id==='bow'){
-     const stats=bowStats(state,charge?.time||0);ctx.strokeStyle=charge?'#f7dc8ecc':'#e5d29177';ctx.lineWidth=1;ctx.setLineDash([3,5]);ctx.beginPath();ctx.moveTo(p.x+aim.x*20,p.y-10+aim.y*20);ctx.lineTo(p.x+aim.x*stats.range,p.y-10+aim.y*stats.range);ctx.stroke();ctx.setLineDash([]);
-     const x=p.x+aim.x*15,y=p.y-15+aim.y*15;ctx.strokeStyle='#c7a466';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x,y,10,Math.atan2(aim.y,aim.x)-1.1,Math.atan2(aim.y,aim.x)+1.1);ctx.stroke();
-     if(charge){rect(p.x-17,p.y+11,34,4,'#243c2c');rect(p.x-17,p.y+11,Math.round(stats.power*34),4,'#edd38a');}
-   }
- }
- if(meteorFall&&!state.inCave){const t=meteorFall.time/1.5,x=meteor.x-250*(1-t),y=meteor.y-380*(1-t);ctx.strokeStyle='#f8d38ccc';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-26,y-40);ctx.lineTo(x,y);ctx.stroke();ellipse(x,y,7,7,'#ffedbd');ellipse(x,y,12,12,'#f2bd7344');}
- for(const a of arrows.filter(a=>a.inCave===state.inCave)){const n=Math.hypot(a.vx,a.vy);ctx.strokeStyle='#f3dda0';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(a.x-a.vx/n*10,a.y-a.vy/n*10);ctx.lineTo(a.x,a.y);ctx.stroke();}
- if(fishing){ctx.strokeStyle='#e8d9a1';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p.x+9,p.y-17);ctx.lineTo(fishing.x,fishing.y);ctx.stroke();ellipse(fishing.x,fishing.y,3,2,'#f0ba79');}
- for(const a of particles){ctx.globalAlpha=Math.max(0,a.life/.7);rect(a.x,a.y,3,3,a.color);}ctx.globalAlpha=1;
- if(buildType){const point=buildPoint(),loc=placement(point.x,point.y);ctx.globalAlpha=.5;building({x:loc.gx,y:loc.gy,type:buildType,...(rotation!=='auto'?{rotation}:{})});ctx.globalAlpha=1;ctx.strokeStyle=loc.valid?'#c7e795':'#f2aa8d';ctx.lineWidth=2;ctx.strokeRect(loc.gx*TILE+1,loc.gy*TILE+1,30,30);}
- for(let i=0;i<16;i++){const x=cam.x+((i*137+elapsed*3)%(canvas.width+30)),y=cam.y+(i*83%canvas.height)+Math.sin(elapsed+i)*7;ctx.globalAlpha=.2+Math.sin(elapsed*2+i)*.13;rect(x,y,2,2,state.time>=300?'#f0dc8c':'#e3dd9c');}ctx.globalAlpha=1;ctx.restore();
- if(!state.inCave&&state.time<300){const sun=ctx.createLinearGradient(0,0,canvas.width,canvas.height);sun.addColorStop(0,'#ffe6a214');sun.addColorStop(.6,'#ffe6a200');sun.addColorStop(1,'#123c2515');ctx.fillStyle=sun;ctx.fillRect(0,0,canvas.width,canvas.height);}
- const night=state.time>=300,dark=state.inCave?.35:night?.40:state.time>270?(state.time-270)/30*.25:0;
- if(dark){ctx.fillStyle=`rgba(8,20,38,${dark})`;ctx.fillRect(0,0,canvas.width,canvas.height);const x=p.x-cam.x,y=p.y-cam.y,g=ctx.createRadialGradient(x,y-10,12,x,y-10,tools[tool].id==='torch'?150:80);g.addColorStop(0,'rgba(249,216,113,.16)');g.addColorStop(1,'rgba(249,216,113,0)');ctx.fillStyle=g;ctx.fillRect(0,0,canvas.width,canvas.height);}
- if(started&&!state.crystalFound&&!state.inCave){const x=canvas.width-35,y=canvas.height-105,angle=Math.atan2(cave.y-p.y,cave.x-p.x);ellipse(x,y,16,16,'#173024be');ctx.save();ctx.translate(x,y);ctx.rotate(angle);poly([[10,0],[-5,-5],[-2,0],[-5,5]],'#e9d388');ctx.restore();ctx.fillStyle='#d5d5ad';ctx.font='7px monospace';ctx.textAlign='center';ctx.fillText('KOOBAS',x,y+26);}
+const tiltedCache={};
+function viewPoint(x,y,h){return projectPoint(x,y,isOutside()?state.camera:0,h??(isOutside()?heightAt(x,y):0));}
+function billboard(x,y,draw,height){const pos=viewPoint(x,y,height);ctx.save();ctx.translate(pos.x-x,pos.y-y);draw();ctx.restore();}
+function projectedTile(x,y,color,h=heightAt((x+.5)*32,(y+.5)*32),g=ctx){const q=isOutside()?state.camera:0,points=[[x*32,y*32],[(x+1)*32,y*32],[(x+1)*32,(y+1)*32],[x*32,(y+1)*32]].map(([a,b])=>projectPoint(a,b,q,h));g.fillStyle=color;g.beginPath();points.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fill();return points;}
+function tiltedTerrain(){
+ const key=state.inCave?'cave':state.interior?'room':state.camera;
+ if(state.interior){for(let y=1;y<=8;y++)for(let x=1;x<=10;x++)projectedTile(x,y,(x+y)%2?'#b4915d':'#a48151',0);const a=viewPoint(32,32,0),b=viewPoint(11*32,32,0);poly([[a.x,a.y],[b.x,b.y],[b.x,b.y-50],[a.x,a.y-50]],'#58796a');rect(a.x,a.y-50,b.x-a.x,5,'#c6b680');ctx.fillStyle='#eee2b6';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText('SINU KODU · KORRUS '+(state.interior.level+1),6*32,4);rect(5.5*32,8*32*.62,32,4,'#ffe1a0');return;}
+ if(state.inCave){ctx.save();ctx.scale(1,.62);terrain();ctx.restore();return;}
+ if(!tiltedCache[key]){
+  const layer=document.createElement('canvas');layer.width=W*32+100;layer.height=W*32*.62+H*32*.62+160;const g=layer.getContext('2d');const origin={x:key===1||key===2?W*32:40,y:key===2||key===3?W*32*.62+80:80};g.translate(origin.x,origin.y);
+  const tiles=[];for(let y=0;y<H;y++)for(let x=0;x<W;x++){const h=heightAt((x+.5)*32,(y+.5)*32),v=projectPoint(x*32,y*32,key,h);tiles.push({x,y,h,depth:v.y+h*12});}tiles.sort((a,b)=>a.depth-b.depth);
+  const polygon=(points,color)=>{g.fillStyle=color;g.beginPath();points.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fill();};
+  for(const t of tiles){const{x,y,h}=t,biome=biomeAt((x+.5)*32,(y+.5)*32),wet=water((x+.5)*32,(y+.5)*32),n=groundNoise(x,y),v=Math.round(n*10);const pts=[[x*32,y*32],[(x+1)*32,y*32],[(x+1)*32,(y+1)*32],[x*32,(y+1)*32]].map(([a,b])=>projectPoint(a,b,key,h));
+   if(h)for(let i=0;i<4;i++){const a=pts[i],b=pts[(i+1)%4];polygon([a,b,{x:b.x,y:b.y+h*12},{x:a.x,y:a.y+h*12}],biome==='desert'?(i%2?'#a98d58':'#bca165'):(i%2?'#6b7750':'#879057'));}
+   const clearing=Math.hypot(x-31,y-29)<4;polygon(pts,wet?`rgb(${45+v},${102+v},${123+v})`:biome==='desert'?`rgb(${196+v},${164+v},${101+v})`:clearing?'#a59b65':`rgb(${81+v+h*8},${113+v+h*8},${65+v})`);
+   if(n>.3){const p=projectPoint((x+.3)*32,(y+.4)*32,key,h);g.fillStyle=wet?'#9bd3cc66':biome==='desert'?'#f5de9e66':'#c5d68b44';g.fillRect(p.x,p.y,wet?12:3,1);}
+  }tiltedCache[key]={layer,origin};
+ }const cache=tiltedCache[key];ctx.drawImage(cache.layer,-cache.origin.x,-cache.origin.y);
 }
+function smallProp(b){const x=(b.x+.5)*32,y=(b.y+.5)*32;
+ if(['floor','stoneFloor','ceiling','roof'].includes(b.type)){const h=isOutside()?heightAt(x,y):0;projectedTile(b.x,b.y,b.type==='stoneFloor'?'#a5b0a0':b.type==='roof'?'#b46e56aa':b.type==='ceiling'?'#e3d49e55':'#c29e6d',h);return;}
+ billboard(x,y,()=>{
+ if(['chest','table','bed','stairs'].includes(b.type)){
+  shadow(x,y,16,5);if(b.type==='chest'){rect(x-14,y-20,28,23,'#775134');rect(x-14,y-23,28,8,'#c29553');rect(x-12,y-12,24,2,'#d5ae66');rect(x-2,y-14,4,7,'#eee0a0');}
+  if(b.type==='table'){rect(x-13,y-13,3,15,'#6d4e34');rect(x+10,y-13,3,15,'#6d4e34');rect(x-17,y-18,34,9,'#d3ac6e');}
+  if(b.type==='bed'){rect(x-13,y-26,26,30,'#835a3a');rect(x-11,y-22,22,23,'#8cb8aa');rect(x-10,y-24,20,8,'#f3e4bc');}
+  if(b.type==='stairs')for(let i=0;i<5;i++){rect(x-15+i*3,y-i*6-4,23,7,'#c3a46d');rect(x-15+i*3,y-i*6+1,23,3,'#8b6c46');}
+ }else if(b.type==='garden'){
+  rect(x-17,y-7,34,14,'#b28a52');rect(x-14,y-8,28,10,'#5c4932');if(b.crop){const ready=cropProgress(state,b)>=1,progress=cropProgress(state,b);for(let i=0;i<3;i++){rect(x-10+i*9,y-7-progress*12,2,8+progress*10,'#9ec47d');ellipse(x-9+i*9,y-8-progress*12,4,3,b.crop==='magicFlower'?'#d8aee6':ready?'#efd28b':'#a0c77a');}if(ready){ctx.fillStyle='#ffe8a4';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText('SAAGIKÜPS',x,y-29);}}
+ }else if(b.type==='boat'){boatSprite(x,y);}
+ else if(/Lamp$/.test(b.type)){
+  const mounted=worldItems().some(n=>n.x===b.x&&n.y===b.y&&n.type==='table'),height=b.type==='yardLamp'?42:b.type==='wallLamp'?30:mounted?34:20;rect(x-2,y-height,4,height,'#9b8057');ellipse(x,y-height,8,10,b.type==='crystalLamp'?'#a6eee9':'#ffe4a3');const glow=ctx.createRadialGradient(x,y-height,2,x,y-height,60);glow.addColorStop(0,b.type==='crystalLamp'?'#a8f0e84a':'#ffe49c40');glow.addColorStop(1,'#ffe49c00');ctx.fillStyle=glow;ctx.fillRect(x-60,y-height-60,120,120);
+ }else if(b.type==='window'){rect(x-16,y-30,32,30,'#ab8958');rect(x-8,y-26,16,17,'#b9ddd5');rect(x-1,y-26,2,17,'#71593c');rect(x-8,y-19,16,2,'#71593c');}
+ else if(b.type==='door'&&b.open){rect(x-16,y-28,5,30,'#d2ac72');rect(x+11,y-28,5,30,'#d2ac72');rect(x-16,y-30,32,5,'#d2ac72');}
+ else building(b);
+ });
+}
+function boatSprite(x,y){shadow(x,y+2,25,7);poly([[x-27,y-8],[x-19,y+7],[x+17,y+7],[x+28,y-8]],'#b88a52');rect(x-20,y-7,40,4,'#e3bb7d');rect(x-3,y-6,6,12,'#7c5c3b');const paddle=Math.sin(elapsed*4)*5;ctx.strokeStyle='#e8c88a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-15,y-3);ctx.lineTo(x-30,y+9+paddle);ctx.moveTo(x+15,y-3);ctx.lineTo(x+30,y+9-paddle);ctx.stroke();}
+function predatorSprite(a){const x=a.x,y=a.y;if(a.type==='skeleton'){shadow(x,y,10,4);rect(x-5,y-18,10,13,'#e4dfc7');rect(x-7,y-31,14,13,'#eee9d0');rect(x-4,y-27,3,4,'#4b6265');rect(x+2,y-27,3,4,'#4b6265');rect(x-3,y-20,6,2,'#b48b61');for(const dx of[-4,3]){rect(x+dx,y-5,3,8,'#e4dfc7');rect(x+dx*2,y-18,3,12,'#e4dfc7');}ellipse(x+10,y-29,7,4,'#d7b878');return;}
+ const bear=a.type==='bear',color=bear?'#9f7957':'#98a9a5',w=bear?31:27;shadow(x,y,20,6);rect(x-w/2,y-25,w,22,color);ellipse(x+10,y-27,bear?12:9,bear?12:9,color);for(const dx of[-9,8])rect(x+dx,y-5,6,9,color);ellipse(x+4,y-36,4,5,color);ellipse(x+16,y-36,4,5,color);rect(x+13,y-29,3,3,'#263b3b');ellipse(x+20,y-23,5,4,bear?'#d5b78c':'#dce2cf');rect(x+22,y-25,3,3,'#35494a');if(!bear)poly([[x-13,y-20],[x-26,y-25],[x-19,y-11]],color);}
+function npcSprite(n){const x=n.x,y=n.y;shadow(x,y,12,4);rect(x-9,y-23,18,20,{ranger:'#749c76',miner:'#8a9ca4',trader:'#b599b5'}[n.id]);rect(x-6,y-36,12,14,'#e2c499');rect(x-11,y-37,22,4,'#d1b26c');rect(x-7,y-43,14,8,'#bda064');rect(x-4,y-32,2,3,'#364749');rect(x+3,y-32,2,3,'#364749');rect(x-3,y-26,7,1,'#986d4d');rect(x-7,y-4,5,7,'#5c6250');rect(x+3,y-4,5,7,'#5c6250');ctx.fillStyle='#fff0bf';ctx.font='8px sans-serif';ctx.textAlign='center';ctx.fillText(n.name,x,y-49);}
+function houseSprite(h){
+ const corners=[[h.minX*32,h.minY*32],[(h.maxX+1)*32,h.minY*32],[(h.maxX+1)*32,(h.maxY+1)*32],[h.minX*32,(h.maxY+1)*32]].map(([x,y])=>viewPoint(x,y));
+ for(let i=0;i<4;i++){const a=corners[i],b=corners[(i+1)%4];poly([[a.x,a.y],[b.x,b.y],[b.x,b.y-32],[a.x,a.y-32]],i%2?'#a77f51':'#c6a06a');}
+ const eaves=corners.map(p=>({x:p.x,y:p.y-33})),ra={x:(eaves[0].x+eaves[1].x)/2,y:(eaves[0].y+eaves[1].y)/2-27},rb={x:(eaves[2].x+eaves[3].x)/2,y:(eaves[2].y+eaves[3].y)/2-27};
+ const points=arr=>arr.map(p=>[p.x,p.y]);poly(points([eaves[0],eaves[1],ra]),'#dbba7d');poly(points([eaves[2],eaves[3],rb]),'#b48b58');poly(points([eaves[0],ra,rb,eaves[3]]),'#a35b4d');poly(points([ra,eaves[1],eaves[2],rb]),'#c87d5b');ctx.strokeStyle='#e8b282';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(ra.x,ra.y);ctx.lineTo(rb.x,rb.y);ctx.stroke();
+
+ const door=viewPoint((h.door.x+.5)*32,(h.door.y+.5)*32);rect(door.x-8,door.y-25,16,26,'#5a4935');rect(door.x+3,door.y-12,3,3,'#ffe0a1');
+ for(const b of state.buildings.filter(b=>b.type==='window'&&h.tiles.some(t=>t.x===b.x&&t.y===b.y))){const p=viewPoint((b.x+.5)*32,(b.y+.5)*32);rect(p.x-7,p.y-24,14,15,'#c9e3d5');rect(p.x-1,p.y-24,2,15,'#8a6b47');}
+}
+function draw(){
+ const p=state.player,pv=viewPoint(p.x,p.y);cam.x=Math.round(pv.x-canvas.width/2);cam.y=Math.round(pv.y-canvas.height/2+20);
+ ctx.fillStyle=state.inCave?'#192d2d':'#193b38';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.save();ctx.translate(-cam.x,-cam.y);tiltedTerrain();
+ const sprites=[],push=(x,y,fn)=>{const v=viewPoint(x,y);if(v.x<cam.x-130||v.x>cam.x+canvas.width+130||v.y<cam.y-100||v.y>cam.y+canvas.height+150)return;sprites.push({depth:v.y+(isOutside()?heightAt(x,y)*12:0),draw:()=>billboard(x,y,fn)});};
+ const homes=findHouses(state.buildings),insideHome=b=>homes.some(h=>h.tiles.some(t=>t.x===b.x&&t.y===b.y));
+ if(isOutside()){
+  for(const b of state.buildings.filter(b=>!insideHome(b)&&['floor','stoneFloor'].includes(b.type)))smallProp(b);
+  push(base.x,base.y,bench);push(cave.x,cave.y,caveSprite);
+  npcData.forEach(n=>push(n.x,n.y,()=>npcSprite(n)));
+  for(const h of homes){const v=viewPoint((h.minX+h.maxX+1)*16,(h.minY+h.maxY+1)*16);sprites.push({depth:v.y+20,draw:()=>houseSprite(h)});}
+  for(const b of state.buildings.filter(b=>!insideHome(b)&&!['floor','stoneFloor'].includes(b.type)&&!(b.type==='boat'&&state.boatId===(b.id||('boat:'+b.x+':'+b.y))))){const pos=viewPoint((b.x+.5)*32,(b.y+.5)*32);sprites.push({depth:pos.y+heightAt((b.x+.5)*32,(b.y+.5)*32)*12,draw:()=>smallProp(b)});}
+  for(const a of animals)push(a.x,a.y,()=>a.type==='rabbit'?rabbit(a):a.type==='deer'?deer(a):predatorSprite(a));
+  for(const z of zombies)push(z.x,z.y,()=>zombie(z));
+  if(state.meteorArrived){push(meteor.x,meteor.y,()=>rock(meteor.x,meteor.y,true));if(!state.alienFriend)push(meteor.x+30,meteor.y+30,()=>alien(meteor.x+30,meteor.y+30));}
+  // Ruins, a friendly bear den and oasis landmark make the new regions discoverable.
+  for(const[x,y]of[[48,10],[51,10],[51,7]])push(x*32,y*32,()=>{rect(x*32-12,y*32-38,24,38,'#c3b28c');rect(x*32-15,y*32-40,30,8,'#e2cca0');rect(x*32-8,y*32-25,5,7,'#8d8969');});
+  push(39*32,12*32,()=>{ellipse(39*32,12*32-5,30,19,'#8d8970');ellipse(39*32,12*32,16,16,'#4e5945');});
+  push(50*32,16*32,()=>{ctx.fillStyle='#ebdda2';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText('OAAS',50*32,16*32-20);});
+  push(61*32,25*32,()=>{const x=61*32,y=25*32+Math.sin(elapsed)*3;ellipse(x,y,48,20,'#8cb8cb');ellipse(x+29,y-7,24,19,'#a0cbd6');ellipse(x+39,y-12,3,3,'#254a5c');poly([[x-39,y],[x-62,y-17],[x-57,y+4],[x-66,y+16],[x-40,y+7]],'#82afc3');ctx.strokeStyle='#d5edf0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+38,y-5,7,0,Math.PI);ctx.stroke();rect(x+10,y-32,2,10,'#c5eef0');});
+ }else if(state.inCave){for(const b of bats.filter(b=>b.hp>0))push(b.x,b.y,()=>batSprite(b));if(!state.crystalFound)push(32*32,20*32,()=>crystal(32*32,20*32));}
+ else for(const b of worldItems()){const v=viewPoint((b.x+.5)*32,(b.y+.5)*32,0);sprites.push({depth:v.y,draw:()=>smallProp(b)});}
+ if(!state.interior)for(const r of resources.filter(r=>!!r.inCave===state.inCave)){
+  if(r.alive)push(r.x,r.y,()=>{if(r.type==='wood')tree(r.x,r.y,r.id%3===0?1:0);else if(r.type==='cactus'){rect(r.x-4,r.y-38,8,40,'#78a777');rect(r.x-15,r.y-26,12,6,'#78a777');rect(r.x-15,r.y-35,5,14,'#78a777');rect(r.x+2,r.y-19,14,6,'#78a777');rect(r.x+11,r.y-30,5,16,'#78a777');ellipse(r.x,r.y-40,4,3,'#f0c5b1');}else if(['stone','ironOre','copperOre'].includes(r.type)){if(!artSprite(r.type==='stone'?'rock':r.type,r.x,r.y+5,36))rock(r.x,r.y);}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);});else if(r.type==='wood'&&!r.removed)push(r.x,r.y,()=>artSprite('stump',r.x,r.y+5,20));
+ }
+ for(const d of state.drops.filter(d=>!!d.inCave===state.inCave&&(d.room||null)===(state.interior?.id||null)&&(d.level||0)===(state.interior?.level||0)))push(d.x,d.y,()=>{ellipse(d.x,d.y,10,7,'#ffe39e44');ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillStyle='#ffe7a5';ctx.fillText(icons[d.id]||'✦',d.x,d.y);});
+ if(state.alienFriend&&!state.interior&&state.alien.inCave===state.inCave)push(state.alien.x,state.alien.y,()=>alien(state.alien.x,state.alien.y));
+ push(p.x,p.y,()=>{if(state.boatId)boatSprite(p.x,p.y+4);ctx.save();ctx.translate(0,-Math.sin((state.jump||0)/.65*Math.PI)*24);if(invulnerable>0&&Math.floor(elapsed*10)%2===0)ctx.globalAlpha=.5;simm(p.x,p.y);ctx.restore();});
+ sprites.sort((a,b)=>a.depth-b.depth);for(const s of sprites)s.draw();
+ if(currentTarget&&!paused&&!buildType){const t=currentTarget;billboard(t.x,t.y,()=>{ctx.strokeStyle='#ffe0a0';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(t.x,t.y+2,19,6,0,0,7);ctx.stroke();ctx.fillStyle='#ffe5ad';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText('A / E',t.x,t.y-42);});}
+ if(started&&!paused){const start=viewPoint(p.x,p.y),end=viewPoint(p.x+aim.x*35,p.y+aim.y*35);ctx.strokeStyle='#ffe2a6';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(start.x,start.y-10);ctx.lineTo(end.x,end.y-10);ctx.stroke();if(charge){ctx.fillStyle='#ffe2a6';ctx.fillRect(start.x-18,start.y+15,36*bowStats(state,charge.time).power,4);}}
+ for(const a of arrows.filter(a=>a.inCave===state.inCave)){const v=viewPoint(a.x,a.y),tail=viewPoint(a.x-a.vx*.025,a.y-a.vy*.025);ctx.strokeStyle='#ffe4ad';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(tail.x,tail.y-8);ctx.lineTo(v.x,v.y-8);ctx.stroke();}
+ if(fishing){const v=viewPoint(fishing.x,fishing.y);ctx.strokeStyle='#f4dfa0';ctx.beginPath();ctx.moveTo(pv.x,pv.y-17);ctx.lineTo(v.x,v.y);ctx.stroke();ellipse(v.x,v.y,3,2,'#f7bb77');}
+ if(meteorFall){const v=viewPoint(meteor.x,meteor.y),t=meteorFall.time/1.5;ctx.strokeStyle='#ffe6a2';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(v.x-(1-t)*180-20,v.y-(1-t)*240-35);ctx.lineTo(v.x-(1-t)*180,v.y-(1-t)*240);ctx.stroke();}
+ for(const a of particles){const v=viewPoint(a.x,a.y);ctx.globalAlpha=Math.max(0,a.life/.7);rect(v.x,v.y,3,3,a.color);}ctx.globalAlpha=1;
+ if(buildType){const point=buildPoint(),loc=placement(point.x,point.y);ctx.globalAlpha=.6;smallProp({x:loc.gx,y:loc.gy,type:buildType});ctx.globalAlpha=1;const pts=projectedTile(loc.gx,loc.gy,loc.valid?'#cce69b55':'#eb9b8e66',isOutside()?heightAt(loc.cx,loc.cy):0);ctx.strokeStyle=loc.valid?'#daf7a4':'#ffa997';ctx.lineWidth=2;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.stroke();}
+ ctx.restore();const dark=state.interior?0:state.inCave?.25:state.time>=300?.35:0;if(dark){ctx.fillStyle=`rgba(8,20,38,${dark})`;ctx.fillRect(0,0,canvas.width,canvas.height);}
+ for(const b of worldItems().filter(b=>/Lamp$/.test(b.type)||b.type==='fire'&&b.fuel>0)){const point=viewPoint((b.x+.5)*32,(b.y+.5)*32),x=point.x-cam.x,y=point.y-cam.y-18,g=ctx.createRadialGradient(x,y,2,x,y,70);g.addColorStop(0,b.type==='crystalLamp'?'#b4f5ed44':'#ffe6ac38');g.addColorStop(1,'#ffe6ac00');ctx.fillStyle=g;ctx.fillRect(x-70,y-70,140,140);}
+}
+
 function resize(){const r=canvas.getBoundingClientRect(),scale=r.height>=1400?3:2;canvas.width=Math.max(1,Math.round(r.width/scale));canvas.height=Math.max(1,Math.round(r.height/scale));ctx.imageSmoothingEnabled=false;}
 new ResizeObserver(resize).observe(canvas);resize();refresh();
 $('startButton').disabled=true;$('newGameButton').disabled=true;
 Promise.allSettled([atlasImage.decode(),heroImage.decode(),extraImage.decode()]).then(()=>{updateHUD();draw();paintTitlePortrait();assetsReady=true;document.querySelector('.game-shell').dataset.ready='true';$('startButton').disabled=false;$('newGameButton').disabled=false;$('loadStatus').textContent='WASD + hiir või Xboxi pult · A alustab · Y uus mäng';});
-function frame(time){const dt=last?Math.min((time-last)/1000,.05):0;last=time;const pad=readPad();if(!document.hidden){if(!paused&&started&&assetsReady){update(dt,pad);draw();}}updateAudio({moving:state.player.walk>0,night:state.time>=300,inCave:state.inCave,nearFire:!!nearFire()?.fuel,paused:paused||!started||!!death||document.hidden});requestAnimationFrame(frame);}requestAnimationFrame(frame);
+function frame(time){const dt=last?Math.min((time-last)/1000,.05):0;last=time;const pad=readPad();if(!document.hidden)tickWhale(dt);if(!document.hidden){if(!paused&&started&&assetsReady){update(dt,pad);draw();}}updateAudio({moving:state.player.walk>0,night:state.time>=300,inCave:state.inCave,nearFire:!!nearFire()?.fuel,paused:paused||!started||!!death||document.hidden});requestAnimationFrame(frame);}requestAnimationFrame(frame);

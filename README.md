@@ -1,4 +1,4 @@
-# Simm metsikus looduses · 0.3
+# Simm metsikus looduses · 0.4
 
 An Estonian browser survival adventure designed with Mattis. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
@@ -6,15 +6,39 @@ An Estonian browser survival adventure designed with Mattis. The game fills the 
 
 ![Fullscreen skill tree](docs/skills.png)
 
+![Desert and oasis](docs/desert.png)
+
 ## Try without installation
 
 Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) and open it in a current desktop browser. Alternatively download the repository ZIP, extract it, and open the root `index.html`. `play/index.html` is an identical standalone copy. No server or asset downloads are required. Press the fullscreen button or F11 for browser fullscreen.
 
-Saves use browser localStorage. Version 0.1 saves are migrated when available. Browsers may store file-URL saves separately when you change the downloaded filename or folder. Gamepad support and local save behavior on file URLs depend on the browser; an HTTP server provides a stable origin when needed. Physical Xbox playtesting is still needed for 0.2.
+Saves use browser localStorage. Earlier saves are migrated when available. Browsers may store file-URL saves separately when you change the downloaded filename or folder. Gamepad support and local save behavior on file URLs depend on the browser; an HTTP server provides a stable origin when needed. Physical Xbox playtesting is still needed for 0.4.
 
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.4
+
+- Four-way rotating, tilted 2D view with visible tile tops and elevation sides. Walking stops at an uphill step; A/E jumps when no interaction is available. F always jumps. The initial jump climbs one step; the **Kõrge hüpe** skill adds up to two more. Movement, aiming and mouse placement follow camera rotation.
+- Trees return after three game days (18 minutes), plants after one day and hunted wildlife after two. Restoration uses saved game time and waits while a building or raised bed occupies the location. Original forest resource IDs and v0.3 inventory, progression and buildings are preserved on load. Continuing an older save introduces the new predators.
+- Wolves pursue Simm but give up beyond 350 world pixels. Bears guard their dens and stop chasing when Simm leaves the 125-pixel home area. The northeast desert adds cacti, stepped dunes, a cooling oasis, ruins and silly skeletons. Heat and thirst are visible there; drink water from the backpack, collect cactus water or visit the oasis. At a shore, open the crafting tab to fill a water bottle without a workbench.
+- Build a **rectangular foundation at least 3×3**, put a wall, window or door on every boundary tile, include at least one door, and roof **every foundation tile**. Floors, walls and roofs occupy separate layers. A completed footprint becomes a whole house with a pitched roof. A at its door opens a separate, larger interior with an 8×6 usable building area.
+- Interiors support tables, beds, chests, lamps, fires, furnaces, ceilings and stairs. Cover all 48 interior cells with ceilings and add stairs to unlock the next floor; repeat for additional floors. A near the entrance goes downstairs, or outside on the ground floor. Furniture and chest contents are saved separately per house and floor. A bed restores health and advances the day.
+- Each chest has its own inventory. A transfers one selected item in either direction. Crafting, cooking, smelting and building use backpack materials first, then chests within 120 world pixels in the same scene and floor. Failed crafts and full-backpack withdrawals preserve all materials.
+- Raised beds include seeds, need no watering and grow carrots, potatoes, berries, medicinal herbs or magic flowers. Growth takes 180–300 active game seconds; plants visibly grow and show **SAAGIKÜPS** when ready. Food crops are edible; herbs, berries, carrots and magic flowers supply potion recipes and NPC requests.
+- Workbench potion recipes: healing (2 herbs + 2 berries), speed (1 magic flower + 1 carrot), animal peace (1 magic flower + 2 herbs). Select a potion in the backpack to drink it. Healing restores up to four hearts; speed lasts 90 seconds and animal peace 120 seconds. Active effect durations are visible on the HUD and pause with the world.
+- Build a rowing boat in the water at the eastern shore, board with A and row out to the whale near the eastern map marker. A starts a friendly light-harpoon encounter: the illuminated line appears before the tracking minigame. Hold RT/Space to raise the marker, release to lower it, and keep it in the gold zone. Successful capture offers release; the whale waves goodbye and grants a sea pearl. B cancels without a reward. Row back near the shore and press A to disembark.
+- The ranger near camp, miner by the cave and trader to the east offer short **UPPERCASE** dialogue and one quest each. Their tasks involve carrots, smelted iron and magic flowers. Rewards and completion persist in the save.
+- Table lamps, wall lanterns, yard lanterns and crystal lamps can be built outside or inside and glow continuously without fuel. Table and wall lamps can share a tile with furniture / a wall.
+
+The game remains an Estonian, child-friendly survival/building adventure without blood or horror effects. PEGI 7 is a design target, not an official rating. No marketplace publishing is part of this version.
+
+### Validation and current limits
+
+`npm run check`, `npm test`, `npm run test:browser`, `npm run test:menus`, `npm run test:v04` and `npm run test:standalone` cover the model, preserved survival systems, simulated Xbox input, new activities and embedded builds. The browser tests require Chromium/Playwright and a running `npm run dev`; set `CHROMIUM_PATH` if needed. `npm run build` regenerates both standalone HTML files. The managed Chromium policy blocks direct `file://` navigation in this environment; standalone behavior is therefore also checked by injecting the embedded HTML without asset requests and by opening both builds over local HTTP. File-URL save behavior on a normal desktop browser remains a manual check.
+
+The camera is a projected 2D view with four fixed rotations. Houses currently use rectangular footprints and a standard 8×6 interior on every floor; the footprint is not a freeform architectural editor. New creatures, NPCs, props and houses use simple procedural pixel art alongside the existing artwork. Each NPC has one quest, the first sea encounter uses one whale location, and sea pearls are collectible keepsakes. World time advances only while playing, not while a menu is open or the game is closed. Test input is simulated; physical Xbox hardware, long play sessions and game balance still need playtesting. Touch controls, spoken dialogue/ElevenLabs and itch.io publication remain future work.
 
 ## Version 0.3
 
@@ -28,26 +52,28 @@ Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / X
 - Adventure journal guides gathering, crafting, the crystal, Nups, building shelter, surviving nights and constructing a crystal beacon. Journal is J / D-pad Up or the quest HUD button.
 - Shooting-star arrival, flickering fire, canopy visibility, cached textured terrain and water boundaries matching the collision model improve atmosphere and performance.
 
-## Controls
+## Controls (0.4)
 
 | Action | Keyboard / mouse | Xbox standard mapping |
 | --- | --- | --- |
-| Move | WASD / arrows | Left stick |
+| Move relative to the camera | WASD / arrows | Left stick |
+| Interact, open door, enter house / boat; otherwise jump | E; F always jumps | A |
+| Rotate camera through four directions | Z / V | D-pad Left / Right |
 | Aim | Mouse | Right stick |
-| Interact / place | E / click to place | A |
 | Tool / bow charge | Hold Space or mouse; release to shoot | Hold RT; release to shoot (X taps tool) |
-| Inventory | I | View, beside the left stick |
-| Building menu | B | Y |
-| Craft | C while beside workbench | A while beside workbench |
-| Skill tree | K | Right stick click (RS) |
+| Open shared menu at **SELJAKOTT** | I, C, B, K or J; HUD buttons | View, Y, RS or D-pad Up |
+| Switch shared-menu tabs | [ / ] or Tab; click a tab | LB / RB |
+| Select / confirm / close in menus | Arrows / Enter / Escape | Left stick / D-pad / A / B |
+| Scroll menus / skill details | Mouse wheel | Right stick |
 | Pause / New Game | Escape | Menu |
-| Adventure journal | J / quest HUD | D-pad Up |
 | Eat best food | R | LT |
 | Nups wait / follow | T | B |
-| Rotate wall / door | Q | X while building |
-| Select tool | 1–6 / toolbar | LB / RB |
-| Menu selection | Arrows / Enter / mouse | Left stick / D-pad / A |
-| Close / cancel building | Escape | B |
+| Rotate wall / door while building | Q | X |
+| Place / cancel building | Click / Escape | A / B |
+| Select tool outside menus | 1–6 / toolbar | LB / RB |
+| Whale minigame: raise marker / let it fall | Hold / release Space | Hold / release RT |
+
+The shared menu always opens at the backpack; each tab retains its selection and scroll position. Its order is **SELJAKOTT → ÜLESANDED → MEISTERDAMINE → EHITAMINE → OSKUSED → KAART**. An interaction with a workbench, fire, chest, garden or NPC opens that activity directly.
 
 Sound starts off. Toggle it using the sound button; its louder default is adjustable with the volume slider.
 
@@ -84,6 +110,7 @@ npm test
 npm run build
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 CHROMIUM_PATH=/usr/bin/chromium npm run test:menus
+CHROMIUM_PATH=/usr/bin/chromium npm run test:v04
 CHROMIUM_PATH=/usr/bin/chromium npm run test:standalone
 ```
 
