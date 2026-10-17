@@ -1,4 +1,4 @@
-# Simm metsikus looduses · 0.4
+# Simm metsikus looduses · 0.4.1
 
 An Estonian browser survival adventure designed with Mattis. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
@@ -18,6 +18,19 @@ Saves use browser localStorage. Earlier saves are migrated when available. Brows
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
 
+## Version 0.4.1 — material recipes and collision fixes
+
+All recipes were reviewed; the complete base-cost list and material rationale are in [docs/recipes.txt](docs/recipes.txt).
+
+- The **stone pickaxe costs 3 wood + 3 stone + 1 plant fibre**. Rare loose branches and small stones can be collected with A/E, without any tool, for one wood/stone each. A small guaranteed supply near camp prevents a blocked start; additional supplies are scattered sparsely. They replenish over game time and wait while buildings occupy their positions. Existing saves receive these supplies without shuffling the original forest resource IDs.
+- One herb makes three plant fibres by hand in the crafting tab, away from a workbench. Fibre supplies bowstrings, fishing line, torch wicks, bags, bedding and bindings. Metal tools need wood, their actual metal and fibre. Bags no longer need wood or star metal.
+- Hand-gather desert sand and melt two sand into one glass. Windows and ordinary lanterns use glass; crystal lamps use crystal, copper and a stone base. Potions require water; stew uses meat, carrots, potatoes, herbs and water. Potatoes can be baked at a fire rather than eaten raw. Two stone produce one slab, or two with the mason skill.
+- Camp has a level clearing. Hills remain outside it, with clearly outlined ledges and a jump hint when an ascent blocks movement. Interactions no longer reach through a height step and swallow the A press needed for jumping.
+- Water rendering and movement use the same tile boundaries, including lakes and the oasis. Older saves that land on water after this correction are moved to nearby free land.
+- Walls, windows, doors and furniture use collision shapes matching their visible footprints. Wall strips replace the oversized square blockers; an open door leaves an actual passage. Felled trees and stumps leave no movement blocker, including after save/reload. Walking animation stops when movement is blocked.
+
+Additional validation: `npm run test:recipes-collision` walks a character with only bare hands through gathering, making fibre, crafting a real stone pickaxe and mining. It also checks an actual felled-tree route before/after reload, walking alongside a wall and passing through an opened door. Unit tests check every recipe's materials, supply-chain reachability, sparse loose supplies, inventory overflow, regrowth and shared shore/terrain geometry.
+
 ## Version 0.4
 
 - Four-way rotating, tilted 2D view with visible tile tops and elevation sides. Walking stops at an uphill step; A/E jumps when no interaction is available. F always jumps. The initial jump climbs one step; the **Kõrge hüpe** skill adds up to two more. Movement, aiming and mouse placement follow camera rotation.
@@ -26,8 +39,8 @@ Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / X
 - Build a **rectangular foundation at least 3×3**, put a wall, window or door on every boundary tile, include at least one door, and roof **every foundation tile**. Floors, walls and roofs occupy separate layers. A completed footprint becomes a whole house with a pitched roof. A at its door opens a separate, larger interior with an 8×6 usable building area.
 - Interiors support tables, beds, chests, lamps, fires, furnaces, ceilings and stairs. Cover all 48 interior cells with ceilings and add stairs to unlock the next floor; repeat for additional floors. A near the entrance goes downstairs, or outside on the ground floor. Furniture and chest contents are saved separately per house and floor. A bed restores health and advances the day.
 - Each chest has its own inventory. A transfers one selected item in either direction. Crafting, cooking, smelting and building use backpack materials first, then chests within 120 world pixels in the same scene and floor. Failed crafts and full-backpack withdrawals preserve all materials.
-- Raised beds include seeds, need no watering and grow carrots, potatoes, berries, medicinal herbs or magic flowers. Growth takes 180–300 active game seconds; plants visibly grow and show **SAAGIKÜPS** when ready. Food crops are edible; herbs, berries, carrots and magic flowers supply potion recipes and NPC requests.
-- Workbench potion recipes: healing (2 herbs + 2 berries), speed (1 magic flower + 1 carrot), animal peace (1 magic flower + 2 herbs). Select a potion in the backpack to drink it. Healing restores up to four hearts; speed lasts 90 seconds and animal peace 120 seconds. Active effect durations are visible on the HUD and pause with the world.
+- Raised beds include seeds, need no watering and grow carrots, potatoes, berries, medicinal herbs or magic flowers. Growth takes 180–300 active game seconds; plants visibly grow and show **SAAGIKÜPS** when ready. Carrots and berries can be eaten directly; potatoes can be baked or used in stew. Herbs, berries, carrots and magic flowers supply potion recipes and NPC requests.
+- Workbench potion recipes: healing (2 herbs + 2 berries + 1 water), speed (1 magic flower + 1 carrot + 1 water), animal peace (1 magic flower + 2 herbs + 1 water). Select a potion in the backpack to drink it. Healing restores up to four hearts; speed lasts 90 seconds and animal peace 120 seconds. Active effect durations are visible on the HUD and pause with the world.
 - Build a rowing boat in the water at the eastern shore, board with A and row out to the whale near the eastern map marker. A starts a friendly light-harpoon encounter: the illuminated line appears before the tracking minigame. Hold RT/Space to raise the marker, release to lower it, and keep it in the gold zone. Successful capture offers release; the whale waves goodbye and grants a sea pearl. B cancels without a reward. Row back near the shore and press A to disembark.
 - The ranger near camp, miner by the cave and trader to the east offer short **UPPERCASE** dialogue and one quest each. Their tasks involve carrots, smelted iron and magic flowers. Rewards and completion persist in the save.
 - Table lamps, wall lanterns, yard lanterns and crystal lamps can be built outside or inside and glow continuously without fuel. Table and wall lamps can share a tile with furniture / a wall.
@@ -36,7 +49,7 @@ The game remains an Estonian, child-friendly survival/building adventure without
 
 ### Validation and current limits
 
-`npm run check`, `npm test`, `npm run test:browser`, `npm run test:menus`, `npm run test:v04` and `npm run test:standalone` cover the model, preserved survival systems, simulated Xbox input, new activities and embedded builds. The browser tests require Chromium/Playwright and a running `npm run dev`; set `CHROMIUM_PATH` if needed. `npm run build` regenerates both standalone HTML files. The managed Chromium policy blocks direct `file://` navigation in this environment; standalone behavior is therefore also checked by injecting the embedded HTML without asset requests and by opening both builds over local HTTP. File-URL save behavior on a normal desktop browser remains a manual check.
+`npm run check`, `npm test`, `npm run test:recipes-collision`, `npm run test:browser`, `npm run test:menus`, `npm run test:v04` and `npm run test:standalone` cover the model, preserved survival systems, simulated Xbox input, new activities and embedded builds. The browser tests require Chromium/Playwright and a running `npm run dev`; set `CHROMIUM_PATH` if needed. `npm run build` regenerates both standalone HTML files. The managed Chromium policy blocks direct `file://` navigation in this environment; standalone behavior is therefore also checked by injecting the embedded HTML without asset requests and by opening both builds over local HTTP. File-URL save behavior on a normal desktop browser remains a manual check.
 
 The camera is a projected 2D view with four fixed rotations. Houses currently use rectangular footprints and a standard 8×6 interior on every floor; the footprint is not a freeform architectural editor. New creatures, NPCs, props and houses use simple procedural pixel art alongside the existing artwork. Each NPC has one quest, the first sea encounter uses one whale location, and sea pearls are collectible keepsakes. World time advances only while playing, not while a menu is open or the game is closed. Test input is simulated; physical Xbox hardware, long play sessions and game balance still need playtesting. Touch controls, spoken dialogue/ElevenLabs and itch.io publication remain future work.
 
@@ -108,6 +121,7 @@ In this cloud machine use `npm ci --cache /workspace/.cache/npm` to keep the cac
 npm run check
 npm test
 npm run build
+CHROMIUM_PATH=/usr/bin/chromium npm run test:recipes-collision
 CHROMIUM_PATH=/usr/bin/chromium npm run test:browser
 CHROMIUM_PATH=/usr/bin/chromium npm run test:menus
 CHROMIUM_PATH=/usr/bin/chromium npm run test:v04

@@ -1,0 +1,65 @@
+SIMM-IN-THE-WILD 0.4.1 — RETSEPTIDE ÜLEVAATUS
+
+Põhimõtted
+- Puit tähendab üht kasutatavat puutükki: oks annab 1, raiutud puu tavaliselt 5.
+- Väike maast korjatav kivi annab 1 kivi ilma kirkata. Suur kivi vajab kirkat.
+- Ühest käsitsi korjatavast maitsetaimest saab käsitsi 3 taimekiudu.
+- Taimekiud asendab nööri, sidumismaterjali ja lihtsat kangast; kuivatatud taimed on pehmendus.
+- Kivist tööriist vajab puitvart, kivipead ja siduvat kiudu; metalltööriist kasutab metallist pead.
+- Vibu ja õng vajavad puidu kõrval nööri, mitte juhuslikke kive.
+- Tõrvikul on puitvars ja kiududest taht, marjad pole kütus.
+- Aken ja tavalised laternad vajavad klaasi. Kõrbe liiva saab käsitsi korjata; klaas valmib sulatusahjus.
+- Kristalllamp kasutab helendavat kristalli, vasest kinnitust ja kivist alust.
+- Liha, kala ja kartul küpsetatakse lõkkel; porgand ja marjad sobivad toorelt.
+- Hautis vajab liha, köögivilju, maitsetaime ja vett. Kõik võlujoogid vajavad vett.
+- Vee võtmisel kasutatakse lähtevarustuse korduvkasutatavat pudelit; vesi pärineb lähedal olevast veekogust.
+- Ahju ehitamine ei vaja sulametalli: esimeste kangide valmistamine ei tohi jääda enda taha kinni.
+- Tähemetall ja kristall on täheehitiste koostisosad; tavaline seljakott neist ei sõltu.
+- Seljakott kasutab kiududest kangast ja taimedest pehmendust; voodi puuraami ja kiudtäidist.
+- Kasti, ukse, katuse ja paadi puuosad seotakse kiuga. Seinad, laud ja vahelaed kasutavad lihtsaid puuliiteid.
+- Retseptid on mänguline materjaliarvestus: vesi ja kütus ei nõua täiendavat pakendiinventari.
+
+Kõik 42 retsepti (baaskulu enne meisterdamisoskuse soodustust)
+
+Taimekiud ×3 | KÄSITSI | Maitsetaim 1
+Kivikirves | MEISTERDAMISLAUAL | Puit 3 + Kivi 4 + Taimekiud 1
+Kivikirka | MEISTERDAMISLAUAL | Puit 3 + Kivi 3 + Taimekiud 1
+Tõrvik | MEISTERDAMISLAUAL | Puit 2 + Taimekiud 1
+Vibu | MEISTERDAMISLAUAL | Puit 6 + Taimekiud 3
+Õng | MEISTERDAMISLAUAL | Puit 4 + Taimekiud 2
+Raudkirves | MEISTERDAMISLAUAL | Puit 3 + Rauakang 2 + Taimekiud 1
+Vaskkirka | MEISTERDAMISLAUAL | Puit 3 + Vasekang 2 + Taimekiud 1
+Suurem seljakott (+5 pesa) | MEISTERDAMISLAUAL | Taimekiud 12 + Maitsetaim 2
+Küpsetatud liha | LÕKKEL | Metsloomaliha 1
+Küpsekartul | LÕKKEL | Kartul 1
+Metsahautis | LÕKKEL | Metsloomaliha 1 + Porgand 1 + Kartul 1 + Maitsetaim 1 + Joogivesi 1
+Küpsetatud kala | LÕKKEL | Kala 1
+Rauakang | SULATUSAHJUS | Rauamaak 2
+Vasekang | SULATUSAHJUS | Vasemaak 2
+Kiviplaat | SULATUSAHJUS | Kivi 2
+Klaas | SULATUSAHJUS | Liiv 2
+Lõke | EHITAMINE | Puit 5 + Kivi 4
+Sulatusahi | EHITAMINE | Kivi 12 + Puit 4
+Puitpõrand | EHITAMINE | Puit 1
+Puitsein | EHITAMINE | Puit 2
+Uks | EHITAMINE | Puit 3 + Taimekiud 1
+Kivipõrand | EHITAMINE | Kiviplaat 1
+Tähemajakas | EHITAMINE | Puit 10 + Tähemetall 4 + Kristall 2 + Rauakang 2 + Vasekang 2
+Katus | EHITAMINE | Puit 2 + Taimekiud 1
+Aknaga sein | EHITAMINE | Puit 2 + Klaas 1
+Hoiukast | EHITAMINE | Puit 6 + Taimekiud 2
+Voodi | EHITAMINE | Puit 5 + Taimekiud 6
+Laud | EHITAMINE | Puit 4
+Trepp | EHITAMINE | Puit 8
+Vahelagi | EHITAMINE | Puit 1
+Kastpeenar | EHITAMINE | Puit 4 + Kivi 1
+Sõudepaat | EHITAMINE | Puit 25 + Rauakang 2 + Taimekiud 4
+Laualamp | EHITAMINE | Puit 2 + Vasekang 1 + Klaas 1
+Seinalatern | EHITAMINE | Rauakang 2 + Klaas 1
+Õuelatern | EHITAMINE | Puit 3 + Rauakang 1 + Klaas 1
+Kristalllamp | EHITAMINE | Kristall 1 + Vasekang 1 + Kivi 2
+Tervendav jook | MEISTERDAMISLAUAL | Maitsetaim 2 + Marjad 2 + Joogivesi 1
+Kiirusejook | MEISTERDAMISLAUAL | Võlulill 1 + Porgand 1 + Joogivesi 1
+Loomasõbra jook | MEISTERDAMISLAUAL | Võlulill 1 + Maitsetaim 2 + Joogivesi 1
+Täida veepudel | KÄSITSI | Veekogu lähedus; materjalikulu puudub
+Tulnuka pesa | EHITAMINE | Puit 8 + Tähemetall 2 + Taimekiud 3

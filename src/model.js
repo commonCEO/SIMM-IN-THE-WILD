@@ -1,50 +1,54 @@
 export const STACK_SIZE = 20;
 export const DROP_LIFETIME = 600;
-export const names = {wood:'Puit',stone:'Kivi',berries:'Marjad',crystal:'Kristall',star:'Tähemetall',herbs:'Maitsetaim',meat:'Metsloomaliha',roast:'Küpseliha',stew:'Metsahautis',ironOre:'Rauamaak',copperOre:'Vasemaak',iron:'Rauakang',copper:'Vasekang',slab:'Kiviplaat',fish:'Kala',cookedFish:'Küpsetatud kala',carrot:'Porgand',potato:'Kartul',magicFlower:'Võlulill',healPotion:'Tervendav jook',speedPotion:'Kiirusejook',peacePotion:'Loomasõbra jook',water:'Joogivesi',pearl:'Merepärl'};
-export const icons = {wood:'🪵',stone:'🪨',berries:'🫐',crystal:'💎',star:'✦',herbs:'🌿',meat:'🥩',roast:'🍗',stew:'🍲',ironOre:'◈',copperOre:'◆',iron:'▰',copper:'▰',slab:'▱',fish:'🐟',cookedFish:'🍢',carrot:'🥕',potato:'🥔',magicFlower:'✿',healPotion:'♥',speedPotion:'➤',peacePotion:'❧',water:'💧',pearl:'◉'};
+export const names = {wood:'Puit',stone:'Kivi',berries:'Marjad',crystal:'Kristall',star:'Tähemetall',herbs:'Maitsetaim',meat:'Metsloomaliha',roast:'Küpseliha',stew:'Metsahautis',ironOre:'Rauamaak',copperOre:'Vasemaak',iron:'Rauakang',copper:'Vasekang',slab:'Kiviplaat',fish:'Kala',cookedFish:'Küpsetatud kala',carrot:'Porgand',potato:'Kartul',magicFlower:'Võlulill',healPotion:'Tervendav jook',speedPotion:'Kiirusejook',peacePotion:'Loomasõbra jook',water:'Joogivesi',pearl:'Merepärl',fiber:'Taimekiud',sand:'Liiv',glass:'Klaas',bakedPotato:'Küpsekartul'};
+export const icons = {wood:'🪵',stone:'🪨',berries:'🫐',crystal:'💎',star:'✦',herbs:'🌿',meat:'🥩',roast:'🍗',stew:'🍲',ironOre:'◈',copperOre:'◆',iron:'▰',copper:'▰',slab:'▱',fish:'🐟',cookedFish:'🍢',carrot:'🥕',potato:'🥔',magicFlower:'✿',healPotion:'♥',speedPotion:'➤',peacePotion:'❧',water:'💧',pearl:'◉',fiber:'〰',sand:'▧',glass:'◇',bakedPotato:'🥔'};
 export const tools = [{id:'hand',icon:'✋',name:'Käsi'},{id:'axe',icon:'🪓',name:'Kirves'},{id:'pickaxe',icon:'⛏️',name:'Kirka'},{id:'bow',icon:'🏹',name:'Vibu'},{id:'torch',icon:'🔥',name:'Tõrvik'},{id:'rod',icon:'🎣',name:'Õng'}];
 export function freshState() {
   return {inventory:Object.fromEntries(Object.keys(names).map(k=>[k,0])),bagSlots:20,gathered:{wood:0,stone:0,berries:0},tools:['hand','axe'],buildings:[],skills:{combat:0,craft:0,gather:0,star:0},level:1,xp:0,points:0,health:5,hunger:100,day:1,time:0,worldAge:0,drops:[],crystalFound:false,alienFriend:false,alienFollowing:true,alien:null,shelterFound:false,nightsSurvived:0,beaconBuilt:false,meteorArrived:false,inCave:false,stumpsRemoved:[],regrowth:{},wildlifeReturns:[],effects:{},thirst:100,heat:0,camera:0,jump:0,interior:null,roomItems:[],npcQuests:{},harvested:0,whalesReleased:0,boatId:null};
 }
 export const recipes = [
-{id:'pickaxe',name:'Kivikirka',icon:'⛏️',cost:{wood:5}},
-{id:'torch',name:'Tõrvik',icon:'🔥',cost:{wood:3,berries:1}},
-{id:'bow',name:'Vibu',icon:'🏹',cost:{wood:10,stone:3}},
-{id:'rod',name:'Õng',icon:'🎣',cost:{wood:6,herbs:2}},
-{id:'ironAxe',name:'Raudkirves',icon:'🪓',cost:{wood:5,iron:2},gear:'axe'},
-{id:'copperPickaxe',name:'Vaskkirka',icon:'⛏️',cost:{wood:4,copper:2},gear:'pickaxe'},
-{id:'bag',name:'Suurem seljakott (+5 pesa)',icon:'🎒',cost:{wood:20,star:2},upgrade:true},
+{id:'fiber',name:'Taimekiud',icon:'〰',cost:{herbs:1},quantity:3,item:true,hand:true},
+{id:'axe',name:'Kivikirves',icon:'🪓',cost:{wood:3,stone:4,fiber:1}},
+{id:'pickaxe',name:'Kivikirka',icon:'⛏️',cost:{wood:3,stone:3,fiber:1}},
+{id:'torch',name:'Tõrvik',icon:'🔥',cost:{wood:2,fiber:1}},
+{id:'bow',name:'Vibu',icon:'🏹',cost:{wood:6,fiber:3}},
+{id:'rod',name:'Õng',icon:'🎣',cost:{wood:4,fiber:2}},
+{id:'ironAxe',name:'Raudkirves',icon:'🪓',cost:{wood:3,iron:2,fiber:1},gear:'axe'},
+{id:'copperPickaxe',name:'Vaskkirka',icon:'⛏️',cost:{wood:3,copper:2,fiber:1},gear:'pickaxe'},
+{id:'bag',name:'Suurem seljakott (+5 pesa)',icon:'🎒',cost:{fiber:12,herbs:2},upgrade:true},
 {id:'roast',name:'Küpsetatud liha',icon:'🍗',cost:{meat:1},cook:true},
-{id:'stew',name:'Metsahautis',icon:'🍲',cost:{berries:2,meat:1,herbs:1},cook:true},
+{id:'bakedPotato',name:'Küpsekartul',icon:'🥔',cost:{potato:1},cook:true},
+{id:'stew',name:'Metsahautis',icon:'🍲',cost:{meat:1,carrot:1,potato:1,herbs:1,water:1},cook:true},
 {id:'cookedFish',name:'Küpsetatud kala',icon:'🍢',cost:{fish:1},cook:true},
 {id:'iron',name:'Rauakang',icon:'▰',cost:{ironOre:2},smelt:true},
 {id:'copper',name:'Vasekang',icon:'▰',cost:{copperOre:2},smelt:true},
-{id:'slab',name:'Kiviplaat',icon:'▱',cost:{stone:2},smelt:true,quantity:2},
+{id:'slab',name:'Kiviplaat',icon:'▱',cost:{stone:2},smelt:true},
+{id:'glass',name:'Klaas',icon:'◇',cost:{sand:2},smelt:true},
 {id:'fire',name:'Lõke',icon:'🔥',cost:{wood:5,stone:4},build:true},
 {id:'furnace',name:'Sulatusahi',icon:'▣',cost:{stone:12,wood:4},build:true},
 {id:'floor',name:'Puitpõrand',icon:'▦',cost:{wood:1},build:true},
 {id:'wall',name:'Puitsein',icon:'▤',cost:{wood:2},build:true},
-{id:'door',name:'Uks',icon:'▥',cost:{wood:3},build:true},
+{id:'door',name:'Uks',icon:'▥',cost:{wood:3,fiber:1},build:true},
 {id:'stoneFloor',name:'Kivipõrand',icon:'▱',cost:{slab:1},build:true},
 {id:'beacon',name:'Tähemajakas',icon:'✦',cost:{wood:10,star:4,crystal:2,iron:2,copper:2},build:true},
-{id:'roof',name:'Katus',icon:'⌂',cost:{wood:2},build:true},
-{id:'window',name:'Aknaga sein',icon:'▣',cost:{wood:2,stone:1},build:true},
-{id:'chest',name:'Hoiukast',icon:'▣',cost:{wood:6},build:true},
-{id:'bed',name:'Voodi',icon:'▰',cost:{wood:5,herbs:2},build:true},
+{id:'roof',name:'Katus',icon:'⌂',cost:{wood:2,fiber:1},build:true},
+{id:'window',name:'Aknaga sein',icon:'▣',cost:{wood:2,glass:1},build:true},
+{id:'chest',name:'Hoiukast',icon:'▣',cost:{wood:6,fiber:2},build:true},
+{id:'bed',name:'Voodi',icon:'▰',cost:{wood:5,fiber:6},build:true},
 {id:'table',name:'Laud',icon:'▤',cost:{wood:4},build:true},
 {id:'stairs',name:'Trepp',icon:'▟',cost:{wood:8},build:true},
 {id:'ceiling',name:'Vahelagi',icon:'▦',cost:{wood:1},build:true},
 {id:'garden',name:'Kastpeenar',icon:'❀',cost:{wood:4,stone:1},build:true},
-{id:'boat',name:'Sõudepaat',icon:'⛵',cost:{wood:25,iron:2},build:true},
-{id:'deskLamp',name:'Laualamp',icon:'♧',cost:{wood:2,copper:1},build:true},
-{id:'wallLamp',name:'Seinalatern',icon:'☼',cost:{iron:1,copper:1},build:true},
-{id:'yardLamp',name:'Õuelatern',icon:'☀',cost:{wood:3,iron:1},build:true},
-{id:'crystalLamp',name:'Kristalllamp',icon:'✦',cost:{crystal:1,copper:1},build:true},
-{id:'healPotion',name:'Tervendav jook',icon:'♥',cost:{herbs:2,berries:2},item:true},
-{id:'speedPotion',name:'Kiirusejook',icon:'➤',cost:{magicFlower:1,carrot:1},item:true},
-{id:'peacePotion',name:'Loomasõbra jook',icon:'❧',cost:{magicFlower:1,herbs:2},item:true},
-{id:'water',name:'Täida veepudel',icon:'💧',cost:{},item:true,water:true},
-{id:'nest',name:'Tulnuka pesa',icon:'🛸',cost:{wood:8,star:2},build:true}
+{id:'boat',name:'Sõudepaat',icon:'⛵',cost:{wood:25,iron:2,fiber:4},build:true},
+{id:'deskLamp',name:'Laualamp',icon:'♧',cost:{wood:2,copper:1,glass:1},build:true},
+{id:'wallLamp',name:'Seinalatern',icon:'☼',cost:{iron:2,glass:1},build:true},
+{id:'yardLamp',name:'Õuelatern',icon:'☀',cost:{wood:3,iron:1,glass:1},build:true},
+{id:'crystalLamp',name:'Kristalllamp',icon:'✦',cost:{crystal:1,copper:1,stone:2},build:true},
+{id:'healPotion',name:'Tervendav jook',icon:'♥',cost:{herbs:2,berries:2,water:1},item:true},
+{id:'speedPotion',name:'Kiirusejook',icon:'➤',cost:{magicFlower:1,carrot:1,water:1},item:true},
+{id:'peacePotion',name:'Loomasõbra jook',icon:'❧',cost:{magicFlower:1,herbs:2,water:1},item:true},
+{id:'water',name:'Täida veepudel',icon:'💧',cost:{},item:true,water:true,hand:true},
+{id:'nest',name:'Tulnuka pesa',icon:'🛸',cost:{wood:8,star:2,fiber:3},build:true}
 ];
 export const skills = [
 {id:'combat',branch:'combat',name:'Vapper seikleja',icon:'⚔',max:3,description:'+1 löögijõudu ja üks lisasüda igal astmel.'},
@@ -74,12 +78,12 @@ export function cook(s,recipe){if((!recipe.cook&&!recipe.smelt)||!canPay(s,recip
 export function dropItem(s,id,x,y,inCave=false){if(!s.inventory[id])return false;s.inventory[id]--;s.drops.push({id,amount:1,x,y,inCave,room:s.interior?.id||null,level:s.interior?.level||0,expires:(s.worldAge||0)+DROP_LIFETIME});return true;}
 export function bowStats(s,charge){const power=Math.min(1,Math.max(0,charge)/(s.skills.quickdraw ? .78 : 1.2));return {power,range:120+power*300,speed:220+power*220,damage:1+power*3+(s.skills.combat||0)+(s.skills.quickdraw?1:0)};}
 export function lakeWater(x,y){const tx=x/32,ty=y/32;return ((tx-15)**2/36+(ty-19)**2/65<1)||((tx-53)**2/32+(ty-39)**2/27<1);}
-export function wallOrientation(b,buildings){if(b.rotation)return b.rotation;const neighbor=(dx,dy)=>buildings.some(n=>n!==b&&(n.type==='wall'||n.type==='door')&&n.x===b.x+dx&&n.y===b.y+dy);return neighbor(0,1)||neighbor(0,-1)?'v':'h';}
+export function wallOrientation(b,buildings){if(b.rotation)return b.rotation;const neighbor=(dx,dy)=>buildings.some(n=>n!==b&&['wall','door','window'].includes(n.type)&&n.x===b.x+dx&&n.y===b.y+dy);return neighbor(0,1)||neighbor(0,-1)?'v':'h';}
 
 export function questSteps(s){return [
- {title:'Esimesed varud',text:'Vali kirves ja korja puust vähemalt viis puitu.',done:(s.gathered.wood||0)>=5},
- {title:'Tööriistad seikluseks',text:'Mine meisterdamislaua kõrvale ja valmista kirka.',done:s.tools.includes('pickaxe')},
- {title:'Valgus pimeduses',text:'Meisterda tõrvik: vajad kolme puitu ja ühte marja.',done:s.tools.includes('torch')},
+ {title:'Esimesed varud',text:'Korja maast oksi või raiu kirvega puud. Kogu viis puitu.',done:(s.gathered.wood||0)>=5},
+ {title:'Tööriistad seikluseks',text:'Kivikirka vajab 3 puitu, 3 väikest kivi ja 1 taimekiudu. Kiud saad maitsetaimest; kirka valmista laual.',done:s.tools.includes('pickaxe')},
+ {title:'Valgus pimeduses',text:'Meisterda tõrvik: 2 puitu ja 1 taimekiud tahiks.',done:s.tools.includes('torch')},
  {title:'Metsa saladus',text:'Mine põhja pool asuvasse koopasse ja leia metsakristall.',done:s.crystalFound},
  {title:'Sõber tähtedelt',text:'Leia ida poolt meteoriit ja ütle Nupsile tere.',done:s.alienFriend},
  {title:'Oma paik maailmas',text:'Ehita suletud tuba seinte ja uksega, siis astu oma koju sisse.',done:s.shelterFound},
@@ -88,10 +92,10 @@ export function questSteps(s){return [
 ];}
 
 // Version 0.4 systems use game seconds, including while away from a biome.
-export function inWater(x,y){return x>=58*32||Math.hypot(x-50*32,y-16*32)<48||lakeWater(x,y);}
+export function inWater(x,y){const cx=(Math.floor(x/32)+.5)*32,cy=(Math.floor(y/32)+.5)*32;return cx>=58*32||Math.hypot(cx-50*32,cy-16*32)<48||lakeWater(cx,cy);}
 export function biomeAt(x,y){return x>=58*32?'sea':x>44*32&&y<22*32?'desert':'forest';}
 export function heightAt(x,y){
- if(inWater(x,y))return 0;const tx=Math.floor(x/32),ty=Math.floor(y/32);
+ if(inWater(x,y))return 0;const tx=Math.floor(x/32),ty=Math.floor(y/32);if(Math.hypot(tx+.5-31,ty+.5-29)<6.5)return 0;
  if(biomeAt(x,y)==='desert')return Math.max(0,Math.floor(1.4+Math.sin(tx*.65)*Math.cos(ty*.4)*1.6));
  const hills=[[23,28,5,2],[39,36,6,3],[21,9,5,2],[43,9,4,2]];
  return hills.reduce((h,[cx,cy,r,top])=>Math.max(h,Math.max(0,Math.ceil(top*(1-Math.hypot(tx-cx,ty-cy)/r)))),0);
@@ -124,8 +128,8 @@ export function usePotion(s,id){if(!s.inventory[id])return false;
  else if(id==='speedPotion')s.effects.speed=90;else if(id==='peacePotion')s.effects.peace=120;else return false;s.inventory[id]--;return true;
 }
 export function tickEffects(s,dt){for(const k of Object.keys(s.effects))s.effects[k]=Math.max(0,s.effects[k]-dt);s.jump=Math.max(0,(s.jump||0)-dt);}
-export function regrowResources(s,resources){for(const r of resources){if(r.inCave||r.alive||!['wood','herbs','berries','cactus'].includes(r.type))continue;
- const due=s.regrowth[r.id]??(s.regrowth[r.id]=s.worldAge+(r.type==='wood'?1080:360));
+export function regrowResources(s,resources){for(const r of resources){if(r.inCave||r.alive||!['wood','herbs','berries','cactus',...Object.keys(forageDefs)].includes(r.type))continue;
+ const due=s.regrowth[r.id]??(s.regrowth[r.id]=s.worldAge+(r.type==='wood'?1080:r.type==='pebble'?720:360));
  if(s.worldAge<due||s.buildings.some(b=>Math.abs((b.x+.5)*32-r.x)<30&&Math.abs((b.y+.5)*32-r.y)<30))continue;
  r.alive=true;r.removed=false;r.hp=3;delete s.regrowth[r.id];}}
 export function predatorIntent(a,p,peace=false){const d=Math.hypot(a.x-p.x,a.y-p.y),home=Math.hypot(p.x-a.homeX,p.y-a.homeY);
@@ -151,3 +155,29 @@ export function finishNPCQuest(s,npc){if(s.npcQuests[npc.id]||!canPay(s,npc.requ
 export function whaleStep(game,dt,held){game.time+=dt;const target=.5+Math.sin(game.time*2)*.28;game.marker=Math.max(0,Math.min(1,game.marker+(held?.72:-.48)*dt));game.target=target;game.progress=Math.max(0,Math.min(1,game.progress+(Math.abs(game.marker-target)<.2?.32:-.08)*dt));return game.progress>=1?'caught':game.time>=35?'escaped':'playing';}
 
 export function houseExitPoint(h){const d=h.door,dx=d.y===h.minY||d.y===h.maxY?0:d.x===h.minX?-1:1,dy=d.y===h.minY?-1:d.y===h.maxY?1:0;return {x:(d.x+.5)*32+dx*42,y:(d.y+.5)*32+dy*42};}
+
+// Loose supplies have independent IDs and RNG: adding them does not shuffle old forest saves.
+export const forageDefs={branch:{item:'wood',quantity:1,label:'Korja oks',delay:360},pebble:{item:'stone',quantity:1,label:'Korja väike kivi',delay:720},sand:{item:'sand',quantity:3,label:'Korja liiva',delay:360}};
+export function looseResources(){
+ const result=[],put=(id,x,y,type)=>{if(!inWater(x,y))result.push({id,x,y,type,hp:1,alive:true,removed:false});};
+ [[-56,88,'branch'],[72,100,'branch'],[-104,128,'branch'],[-80,32,'pebble'],[72,56,'pebble'],[-24,136,'pebble'],[104,112,'pebble'],[-112,-16,'pebble']].forEach(([dx,dy,type],i)=>put(8000+i,31*32+dx,29*32+dy,type));
+ for(let y=3;y<45;y++)for(let x=3;x<61;x++){
+  const hash=((Math.imul(x+17,73856093)^Math.imul(y+31,19349663))>>>0)/4294967296,px=(x+.5)*32,py=(y+.5)*32;
+  if(Math.hypot(px-31*32,py-29*32)<190)continue;
+  if(hash<.01&&biomeAt(px,py)==='forest')put(9000+y*64+x,px,py,'branch');else if(hash>=.01&&hash<.02)put(9000+y*64+x,px,py,'pebble');
+ }
+ [[48,18],[52,17],[54,13],[55,19]].forEach(([x,y],i)=>put(13000+i,(x+.5)*32,(y+.5)*32,'sand'));
+ return result;
+}
+export function gatherLoose(s,r){const def=forageDefs[r.type];if(!def||!r.alive||!addItem(s,def.item,def.quantity))return false;r.alive=false;r.hp=0;s.gathered[def.item]=(s.gathered[def.item]||0)+def.quantity;s.regrowth[r.id]=s.worldAge+def.delay;gainXP(s,2);return true;}
+// Body footprints follow the drawn wall strips, rather than blocking a 38x38 square.
+export function buildingBounds(b,buildings){
+ const cx=(b.x+.5)*32,cy=(b.y+.5)*32,box=(w,h)=>({x:cx-w/2,y:cy-h/2,w,h});
+ if(['wall','window','door'].includes(b.type)){
+  if(b.type==='door'&&b.open)return [];
+  const vertical=wallOrientation(b,buildings)==='v',horizontal=!vertical||(!b.rotation&&buildings.some(n=>n!==b&&['wall','door','window'].includes(n.type)&&n.y===b.y&&Math.abs(n.x-b.x)===1));
+  return [...(horizontal?[box(32,10)]:[]),...(vertical?[box(10,32)]:[])];
+ }
+ if(b.type==='chest')return [box(28,16)];if(b.type==='table')return [box(32,18)];if(b.type==='bed')return [box(26,30)];return [];
+}
+export function solidBuildingAt(buildings,x,y,radius=5){return buildings.find(b=>buildingBounds(b,buildings).some(rect=>{const dx=x-Math.max(rect.x,Math.min(x,rect.x+rect.w)),dy=y-Math.max(rect.y,Math.min(y,rect.y+rect.h));return dx*dx+dy*dy<radius*radius;}));}
