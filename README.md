@@ -1,4 +1,4 @@
-# Simm metsikus looduses · 0.4.1
+# Simm metsikus looduses · 0.4.2
 
 An Estonian browser survival adventure designed with Mattis. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
@@ -17,6 +17,12 @@ Saves use browser localStorage. Earlier saves are migrated when available. Brows
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.4.2 — defeat recovery found by continuous E2E
+
+A continuous fresh-game run exposed a gap in the earlier isolated tests: pursuing wildlife could remain at camp after a defeat and repeatedly attack Simm on respawn. Wolves, bears and skeletons now return to their home positions and stay calm for 12 active game seconds after defeat. Prey, inventory and progress remain intact.
+
+`npm run test:respawn` reproduces an actual wolf attack, defeat and recovery, then verifies that a second defeat does not occur at camp. `npm run test:e2e-journey` runs a separate normal-speed session against the standalone build from its title screen, with no injected save, inventory or progression. It gathers and crafts supplies, builds a furnished house, grows carrots, completes the ranger and cave quests, survives the natural day/night cycle and reloads the save. This optional test takes several minutes because crop growth and the six-minute day are not accelerated. Simulated Xbox input, keyboard and mouse are used; resource cooldowns are checked against game time rather than fixed wall-clock delays.
 
 ## Version 0.4.1 — material recipes and collision fixes
 

@@ -1,6 +1,6 @@
 {
   "name": "simm-in-the-wild",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,7 +13,9 @@
     "test:menus": "node tests/menu-ux.mjs",
     "test:recipes-collision": "node tests/recipes-collision-browser.mjs",
     "test:v04": "node tests/v04-browser.mjs",
-    "test:standalone": "node tests/standalone.mjs"
+    "test:standalone": "node tests/standalone.mjs",
+    "test:respawn": "node tests/respawn-browser.mjs",
+    "test:e2e-journey": "node tests/fresh-journey.mjs"
   },
   "devDependencies": {
     "playwright": "1.64.0"

@@ -181,3 +181,7 @@ export function buildingBounds(b,buildings){
  if(b.type==='chest')return [box(28,16)];if(b.type==='table')return [box(32,18)];if(b.type==='bed')return [box(26,30)];return [];
 }
 export function solidBuildingAt(buildings,x,y,radius=5){return buildings.find(b=>buildingBounds(b,buildings).some(rect=>{const dx=x-Math.max(rect.x,Math.min(x,rect.x+rect.w)),dy=y-Math.max(rect.y,Math.min(y,rect.y+rect.h));return dx*dx+dy*dy<radius*radius;}));}
+
+// New wildlife must retreat as well as night monsters after a defeat. Otherwise a
+// pursuing wolf can camp at the respawn point through repeated morning resets.
+export function resetHostilesAfterDefeat(s,animals){for(const a of animals){if(!['wolf','bear','skeleton'].includes(a.type))continue;if(Number.isFinite(a.homeX)&&Number.isFinite(a.homeY)){a.x=a.homeX;a.y=a.homeY;}a.chasing=false;a.calmUntil=s.worldAge+12;}}

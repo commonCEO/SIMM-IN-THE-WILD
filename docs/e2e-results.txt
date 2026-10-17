@@ -1,0 +1,45 @@
+SIMM-IN-THE-WILD 0.4.2 — E2E verification, 2026-10-17
+
+Baseline: 61ba28bf96adb07ea4594f02b60cf48ee7589eb3 (0.4.1).
+Environment: Playwright, Chromium /usr/bin/chromium, local HTTP server.
+
+Continuous fresh-game journey: PASS, 368 seconds wall time.
+No injected save, inventory, progression, crop growth or clock acceleration.
+Inputs: keyboard, mouse and simulated Xbox Gamepad API buttons/sticks.
+  13s: branches/pebbles gathered by hand; fibre and stone pickaxe crafted.
+  79s: natural timber/stone/fibre gathered and torch crafted.
+  83s: chest, garden and fire built; carrots planted.
+  92s: complete house built, entered, furnished with chest, and exited.
+ 113s: storage transfers, fire fuel and cave crystal collection verified.
+ 274s: naturally grown carrots harvested and ranger quest rewarded.
+ 368s: natural night survived inside house; day 2 with all five hearts.
+Reload preserved the house, furniture, ranger quest and crystal inventory.
+No JavaScript page errors or external asset requests were observed.
+
+Defect discovered during fresh-game testing:
+Pursuing wildlife could remain at camp after defeat and repeatedly kill the
+respawning player. Hostile wolves, bears and skeletons now return home and
+remain calm for 12 active game seconds. A separate browser regression causes
+an actual wolf defeat, verifies recovery, then checks no repeat defeat occurs.
+
+Other verification, all PASS:
+  npm run check
+  npm test — 33 individual unit/build tests
+  npm run test:browser — survival, resources, combat and defeat scenarios
+  npm run test:v04 — migration, storage, potions, crops/NPCs, houses/stairs,
+    boats/whales, lamps, camera directions, terrain and regeneration
+  npm run test:menus — controller/new-game flow, pause CPU, 720p/4K layout;
+    measured menu input latency 15–63 ms
+  npm run test:recipes-collision — hand gathering to pickaxe/mining,
+    felled-tree movement before/after reload, walls and doors
+  npm run test:standalone — inline and both HTML builds via local HTTP,
+    save/reload, no external asset requests
+  npm run test:respawn — actual hostile defeat and recovery
+  npm run test:e2e-journey — continuous fresh game described above
+  git diff --check
+
+Limits: Xbox input was simulated, not a physical controller. Direct file://
+navigation is blocked by managed Chromium (ERR_BLOCKED_BY_ADMINISTRATOR);
+that part was skipped explicitly. Standalone HTML was tested over local HTTP
+and as inline content. These automated scenarios do not cover every possible
+world route, recipe combination or building arrangement.
