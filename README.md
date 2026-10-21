@@ -1,6 +1,6 @@
-# Simm metsikus looduses · 0.4.2
+# SIMM — In the wild · 0.4.3
 
-An Estonian browser survival adventure designed with Mattis. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
+A browser survival adventure designed with Mattis. English is the default language; choose English or Eesti on the title screen, in the HUD, or from Pause. Text and NPC dialogue switch immediately, and the language preference persists independently of your game save. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
 ![Simm game preview](docs/preview.png)
 
@@ -17,6 +17,21 @@ Saves use browser localStorage. Earlier saves are migrated when available. Brows
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.4.3 — precise controller building and clearer feedback
+
+Selected improvements: 1, 2, 3, 4, 5, 6, 7, 10, 11, 13, 14, 17, 18 and 19.
+
+- Nearby loose branches, pebbles and sand have subtle markers. The interaction prompt identifies the selected action; nearby stations and doors take priority over harvesting, and tools help choose between resource targets.
+- Recipe cards list missing materials using both backpack and nearby chest supplies. The first-pickaxe guide tracks wood, stone, herbs and fibre; a compact quest tracker then shows NPC delivery progress.
+- Full-backpack failures retain the resource or drop harvested goods on the ground. The warning stays visible. Successful pickups show floating item quantities.
+- **Xbox building:** Y opens Building. Select a piece with the left stick or D-pad and A. In the world, the right stick or D-pad moves a cursor exactly one tile at a time, in screen directions for the current camera. Left stick moves Simm without moving the selected world tile. A or RT places, X rotates walls and B finishes. A stale mouse position cannot override gamepad placement. Hold a direction to repeat after a short delay.
+- The selected piece stays active for repeated placement. Its panel shows tile coordinates, material stock, how many pieces remain affordable, and a specific reason when placement is blocked. Mouse aiming/clicking still works.
+- In a chest, A moves one item and X moves a stack of up to 20 from the selected row. Mouse users have a separate stack button. Withdrawals respect backpack capacity, including a partially fitting stack.
+- Garden prompts and menus show the growth stage and approximate minutes until harvest. Damage highlights hearts and displays the remaining temporary protection period.
+- Menus, item/skill names, quests, NPC text, HUD, hints and help support English and Estonian. Language changes preserve gameplay IDs and save data. No new recorded dialogue is included in this version.
+
+Run `npm run test:v043` for the controller placement, language persistence, interaction priority, material deficits, chest stacks, crop timing, pickup labels and damage-feedback scenarios. Existing Estonian regression tests explicitly select Estonian; the new suite checks the English default and live switching. Gamepad tests wait for actual browser frames so button edges are observed even on slower test machines. See the [0.4.3 verification report](docs/e2e-results-v043.txt).
 
 ## Version 0.4.2 — defeat recovery found by continuous E2E
 

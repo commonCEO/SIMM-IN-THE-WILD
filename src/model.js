@@ -185,3 +185,9 @@ export function solidBuildingAt(buildings,x,y,radius=5){return buildings.find(b=
 // New wildlife must retreat as well as night monsters after a defeat. Otherwise a
 // pursuing wolf can camp at the respawn point through repeated morning resets.
 export function resetHostilesAfterDefeat(s,animals){for(const a of animals){if(!['wolf','bear','skeleton'].includes(a.type))continue;if(Number.isFinite(a.homeX)&&Number.isFinite(a.homeY)){a.x=a.homeX;a.y=a.homeY;}a.chasing=false;a.calmUntil=s.worldAge+12;}}
+
+export function firstPickaxeStep(s){
+ if(s.tools.includes('pickaxe'))return {title:'Kivikirka valmis!',text:'Järgmiseks meisterda tõrvik ja uuri koobast.'};
+ const inventory=availableInventory(s),wood=Math.min(inventory.wood||0,3),stone=Math.min(inventory.stone||0,3),fiber=Math.min(inventory.fiber||0,1),herbs=Math.min(inventory.herbs||0,1);
+ return {title:'Sinu esimene kivikirka',text:`Korja oksi ja väikseid kive. Puit ${wood}/3 · Kivi ${stone}/3 · Maitsetaim ${herbs}/1 → Taimekiud ${fiber}/1. Tee maitsetaimest menüüs taimekiud; meisterda kirka laagri laual.`};
+}

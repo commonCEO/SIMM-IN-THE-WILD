@@ -1,0 +1,59 @@
+SIMM-IN-THE-WILD 0.4.3 — verification on 2026-10-21
+
+Baseline: f082381037555371f6184b9593dc80d856a7f0cf (0.4.2).
+Selected improvements: 1, 2, 3, 4, 5, 6, 7, 10, 11, 13, 14, 17, 18, 19.
+
+Continuous fresh standalone journey: PASS.
+Duration: 379 seconds wall time; normal game/crop/day-night speed.
+No injected game save, inventory, progression or clock acceleration.
+The test selects Estonian and simulates controller input; the dedicated v043
+suite separately checks the English default and live EN/ET switching.
+
+  2s | day 1, game time 0, health 5 | Fresh standalone game: no injected save or supplies
+ 14s | day 1, game time 12, health 5 | Hand gathering and stone pickaxe crafted through the UI
+ 26s | day 1, game time 23, health 5 | Gathering actual timber for the house
+ 38s | day 1, game time 35, health 5 | Gathering actual timber for the house
+ 56s | day 1, game time 53, health 5 | Gathering actual timber for the house
+ 86s | day 1, game time 81, health 5 | Natural wood, stone and fibre collected; torch crafted
+ 89s | day 1, game time 83, health 5 | Chest, raised bed and fire built; carrots planted
+ 99s | day 1, game time 91, health 5 | A complete house built from gathered supplies, entered, furnished and exited
+121s | day 1, game time 112, health 5 | Chest transfers, fire fuel and the cave crystal quest completed normally
+286s | day 1, game time 273, health 5 | Naturally grown carrots harvested and ranger quest rewarded
+379s | day 2, game time 1, health 5 | Day 2 reached; house, furniture, quest and inventory persisted across reload
+
+JavaScript errors: 0. External asset requests: 0.
+
+Verification commands (all passed):
+  npm run check
+  npm test — 35 individual model/localization/build tests
+  npm run test:v043
+  npm run test:browser
+  npm run test:v04
+  npm run test:menus
+  npm run test:recipes-collision
+  npm run test:standalone
+  npm run test:respawn
+  npm run test:e2e-journey
+
+The new browser suite verifies controller-only repeated floor placement in
+all four camera directions, exact right-stick/D-pad tile increments, left-stick
+movement independent of the cursor, stale mouse input, cancellation, occupied
+tile explanations, house-entry priority, recipe deficits, chest stacks, crop
+timing, positive pickup labels, full-backpack resource retention, actual enemy
+damage/protection feedback, language persistence and audio-label switching.
+
+The broader suite checks migration, skills, resource gathering, caves, cooking,
+combat, fishing, defeat, houses, furniture, stairs, gardening, NPC rewards,
+boats/whales, lamps, terrain, camera rotation and resource regeneration.
+Menu input latency: 13, 13, 67, 65, 58, 61 ms in the successful measured run.
+Paused-frame work: approximately 0.0–0.1 ms.
+
+Test harness changes: legacy language-specific tests explicitly select Estonian;
+button pulses wait for browser frames, and movement, fishing and defeat checks
+observe game time or actual completion rather than only wall-clock delays.
+
+Limits: Xbox input is simulated through the Gamepad API, not a physical pad.
+Managed Chromium blocks direct file:// navigation; this check explicitly skips
+that path and tests the self-contained HTML inline and through local HTTP.
+Automated coverage is bounded and does not establish that all possible routes
+or construction layouts are defect-free.

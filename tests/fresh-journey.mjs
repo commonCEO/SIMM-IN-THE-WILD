@@ -32,6 +32,7 @@ function flatSafeRoute(a,b,s){return safeSegment(a,b,s);}
 async function gameWait(seconds){const start=(await snapshot()).worldAge;for(let i=0;i<200;i++){if((await snapshot()).worldAge-start>=seconds)return;await page.waitForTimeout(30);}throw Error('Game clock stopped while waiting for resource cooldown');}
 async function harvest(r){await walkTo(r.x,r.y);await page.keyboard.press(r.type==='wood'?'Digit2':'Digit3');for(let i=0;i<(r.type==='wood'?4:r.type==='stone'?3:1);i++){await gameWait(.31);await page.keyboard.press('KeyE');await gameWait(.31);}}
 try{
+ await page.addInitScript(()=>localStorage.setItem('simm-language','et'));
  await page.goto((process.env.TEST_URL||'http://127.0.0.1:3000')+'/index.html');await page.getByRole('button',{name:'Alusta seiklust'}).click();await page.evaluate(()=>{window.mockPad={connected:true,axes:[0,0,0,0],buttons:Array.from({length:17},()=>({pressed:false,value:0}))};navigator.getGamepads=()=>[window.mockPad];});await frames();
  let s=await snapshot();assert.equal(s.day,1);assert.equal(s.buildings.length,0);assert.ok(Object.values(s.inventory).every(n=>n===0));assert.deepEqual(s.tools,['hand','axe']);await log('Fresh standalone game: no injected save or supplies');
  for(const id of [8000,8001,8002,8003,8004,8005]){const r=looseResources().find(r=>r.id===id);await walkTo(r.x,r.y);await press(0);}s=await snapshot();assert.equal(s.inventory.wood,3);assert.equal(s.inventory.stone,3);
