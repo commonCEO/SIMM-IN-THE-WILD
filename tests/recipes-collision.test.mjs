@@ -6,7 +6,8 @@ test('all recipes use known positive material quantities; glass, fibre, food and
  const ids=new Set();for(const r of m.recipes){assert.ok(!ids.has(r.id));ids.add(r.id);for(const[id,n]of Object.entries(r.cost)){assert.ok(m.names[id],`${r.id}: ${id}`);assert.ok(Number.isInteger(n)&&n>0,r.id);}assert.ok(!r.quantity||Number.isInteger(r.quantity)&&r.quantity>0);}
  assert.deepEqual(recipe('pickaxe').cost,{wood:3,stone:3,fiber:1});assert.ok(recipe('bow').cost.fiber);assert.ok(!recipe('bow').cost.stone);assert.ok(recipe('torch').cost.fiber);assert.ok(!recipe('torch').cost.berries);assert.ok(recipe('window').cost.glass);assert.ok(recipe('bag').cost.fiber);assert.ok(!recipe('bag').cost.star);
  const available=new Set(['wood','stone','herbs','berries','water','meat','fish','ironOre','copperOre','star','crystal','carrot','potato','magicFlower','sand']);
- let progress=true;while(progress){progress=false;for(const r of m.recipes)if(!available.has(r.id)&&Object.keys(r.cost).every(k=>available.has(k))){available.add(r.id);progress=true;}}
+ for(const type of ['zombie','skeleton','bat',...m.hostileTypes])for(const id of Object.keys(m.creatureLoot(type)))available.add(id);available.add('gold');available.add('banana');
+ let progress=true;while(progress){progress=false;for(const r of m.recipes)if(!available.has(r.id)&&Object.keys(r.cost).every(k=>available.has(k))){available.add(r.output||r.id);available.add(r.id);progress=true;}}
  for(const r of m.recipes)assert.ok(Object.keys(r.cost).every(id=>available.has(id)),`unreachable recipe: ${r.id}`);
 });
 test('rare branches and pebbles bootstrap a stone pickaxe using only hand gathering',()=>{

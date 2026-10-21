@@ -1,6 +1,6 @@
 import { tr, getLanguage, setLanguage, localizedData } from './i18n.js';
 import { toggleAudio, sound, updateAudio, setVolume } from './audio.js';
-import { freshState, recipes as sourceRecipes, skills as sourceSkills, names as sourceNames, icons, tools as sourceTools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, dropItem, bowStats, inWater, lakeWater, wallOrientation, questSteps as sourceQuestSteps, biomeAt, heightAt, canStep, rotateVector, projectPoint, sceneBuildings, availableInventory, payNearby, transferItem, craftItem, crops as sourceCrops, plantCrop, cropProgress, harvestCrop, usePotion, tickEffects, regrowResources, predatorIntent, findHouses, houseExitPoint, canAscend, npcData as sourceNpcData, finishNPCQuest, whaleStep, forageDefs as sourceForageDefs, looseResources, gatherLoose, solidBuildingAt, buildingBounds, resetHostilesAfterDefeat, firstPickaxeStep as sourceFirstPickaxeStep } from './model.js';
+import { freshState, recipes as sourceRecipes, skills as sourceSkills, names as sourceNames, icons, tools as sourceTools, pay, canPay, gainXP, canUpgrade, upgrade, maxHealth, advanceTime, addItem, usedSlots, STACK_SIZE, dropItem, bowStats, inWater, lakeWater, wallOrientation, questSteps as sourceQuestSteps, biomeAt, heightAt, canStep, rotateVector, projectPoint, sceneBuildings, availableInventory, payNearby, transferItem, craftItem, crops as sourceCrops, plantCrop, cropProgress, harvestCrop, usePotion, tickEffects, regrowResources, predatorIntent, findHouses, houseExitPoint, canAscend, npcData as sourceNpcData, finishNPCQuest, whaleStep, forageDefs as sourceForageDefs, looseResources, gatherLoose, solidBuildingAt, buildingBounds, resetHostilesAfterDefeat, firstPickaxeStep as sourceFirstPickaxeStep, WORLD, hostileTypes, creatureLoot, tickRainbow, claimRainbow, migrateWorld, creatureHealth } from './model.js';
 
 const names=localizedData(sourceNames), tools=localizedData(sourceTools), recipes=localizedData(sourceRecipes), skills=localizedData(sourceSkills), crops=Object.fromEntries(Object.entries(sourceCrops).map(([id,c])=>[id,localizedData(c)])), npcData=localizedData(sourceNpcData), forageDefs=Object.fromEntries(Object.entries(sourceForageDefs).map(([id,d])=>[id,localizedData(d)]));
 const questSteps=s=>sourceQuestSteps(s).map(localizedData), firstPickaxeStep=s=>localizedData(sourceFirstPickaxeStep(s));
@@ -15,11 +15,11 @@ function captureStaticCopy(){
  staticCopy.push({node:document.querySelector('title').firstChild,source:document.title});
 }
 function applyStaticLanguage(){for(const entry of staticCopy){if(entry.attribute)entry.node.setAttribute(entry.attribute,tr(entry.source));else entry.node.textContent=tr(entry.source);}document.documentElement.lang=getLanguage();document.querySelectorAll('[data-language]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.language===getLanguage())));}
-function changeLanguage(value){setLanguage(value);applyStaticLanguage();$('audioButton').textContent=tr($('audioButton').getAttribute('aria-pressed')==='true'?'♫ Heli sees':'♫ Heli väljas');questTrackerCache='';targetLock=null;refresh();if(saveFound){$('startButton').textContent=tr('Jätka seiklust →');document.querySelector('.intro-card p').textContent=tr('Sinu mets, varud ja ehitised on alles. Versioon 0.4.3 ootab uut seiklust.');}if(assetsReady)$('loadStatus').textContent=tr('WASD + hiir või Xboxi pult · A alustab · Y uus mäng');if(menuKind)openModal(menuKind);updateHUD();draw();}
+function changeLanguage(value){setLanguage(value);applyStaticLanguage();$('audioButton').textContent=tr($('audioButton').getAttribute('aria-pressed')==='true'?'♫ Heli sees':'♫ Heli väljas');questTrackerCache='';targetLock=null;refresh();if(saveFound){$('startButton').textContent=tr('Jätka seiklust →');document.querySelector('.intro-card p').textContent=tr('Sinu mets, varud ja ehitised on alles. Versioon 0.5.0 ootab uut seiklust.');}if(assetsReady)$('loadStatus').textContent=tr('WASD + hiir või Xboxi pult · A alustab · Y uus mäng');if(menuKind)openModal(menuKind);updateHUD();draw();}
 captureStaticCopy();applyStaticLanguage();
 $('languageButton').onclick=()=>openModal('language');document.querySelectorAll('.language-choices [data-language]').forEach(b=>b.onclick=()=>changeLanguage(b.dataset.language));
-const TILE=32, W=64, H=48;
-const base={x:31*TILE,y:29*TILE}, cave={x:33*TILE,y:16*TILE}, meteor={x:45*TILE,y:27*TILE};
+const TILE=32, W=WORLD.width, H=WORLD.height;
+const base={x:31*TILE,y:29*TILE}, cave=WORLD.cave, meteor={x:45*TILE,y:27*TILE};
 let seed=1742;
 function rand(){seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;}
 const state=freshState();
@@ -33,7 +33,7 @@ try {
     state.skills={...freshState().skills,...saved.state.skills};
     state.drops=state.drops||[];state.stumpsRemoved=state.stumpsRemoved||[];
     state.alienFollowing=state.alienFollowing??true;state.camera=((state.camera||0)%4+4)%4;state.jump=0;
-    saveFound=true;
+    migrateWorld(state,saveVersion);saveFound=true;
   }
 }catch{}
 let assetsReady=false;
@@ -62,12 +62,12 @@ function respawnWildlife(){
   const a={...r.animal,x:r.animal.homeX??r.animal.x,y:r.animal.homeY??r.animal.y},home={x:a.x,y:a.y},region=biomeAt(a.x,a.y),points=[home];
   for(let radius=64;radius<=192;radius+=64)for(let angle=0;angle<8;angle++)points.push({x:home.x+Math.cos(angle*Math.PI/4)*radius,y:home.y+Math.sin(angle*Math.PI/4)*radius});
   const free=points.find(p=>p.x>=64&&p.y>=70&&p.x<W*32-64&&p.y<H*32-64&&!water(p.x,p.y)&&biomeAt(p.x,p.y)===region&&!state.buildings.some(b=>Math.hypot((b.x+.5)*32-p.x,(b.y+.5)*32-p.y)<55));
-  if(!free)continue;Object.assign(a,free);a.hp=a.type==='bear'?7:a.type==='wolf'?4:a.type==='deer'?3:1;a.chasing=false;animals.push(a);state.wildlifeReturns.splice(i,1);
+  if(!free)continue;Object.assign(a,free);a.hp=creatureHealth(a.type);a.chasing=false;animals.push(a);state.wildlifeReturns.splice(i,1);
  }
 }
 
 for(let i=0;i<290;i++){
-  const x=(3+rand()*(W-6))*TILE,y=(3+rand()*(H-6))*TILE;
+  const x=(3+rand()*(64-6))*TILE,y=(3+rand()*(48-6))*TILE;
   if(Math.hypot(x-base.x,y-base.y)<150||Math.hypot(x-cave.x,y-cave.y)<110||Math.hypot(x-meteor.x,y-meteor.y)<100||lakeWater(x,y))continue;
   // Keep the original forest layout so version 0.1 saved resource IDs still match.
   const type=rand()<.60?'wood':rand()<.48?'stone':rand()<.7?'berries':'herbs';
@@ -82,23 +82,36 @@ for(let i=0;i<14;i++){
 }
 for(const[type,x,y]of[['wolf',24,22],['wolf',40,32],['bear',39,12],['skeleton',49,12],['skeleton',52,8]])animals.push({type,x:x*TILE,y:y*TILE,homeX:x*TILE,homeY:y*TILE,hp:type==='bear'?7:4,dir:0,timer:1,step:0});
 for(const a of animals){a.homeX??=a.x;a.homeY??=a.y;}
+const expandedWildlife=[];
+for(const[type,tx,ty]of[['fox',42,45],['fox',58,48],['snowHare',66,18],['snowHare',77,12],['arcticFox',86,18],['polarBear',84,10],['ibex',62,12],['ibex',93,13],['troll',72,20],['troll',90,9],['jaguar',43,77],['fox',15,68]])expandedWildlife.push({type,x:tx*32+16,y:ty*32+16,homeX:tx*32+16,homeY:ty*32+16,hp:creatureHealth(type),dir:0,timer:1,step:0});
+animals.push(...expandedWildlife);
 const initialWildlife=animals.map(a=>({...a}));
-if(Array.isArray(state.wildlife)){animals.length=0;for(const a of state.wildlife){if(Number.isFinite(a.x)&&Number.isFinite(a.y)&&['rabbit','deer','wolf','bear','skeleton'].includes(a.type)&&!water(a.x,a.y))animals.push({...a});}}
-if(saveVersion<4&&Array.isArray(state.wildlife))for(const a of initialWildlife.filter(a=>['wolf','bear','skeleton'].includes(a.type)))animals.push({...a});
+if(Array.isArray(state.wildlife)){animals.length=0;for(const a of state.wildlife){if(Number.isFinite(a.x)&&Number.isFinite(a.y)&&['rabbit','deer','fox','snowHare','arcticFox','ibex',...hostileTypes].includes(a.type)&&!water(a.x,a.y))animals.push({...a});}}
+if(saveVersion<4&&Array.isArray(state.wildlife))for(const a of initialWildlife.filter(a=>hostileTypes.includes(a.type)))animals.push({...a});
+if(saveFound&&saveVersion<5)animals.push(...expandedWildlife.map(a=>({...a})));
 for(let i=0;i<3;i++)bats.push({x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,phase:rand()*6.28,hit:0});
 for(const [id,x,y,type]of[[600,29,22,'ironOre'],[601,35,23,'copperOre'],[602,28,26,'ironOre'],[603,36,27,'copperOre'],[604,28,19,'stone']])resources.push({id,x:x*TILE,y:y*TILE,type,hp:3,inCave:true,alive:!state.depleted?.includes(id)});
+// Independent resource IDs preserve the original camp forest and old depletion data.
+for(let y=3;y<H-3;y++)for(let x=3;x<W-3;x++){
+ if(x<64&&y<48)continue;let noise=Math.imul((x+71)^Math.imul(y+97,374761393),668265263);noise=Math.imul(noise^(noise>>>13),1274126177);const hash=((noise^(noise>>>16))>>>0)/4294967296,px=(x+.5)*32,py=(y+.5)*32,biome=biomeAt(px,py);
+ if(hash>.19||water(px,py)||Math.hypot(px-cave.x,py-cave.y)<100||npcData.some(n=>Math.hypot(px-n.x,py-n.y)<60))continue;
+ const type=biome==='desert'?(hash<.09?'cactus':'stone'):biome==='snow'?(hash<.08?'wood':hash<.15?'stone':'herbs'):hash<.12?'wood':hash<.15?'stone':hash<.17?'herbs':'berries',id=40000+y*W+x;
+ resources.push({id,x:px,y:py,type,hp:3,alive:!state.depleted?.includes(id),removed:state.stumpsRemoved.includes(id)});
+}
 for(const r of looseResources())resources.push({...r,alive:!state.depleted?.includes(r.id)&&!state.buildings.some(b=>Math.hypot((b.x+.5)*32-r.x,(b.y+.5)*32-r.y)<30)});
+function clearNPCSpace(){for(const r of resources)if(!r.inCave&&npcData.some(n=>Math.hypot(n.x-r.x,n.y-r.y)<(r.type==='wood'?56:18))){r.alive=false;r.removed=true;}}
+clearNPCSpace();
 if(state.alienFriend&&!state.alien)state.alien={x:state.player.x+35,y:state.player.y+25,inCave:state.inCave};
 function notify(text){$('toast').textContent=tr(text);$('toast').classList.remove('hidden');toastTime=4;}
-function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:4,state}));}catch{}}
-function start(){if(!assetsReady)return;recoverShorePosition();started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?tr('Tere tagasi, Simm!'):tr('Metsakristall ootab põhja pool. A / E suhtleb või hüppab. View / I avab menüü.'));refresh();}
+function save(){try{state.wildlife=animals.map(a=>({...a}));state.depleted=resources.filter(r=>!r.alive).map(r=>r.id);state.stumpsRemoved=resources.filter(r=>r.removed).map(r=>r.id);localStorage.setItem('simm-save-v1',JSON.stringify({version:5,state}));}catch{}}
+function start(){if(!assetsReady)return;recoverShorePosition();started=true;if(state.time>=300)spawnZombies();$('startOverlay').classList.add('hidden');canvas.focus();notify(saveFound?tr('Tere tagasi, Simm!'):tr('Karjon teab, kus koobas peitub. A / E suhtleb või hüppab. View / I avab menüü.'));refresh();}
 $('startButton').onclick=start;$('newGameButton').onclick=()=>saveFound?openModal('newgame'):startNewGame();$('pauseButton').onclick=()=>openModal('pause');
-if(saveFound){$('startButton').textContent=tr('Jätka seiklust →');document.querySelector('.intro-card p').textContent=tr('Sinu mets, varud ja ehitised on alles. Versioon 0.4.3 ootab uut seiklust.');}
+if(saveFound){$('startButton').textContent=tr('Jätka seiklust →');document.querySelector('.intro-card p').textContent=tr('Sinu mets, varud ja ehitised on alles. Versioon 0.5.0 ootab uut seiklust.');}
 $('audioButton').onclick=async()=>{try{const enabled=await toggleAudio();setVolume(Number($('volume').value)/100);$('audioButton').textContent=enabled?tr('♫ Heli sees'):tr('♫ Heli väljas');$('audioButton').setAttribute('aria-pressed',String(enabled));}catch{notify(tr('Brauser ei saanud heli käivitada.'));}};
 $('volume').oninput=()=>setVolume(Number($('volume').value)/100);
 $('fullscreenButton').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{notify(tr('Kasuta brauseri täisekraani klahvi F11.'));}};
 $('journalButton').onclick=openMain;$('helpButton').onclick=()=>openModal('help');$('skillsButton').onclick=openMain;$('craftButton').onclick=openMain;$('buildButton').onclick=()=>openModal('build');$('bagButton').onclick=openMain;$('eatButton').onclick=eat;
-function closeModal(){if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:$('modalContent').scrollTop};if($('modal').open)$('modal').close();paused=false;menuKind=null;menuCache=[];menuDirection=null;canvas.focus({preventScroll:true});}
+function closeModal(){if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:($('recipeList')||$('modalContent')).scrollTop};if($('modal').open)$('modal').close();paused=false;menuKind=null;menuCache=[];menuDirection=null;canvas.focus({preventScroll:true});}
 $('closeModal').onclick=closeModal;$('modal').addEventListener('cancel',e=>{e.preventDefault();closeModal();});
 $('modal').addEventListener('click',e=>{if(e.target===$('modal')){const r=$('modal').getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)closeModal();}});
 function uiGlyph(id){
@@ -127,7 +140,7 @@ function uiGlyph(id){
 
 function menuButtons(){return menuCache;}
 function cacheMenu(){
-  menuCache=[...$('modalContent').querySelectorAll('button[data-nav],button:not(:disabled)')].filter(b=>!b.closest('.hidden'));
+  menuCache=[...$('modalContent').querySelectorAll('button[data-nav],button:not(:disabled)')].filter(b=>!b.closest('.hidden')&&!b.dataset.pointerOnly);
   for(const button of menuCache){button.addEventListener('pointermove',e=>{const i=menuCache.indexOf(button);if((e.movementX||e.movementY)&&i>=0&&i!==menuIndex)focusMenu(i,false);});}
 }
 function focusMenu(index,scroll=true){
@@ -136,7 +149,7 @@ function focusMenu(index,scroll=true){
   menuIndex=Math.max(0,Math.min(menuCache.length-1,index));const button=menuCache[menuIndex];
   button.classList.add('pad-focused');button.focus({preventScroll:true});
   // Only scroll the content container, and only when the selected card is actually outside it.
-  if(scroll){const box=button.getBoundingClientRect(),container=$('modalContent'),bounds=container.getBoundingClientRect();if(box.top<bounds.top+8)container.scrollTop-=bounds.top-box.top+12;else if(box.bottom>bounds.bottom-8)container.scrollTop+=box.bottom-bounds.bottom+12;}
+  if(scroll){const box=button.getBoundingClientRect(),container=button.closest('[data-menu-scroll]')||$('modalContent'),bounds=container.getBoundingClientRect();if(box.top<bounds.top+8)container.scrollTop-=bounds.top-box.top+12;else if(box.bottom>bounds.bottom-8)container.scrollTop+=box.bottom-bounds.bottom+12;}
   updateMenuDetail(button);
 }
 function moveMenu(dx,dy){
@@ -157,7 +170,7 @@ function moveMenu(dx,dy){
 }
 function activateMenu(){const button=menuCache[menuIndex];if(!button&&document.activeElement===$('closeModal')){closeModal();return;}if(button?.dataset.skill){selectedSkill=button.dataset.skill;learnSelectedSkill();}else if(button&&!button.disabled)button.click();}
 function updateMenuDetail(button){
-  if(!button?.dataset.skill)return;
+  if(button?.dataset.recipe){showRecipeDetail(recipeActions.get(button.dataset.recipe),menuKind);return;}if(!button?.dataset.skill)return;
   const s=skills.find(s=>s.id===button.dataset.skill),rank=state.skills[s.id]||0;
   selectedSkill=s.id;
   const available=canUpgrade(state,s.id),locked=s.requires&&!state.skills[s.requires];
@@ -168,7 +181,7 @@ function learnSelectedSkill(){if(!selectedSkill)return;if(upgrade(state,selected
 function startNewGame(){
   if(!assetsReady)return;
   for(const k of Object.keys(state))delete state[k];Object.assign(state,freshState());state.player={x:base.x,y:base.y+64,face:1,walk:0};
-  for(const r of resources){r.alive=true;r.removed=false;r.hp=3;}
+  for(const r of resources){r.alive=true;r.removed=false;r.hp=3;}clearNPCSpace();for(const k of Object.keys(recipeFilters))recipeFilters[k]='all';focusedRecipe=null;
   animals.splice(0,animals.length,...initialWildlife.map(a=>({...a})));zombies.length=0;arrows.length=0;particles.length=0;
   bats.forEach((b,i)=>Object.assign(b,{x:(29+i*2)*TILE,y:(21+i%3)*TILE,hp:1,hit:0}));
   tool=0;buildType=null;buildCursor=null;targetLock=null;pickups.length=0;chestOpen=null;gardenOpen=null;npcOpen=null;whaleGame=null;whaleHeld=false;worldTick=0;for(const key of Object.keys(menuSelections))delete menuSelections[key];charge=null;death=null;fishing=null;meteorFall=null;invulnerable=0;damageFlash=0;autosave=0;aim={x:1,y:0};canvas._pointer=null;saveFound=false;
@@ -187,19 +200,77 @@ function costFor(r){return Object.fromEntries(Object.entries(r.cost).map(([k,v])
 function nearBench(){return isOutside()&&Math.hypot(state.player.x-(base.x+35),state.player.y-base.y)<46;}
 function nearStation(type){return !state.inCave&&worldItems().find(b=>b.type===type&&Math.hypot(state.player.x-(b.x+.5)*TILE,state.player.y-(b.y+.5)*TILE)<48);}
 function nearFire(){return nearStation('fire');}
+const workbenchKinds=['craft','build','fire','furnace'];
+const recipeFilters={craft:'all',build:'all',fire:'all',furnace:'all'};
+const basicRecipeOrder=['fiber','pickaxe','torch','bow','rod','axe','healPotion','water','bag','ironAxe','copperPickaxe','floor','wall','door','roof','window','ceiling','stairs','fire','chest','garden','bed','table','furnace','stoneFloor','deskLamp','wallLamp','yardLamp','crystalLamp','boat','nest','beacon'];
+let focusedRecipe=null;
+const recipeActions=new Map();
+function recipeGroup(r){if(!r.build)return r.gear||!r.item&&!r.cook&&!r.smelt&&!r.upgrade?'tools':'supplies';return /Lamp$/.test(r.id)?'lighting':['floor','stoneFloor','wall','window','door','roof','ceiling','stairs'].includes(r.id)?'structure':'furniture';}
+function filterOptions(kind){return kind==='build'?['all','structure','furniture','lighting']:['all','tools','supplies'];}
+function filterLabel(id){return tr(({all:'Kõik',structure:'Majaosad',furniture:'Sisustus',lighting:'Valgustus',tools:'Tööriistad',supplies:'Varustus'})[id]);}
+function changeRecipeFilter(d){if(!workbenchKinds.includes(menuKind))return;const kind=menuKind,options=filterOptions(kind);recipeFilters[kind]=options[(options.indexOf(recipeFilters[kind])+d+options.length)%options.length];delete menuSelections[kind];menuKind=null;openModal(kind);}
+function itemIcon(id){const alias={boneBow:'bow',ironAxe:'axe',copperPickaxe:'pickaxe',fiberFromCloth:'fiber',hunterCharm:'fang'},key=alias[id]||id,toolGlyph=uiGlyph(key);if(toolGlyph)return toolGlyph;
+ const box=(fill,path)=>`<svg class="item-icon" viewBox="0 0 48 48" aria-hidden="true"><g fill="${fill}" stroke="#18362a" stroke-width="2" stroke-linejoin="round">${path}</g></svg>`;
+ if(['wood'].includes(key))return box('#bd9257','<path d="M7 12h30v10H7zM12 27h30v10H12z"/><ellipse cx="8" cy="17" rx="6" ry="5" fill="#ead19b"/><ellipse cx="13" cy="32" rx="6" ry="5" fill="#ead19b"/>');
+ if(['stone','ironOre','copperOre','slab','sand'].includes(key))return box(key==='copperOre'?'#bc8e62':key==='sand'?'#e7cd8e':'#a7b6a9','<path d="M5 33l4-16 14-9 15 7 6 19-17 7z"/><path d="M9 17l14 6 15-8M23 23l4 18" fill="none"/>');
+ if(['crystal','star','frostShard','gold','iron','copper','glass','pearl'].includes(key))return box(key==='gold'?'#efd16e':key==='frostShard'?'#d7f0f2':key==='star'?'#d8bb74':'#a9d6d2','<path d="M24 4L7 20l17 24 17-24z"/><path d="M24 4v40M7 20h34" fill="none"/>');
+ if(['herbs','fiber','magicFlower','trollMoss'].includes(key))return box(key==='magicFlower'?'#c6a4d8':'#a3be77','<path d="M10 39Q6 6 39 7Q42 35 10 39z"/><path d="M9 41L31 16M18 31l-2-11M25 25l10 1" fill="none"/>');
+ if(['healPotion','speedPotion','peacePotion','water','salve'].includes(key))return box(key==='water'?'#91c8d8':key==='salve'?'#9cc78b':'#d3a2bd','<path d="M18 5h12v13l10 17q3 10-16 10T8 35l10-17z"/><path d="M13 29h22" fill="none"/><path d="M20 30h8v8h-8z" fill="#f7e7b1"/>');
+ if(key==='bone')return box('#eee4c4','<path d="M11 7q-8-2-7 6 0 6 8 5l18 18q-1 8 6 8 8 1 6-7 5-7-2-10-5-2-8 3L17 14q5-7-1-10-4-1-5 3z"/>');
+ if(key==='fang')return box('#efe3b6','<path d="M10 7l27 4q-3 25-25 33l8-24z"/>');
+ if(/Lamp$/.test(key))return box(key==='frostLamp'?'#bde5ee':key==='goldLamp'?'#f2d276':'#dfcf96','<path d="M20 21h8v20h-8zM12 40h24v5H12z"/><path d="M10 21L17 5h14l7 16z" fill="#e8dfab"/>');
+ if(['fur','cloth'].includes(key))return box(key==='fur'?'#bb9b78':key==='cloth'?'#b2c4ab':'#e9e1bc','<path d="M8 9l11-4 11 6 10-4-3 32-11 5-11-7-10 3z"/><path d="M13 14l17 19M16 30l14-14" fill="none"/>');
+ if(['berries','meat','roast','stew','fish','cookedFish','carrot','potato','banana','bakedPotato'].includes(key))return box(['meat','roast'].includes(key)?'#c49a7b':key==='berries'?'#aaa2d0':key==='fish'||key==='cookedFish'?'#a2c9cb':'#dfb76a','<path d="M9 18q0-10 15-9t15 9v14q-1 11-15 11T9 32z"/><path d="M24 9l-4-6 12 1-3 7" fill="#9bbb76"/><path d="M13 23h21M14 30h20" fill="none"/>');
+ const r=recipes.find(r=>r.id===id),symbol=r?.build?({floor:'▦',stoneFloor:'▦',wall:'▤',window:'⊞',door:'▥',roof:'⌂',ceiling:'▦',stairs:'▟',chest:'▣',garden:'❀',fire:'♨',furnace:'▣',boat:'◒',bed:'▰',table:'▤',nest:'◉',beacon:'✦'})[id]||'✦':id==='bag'?'▣':'✦';
+ return box('#d9bd79',`<rect x="5" y="5" width="38" height="38" rx="5" fill="#2e4a35"/><text x="24" y="32" text-anchor="middle" stroke="none" fill="#f1d793" font-family="sans-serif" font-size="30">${symbol}</text>`);
+}
+function recipeOwned(r){return r.gear?!!state.gear?.[r.gear]:r.upgrade?state.bagSlots>=40:!r.build&&!r.item&&!r.cook&&!r.smelt&&state.tools.includes(r.id);}
+function recipeBlock(r,kind){
+ if(recipeOwned(r))return tr('Juba olemas');
+ if(kind==='craft'&&!r.hand&&!nearBench())return tr('Vajad meisterdamislauda.');
+ if(r.gear&&['axe','pickaxe','bow'].includes(r.gear)&&!state.tools.includes(r.gear))return tr('Meisterda esmalt põhitööriist.');
+ if(r.water&&!shorePoint())return tr('Vee võtmiseks mine veekogu kaldale.');
+ if(['fire','furnace'].includes(kind)&&!(nearStation(kind)?.fuel>0))return tr('Lisa jaama kütust.');
+ const missing=missingMaterials(costFor(r));return missing?tr`Puudu: ${missing}`:'';
+}
+function inventoryPanel(){return `<aside class="inventory-panel"><h3>${tr('SELJAKOTT')} <small>${usedSlots(state)}/${state.bagSlots}</small></h3><p>${tr('Sinu varud on kogu aeg nähtaval. Lähedase kasti materjalid lisanduvad retsepti juures.')}</p><div class="inventory-preview">${Object.entries(state.inventory).filter(([,n])=>n>0).map(([id,n])=>`<div class="inventory-cell" title="${names[id]}">${itemIcon(id)}<span>${names[id]}</span><b>${n}</b></div>`).join('')||`<p>${tr('Seljakott on tühi.')}</p>`}</div></aside>`;}
+function showRecipeDetail(r,kind){
+ focusedRecipe=r;const inventory=availableInventory(state),cost=costFor(r),reason=recipeBlock(r,kind),description=recipeDescription(r),out=r.output||r.id;
+ $('recipeDetail').innerHTML=`<div class="recipe-hero">${itemIcon(r.id)}</div><h3>${r.name}${r.quantity>1?' ×'+r.quantity:''}</h3><p class="recipe-description">${description}</p><h4>${tr('Materjalid')}</h4><div class="recipe-materials">${Object.entries(cost).map(([id,n])=>`<div class="material-line ${inventory[id]>=n?'enough':'missing'}">${itemIcon(id)}<span>${names[id]}<small>${tr('Kotis')}: ${state.inventory[id]||0} · ${tr('Kastis')}: ${(inventory[id]||0)-(state.inventory[id]||0)}</small></span><b>${inventory[id]||0} / ${n}</b></div>`).join('')||`<p>${tr('Materjale pole vaja.')}</p>`}</div><p class="recipe-state" role="status">${reason||tr('Valmis meisterdamiseks')}</p><button id="recipeConfirm" data-pointer-only="true" class="primary" ${reason?'disabled':''}>${r.build?tr('A · Vali ehitamiseks'):tr('A · Valmista')}</button><p class="recipe-capacity">${r.item||r.cook||r.smelt?`${tr('Kotis')}: ${state.inventory[out]||0}`:r.build?tr('Valik jääb pärast paigaldamist aktiivseks.'):''}</p>`;
+ $('recipeConfirm').onclick=()=>activateRecipe(r,kind);
+}
+function recipeDescription(r){return tr(({
+ boneBow:'Luud tugevdavad vibu. Laetud nool teeb rohkem kahju.',hunterCharm:'Kihvad ja karusnahk annavad amuletile ühe lisasüdame.',salve:'Trollisammal ja ravimtaim ravivad kuni neli südant.',fiberFromCloth:'Haruta pahalastelt saadud kangas meisterdamiseks kiududeks.',frostLamp:'Jääkildudest lamp põleb püsivalt.',goldLamp:'Vikerkaare kuld valgustab sinu kodu.',floor:'Maja alus. Paigalda järjest mitu põrandaruudu.',wall:'Ühendub naaberseintega. Parem kang valib ehitusruudu.',roof:'Lisa igale maja põrandaruudule katus.',ceiling:'Täida toa lagi, et avada järgmine korrus.',chest:'Hoiab varusid. Lähedase kasti materjale saab meisterdamisel kasutada.',garden:'Kasvata toitu. Seemned on kaasas ja kastmist pole vaja.',boat:'Ehita idaranna merevette. Aeruta puldi vasaku kangiga.'
+ })[r.id]||(r.build?'Ehita ja sisusta oma kodu. Eelvaade selgitab sobimatut paigutust.':r.gear?'Täiusta oma varustust.':r.hand?'Saad valmistada käsitsi.':'Valmista see laagri meisterdamislaual.'));}
+function activateRecipe(r,kind){const reason=recipeBlock(r,kind);if(reason){notify(reason);return;}
+ if(r.build){buildType=r.id;rotation='auto';buildCursor=null;buildDirection=null;closeModal();if(inputMode==='pad')ensureBuildCursor();notify(tr('Parem kang / ristnupud valivad ruudu. A paigaldab. B lõpetab.'));return;}
+ const cost=costFor(r);if(r.item||r.cook||r.smelt){if(!craftItem(state,r,cost)){notify(tr('Seljakott on täis. Tee ruumi või kasuta hoiukasti.'));return;}if(r.cook||r.smelt){const station=nearStation(kind);station.fuel=Math.max(0,station.fuel-5);}}
+ else{if(!payNearby(state,cost))return;const health=maxHealth(state);if(r.gear){state.gear??={};state.gear[r.gear]=true;state.health+=maxHealth(state)-health;}else if(r.upgrade)state.bagSlots+=5;else state.tools.push(r.id);}
+ gainXP(state,8);sound('craft');refresh();save();openModal(kind);notify(tr`${r.name} valmis!`);
+}
+function renderWorkbench(kind,content){if(!workbenchKinds.includes(kind))return false;
+ recipeActions.clear();const candidates=recipes.filter(r=>kind==='build'?r.build:kind==='fire'?r.cook:kind==='furnace'?r.smelt:!r.build&&!r.cook&&!r.smelt),filter=recipeFilters[kind],list=candidates.sort((a,b)=>{const rank=id=>{const i=basicRecipeOrder.indexOf(id);return i<0?100: i;};return rank(a.id)-rank(b.id);}).filter(r=>filter==='all'||recipeGroup(r)===filter);
+ content.innerHTML=inventoryPanel()+`<section class="recipe-panel"><div class="recipe-filters">${filterOptions(kind).map(id=>`<button data-pointer-only="true" data-filter="${id}" aria-pressed="${id===filter}">${filterLabel(id)}</button>`).join('')}</div><p class="recipe-location">${kind==='craft'?(nearBench()?tr('Meisterdamislaud lähedal'):tr('Käsitsi meisterdamine — tööriistad vajavad lauda')):kind==='build'?tr('Vali osa, seejärel ehita mänguväljal.'):tr('Kütus ja toiduvalmistamine')}</p><div id="recipeList" class="recipe-list" data-menu-scroll="true"></div></section><aside id="recipeDetail" class="recipe-detail"></aside>`;
+ content.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{recipeFilters[kind]=b.dataset.filter;delete menuSelections[kind];menuKind=null;openModal(kind);});
+ if(['fire','furnace'].includes(kind)){const station=nearStation(kind),fuel=document.createElement('button');fuel.id='fuelButton';fuel.dataset.key='fuel';fuel.textContent=tr`Lisa 1 puit · Kütust: ${Math.ceil(station?.fuel||0)} s`;fuel.disabled=!station||!availableInventory(state).wood;fuel.onclick=()=>{if(station&&payNearby(state,{wood:1})){station.fuel=(station.fuel||0)+120*(state.skills.smelter?2:1);save();refresh();openModal(kind);}};$('recipeList').append(fuel);}
+ for(const r of list){const row=document.createElement('div');row.className='recipe';const b=document.createElement('button');b.className='recipe-choice';b.dataset.key=r.id;b.dataset.recipe=r.id;b.dataset.nav='true';const reason=recipeBlock(r,kind);b.dataset.available=String(!reason);b.setAttribute('aria-disabled',String(!!reason));b.innerHTML=`<span class="recipe-icon">${itemIcon(r.id)}</span><span class="recipe-name"><strong>${r.name}${r.quantity>1?' ×'+r.quantity:''}</strong><small>${recipeOwned(r)?tr('Juba olemas'):reason?tr('Vaata tingimusi'):r.build?tr('A · Vali'):tr('A · Valmista')}</small></span><span class="recipe-indicator">${recipeOwned(r)?'✓':reason?'○':'●'}</span>`;b.onclick=()=>activateRecipe(r,kind);recipeActions.set(r.id,r);row.append(b);$('recipeList').append(row);}
+ if(!list.length)$('recipeList').innerHTML=`<p>${tr('Selles kategoorias pole retsepte.')}</p>`;
+ if(list[0])showRecipeDetail(list[0],kind);return true;
+}
+
 function openModal(kind){
-  if(death)return;if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:$('modalContent').scrollTop};const previousKey=menuSelections[kind]?.key;
+  if(death)return;if(menuKind)menuSelections[menuKind]={key:menuCache[menuIndex]?.dataset.key,scroll:($('recipeList')||$('modalContent')).scrollTop};const previousKey=menuSelections[kind]?.key;
   charge=null;fishing=null;paused=true;keys={};
-  const modal=$('modal'),content=$('modalContent');menuKind=kind;menuDirection=null;menuRepeatAt=0;modal.dataset.kind=kind;drawTabs();modal.classList.toggle('wide',kind==='skills');$('modalDetail').classList.toggle('hidden',kind!=='skills');content.replaceChildren();
+  const modal=$('modal'),content=$('modalContent');menuKind=kind;menuDirection=null;menuRepeatAt=0;modal.dataset.kind=kind;drawTabs();modal.classList.toggle('wide',kind==='skills');modal.classList.toggle('workbench',workbenchKinds.includes(kind));$('modalDetail').classList.toggle('hidden',kind!=='skills');content.replaceChildren();
   $('modalEyebrow').textContent={language:tr('Keele valik'),skills:tr`TASE ${state.level}`,craft:tr('MEISTERDAMISLAUD'),build:tr('OMA KODU, OMA REEGLID'),bag:tr('KÕIK VAJALIK KAASAS'),fire:tr('LÕKKE ÄÄRES'),furnace:tr('MAAGIST METALLIKS'),help:tr('VÄIKE SPIKKER'),pause:tr('VÕTA HETK ENDALE'),newgame:tr('UUS ALGUS'),journal:tr('IGA SAMM LOEB'),map:tr('SUUR MAAILM'),chest:tr('IGA ASI OMA KOHALE'),garden:tr('KASVAB ILMA KASTMATA'),npc:tr('SÕBRAD JA ÜLESANDED'),whale:tr('MERESÕBRA MÄNG')}[kind];
   $('modalTitle').textContent={language:tr('Vali mängu keel'),skills:tr('Vali oma rada'),craft:tr('Valmista midagi head'),build:tr('Ehita oma kodu'),bag:tr('Sinu seljakott'),fire:tr('Soe tuli, hea toit'),furnace:tr('Sulatusahi'),help:tr('Seiklus algab siit'),pause:tr('Seiklus ootab sind'),newgame:tr('Alustame uut seiklust?'),journal:tr('Sinu seikluse lugu'),map:tr('Sinu maailm'),chest:tr('Hoiukast'),garden:tr('Sinu kastpeenar'),npc:npcOpen?.name,whale:tr('Sõbralik vaalapüük')}[kind];
-  if(kind==='language'){content.innerHTML=tr('<p class="build-note">Tekstid ja subtiitrid kasutavad valitud keelt. Tulevane räägitud dialoog on inglise keeles.</p><button class="storage-row" data-language="en">English</button><button class="storage-row" data-language="et">Eesti</button>');content.querySelectorAll('[data-language]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.language===getLanguage()));b.onclick=()=>changeLanguage(b.dataset.language);});}else if(extraMenu(kind,content)){}else if(kind==='journal'){const steps=questSteps(state),active=steps.findIndex(q=>!q.done);content.innerHTML='<div class="journal-list">'+steps.map((q,i)=>`<article class="journal-step ${q.done?'complete':''} ${i===active?'active':''}"><span>${q.done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${q.title}</h3><p>${q.text}</p></div>${i===active?tr('<small>SINU JÄRGMINE SAMM</small>'):''}</article>`).join('')+'</div>'+npcData.map(n=>`<article class="journal-step"><span>${state.npcQuests[n.id]?'✓':'!'}</span><div><h3>${n.name}</h3><p>${n.task} ${state.npcQuests[n.id]?tr('TEHTUD!'):''}</p></div></article>`).join('');
+  if(renderWorkbench(kind,content)){}else if(kind==='language'){content.innerHTML=tr('<p class="build-note">Tekstid ja subtiitrid kasutavad valitud keelt. Tulevane räägitud dialoog on inglise keeles.</p><button class="storage-row" data-language="en">English</button><button class="storage-row" data-language="et">Eesti</button>');content.querySelectorAll('[data-language]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.language===getLanguage()));b.onclick=()=>changeLanguage(b.dataset.language);});}else if(extraMenu(kind,content)){}else if(kind==='journal'){const steps=questSteps(state),active=steps.findIndex(q=>!q.done);content.innerHTML='<div class="journal-list">'+steps.map((q,i)=>`<article class="journal-step ${q.done?'complete':''} ${i===active?'active':''}"><span>${q.done?'✓':String(i+1).padStart(2,'0')}</span><div><h3>${q.title}</h3><p>${q.text}</p></div>${i===active?tr('<small>SINU JÄRGMINE SAMM</small>'):''}</article>`).join('')+'</div>'+npcData.map(n=>`<article class="journal-step"><span>${state.npcQuests[n.id]?'✓':'!'}</span><div><h3>${n.name}</h3><p>${n.task} ${state.npcQuests[n.id]?tr('TEHTUD!'):''}</p></div></article>`).join('');
   }else if(kind==='pause'){content.innerHTML=tr('<div class="pause-grid"><button id="resumeGame" class="primary">Jätka seiklust</button><button id="pauseSkills">✦ Minu oskused</button><button id="pauseHelp">? Kuidas mängida</button><button id="pauseNew">Uus mäng</button><button id="pauseJournal">⚑ Seikluspäevik</button><button id="pauseLanguage">English / Eesti</button></div><p class="build-note">Mäng on pausil ja sinu seiklus salvestatud.</p>');save();$('resumeGame').onclick=closeModal;$('pauseSkills').onclick=()=>openModal('skills');$('pauseHelp').onclick=()=>openModal('help');$('pauseNew').onclick=()=>openModal('newgame');$('pauseJournal').onclick=()=>openModal('journal');$('pauseLanguage').onclick=()=>openModal('language');
   }else if(kind==='newgame'){content.innerHTML=tr('<div class="newgame-confirm"><span>✧</span><h3>Üks mets. Tuhat uut võimalust.</h3><p>Alustad esimesest päevast tühja seljakotiga. Praegune seiklus asendatakse uuega.</p><div class="pause-grid"><button id="cancelNewGame">Jäta praegune seiklus alles</button><button id="confirmNewGame" class="primary">Jah, alusta uut mängu</button></div></div>');$('cancelNewGame').onclick=closeModal;$('confirmNewGame').onclick=startNewGame;
   }else if(kind==='bag'){
     content.innerHTML=tr`<p class="build-note">${usedSlots(state)} / ${state.bagSlots} pesa · Virnas kuni ${STACK_SIZE} eset. Vali ese, et üks maha panna. Ese püsib 10 mänguminutit ja selle saab A / E-ga uuesti üles korjata.</p>`;
     const grid=document.createElement('div');grid.className='bag-grid';
-    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · ${['water','healPotion','speedPotion','peacePotion'].includes(k)?tr('kasuta'):tr('pane üks maha')}`;slot.setAttribute('aria-label',`${['water','healPotion','speedPotion','peacePotion'].includes(k)?tr('Kasuta'):tr('Pane maha')}: ${names[k]}`);slot.dataset.key=k;slot.innerHTML=`${menuArt(k,icons[k])}<span class="slot-name">${names[k]}</span><small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{if(['water','healPotion','speedPotion','peacePotion'].includes(k)){useBagItem(k);return;}dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
+    for(const[k,v]of Object.entries(state.inventory))for(let n=v;n>0;n-=STACK_SIZE){const slot=document.createElement('button');slot.className='inv-slot';slot.title=`${names[k]} · ${['water','healPotion','salve','speedPotion','peacePotion'].includes(k)?tr('kasuta'):tr('pane üks maha')}`;slot.setAttribute('aria-label',`${['water','healPotion','salve','speedPotion','peacePotion'].includes(k)?tr('Kasuta'):tr('Pane maha')}: ${names[k]}`);slot.dataset.key=k;slot.innerHTML=`${menuArt(k,icons[k])}<span class="slot-name">${names[k]}</span><small>${Math.min(n,STACK_SIZE)}</small>`;slot.onclick=()=>{if(['water','healPotion','salve','speedPotion','peacePotion'].includes(k)){useBagItem(k);return;}dropItem(state,k,state.player.x+aim.x*20,state.player.y+aim.y*20,state.inCave);refresh();save();openModal('bag');};grid.append(slot);}
     while(grid.children.length<state.bagSlots){const d=document.createElement('div');d.className='inv-slot empty';grid.append(d);}content.append(grid);
   }else if(kind==='skills'){
     content.innerHTML=tr`<div class="skill-points">✦ <strong>${state.points}</strong> oskuspunkti <span>Vali rada. Vaata võimalusi. Kasva omas tempos.</span></div>`;
@@ -245,7 +316,7 @@ function openModal(kind){
     }
   }
   if(!modal.open)modal.showModal();
-  cacheMenu();$('modalContent').scrollTop=menuSelections[kind]?.scroll||0;const keep=previousKey?menuCache.findIndex(b=>b.dataset.key===previousKey):-1;focusMenu(keep>=0?keep:0,!['help','journal'].includes(kind));paintMenuArt();document.querySelector('.modal-hint').textContent=kind==='skills'?tr('Vasak kang / ristnupud: vali · A: õpi · LB/RB: vaheleht · B: tagasi'):['help','journal'].includes(kind)?tr('Parem kang / hiireratas: keri · B: tagasi'):mainTabs.includes(kind)?tr('LB/RB või [ / ]: vaheleht · A: kinnita · B: tagasi'):tr('Vasak kang / ristnupud: vali · A: kinnita · B: tagasi');
+  cacheMenu();($('recipeList')||$('modalContent')).scrollTop=menuSelections[kind]?.scroll||0;const keep=previousKey?menuCache.findIndex(b=>b.dataset.key===previousKey):-1;const firstReady=menuCache.findIndex(b=>b.dataset.available==='true');focusMenu(keep>=0?keep:firstReady>=0?firstReady:0,!['help','journal'].includes(kind));paintMenuArt();document.querySelector('.modal-hint').textContent=workbenchKinds.includes(kind)?tr('Kang / ristnupud · Vali   A · Valmista või ehita   LT/RT · Kategooria   LB/RB · Vaheleht   B · Tagasi'):kind==='skills'?tr('Vasak kang / ristnupud: vali · A: õpi · LB/RB: vaheleht · B: tagasi'):['help','journal'].includes(kind)?tr('Parem kang / hiireratas: keri · B: tagasi'):mainTabs.includes(kind)?tr('LB/RB või [ / ]: vaheleht · A: kinnita · B: tagasi'):tr('Vasak kang / ristnupud: vali · A: kinnita · B: tagasi');
 }
 function recipeRow(r,cost,disabled,label){const row=document.createElement('div');row.className='recipe';row.innerHTML=`<span>${menuArt(r.id,r.icon)}</span><div><strong>${r.name}${r.quantity>1?` ×${r.quantity}`:''}</strong><p>${Object.entries(cost).map(([k,v])=>tr`${names[k]} ${v} <small class="material-count ${availableInventory(state)[k]>=v?'enough':'missing'}">(${availableInventory(state)[k]||0} olemas)</small>`).join(' · ')||tr('Veekogu ääres · korduvkasutatav veepudel')}</p></div><button ${disabled?'disabled':''}>${label}</button>`;row.querySelector('button').dataset.key=r.id;const missing=missingMaterials(cost);if(missing){const note=document.createElement('p');note.className='recipe-missing';note.textContent=tr`Puudu: ${missing}`;row.children[1].append(note);}return row;}
 function selectTool(i){if(state.tools.includes(tools[i]?.id)){charge=null;fishing=null;tool=i;refresh();}else notify(tr('Meisterda kõigepealt see tööriist.'));}
@@ -269,7 +340,7 @@ function chooseTarget(candidates){
 }
 function getTarget(){
   if(state.interior)return interiorTarget();
-  const p=state.player,candidates=[];if(state.boatId){if(p.x>59*32&&Math.hypot(p.x-61*32,p.y-25*32)<240)return {kind:'whale',x:61*32,y:25*32,label:tr('Sõbralik vaalapüük')};return {kind:'boatExit',x:p.x,y:p.y,label:tr('Astu kaldale')};}
+  const p=state.player,candidates=[];if(state.boatId){if(Math.hypot(p.x-WORLD.whale.x,p.y-WORLD.whale.y)<240)return {kind:'whale',x:WORLD.whale.x,y:WORLD.whale.y,label:tr('Sõbralik vaalapüük')};return {kind:'boatExit',x:p.x,y:p.y,label:tr('Astu kaldale')};}
   function candidate(kind,x,y,range,label,ref){const d=Math.hypot(p.x-x,p.y-y);if(d<range&&(state.inCave||heightAt(x,y)===heightAt(p.x,p.y)))candidates.push({kind,x,y,d,label,ref});}
   for(const drop of state.drops.filter(d=>!!d.inCave===state.inCave&&!d.room))candidate('drop',drop.x,drop.y,40,tr`Korja ${names[drop.id].toLowerCase()} (${drop.amount})`,drop);
   for(const r of resources.filter(r=>!!r.inCave===state.inCave&&(r.alive||r.type==='wood'&&!r.removed)))candidate('resource',r.x,r.y,45,forageDefs[r.type]?.label||(!r.alive?tr('Eemalda känd'):r.type==='wood'?tr('Raiu puud'):['stone','ironOre','copperOre'].includes(r.type)?tr`Kaevanda ${names[r.type==='cactus'?'water':r.type].toLowerCase()}`:r.type==='herbs'?tr('Korja maitsetaimi'):r.type==='cactus'?tr('Kogu kaktusevett'):tr('Korja marju')),r);
@@ -278,7 +349,8 @@ function getTarget(){
     for(const n of npcData)candidate('npc',n.x,n.y,44,tr`Räägi: ${n.name}`,n);
     for(const b of state.buildings.filter(b=>['chest','garden','boat','door'].includes(b.type)))candidate(b.type,(b.x+.5)*32,(b.y+.5)*32,42,({chest:tr('Ava hoiukast'),garden:b.crop?gardenDescription(b):tr('Istuta peenrasse'),boat:state.boatId?tr('Astu kaldale'):tr('Istu paati'),door:tr('Ava uks / sisene majja')})[b.type],b);
     if(state.boatId)candidate('boatExit',p.x,p.y,1,tr('Astu kaldale'));
-    if(state.boatId&&p.x>59*32&&Math.hypot(p.x-61*32,p.y-25*32)<240)candidate('whale',61*32,25*32,240,tr('Sõbralik vaalapüük'));
+    if(state.boatId&&Math.hypot(p.x-WORLD.whale.x,p.y-WORLD.whale.y)<240)candidate('whale',WORLD.whale.x,WORLD.whale.y,240,tr('Sõbralik vaalapüük'));
+    if(state.rainbow&&!state.rainbow.claimed&&state.rainbow.until>state.worldAge)candidate('rainbow',state.rainbow.x,state.rainbow.y,45,tr('Otsi vikerkaare lõpust kulda'));
     candidate('bench',base.x+35,base.y,46,tr('Kasuta meisterdamislauda'));candidate('cave',cave.x,cave.y,58,tr('Sisene salakoopasse'));
     for(const b of state.buildings.filter(b=>['fire','furnace'].includes(b.type)))candidate(b.type,(b.x+.5)*TILE,(b.y+.5)*TILE,48,b.type==='fire'?tr('Lõke ja toiduvalmistamine'):tr('Sulatusahi'),b);
     if(state.meteorArrived&&!state.alienFriend)candidate('alien',meteor.x+30,meteor.y+30,55,tr('Ütle Nupsile tere'));
@@ -288,14 +360,14 @@ function getTarget(){
 function interact(){
   if(!started||paused||death||actionCooldown>0)return;
   if(buildType){const p=buildPoint();place(p.x,p.y);return;}
-  const t=getTarget();if(!t){jump();return;}if(extraInteract(t))return;
+  const t=getTarget();if(!t){jump();return;}if(t.kind==='rainbow'){if(claimRainbow(state)){showPickup('gold',3,t.x,t.y);sound('crystal');notify(tr('Leidsid vikerkaare lõpust kulda!'));refresh();save();}else notify(tr('Seljakott on täis.'));return;}if(extraInteract(t))return;
   if(t.kind==='resource'){collect(t.ref);actionCooldown=.28;}
   else if(t.kind==='drop'){if(addItem(state,t.ref.id,t.ref.amount)){state.drops.splice(state.drops.indexOf(t.ref),1);notify(tr('Korjasid oma asjad üles.'));refresh();save();}else notify(tr('Seljakott on täis.'));}
   else if(['bench','fire','furnace'].includes(t.kind))openModal(t.kind==='bench'?'craft':t.kind);
   else if(t.kind==='crystal'){state.crystalFound=true;const added=addOrDrop('crystal',3);gainXP(state,55);sound('crystal');if(added)notify(tr('Metsakristall leitud! Sinu esimene suur seiklus on tehtud.'));refresh();save();}
   else if(t.kind==='cave'){
     if(!state.tools.includes('pickaxe')||!state.tools.includes('torch')){notify(tr('Koopasse minekuks vajad kirkat ja tõrvikut.'));return;}
-    state.inCave=true;state.player.x=32*TILE;state.player.y=27*TILE;moveAlienScene();notify(tr('Salakoobas · kristall asub põhja pool.'));
+    state.caveDiscovered=true;state.inCave=true;state.player.x=32*TILE;state.player.y=27*TILE;moveAlienScene();notify(tr('Salakoobas · kristall asub põhja pool.'));
   }else if(t.kind==='exit'){state.inCave=false;state.player.x=cave.x;state.player.y=cave.y+48;moveAlienScene();}
   else if(t.kind==='alien'){state.alienFriend=true;state.alienFollowing=true;state.alien={x:t.x,y:t.y,inCave:false};const added=addOrDrop('star',6);gainXP(state,35);sound('alien');if(added)notify(tr('Nups on sinu sõber! B / T käsib tal oodata või kaasa tulla.'));refresh();save();}
 }
@@ -320,8 +392,13 @@ function attack(){
   if(target){hitEntity(target,1+(state.skills.combat||0)+(tools[tool].id==='axe'&&state.gear?.axe?1:0));return;}
   const t=getTarget();if(t?.kind==='resource')collect(t.ref);
 }
-function hitEntity(e,damage){e.hp-=damage;burst(e.x,e.y,e.type?'#e0d4ae':'#b6c998');if(e.hp<=0){if(animals.includes(e)){state.wildlifeReturns.push({at:state.worldAge+720,animal:{...e}});animals.splice(animals.indexOf(e),1);const added=e.type!=='skeleton'?addOrDrop('meat',e.type==='deer'?3:1,e.x,e.y):addOrDrop('stone',2,e.x,e.y);if(added&&e.type!=='skeleton')notify(tr('Metsloomalt said liha. Lõkkel saab süüa teha.'));}else if(zombies.includes(e))zombies.splice(zombies.indexOf(e),1);gainXP(state,8);refresh();}else{e.x+=aim.x*12;e.y+=aim.y*12;}}
-function eat(){if(!started||death)return;const food=['stew','cookedFish','roast','bakedPotato','carrot','berries'].find(k=>state.inventory[k]>0);if(!food){notify(tr('Korja marju või valmista lõkkel süüa.'));return;}if(state.hunger>=100&&state.health>=maxHealth(state))return;const value={stew:[65,3],roast:[40,2],cookedFish:[45,2],berries:[25,1],carrot:[30,1],bakedPotato:[35,1]}[food];state.inventory[food]--;state.hunger=Math.min(100,state.hunger+value[0]);state.health=Math.min(maxHealth(state),state.health+value[1]);sound('eat');notify(tr`${names[food]} · +${value[0]} kõhtu`);refresh();save();}
+function dropLoot(e,type){const loot=creatureLoot(type);let offset=0;for(const[id,amount]of Object.entries(loot)){state.drops.push({id,amount,x:e.x+offset,y:e.y,inCave:state.inCave,room:state.interior?.id||null,level:state.interior?.level||0,expires:state.worldAge+600});offset+=9;}burst(e.x,e.y,'#e7ce87',8);notify(tr('Saak jäi maha — korja A / E-ga üles.'));save();}
+function hitEntity(e,damage){e.hp-=damage;burst(e.x,e.y,e.type?'#e0d4ae':'#b6c998');if(e.hp<=0){
+ if(animals.includes(e)){state.wildlifeReturns.push({at:state.worldAge+720,animal:{...e}});animals.splice(animals.indexOf(e),1);if(hostileTypes.includes(e.type))dropLoot(e,e.type);else{const loot=creatureLoot(e.type);for(const[id,n]of Object.entries(loot))addOrDrop(id,n,e.x,e.y);}}
+ else if(zombies.includes(e)){zombies.splice(zombies.indexOf(e),1);dropLoot(e,'zombie');}else if(bats.includes(e))dropLoot(e,'bat');gainXP(state,8);refresh();save();
+ }else{e.x+=aim.x*12;e.y+=aim.y*12;}}
+
+function eat(){if(!started||death)return;const food=['stew','cookedFish','roast','bakedPotato','carrot','banana','berries'].find(k=>state.inventory[k]>0);if(!food){notify(tr('Korja marju või valmista lõkkel süüa.'));return;}if(state.hunger>=100&&state.health>=maxHealth(state))return;const value={banana:[22,1],stew:[65,3],roast:[40,2],cookedFish:[45,2],berries:[25,1],carrot:[30,1],bakedPotato:[35,1]}[food];state.inventory[food]--;state.hunger=Math.min(100,state.hunger+value[0]);state.health=Math.min(maxHealth(state),state.health+value[1]);sound('eat');notify(tr`${names[food]} · +${value[0]} kõhtu`);refresh();save();}
 function shorePoint(){if(state.inCave||state.interior)return null;const p=state.player;for(let radius=20;radius<=75;radius+=10)for(let a=0;a<16;a++){const angle=a*Math.PI/8,x=p.x+Math.cos(angle)*radius,y=p.y+Math.sin(angle)*radius;if(water(x,y))return{x,y};}return null;}
 function beginFishing(){if(fishing){fishing=null;notify(tr('Õng on kokku pandud.'));return;}const shore=shorePoint();if(!shore){notify(tr('Kalapüügiks mine veekogu kaldale.'));return;}fishing={...shore,time:0,origin:{x:state.player.x,y:state.player.y}};notify(tr('Õng vees… oota natuke ja hoia paigal.'));}
 function rotateBuild(){if(!['wall','door'].includes(buildType))return;rotation=rotation==='v'?'h':'v';notify(rotation==='v'?tr('Sein: vertikaalne'):tr('Sein: horisontaalne'));}
@@ -337,11 +414,11 @@ function placement(x,y){
  else if(state.inCave)reason=tr('Koopas ei saa ehitada.');
  else if(Math.hypot(cx-state.player.x,cy-state.player.y)>=145)reason=tr('Liiga kaugel — liigu lähemale.');
  else if(state.interior&&(gx<2||gx>9||gy<2||gy>7))reason=tr('Väljaspool toa ehitusala.');
- else if(state.interior&&!['chest','bed','table','stairs','ceiling','deskLamp','wallLamp','crystalLamp','fire','furnace'].includes(buildType))reason=tr('See osa sobib ainult õue.');
+ else if(state.interior&&!['chest','bed','table','stairs','ceiling','deskLamp','wallLamp','crystalLamp','frostLamp','goldLamp','fire','furnace'].includes(buildType))reason=tr('See osa sobib ainult õue.');
  else if(!state.interior){
   if(gx<2||gy<2||gx>=W-2||gy>=H-2)reason=tr('Väljaspool ehitusala.');
   else if(findHouses(state.buildings).some(h=>h.tiles.some(t=>t.x===gx&&t.y===gy)))reason=tr('Valmis maja on ees.');
-  else if(buildType==='boat'?!(water(cx,cy)&&cx>=58*32):water(cx,cy))reason=buildType==='boat'?tr('Paat vajab merevett.'):tr('Siin on vesi.');
+  else if(buildType==='boat'?!(water(cx,cy)&&cx>=WORLD.seaX*32):water(cx,cy))reason=buildType==='boat'?tr('Paat vajab merevett.'):tr('Siin on vesi.');
   else if(Math.hypot(cx-cave.x,cy-cave.y)<=75||Math.hypot(cx-(base.x+35),cy-base.y)<=32||npcData.some(n=>Math.hypot(cx-n.x,cy-n.y)<30))reason=tr('Jäta käigutee vabaks.');
   else if(resources.some(r=>!r.inCave&&(r.alive||r.type==='wood'&&!r.removed)&&!['berries','herbs',...Object.keys(forageDefs)].includes(r.type)&&Math.hypot(r.x-cx,r.y-cy)<25))reason=tr('Eemalda esmalt puu, känd või kivi.');
  }
@@ -361,7 +438,7 @@ function blocked(x,y,enemy=false,inCave=state.inCave){
  if(state.interior)return x<2*32||x>10*32||y<2*32||y>8*32||!!solidBuildingAt(worldItems(),x,y);
  if(inCave)return x<27*TILE||x>37*TILE||y<18*TILE||y>30*TILE;
  if(x<60||y<70||x>W*TILE-38||y>H*TILE-60)return true;
- if(state.boatId&&!enemy)return !water(x,y)||x<58*32;
+ if(state.boatId&&!enemy)return !water(x,y)||x<WORLD.seaX*32;
  return water(x,y)||!!solidBuildingAt(state.buildings,x,y);
 }
 function recoverShorePosition(){
@@ -380,7 +457,7 @@ function updateAlien(dt){if(!state.alienFriend||state.interior)return;const a=st
 function updateArrows(dt){for(let i=arrows.length-1;i>=0;i--){const a=arrows[i],distance=Math.hypot(a.vx,a.vy)*dt;const steps=Math.max(1,Math.ceil(distance/7));let gone=false;for(let j=0;j<steps;j++){a.x+=a.vx*dt/steps;a.y+=a.vy*dt/steps;a.remaining-=distance/steps;if(blocked(a.x,a.y,false,a.inCave)){gone=true;break;}const entities=a.inCave?bats.filter(b=>b.hp>0):[...zombies,...animals];const e=entities.find(e=>Math.hypot(e.x-a.x,e.y-10-a.y)<20);if(e){hitEntity(e,a.damage);gone=true;break;}}if(gone||a.remaining<=0)arrows.splice(i,1);}}
 function updateHUD(){
   $('hearts').textContent=Array.from({length:maxHealth(state)},(_,i)=>i<state.health?'♥':'♡').join(' ');$('foodBar').style.width=`${state.hunger}%`;$('foodText').textContent=`${Math.ceil(state.hunger)}%`;
-  const night=state.time>=300,left=Math.ceil((night?360:300)-state.time);$('sunIcon').textContent=night?'☾':'☀';$('dayLabel').textContent=getLanguage()==='et'?`${state.day}. päev`:`Day ${state.day}`;$('timeLabel').textContent=`${night?tr('Öö'):tr('Päev')} · ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;$('effectStatus').textContent=[state.effects.speed>0?tr('➤ KIIRUS ')+Math.ceil(state.effects.speed)+' s':'',state.effects.peace>0?tr('❧ LOOMASÕBER ')+Math.ceil(state.effects.peace)+' s':'',isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?tr('☀ KUUMUS ')+Math.ceil(state.heat)+tr('% · VESI ')+Math.ceil(state.thirst)+'%':''].filter(Boolean).join('\n');$('areaName').textContent=state.interior?tr('Sinu kodu · ')+(state.interior.level+1)+tr('. korrus'):isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?tr('Päikeseliiva kõrb'):state.boatId?tr('Sõudepaat · Idameri'):state.inCave?tr('Metsakristalli salakoobas'):isSheltered()?tr('Sinu turvaline kodu'):tr('Rohelaane mets');
+  const night=state.time>=300,left=Math.ceil((night?360:300)-state.time);$('sunIcon').textContent=night?'☾':'☀';$('dayLabel').textContent=getLanguage()==='et'?`${state.day}. päev`:`Day ${state.day}`;$('timeLabel').textContent=`${night?tr('Öö'):tr('Päev')} · ${Math.floor(left/60)}:${String(left%60).padStart(2,'0')}`;$('effectStatus').textContent=[state.effects.speed>0?tr('➤ KIIRUS ')+Math.ceil(state.effects.speed)+' s':'',state.effects.peace>0?tr('❧ LOOMASÕBER ')+Math.ceil(state.effects.peace)+' s':'',isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?tr('☀ KUUMUS ')+Math.ceil(state.heat)+tr('% · VESI ')+Math.ceil(state.thirst)+'%':''].filter(Boolean).join('\n');$('areaName').textContent=state.interior?tr('Sinu kodu · ')+(state.interior.level+1)+tr('. korrus'):isOutside()&&biomeAt(state.player.x,state.player.y)==='snow'?tr('Lumemäed'):isOutside()&&biomeAt(state.player.x,state.player.y)==='jungle'?tr('Džungel'):isOutside()&&biomeAt(state.player.x,state.player.y)==='desert'?tr('Päikeseliiva kõrb'):state.boatId?tr('Sõudepaat · Idameri'):state.inCave?tr('Metsakristalli salakoobas'):isSheltered()?tr('Sinu turvaline kodu'):tr('Rohelaane mets');
   currentTarget=getTarget();$('interaction').dataset.target=currentTarget?.kind||'';let prompt=buildType?(inputMode==='pad'?tr('Parem kang / ristnupud · Vali ruut   A · Ehita   X · Pööra   B · Lõpeta'):tr('Hiir · Vali ruut   E / klõps · Ehita   Q · Pööra   Esc · Lõpeta')):fishing?tr('Õng vees… kala näkkab varsti'):charge?tr`Vibu laeb · ${Math.round(bowStats(state,charge.time).power*100)}% · vabasta RT / tühik`:currentTarget?`A / E · ${currentTarget.label}`:tools[tool].id==='rod'&&shorePoint()?tr('RT / tühik · Püüa kala'):tr('A / E · Hüppa');
   if(!buildType&&!currentTarget&&cliffHintUntil>elapsed)prompt=tr('Kõrgusaste · A / E või F · Hüppa üles');
   $('interaction').textContent=prompt;$('interaction').classList.toggle('hidden',!prompt||paused||!!death);
@@ -405,7 +482,7 @@ function update(dt,pad){
    if(dx)p.face=dx<0?-1:1;if(!canvas._pointer&&!pad.aimed&&!charge){const length=Math.hypot(dx,dy);aim={x:dx/length,y:dy/length};}
   }else p.walk=0;
   if(p.swing)p.swing-=dt;if(charge)charge.time=Math.min(1.5,charge.time+dt);
-  worldTick+=dt;if(worldTick>=1){worldTick=0;regrowResources(state,resources);respawnWildlife();}
+  worldTick+=dt;if(worldTick>=1){worldTick=0;if(tickRainbow(state)){notify(tr('Haruldane vikerkaar! Selle lõpus peitub kuld.'));save();}if(isOutside()&&!state.caveDiscovered&&Math.hypot(p.x-cave.x,p.y-cave.y)<160){state.caveDiscovered=true;notify(tr('Leidsid peidetud koopa!'));save();}regrowResources(state,resources);respawnWildlife();}
   if(isOutside()&&biomeAt(p.x,p.y)==='desert'){state.heat=Math.min(100,state.heat+dt*2);state.thirst=Math.max(0,state.thirst-dt*.8);if(lakeWaterNear())state.thirst=Math.min(100,state.thirst+dt*8);if(state.thirst===0){state.heatDamage=(state.heatDamage||0)+dt;if(state.heatDamage>8){damagePlayer();state.heatDamage=0;notify(tr('PALAV! JOO VETT VÕI LEIA OAAS.'));}}}else state.heat=Math.max(0,state.heat-dt*3);
   const wasNight=state.time>=300;advanceTime(state,dt);if(!wasNight&&state.time>=300){spawnZombies();notify(tr('Öö saabus. Lõke, tõrvik ja kodu kaitsevad sind.'));}if(wasNight&&state.time<300){zombies.length=0;state.nightsSurvived=(state.nightsSurvived||0)+1;gainXP(state,20);refresh();notify(tr('Algab uus päev! Elasid öö üle.'));}
   if(!state.meteorArrived&&(state.time>55||state.day>1)){state.meteorArrived=true;meteorFall={time:0};notify(tr('Tähelangus ida pool! Sealt saabub väike külaline.'));save();}
@@ -414,7 +491,7 @@ function update(dt,pad){
   if(meteorFall){meteorFall.time+=dt;if(meteorFall.time>=1.5){burst(meteor.x,meteor.y,'#e6d591',35);sound('crystal');meteorFall=null;}}
   updateAlien(dt);
   if(isOutside()){
-    for(const a of animals){if(['wolf','bear','skeleton'].includes(a.type)){updatePredator(a,dt);continue;}a.timer-=dt;const d=Math.hypot(a.x-p.x,a.y-p.y),fire=scaredByFire(a.x,a.y);if(fire||d<100){const from=fire||p;a.dir=Math.atan2(a.y-from.y,a.x-from.x);a.timer=.4;}else if(a.timer<0){a.dir=rand()*6.28;a.timer=2+rand()*4;}const speed=fire||d<100?52:9;const nx=a.x+Math.cos(a.dir)*speed*dt,ny=a.y+Math.sin(a.dir)*speed*dt;if(!blocked(nx,ny,false,false)&&!water(nx-8,ny)&&!water(nx+8,ny)&&!water(nx,ny-6)&&!water(nx,ny+6)){a.x=nx;a.y=ny;a.step+=dt*8;}else a.dir+=2;}
+    for(const a of animals){if(hostileTypes.includes(a.type)){updatePredator(a,dt);continue;}a.timer-=dt;const d=Math.hypot(a.x-p.x,a.y-p.y),fire=scaredByFire(a.x,a.y);if(fire||d<100){const from=fire||p;a.dir=Math.atan2(a.y-from.y,a.x-from.x);a.timer=.4;}else if(a.timer<0){a.dir=rand()*6.28;a.timer=2+rand()*4;}const speed=fire||d<100?52:9;const nx=a.x+Math.cos(a.dir)*speed*dt,ny=a.y+Math.sin(a.dir)*speed*dt;if(!blocked(nx,ny,false,false)&&!water(nx-8,ny)&&!water(nx+8,ny)&&!water(nx,ny-6)&&!water(nx,ny+6)){a.x=nx;a.y=ny;a.step+=dt*8;}else a.dir+=2;}
     const sheltered=isSheltered();if(sheltered&&!state.shelterFound){state.shelterFound=true;gainXP(state,35);refresh();save();notify(tr('Oma kodu! Sinu esimene turvaline tuba on valmis.'));}for(const z of zombies)moveEnemy(z,dt,23,sheltered);
   }else if(state.inCave)for(const b of bats.filter(b=>b.hp>0))moveEnemy(b,dt,17);
   for(const b of state.buildings.filter(b=>['fire','furnace'].includes(b.type)))b.fuel=Math.max(0,(b.fuel||0)-dt);
@@ -428,7 +505,7 @@ window.addEventListener('keydown',e=>{
   if(e.ctrlKey||e.metaKey||e.altKey)return;
   if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Escape'].includes(e.code))e.preventDefault();
   if(e.repeat)return;keys[e.code]=true;
-  if(paused){if(menuKind==='whale'&&whaleGame?.status==='playing'&&e.code==='Space'){e.preventDefault();whaleHeld=true;return;}if(e.code==='BracketLeft'){changeTab(-1);return;}if(e.code==='BracketRight'||e.code==='Tab'){e.preventDefault();changeTab(1);return;}if(e.code==='Escape')closeModal();else if(['ArrowDown','KeyS'].includes(e.code))moveMenu(0,1);else if(['ArrowUp','KeyW'].includes(e.code))moveMenu(0,-1);else if(['ArrowLeft','KeyA'].includes(e.code))moveMenu(-1,0);else if(['ArrowRight','KeyD'].includes(e.code))moveMenu(1,0);else if(e.code==='Enter'||e.code==='Space'){e.preventDefault();activateMenu();}return;}
+  if(paused){if(workbenchKinds.includes(menuKind)&&['PageUp','PageDown'].includes(e.code)){changeRecipeFilter(e.code==='PageUp'?-1:1);return;}if(menuKind==='whale'&&whaleGame?.status==='playing'&&e.code==='Space'){e.preventDefault();whaleHeld=true;return;}if(e.code==='BracketLeft'){changeTab(-1);return;}if(e.code==='BracketRight'||e.code==='Tab'){e.preventDefault();changeTab(1);return;}if(e.code==='Escape')closeModal();else if(['ArrowDown','KeyS'].includes(e.code))moveMenu(0,1);else if(['ArrowUp','KeyW'].includes(e.code))moveMenu(0,-1);else if(['ArrowLeft','KeyA'].includes(e.code))moveMenu(-1,0);else if(['ArrowRight','KeyD'].includes(e.code))moveMenu(1,0);else if(e.code==='Enter'||e.code==='Space'){e.preventDefault();activateMenu();}return;}
   if(e.code==='Escape'){if(buildType)buildType=null;else if(started)openModal('pause');return;}if(!started){if(e.code==='Enter'&&document.activeElement?.tagName!=='BUTTON')start();return;}if(death)return;
   if(/^Digit[1-6]$/.test(e.code)){selectTool(+e.code.slice(-1)-1);return;}
   switch(e.code){case'KeyE':interact();break;case'Space':beginAction();break;case'KeyR':eat();break;case'KeyC':openMain();break;case'KeyB':openModal('build');break;case'KeyK':openMain();break;case'KeyI':openMain();break;case'KeyT':alienCommand();break;case'KeyJ':openMain();break;case'KeyZ':rotateCamera(-1);break;case'KeyV':rotateCamera(1);break;case'KeyF':jump();break;case'KeyQ':rotateBuild();break;}
@@ -448,7 +525,7 @@ function readPad(){
   if(paused){
     whaleHeld=down(7)||!!keys.Space;
     if(pressed(1)||pressed(9))closeModal();
-    else{if(Math.abs(ay)>.25){const panel=menuKind==='skills'?$('modalDetail'):$('modalContent');panel.scrollTop+=ay*12;}
+    else{if(Math.abs(ay)>.25){const panel=menuKind==='skills'?$('modalDetail'):workbenchKinds.includes(menuKind)?$('recipeDetail'):$('modalContent');panel.scrollTop+=ay*12;}
       let direction=null;
       if(down(12))direction={x:0,y:-1};else if(down(13))direction={x:0,y:1};else if(down(14))direction={x:-1,y:0};else if(down(15))direction={x:1,y:0};
       else if(Math.max(Math.abs(lx),Math.abs(ly))>.40)direction=Math.abs(ly)>=Math.abs(lx)?{x:0,y:Math.sign(ly)}:{x:Math.sign(lx),y:0};
@@ -457,7 +534,7 @@ function readPad(){
       else if(key&&now>=menuRepeatAt){if(!menuCache.length&&direction.y)$('modalContent').scrollTop+=direction.y*110;else moveMenu(direction.x,direction.y);menuRepeatAt=now+85;}
       menuDirection=key;if(!key)menuRepeatAt=0;
       if(pressed(0))inputMode='pad';if(pressed(0)&&!(menuKind==='whale'&&whaleGame?.status==='playing'))activateMenu();
-      if(menuKind==='chest'&&pressed(2))transferFocusedStack();if(pressed(4))changeTab(-1);if(pressed(5))changeTab(1);
+      if(workbenchKinds.includes(menuKind)){if(pressed(6))changeRecipeFilter(-1);if(pressed(7))changeRecipeFilter(1);}if(menuKind==='chest'&&pressed(2))transferFocusedStack();if(pressed(4))changeTab(-1);if(pressed(5))changeTab(1);
     }
   }else if(!started){if(pressed(0))start();if(pressed(3)){if(saveFound)openModal('newgame');else startNewGame();}
   }else if(!death){
@@ -485,10 +562,10 @@ let questTrackerCache='';
 function updateQuestTracker(){const q=trackedQuest(),text=q.title+' · '+q.text;if(text===questTrackerCache)return;questTrackerCache=text;$('questTracker').textContent=text;}
 function extraMenu(kind,content){
  if(kind==='map'){
-  content.innerHTML=tr('<p class="build-note">PÕHI ↑ · Metsavaht laagri lähedal · Kaevur koopa kõrval · Kaupmees idas · Kõrb kirdes · Meri idas</p><canvas id="worldMap" width="768" height="576" aria-label="Maailmakaart"></canvas>');
-  const g=$('worldMap').getContext('2d');for(let y=0;y<H;y++)for(let x=0;x<W;x++){const biome=biomeAt((x+.5)*32,(y+.5)*32);g.fillStyle=water((x+.5)*32,(y+.5)*32)?'#397c93':biome==='desert'?'#d6b979':heightAt(x*32,y*32)>0?'#91a46b':'#50734b';g.fillRect(x*12,y*12,12,12);}
-  function marker(x,y,label,color){g.fillStyle=color;g.beginPath();g.arc(x/32*12,y/32*12,5,0,7);g.fill();g.font='bold 13px sans-serif';g.fillText(label,x/32*12+7,y/32*12-6);}
-  marker(base.x,base.y,tr('LAAGER'),'#ffdd8c');marker(cave.x,cave.y,tr('KOOBAS'),'#b7e5ef');npcData.forEach(n=>marker(n.x,n.y,n.name,'#ebdcaf'));marker(61*32,25*32,tr('VAAL'),'#89e0ed');marker(state.interior?.outside.x??state.player.x,state.interior?.outside.y??state.player.y,'SIMM','#fff');return true;
+  content.innerHTML=tr('<p class="build-note">Vihje: Karjon tunneb koopaid. Džungel lõunas, lumemäed kirdes, kõrb idas, meri kaugel idas.</p><canvas id="worldMap" width="1024" height="768" aria-label="Maailmakaart"></canvas>');
+  const g=$('worldMap').getContext('2d');for(let y=0;y<H;y++)for(let x=0;x<W;x++){const biome=biomeAt((x+.5)*32,(y+.5)*32);g.fillStyle=water((x+.5)*32,(y+.5)*32)?'#397c93':biome==='desert'?'#d6b979':biome==='snow'?'#e6eeef':biome==='jungle'?'#285d44':heightAt(x*32,y*32)>0?'#91a46b':'#50734b';g.fillRect(x*8,y*8,8,8);}
+  function marker(x,y,label,color){g.fillStyle=color;g.beginPath();g.arc(x/32*8,y/32*8,5,0,7);g.fill();g.font='bold 13px sans-serif';g.fillText(label,x/32*8+7,y/32*8-6);}
+  marker(base.x,base.y,tr('LAAGER'),'#ffdd8c');if(state.caveDiscovered)marker(cave.x,cave.y,tr('KOOBAS'),'#b7e5ef');npcData.forEach(n=>marker(n.x,n.y,n.name,'#ebdcaf'));marker(WORLD.whale.x,WORLD.whale.y,tr('VAAL'),'#89e0ed');marker(state.inCave?cave.x:state.interior?.outside.x??state.player.x,state.inCave?cave.y:state.interior?.outside.y??state.player.y,'SIMM','#fff');return true;
  }
  if(kind==='chest'){
   content.innerHTML=tr('<p class="build-note">A liigutab ühe eseme. X liigutab kuni 20 eset. Seljakotist → kasti või kastist → seljakotti. Sama ruumi ja korruse lähedasi kaste kasutatakse meisterdamisel automaatselt.</p><div class="storage-columns"><section><h3>SELJAKOTT → KAST</h3><div id="depositList"></div></section><section><h3>KAST → SELJAKOTT</h3><div id="withdrawList"></div></section></div>');
@@ -499,7 +576,7 @@ function extraMenu(kind,content){
   }else{content.innerHTML=tr('<p class="build-note">Vali taim. Seemned on peenraga kaasas ja kastmist pole vaja.</p>');for(const[id,crop]of Object.entries(crops)){const b=document.createElement('button');b.className='storage-row';b.dataset.key=id;b.textContent=tr`${icons[id]} ${crop.name} · ${crop.duration} s · saak ${crop.yield}`;b.onclick=()=>{plantCrop(state,gardenOpen,id);save();openModal('garden');};content.append(b);}}return true;
  }
  if(kind==='npc'){
-  const n=npcOpen,done=state.npcQuests[n.id];content.innerHTML=`<div class="npc-dialog"><span>${{ranger:'❧',miner:'⛏',trader:'◈'}[n.id]}</span><h3>${done?tr('AITÄH, SIMM! SA OLED TORE SÕBER.'):n.line}</h3><p>${done?tr('HEAD SEIKLEMIST!'):n.task}</p><p>${done?'':tr('TASU: ')+Object.entries(n.reward).map(([k,v])=>`${names[k].toUpperCase()} ${v}`).join(' · ')}</p><button id="npcQuestButton" ${done||!canPay(state,n.request)?'disabled':''}>${done?tr('ÜLESANNE TEHTUD'):tr('ANNA ASJAD JA VÕTA TASU')}</button></div>`;$('npcQuestButton').onclick=()=>{if(finishNPCQuest(state,n)){sound('craft');refresh();save();openModal('npc');}else notify(tr('TEE SELJAKOTIS RUUMI.'));};return true;
+  const n=npcOpen,done=state.npcQuests[n.id];content.innerHTML=`<div class="npc-dialog"><canvas id="npcPortrait" width="256" height="256" aria-hidden="true"></canvas><h4>${tr(n.role).toUpperCase()} · ${n.age}</h4><h3>${done?tr('AITÄH, SIMM! SA OLED TORE SÕBER.'):n.line}</h3><p>${done?tr('HEAD SEIKLEMIST!'):n.task}</p><p>${done?'':tr('TASU: ')+Object.entries(n.reward).map(([k,v])=>`${names[k].toUpperCase()} ${v}`).join(' · ')}</p><button id="npcQuestButton" ${done||!canPay(state,n.request)?'disabled':''}>${done?tr('ÜLESANNE TEHTUD'):tr('ANNA ASJAD JA VÕTA TASU')}</button></div>`;const portrait=$('npcPortrait'),pg=portrait.getContext('2d'),cw=npcImage.naturalWidth/3,ch=npcImage.naturalHeight/2;pg.imageSmoothingEnabled=false;if(cw)pg.drawImage(npcImage,(n.sprite%3)*cw,Math.floor(n.sprite/3)*ch,cw,ch,0,0,256,256);$('npcQuestButton').onclick=()=>{if(finishNPCQuest(state,n)){sound('craft');refresh();save();openModal('npc');}else notify(tr('TEE SELJAKOTIS RUUMI.'));};return true;
  }
  if(kind==='whale'){
   if(!whaleGame)whaleGame={time:0,marker:.5,target:.5,progress:0,status:'ready'};
@@ -532,11 +609,11 @@ function extraInteract(t){
  else if(t.kind==='whale'){whaleGame=null;openModal('whale');}
  else return false;return true;
 }
-function lakeWaterNear(){return Math.hypot(state.player.x-50*32,state.player.y-16*32)<70;}
+function lakeWaterNear(){return Math.hypot(state.player.x-86*32,state.player.y-45*32)<70;}
 function updatePredator(a,dt){
  if((a.calmUntil||0)>state.worldAge)return;
  const p=state.player,peace=state.effects.peace>0&&a.type!=='skeleton';const intent=predatorIntent(a,p,peace),target=intent==='chase'?p:{x:a.homeX,y:a.homeY};
- if(a.type==='skeleton'){const d=Math.hypot(a.x-p.x,a.y-p.y);if(d<210){moveEnemy(a,dt,29,isSheltered());return;}}
+ if(a.type==='skeleton'||a.type==='troll'){const d=Math.hypot(a.x-p.x,a.y-p.y);if(d<210){moveEnemy(a,dt,29,isSheltered());return;}}
  const dx=target.x-a.x,dy=target.y-a.y,n=Math.hypot(dx,dy)||1;a.slowed=slowed(a);const speed=(intent==='chase'?(a.type==='wolf'?73:55):22)*(a.slowed?.45:1);if(n>10){const nx=a.x+dx/n*speed*dt,ny=a.y+dy/n*speed*dt;if(!blocked(nx,a.y,true,false))a.x=nx;if(!blocked(a.x,ny,true,false))a.y=ny;a.step+=dt*8;}
  if(intent==='chase'&&n<26&&!isSheltered()&&!peace)damagePlayer();
 }
@@ -576,14 +653,14 @@ function drawHeldTool(x,y){
  else if(selected==='rod'){ctx.strokeStyle='#bda46b';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x+8,y-14);ctx.lineTo(x+18,y-39);ctx.stroke();}
 }
 function simm(x,y){if(heroImage.complete&&heroImage.naturalWidth){const moving=state.player.walk>0,frame=moving?Math.floor(state.player.walk*1.1)%4:0,bob=moving?Math.sin(state.player.walk)*.45:Math.sin(elapsed*2)*.15;ctx.save();ctx.translate(Math.round(x),Math.round(y+bob));if(state.player.face<0)ctx.scale(-1,1);ctx.drawImage(heroImage,frame*(heroImage.naturalWidth/4)+120,88,300,545,-13,-45,27,49);ctx.restore();drawHeldTool(x,y);return;}const p=state.player,bob=p.walk?Math.sin(p.walk)*1.5:0;shadow(x,y+2,12,4);const yy=y+bob,step=p.walk?Math.sin(p.walk)*3:0;rect(x-7,yy-8,5,9+step,'#384739');rect(x+2,yy-8,5,9-step,'#384739');rect(x-8,yy+step,6,3,'#332e23');rect(x+2,yy-step,6,3,'#332e23');rect(x-9,yy-23,18,16,'#d7ac43');rect(x-6,yy-22,9,13,'#ebc45d');rect(x-12,yy-21,4,12,'#b28b37');rect(x+8,yy-21,4,12,'#e4b854');rect(x-12,yy-10,4,4,'#f2c293');rect(x+8,yy-10,4,4,'#f2c293');rect(x-5,yy-33,12,11,'#dca776');rect(x-7,yy-38,14,7,'#695333');rect(x-8,yy-33,4,7,'#695333');rect(x-4,yy-37,9,3,'#937141');rect(x+(p.face<0?-4:3),yy-30,2,2,'#263629');rect(x-6,yy-24,12,3,'#e4c664');rect(x-5,yy-17,3,4,'#b98d38');if(p.swing>0){const sx=x+aim.x*19,sy=yy-15+aim.y*16;rect(sx-2,sy-10,3,21,'#b89259');poly([[sx-8,sy-11],[sx+5,sy-13],[sx+9,sy-6],[sx-7,sy-3]],'#bdc5a9');ellipse(x+aim.x*29,yy-12+aim.y*26,6,3,'#e5db8c80');}else if(tools[tool].id==='torch'){rect(x+12,yy-21,3,12,'#956d3c');ellipse(x+14,yy-26,4+Math.sin(elapsed*12),7,'#eab559');rect(x+12,yy-28,3,5,'#fff1ac');}}
-function rabbit(a){if(artSprite('rabbit',a.x,a.y+2+Math.sin(a.step)*.8,24,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step)*1;shadow(x,y+2,9,3);rect(x-7,y-9+b,13,8,'#d6cbb3');rect(x+3,y-13+b,8,9,'#e5ddc4');rect(x+4,y-23+b,3,12,'#e5ddc4');rect(x+8,y-21+b,3,9,'#c9bca3');rect(x+5,y-21+b,1,6,'#d7a79e');rect(x+9,y-11+b,2,2,'#343d2c');rect(x-10,y-7+b,4,4,'#eee7d0');rect(x-5,y,3,3,'#b5ad91');rect(x+5,y,3,3,'#b5ad91');}
-function deer(a){if(artSprite('deer',a.x,a.y+3+Math.sin(a.step)*.6,44,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step);shadow(x,y+1,17,5);for(const dx of[-11,-4,6,12])rect(x+dx,y-13,3,14+Math.sin(a.step+dx)*2,'#876346');rect(x-14,y-26+b,27,14,'#ae8150');rect(x-12,y-25+b,19,5,'#c29965');rect(x+9,y-35+b,7,20,'#b58a59');rect(x+11,y-39+b,14,10,'#bd9663');rect(x+20,y-36+b,2,2,'#293c2c');rect(x+10,y-44+b,4,7,'#a7784c');rect(x+18,y-43+b,4,7,'#a7784c');rect(x-17,y-25+b,5,5,'#e2d0a1');for(const dx of[-5,2,7])rect(x+dx,y-22+b,2,2,'#e5c995');}
+function rabbit(a){if(a.type==='snowHare'){snowHareSprite(a);return;}if(artSprite('rabbit',a.x,a.y+2+Math.sin(a.step)*.8,24,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step)*1;shadow(x,y+2,9,3);rect(x-7,y-9+b,13,8,'#d6cbb3');rect(x+3,y-13+b,8,9,'#e5ddc4');rect(x+4,y-23+b,3,12,'#e5ddc4');rect(x+8,y-21+b,3,9,'#c9bca3');rect(x+5,y-21+b,1,6,'#d7a79e');rect(x+9,y-11+b,2,2,'#343d2c');rect(x-10,y-7+b,4,4,'#eee7d0');rect(x-5,y,3,3,'#b5ad91');rect(x+5,y,3,3,'#b5ad91');}
+function deer(a){if(a.type==='ibex'){ibexSprite(a);return;}if(artSprite('deer',a.x,a.y+3+Math.sin(a.step)*.6,44,Math.cos(a.dir)<0))return;const x=a.x,y=a.y,b=Math.sin(a.step);shadow(x,y+1,17,5);for(const dx of[-11,-4,6,12])rect(x+dx,y-13,3,14+Math.sin(a.step+dx)*2,'#876346');rect(x-14,y-26+b,27,14,'#ae8150');rect(x-12,y-25+b,19,5,'#c29965');rect(x+9,y-35+b,7,20,'#b58a59');rect(x+11,y-39+b,14,10,'#bd9663');rect(x+20,y-36+b,2,2,'#293c2c');rect(x+10,y-44+b,4,7,'#a7784c');rect(x+18,y-43+b,4,7,'#a7784c');rect(x-17,y-25+b,5,5,'#e2d0a1');for(const dx of[-5,2,7])rect(x+dx,y-22+b,2,2,'#e5c995');}
 function alien(x,y){if(artSprite('alien',x,y+3+Math.sin(elapsed*3)*1.4,35))return;const float=Math.sin(elapsed*3)*2;shadow(x,y+2,11,4);rect(x-8,y-19+float,16,15,'#83b8aa');rect(x-11,y-29+float,22,15,'#a5d0b5');rect(x-8,y-33+float,16,8,'#a5d0b5');rect(x-7,y-26+float,4,6,'#27394a');rect(x+3,y-26+float,4,6,'#27394a');rect(x-6,y-26+float,1,2,'#f0ffdb');rect(x+4,y-26+float,1,2,'#f0ffdb');rect(x-3,y-17+float,6,6,'#d6c17b');rect(x-8,y-37+float,2,6,'#81af9c');rect(x+6,y-37+float,2,6,'#81af9c');rect(x-9,y-39+float,4,3,'#ecdb93');rect(x+5,y-39+float,4,3,'#ecdb93');}
 function zombie(z){if(artSprite('zombie',z.x,z.y+4+Math.sin(elapsed*4+z.x)*.8,39,z.x>state.player.x))return;const bob=Math.sin(elapsed*5+z.x)*1;shadow(z.x,z.y,11,4);rect(z.x-7,z.y-10,5,11,'#314c3b');rect(z.x+3,z.y-10,5,11,'#314c3b');rect(z.x-10,z.y-25+bob,20,17,'#637658');rect(z.x-7,z.y-38+bob,15,14,'#9ab678');rect(z.x-12,z.y-22+bob,4,13,'#8fa769');rect(z.x+9,z.y-22+bob,4,13,'#8fa769');rect(z.x-4,z.y-33+bob,3,3,'#354230');rect(z.x+3,z.y-33+bob,3,3,'#354230');rect(z.x-2,z.y-27+bob,6,2,'#4c633a');}
 function herb(x,y){shadow(x,y+2,10,3);for(let i=0;i<7;i++){const a=i*Math.PI/3.5,dx=Math.cos(a)*8,dy=Math.sin(a)*4;poly([[x,y],[x+dx,y-12+dy],[x+dx+3,y-8+dy],[x+dx*.5,y-2]],i%2?'#9db965':'#728f4a');rect(x+dx,y-11+dy,2,2,'#bed184');}rect(x-1,y-5,2,6,'#526b34');}
 function batSprite(b){if(artSprite('bat',b.x,b.y+Math.sin(elapsed*4+b.phase)*2,22)){return;}const x=b.x,y=b.y+Math.sin(elapsed*4+b.phase)*3,wing=Math.sin(elapsed*10+b.phase)*8;shadow(x,y+25,9,3);poly([[x-4,y],[x-21,y-8-wing],[x-16,y+4],[x-6,y+7]],'#9f90b7');poly([[x+4,y],[x+21,y-8-wing],[x+16,y+4],[x+6,y+7]],'#9f90b7');rect(x-5,y-7,10,15,'#b8a8c9');rect(x-5,y-12,3,6,'#b8a8c9');rect(x+2,y-12,3,6,'#b8a8c9');rect(x-3,y-3,2,3,'#354347');rect(x+2,y-3,2,3,'#354347');rect(x-2,y+4,4,1,'#e9d8d8');}
 function bench(){const x=base.x+35,y=base.y;if(!artSprite('bench',x,y+5,43)){shadow(x,y+4,22,6);rect(x-16,y-17,5,23,'#65462e');rect(x+11,y-17,5,23,'#65462e');rect(x-22,y-25,44,10,'#a8804e');rect(x-22,y-26,44,3,'#d1ab6b');rect(x-17,y-23,2,7,'#785831');rect(x-14,y-32,8,7,'#7e9583');rect(x-9,y-36,3,5,'#aabc9a');rect(x+4,y-31,10,5,'#cfb579');rect(x+6,y-37,3,9,'#79664e');}const tx=base.x-55,ty=base.y+6;if(artSprite('tent',tx,ty+6,55))return;shadow(tx,ty+1,33,8);poly([[tx,ty-42],[tx-31,ty],[tx+29,ty]],'#c3ab64');poly([[tx,ty-42],[tx+29,ty],[tx+6,ty]],'#a48f53');poly([[tx,ty-30],[tx-13,ty],[tx+11,ty]],'#3b4630');rect(tx-34,ty,68,3,'#765e3e');}
-function caveSprite(){const x=cave.x,y=cave.y;if(artSprite('cave',x,y+12,92)){ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('SALAKOOBAS',x,y-86);return;}shadow(x,y+8,50,14);poly([[x-55,y+3],[x-46,y-38],[x-23,y-60],[x+19,y-63],[x+46,y-38],[x+53,y+3]],'#607d6a');poly([[x-44,y-37],[x-23,y-58],[x+16,y-60],[x+8,y-36],[x-15,y-28]],'#8aa18a');poly([[x-25,y+3],[x-24,y-23],[x-10,y-37],[x+10,y-36],[x+24,y-20],[x+26,y+3]],'#172c28');rect(x-21,y-9,44,14,'#172c28');rect(x-30,y-31,9,5,'#a8b49b');rect(x+26,y-22,12,4,'#81967a');rect(x-38,y+2,75,6,'#a3976b');bush(x+51,y+6);ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';ctx.fillText('SALAKOOBAS',x,y-72);}
+function caveSprite(){const x=cave.x,y=cave.y;if(artSprite('cave',x,y+12,92)){ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';if(state.caveDiscovered)ctx.fillText(tr('KOOBAS'),x,y-86);return;}shadow(x,y+8,50,14);poly([[x-55,y+3],[x-46,y-38],[x-23,y-60],[x+19,y-63],[x+46,y-38],[x+53,y+3]],'#607d6a');poly([[x-44,y-37],[x-23,y-58],[x+16,y-60],[x+8,y-36],[x-15,y-28]],'#8aa18a');poly([[x-25,y+3],[x-24,y-23],[x-10,y-37],[x+10,y-36],[x+24,y-20],[x+26,y+3]],'#172c28');rect(x-21,y-9,44,14,'#172c28');rect(x-30,y-31,9,5,'#a8b49b');rect(x+26,y-22,12,4,'#81967a');rect(x-38,y+2,75,6,'#a3976b');bush(x+51,y+6);ctx.fillStyle='#e1dfb7';ctx.font='9px monospace';ctx.textAlign='center';if(state.caveDiscovered)ctx.fillText(tr('KOOBAS'),x,y-72);}
 function crystal(x,y){if(artSprite('crystal',x,y+4+Math.sin(elapsed*2)*2,57)){ellipse(x,y,24,8,'#72dad028');return;}const bob=Math.sin(elapsed*2)*3;ellipse(x,y,27,9,'#7bd2cc22');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y+1+bob],[x+13,y-18+bob]],'#5d9fc2');poly([[x,y-37+bob],[x-13,y-18+bob],[x,y-13+bob]],'#b6f4e2');poly([[x,y-37+bob],[x,y-13+bob],[x+13,y-18+bob]],'#80ceda');poly([[x-13,y-18+bob],[x,y-13+bob],[x,y+1+bob]],'#6dbbcc');rect(x-21,y-27+Math.sin(elapsed*3)*6,3,3,'#cbfff1');rect(x+21,y-10+Math.sin(elapsed*2)*7,2,2,'#e4ffe1');}
 function fireSprite(x,y,fuel){shadow(x,y+4,22,6);for(let i=0;i<7;i++){const a=i*Math.PI*2/7;rect(x+Math.cos(a)*17-4,y+Math.sin(a)*7-3,8,6,'#a0a28c');}rect(x-13,y-3,26,5,'#795234');rect(x-8,y-7,17,4,'#b38c4e');if(fuel>0){const flick=Math.sin(elapsed*13)*3;poly([[x-10,y-3],[x-7,y-17],[x-2,y-11],[x+2,y-29-flick],[x+8,y-14],[x+11,y-3]],'#e99045');poly([[x-5,y-4],[x-2,y-19],[x+2,y-13],[x+5,y-5]],'#ffe0a0');rect(x+5+Math.sin(elapsed*2)*5,y-34-(elapsed*12%12),2,2,'#f8cf88');}}
 function artWall(id,x,y,w,h){const r=artRects[id];if(!extraImage.complete||!extraImage.naturalWidth)return false;ctx.drawImage(extraImage,r[0],r[1],r[2],r[3],x,y,w,h);return true;}
@@ -617,7 +694,7 @@ function building(b){
 const terrainCache={forest:null,cave:null};
 function groundNoise(x,y){const n=Math.sin(x*12.9898+y*78.233)*43758.5453;return n-Math.floor(n);}
 function makeGround(isCave){
- const layer=document.createElement('canvas');layer.width=W*TILE;layer.height=H*TILE;const g=layer.getContext('2d');
+ const layer=document.createElement('canvas');layer.width=isCave?38*TILE:W*TILE;layer.height=isCave?31*TILE:H*TILE;const g=layer.getContext('2d');
  for(let y=0;y<layer.height;y+=4)for(let x=0;x<layer.width;x+=4){
   const grain=groundNoise(x,y),slow=Math.sin(x*.012)*Math.cos(y*.009),shift=Math.round((grain-.5)*9+slow*5);
   if(isCave){const inside=x>=27*TILE&&x<=37*TILE&&y>=18*TILE&&y<=30*TILE;g.fillStyle=inside?`rgb(${48+shift},${63+shift},${58+shift})`:`rgb(${29+shift},${49+shift},${45+shift})`;}
@@ -660,19 +737,29 @@ function tiltedTerrain(){
  const key=state.inCave?'cave':state.interior?'room':state.camera;
  if(state.interior){for(let y=1;y<=8;y++)for(let x=1;x<=10;x++)projectedTile(x,y,(x+y)%2?'#b4915d':'#a48151',0);const a=viewPoint(32,32,0),b=viewPoint(11*32,32,0);poly([[a.x,a.y],[b.x,b.y],[b.x,b.y-50],[a.x,a.y-50]],'#58796a');rect(a.x,a.y-50,b.x-a.x,5,'#c6b680');ctx.fillStyle='#eee2b6';ctx.font='12px sans-serif';ctx.textAlign='center';ctx.fillText(tr('SINU KODU · KORRUS ')+(state.interior.level+1),6*32,4);rect(5.5*32,8*32*.62,32,4,'#ffe1a0');return;}
  if(state.inCave){ctx.save();ctx.scale(1,.62);terrain();ctx.restore();return;}
- if(!tiltedCache[key]){
-  const layer=document.createElement('canvas');layer.width=W*32+100;layer.height=W*32*.62+H*32*.62+160;const g=layer.getContext('2d');const origin={x:key===1||key===2?W*32:40,y:key===2||key===3?W*32*.62+80:80};g.translate(origin.x,origin.y);
-  const tiles=[];for(let y=0;y<H;y++)for(let x=0;x<W;x++){const h=heightAt((x+.5)*32,(y+.5)*32),v=projectPoint(x*32,y*32,key,h);tiles.push({x,y,h,depth:v.y+h*12});}tiles.sort((a,b)=>a.depth-b.depth);
-  const polygon=(points,color)=>{g.fillStyle=color;g.beginPath();points.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fill();};
-  for(const t of tiles){const{x,y,h}=t,biome=biomeAt((x+.5)*32,(y+.5)*32),wet=water((x+.5)*32,(y+.5)*32),n=groundNoise(x,y),v=Math.round(n*10);const pts=[[x*32,y*32],[(x+1)*32,y*32],[(x+1)*32,(y+1)*32],[x*32,(y+1)*32]].map(([a,b])=>projectPoint(a,b,key,h));
-   const adjacent=[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>heightAt((x+dx+.5)*32,(y+dy+.5)*32));
-   if(h)for(let i=0;i<4;i++){const delta=h-adjacent[i];if(delta<=0)continue;const a=pts[i],b=pts[(i+1)%4];polygon([a,b,{x:b.x,y:b.y+delta*12},{x:a.x,y:a.y+delta*12}],biome==='desert'?'#987746':'#576342');}
-   const clearing=Math.hypot(x-31,y-29)<4;polygon(pts,wet?`rgb(${45+v},${102+v},${123+v})`:biome==='desert'?`rgb(${196+v},${164+v},${101+v})`:clearing?'#a59b65':`rgb(${81+v+h*8},${113+v+h*8},${65+v})`);
-   for(let i=0;i<4;i++)if(h!==adjacent[i]){const a=pts[i],b=pts[(i+1)%4];g.strokeStyle=h>adjacent[i]?(biome==='desert'?'#f5d28f':'#d6d593'):'#394d37';g.lineWidth=1.3;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();}
-   if(n>.3){const p=projectPoint((x+.3)*32,(y+.4)*32,key,h);g.fillStyle=wet?'#9bd3cc66':biome==='desert'?'#f5de9e66':'#c5d68b44';g.fillRect(p.x,p.y,wet?12:3,1);}
-  }tiltedCache[key]={layer,origin};
- }const cache=tiltedCache[key];ctx.drawImage(cache.layer,-cache.origin.x,-cache.origin.y);
+ const chunks=[];
+ for(let cy=0;cy<Math.ceil(H/16);cy++)for(let cx=0;cx<Math.ceil(W/16);cx++){
+  const corners=[[cx*512,cy*512],[(cx+1)*512,cy*512],[(cx+1)*512,(cy+1)*512],[cx*512,(cy+1)*512]].map(([x,y])=>projectPoint(x,y,key,0));
+  const minX=Math.min(...corners.map(p=>p.x))-4,minY=Math.min(...corners.map(p=>p.y))-150,maxX=Math.max(...corners.map(p=>p.x))+4,maxY=Math.max(...corners.map(p=>p.y))+8;
+  if(maxX<cam.x||minX>cam.x+canvas.width||maxY<cam.y||minY>cam.y+canvas.height)continue;
+  const id=key+':'+cx+':'+cy;let cached=tiltedCache[id];if(!cached){cached=terrainChunk(key,cx,cy,minX,minY,maxX,maxY);if(Object.keys(tiltedCache).length>=64)delete tiltedCache[Object.keys(tiltedCache)[0]];tiltedCache[id]=cached;}chunks.push(cached);
+ }
+ chunks.sort((a,b)=>a.depth-b.depth);for(const chunk of chunks)ctx.drawImage(chunk.layer,chunk.x,chunk.y);
 }
+function terrainChunk(q,cx,cy,minX,minY,maxX,maxY){
+ const layer=document.createElement('canvas');layer.width=Math.ceil(maxX-minX);layer.height=Math.ceil(maxY-minY);const g=layer.getContext('2d');g.translate(-minX,-minY);
+ const tiles=[];for(let y=cy*16;y<Math.min(H,(cy+1)*16);y++)for(let x=cx*16;x<Math.min(W,(cx+1)*16);x++){const h=heightAt((x+.5)*32,(y+.5)*32),v=projectPoint(x*32,y*32,q,0);tiles.push({x,y,h,depth:v.y});}tiles.sort((a,b)=>a.depth-b.depth);
+ const polygon=(pts,color)=>{g.fillStyle=color;g.beginPath();pts.forEach((p,i)=>i?g.lineTo(p.x,p.y):g.moveTo(p.x,p.y));g.closePath();g.fill();};
+ for(const{x,y,h}of tiles){const biome=biomeAt((x+.5)*32,(y+.5)*32),wet=water((x+.5)*32,(y+.5)*32),v=Math.round(groundNoise(x,y)*10),pts=[[x*32,y*32],[(x+1)*32,y*32],[(x+1)*32,(y+1)*32],[x*32,(y+1)*32]].map(([a,b])=>projectPoint(a,b,q,h));
+  const adjacent=[[0,-1],[1,0],[0,1],[-1,0]].map(([dx,dy])=>heightAt((x+dx+.5)*32,(y+dy+.5)*32));
+  for(let i=0;i<4;i++){const delta=h-adjacent[i];if(delta<=0)continue;const a=pts[i],b=pts[(i+1)%4];polygon([a,b,{x:b.x,y:b.y+delta*12},{x:a.x,y:a.y+delta*12}],biome==='snow'?'#8b9da5':biome==='desert'?'#987746':'#576342');}
+  const clearing=Math.hypot(x-31,y-29)<4,color=wet?`rgb(${45+v},${102+v},${123+v})`:biome==='snow'?`rgb(${213+v},${225+v},${227+v})`:biome==='jungle'?`rgb(${36+v},${86+v},${57+v})`:biome==='desert'?`rgb(${196+v},${164+v},${101+v})`:clearing?'#a59b65':`rgb(${81+v+h*8},${113+v+h*8},${65+v})`;polygon(pts,color);
+  for(let i=0;i<4;i++)if(h!==adjacent[i]){const a=pts[i],b=pts[(i+1)%4];g.strokeStyle=h>adjacent[i]?(biome==='snow'?'#f5fafb':'#d6d593'):'#394d37';g.lineWidth=1;g.beginPath();g.moveTo(a.x,a.y);g.lineTo(b.x,b.y);g.stroke();}
+  if(groundNoise(x,y)>.3){const p=projectPoint((x+.3)*32,(y+.4)*32,q,h);g.fillStyle=wet?'#9bd3cc66':biome==='snow'?'#ffffff88':'#c5d68b44';g.fillRect(p.x,p.y,wet?12:3,1);}
+ }
+ return {layer,x:minX,y:minY,depth:projectPoint((cx+.5)*512,(cy+.5)*512,q,0).y};
+}
+
 function drawWall(b){
  const items=worldItems(),x=(b.x+.5)*32,y=(b.y+.5)*32,h=isOutside()?heightAt(x,y):0;
  const rects=buildingBounds(b.open?{...b,open:false}:b,items);
@@ -696,7 +783,7 @@ function smallProp(b){if(['wall','door','window'].includes(b.type)){drawWall(b);
   rect(x-17,y-7,34,14,'#b28a52');rect(x-14,y-8,28,10,'#5c4932');if(b.crop){const ready=cropProgress(state,b)>=1,progress=cropProgress(state,b);for(let i=0;i<3;i++){rect(x-10+i*9,y-7-progress*12,2,8+progress*10,'#9ec47d');ellipse(x-9+i*9,y-8-progress*12,4,3,b.crop==='magicFlower'?'#d8aee6':ready?'#efd28b':'#a0c77a');}if(ready){ctx.fillStyle='#ffe8a4';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText(tr('SAAGIKÜPS'),x,y-29);}}
  }else if(b.type==='boat'){boatSprite(x,y);}
  else if(/Lamp$/.test(b.type)){
-  const mounted=worldItems().some(n=>n.x===b.x&&n.y===b.y&&n.type==='table'),height=b.type==='yardLamp'?42:b.type==='wallLamp'?30:mounted?34:20;rect(x-2,y-height,4,height,'#9b8057');ellipse(x,y-height,8,10,b.type==='crystalLamp'?'#a6eee9':'#ffe4a3');const glow=ctx.createRadialGradient(x,y-height,2,x,y-height,60);glow.addColorStop(0,b.type==='crystalLamp'?'#a8f0e84a':'#ffe49c40');glow.addColorStop(1,'#ffe49c00');ctx.fillStyle=glow;ctx.fillRect(x-60,y-height-60,120,120);
+  const mounted=worldItems().some(n=>n.x===b.x&&n.y===b.y&&n.type==='table'),height=b.type==='yardLamp'?42:b.type==='wallLamp'?30:mounted?34:20;rect(x-2,y-height,4,height,'#9b8057');ellipse(x,y-height,8,10,['crystalLamp','frostLamp'].includes(b.type)?'#a6eee9':'#ffe4a3');const glow=ctx.createRadialGradient(x,y-height,2,x,y-height,60);glow.addColorStop(0,['crystalLamp','frostLamp'].includes(b.type)?'#a8f0e84a':'#ffe49c40');glow.addColorStop(1,'#ffe49c00');ctx.fillStyle=glow;ctx.fillRect(x-60,y-height-60,120,120);
  }else if(b.type==='window'){rect(x-16,y-30,32,30,'#ab8958');rect(x-8,y-26,16,17,'#b9ddd5');rect(x-1,y-26,2,17,'#71593c');rect(x-8,y-19,16,2,'#71593c');}
  else if(b.type==='door'&&b.open){rect(x-16,y-28,5,30,'#d2ac72');rect(x+11,y-28,5,30,'#d2ac72');rect(x-16,y-30,32,5,'#d2ac72');}
  else building(b);
@@ -704,9 +791,17 @@ function smallProp(b){if(['wall','door','window'].includes(b.type)){drawWall(b);
 }
 function looseSprite(r){const x=r.x,y=r.y;shadow(x,y+2,7,2);if(r.type==='branch'){ctx.strokeStyle='#513b25';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(x-8,y+1);ctx.lineTo(x+8,y-5);ctx.moveTo(x,y-2);ctx.lineTo(x+2,y-8);ctx.stroke();ctx.strokeStyle='#dcbd82';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x-8,y);ctx.lineTo(x+8,y-6);ctx.stroke();}else if(r.type==='pebble'){poly([[x-7,y],[x-3,y-6],[x+3,y-7],[x+7,y-2],[x+4,y+2]],'#b9c7bd');rect(x-3,y-6,6,2,'#e2e2ca');}else{ellipse(x,y,11,4,'#e9c58a');ellipse(x+2,y-3,6,4,'#f1d49b');}}
 function boatSprite(x,y){shadow(x,y+2,25,7);poly([[x-27,y-8],[x-19,y+7],[x+17,y+7],[x+28,y-8]],'#b88a52');rect(x-20,y-7,40,4,'#e3bb7d');rect(x-3,y-6,6,12,'#7c5c3b');const paddle=Math.sin(elapsed*4)*5;ctx.strokeStyle='#e8c88a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x-15,y-3);ctx.lineTo(x-30,y+9+paddle);ctx.moveTo(x+15,y-3);ctx.lineTo(x+30,y+9-paddle);ctx.stroke();}
-function predatorSprite(a){const x=a.x,y=a.y;if(a.type==='skeleton'){shadow(x,y,10,4);rect(x-5,y-18,10,13,'#e4dfc7');rect(x-7,y-31,14,13,'#eee9d0');rect(x-4,y-27,3,4,'#4b6265');rect(x+2,y-27,3,4,'#4b6265');rect(x-3,y-20,6,2,'#b48b61');for(const dx of[-4,3]){rect(x+dx,y-5,3,8,'#e4dfc7');rect(x+dx*2,y-18,3,12,'#e4dfc7');}ellipse(x+10,y-29,7,4,'#d7b878');return;}
- const bear=a.type==='bear',color=bear?'#9f7957':'#98a9a5',w=bear?31:27;shadow(x,y,20,6);rect(x-w/2,y-25,w,22,color);ellipse(x+10,y-27,bear?12:9,bear?12:9,color);for(const dx of[-9,8])rect(x+dx,y-5,6,9,color);ellipse(x+4,y-36,4,5,color);ellipse(x+16,y-36,4,5,color);rect(x+13,y-29,3,3,'#263b3b');ellipse(x+20,y-23,5,4,bear?'#d5b78c':'#dce2cf');rect(x+22,y-25,3,3,'#35494a');if(!bear)poly([[x-13,y-20],[x-26,y-25],[x-19,y-11]],color);}
-function npcSprite(n){const x=n.x,y=n.y;shadow(x,y,12,4);rect(x-9,y-23,18,20,{ranger:'#749c76',miner:'#8a9ca4',trader:'#b599b5'}[n.id]);rect(x-6,y-36,12,14,'#e2c499');rect(x-11,y-37,22,4,'#d1b26c');rect(x-7,y-43,14,8,'#bda064');rect(x-4,y-32,2,3,'#364749');rect(x+3,y-32,2,3,'#364749');rect(x-3,y-26,7,1,'#986d4d');rect(x-7,y-4,5,7,'#5c6250');rect(x+3,y-4,5,7,'#5c6250');ctx.fillStyle='#fff0bf';ctx.font='8px sans-serif';ctx.textAlign='center';ctx.fillText(n.name,x,y-49);}
+function predatorSprite(a){const x=a.x,y=a.y;if(['fox','arcticFox'].includes(a.type)){foxSprite(a);return;}if(a.type==='skeleton'||a.type==='troll'){shadow(x,y,10,4);rect(x-5,y-18,10,13,'#e4dfc7');rect(x-7,y-31,14,13,'#eee9d0');rect(x-4,y-27,3,4,'#4b6265');rect(x+2,y-27,3,4,'#4b6265');rect(x-3,y-20,6,2,'#b48b61');for(const dx of[-4,3]){rect(x+dx,y-5,3,8,'#e4dfc7');rect(x+dx*2,y-18,3,12,'#e4dfc7');}ellipse(x+10,y-29,7,4,'#d7b878');return;}
+ if(a.type==='troll'){trollSprite(a);return;}const bear=['bear','polarBear'].includes(a.type),color=a.type==='polarBear'?'#e4eae2':a.type==='arcticFox'?'#e7ecea':a.type==='fox'?'#c4743e':a.type==='jaguar'?'#d3ad55':bear?'#9f7957':'#98a9a5',w=bear?31:27;shadow(x,y,20,6);rect(x-w/2,y-25,w,22,color);ellipse(x+10,y-27,bear?12:9,bear?12:9,color);for(const dx of[-9,8])rect(x+dx,y-5,6,9,color);ellipse(x+4,y-36,4,5,color);ellipse(x+16,y-36,4,5,color);rect(x+13,y-29,3,3,'#263b3b');ellipse(x+20,y-23,5,4,bear?'#d5b78c':'#dce2cf');rect(x+22,y-25,3,3,'#35494a');if(!bear)poly([[x-13,y-20],[x-26,y-25],[x-19,y-11]],color);}
+const npcImage=new Image();npcImage.src='/assets/art/npcs-v05.png';
+function jungleTree(x,y,id){shadow(x,y,22,6);rect(x-6,y-67,12,70,'#775337');rect(x-3,y-62,4,62,'#b38a4e');for(const[dx,dy,w]of[[-21,-60,26],[17,-63,29],[0,-81,31],[-10,-88,27]]){ellipse(x+dx,y+dy,w,16,'#26683f');ellipse(x+dx-3,y+dy-4,w-6,10,'#4b9451');}ctx.strokeStyle='#87ad57';ctx.lineWidth=2;for(const dx of[-18,23]){ctx.beginPath();ctx.moveTo(x+dx,y-62);ctx.quadraticCurveTo(x+dx+10,y-36,x+dx-3,y-17);ctx.stroke();}if(id%3===0){rect(x+10,y-45,3,10,'#efcb62');rect(x+14,y-43,3,8,'#e9bb4e');}}
+function drawRainbow(){const r=state.rainbow;if(!r||!isOutside()||r.until<=state.worldAge)return;const end=viewPoint(r.x,r.y),start={x:end.x-360,y:end.y},mx=(end.x+start.x)/2,my=Math.min(end.y,start.y),radius=Math.abs(end.x-start.x)/2;if(radius>20){ctx.save();ctx.globalAlpha=.55;['#ef7772','#efad66','#eed777','#9cce8b','#80bbdb','#9e9bd5','#c49bce'].forEach((color,i)=>{ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();ctx.ellipse(mx,my,radius,100-i*3,0,Math.PI,Math.PI*2);ctx.stroke();});ctx.restore();}if(!r.claimed){billboard(r.x,r.y,()=>{ellipse(r.x,r.y,12,5,'#efda8066');ctx.fillStyle='#ffe39a';ctx.font='15px sans-serif';ctx.textAlign='center';ctx.fillText('✦',r.x,r.y-13-Math.sin(elapsed*3)*3);});}}
+function npcSprite(n){const x=n.x,y=n.y,bob=n.id==='anyo'?Math.sin(elapsed*2)*2:Math.sin(elapsed*1.5+n.sprite)*.4;shadow(x,y,14,4);if(npcImage.complete&&npcImage.naturalWidth){const cw=npcImage.naturalWidth/3,ch=npcImage.naturalHeight/2;ctx.drawImage(npcImage,(n.sprite%3)*cw,Math.floor(n.sprite/3)*ch,cw,ch,x-27,y-65+bob,54,68);}ctx.fillStyle='#fff0bf';ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.fillText(n.name,x,y-69);}
+function foxSprite(a){const x=a.x,y=a.y,color=a.type==='arcticFox'?'#c4d5dc':'#c78348',light=a.type==='arcticFox'?'#eef5f2':'#edd8af';shadow(x,y,15,4);poly([[x-8,y-16],[x-29,y-23],[x-25,y-10],[x-10,y-5]],color);poly([[x-27,y-22],[x-33,y-26],[x-29,y-14],[x-24,y-11]],light);ellipse(x,y-12,14,8,color);ellipse(x+11,y-19,9,7,color);poly([[x+5,y-23],[x+5,y-34],[x+13,y-25]],color);poly([[x+15,y-24],[x+19,y-33],[x+20,y-20]],color);poly([[x+13,y-20],[x+27,y-15],[x+15,y-11]],light);rect(x+23,y-17,3,3,'#293b3b');rect(x+13,y-22,2,2,'#273b3a');for(const dx of[-7,8])rect(x+dx,y-6,3,9,'#4a514b');}
+function snowHareSprite(a){const x=a.x,y=a.y;shadow(x,y,9,3);ellipse(x,y-6,9,6,'#f3f6ef');ellipse(x+6,y-12,5,5,'#f9faf6');rect(x+3,y-25,3,13,'#e6eeea');rect(x+8,y-24,3,12,'#eff4ef');rect(x+9,y-14,2,2,'#394a55');ellipse(x-8,y-8,4,4,'#fff');}
+function ibexSprite(a){const x=a.x,y=a.y;shadow(x,y,14,4);rect(x-12,y-20,23,14,'#b7b8a7');rect(x+8,y-30,9,17,'#d8daca');for(const dx of[-9,6])rect(x+dx,y-8,4,10,'#7a817b');ctx.strokeStyle='#696f6b';ctx.lineWidth=3;ctx.beginPath();ctx.arc(x+10,y-35,8,Math.PI,Math.PI*2);ctx.stroke();rect(x+13,y-27,2,2,'#303c42');}
+function trollSprite(a){const x=a.x,y=a.y;shadow(x,y,10,4);rect(x-8,y-18,16,17,'#718757');ellipse(x,y-25,12,10,'#91a86b');poly([[x-8,y-30],[x-18,y-35],[x-15,y-22]],'#91a86b');poly([[x+8,y-30],[x+18,y-35],[x+15,y-22]],'#91a86b');rect(x-6,y-28,3,3,'#283f31');rect(x+4,y-28,3,3,'#283f31');ellipse(x+2,y-21,5,3,'#b9b77e');rect(x-9,y-2,5,5,'#465b3c');rect(x+4,y-2,5,5,'#465b3c');}
+
 function houseSprite(h){
  const corners=[[h.minX*32,h.minY*32],[(h.maxX+1)*32,h.minY*32],[(h.maxX+1)*32,(h.maxY+1)*32],[h.minX*32,(h.maxY+1)*32]].map(([x,y])=>viewPoint(x,y));
  for(let i=0;i<4;i++){const a=corners[i],b=corners[(i+1)%4];poly([[a.x,a.y],[b.x,b.y],[b.x,b.y-32],[a.x,a.y-32]],i%2?'#a77f51':'#c6a06a');}
@@ -723,27 +818,27 @@ function draw(){
  const homes=findHouses(state.buildings),insideHome=b=>homes.some(h=>h.tiles.some(t=>t.x===b.x&&t.y===b.y));
  if(isOutside()){
   for(const b of state.buildings.filter(b=>!insideHome(b)&&['floor','stoneFloor'].includes(b.type)))smallProp(b);
-  push(base.x,base.y,bench);push(cave.x,cave.y,caveSprite);
+  push(base.x,base.y,bench);if(state.caveDiscovered||Math.hypot(p.x-cave.x,p.y-cave.y)<180)push(cave.x,cave.y,caveSprite);
   npcData.forEach(n=>push(n.x,n.y,()=>npcSprite(n)));
   for(const h of homes){const v=viewPoint((h.minX+h.maxX+1)*16,(h.minY+h.maxY+1)*16);sprites.push({depth:v.y+20,draw:()=>houseSprite(h)});}
   for(const b of state.buildings.filter(b=>!insideHome(b)&&!['floor','stoneFloor'].includes(b.type)&&!(b.type==='boat'&&state.boatId===(b.id||('boat:'+b.x+':'+b.y))))){const pos=viewPoint((b.x+.5)*32,(b.y+.5)*32);sprites.push({depth:pos.y+heightAt((b.x+.5)*32,(b.y+.5)*32)*12,draw:()=>smallProp(b)});}
-  for(const a of animals)push(a.x,a.y,()=>a.type==='rabbit'?rabbit(a):a.type==='deer'?deer(a):predatorSprite(a));
+  for(const a of animals)push(a.x,a.y,()=>['rabbit','snowHare'].includes(a.type)?rabbit(a):['deer','ibex'].includes(a.type)?deer(a):predatorSprite(a));
   for(const z of zombies)push(z.x,z.y,()=>zombie(z));
   if(state.meteorArrived){push(meteor.x,meteor.y,()=>rock(meteor.x,meteor.y,true));if(!state.alienFriend)push(meteor.x+30,meteor.y+30,()=>alien(meteor.x+30,meteor.y+30));}
   // Ruins, a friendly bear den and oasis landmark make the new regions discoverable.
   for(const[x,y]of[[48,10],[51,10],[51,7]])push(x*32,y*32,()=>{rect(x*32-12,y*32-38,24,38,'#c3b28c');rect(x*32-15,y*32-40,30,8,'#e2cca0');rect(x*32-8,y*32-25,5,7,'#8d8969');});
   push(39*32,12*32,()=>{ellipse(39*32,12*32-5,30,19,'#8d8970');ellipse(39*32,12*32,16,16,'#4e5945');});
-  push(50*32,16*32,()=>{ctx.fillStyle='#ebdda2';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText(tr('OAAS'),50*32,16*32-20);});
-  push(61*32,25*32,()=>{const x=61*32,y=25*32+Math.sin(elapsed)*3;ellipse(x,y,48,20,'#8cb8cb');ellipse(x+29,y-7,24,19,'#a0cbd6');ellipse(x+39,y-12,3,3,'#254a5c');poly([[x-39,y],[x-62,y-17],[x-57,y+4],[x-66,y+16],[x-40,y+7]],'#82afc3');ctx.strokeStyle='#d5edf0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+38,y-5,7,0,Math.PI);ctx.stroke();rect(x+10,y-32,2,10,'#c5eef0');});
+  push(86*32,45*32,()=>{ctx.fillStyle='#ebdda2';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText(tr('OAAS'),50*32,16*32-20);});
+  push(WORLD.whale.x,WORLD.whale.y,()=>{const x=WORLD.whale.x,y=WORLD.whale.y+Math.sin(elapsed)*3;ellipse(x,y,48,20,'#8cb8cb');ellipse(x+29,y-7,24,19,'#a0cbd6');ellipse(x+39,y-12,3,3,'#254a5c');poly([[x-39,y],[x-62,y-17],[x-57,y+4],[x-66,y+16],[x-40,y+7]],'#82afc3');ctx.strokeStyle='#d5edf0';ctx.lineWidth=2;ctx.beginPath();ctx.arc(x+38,y-5,7,0,Math.PI);ctx.stroke();rect(x+10,y-32,2,10,'#c5eef0');});
  }else if(state.inCave){for(const b of bats.filter(b=>b.hp>0))push(b.x,b.y,()=>batSprite(b));if(!state.crystalFound)push(32*32,20*32,()=>crystal(32*32,20*32));}
  else for(const b of worldItems()){const v=viewPoint((b.x+.5)*32,(b.y+.5)*32,0);sprites.push({depth:v.y,draw:()=>smallProp(b)});}
  if(!state.interior)for(const r of resources.filter(r=>!!r.inCave===state.inCave)){
-  if(r.alive)push(r.x,r.y,()=>{if(forageDefs[r.type]){looseSprite(r);if(started&&Math.hypot(r.x-p.x,r.y-p.y)<150){ctx.strokeStyle='#f3dfa2';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(r.x,r.y,10,4,0,0,7);ctx.stroke();ctx.fillStyle='#ffe9ac';ctx.font='10px sans-serif';ctx.textAlign='center';ctx.fillText('✦',r.x,r.y-10-Math.sin(elapsed*3+r.id)*2);}}else if(r.type==='wood')tree(r.x,r.y,r.id%3===0?1:0);else if(r.type==='cactus'){rect(r.x-4,r.y-38,8,40,'#78a777');rect(r.x-15,r.y-26,12,6,'#78a777');rect(r.x-15,r.y-35,5,14,'#78a777');rect(r.x+2,r.y-19,14,6,'#78a777');rect(r.x+11,r.y-30,5,16,'#78a777');ellipse(r.x,r.y-40,4,3,'#f0c5b1');}else if(['stone','ironOre','copperOre'].includes(r.type)){if(!artSprite(r.type==='stone'?'rock':r.type,r.x,r.y+5,36))rock(r.x,r.y);}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);});else if(r.type==='wood'&&!r.removed)push(r.x,r.y,()=>artSprite('stump',r.x,r.y+5,20));
+  if(r.alive)push(r.x,r.y,()=>{if(forageDefs[r.type]){looseSprite(r);if(started&&Math.hypot(r.x-p.x,r.y-p.y)<150){ctx.strokeStyle='#f3dfa2';ctx.lineWidth=1;ctx.beginPath();ctx.ellipse(r.x,r.y,10,4,0,0,7);ctx.stroke();ctx.fillStyle='#ffe9ac';ctx.font='10px sans-serif';ctx.textAlign='center';ctx.fillText('✦',r.x,r.y-10-Math.sin(elapsed*3+r.id)*2);}}else if(r.type==='wood'){const biome=biomeAt(r.x,r.y);if(biome==='jungle')jungleTree(r.x,r.y,r.id);else{tree(r.x,r.y,biome==='snow'?1:r.id%3===0?1:0);if(biome==='snow'){rect(r.x-10,r.y-61,20,4,'#f3f8f1');rect(r.x-16,r.y-39,32,3,'#edf4f0');}}}else if(r.type==='cactus'){rect(r.x-4,r.y-38,8,40,'#78a777');rect(r.x-15,r.y-26,12,6,'#78a777');rect(r.x-15,r.y-35,5,14,'#78a777');rect(r.x+2,r.y-19,14,6,'#78a777');rect(r.x+11,r.y-30,5,16,'#78a777');ellipse(r.x,r.y-40,4,3,'#f0c5b1');}else if(['stone','ironOre','copperOre'].includes(r.type)){if(!artSprite(r.type==='stone'?'rock':r.type,r.x,r.y+5,36))rock(r.x,r.y);}else if(r.type==='herbs')herb(r.x,r.y);else bush(r.x,r.y);});else if(r.type==='wood'&&!r.removed)push(r.x,r.y,()=>artSprite('stump',r.x,r.y+5,20));
  }
  for(const d of state.drops.filter(d=>!!d.inCave===state.inCave&&(d.room||null)===(state.interior?.id||null)&&(d.level||0)===(state.interior?.level||0)))push(d.x,d.y,()=>{ellipse(d.x,d.y,10,7,'#ffe39e44');ctx.font='13px sans-serif';ctx.textAlign='center';ctx.fillStyle='#ffe7a5';ctx.fillText(icons[d.id]||'✦',d.x,d.y);});
  if(state.alienFriend&&!state.interior&&state.alien.inCave===state.inCave)push(state.alien.x,state.alien.y,()=>alien(state.alien.x,state.alien.y));
  push(p.x,p.y,()=>{if(state.boatId)boatSprite(p.x,p.y+4);ctx.save();ctx.translate(0,-Math.sin((state.jump||0)/.65*Math.PI)*24);if(invulnerable>0&&Math.floor(elapsed*10)%2===0)ctx.globalAlpha=.5;simm(p.x,p.y);ctx.restore();});
- sprites.sort((a,b)=>a.depth-b.depth);for(const s of sprites)s.draw();
+ sprites.sort((a,b)=>a.depth-b.depth);for(const s of sprites)s.draw();drawRainbow();
  if(currentTarget&&!paused&&!buildType){const t=currentTarget;billboard(t.x,t.y,()=>{ctx.strokeStyle='#ffe0a0';ctx.lineWidth=1.5;ctx.beginPath();ctx.ellipse(t.x,t.y+2,19,6,0,0,7);ctx.stroke();ctx.fillStyle='#ffe5ad';ctx.font='9px sans-serif';ctx.textAlign='center';ctx.fillText('A / E',t.x,t.y-42);});}
  if(started&&!paused){const start=viewPoint(p.x,p.y),end=viewPoint(p.x+aim.x*35,p.y+aim.y*35);ctx.strokeStyle='#ffe2a6';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(start.x,start.y-10);ctx.lineTo(end.x,end.y-10);ctx.stroke();if(charge){ctx.fillStyle='#ffe2a6';ctx.fillRect(start.x-18,start.y+15,36*bowStats(state,charge.time).power,4);}}
  for(const a of arrows.filter(a=>a.inCave===state.inCave)){const v=viewPoint(a.x,a.y),tail=viewPoint(a.x-a.vx*.025,a.y-a.vy*.025);ctx.strokeStyle='#ffe4ad';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(tail.x,tail.y-8);ctx.lineTo(v.x,v.y-8);ctx.stroke();}
@@ -753,11 +848,11 @@ function draw(){
  for(const item of pickups){const v=viewPoint(item.x,item.y);ctx.globalAlpha=Math.min(1,item.life*2);ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.fillStyle='#fff0b0';ctx.strokeStyle='#122820';ctx.lineWidth=3;const text=`+${item.n} ${names[item.id]}`;ctx.strokeText(text,v.x,v.y-26-(1.5-item.life)*18);ctx.fillText(text,v.x,v.y-26-(1.5-item.life)*18);}ctx.globalAlpha=1;
  if(buildType){const point=buildPoint(),loc=placement(point.x,point.y);ctx.globalAlpha=.6;smallProp({x:loc.gx,y:loc.gy,type:buildType});ctx.globalAlpha=1;const pts=projectedTile(loc.gx,loc.gy,loc.valid?'#cce69b55':'#eb9b8e66',isOutside()?heightAt(loc.cx,loc.cy):0);ctx.strokeStyle=loc.valid?'#daf7a4':'#ffa997';ctx.lineWidth=2;ctx.beginPath();pts.forEach((p,i)=>i?ctx.lineTo(p.x,p.y):ctx.moveTo(p.x,p.y));ctx.closePath();ctx.stroke();}
  ctx.restore();const dark=state.interior?0:state.inCave?.25:state.time>=300?.35:0;if(dark){ctx.fillStyle=`rgba(8,20,38,${dark})`;ctx.fillRect(0,0,canvas.width,canvas.height);}
- for(const b of worldItems().filter(b=>/Lamp$/.test(b.type)||b.type==='fire'&&b.fuel>0)){const point=viewPoint((b.x+.5)*32,(b.y+.5)*32),x=point.x-cam.x,y=point.y-cam.y-18,g=ctx.createRadialGradient(x,y,2,x,y,70);g.addColorStop(0,b.type==='crystalLamp'?'#b4f5ed44':'#ffe6ac38');g.addColorStop(1,'#ffe6ac00');ctx.fillStyle=g;ctx.fillRect(x-70,y-70,140,140);}
+ for(const b of worldItems().filter(b=>/Lamp$/.test(b.type)||b.type==='fire'&&b.fuel>0)){const point=viewPoint((b.x+.5)*32,(b.y+.5)*32),x=point.x-cam.x,y=point.y-cam.y-18,g=ctx.createRadialGradient(x,y,2,x,y,70);g.addColorStop(0,['crystalLamp','frostLamp'].includes(b.type)?'#b4f5ed44':'#ffe6ac38');g.addColorStop(1,'#ffe6ac00');ctx.fillStyle=g;ctx.fillRect(x-70,y-70,140,140);}
 }
 
 function resize(){const r=canvas.getBoundingClientRect(),scale=r.height>=1400?3:2;canvas.width=Math.max(1,Math.round(r.width/scale));canvas.height=Math.max(1,Math.round(r.height/scale));ctx.imageSmoothingEnabled=false;}
 new ResizeObserver(resize).observe(canvas);resize();refresh();
 $('startButton').disabled=true;$('newGameButton').disabled=true;
-Promise.allSettled([atlasImage.decode(),heroImage.decode(),extraImage.decode()]).then(()=>{updateHUD();draw();paintTitlePortrait();assetsReady=true;document.querySelector('.game-shell').dataset.ready='true';$('startButton').disabled=false;$('newGameButton').disabled=false;$('loadStatus').textContent=tr('WASD + hiir või Xboxi pult · A alustab · Y uus mäng');});
+Promise.allSettled([atlasImage.decode(),heroImage.decode(),extraImage.decode(),npcImage.decode()]).then(()=>{updateHUD();draw();paintTitlePortrait();assetsReady=true;document.querySelector('.game-shell').dataset.ready='true';$('startButton').disabled=false;$('newGameButton').disabled=false;$('loadStatus').textContent=tr('WASD + hiir või Xboxi pult · A alustab · Y uus mäng');});
 function frame(time){const dt=last?Math.min((time-last)/1000,.05):0;last=time;const pad=readPad();if(!document.hidden)tickWhale(dt);if(!document.hidden){if(!paused&&started&&assetsReady){update(dt,pad);draw();}}updateAudio({moving:state.player.walk>0,night:state.time>=300,inCave:state.inCave,nearFire:!!nearFire()?.fuel,paused:paused||!started||!!death||document.hidden});requestAnimationFrame(frame);}requestAnimationFrame(frame);

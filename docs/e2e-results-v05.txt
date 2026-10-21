@@ -1,0 +1,71 @@
+SIMM-IN-THE-WILD 0.5.0 — verification on 2026-10-21
+
+Baseline: 928c074 (0.4.3 plus approved NPC concept revision).
+
+New v0.5 browser scenarios: PASS.
+  building/crafting art, text, buttons and panels do not overlap at 720p, 1080p, 4K in English and Estonian; inventory remains visible
+  controller LT/RT category filters, LB/RB tabs, retained recipe focus, A selection and B cancellation
+  precise repeated controller floor placement and independent left-stick walking preserved in all four camera directions
+  real skeleton defeats drop bones/ore on ground, A collects them and controller crafting creates a reinforced bow
+  all six named NPCs have visible approved artwork, dialogue, ages/roles, actual delivery quests and rewards; Diego lives in jungle
+  fresh world spawns foxes, white hares, polar bears, arctic foxes, ibex, trolls and jungle predators; cave starts undiscovered
+  jungle canopy and snowy peaks render in larger biomes without page errors
+  rare rainbow starts naturally on an eligible day, player walks to the end, claims gold once and reward state survives reload
+
+Continuous fresh-game standalone journey: PASS, 374 seconds wall time.
+No injected save, supplies, progression or game-clock acceleration.
+Crop growth and day/night run at normal speed. The journey selects Estonian;
+the dedicated v05 suite separately tests English and Estonian interfaces.
+
+  1s | day 1, time 0, health 5 | Fresh standalone game: no injected save or supplies
+ 13s | day 1, time 11, health 5 | Hand gathering and stone pickaxe crafted through the UI
+ 24s | day 1, time 23, health 5 | Gathering actual timber for the house
+ 36s | day 1, time 34, health 5 | Gathering actual timber for the house
+ 54s | day 1, time 52, health 5 | Gathering actual timber for the house
+ 82s | day 1, time 78, health 5 | Natural wood, stone and fibre collected; torch crafted
+ 86s | day 1, time 81, health 5 | Chest, raised bed and fire built; carrots planted
+ 96s | day 1, time 89, health 5 | A complete house built from gathered supplies, entered, furnished and exited
+142s | day 1, time 134, health 5 | Chest transfers, fire fuel and the cave crystal quest completed normally
+279s | day 1, time 269, health 5 | Naturally grown carrots harvested and ranger quest rewarded
+374s | day 2, time 0, health 5 | Day 2 reached; house, furniture, quest and inventory persisted across reload
+
+Fresh journey JavaScript errors: 0; external assets: 0.
+
+Verification commands (all passed; nine browser suites):
+  npm run check
+  npm test — 44 individual tests across six files
+  npm run test:v05
+  npm run test:v043
+  npm run test:v04
+  npm run test:menus
+  npm run test:browser
+  npm run test:recipes-collision
+  npm run test:standalone
+  npm run test:respawn
+  npm run test:e2e-journey
+
+Final skill-menu focus latency sample: 14, 88, 78, 87, 74, 68 ms.
+Paused callback work: about 0.0–0.1 ms in this managed browser.
+
+Layout checks inspect all recipe rows, their SVG art/text bounds, inter-row
+intersections, horizontal overflow and panel intersections. Resolutions:
+1280x720, 1920x1080 and 3840x2160, in both supported languages.
+
+Model checks cover enlarged biome areas and mountain heights; all six NPC ages,
+names and quest transactions; useful enemy drops; cloth-to-fibre output; healing
+salve; bow/charm effects; deterministic rare events; one-time gold claims; bag
+overflow; lantern costs; legacy save/boat migration; and the cave approach.
+
+Legacy scenarios retain resource gathering, hunting, combat, cooking, fishing,
+save/reload, defeat recovery, skills, crop growth, NPC rewards, houses/interiors,
+stairs, storage, boats/whales, lamps, camera directions and terrain movement.
+World-size and new layout assumptions in old tests were updated explicitly.
+
+Limitations: controller input is simulated through the Gamepad API; no physical
+Xbox controller or console was available. Tests are automated heuristic and
+functional checks, not a controlled human usability study or exhaustive review
+of every route/building layout. Managed Chromium blocks direct file:// URLs;
+that part explicitly skips, while inline and local-HTTP standalone builds pass.
+NPCs currently use full-body idle sprites/portraits and text dialogue; this
+release does not introduce recorded voices or walking animation sprite sheets.
+Research and implementation rationale: docs/v05-design-notes.txt.

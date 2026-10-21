@@ -1,0 +1,88 @@
+SIMM-IN-THE-WILD 0.5 — controller interface design notes
+2026-10-21
+
+Evidence and its limits
+
+Microsoft Xbox Accessibility Guideline 112: UI navigation
+https://learn.microsoft.com/en-us/xbox/accessibility/xbox-accessibility-guidelines/112
+Read for consistent interaction methods and predictable directional focus.
+
+Game Accessibility Guidelines: full list
+https://gameaccessibilityguidelines.com/full-list/
+Read for legibility, spacing, contextual guidance, stationary targets and access
+through the same input method used during gameplay.
+
+Desurvire & Wiberg (2009), Game Usability Heuristics (PLAY) for Evaluating and
+Designing Better Games: The Next Iteration. DOI: 10.1007/978-3-642-02774-1_60.
+Bibliographic/abstract background, not a claim to have read the paywalled full
+paper. The authors' publication/resource pages were also checked:
+https://www.userbehavioristics.com/books
+https://www.userbehavioristics.com/gap-and-play
+
+These are research background and industry guidance, not evidence that this
+particular interface has been validated in a controlled human study. The release
+uses heuristic review plus automated functional/layout checks. Mattias's actual
+controller play remains important usability evidence.
+
+Applied decisions
+
+1. Building and crafting share one master/detail layout: personal inventory,
+   recipe list, selected recipe details. The list does not cram a large picture,
+   long ingredient paragraph and action button into the same space.
+2. Every recipe has an icon plus a text label. Readiness has a symbol and text;
+   colour alone is not required to understand whether crafting is possible.
+3. Basic recipes have a stable order near the beginning. Lists do not reorder
+   themselves every time stock changes. Categories reduce the visible choices.
+4. Left stick/D-pad moves focus, A acts, B returns, LB/RB switches tabs, LT/RT
+   switches recipe categories. Keyboard arrows/Enter/Escape and brackets work;
+   PageUp/PageDown changes categories. No mouse-style cursor or dragging is
+   required inside these menus. Right stick scrolls recipe/skill details.
+5. Unavailable recipes remain focusable, with requirements in the details panel.
+   The same validation blocks mouse and controller activation without spending
+   materials. No craft occurs just because focus or hover changes.
+6. Personal stock stays visible beside recipes at tested desktop/TV sizes.
+   Ingredients report both backpack and nearby-chest amounts. On narrow mobile
+   widths, the auxiliary inventory column is hidden; the Backpack tab remains.
+7. Focus and recipe-list scroll survive tab changes and successful crafting.
+   Repeated crafting does not force the player back to the first item.
+8. World building retains the absolute tile cursor from 0.4.3. Right stick/D-pad
+   changes a tile; walking does not move it; mouse leftovers do not override it.
+9. Skill branches are compact vertical groups beside a persistent explanation
+   and learn action, rather than large irregular child cards. A learns the
+   selected skill; locked skills can still be inspected.
+10. Workbench rows have explicit minimum grid track sizes and content-based
+    growth. SVG art has bounded dimensions. Automated tests compare text/art
+    bounds with their button and detect intersecting rows/panels.
+
+Validation targets
+
+English and Estonian; 1280x720, 1920x1080 and 3840x2160; every listed recipe,
+including unavailable recipes; controller-only categories, tab changes and
+building; ingredient preservation when crafting is blocked; nearby chest use;
+skill focus/learning; natural fresh-game progression and save/reload.
+
+The menu latency test measures skill-menu focus, not every action in the game.
+In the recorded successful run: 14, 88, 78, 87, 74, 68 ms. Paused callback work
+was about 0.0–0.1 ms. This is one managed Chromium environment, not a hardware
+Xbox performance benchmark.
+
+World/rendering decisions
+
+The map is 128x96 tiles, four times the previous area. Larger forest, desert and
+sea regions coexist with a southern jungle and northeastern snowy mountains.
+The terrain renderer caches visible 16x16-tile chunks with a 64-entry bound,
+rather than creating four full-world image layers. Original camp resource IDs
+remain stable; expansion resources have independent IDs and mixed coordinate
+hashes so they do not form accidental rows. NPC areas stay visually clear.
+
+The cave is farther away and absent from the map until discovered. Karjon gives
+a regional clue without requiring completion of his delivery quest. Existing
+saves preserve camp buildings, stock and NPC quest flags; old coastal boats are
+moved into the expanded sea. Previously found crystals preserve cave discovery.
+
+Rare rainbows use an approximately 8% deterministic daily eligibility check from
+day two onward, after 90 active seconds of daylight. An event lasts 120 active
+seconds. Its accessible land endpoint is near the player, and can give three
+gold once. Event, expiry and claimed state persist in saves. Gold is used in a
+buildable golden lantern. The weather test starts just before the trigger on an
+eligible day and actually walks to the endpoint; it does not inject a rainbow.

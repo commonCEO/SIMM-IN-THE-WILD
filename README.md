@@ -1,4 +1,4 @@
-# SIMM — In the wild · 0.4.3
+# SIMM — In the wild · 0.5.0
 
 A browser survival adventure designed with Mattis. English is the default language; choose English or Eesti on the title screen, in the HUD, or from Pause. Text and NPC dialogue switch immediately, and the language preference persists independently of your game save. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
@@ -17,6 +17,19 @@ Saves use browser localStorage. Earlier saves are migrated when available. Brows
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.5 — a wider world and a controller workbench
+
+- Crafting/building now show inventory, a recipe list and the selected recipe side by side. All recipes have icons, stock counts and clear requirements. LT/RT changes categories, LB/RB changes tabs, A acts and B returns. Basic recipes come first, selection is retained, and unavailable recipes can be inspected. The skills view has compact, predictable branches. The precise world-building cursor remains intact.
+- Six NPCs use Mattias's approved designs: **Bronkings** (22), **Diego** (7), **Karjon** (165), **Anyo** (36), **Salty** (27) and **Leina** (13). They have individual portraits, world sprites, dialogue and delivery quests in both languages. Diego is a wild jungle child with his pet rat; Bronkings stays bald.
+- The world is **128×96 tiles**, four times the area: larger forest, desert and sea, a southern jungle and much higher snowy mountains. Foxes, white hares, arctic foxes, polar bears, ibex, small trolls and jungle predators inhabit it. The more distant cave is hidden on the map until found; Karjon offers a clue.
+- Defeated enemies leave collectable materials. Bones reinforce bows, cloth becomes fibre, fangs/fur make a health charm, troll moss makes healing salve, and frost shards make lanterns. Wildlife also supplies food/fur. Drops and their expiry survive saving.
+- Very rare rainbows can reveal gold at their end. Find and collect it before the event fades, then craft a golden lantern. Reloading cannot claim the same treasure twice.
+- Existing saves preserve inventory, camp buildings and completed quests; old sea boats move to the new coastline. Terrain uses bounded visible-chunk caching for the larger map. Both standalone HTML files still embed the art and need no asset server.
+
+![Inventory and crafting together](docs/v05-crafting.png)
+
+Run `npm run test:v05` for the new world, NPC, loot, rainbow and controller/layout scenarios. The [design and research notes](docs/v05-design-notes.txt) distinguish published guidance from what was actually tested. The [0.5 test report](docs/e2e-results-v05.txt) records results and limitations.
 
 ## Version 0.4.3 — precise controller building and clearer feedback
 

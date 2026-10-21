@@ -14,7 +14,7 @@ const modelBindings=sources[3].match(/import \{ (.*) \} from '\.\/model.js';/)[1
 const modelExports=[...sources[1].matchAll(/^export (?:const|function) (\w+)/gm)].map(m=>m[1]).join(',');
 const js=[clean(sources[0]),`const {${modelBindings}}=(()=>{${clean(sources[1])}\nreturn {${modelExports}};})();`,`const {toggleAudio,sound,updateAudio,setVolume}=(()=>{${clean(sources[2])}\nreturn {toggleAudio,sound,updateAudio,setVolume};})();`,clean(sources[3])].join('\n');
 html=html.replace('<link rel="stylesheet" href="/src/style.css">',`<style>${css}</style>`).replace('<script type="module" src="/src/game.js"></script>',()=>`<script type="module">${js}</script>`);
-for(const name of ['woodland-atlas.png','simm-walk.png','campsite-atlas.png']){const data=await readFile(path.join(root,'assets/art',name));html=html.replaceAll(`/assets/art/${name}`,`data:image/png;base64,${data.toString('base64')}`);}
+for(const name of ['woodland-atlas.png','simm-walk.png','campsite-atlas.png','npcs-v05.png']){const data=await readFile(path.join(root,'assets/art',name));html=html.replaceAll(`/assets/art/${name}`,`data:image/png;base64,${data.toString('base64')}`);}
 const licenses=await Promise.all(['DM-Sans-OFL.txt','Outfit-OFL.txt'].map(name=>readFile(path.join(root,'assets/fonts',name),'utf8')));
 html=html.replace('</body>',()=>`<script type="text/plain" id="font-licenses">${licenses.join('\n\n')}</script></body>`);
 html=html.replace('href="/" aria-label="Simm avaleht"','href="#" aria-label="Simm avaleht"');
