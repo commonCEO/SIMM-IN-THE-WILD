@@ -1,0 +1,35 @@
+SIMM-IN-THE-WILD 0.5.1 — rendering repair, 2026-11-11
+
+Cause: the world canvas used CSS width/2 and height/2 (or /3 on large displays),
+then CSS magnified the resulting raster. Character artwork and 8px world text
+were reduced before magnification. Device pixel ratio was ignored.
+
+Fix: native CSS-size times DPR backing store, separate logical world viewport,
+unchanged world zoom, density-aware transforms and pointer conversion. Character
+sprites use high-quality resampling at final resolution. World labels have
+native-resolution 9px world text (18 CSS px normally, 27 at the larger zoom)
+and dark contrast panels. Resize and DPR changes redraw even while paused.
+
+PASS: npm run check; 44 existing unit/build tests; test:v05; test:standalone;
+and the new test:render-resolution browser regression.
+
+Resolution regression results:
+  1280x720, DPR 1: backing 1280x720; four camera pointer-placement checks passed.
+  1440x900, DPR 1: backing 1440x900; four camera pointer-placement checks passed.
+  1440x900, DPR 2: backing 2880x1800; four camera pointer-placement checks passed.
+  1920x1080, DPR 1: backing 1920x1080; four camera pointer-placement checks passed.
+  3840x2160, DPR 1: backing 3840x2160; four camera pointer-placement checks passed.
+  1023x767, DPR 1.25: backing 1279x959; four camera pointer-placement checks passed.
+  Resize plus a live DPR change while paused: passed without changing inventory.
+  JavaScript page errors: zero.
+
+The baseline 1440x900 build used a 720x450 raster. The repaired build uses
+1440x900 at DPR 1 and 2880x1800 at DPR 2, with the same world framing.
+The new test records actual canvas text/character draw transforms and sampling
+settings as well as checking backing dimensions and real mouse placements.
+
+Standalone HTML was tested inline and over local HTTP with no external asset
+requests. Managed Chromium blocks direct file:// navigation; that path explicitly
+skips. Screen-density emulation was used rather than physical Retina hardware.
+
+Visual example: docs/render-sharp-v051.png

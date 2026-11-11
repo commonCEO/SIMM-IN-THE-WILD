@@ -1,4 +1,4 @@
-# SIMM — In the wild · 0.5.0
+# SIMM — In the wild · 0.5.1
 
 A browser survival adventure designed with Mattis. English is the default language; choose English or Eesti on the title screen, in the HUD, or from Pause. Text and NPC dialogue switch immediately, and the language preference persists independently of your game save. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
@@ -17,6 +17,12 @@ Saves use browser localStorage. Earlier saves are migrated when available. Brows
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.5.1 — sharper characters and readable world labels
+
+The world canvas now renders at CSS size × device pixel ratio, while its camera, zoom and interaction coordinates remain in separate world units. The old half/third-resolution canvas magnified already-rasterized characters and text. Simm and NPCs now use high-quality image resampling at the final drawing resolution; NPC names, cave/crop labels and interaction labels have native-resolution text on dark contrast panels. The renderer also detects pixel-density changes and redraws correctly after resize, including while paused.
+
+`npm run test:render-resolution` verifies native backing dimensions, character/text draw transforms and real pointer placement in all four camera views at 720p, 1080p, 4K, DPR 2 and a fractional DPR. It also changes DPR while paused. No new character artwork or save migration is needed.
 
 ## Version 0.5 — a wider world and a controller workbench
 

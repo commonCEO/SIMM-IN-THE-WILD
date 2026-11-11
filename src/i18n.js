@@ -16,7 +16,7 @@ const english = {
   "Tere tagasi, Simm!": "Welcome back, Simm!",
   "Metsakristall ootab põhja pool. A / E suhtleb või hüppab. View / I avab menüü.": "The forest crystal awaits in the north. A / E interacts or jumps. View / I opens the menu.",
   "Jätka seiklust": "Continue adventure",
-  "Sinu mets, varud ja ehitised on alles. Versioon 0.5.0 ootab uut seiklust.": "Your world, supplies and buildings are saved. Version 0.5.0 awaits a new adventure.",
+  "Sinu mets, varud ja ehitised on alles. Versioon 0.5.1 ootab uut seiklust.": "Your world, supplies and buildings are saved. Version 0.5.1 awaits a new adventure.",
   "Heli sees": "Sound on",
   "Heli väljas": "Sound off",
   "Brauser ei saanud heli käivitada.": "The browser could not start audio.",
