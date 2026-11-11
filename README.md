@@ -1,22 +1,37 @@
-# SIMM — In the wild · 0.5.1
+# SIMM — In the wild · 0.6.0
 
 A browser survival adventure designed with Mattis. English is the default language; choose English or Eesti on the title screen, in the HUD, or from Pause. Text and NPC dialogue switch immediately, and the language preference persists independently of your game save. The game fills the browser window; the toolbar, health, time and unspent skill points stay inside the game. All graphics, fonts and original synthesized sound are local.
 
-![Simm game preview](docs/preview.png)
+![Simm diorama game preview](docs/v06-gameplay.png)
 
-![Fullscreen skill tree](docs/skills.png)
-
-![Desert and oasis](docs/desert.png)
+![Backpack with explicit item actions](docs/v06-backpack.png)
 
 ## Try without installation
 
 Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) and open it in a current desktop browser. Alternatively download the repository ZIP, extract it, and open the root `index.html`. `play/index.html` is an identical standalone copy. No server or asset downloads are required. Press the fullscreen button or F11 for browser fullscreen.
 
-Saves use browser localStorage. Earlier saves are migrated when available. Browsers may store file-URL saves separately when you change the downloaded filename or folder. Gamepad support and local save behavior on file URLs depend on the browser; an HTTP server provides a stable origin when needed. Physical Xbox playtesting is still needed for 0.4.
+Saves use browser localStorage. Earlier saves are migrated when available. Browsers may store file-URL saves separately when you change the downloaded filename or folder. Gamepad support and local save behavior on file URLs depend on the browser; an HTTP server provides a stable origin when needed. Physical Xbox playtesting is still needed; automated controller checks use the browser Gamepad API.
 
 ## Start a new adventure
 
 Choose **Uus mäng** on the title screen (Xbox Y), or open Pause with Escape / Xbox Menu and choose **Uus mäng**. When replacing an existing save, the in-game confirmation starts with **Cancel** selected. Choose **Jah, alusta uut mängu** to reset the world, inventory, tools, skills, quests and creatures. No browser-native confirmation dialog is required.
+
+## Version 0.6 — the diorama world
+
+The selected art direction is **concept 2: a stylized diorama**. Seven new local atlases replace the active pixel artwork: six sheets contain characters, wildlife, scenery, furniture, held tools and inventory items; the seventh supplies six terrain materials. This is a **2.5D sprite renderer with rendered 3D-style artwork**, ground elevation, depth sorting and soft lighting, rather than a polygonal 3D engine. Text still uses native HiDPI backing pixels. The actual [gameplay screenshot](docs/v06-gameplay.png) shows the implementation, distinct from the earlier [concept sheet](docs/v06-art-directions.png).
+
+- **Zoom:** mouse wheel, keyboard +/−, HUD +/− buttons, or hold **R3 and move the right stick up/down**. Pause offers zoom buttons and reset. Zoom persists independently of saves; default is 85%, range 55–150%. Normal right-stick aiming and furniture placement retain their controls.
+- **Homes:** talk to **Bronkings** at camp and choose **My house**, or inspect **Building → Houses**. Bring the displayed materials; construction takes **three game days**. Rest in the camp tent to advance to morning. Your completed cabin is southwest of camp and includes a bed and chest. Further orders produce a cottage and a Starlight home with upper floors. Existing possessions, furniture and legacy houses are retained. Outdoor modular house pieces are replaced by this flow; free furniture/garden/lighting placement remains available.
+- **World:** **192×144 square tiles**, 2.25 times the area of 0.5. Biomes have curved, irregular boundaries. Forest, jungle, snowy mountains, desert and sea all expand; the desert has a substantial land buffer from the ocean. The coastline meanders, and boat placement follows the actual shore.
+- **Volcano:** Ashpeak lies southeast, with a walkable entrance into volcanic halls. Glowing fissures burn; smoke and an on-screen warning precede periodic eruptions. Stay away from the crater during an eruption.
+- **Dungeon:** six connected chambers, corridors, ore, bats, persistent supply chests and a distant crystal replace the small cave room. A light ring marks the exit, and the Map tab shows the dungeon layout while underground. The volcano has its own chest contents and return entrance.
+- **Tools and aiming:** equipped axe, pickaxe, bow, torch and rod have distinct visible held artwork and matching menu icons. The permanent aim line is removed; a compact marker and power meter appear only while charging a bow.
+- **Backpack:** select an item, then explicitly choose **Drink water**, **Eat**, **Use** or **Drop 1**. Selecting an item does not consume or drop it. Drinking restores hydration and reduces heat, plays sound when audio is enabled, and reports the result inside the menu. Unneeded consumables remain in the bag. All item views have icons.
+- **Menus:** backpack, quests, crafting, building, skills and map use the same outer frame and dimensions. Crafting/building retain their inventory/recipe/detail columns and controller navigation.
+
+Run `npm run check`, `npm test`, `npm run test:v06`, `npm run test:render-resolution`, `npm run test:recipes-collision` and `npm run test:standalone`. Browser suites need `npm start` and Chromium; set `CHROMIUM_PATH=/usr/bin/chromium` where applicable. The [0.6 test report](docs/e2e-results-v06.txt) records actual checks and limitations. Some older version-specific browser scripts describe superseded modular-house interactions; the current 0.6 suite tests the replacement house flow.
+
+**Multiplayer is recorded as future work and is not implemented.** The [requirements](docs/v06-requirements.txt) and [release notes](docs/v06-release.txt) retain the agreed scope and control/source references.
 
 ## Version 0.5.1 — sharper characters and readable world labels
 
@@ -174,4 +189,4 @@ Cloud tasks already run in isolated environments; use the existing checkout rath
 
 ## Future release
 
-PEGI 7 is the art/content target; no official age rating has been obtained. Intended itch.io price: €4.99. The game has not been published there. Touch controls, ice/volcano biomes, more biomes and quests, gold/tin/bronze and release balancing remain future work. Fonts include their SIL Open Font License notices; no downloaded music or commercial asset subscriptions are used.
+PEGI 7 is the art/content target; no official age rating has been obtained. Intended itch.io price: €4.99. The game has not been published there. Multiplayer, touch controls, additional quests, tin/bronze and release balancing remain future work. Snow, volcanoes and rainbow gold are already playable. Fonts include their SIL Open Font License notices; no downloaded music or commercial asset subscriptions are used.

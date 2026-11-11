@@ -1,4 +1,4 @@
-export const WORLD={width:128,height:96,seaX:104,cave:{x:65*32,y:29*32},whale:{x:124*32,y:50*32}};
+export const WORLD={width:192,height:144,seaX:164,cave:{x:65*32,y:29*32},volcano:{x:132*32,y:112*32},whale:{x:183*32,y:64*32}};
 export const hostileTypes=['wolf','bear','skeleton','polarBear','troll','jaguar'];
 export const STACK_SIZE = 20;
 export const DROP_LIFETIME = 600;
@@ -6,7 +6,7 @@ export const names = {bone:'Luu',cloth:'Kangas',fang:'Kihv',fur:'Karusnahk',fros
 export const icons = {bone:'🦴',cloth:'▧',fang:'◭',fur:'▨',frostShard:'❄',trollMoss:'❧',gold:'●',banana:'☽',salve:'✚',wood:'🪵',stone:'🪨',berries:'🫐',crystal:'💎',star:'✦',herbs:'🌿',meat:'🥩',roast:'🍗',stew:'🍲',ironOre:'◈',copperOre:'◆',iron:'▰',copper:'▰',slab:'▱',fish:'🐟',cookedFish:'🍢',carrot:'🥕',potato:'🥔',magicFlower:'✿',healPotion:'♥',speedPotion:'➤',peacePotion:'❧',water:'💧',pearl:'◉',fiber:'〰',sand:'▧',glass:'◇',bakedPotato:'🥔'};
 export const tools = [{id:'hand',icon:'✋',name:'Käsi'},{id:'axe',icon:'🪓',name:'Kirves'},{id:'pickaxe',icon:'⛏️',name:'Kirka'},{id:'bow',icon:'🏹',name:'Vibu'},{id:'torch',icon:'🔥',name:'Tõrvik'},{id:'rod',icon:'🎣',name:'Õng'}];
 export function freshState() {
-  return {inventory:Object.fromEntries(Object.keys(names).map(k=>[k,0])),bagSlots:20,gathered:{wood:0,stone:0,berries:0},tools:['hand','axe'],buildings:[],skills:{combat:0,craft:0,gather:0,star:0},level:1,xp:0,points:0,health:5,hunger:100,day:1,time:0,worldAge:0,drops:[],crystalFound:false,alienFriend:false,alienFollowing:true,alien:null,shelterFound:false,nightsSurvived:0,beaconBuilt:false,meteorArrived:false,inCave:false,stumpsRemoved:[],regrowth:{},wildlifeReturns:[],effects:{},thirst:100,heat:0,camera:0,jump:0,interior:null,roomItems:[],npcQuests:{},harvested:0,whalesReleased:0,boatId:null,worldVersion:5,caveDiscovered:false,rainbow:null,rainbowCheckedDay:0};
+  return {inventory:Object.fromEntries(Object.keys(names).map(k=>[k,0])),bagSlots:20,gathered:{wood:0,stone:0,berries:0},tools:['hand','axe'],buildings:[],skills:{combat:0,craft:0,gather:0,star:0},level:1,xp:0,points:0,health:5,hunger:100,day:1,time:0,worldAge:0,drops:[],crystalFound:false,alienFriend:false,alienFollowing:true,alien:null,shelterFound:false,nightsSurvived:0,beaconBuilt:false,meteorArrived:false,inCave:false,stumpsRemoved:[],regrowth:{},wildlifeReturns:[],effects:{},thirst:100,heat:0,camera:0,jump:0,interior:null,roomItems:[],npcQuests:{},harvested:0,whalesReleased:0,boatId:null,worldVersion:6,home:{level:0,x:24,y:33,order:null},caveKind:null,caveDiscovered:false,rainbow:null,rainbowCheckedDay:0};
 }
 export const recipes = [
 {id:'boneBow',name:'Tugevdatud vibu',icon:'🏹',cost:{bone:3,fiber:2,wood:2},gear:'bow'},
@@ -83,7 +83,7 @@ export function advanceTime(s,dt){s.worldAge=(s.worldAge||0)+dt;s.time+=dt;while
 export function usedSlots(s){return Object.values(s.inventory).reduce((n,v)=>n+Math.ceil(v/STACK_SIZE),0);}
 export function addItem(s,id,amount){if(!Object.hasOwn(s.inventory,id)||!Number.isInteger(amount)||amount<0)return false;const old=s.inventory[id];s.inventory[id]+=amount;if(usedSlots(s)>(s.bagSlots||20)){s.inventory[id]=old;return false;}return true;}
 export function cook(s,recipe){if((!recipe.cook&&!recipe.smelt)||!canPay(s,recipe.cost))return false;const next={...s,inventory:{...s.inventory}};pay(next,recipe.cost);const n=(recipe.quantity||1)*(recipe.id==='slab'&&s.skills.mason?2:1);if(!addItem(next,recipe.output||recipe.id,n))return false;s.inventory=next.inventory;return true;}
-export function dropItem(s,id,x,y,inCave=false){if(!s.inventory[id])return false;s.inventory[id]--;s.drops.push({id,amount:1,x,y,inCave,room:s.interior?.id||null,level:s.interior?.level||0,expires:(s.worldAge||0)+DROP_LIFETIME});return true;}
+export function dropItem(s,id,x,y,inCave=false){if(!s.inventory[id])return false;s.inventory[id]--;s.drops.push({id,amount:1,x,y,inCave,caveKind:s.caveKind||'forest',room:s.interior?.id||null,level:s.interior?.level||0,expires:(s.worldAge||0)+DROP_LIFETIME});return true;}
 export function bowStats(s,charge){const power=Math.min(1,Math.max(0,charge)/(s.skills.quickdraw ? .78 : 1.2));return {power,range:120+power*300,speed:220+power*220,damage:1+power*3+(s.gear?.bow?2:0)+(s.skills.combat||0)+(s.skills.quickdraw?1:0)};}
 export function lakeWater(x,y){const tx=x/32,ty=y/32;return ((tx-15)**2/36+(ty-19)**2/65<1)||((tx-53)**2/32+(ty-39)**2/27<1);}
 export function wallOrientation(b,buildings){if(b.rotation)return b.rotation;const neighbor=(dx,dy)=>buildings.some(n=>n!==b&&['wall','door','window'].includes(n.type)&&n.x===b.x+dx&&n.y===b.y+dy);return neighbor(0,1)||neighbor(0,-1)?'v':'h';}
@@ -94,25 +94,36 @@ export function questSteps(s){return [
  {title:'Valgus pimeduses',text:'Meisterda tõrvik: 2 puitu ja 1 taimekiud tahiks.',done:s.tools.includes('torch')},
  {title:'Metsa saladus',text:'Küsi Karjonilt vihjet. Koobas peitub kaugel idas, mägede lõunaservas.',done:s.crystalFound},
  {title:'Sõber tähtedelt',text:'Leia ida poolt meteoriit ja ütle Nupsile tere.',done:s.alienFriend},
- {title:'Oma paik maailmas',text:'Ehita suletud tuba seinte ja uksega, siis astu oma koju sisse.',done:s.shelterFound},
+ {title:'Oma paik maailmas',text:'Vii Bronkingsile maja materjalid. Kolme päeva pärast astu oma koju.',done:s.shelterFound},
  {title:'Kolm tähistaevast',text:`Ela üle kolm ööd. Seni üle elatud: ${s.nightsSurvived||0}/3.`,done:(s.nightsSurvived||0)>=3},
  {title:'Tähemajakas',text:'Sulata metallid ja ehita kristallist tähemajakas — sinu baasi särav süda.',done:s.beaconBuilt}
 ];}
 
 // Version 0.4 systems use game seconds, including while away from a biome.
-export function inWater(x,y){const cx=(Math.floor(x/32)+.5)*32,cy=(Math.floor(y/32)+.5)*32;return cx>=WORLD.seaX*32||Math.hypot(cx-86*32,cy-45*32)<48||lakeWater(cx,cy);}
-export function biomeAt(x,y){const tx=x/32,ty=y/32;return tx>=WORLD.seaX?'sea':tx>=50&&tx<104&&ty<24?'snow':ty>=62&&tx<68?'jungle':tx>=68&&ty>=24&&ty<72?'desert':'forest';}
+export function coastAt(y){return WORLD.seaX+Math.sin(y/32*.07)*4+Math.sin(y/32*.17)*2;}
+export function inWater(x,y){const cx=(Math.floor(x/32)+.5)*32,cy=(Math.floor(y/32)+.5)*32;return cx>=coastAt(cy)*32||Math.hypot(cx-110*32,cy-65*32)<56||lakeWater(cx,cy);}
+export function biomeAt(x,y){
+ const tx=x/32,ty=y/32,wave=Math.sin(tx*.13)*.08+Math.cos(ty*.19)*.06;
+ if(tx>=coastAt(y))return 'sea';
+ if(Math.hypot((tx-132)/18,(ty-112)/20)<1+wave)return 'volcano';
+ if(Math.hypot((tx-94)/49,(ty-14)/29)<1+wave)return 'snow';
+ if(Math.hypot((tx-54)/49,(ty-105)/36)<1+wave)return 'jungle';
+ if(Math.hypot((tx-110)/29,(ty-64)/29)<1+wave)return 'desert';
+ return 'forest';
+}
 export function heightAt(x,y){
- if(inWater(x,y))return 0;const tx=Math.floor(x/32),ty=Math.floor(y/32);if(tx>=WORLD.seaX-2)return 0;if(Math.hypot(tx+.5-31,ty+.5-29)<6.5)return 0;
- if(biomeAt(x,y)==='snow'){const peak=Math.max(0,10-Math.hypot((tx-77)*.55,(ty-10)*.8));return Math.max(1,Math.floor(peak));}
+ if(inWater(x,y))return 0;const tx=Math.floor(x/32),ty=Math.floor(y/32);if(tx>=coastAt((ty+.5)*32)-3)return 0;if(Math.hypot(tx+.5-31,ty+.5-29)<12)return 0;
  if(ty>=27&&ty<=30&&tx>=30&&tx<=66)return 0;
- if(biomeAt(x,y)==='desert')return Math.max(0,Math.floor(1.4+Math.sin(tx*.65)*Math.cos(ty*.4)*1.6));
+ if(biomeAt((tx+.5)*32,(ty+.5)*32)==='snow'){const peak=Math.max(0,10-Math.hypot((tx-94)*.32,(ty-10)*.55));return Math.max(1,Math.floor(peak));}
+ if(Math.abs(tx-132)<=2&&ty>=111&&ty<=127)return 0;
+ if(biomeAt((tx+.5)*32,(ty+.5)*32)==='volcano')return Math.max(0,Math.floor(6-Math.hypot(tx-132,ty-108)*.45));
+ if(biomeAt((tx+.5)*32,(ty+.5)*32)==='desert')return Math.max(0,Math.floor(1.4+Math.sin(tx*.65)*Math.cos(ty*.4)*1.6));
  const hills=[[23,28,5,2],[39,36,6,3],[21,9,5,2],[43,9,4,2]];
  return hills.reduce((h,[cx,cy,r,top])=>Math.max(h,Math.max(0,Math.ceil(top*(1-Math.hypot(tx-cx,ty-cy)/r)))),0);
 }
 export function canStep(s,x,y,jumping=s.jump>0){return heightAt(x,y)<=(jumping?(s.jumpOrigin??heightAt(s.player.x,s.player.y))+1+(s.skills.leap||0):heightAt(s.player.x,s.player.y));}
 export function rotateVector(x,y,quarter=0){const q=((quarter%4)+4)%4;return q===0?{x,y}:q===1?{x:-y,y:x}:q===2?{x:-x,y:-y}:{x:y,y:-x};}
-export function projectPoint(x,y,quarter=0,height=heightAt(x,y)){const r=rotateVector(x,y,quarter);return {x:r.x,y:r.y*.62-height*12};}
+export function projectPoint(x,y,quarter=0,height=heightAt(x,y)){const r=rotateVector(x,y,quarter);return {x:r.x,y:r.y-height*12};}
 export function sameScene(a,b){return (a.room||null)===(b.interior?.id||null)&&(a.level||0)===(b.interior?.level||0);}
 export function sceneBuildings(s){return s.interior?s.roomItems.filter(b=>sameScene(b,s)):s.buildings;}
 export function nearbyChests(s,radius=120){return sceneBuildings(s).filter(b=>b.type==='chest'&&Math.hypot((b.x+.5)*32-s.player.x,(b.y+.5)*32-s.player.y)<=radius);}
@@ -140,7 +151,8 @@ export function usePotion(s,id){if(!s.inventory[id])return false;
 export function tickEffects(s,dt){for(const k of Object.keys(s.effects))s.effects[k]=Math.max(0,s.effects[k]-dt);s.jump=Math.max(0,(s.jump||0)-dt);}
 export function regrowResources(s,resources){for(const r of resources){if(r.inCave||r.alive||!['wood','herbs','berries','cactus',...Object.keys(forageDefs)].includes(r.type))continue;
  const due=s.regrowth[r.id]??(s.regrowth[r.id]=s.worldAge+(r.type==='wood'?1080:r.type==='pebble'?720:360));
- if(s.worldAge<due||npcData.some(n=>Math.hypot(n.x-r.x,n.y-r.y)<(r.type==='wood'?56:18))||s.buildings.some(b=>Math.abs((b.x+.5)*32-r.x)<30&&Math.abs((b.y+.5)*32-r.y)<30))continue;
+ const home=homeState(s),yard=(home.level||home.order)&&r.x>(home.x-3)*32&&r.x<(home.x+4)*32&&r.y>(home.y-4)*32&&r.y<(home.y+5)*32;
+ if(s.worldAge<due||yard||prefabBlocked(s,r.x,r.y)||npcData.some(n=>Math.hypot(n.x-r.x,n.y-r.y)<(r.type==='wood'?56:18))||s.buildings.some(b=>Math.abs((b.x+.5)*32-r.x)<30&&Math.abs((b.y+.5)*32-r.y)<30))continue;
  r.alive=true;r.removed=false;r.hp=3;delete s.regrowth[r.id];}}
 export function predatorIntent(a,p,peace=false){const d=Math.hypot(a.x-p.x,a.y-p.y),home=Math.hypot(p.x-a.homeX,p.y-a.homeY);
  if(peace){a.chasing=false;return 'home';}if(a.type==='bear'||a.type==='polarBear'){a.chasing=home<125;return a.chasing?'chase':'home';}
@@ -159,10 +171,10 @@ export function canAscend(s){if(!s.interior)return false;const items=sceneBuildi
 export const npcData=[
  {id:'ranger',name:'LEINA',age:13,role:'Aednik',sprite:5,x:29*32,y:27*32,line:'TERE! SEEMNEST VÕIB KASVADA SUUR IDEE.',request:{carrot:3},reward:{herbs:4,wood:8},task:'KASVATA JA TOO KOLM PORGANDIT.'},
  {id:'miner',name:'BRONKINGS',age:22,role:'Sepp',sprite:2,x:35*32,y:30*32,line:'HEA TÖÖ ALGAB AUSAST KAUBAST.',request:{iron:2},reward:{crystal:2,copper:3},task:'TOO KAKS RAUAKANGI. AITAN SUL SEPANA EDASI JÕUDA.'},
- {id:'trader',name:'SALTY',age:27,role:'Kalamees',sprite:4,x:102*32,y:50*32,line:'MERI JUTUSTAB LUGUSID. VAALAD ON MEIE SÕBRAD!',request:{fish:3},reward:{iron:3,water:5},task:'TOO KOLM KALA. IDAS OOTAB SÕBRALIK VAAL.'},
+ {id:'trader',name:'SALTY',age:27,role:'Kalamees',sprite:4,x:156*32,y:64*32,line:'MERI JUTUSTAB LUGUSID. VAALAD ON MEIE SÕBRAD!',request:{fish:3},reward:{iron:3,water:5},task:'TOO KOLM KALA. IDAS OOTAB SÕBRALIK VAAL.'},
  {id:'karjon',name:'KARJON',age:165,role:'Rändur',sprite:1,x:40*32,y:26*32,line:'165 AASTAT JA IKKA UUDISHIMULIK! KOOBAS PEIDAB END KAUGEL IDAS, MÄGEDE LÕUNASERVAS.',request:{bone:3},reward:{frostShard:2,wood:10},task:'TOO KOLM LUUD LUUKEREDELT. KOOPA JAOKS VAJAD KIRKAT JA TÕRVIKUT.'},
  {id:'anyo',name:'ANYO',age:36,role:'Võlur',sprite:3,x:56*32,y:28*32,line:'MA HÕLJUN, SEST ÕPPIMINE EI PEA MAA KÜLJES KINNI OLEMA.',request:{crystal:2},reward:{star:4,magicFlower:3},task:'TOO KAKS KRISTALLI. TASUKS TÄHEMETALL JA VÕLULILLED.'},
- {id:'diego',name:'DIEGO',age:7,role:'Džunglipoiss',sprite:0,x:25*32,y:74*32,line:'PSST! MINU ROTT TUNNEB SIIN IGA PUUD. MÄNGIME!',request:{berries:5},reward:{banana:5,fiber:6},task:'TOO VIIS MARJA MULLE JA MU ROTILE.'}
+ {id:'diego',name:'DIEGO',age:7,role:'Džunglipoiss',sprite:0,x:25*32,y:90*32,line:'PSST! MINU ROTT TUNNEB SIIN IGA PUUD. MÄNGIME!',request:{berries:5},reward:{banana:5,fiber:6},task:'TOO VIIS MARJA MULLE JA MU ROTILE.'}
 ];
 export function finishNPCQuest(s,npc){if(s.npcQuests[npc.id]||!canPay(s,npc.request))return false;const next={...s,inventory:{...s.inventory}};pay(next,npc.request);for(const[k,v]of Object.entries(npc.reward))if(!addItem(next,k,v))return false;s.inventory=next.inventory;s.npcQuests[npc.id]=true;gainXP(s,35);return true;}
 export function whaleStep(game,dt,held){game.time+=dt;const target=.5+Math.sin(game.time*2)*.28;game.marker=Math.max(0,Math.min(1,game.marker+(held?.72:-.48)*dt));game.target=target;game.progress=Math.max(0,Math.min(1,game.progress+(Math.abs(game.marker-target)<.2?.32:-.08)*dt));return game.progress>=1?'caught':game.time>=35?'escaped':'playing';}
@@ -179,7 +191,8 @@ export function looseResources(){
   if(Math.hypot(px-31*32,py-29*32)<190)continue;
   if(hash<.01&&biomeAt(px,py)==='forest')put(9000+y*64+x,px,py,'branch');else if(hash>=.01&&hash<.02)put(9000+y*64+x,px,py,'pebble');
  }
- [[48,18],[52,17],[54,13],[55,19]].forEach(([x,y],i)=>put(13000+i,(x+.5)*32,(y+.5)*32,'sand'));
+ [[104,53],[115,59],[117,73],[101,78]].forEach(([x,y],i)=>put(13000+i,(x+.5)*32,(y+.5)*32,'sand'));
+ for(let y=4;y<WORLD.height-4;y++)for(let x=4;x<WORLD.seaX-5;x++){if(x<64&&y<48)continue;const n=((Math.imul(x+11,73856093)^Math.imul(y+57,19349663))>>>0)%1000,biome=biomeAt((x+.5)*32,(y+.5)*32);if(n<14)put(100000+y*WORLD.width+x,(x+.5)*32,(y+.5)*32,biome==='desert'?'sand':n<7?'branch':'pebble');}
  return result;
 }
 export function gatherLoose(s,r){const def=forageDefs[r.type];if(!def||!r.alive||!addItem(s,def.item,def.quantity))return false;r.alive=false;r.hp=0;s.gathered[def.item]=(s.gathered[def.item]||0)+def.quantity;s.regrowth[r.id]=s.worldAge+def.delay;gainXP(s,2);return true;}
@@ -218,10 +231,40 @@ export function tickRainbow(s){
 }
 export function claimRainbow(s){const r=s.rainbow;if(!r||r.claimed||r.until<=s.worldAge||s.inCave||s.interior||Math.hypot(s.player.x-r.x,s.player.y-r.y)>45||!addItem(s,'gold',3))return false;r.claimed=true;gainXP(s,25);return true;}
 export function migrateWorld(s,version){
- s.worldVersion=5;s.caveDiscovered=!!(s.caveDiscovered||s.crystalFound);s.rainbow??=null;s.rainbowCheckedDay??=0;
- if(version<5&&s.boatId){const boat=s.buildings.find(b=>(b.id||('boat:'+b.x+':'+b.y))===s.boatId);s.player.x=(WORLD.seaX+1.5)*32;s.player.y=50.5*32;if(boat){boat.x=WORLD.seaX+1;boat.y=50;}}
- for(const b of s.buildings)if(version<5&&b.type==='boat'&&b.x>=58&&b.x<WORLD.seaX){b.x=WORLD.seaX+1;b.y=50;}
+ s.worldVersion=6;homeState(s);if(version<6&&s.home.level===0&&homePlotOccupied(s)){const candidates=[[38,35],[26,40],[40,40]];for(let y=22;y<=45;y+=3)for(let x=20;x<=44;x+=3)candidates.push([x,y]);for(const[x,y]of candidates){if([-2,0,2].some(dx=>[-3,0,1].some(dy=>inWater((x+dx+.5)*32,(y+dy+.5)*32)||heightAt((x+dx+.5)*32,(y+dy+.5)*32)!==0)))continue;s.home.x=x;s.home.y=y;if(!homePlotOccupied(s))break;}}s.caveKind??=s.inCave?'forest':null;s.caveDiscovered=!!(s.caveDiscovered||s.crystalFound);s.rainbow??=null;s.rainbowCheckedDay??=0;
+ if(version<6&&s.boatId){const boat=s.buildings.find(b=>(b.id||('boat:'+b.x+':'+b.y))===s.boatId);s.player.x=(WORLD.seaX+1.5)*32;s.player.y=50.5*32;if(boat){boat.x=WORLD.seaX+1;boat.y=50;}}
+ for(const b of s.buildings)if(version<6&&b.type==='boat'&&b.x>=58&&b.x<WORLD.seaX){b.x=WORLD.seaX+1;b.y=50;}
  return s;
 }
 
 export function creatureHealth(type){return ({rabbit:1,snowHare:1,deer:3,ibex:3,fox:2,arcticFox:2,wolf:4,bear:7,polarBear:8,skeleton:4,troll:4,jaguar:5})[type]||1;}
+
+// Authored connected rooms share the same geometry for rendering and collision.
+export const dungeonRooms=[{x:27,y:18,w:11,h:13},{x:9,y:23,w:12,h:12},{x:11,y:42,w:16,h:12},{x:39,y:40,w:14,h:14},{x:49,y:23,w:16,h:11},{x:49,y:8,w:15,h:10}];
+export const dungeonCorridors=[{x:20,y:27,w:9,h:3},{x:15,y:33,w:3,h:11},{x:25,y:46,w:16,h:3},{x:44,y:31,w:3,h:12},{x:36,y:27,w:15,h:3},{x:55,y:16,w:3,h:9}];
+export const dungeonSpawn={x:32*32,y:29*32};
+export const dungeonCrystal={x:56*32,y:12*32};
+export function dungeonFloor(x,y){const tx=x/32,ty=y/32;return [...dungeonRooms,...dungeonCorridors].some(r=>tx>=r.x&&tx<r.x+r.w&&ty>=r.y&&ty<r.y+r.h);}
+export function dungeonBlocked(x,y){return [[-7,-7],[7,-7],[-7,7],[7,7]].some(([dx,dy])=>!dungeonFloor(x+dx,y+dy));}
+export function lavaAt(x,y){const tx=x/32,ty=y/32;return biomeAt(x,y)==='volcano'&&Math.abs(Math.sin(tx*.41)+Math.cos(ty*.39))<.10&&Math.hypot(tx-132,ty-112)>3;}
+export function eruptionPhase(age){const t=age%240;return t>=225?'erupting':t>=215?'warning':'quiet';}
+
+export const housePlans=[
+ {level:1,name:'Metsamaja',cost:{wood:25,stone:15,fiber:6},days:3},
+ {level:2,name:'Suur metsamaja',cost:{wood:45,slab:12,iron:4},days:3},
+ {level:3,name:'Tähekodu',cost:{wood:60,slab:20,glass:8,crystal:3},days:3}
+];
+export function homeState(s){return s.home??={level:0,x:24,y:33,order:null};}
+export function homePlotTile(s,x,y){const h=homeState(s);return x>=h.x-2&&x<=h.x+2&&y>=h.y-3&&y<=h.y+1;}
+export function homePlotOccupied(s){return s.buildings.some(b=>homePlotTile(s,b.x,b.y));}
+export function orderHouse(s){const h=homeState(s),p=housePlans[h.level];if(h.order||!p||homePlotOccupied(s)||!payNearby(s,p.cost))return false;h.order={level:p.level,readyDay:s.day+p.days};return true;}
+export function completeHouse(s){const h=homeState(s);if(!h.order||s.day<h.order.readyDay)return false;h.level=h.order.level;h.order=null;return true;}
+export function prefabHouse(s){const h=homeState(s);if(!h.level)return null;return {id:'prefab-home',minX:h.x-2,maxX:h.x+2,minY:h.y-3,maxY:h.y,door:{x:h.x,y:h.y},tiles:[],prefab:true,level:h.level};}
+export function prefabBlocked(s,x,y){const h=homeState(s);return h.level>0&&x>(h.x-2)*32&&x<(h.x+3)*32&&y>(h.y-3)*32&&y<(h.y+.4)*32;}
+export const foodValues={banana:[22,1],stew:[65,3],roast:[40,2],cookedFish:[45,2],berries:[25,1],carrot:[30,1],bakedPotato:[35,1]};
+export function useInventoryItem(s,id){
+ if(!s.inventory[id])return {ok:false,reason:'empty'};
+ if(id==='water'){if(s.thirst>=100&&s.heat<=0)return {ok:false,reason:'full'};const before=s.thirst;s.thirst=Math.min(100,s.thirst+60);s.heat=Math.max(0,s.heat-35);s.inventory.water--;return {ok:true,thirst:s.thirst-before};}
+ if(foodValues[id]){if(s.hunger>=100&&s.health>=maxHealth(s))return {ok:false,reason:'full'};const [food,health]=foodValues[id];s.inventory[id]--;s.hunger=Math.min(100,s.hunger+food);s.health=Math.min(maxHealth(s),s.health+health);return {ok:true};}
+ return {ok:usePotion(s,id),reason:'full'};
+}

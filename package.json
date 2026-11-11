@@ -1,6 +1,6 @@
 {
   "name": "simm-in-the-wild",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -18,6 +18,7 @@
     "test:e2e-journey": "node tests/fresh-journey.mjs",
     "test:v043": "node tests/v043-browser.mjs",
     "test:v05": "node tests/v05-browser.mjs",
+    "test:v06": "node tests/v06-browser.mjs && node tests/v06-details.mjs",
     "test:render-resolution": "node tests/render-resolution-browser.mjs"
   },
   "devDependencies": {

@@ -11,7 +11,7 @@ test('all recipes use known positive material quantities; glass, fibre, food and
  for(const r of m.recipes)assert.ok(Object.keys(r.cost).every(id=>available.has(id)),`unreachable recipe: ${r.id}`);
 });
 test('rare branches and pebbles bootstrap a stone pickaxe using only hand gathering',()=>{
- const s=m.freshState();s.tools=['hand'];const nodes=m.looseResources();assert.ok(nodes.filter(r=>r.type==='branch').length<30);assert.ok(nodes.filter(r=>r.type==='pebble').length<35);
+ const s=m.freshState();s.tools=['hand'];const nodes=m.looseResources();assert.ok(nodes.filter(r=>r.type==='branch').length<m.WORLD.width*m.WORLD.height*.01);assert.ok(nodes.filter(r=>r.type==='pebble').length<m.WORLD.width*m.WORLD.height*.01);
  const near=nodes.filter(r=>Math.hypot(r.x-992,r.y-928)<190);assert.ok(near.filter(r=>r.type==='branch').length>=3);assert.ok(near.filter(r=>r.type==='pebble').length>=3);
  for(const type of ['branch','pebble'])for(const r of near.filter(r=>r.type===type).slice(0,3))assert.ok(m.gatherLoose(s,r));
  assert.equal(s.inventory.wood,3);assert.equal(s.inventory.stone,3);s.inventory.herbs=1;assert.ok(m.craftItem(s,recipe('fiber')));assert.equal(s.inventory.fiber,3);assert.ok(m.pay(s,recipe('pickaxe').cost));assert.equal(s.inventory.wood,0);assert.equal(s.inventory.stone,0);assert.equal(s.inventory.fiber,2);

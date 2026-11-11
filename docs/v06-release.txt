@@ -1,0 +1,90 @@
+SIMM-IN-THE-WILD 0.6.0 — ruumiline dioraam
+2026-11-11
+
+KASUTAJA VALITUD KUNSTISUUND 2
+Mäng kasutab seitset uut kohalikku kunstiatlast: 96 spriidilahtrit ja kuus
+maapinna materjali. Uue stiili said Simm, kõik kuus NPC-d, loomad, pahalased,
+puud, kivid, laagriesemed, majad, mööbel, tööriistad ja inventari esemepildid.
+Diegol on rott ja metsik džungliriietus, Bronkings on kiilaspäine.
+Teostus on 2.5D: ruumiliselt renderdatud kunst, maapinna kõrgused,
+sügavusjärjestus ja valgusefektid 2D-lõuendil. Tegemist ei ole polügoonidest
+koosneva 3D-mootoriga. Tegelikku mängupilti näitab v06-gameplay.png;
+v06-art-directions.png on varasem kunstisuuna kavand.
+
+SUUM JA JUHTIMINE
+- Hiirerullik või klaviatuuri +/−.
+- Pult: hoia paremat kangi all (R3) ja kalluta sama kangi üles/alla.
+- +/− nupud HUD-is ja pausimenüüs; pausil saab taastada vaikesuumi.
+- Vaikimisi 85%, vahemik 55–150%; valik säilib salvestusest sõltumatult.
+- Ilma R3-ta jääb parem kang sihtimiseks või mööbli ehitusruudu valimiseks.
+- Vasak kang / WASD liigutab; A / E suhtleb; LB/RB vahetab tööriistu.
+- View / I avab põhimenüü, Y / B ehitamise. Menüüs LB/RB vahetab vahelehti,
+  A kinnitab ja B sulgeb. LT/RT vahetab meisterdamise/ehitamise kategooriat.
+Suumijuhtimise võrdluseks vaadati Stardew Valley suuminuppe ja juhiseid:
+https://stardewvalleywiki.com/Options
+https://stardewvalleywiki.com/Controls
+https://terraria.wiki.gg/wiki/Game_controls
+R3 + kang on SIMM-i valitud lahendus; seda ei esitata kõigi mängude standardina.
+
+KODU BRONKINGSILT
+Räägi laagris Bronkingsiga ja vali „Minu maja · telli või uuenda”. Sama
+plaani näeb Ehitamine → Majad. Materjalid tuleb anda Bronkingsi lähedal.
+1. Metsamaja: 25 puitu, 15 kivi, 6 taimekiudu.
+2. Suur metsamaja: 45 puitu, 12 kiviplaati, 4 rauakangi.
+3. Tähekodu: 60 puitu, 20 kiviplaati, 8 klaasi, 3 kristalli.
+Iga tellimus kestab kolm mängupäeva ja tasutakse üks kord. Alguslaagri telgis
+saab järgmise hommikuni puhata. Valmis kodu ootab tavaliselt laagrist edelas;
+vana ehitisega hõivatud platsile otsitakse üleminekul vaba alternatiiv.
+Esimeses kodus on voodi ja kast, uuendused lisavad ligipääsu ülemistele
+korrustele. Sisustus ja kastisisu jäävad uuendamisel alles.
+Õues ei pea enam maja seintest, ustest ja katuseruutudest kokku laduma.
+Mööblit, peenraid, jaamu ja lampe saab endiselt vabalt paigutada, ka puldiga.
+Vanad iseehitatud majad ja nende salvestused säilivad ning kasutavad uut kunsti.
+Maja plats ja ukseesine jäetakse uutest paigutustest vabaks.
+
+MAAILM
+Maailm kasvas 128×96-lt 192×144 ruuduni ehk 2,25 korda. Kõik senised bioomid
+on suuremad ja piirid lainelised/kaarduvad. Kõrb asub sisemaal, merest eraldi.
+Maapinna ruute ei suruta enam vertikaalselt kokku: ruudu küljed on võrdsed.
+Uus rannajoon mõjutab sama moodi nii pilti, liikumist kui paadi paigaldamist.
+
+VULKAAN JA KOOPAD
+Kagus asub Tuhamäe vulkaan: laavapraod, sissepääs ning vulkaanilised saalid.
+Suitsev kraater ja hoiatustekst annavad purskest ette teada. Purse kordub aktiivse mängu aja
+järgi; laava ja purskava kraatri lähedus vähendavad elupunkte. Pärast tabamust
+kehtib sama ajutine kaitse nagu muude vastaste puhul ning ohualast saab lahkuda.
+Ebaselgest suulisest märkusest ei tuletatud baasi hävitamist ega muid karistusi.
+Metsakoobas on nüüd kuue ühendatud saali ja koridoridega dungeon: maak,
+nahkhiired, püsiva sisuga aardekastid ja kaugemasse saali peidetud kristall.
+Väljapääsu märgib valgusring. Koobas ja vulkaan peavad eraldi meeles maaki,
+maha pandud asju ja kastisisu. Väljapääs viib õigesse sissepääsu juurde.
+Koopas näitab Kaardi vaheleht selle saalide paigutust.
+
+TÖÖRIISTAD, SELJAKOTT JA MENÜÜD
+Kirves, kirka, vibu, tõrvik ja õng on käes selgelt erinevad. Pidev pikk
+sihtimisjoon on eemaldatud; vibu laadimisel ilmuvad väike sihtmärk ja jõuriba.
+Seljakotis valitakse esmalt ese ning seejärel „Joo vett”, „Söö”, „Kasuta” või
+„Pane 1 maha”. Eseme valimine ei pane seda automaatselt maha ega kasuta ära.
+Vesi taastab kuni 60% janu ja vähendab kuumust 35%. Tulemus kuvatakse menüüs,
+õnnestunud kasutusel mängib lubatud heli korral heliefekt. Mittevajalik jook
+jääb alles. Maha pandud asja saab A / E-ga tagasi korjata.
+Kõigis esemete menüüvaadetes on ikoonid. NPC ülesannete materjalid ja tasud
+näitavad samuti esemepilte ning koguseid.
+Põhimenüüde välisraam on ühesuurune. Meisterdamisel ja ehitamisel on koos
+näha seljakott, retseptid ja valitud retsepti detailid. Õue/maja vahetamisel
+kohandatakse kategooria uuele vaatele, et menüü ei jääks tühjaks.
+Tekst ja tegelased joonistatakse ekraani tegelikul pikslitihedusel.
+
+SALVESTUSED JA EHITUS
+Salvestusversioon 6 säilitab varud, ülesanded, vanad ehitised ja sisustuse.
+Vanad merepaadid tõstetakse laiendatud merele. Algse metsa ressursi-ID-d
+säilivad. Suum ja keelevalik ei sõltu mängu salvestusest.
+index.html ja play/index.html on identsed iseseisvad mängufailid: kunst ja
+fondid on sees, mängimise ajal väliseid kunstipäringuid ega AI-teenuseid pole.
+
+MULTIPLAYER
+Kirjas tulevikuplaanina. Ei ole selles versioonis teostatud.
+
+KONTROLLID
+Täpsed jooksutatud kontrollid, parandatud vead ja piirangud on failis
+e2e-results-v06.txt. Tegelikud mängupildid on docs/v06-*.png.

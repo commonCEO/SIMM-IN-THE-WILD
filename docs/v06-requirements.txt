@@ -1,9 +1,9 @@
 SIMM-IN-THE-WILD 0.6 — arutelu ja kunstisuuna valik
 Kuupäev: 2026-11-11
 
-Staatus: nõuded kirja pandud; esmalt kasutaja valib kunstisuuna.
-See dokument ja kunstikavandid ei tähenda, et 0.6 mängumuudatused on valmis.
-Praegune mäng jääb versioonile 0.5.1.
+Staatus: kasutaja kinnitas kunstisuuna 2, ruumilise dioraami.
+0.6 rakendab selle 2.5D renderdusega; teostuse ja testide seis on failides
+v06-release.txt ja e2e-results-v06.txt. Kavandileht jääb kunstisuuna võrdluseks.
 
 KUNSTIKAVANDID
 Fail: docs/v06-art-directions.png
@@ -16,8 +16,9 @@ Kõigis sama laager, Simm, Leina ja kiilaspäine Bronkings. Need on kunstisuuna
 kavandid, mitte mängumootori ekraanipildid. Kavandites nähtav ruudustiku
 perspektiiv ei määra lõpliku mängu geomeetriat: mängus peavad ruudud olema
 ekraanil võrdselt laiad ja kõrged, nagu kasutaja palus.
-Soovitus: 1; säilitab mängu identiteedi ja sobib 2D renderduse edasiarenduseks.
-2 eeldaks terviklikuks tulemuseks ulatuslikumat graafika ja renderduse tööd.
+Kasutaja valik: 2, selgelt eelistatud teistele kavanditele.
+Teostus: uued ruumiliselt renderdatud spriidid, maapinna materjalid,
+sügavusjärjestus ja valgus; brauseri lõuendil töötav 2.5D dioraam.
 
 STEAMI TAUSTAUURING
 Vaadatud 2026-11-11:
@@ -35,7 +36,8 @@ KASUTAJA SOOVID 0.6 JAOKS
    Säilitada loetav tekst ja selged tegelased ka suurel ekraanil.
 2. Vulkaan: kindel sissepääs, laavapraod ja laavaala; aeg-ajalt pursked.
    Viimane suuline märkus pihtasaamise tagajärje kohta jäi ebaselgeks.
-   Selle konkreetne mehaanika täpsustada enne rakendamist.
+   0.6 kasutab laava ja kraatripurske puhul elupunktide kaotust;
+   ebaselgest märkusest ei tuletatud lisaks baasi hävitamist ega muud karistust.
 3. Käes olevad tööriistad peavad üksteisest selgelt erinema, et neid tunneks
    ära ilma kiirvalikuriba vaatamata.
 4. Majad: senise ebamugava maja tükkhaaval ehitamise asemel valmis majad.
@@ -54,11 +56,14 @@ KASUTAJA SOOVID 0.6 JAOKS
 11. Kõik bioomid suuremaks ja orgaaniliste piiridega, mitte kastikujuliseks.
 12. Maailma tile-ruudud peavad olema ekraanil ruudud, mitte ristkülikud.
 13. Puldiga kasutamise mugavus jääb kõigi menüüde ja tegevuste nõudeks.
+14. Kasutaja lisas stiili kinnitamisel reguleeritava suumi: hiirerullik ja
+    mugav puldijuhtimine. 0.6: hoia R3 + parem kang üles/alla, lisaks
+    suuminupud HUD-is ja pausimenüüs; seadistus säilib.
 
 TULEVIK, MITTE PRAEGUNE TEOSTUS
 Multiplayer: koos teistega mängimine. Kirjas tulevikuplaanina; praegu mitte
 rakendada, enne viia üksikmäng sobiva valmiduseni.
 
 JÄRGMINE SAMM
-Kasutaja valib neljast kavandist suuna või soovitud elementide kombinatsiooni.
-Seejärel rakendada 0.6 muudatused ja teha mängitav E2E kontroll.
+Kunstisuund 2 on kinnitatud. Teostus kontrollitakse päris brauseris
+ning main-harusse läheb mängitav 0.6 koos tegelike ekraanipiltidega.

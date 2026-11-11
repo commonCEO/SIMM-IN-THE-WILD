@@ -1,0 +1,93 @@
+SIMM-IN-THE-WILD 0.6.0 — verification report
+2026-11-11
+
+RESULT: PASSED
+
+BUILD / MODEL
+- npm run check: passed syntax checks for all source modules and build script.
+- npm run build: produced identical self-contained index.html and play/index.html.
+- npm test: 52 tests passed, 0 failures (seven test files).
+- git diff --check: passed.
+- Build now checks that every imported model binding is included in the inline
+  module wrapper. This catches omitted standalone exports before release.
+
+CURRENT 0.6 BROWSER SUITE
+npm run test:v06: passed (v06-browser.mjs + v06-details.mjs).
+Tested generated index.html in Chromium with actual keyboard/mouse events and
+simulated Gamepad API button edges/sticks, using real animation frames.
+
+1. Backpack, journal, crafting, building, skills and map retain identical outer
+   dimensions at 1280x720, 1920x1080 and 3840x2160 in English and Estonian.
+   Recipe panels/icons/text do not overlap; every inventory item has an icon.
+2. Mouse-wheel zoom, controller R3 + vertical right stick, HUD/pause controls
+   and persisted zoom work without opening unintended menus.
+3. Backpack selection alone consumes/drops nothing. Explicit water drinking,
+   eating and dropping alter the right quantities/stats and show result text.
+4. Controller NPC dialogue -> house order charges once. Three actual camp
+   rests complete the order; reload retains it. The door opens a furnished
+   home, and a second three-day order upgrades it. House/furniture categories
+   remain valid when entering and leaving the home.
+5. Normal cave interaction enters the dungeon. Controller movement follows
+   the connected corridors to the distant crystal; the map and saved progress
+   work. The player is not teleported along that dungeon route.
+6. The volcano renders its warning, normal interaction opens volcanic halls,
+   and the exit returns to the volcano entrance.
+7. Mouse furniture placement maps to the correct square tiles in all four
+   camera orientations.
+8. Expanded jungle, snow and desert render without page errors; canvas backing
+   dimensions are native-resolution at DPR 2.
+9. Five equipped tools issue distinct smooth sprite draws in the world. Holding
+   and releasing the bow fires a real arrow.
+10. An active eruption causes damage within the crater's danger radius. The
+    temporary protection period works; moving away avoids another hit.
+11. Dropped goods are scoped to the forest or volcanic dungeon rather than
+    leaking between scenes with matching coordinates.
+12. The highest-tier home creates stairs for both upper floors. A retained
+    outdoor Houses filter resets to valid indoor furniture, then remains usable
+    after returning outdoors.
+
+REGRESSION CHECKS ALSO PASSED
+- npm run test:v05: eight scenario groups. Inventory/workbench layout in EN/ET
+  at 720p/1080p/4K; LT/RT categories and LB/RB tabs; repeated controller furniture
+  placement and independent walking in four views; real skeleton loot pickup
+  and reinforced bow crafting; all six NPC portraits/delivery quests/rewards;
+  expanded wildlife/biomes; naturally triggered rare rainbow, walking to gold,
+  claiming once and persistence through reload.
+  Historical modular-floor placement assertions were updated to current
+  furniture placement because prefab houses intentionally replace that flow.
+- npm run test:render-resolution: six viewport/DPR configurations, 24 actual
+  pointer placements across the four camera orientations, native label/character
+  transforms, fractional DPR, and live DPR/resize changes while paused.
+- CHROMIUM_PATH=/usr/bin/chromium npm run test:recipes-collision: controller-only
+  loose gathering -> fibre -> pickaxe -> mining; actual tree felling and walking
+  through the route before/after reload; thin walls, closed/open door collision;
+  shore movement. No bootstrap deadlock.
+- CHROMIUM_PATH=/usr/bin/chromium npm run test:standalone: inline HTML start,
+  menus, audio and New Game; both standalone files over local HTTP start and
+  save/reload without external asset requests. Direct file:// navigation was
+  explicitly skipped when managed Chrome returned ERR_BLOCKED_BY_ADMINISTRATOR.
+
+FIXES FOUND DURING THIS RELEASE'S TESTING
+- A dungeon coordinate was missing from the standalone export wrapper, freezing
+  the simulation on cave entry. Export handling and build-time validation fixed.
+- Resource placement could cover the volcano entrance and win interaction
+  selection. The entrance is cleared and the volcanic biome uses sparse ore/rock
+  scenery instead of a dense green forest.
+- NPC quest/house actions could share a row, preventing down-navigation to the
+  housing button. They now form a vertical controller-accessible list.
+- Focused primary actions could have dark text on a dark background. Contrast fixed.
+- Outdoor category state could leave the indoor build view empty. Categories are
+  validated per scene; indoor building lists appropriate furnishings.
+- New coastline positions could leave boat placement too far from land. Boat
+  placement/movement now follows the actual shoreline rather than a fixed x line.
+- Home plot and doorway are protected from later placement; yard clearing and
+  regrowth rules keep the approach clear. Older occupied plots seek a free site.
+
+LIMITS OF THE EVIDENCE
+The main scenario suite uses seeded initial saves to isolate systems and keep
+runs repeatable; it is not a claim that the entire campaign was completed from a
+single fresh save. The separate recipe/collision run genuinely gathers and crafts
+its starting supplies through the UI. House waits use the normal rest mechanic,
+not a test-only clock advance. Physical Xbox hardware was not attached: controller
+checks simulate the browser Gamepad API. Art is a 2.5D diorama rendering, not a
+polygonal 3D engine. Multiplayer remains explicitly deferred.
