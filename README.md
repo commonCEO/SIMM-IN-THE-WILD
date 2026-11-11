@@ -6,6 +6,12 @@ A browser survival adventure designed with Mattis. English is the default langua
 
 ![Backpack with explicit item actions](docs/v06-backpack.png)
 
+## Godot 3D prototype and handovers
+
+A separate [Godot project](godot/README.txt) now establishes real 3D movement, collision, an orthographic camera and automatic GLB loading. It is a **labelled primitive blockout with 13 models pending**, not an approved visual result or a full gameplay port. The browser release remains intact.
+
+Use the [Windows local Codex handover](docs/LOCAL-CODEX-GODOT-HANDOVER.txt) to set up/open it on your PC and verify Godot MCP access. Give the [Blender handover](docs/FABLE-BLENDER-HANDOVER.txt) to the model artist; both sides share [the asset manifest](godot/assets/manifest.json). Visual target: panel 2 of the concept sheet. The failed browser approximation is not the art target.
+
 ## Try without installation
 
 Download [index.html](https://github.com/commonCEO/SIMM-IN-THE-WILD/raw/refs/heads/main/index.html) and open it in a current desktop browser. Alternatively download the repository ZIP, extract it, and open the root `index.html`. `play/index.html` is an identical standalone copy. No server or asset downloads are required. Press the fullscreen button or F11 for browser fullscreen.

@@ -1,0 +1,90 @@
+You are the Blender artist for SIMM-IN-THE-WILD, a cozy woodland adventure
+co-designed with a child. Use Blender through your MCP connection to create
+REAL 3D assets for the new Godot 4 prototype. Work in the existing repository:
+https://github.com/commonCEO/SIMM-IN-THE-WILD
+
+VISUAL TARGET — THIS IS THE MAIN ACCEPTANCE CRITERION
+Read docs/v06-art-directions.png and use ONLY panel 2 (upper right), or use the
+large crop attached by the user. The reference shows a sculpted, warm, tactile
+forest diorama: rounded foliage clusters, dimensional characters with expressive
+faces, natural wood/cloth/leather, soft warm sunlight and coherent contact shadows.
+Use docs/npc-concepts-v2.png for the approved character identities.
+The current browser screenshot docs/v06-gameplay.png is the FAILED approximation,
+not the style target. Do not reproduce its flat sprite presentation.
+
+Make actual geometry that looks dimensional from several camera angles. No
+whole-object billboards, flat cutout characters, painted floor shadows, foliage
+shaped like cardboard, ground discs attached to feet, or baked depth-of-field.
+Avoid shiny plastic, extreme low-poly faceting and photorealistic skin. Use soft
+bevels, smooth normals, warm restrained colors and a consistent level of detail.
+The generated reference is art direction, not a texture to project onto planes.
+
+SCOPE — ONE PLAYABLE CLEARING FIRST
+Read godot/assets/manifest.json. It is the shared asset contract: filenames,
+approximate dimensions in metres, model kinds and required animation names.
+Build a cohesive starter kit of these 13 assets, not the entire game:
+1. simm.glb: brown-haired young explorer, yellow jacket, olive backpack, dark
+   trousers, brown boots. Height about 1.35 m. Friendly expressive face.
+2. leina.glb: gardener, 13, auburn ponytail, yellow shirt and coral overalls,
+   watering can and flowers. Height about 1.50 m.
+3. bronkings.glb: blacksmith, 22, BALD, broad leather apron with pockets and
+   tools, hammer, fair and approachable expression. Height about 1.75 m.
+4–13. workbench, tent, oak, pine, birch, rock, berry_bush, branch, pebble,
+   grass_clump. Exact .glb filenames and dimensions are in the manifest.
+
+Make Simm, an oak and the workbench first to establish consistent proportions,
+material treatment and detail, then carry that language across the starter kit.
+Keep props recognizable at an elevated gameplay distance. The workbench should
+read as wood with small metal tools, not an untextured cube. Trees need a visible
+trunk and volumetric canopies. The tent is tan cloth with simple poles and vines.
+
+LATER CHARACTERS — DO NOT MODEL UNTIL THE CLEARING IS APPROVED
+Diego: 7, feral jungle boy, messy brown hair, torn lime-green clothes, barefoot,
+pet RAT on his shoulder (not a pot). Karjon: 165, silver hair, patched brown coat,
+red trousers, left hook and right-hand knife. Anyo: 36, floating wizard,
+dark-blue hair/silver streak, purple/gold robes. Salty: 27, ginger fisherman,
+yellow/blue clothes with seaweed. Keep their approved silhouettes and identities.
+
+BLENDER / GODOT EXPORT CONTRACT
+- 1 Blender unit = 1 metre. Metric, unit scale 1.0. Follow manifest sizes within
+  roughly 10%; do not silently use centimetres or compensate with export scale.
+- Ground/foot pivot at origin. Characters stand on Blender Z=0. Center horizontally.
+- Blender up +Z, character front -Y; standard glTF Y-up conversion makes Godot
+  up +Y and model front +Z. The Godot movement code uses that model convention.
+- Each exported root is named after its asset ID with identity transform.
+  Static object transforms applied; rigs authored at correct scale before binding.
+- Export one asset per self-contained GLB to godot/assets/models/<id>.glb.
+  Use glTF 2.0 binary, Y-up, embedded textures, exported skin/animation where needed.
+  Exclude Blender cameras, lights, studio ground, preview rigs and other assets.
+- Keep editable source files under art_source/blender/ and shared textures under
+  art_source/textures/. Do not overwrite existing .blend work or unrelated files.
+- Use glTF-compatible PBR materials. Bake unsupported procedural Blender nodes
+  to base-color/roughness/normal textures; verify the GLB, not just the .blend.
+  Avoid duplicated huge textures; 1K/2K textures and shared materials are sufficient
+  for this initial scene where appropriate. Do not bake illumination or shadows.
+- Approximate budgets, subordinate to silhouette/quality: characters 8k–20k
+  triangles, trees 3k–12k, props 500–8k. Report actual counts and material counts.
+- Simm animations: idle, walk, gather. NPC animations: idle, talk. Exact lower-case
+  clip names, in-place locomotion, no drifting root, idle/walk loops without pops.
+  Keep rig/skin data exportable to Godot's Skeleton3D/AnimationPlayer.
+- Include a right-hand attachment node named hand_r_socket for future held tools
+  and document its hierarchy. Skinning must not stretch during walking/gathering.
+- Do not generate whole-canopy collision meshes. The Godot scaffold owns physics:
+  tree collision is the trunk; loose pickups have no blocking collision. If an
+  asset needs a different footprint, report it in an asset report rather than
+  embedding invisible large blockers or silently changing the manifest.
+
+VALIDATION / DELIVERY
+Provide editable .blend sources, the 13 GLBs, any source/baked textures and a
+short report listing dimensions, triangle counts, materials and animation names.
+Reimport the GLBs into a clean Blender scene to verify scale/materials/animation.
+If Godot is available, import them into godot/project.godot, run the camp and
+capture an ACTUAL Godot screenshot from the reference camera plus another angle.
+If it is not available, explicitly say Godot integration is untested and supply
+Blender turntable renders; do not label those as game screenshots.
+
+The scaffold loads matching GLBs at their authored scale on startup. The gray
+boxes are deliberate integration placeholders, not approved artwork. Replace
+those through the model files; coordinate any code/manifest changes with the
+Godot developer. Do not port the browser game or build multiplayer in this task.
+The user should approve the lit, playable clearing before the world is expanded.

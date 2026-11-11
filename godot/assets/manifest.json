@@ -1,0 +1,21 @@
+{
+  "units": "metres",
+  "godot_up": "+Y",
+  "model_front": "+Z",
+  "ground_pivot": [0, 0, 0],
+  "assets": [
+    {"id":"simm","file":"simm.glb","kind":"player","height":1.35,"width":0.55,"depth":0.4,"position":[0,0,2],"animations":["idle","walk","gather"]},
+    {"id":"leina","file":"leina.glb","kind":"npc","height":1.5,"width":0.55,"depth":0.4,"position":[-2.5,0,-3.2],"animations":["idle","talk"]},
+    {"id":"bronkings","file":"bronkings.glb","kind":"npc","height":1.75,"width":0.8,"depth":0.5,"position":[3.5,0,-1.5],"animations":["idle","talk"]},
+    {"id":"workbench","file":"workbench.glb","kind":"prop","height":0.9,"width":1.4,"depth":0.8,"position":[0.8,0,-1.8]},
+    {"id":"tent","file":"tent.glb","kind":"prop","height":1.7,"width":2.4,"depth":2.0,"position":[-3,0,-0.8]},
+    {"id":"oak","file":"oak.glb","kind":"tree","height":4.5,"width":3.0,"depth":3.0,"position":[-5.5,0,1]},
+    {"id":"pine","file":"pine.glb","kind":"tree","height":5.5,"width":2.4,"depth":2.4,"position":[5.5,0,-2.5]},
+    {"id":"birch","file":"birch.glb","kind":"tree","height":5.0,"width":2.2,"depth":2.2,"position":[5.8,0,4.2]},
+    {"id":"rock","file":"rock.glb","kind":"prop","height":0.65,"width":0.9,"depth":0.75,"position":[2.2,0,0.7]},
+    {"id":"berry_bush","file":"berry_bush.glb","kind":"prop","height":0.65,"width":0.8,"depth":0.7,"position":[-3.5,0,3]},
+    {"id":"branch","file":"branch.glb","kind":"pickup","height":0.12,"width":0.6,"depth":0.2,"position":[-1,0,2]},
+    {"id":"pebble","file":"pebble.glb","kind":"pickup","height":0.12,"width":0.22,"depth":0.18,"position":[1,0,2]},
+    {"id":"grass_clump","file":"grass_clump.glb","kind":"decoration","height":0.18,"width":0.35,"depth":0.35,"position":[-4.2,0,2.4]}
+  ]
+}

@@ -1,0 +1,17 @@
+; Godot 4 prototype. The browser game remains in ../src and ../index.html.
+config_version=5
+
+[application]
+config/name="SIMM — 3D visual prototype"
+run/main_scene="res://scenes/camp.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+
+[display]
+window/size/viewport_width=1280
+window/size/viewport_height=800
+window/stretch/mode="canvas_items"
+
+[rendering]
+renderer/rendering_method="forward_plus"
+renderer/rendering_method.mobile="mobile"
+textures/default_filters/use_nearest_mipmap_filter=false

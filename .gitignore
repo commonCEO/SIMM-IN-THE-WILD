@@ -3,3 +3,7 @@ playwright-report/
 test-results/
 .DS_Store
 work/
+godot/.godot/
+godot/exports/
+*.blend1
+*.blend2

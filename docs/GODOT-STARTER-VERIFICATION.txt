@@ -1,0 +1,31 @@
+Godot starter verification — 2026-11-11
+
+Environment: managed cloud Linux, Godot 4.6.3, Blender 4.3.2.
+No callable Godot or Blender MCP tools were connected to this conversation.
+All engine checks below used local command-line executables in the cloud.
+This does not establish Windows installation/readiness or local MCP access.
+
+PASSED
+1. Headless Godot editor import/parse of godot/project.godot.
+2. godot/tests/smoke.gd: scene loading, actual floor collision, player foot pivot,
+   physics movement driven by input actions, a collectible pickup, zoom bounds.
+3. Blender generated a synthetic, explicitly temporary GLB fixture. Godot imported
+   it and replaced the branch placeholder. tests/import_smoke.gd verified metre
+   scale, Blender Z -> Godot Y conversion and the ground-level pivot.
+   Blender reported its optional Draco library missing; the uncompressed GLB
+   export succeeded and the Godot import/bounds check passed.
+4. Temporary branch.glb and its import sidecar were removed. A final smoke test
+   passed with all 13 expected artistic models correctly reported as pending.
+5. git diff --check passed. Browser 0.6 source/builds were not changed.
+
+The editor initially could not write its caches under the cloud user's home or
+bind its local diagnostic socket inside the command sandbox. Tests used writable
+XDG data/config/cache directories under ignored work/ and permitted local socket
+access. The final import/physics/GLB checks completed successfully. These cloud
+paths are not Windows setup instructions.
+
+NOT CLAIMED
+No polished models, rendered visual approval, Windows launch, physical gamepad
+check, or full gameplay migration. The starter is labelled as a primitive blockout.
+Forward+ visuals and real controller feel must be checked locally. The first
+review milestone remains a lit clearing matching concept panel 2, using real GLBs.

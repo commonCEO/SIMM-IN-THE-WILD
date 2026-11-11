@@ -1,0 +1,80 @@
+Continue SIMM-IN-THE-WILD locally on this Windows PC. Work on THIS COMPUTER,
+not a cloud task. The user authorizes Godot setup, a local Godot MCP connection,
+and starting the prototype. You may push this project's changes to main.
+
+REPOSITORY
+https://github.com/commonCEO/SIMM-IN-THE-WILD.git
+If the selected directory already contains this repo, inspect git status and
+preserve uncommitted work before updating. If it is an empty selected project
+folder, clone the repo there. If it contains another project, use a separate
+SIMM-IN-THE-WILD subfolder; do not repurpose or alter that other project.
+Read repository instructions and these files first:
+- docs/FABLE-BLENDER-HANDOVER.txt
+- godot/assets/manifest.json
+- godot/README.txt
+- docs/v06-art-directions.png, panel 2 only (the user's chosen target)
+- docs/npc-concepts-v2.png (approved NPC identities)
+
+CURRENT STATE AND GOAL
+Browser 0.6 remains intact in src/, index.html and play/. Its rendered-sprite
+approach did NOT match the reference's 3D diorama. The new Godot project is in
+godot/ and contains real 3D movement/collision, orthographic follow camera,
+mouse/controller zoom, warm light, simple pickup and NPC interactions, and
+manifest-driven GLB loading. It currently uses labelled primitive placeholders.
+No polished models or visual acceptance are claimed. Fable is building the
+Blender models separately using docs/FABLE-BLENDER-HANDOVER.txt.
+
+START ON THIS WINDOWS PC
+1. Verify the actual working directory and local execution access. Check installed
+   Godot 4, Node.js/npm, Git and Blender before installing anything. The cloud
+   machine had Godot 4.6.3 and Blender 4.3.2; that does NOT establish Windows
+   installations. Determine whether commands run in native Windows or WSL and
+   use executable paths/interoperability appropriate to that environment. Use
+   the Godot console executable for command-line diagnostics.
+   If Godot is missing, install a current compatible official Godot 4.x release
+   from godotengine.org, following this machine's available permission flow.
+2. Inspect existing MCP settings and callable tools. Preserve all unrelated MCP
+   servers, settings and approval preferences. If a compatible Godot MCP is
+   already connected, use it. Otherwise evaluate/configure a maintained local
+   Godot MCP server for THIS Codex client, using its current documentation and
+   this client's actual config format. One researched candidate is:
+   https://github.com/Coding-Solo/godot-mcp
+   It documents launching the editor, running projects, debug output, version and
+   project inspection. It is a third-party server, not a built-in Godot feature.
+   Inspect its current source/version and pin the chosen version/commit; do not
+   blindly paste another client's JSON config or run an unreviewed remote script.
+   Prefer local stdio, configure GODOT_PATH to the actual Windows executable,
+   and do not expose the editor or MCP ports to the public internet.
+   Use `codex mcp add --help` if that CLI exists; discover the supported client
+   setup instead of assuming a config path. If tool discovery needs the user
+   to reload the local conversation/app, state that exact remaining step.
+3. Verify MCP by actually calling its Godot-version/project-info tools and then
+   launch_editor on the absolute path containing godot/project.godot. Installed
+   packages alone are not evidence that MCP tools are available to this session.
+   If MCP cannot be connected in this client, continue useful work with Godot CLI
+   and state clearly that execution is CLI-only; do not fabricate an MCP success.
+4. Import/open godot/project.godot and run it. Expected starter commands, adapting
+   the executable path to the actual Windows installation:
+   Godot_console.exe --headless --path <repo>/godot --editor --import --quit
+   Godot_console.exe --headless --path <repo>/godot --script tests/smoke.gd
+   Godot.exe --editor --path <repo>/godot
+   Run the main scene with F6/F5 as appropriate. Show the user the actual window.
+5. Read the real editor/game diagnostics and fix parse/import/runtime errors.
+   Confirm movement, floor/trunk collision, E/controller A pickup and zoom with
+   mouse wheel or hold R3 + right-stick vertical. Do not interpret a headless
+   physics test as proof of rendered visual quality or physical-controller feel.
+
+NEXT MILESTONE
+Integrate Fable's real GLBs into godot/assets/models/ using the shared manifest.
+Use dimensional meshes, consistent PBR materials, directional/contact shadows,
+a restrained ambient contribution and a camera matching panel 2. Keep meaningful
+geometry and consistent lighting at different camera angles. Character animation
+names must match the asset contract. The loader deliberately does not auto-resize
+bad exports; fix units/pivots at source. Capture actual Godot screenshots at the
+reference angle and one additional angle, and a short walk/gather interaction.
+
+Obtain visual approval of this ONE clearing before migrating the full campaign,
+biomes or UI. Existing JavaScript recipes/quests/saves are source material for a
+later migration, not already ported systems. Do not overwrite the browser game.
+Multiplayer stays explicitly deferred. Report actual local/MCP readiness, what
+ran, any remaining blocker and where the preview can be opened.
