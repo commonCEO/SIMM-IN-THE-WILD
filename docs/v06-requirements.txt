@@ -1,0 +1,64 @@
+SIMM-IN-THE-WILD 0.6 — arutelu ja kunstisuuna valik
+Kuupäev: 2026-11-11
+
+Staatus: nõuded kirja pandud; esmalt kasutaja valib kunstisuuna.
+See dokument ja kunstikavandid ei tähenda, et 0.6 mängumuudatused on valmis.
+Praegune mäng jääb versioonile 0.5.1.
+
+KUNSTIKAVANDID
+Fail: docs/v06-art-directions.png
+Neli sama alguslaagri tõlgendust, nummerdatud vasakult paremale:
+1. Maaliline detailne 2D: loomulikumad materjalid, soe seikluslik õhkkond.
+2. Stiliseeritud 3D-dioraam: ruumilised vormid, pehmed varjud ja valgus.
+3. Detailne pikslikunst: praegusele suunale lähedane, rikkalikum valgus ja detail.
+4. Käsitsi illustreeritud: tindijoon, akvarell ja guašš, juturaamatu laad.
+Kõigis sama laager, Simm, Leina ja kiilaspäine Bronkings. Need on kunstisuuna
+kavandid, mitte mängumootori ekraanipildid. Kavandites nähtav ruudustiku
+perspektiiv ei määra lõpliku mängu geomeetriat: mängus peavad ruudud olema
+ekraanil võrdselt laiad ja kõrged, nagu kasutaja palus.
+Soovitus: 1; säilitab mängu identiteedi ja sobib 2D renderduse edasiarenduseks.
+2 eeldaks terviklikuks tulemuseks ulatuslikumat graafika ja renderduse tööd.
+
+STEAMI TAUSTAUURING
+Vaadatud 2026-11-11:
+https://store.steampowered.com/charts/topselling/
+https://store.steampowered.com/search/?filter=topsellers&tags=492%2C122
+https://store.steampowered.com/search/?filter=topsellers&l=english&tags=87918
+Steami müügitabel on tulupõhine ja muutuv; otsingutulemustes esinevad nii
+Enshrouded kui ka Stardew Valley. See näitab erinevate visuaalsete suundade
+olemasolu müüvate mängude seas, mitte kunstistiili põhjustatud müügiedu.
+Ühegi kavandi edu ega müüginumbreid ei prognoosita. Ülaltoodud soovitus
+põhineb selle projekti loetavusel, identiteedil ja teostatavusel.
+
+KASUTAJA SOOVID 0.6 JAOKS
+1. Graafika veidi realistlikumaks; esmalt neli kunstisuunda ja kasutaja valik.
+   Säilitada loetav tekst ja selged tegelased ka suurel ekraanil.
+2. Vulkaan: kindel sissepääs, laavapraod ja laavaala; aeg-ajalt pursked.
+   Viimane suuline märkus pihtasaamise tagajärje kohta jäi ebaselgeks.
+   Selle konkreetne mehaanika täpsustada enne rakendamist.
+3. Käes olevad tööriistad peavad üksteisest selgelt erinema, et neid tunneks
+   ära ilma kiirvalikuriba vaatamata.
+4. Majad: senise ebamugava maja tükkhaaval ehitamise asemel valmis majad.
+   NPC võtab materjalid vastu ja täiendab maja. Ehitamine kestab näiteks
+   kolm mängupäeva. Stardew Valley laadne arusaadav teenusevoog, oma kunst.
+   Olemasolevate salvestuste ja ehitatud majade üleminek lahendada teostuses.
+5. Vibu pidevalt nähtav sihtimisjoon asendada sobivama, vähem segava lahendusega.
+6. Kõrb peab asuma merest eemal.
+7. Koobas laiendada suuremaks uuritavaks dungeoniks, kus saab ringi liikuda.
+8. Igal esemel peab kõikides menüüdes, sh seljakotis, olema ikoon.
+9. Seljakotist peab saama kasutatavaid esemeid otse kasutada. Näiteks vesi:
+   selgelt eristatavad joomine, maha panemine ja kustutamine. Tegevusel peab
+   olema visuaalne ja heliline tagasiside; janu/kuumuse muutus arusaadav.
+10. Seljakoti, ülesannete, ehitamise ja teiste põhimenüüde välisraam ning
+    paigutus peavad olema ühtlased. Menüüd ei tohi avamisel suurust hüpitada.
+11. Kõik bioomid suuremaks ja orgaaniliste piiridega, mitte kastikujuliseks.
+12. Maailma tile-ruudud peavad olema ekraanil ruudud, mitte ristkülikud.
+13. Puldiga kasutamise mugavus jääb kõigi menüüde ja tegevuste nõudeks.
+
+TULEVIK, MITTE PRAEGUNE TEOSTUS
+Multiplayer: koos teistega mängimine. Kirjas tulevikuplaanina; praegu mitte
+rakendada, enne viia üksikmäng sobiva valmiduseni.
+
+JÄRGMINE SAMM
+Kasutaja valib neljast kavandist suuna või soovitud elementide kombinatsiooni.
+Seejärel rakendada 0.6 muudatused ja teha mängitav E2E kontroll.
