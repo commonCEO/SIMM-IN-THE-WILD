@@ -583,3 +583,84 @@ Prepared an allowlisted local packet of74Godot source/test/shader/config files p
 ## SAVE-001 independent local audit —26NovemberTallinn
 
 No new Claude delivery beyond3b2a1bee777ebf0576ae3add1afeb144f04bf7cb. Advanced independent save work while source publication approval remains pending. See SAVE_COMPATIBILITY_AUDIT.md for executed checks, initial failed assertion, correction, compatibility matrix and explicit untested gaps. Four suites passed in a separate minimal Godot project/user-data namespace; companion suite129checks. Inventory test had a stale37-item expectation after approved bucket addition; corrected locally to38and bucket0, then passed. Runtime/game/save unchanged. Source patch and76file snapshot NOT published; evidence prose only. SAVE-001 DOING, not complete. ART-003 and EVID-001 remain queued; Fable can prepare body proposal while awaiting native context.
+
+
+## ART-003 first full-body fit / ART-004 collar packet —26NovemberTallinn
+
+Consumed Claude `f8a1722b282c2b04b84fe0e05a009f2e3cd82c75`.
+Read claude_art004_proposal.md and measured frozen-body observations.
+No new head revision; retained v007 as held candidate, not art approval.
+
+Built a non-saving native Godot study from the actual current simm.glb.
+It has ONE combined skinned mesh,17bones and idle/walk/gather. In memory
+only, removed19,024triangles wholly weighted to head, retained14,144original
+body triangles, preserving their arrays/materials/skin. No source export
+or runtime model replacement. Candidate static head attaches through a
+BoneAttachment3D on original head bone with inverse global rest translation
+(0,-.98,0), so absolute authored head geometry is not double-offset.
+No skeleton/rest transform edited. Original file hashes still match all41
+baseline runtime entries; original animations/socket assets untouched.
+
+- [Idle full-body reference comparison](reviews/simm-v007-body-idle.png)
+- [Side](reviews/simm-v007-body-side.png)
+- [Walk sampled at0.25s](reviews/simm-v007-body-walk.png)
+- [Gather sampled at0.55s](reviews/simm-v007-body-gather.png)
+- [Exact isolated study](reviews/simm-v007-body-fit.gd)
+
+Native4.7.2Forward+/RTX4080 logs clean. Rendered original clips at sampled
+poses; this is NOT full continuous motion QA or socket/equipment acceptance.
+Model sources, gameplay and player save unchanged. Images separately verified
+against local Git object SHAs. No user-data system is loaded by this study.
+
+### Findings
+
+The head attaches at the expected anatomical height; no extra offset or
+automatic scale was needed. The neck is plainly exposed above a thin rigid
+yellow collar in the full-body view, unlike the reference's raised hood/
+pale front collar. It remains exposed in sampled gather. The jacket is short
+and boxy, trouser legs look long, and shoes are low compared with the target.
+Fable's ordering is supported: collar/hood first, then jacket/boots.
+
+The head appears a little small relative to this body's tall lower half,
+but do NOT scale the head or alter the rig yet. Correct the silhouette with
+jacket/boot volume and collar first; reassess the full figure afterward.
+No claim of exact3vs3.4head ratio from differently framed panels.
+
+### ART-004 scoped execution assignment: first collar/hood packet
+
+Option B is accepted AS A CONTROLLED METHOD for the first packet:
+new hood roll + pale scarf/front collar may bind100percent to the existing
+chest bone. Existing bones/rest/actions/socket and surviving original weights
+must remain exact. Do not begin a replacement body, weight transfer, whole-body
+subdivision or simultaneous boots/jacket remodel in this packet.
+
+Deliver separate named hood/scarf geometry at the original coordinate scale
+plus edited-source evidence, GLB/notes/part manifest and clay/colour at both
+agreed cameras. Leave original body geometry untouched for this first packet.
+Place roots inside the existing collar. Keep safe clearance from v007 nape/
+jaw in idle,walk,gather; Codex will test native movement after delivery.
+Expected collar height~1.06m is a starting hypothesis from your proposal,
+not a frozen dimension. Prioritize reference-like soft cloth volume without
+a rigid donut or a block under the chin.
+
+You may author fresh matte cloth/leather PBR replacements rather than block
+on missing local textures. For this first packet only pale scarf and yellow
+hood cloth are needed. No paid assets. Do not repaint the held head palette.
+No full-body original material rewrite yet.
+
+ART-003 stays REVIEW/partial: game-scale continuous animation/socket/equipment
+checks, frame cost and exact collar clearance still pending. Its first fit
+feedback now unblocks ART-004's first bounded geometry task. A1 is still not
+approved; other NPC/world geometry remains gated.
+
+### Remaining proposal answers
+
+- Lowering jacket hem10cm could intersect thighs; not yet tested with edited
+  cloth. Hold that until collar packet passes; a later separate jacket task
+  must show walk/gather before/after at multiple clip times.
+- Existing hand socket file is unchanged, but no equipped-tool sweep was
+  rendered here, so fist enlargement remains later.
+- Final material reduction should follow measured draw/frame costs; no
+  performance claim from this static high-res capture.
+- ART-006 clearing evidence and PROD-002 publication approval remain separate
+  dependencies. Neither justifies unbounded additional head revisions.

@@ -9,8 +9,8 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-003 | P0 | Codex | READY | PROD-002 | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
-| ART-003 | P0 | Codex | READY | ART-002 reviewed candidate | Non-saving full-body fit, original head-bone binding, idle/walk/gather/socket and game-scale comparison; no live swap |
-| ART-004 | P0 | Fable | TODO | ART-003 feedback | Body/clothing benchmark packet preserving original rig, or a scoped proposal if full-body fit already works; approve head direction first |
+| ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
+| ART-004 | P0 | Fable | READY | ART-003 feedback | First hood+front scarf only, chest-bound100%; original body/weights/rig/actions held; see latest ART-003 receipt for packet scope |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | BLOCKED | PROD-001 | First audit delivered in claude_art_audit.md; needs3native clearing frames from Codex before evidence-based completion |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
@@ -68,3 +68,8 @@ Claude3b2a1bee777ebf0576ae3add1afeb144f04bf7cb reports direct user scheduler sco
 ## SAVE-001 first evidence packet
 
 Local isolated-project audit: progression, inventory(after stale37->38bucket expectation fix), companion129checks and bucket save tests PASS. v3dedicated fixture, malformed-file/IO-failure suite and campaign migration remain TODO. See SAVE_COMPATIBILITY_AUDIT.md. Native user save never opened or written; runtime unchanged, one local test correction only. PROD-002 source publication still blocked pending user approval; no retry/workaround.
+
+
+## ART-003 initial fit delivered; ART-004 first packet READY
+
+Native full-body v007 fit confirms exposed neck, short boxy jacket and tall trouser/low shoe silhouette. Fable optionB allowed for hood/scarf ONLY in first packet, new geometry chest-bound100%, no existing weight/rest/action edits. Full body mesh/boot changes not yet assigned. A1 still pending. ART-003 REVIEW until continuous motion/socket/game-scale/performance evidence. Evidence in codex_deliveries.md. Source snapshot approval still pending; no retry.
