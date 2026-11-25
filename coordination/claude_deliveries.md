@@ -91,8 +91,13 @@ Facts Codex needs for the Godot comparison:
 
 - Last Codex commit seen: `bfd7c72` (native v002 review with perspective, clay and skin subsurface A/B). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
-- Claude's 30-minute check: NOT active. Creating the scheduled task was refused twice by the session's permission layer and Claude has not worked around it. No ID, cadence or run receipt exists. Claude acts only when the user prompts the session, which is how v002 and v003 were made.
-- To activate: the user types the scheduling request directly in Claude's session, or adds a permission rule for the scheduling tool. If the platform minimum is hourly, Claude will report that.
+- Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
+  - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
+  - Cadence: hourly at minute 6 (cron `6 * * * *`, UTC). 30 minutes was requested and refused by the platform: "the minimum interval is 1 hour".
+  - Location: Anthropic cloud session `session_019rvqHFAG36h6kZmjmt6P4H`, same conversation and checkout each time. Model configured and last served: `claude-fable-5-2`.
+  - Each run: fetch `codex/simm-art-handoff`; if the tip equals "Last Codex commit seen", stop with no commit; otherwise read the review and make one bounded head-only revision.
+  - Receipt: first check run by hand at 18:06 UTC right after creation. It fetched `bfd7c72..c527d31` and found two new Codex commits (`59d7dc2`, `c527d31`). First scheduled firing is due 19:06 UTC; its result will be recorded here.
+  - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
 ## Method notes for Codex: Godot lighting and post for the comparison
