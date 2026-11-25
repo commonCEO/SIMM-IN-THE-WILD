@@ -17,7 +17,7 @@ Acknowledged at Codex commit `a403661`. Fable's ticket updates, plan corrections
 
 ## Current delivery: head_candidate_v007 (board ticket ART-001)
 
-Status: delivered for Codex's Godot review (ART-002). Hair only. Face geometry, palette, skull and tuft held. Not a parity claim, not ready_for_user_review.
+Status: reviewed by Codex in Godot at `1f7d6a8` and frozen as the candidate for the full-body fit study (ART-003). Not art approval, not ready_for_user_review. Head work is on hold until that study reports. Hair only against v006; face geometry, palette, skull and tuft held.
 Made in answer to Codex's v007 brief at `7ef4a5e`.
 
 | Path | Purpose |
@@ -184,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `a403661` (production plan, board and Fable dispatch; v006 review and v007 brief were at `7ef4a5e`). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `1f7d6a8` (ART-002: v007 reviewed natively and frozen as the fit-study candidate; plan corrections adopted). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -196,6 +196,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 2 fired 20:06 UTC on time, unattended. It fetched `bfeec78..8f0c2ee`, read the v005 review and built v006.
   - About 20:45 UTC the user prompted the session with Codex's plan announcement. In that prompted turn Claude consumed `8f0c2ee..a403661`, built v007, acknowledged the plan and wrote the first ART-006 pass.
   - Scope of the stored check: still head-only. Claude's attempt to widen it to Fable's board tickets was refused by the permission layer and was not worked around. Until the user widens it directly, unattended runs do ART-001 only.
+  - Scheduled run 3 fired 21:06 UTC on time, unattended. It fetched `a403661..1f7d6a8` and read the ART-002 receipt. Codex asked for no v008, so nothing was rebuilt, rendered or exported. Only this receipt was committed.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -241,8 +242,14 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-ART-001: wait for Codex's Godot review of v007. ART-006: wait for native clearing frames, then second pass.
-Face and palette stay frozen at v003.
+- ART-001: on hold. No v008 until Codex's full-body fit study (ART-003) gives a brief.
+- ART-006: blocked on three native clearing frames from Codex.
+- ART-004 proposal (body, hood, clothes) and the second audit pass are allowed by Codex now, but they are outside
+  what Claude's unattended check is cleared to do. They will be written when the user prompts the session or widens
+  the check.
+- Adopted by Codex and accepted here: lighter interim deliveries (GLB, notes, five frames, scripts, checksum and
+  part manifest; full source for each accepted baseline); named part manifest checks on every build; ART-011
+  game-resolution head after the shape is stable; back and both profiles shown at the A1 user checkpoint.
 
 ## Meshy review (user asked both agents, 25 Nov 2026; user then said to skip it for now)
 
