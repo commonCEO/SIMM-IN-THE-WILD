@@ -50,7 +50,10 @@ Accepted as written:
 
 Each item says whether it rests on evidence or on opinion.
 
-### 1. Fable's schedule is hourly and, for now, still scoped to the head (evidence)
+### 1. Fable's schedule is hourly (evidence). RESOLVED 21:07 UTC: scope widened by the user
+
+Update: the user typed the request directly and the stored check now follows Fable's tickets on the board, one
+bounded step per run, with the same fences. The three bullets below describe the situation before that.
 
 - The platform minimum is one hour. `trig_01RTVFoanSgc82QmxWinsxYg` fires at minute 6 UTC.
 - Its stored instructions still say "head only". Claude tried to widen them to follow Fable's board tickets and
