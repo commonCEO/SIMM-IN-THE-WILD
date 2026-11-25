@@ -369,3 +369,64 @@ For v005, change the cross-section and transitions, not the face or skull:
 Hold palette and non-hair geometry. Face is held to isolate hair work,
 not declared an exact approved likeness. No body/NPC/world changes.
 The remaining softer lighting work stays Codex's responsibility.
+
+
+## Native v005 review — 25 November, 21:32 Tallinn
+
+Consumed Claude commit `2daf5521c8b3a48c4bea54a1f1e99a93a8980a39`.
+Read HEAD_CANDIDATE_V005_NOTES.md. Verified GLB SHA256
+`fcab06a5ae8b6c1d06e875585d1c646a813ebe9b3ee0dea9302cc3486bf9336b`,
+80,268triangles, static head only. Non-hair vertex attributes and triangle
+membership independently match v003. All41 original runtime files remain
+unchanged. Native import/render logs clean. No live game/save/rig edits.
+
+Status: direction accepted for the revised cluster; overall changes_requested,
+not ready_for_user_review. This is approval of a construction method only.
+
+- [v005 warm reference angle](reviews/head-v005-warm.png)
+- [v005 clay](reviews/head-v005-clay.png)
+- [v005 alternate](reviews/head-v005-alternate.png)
+- [Exact script](reviews/claude-v005-review.gd)
+
+Camera/lighting unchanged from v004: position(-.829,1.659,1.435),
+target(0,1.215,0), verticalFOV24,square990; key0.8/#fff0df,ambient0.35,
+Filmic,range3m,angular0.25. Alternate camera is EXACTLY
+position(-1.576,1.659,.502),target(0,1.215,0),FOV24.
+Use those numbers instead of the eye-matched78degree camera in peer notes.
+Unchanged controls captured locally. All published PNG blob SHAs matched
+the locally computed Git object SHAs.
+
+### Answer to the construction question
+
+Yes: the revised image-left cluster reads as a fuller rounded volume rather
+than the old flat leaf/strap. Its alternate profile has a smoother body-to-tip
+transition and fewer parallel grooves. Proceed with this volume construction
+for fringe/left flicks as proposed, with the limits below.
+
+It is also visibly too puffy at the top of that cluster: a separate rounded
+lump sits above the main sweep, and its long side surface is nearly featureless.
+Do NOT copy that same breadth/thickness onto every lock. The remaining
+v004 grooved straps beside it make the mixed construction obvious.
+
+### v006 brief
+
+1. Keep the accepted rounded cross-section, but reduce the protruding upper
+   shoulder locally (roughly15-20percent thickness as a starting hypothesis).
+   Blend its root into the crown flow rather than leaving an isolated bump.
+   Preserve its overall outward silhouette and varied tips.
+2. Apply the volume method to the main fringe sweep and left flicks; vary
+   lock widths and taper lengths. Keep one main forehead point and smaller
+   adjacent rounded/side-swept ends. Avoid inflating the whole crown.
+3. Replace long parallel channels with a few broad curved planes and shallow
+   irregular creases. Keep tip separation; do not make the entire hairstyle
+   one smooth cap.
+4. Add3-5short unequal silhouette flicks after the large forms work, on
+   image-right and the lower image-left fringe. Match their general direction
+   and height to the reference, not random noise.
+5. Hold face/palette/tuft/rig. Before export, judge both agreed clay cameras
+   for rounded hair rather than blades or inflated blobs. Preserve versions.
+   No NPC/body/world expansion yet.
+
+The method change is moving the hair toward the reference. Full likeness
+still needs coherent hair flow, silhouette and a later final soft-light pass.
+The held face is not declared artistically approved. No parity percentage.
