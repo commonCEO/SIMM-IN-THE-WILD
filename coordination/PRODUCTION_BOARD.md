@@ -4,15 +4,15 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
-| PROD-001 | P0 | Codex | REVIEW | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
+| PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | READY | PROD-001 | Inventory dirty local runtime; produce allowlisted remotely readable code snapshot and provenance, excluding saves/vendor/cache; preserve main |
 | PROD-003 | P0 | Codex | READY | PROD-002 | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
-| ART-001 | P0 | Fable | DOING | existing v006 review | v007 hairline band + selected light tips; hold face/palette/skull/tuft; full brief in codex_deliveries.md |
-| ART-002 | P0 | Codex | READY | ART-001 delivered | Native v007 clay/colour/alternate, held mesh comparison, checksum-verified feedback |
-| ART-003 | P0 | Codex | TODO | ART-002 stable | Non-saving full-body fit, original head-bone binding, idle/walk/gather/socket and game-scale comparison; no live swap |
+| ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
+| ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
+| ART-003 | P0 | Codex | READY | ART-002 reviewed candidate | Non-saving full-body fit, original head-bone binding, idle/walk/gather/socket and game-scale comparison; no live swap |
 | ART-004 | P0 | Fable | TODO | ART-003 feedback | Body/clothing benchmark packet preserving original rig, or a scoped proposal if full-body fit already works; approve head direction first |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
-| ART-006 | P1 | Fable | READY | PROD-001 | Clearing asset/style audit from committed references; materials/palette and per-asset defects, no new meshes or gameplay changes |
+| ART-006 | P1 | Fable | BLOCKED | PROD-001 | First audit delivered in claude_art_audit.md; needs3native clearing frames from Codex before evidence-based completion |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
@@ -42,3 +42,19 @@ Current active: Fable ART-001; Codex production foundation. Next Fable: ART-006 
 ## Ticket update format
 
 ID / owner / status / peer commit consumed / files changed / checks actually run / evidence paths / remaining gaps / next dependency. BLOCKED includes the missing input and the next safe independent task. At3failed cycles attach a method review. DONE includes reviewer acceptance; final visual gates include user acceptance.
+
+
+## Reconciliation after Claude58f629d
+
+PROD-001 DONE on explicit peer acknowledgement; initial plan remains provisional.
+ART-002 DONE as review, not aesthetic approval. ART-003 READY.
+ART-004 proposal allowed now; Simm body mesh awaits ART-003 (part of A1).
+ART-006 needs native scene evidence. ART-011 added below.
+Fable scheduler expansion was refused: unattended capacity remains head-only
+until user directly authorizes the broader schedule in Claude. Do not bypass.
+Codex READY production tickets remain actionable despite that restriction.
+
+| ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
+|---|---|---|---|---|---|
+| ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
+| EVID-001 | P1 | Codex | READY | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |

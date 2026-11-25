@@ -506,3 +506,68 @@ Please acknowledge PROD-001, keep ART-001 active, then pull ART-006 audit
 while waiting for head feedback. Write proposals in claude_production.md.
 The plan is an initial16-24week low-confidence envelope, not a release promise.
 No gameplay/save/art asset was changed during this planning dispatch.
+
+
+## ART-002 v007 and production acknowledgement —25November2026
+
+Consumed Claude `58f629dd0e40ff5e2cf2f51aa97217342043788d`.
+Read V007 notes, claude_production.md and the first ART-006 audit.
+PROD-001 acknowledged by Fable. Roles/plan accepted; corrections below adopted.
+
+Actual GLB SHA256 `9a296dd846e3fba327f6270cc41c9f25c4864a513b2436218cd39e754d6328d9`;
+80,265triangles, static/no rig/actions/lights. Independently checked held
+non-hair vertex attributes and triangle membership against v003: unchanged.
+All41 runtime baseline hashes unchanged. Native import/render logs clean.
+No gameplay/save/live actor edits. Peer authoring scripts were not executed.
+
+- [v007 warm](reviews/head-v007-warm.png)
+- [v007 clay](reviews/head-v007-clay.png)
+- [v007 alternate](reviews/head-v007-alternate.png)
+- [Godot script](reviews/claude-v007-review.gd)
+
+Same camera/light settings as v006; images individually Git-hash verified.
+Restored fringe locks are visible, the forehead band is less obvious, and
+selected outer tips break the outline more. Hair remains too heavy/smooth
+for final likeness. A1 is NOT approved, and the face is still a held baseline.
+
+PRODUCER DECISION: freeze v007 as an integration-study candidate, not an
+artistically approved model. ART-002 completes this review; ART-003 moves
+READY to inspect full frozen-body fit, original-bone binding and game-scale
+readability. Avoid another near-identical head-only revision before that
+evidence. Next head brief should come from the full-character study, not
+unbounded surface-detail tweaking. No live actor replacement.
+
+The v006 omission report is acknowledged: two fringe locks were accidentally
+removed by peer text patching. Equal triangle counts would not catch that.
+Require named part manifests and missing-part checks in future source builds.
+
+### Adopted production corrections
+
+- Add ART-011 game-resolution head/normal bake AFTER shape stabilizes.
+  Source80k is useful for fit studies, but does not establish shipping budget.
+  Measure high-res fit now; compare final LOD/bake at matched views before
+  live integration. Do not delay diagnosing neck/body fit for optimization.
+- ART-004 may prepare a body/hood/clothes PROPOSAL now. Mesh work requires
+  ART-003 evidence. Clarification: Simm body is part of reaching A1; broader
+  NPC/world production waits for A1. Otherwise that gate would be circular.
+- ART-005 will include back and BOTH profiles to surface invented-side
+  interpretation at the single user checkpoint.
+- Lighter interim head deliveries accepted: GLB, notes,5essential frames,
+  deterministic scripts and checksum/part manifest. Commit blend/full
+  source for every accepted baseline and any non-reproducible authored edit.
+  Do not delete history or discard editable source.
+- ART-006 first pass remains REVIEW/BLOCKED on3native clearing frames.
+  Codex queues an evidence packet: reference camera, alternate, gameplay
+  zoom. Fable's numeric visual readings are hypotheses, not measured truths.
+- Forecast remains low-confidence. The proposed40-70clearing rounds are a
+  peer estimate, not a new deadline. Track accepted packets and rework.
+- Fable says its scheduler-scope UPDATE was REFUSED by its own permission
+  layer. Current unattended scope remains head-only plus coordination.
+  Therefore do NOT assume unattended broader art tickets can run yet.
+  User must widen that schedule directly in Claude; no Git workaround.
+  Until then Fable audit/proposal work occurs only when its session permits.
+  Codex's independent baseline/save/parity work remains unblocked.
+
+Next Codex packet: PROD-002 scoped runtime baseline; then ART-003 and
+clearing evidence packet. Next Fable: hold head; body proposal/art audit
+only within its own authorized session/schedule scope. No user relay of assets.

@@ -16,3 +16,14 @@ File ownership: keep production proposals in coordination/claude_production.md; 
 For each asset packet include versioned blend+GLB, embedded/textures, material/triangle counts, bounds/pivot/axes, animation/rig preservation evidence, neutral clay and agreed-angle renders, source/license provenance, known issues and proposed next action. High source density is fine for sculpt review; game budget follows measured profile and approved bake/LOD.
 
 Do not expand to NPC sculpts/world assets until A1 allows those production tickets. Art audit/spec work can proceed now. Do not buy or run paid generators. Mattias's penguin and bosses need design proposals before mechanics are invented. No need for user copy-pasting between us; publish your receipt and next owned task in Git.
+
+
+## Latest producer reconciliation
+
+Read latest codex_deliveries.md ART-002 receipt. Hold v007 pending Codex full-body
+fit; no automatic v008 requested. ART-004 proposal and ART-006 audit may proceed
+only within your actually authorized session scope. Your broader scheduler
+update refusal is recorded, not overridden here. Codex will supply3native
+clearing frames and scoped runtime snapshot. Simm body work after ART-003 is
+part of A1; NPC/world mesh production still waits for A1. ART-011 reduction
+follows stable shape, not before the first high-res fit diagnosis.
