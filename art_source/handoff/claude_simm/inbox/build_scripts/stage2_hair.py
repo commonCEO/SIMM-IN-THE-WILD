@@ -16,16 +16,17 @@ def sstep(x): x = np.clip(x, 0, 1); return x*x*(3-2*x)
 
 # ---------------- hairline: elevation above which the scalp carries hair, by |azimuth|
 HL_AZ = [0, 25, 50, 68, 80, 92, 106, 120, 150, 180]
-HL_EL = [29, 28, 19, 4, -5, -8, -13, -30, -35, -36]
+HL_EL = [29, 28, 19, 5, 1, 0, -3, -26, -30, -31]      # stays above the ear so the mass never cuts through it
 def wrap(az): return ((az + 180) % 360) - 180
 def hairline(az): return float(np.interp(abs(wrap(az)), HL_AZ, HL_EL))
 def mass(az, el):
-    """thickness of the primary hair mass above the skin"""
-    hl = hairline(az); back = sstep((abs(wrap(az)) - 90)/70)
-    a = wrap(az)
-    heavy = sstep((a + 150)/40)*sstep((-25 - a)/40)*sstep((el - hl)/30)     # Simm's right carries more volume
-    crown = sstep((el - 62)/20)
-    return 0.004 + 0.008*sstep((el - (hl-10))/10) + (0.023 + 0.006*back)*sstep((el - hl)/30) + 0.007*heavy + 0.006*crown
+    """thickness of the primary hair mass above the skin (v002: a big airy volume, heavier on Simm's right)"""
+    hl = hairline(az); a = wrap(az); back = sstep((abs(a) - 90)/70)
+    heavy = sstep((a + 160)/50)*sstep((-15 - a)/50)*sstep((el - hl)/30)
+    crown = sstep((el - 60)/22)
+    side = sstep((abs(a) - 55)/30)*sstep((150 - abs(a))/40)*sstep((el - hl)/26)*sstep((78 - el)/30)
+    front = sstep((70 - abs(a))/20)
+    return 0.004 + (0.008 - 0.004*front)*sstep((el - (hl-10))/10) + (0.037 + 0.006*back)*sstep((el - hl)/32) + 0.010*heavy + 0.010*crown + 0.014*side
 
 bm = bmesh.new()
 # ---------------- 1. primary mass: a clean shell on the real skull, rim rolled under at the hairline
@@ -55,83 +56,79 @@ def L(name, pts, w, t=0.016, n=16, **kw):
     kw.setdefault('under', 0.9)      # undersides sink into the mass: no hollow gaps beneath a clump
     GUIDES.append((name, P)); sweep(bm, catmull(P, n), w, thick=t, **kw)
 
-# ===== back: lower tier down to the nape, tips kicking out                      [not visible in reference: invented]
-L("back_c",   [(180, 58, -.006), (180, 10, .000), (180, -32, .004), (180, -60, .022)], .110, grooves=[(-.35, .4), (.3, .35)], ridge_at=.1)
-L("back_l1",  [(150, 58, -.006), (148, 10, .000), (150, -30, .004), (157, -56, .028)], .105, grooves=[(.25, .4), (-.4, .3)], ridge_at=-.2)
-L("back_r1",  [(-150, 58, -.006), (-148, 10, .000), (-149, -29, .004), (-154, -54, .026)], .105, grooves=[(-.25, .4), (.4, .3)], ridge_at=.2)
-L("back_l2",  [(122, 56, -.006), (118, 12, .000), (115, -20, .005), (120, -45, .032)], .095, grooves=[(.1, .4)], ridge_at=-.3)
-L("back_r2",  [(-122, 56, -.006), (-119, 12, .000), (-117, -20, .005), (-123, -43, .030)], .095, grooves=[(-.1, .4)], ridge_at=.3)
-# ===== nape: short under-clumps that feather the lower edge                      [invented]
-NP = dict(t=.010, n=10, tip_pow=1.8)
-L("nape_a", [(168, -18, -.002), (167, -36, .003), (165, -50, .010)], .070, **NP)
-L("nape_b", [(-168, -18, -.002), (-167, -35, .003), (-164, -48, .010)], .070, **NP)
-L("nape_c", [(138, -14, -.002), (136, -32, .003), (133, -46, .012)], .066, **NP)
-L("nape_d", [(-138, -14, -.002), (-136, -31, .003), (-134, -44, .012)], .066, **NP)
-L("nape_e", [(114, -2, -.002), (112, -18, .003), (110, -32, .012)], .056, **NP)
-L("nape_f", [(-114, -2, -.002), (-112, -18, .003), (-110, -31, .012)], .056, **NP)
-# ===== back: upper tier, shorter, staggered over the gaps of the lower tier      [invented]
-L("back_u1",  [(166, 70, -.004), (167, 34, .006), (169, -2, .010), (173, -24, .028)], .090, grooves=[(.3, .4), (-.2, .3)], ridge_at=-.2)
-L("back_u2",  [(-166, 70, -.004), (-166, 34, .006), (-165, 0, .010), (-160, -21, .026)], .092, grooves=[(-.3, .4), (.2, .3)], ridge_at=.2)
-L("back_u3",  [(136, 68, -.004), (133, 34, .006), (130, 2, .010), (134, -18, .032)], .084, grooves=[(0, .4)], ridge_at=.3)
-L("back_u4",  [(-136, 68, -.004), (-134, 34, .006), (-133, 2, .010), (-139, -16, .030)], .084, grooves=[(.1, .4)], ridge_at=-.3)
-# ===== Simm's right side (screen-left in the reference): the heavy swept mass over the ear
-L("sideR_ear",  [(-97, 60, -.006), (-99, 26, .002), (-98, -4, .006), (-92, -25, .016)], .095, grooves=[(-.25, .4), (.35, .35)], ridge_at=.2)
-L("sideR_burn", [(-76, 60, -.006), (-75, 28, .002), (-72, 4, .005), (-64, -14, .010)], .075, grooves=[(.2, .4)], ridge_at=-.2)
-L("sideR_kick", [(-114, 62, -.004), (-116, 30, .008), (-119, 8, .016), (-127, -8, .040)], .072, grooves=[(0, .35)], ridge_at=.3)
-# ===== Simm's left side (screen-right): lighter, flicking outward
-L("sideL_ear",  [(97, 60, -.006), (98, 28, .002), (99, 0, .008), (104, -18, .030)], .086, grooves=[(.2, .4), (-.3, .3)], ridge_at=-.2)
-L("sideL_burn", [(77, 60, -.006), (77, 30, .002), (75, 8, .006), (70, -10, .014)], .068, grooves=[(-.15, .35)], ridge_at=.2)
-L("sideL_flick",[(90, 64, -.004), (95, 42, .010), (102, 24, .030), (112, 13, .062)], .060, grooves=[(.1, .35)], ridge_at=-.3, tip_pow=1.4)
-L("sideL_kick", [(114, 64, -.004), (118, 36, .008), (122, 16, .020), (131, 3, .046)], .066, grooves=[(-.1, .35)], ridge_at=.3)
-# ===== fringe: one central point between the brows, a forehead window either side
-L("fringe_c",   [(-8, 66, -.006), (-6, 44, .003), (-2, 24, .007), (3, 5, .009)], .082, grooves=[(-.3, .45), (.3, .35)], ridge_at=.15, tip_pow=1.5)
-L("fringe_r1",  [(-30, 64, -.006), (-35, 44, .003), (-42, 26, .007), (-48, 9, .010)], .084, grooves=[(.2, .45), (-.35, .3)], ridge_at=-.2, tip_pow=1.5)
-L("fringe_r2",  [(-54, 62, -.006), (-63, 42, .003), (-72, 20, .007), (-77, 0, .010)], .086, grooves=[(-.2, .4), (.35, .35)], ridge_at=.2)
-L("fringe_r0",  [(-18, 65, -.006), (-20, 47, .003), (-23, 30, .007), (-29, 12, .009)], .074, grooves=[(.1, .4)], ridge_at=.2, tip_pow=1.6)
-L("fringe_l0",  [(7, 65, -.006), (9, 49, .003), (11, 36, .007), (13, 25, .009)], .058, grooves=[(-.1, .4)], ridge_at=-.2, tip_pow=1.6)
-L("fringe_l15", [(32, 63, -.006), (38, 47, .003), (43, 33, .008), (48, 18, .012)], .068, grooves=[(.15, .4)], ridge_at=.2, tip_pow=1.6)
-L("fringe_l1",  [(20, 64, -.006), (25, 46, .003), (29, 29, .007), (33, 11, .009)], .076, grooves=[(-.2, .45)], ridge_at=.2, tip_pow=1.5)
-L("fringe_l2",  [(44, 62, -.006), (53, 44, .003), (61, 25, .010), (67, 7, .018)], .086, grooves=[(.2, .4), (-.3, .3)], ridge_at=-.2)
-L("fringe_l3",  [(64, 62, -.004), (73, 42, .006), (82, 26, .020), (91, 14, .044)], .060, grooves=[(0, .35)], ridge_at=.3, tip_pow=1.4)
-# ===== under-fringe: short clumps that break the hairline so it never reads as a band
-U = dict(t=.011, n=10, tip_pow=1.9)
-L("under_a", [(-12, 42, .000), (-13, 29, .004), (-15, 18, .004)], .060, **U)
-L("under_b", [(-30, 40, .000), (-33, 24, .004), (-38, 8, .004)], .066, **U)
-L("under_c", [(14, 42, .000), (16, 30, .004), (18, 20, .004)], .054, **U)
-L("under_d", [(36, 40, .000), (40, 24, .004), (46, 9, .004)], .062, **U)
-L("under_e", [(-50, 34, .000), (-55, 22, .004), (-59, 10, .004)], .056, **U)
-L("under_f", [(54, 34, .000), (59, 19, .004), (65, 3, .004)], .058, **U)
-L("under_g", [(2, 44, .000), (3, 34, .004), (5, 26, .004)], .044, **U)
-L("fill_r", [(-46, 66, -.004), (-51, 50, .002), (-56, 36, .005), (-61, 22, .008)], .072, grooves=[(.1, .35)], tip_pow=1.7)
-L("fill_l", [(60, 64, -.004), (66, 48, .002), (72, 34, .006), (78, 20, .012)], .064, grooves=[(-.1, .35)], tip_pow=1.7)
-# ===== top: broad masses sweeping forward from the crown whorl over the fringe roots
-L("top_r1",  [(-150, 80, -.014), (-92, 84, .004), (-44, 74, .008), (-32, 58, .012)], .105, grooves=[(-.3, .4), (.3, .35)], root=.30, belly=.30, ridge_at=.1)
-L("top_r2",  [(-158, 76, -.014), (-114, 72, .004), (-76, 68, .008), (-62, 54, .013)], .100, grooves=[(.2, .4)], root=.30, belly=.30, ridge_at=-.2)
-L("top_c",   [(-170, 82, -.014), (-30, 88, .005), (-10, 74, .009), (-8, 60, .013)], .105, grooves=[(-.2, .4), (.35, .35)], root=.30, belly=.30, ridge_at=.2)
-L("top_l1",  [(165, 82, -.014), (62, 86, .004), (27, 74, .008), (22, 58, .012)], .100, grooves=[(.25, .4)], root=.30, belly=.30, ridge_at=-.2)
-L("top_l2",  [(150, 78, -.014), (102, 74, .004), (68, 70, .008), (55, 56, .013)], .092, grooves=[(-.2, .35)], root=.30, belly=.30, ridge_at=.2)
-L("top_r3",  [(-165, 74, -.014), (-132, 62, .004), (-102, 62, .009), (-88, 52, .015)], .092, grooves=[(.1, .35)], root=.30, belly=.30, ridge_at=-.3)
-L("top_l3",  [(165, 74, -.014), (132, 62, .004), (106, 62, .009), (93, 52, .016)], .086, grooves=[(-.1, .35)], root=.30, belly=.30, ridge_at=.3)
-# ===== cowlicks: the upward tufts that make the silhouette asymmetric
-L("cowlick_main", [(-40, 76, -.008), (0, 86, .014), (52, 79, .040), (84, 66, .070)], .074, t=.020, grooves=[(.25, .45), (-.3, .3)], ridge_at=-.2, tip_pow=1.7, root=.5, belly=.3)
-L("cowlick_m2",   [(-10, 72, -.008), (26, 78, .012), (62, 70, .028), (88, 56, .048)], .070, t=.018, grooves=[(0, .4)], ridge_at=.2, tip_pow=1.7, root=.5, belly=.3)
-L("cowlick_m3",   [(-60, 80, -.008), (-20, 88, .010), (42, 84, .024), (72, 74, .044)], .060, t=.016, grooves=[(.1, .35)], tip_pow=1.6, root=.5, belly=.3)
-L("cowlick_l",    [(56, 76, -.004), (80, 68, .016), (97, 60, .050)], .052, n=12, grooves=[(0, .35)], tip_pow=1.4)
-L("cowlick_r",    [(-94, 72, -.004), (-106, 64, .016), (-115, 56, .048)], .048, n=12, grooves=[(0, .35)], tip_pow=1.4)
-L("cowlick_back", [(150, 82, -.004), (170, 74, .014), (-176, 64, .042)], .052, n=12, grooves=[(.1, .35)], tip_pow=1.4)
-# ===== accent strands: thin, slightly lifted, breaking the big shapes with direction changes
-A = dict(t=.008, n=12, tip_pow=1.3)
-L("acc_fr_a", [(-17, 62, .004), (-19, 46, .010), (-22, 32, .012), (-27, 22, .012)], .026, **A)
-L("acc_fr_b", [(10, 62, .004), (12, 48, .010), (13, 36, .012), (12, 26, .011)], .024, **A)
-L("acc_fr_c", [(-44, 62, .004), (-50, 46, .010), (-55, 32, .013), (-58, 20, .014)], .026, **A)
-L("acc_fr_d", [(34, 62, .004), (38, 48, .010), (41, 36, .013), (42, 26, .014)], .024, **A)
-L("acc_sr_a", [(-88, 58, .004), (-88, 34, .010), (-86, 12, .013), (-82, -6, .016)], .028, **A)
-L("acc_sl_a", [(88, 58, .004), (89, 36, .010), (91, 18, .016), (96, 4, .028)], .026, **A)
-L("acc_bk_a", [(174, 60, .004), (176, 30, .010), (178, 2, .012), (-178, -16, .020)], .028, **A)
-L("acc_bk_b", [(-146, 60, .004), (-145, 32, .010), (-144, 8, .012), (-147, -10, .022)], .028, **A)
-L("acc_bk_c", [(146, 60, .004), (144, 32, .010), (142, 8, .012), (145, -10, .022)], .028, **A)
-L("acc_tp_a", [(-120, 80, .004), (-70, 82, .010), (-48, 70, .014), (-42, 60, .016)], .028, **A)
-L("acc_tp_b", [(120, 82, .004), (50, 86, .010), (36, 74, .014), (34, 62, .016)], .026, **A)
+# v002 layout, read from the full-resolution reference: a few bold windswept clumps radiating from the crown,
+# fringe swept across the forehead toward Simm's left, heavy mass over his right temple and ear, flicks kicking
+# out on his left, one tall tuft at the top.
+BIG = dict(t=.026)
+# ===== fringe: parted above Simm's right eye, swept diagonally toward his left
+L("fringe_1", [(-30, 66, -.010), (-18, 42, .002), (-6, 16, .006), (7, -11, .009)], .100, t=.022, grooves=[(-.3, .4), (.3, .35)], ridge_at=.15, tip_pow=2.6)
+L("fringe_2", [(-22, 70, -.010), (-4, 48, .002), (14, 22, .006), (30, -10, .009)], .098, t=.022, grooves=[(.25, .4)], ridge_at=-.2, tip_pow=2.6)
+L("fringe_3", [(-12, 73, -.010), (10, 52, .003), (33, 25, .007), (50, -9, .012)], .098, t=.022, grooves=[(-.2, .4), (.35, .3)], ridge_at=.2, tip_pow=2.6)
+L("fringe_4", [(0, 75, -.010), (26, 57, .004), (51, 31, .010), (71, -3, .026)], .092, t=.022, grooves=[(.2, .4)], ridge_at=-.2, tip_pow=2.6)
+L("fringe_short", [(-37, 62, -.008), (-35, 45, .003), (-33, 24, .005), (-29, 0, .006)], .076, t=.018, grooves=[(0, .35)], tip_pow=2.4)
+L("fringe_5", [(8, 76, -.010), (38, 64, .004), (62, 46, .010), (80, 26, .020)], .090, t=.022, grooves=[(.1, .4)], ridge_at=.2, tip_pow=2.2)
+# ===== Simm's right (screen-left): heavy mass over temple and ear, tips kicking out
+L("right_temple", [(-41, 66, -.010), (-53, 44, .003), (-63, 18, .009), (-68, -14, .014)], .114, grooves=[(-.25, .4), (.3, .35)], ridge_at=.2, tip_pow=2.4, **BIG)
+L("right_ear",    [(-53, 69, -.010), (-69, 48, .005), (-83, 28, .016), (-94, 8, .046)], .104, grooves=[(.2, .4)], ridge_at=-.2, **BIG)
+L("right_flick",  [(-65, 71, -.010), (-87, 54, .008), (-103, 36, .028), (-114, 20, .066)], .098, grooves=[(-.2, .4), (.3, .3)], ridge_at=.2, tip_pow=1.7, **BIG)
+L("right_upper",  [(-81, 73, -.008), (-105, 60, .010), (-121, 46, .026), (-131, 35, .052)], .084, grooves=[(.1, .35)], ridge_at=-.3, tip_pow=1.6, **BIG)
+L("right_spike",  [(-70, 81, -.006), (-86, 75, .018), (-97, 69, .052)], .048, t=.018, n=12, grooves=[(0, .3)], tip_pow=1.4)
+L("right_burn",   [(-84, 40, -.006), (-86, 16, .003), (-84, -4, .007), (-78, -21, .013)], .072, t=.018, grooves=[(.15, .35)], ridge_at=-.2)
+L("right_behind", [(-104, 36, -.006), (-106, 10, .005), (-106, -12, .011), (-102, -31, .026)], .084, t=.022, grooves=[(-.2, .35)], ridge_at=.2)
+# ===== Simm's left (screen-right): lighter, three flicks pointing out and up
+L("left_flick_hi",  [(30, 77, -.010), (62, 63, .005), (84, 47, .020), (99, 33, .054)], .092, grooves=[(.2, .4)], ridge_at=-.2, tip_pow=1.6, **BIG)
+L("left_flick_mid", [(50, 71, -.010), (76, 53, .005), (92, 33, .018), (105, 15, .048)], .092, grooves=[(-.2, .4), (.3, .3)], ridge_at=.2, tip_pow=1.6, **BIG)
+L("left_flick_low", [(72, 58, -.008), (86, 36, .003), (94, 12, .012), (99, -10, .032)], .084, t=.022, grooves=[(.1, .35)], ridge_at=-.3, tip_pow=1.6)
+L("left_burn",      [(80, 36, -.006), (80, 14, .003), (78, -4, .007), (74, -19, .011)], .062, t=.016, grooves=[(-.15, .35)], ridge_at=.2)
+L("left_behind",    [(106, 40, -.006), (108, 14, .005), (108, -10, .011), (104, -29, .028)], .084, t=.022, grooves=[(.2, .35)], ridge_at=-.2)
+# ===== top: broad masses rolling off the crown into the parting, the fringe roots and the left flicks
+L("top_to_part",  [(172, 80, -.012), (-120, 85, .004), (-70, 79, .008), (-50, 69, .010)], .112, root=.35, belly=.3, grooves=[(-.3, .4), (.3, .35)], ridge_at=.1, **BIG)
+L("top_to_left",  [(160, 79, -.012), (92, 85, .004), (52, 81, .008), (32, 77, .009)], .112, root=.35, belly=.3, grooves=[(.25, .4)], ridge_at=-.2, **BIG)
+L("top_to_front", [(-176, 78, -.012), (-20, 89, .006), (-16, 79, .009), (-18, 71, .009)], .104, root=.35, belly=.3, grooves=[(-.2, .4)], ridge_at=.2, **BIG)
+L("top_right_bk", [(-166, 74, -.012), (-134, 68, .004), (-108, 66, .010), (-94, 60, .016)], .100, root=.35, belly=.3, grooves=[(.1, .35)], ridge_at=-.3, **BIG)
+L("top_left_bk",  [(166, 74, -.012), (134, 68, .004), (108, 66, .010), (94, 60, .016)], .096, root=.35, belly=.3, grooves=[(-.1, .35)], ridge_at=.3, **BIG)
+# ===== tufts: the tall one at the top leaning toward Simm's left, a second spike beyond it
+L("tuft_main", [(-14, 84, -.012), (8, 88, .018), (32, 84, .044), (52, 76, .072)], .082, t=.028, grooves=[(.25, .45), (-.3, .3)], ridge_at=-.2, tip_pow=1.5, root=.55, belly=.3)
+L("tuft_main_b", [(-30, 80, -.012), (-6, 86, .012), (24, 84, .030), (46, 78, .050)], .066, t=.022, grooves=[(0, .4)], tip_pow=1.6, root=.55, belly=.3)
+L("tuft_second", [(40, 80, -.010), (70, 74, .016), (92, 66, .042), (107, 58, .074)], .062, t=.022, grooves=[(.1, .35)], tip_pow=1.5, root=.55, belly=.3)
+L("tuft_back", [(150, 83, -.008), (174, 75, .016), (-172, 64, .048)], .054, t=.018, n=12, grooves=[(.1, .35)], tip_pow=1.4)
+# ===== back, lower tier: down to the nape, tips kicking out                   [not visible in reference: invented]
+L("back_c",   [(180, 54, -.010), (180, 10, .000), (180, -32, .004), (180, -60, .026)], .122, grooves=[(-.35, .4), (.3, .35)], ridge_at=.1, **BIG)
+L("back_l1",  [(148, 54, -.010), (146, 10, .000), (148, -30, .004), (156, -56, .032)], .118, grooves=[(.25, .4), (-.4, .3)], ridge_at=-.2, **BIG)
+L("back_r1",  [(-148, 54, -.010), (-146, 10, .000), (-147, -29, .004), (-153, -54, .030)], .118, grooves=[(-.25, .4), (.4, .3)], ridge_at=.2, **BIG)
+L("back_l2",  [(120, 52, -.010), (117, 12, .000), (115, -20, .006), (121, -45, .038)], .106, grooves=[(.1, .4)], ridge_at=-.3, **BIG)
+L("back_r2",  [(-120, 52, -.010), (-118, 12, .000), (-117, -20, .006), (-124, -43, .036)], .106, grooves=[(-.1, .4)], ridge_at=.3, **BIG)
+# ===== back, upper tier: shorter, staggered over the lower tier, tips lifting  [invented]
+L("back_u1",  [(165, 72, -.008), (166, 36, .006), (168, 0, .012), (173, -22, .036)], .108, grooves=[(.3, .4), (-.2, .3)], ridge_at=-.2, **BIG)
+L("back_u2",  [(-165, 72, -.008), (-165, 36, .006), (-164, 2, .012), (-158, -19, .034)], .110, grooves=[(-.3, .4), (.2, .3)], ridge_at=.2, **BIG)
+L("back_u3",  [(134, 70, -.008), (131, 36, .006), (128, 4, .012), (133, -16, .040)], .100, grooves=[(0, .4)], ridge_at=.3, **BIG)
+L("back_u4",  [(-134, 70, -.008), (-132, 36, .006), (-131, 4, .012), (-138, -14, .038)], .100, grooves=[(.1, .4)], ridge_at=-.3, **BIG)
+# ===== nape: short under-clumps that feather the lower edge                    [invented]
+NP = dict(t=.012, n=10, tip_pow=1.8, root=.3, belly=.35)
+L("nape_a", [(168, -8, -.012), (167, -36, .003), (165, -50, .012)], .074, **NP)
+L("nape_b", [(-168, -8, -.012), (-167, -35, .003), (-164, -48, .012)], .074, **NP)
+L("nape_c", [(138, -4, -.012), (136, -32, .003), (133, -46, .014)], .070, **NP)
+L("nape_d", [(-138, -4, -.012), (-136, -31, .003), (-134, -44, .014)], .070, **NP)
+L("nape_e", [(114, 8, -.012), (112, -18, .003), (110, -32, .014)], .060, **NP)
+L("nape_f", [(-114, 8, -.012), (-112, -18, .003), (-110, -31, .014)], .060, **NP)
+# ===== under-fringe: short clumps following the sweep, so the hairline never reads as a band
+U = dict(t=.014, n=10, tip_pow=2.4)
+L("under_a", [(-24, 42, -.002), (-16, 20, .003), (-9, -4, .004)], .076, **U)
+L("under_b", [(-6, 44, -.002), (6, 21, .003), (17, -4, .004)], .078, **U)
+L("under_c", [(14, 44, -.002), (28, 21, .003), (40, -4, .004)], .078, **U)
+L("under_d", [(34, 40, -.002), (48, 18, .003), (60, -3, .004)], .074, **U)
+L("under_e", [(-46, 36, -.002), (-54, 20, .003), (-61, 2, .004)], .074, **U)
+L("under_f", [(56, 32, -.002), (64, 18, .003), (71, 2, .004)], .068, **U)
+# ===== accent strands: thin, lifted, following the big shapes
+A = dict(t=.009, n=12, tip_pow=1.3)
+L("acc_fr_a", [(-26, 68, .002), (-10, 50, .010), (6, 34, .013), (18, 22, .013)], .028, **A)
+L("acc_fr_b", [(-6, 74, .002), (18, 58, .010), (40, 42, .014), (56, 28, .018)], .028, **A)
+L("acc_rt_a", [(-47, 68, .002), (-61, 48, .010), (-74, 30, .014), (-83, 14, .022)], .030, **A)
+L("acc_rt_b", [(-74, 72, .002), (-96, 58, .012), (-112, 42, .026), (-122, 30, .044)], .028, **A)
+L("acc_lf_a", [(40, 74, .002), (70, 58, .010), (88, 40, .020), (101, 24, .044)], .028, **A)
+L("acc_bk_a", [(174, 62, .002), (176, 30, .010), (178, 2, .014), (-178, -16, .024)], .030, **A)
+L("acc_bk_b", [(-146, 62, .002), (-145, 32, .010), (-144, 8, .014), (-148, -10, .028)], .030, **A)
+L("acc_bk_c", [(146, 62, .002), (144, 32, .010), (142, 8, .014), (146, -10, .028)], .030, **A)
 
 bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
 me = bpy.data.meshes.new("SCULPT_HAIR"); bm.to_mesh(me); bm.free()
@@ -145,7 +142,7 @@ print("SOURCE verts", len(me.vertices), "clumps", len(GUIDES))
 # ---------------- fuse into one sculpted surface, relax the joins, reduce
 m = hair.modifiers.new("fuse", 'REMESH'); m.mode = 'VOXEL'; m.voxel_size = VOX; m.adaptivity = 0.0; m.use_smooth_shade = True
 bpy.ops.object.modifier_apply(modifier="fuse")
-m = hair.modifiers.new("relax", 'SMOOTH'); m.factor = 0.5; m.iterations = 6
+m = hair.modifiers.new("relax", 'SMOOTH'); m.factor = 0.5; m.iterations = 4
 bpy.ops.object.modifier_apply(modifier="relax")
 print("FUSED verts", len(hair.data.vertices))
 # drop everything that ended up buried inside the head
@@ -160,6 +157,20 @@ bm.to_mesh(hair.data); bm.free()
 tris = sum(len(p.vertices)-2 for p in hair.data.polygons)
 m = hair.modifiers.new("reduce", 'DECIMATE'); m.ratio = min(1.0, TRIS/max(tris, 1))
 bpy.ops.object.modifier_apply(modifier="reduce")
+# drop loose crumbs left by fusing and reduction (tiny disconnected shells read as specks)
+bm = bmesh.new(); bm.from_mesh(hair.data); bm.verts.ensure_lookup_table()
+seen = set(); crumbs = []
+for v in bm.verts:
+    if v.index in seen: continue
+    st = [v]; comp = [v]; seen.add(v.index)
+    while st:
+        x_ = st.pop()
+        for e in x_.link_edges:
+            y_ = e.other_vert(x_)
+            if y_.index not in seen: seen.add(y_.index); st.append(y_); comp.append(y_)
+    if len(comp) < 400: crumbs += comp
+print("crumb verts removed", len(crumbs))
+bmesh.ops.delete(bm, geom=crumbs, context='VERTS'); bm.to_mesh(hair.data); bm.free()
 for p in hair.data.polygons: p.use_smooth = True
 hair.data.use_auto_smooth = True; hair.data.auto_smooth_angle = math.radians(75)
 mat = bpy.data.materials.get("SCULPT_MAT_HAIR") or bpy.data.materials.new("SCULPT_MAT_HAIR")

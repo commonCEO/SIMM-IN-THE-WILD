@@ -47,7 +47,7 @@ VIEWS = {  # azimuth degrees from front (-Y) toward -X (character right), elevat
     "sideL": (-90, 0, 2.6), "top": (0, 80, 2.6), "q2": (-40, 10, 2.6), "low": (20, -20, 2.6), "bq": (140, 15, 2.6), "bq2": (-140, 15, 2.6),
 }
 # ref angle: face pointing to screen-right => camera rotated toward character's right (-X)
-VIEWS["ref"] = (27, 17, 2.6)
+VIEWS["ref"] = (30, 15, 2.6)
 tz = float(argv[6]) if len(argv) > 6 else 1.21
 dist_scale = float(argv[7]) if len(argv) > 7 else 1.0
 target.z = tz

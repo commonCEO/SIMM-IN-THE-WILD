@@ -10,9 +10,39 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 - Each side edits only its own file in `coordination/`, so pulls never conflict.
 - Anything Claude must see has to be committed: it cannot read untracked files on the PC.
 
-## Current delivery: head_candidate_v001
+## Current delivery: head_candidate_v002
 
-Status: delivered, waiting for user review. Head, hair and eyes only. Not a parity claim.
+Status: delivered for Codex's Godot review. Head, hair and eyes only. Not a parity claim, not ready_for_user_review.
+Built from the full `APPROVED_REFERENCE.png` and Codex's v001 Godot review.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_simm/inbox/head_candidate_v002.glb` | For Codex. Static head, identity root `SCULPT_HEAD_ROOT`, metres, Y-up, textures embedded. 80,253 triangles, 5 materials, 3 textures. No rig, animation, camera or lights. |
+| `art_source/handoff/claude_simm/inbox/head_candidate_v002.blend` | Editable source, Blender 3.5.1. |
+| `art_source/handoff/claude_simm/inbox/HEAD_CANDIDATE_V002_NOTES.md` | Counts, point-by-point answer to Codex's five priorities, remaining issues. |
+| `art_source/handoff/claude_simm/inbox/renders_v002/` | Clay and colour views, comparison against the unaltered reference crop, fit check. |
+| `art_source/handoff/claude_simm/inbox/textures_v002/` | Base-colour maps, also embedded in the GLB. |
+
+Facts for the Godot comparison:
+
+- Bounds in Blender axes: X -0.259 to 0.237, Y -0.144 to 0.276, Z 0.936 to 1.496. Front is -Y. Same attach rule as v001: original `head` bone, no offset, no scale.
+- Hair is bigger than v001 on purpose (reference head with hair is about one third of the figure). Tuft tip is at Z 1.496, above the 1.42 guide. Say so if the framing disagrees.
+- Frozen body, old head, 17 bone rest matrices, three actions and `hand_r_socket` verified unchanged again.
+- Claude's reference-angle camera in Godot axes: target (0, 1.215, 0), position (-0.829, 1.659, 1.435), FOV about 18.6 degrees, square frame. A perspective render there would let both sides compare like for like.
+
+What changed against Codex's priorities (detail in the notes file):
+
+1. Hair: fewer, broader clumps; fringe parted over Simm's right eye and swept toward his left; heavy right temple mass; flicks on his left; one tall tuft; fringe-root pits closed.
+2. Eyes: opening 35 x 53 mm (was 45 x 60), iris fills the opening, roughness 0.30, thin lid edge, no hard rim.
+3. Forehead and jaw: fringe reaches the brows; chin rounded, jaw filled, cheeks halved.
+4. Mouth and nose: rebuilt. The beak was an adult overbite in the base, now corrected. Closed 41 mm smile arc with a shallow crease. Nose is a single soft bump, no nostril pits.
+5. Colour: warmer chestnut hair, slightly warmer skin. Albedo only.
+
+Where Claude expects Codex to still object: the fringe edge is a row of similar teeth, the hair is tidier than the ragged reference, the tuft reads as a knot from the front with one pit at its root, and the mouth is closed where Codex read a subtle opening.
+
+## Earlier delivery: head_candidate_v001 (kept, superseded by v002)
+
+Status: superseded. Reviewed by Codex in Godot at `8ffedf9`: changes requested. Head, hair and eyes only. Not a parity claim.
 First commit: `ae9c859` on `claude/compassionate-maxwell-fagj20`.
 
 | Path | Purpose |
@@ -34,9 +64,10 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: none. `codex/simm-art-handoff` was not on the remote when Claude last fetched (25 Nov 2026).
-- Claude's 30-minute check: NOT active yet. Creating the scheduled task was refused pending the user's direct go-ahead in Claude's session. Until then Claude checks only when the user prompts it.
-- Planned behaviour once active: fetch `codex/simm-art-handoff` and `main`; if nothing new, do nothing; if new feedback or the full reference arrived, make the next head-only version, publish it here, push.
+- Last Codex commit seen: `8ffedf9` (native v001 review with colour and clay evidence). Reference and protocol taken from `b143f31`.
+- `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
+- Claude's 30-minute check: NOT active. Creating the scheduled task was refused twice by the session's permission layer and Claude has not worked around it. No ID, cadence or run receipt exists. Claude acts only when the user prompts the session, which is how v002 was made.
+- To activate: the user types the scheduling request directly in Claude's session, or adds a permission rule for the scheduling tool. If the platform minimum is hourly, Claude will report that.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
 ## Method notes for Codex: Godot lighting and post for the comparison
@@ -71,20 +102,20 @@ Known things the engine render will expose: the neck is visible above the collar
 
 ## Working files
 
-Not committed, rebuilt from the scripts: `art_source/handoff/claude_simm/inbox/work/stage1.blend`, `stage2.blend`.
+Not committed, rebuilt from the scripts: `art_source/handoff/claude_simm/inbox/work/stage1.blend`, `stage2.blend`, `stage3.blend`.
+`build_scripts/` now holds the v002 state; the exact v001 scripts are at commit `ae9c859`.
 A byte-identical copy of the starter is committed at `art_source/handoff/claude_simm/inbox/starter_copy/START_HERE_v02.blend` so Claude can rebuild if its container is replaced. It sits inside `inbox/`, not at the starter's own path, so a pull cannot collide with the local copy on the PC.
 
-## Blocked, needs a commit from the PC side
+## Blocked
 
-1. `art_source/handoff/claude_simm/APPROVED_REFERENCE.png` (2048 x 1270). It was not packed in the starter and never reached Claude. v001 was judged against the 55 px copy in `docs/v06-art-directions.png`, panel 2.
-2. `coordination/START_HERE.txt`. Claude has not read it. If it sets rules that differ from this file, those rules win and Claude will follow them once it is committed.
+Nothing on the art side. Reference and protocol arrived. Only the schedule above is open, and it needs the user.
 
 ## Next
 
-Nothing until the user has reviewed v001. Planned v002 changes, head only: smaller and less glossy eyes, less wide face,
-a fringe that sweeps sideways with fewer and bolder points, softer hair mass at temples and nape, smaller cowlick.
+Wait for Codex's Godot review of v002. Planned for v003 if Codex agrees: break the fringe into fewer, broader clumps,
+rougher clump separation and stronger left flicks, tuft root clean-up, and whatever the engine render exposes.
 
-## Meshy review (user asked both agents, 25 Nov 2026)
+## Meshy review (user asked both agents, 25 Nov 2026; user then said to skip it for now)
 
 Claude's read, from vendor docs and published reviews. Nothing was generated and the reference was not uploaded anywhere.
 

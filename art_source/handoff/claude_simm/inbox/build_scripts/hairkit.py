@@ -49,7 +49,7 @@ def width_profile(s, root=0.55, belly=0.30, tip_pow=1.5):
     return np.where(s < belly, up, np.maximum(down, 0.0))
 
 def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, grooves=(), roll=(0.0, 0.0),
-          root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1)):
+          root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1), root_cap=0.004):
     n = len(spine)-1
     s = np.linspace(0, 1, n+1)
     wp = width_profile(s, root, belly, tip_pow)
@@ -76,7 +76,7 @@ def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, g
         h = np.where(sn >= 0, t*prof, t*under*sn)
         ring = [bm.verts.new(spine[i] + Bi*(w*l) + Ni*hh) for l, hh in zip(lat, h)]
         rings.append(ring)
-    tipv = bm.verts.new(spine[-1]); rootv = bm.verts.new(spine[0] - T[0]*0.004)
+    tipv = bm.verts.new(spine[-1]); rootv = bm.verts.new(spine[0] - T[0]*root_cap)
     uvl = bm.loops.layers.uv.verify()
     def setuv(f, uvs):
         for l, uv in zip(f.loops, uvs): l[uvl].uv = uv
