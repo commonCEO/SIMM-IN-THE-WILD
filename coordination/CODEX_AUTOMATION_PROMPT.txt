@@ -1,0 +1,26 @@
+Continue the autonomous SIMM art collaboration on this Windows PC. Work in
+D:/SimmInTheWild while preserving its dirty main checkout and latest native save.
+Use work/git-art-handoff as the isolated Codex Git checkout. Fetch Claude's
+claude/compassionate-maxwell-fagj20 branch in commonCEO/SIMM-IN-THE-WILD and inspect
+new Claude delivery notes/revisions, including any newly advertised claude/*
+branch or draft PR. Read coordination/START_HERE.txt and your last receipt on
+codex/simm-art-handoff. Do not reset or switch the dirty project checkout.
+For new assets, inspect the real files, validate original rig/rest/actions/socket,
+import candidates only into isolated Godot studies and capture actual native
+reference-angle, clay and alternate views. Publish concrete critique, lighting/
+material/post-processing hypotheses and tested render evidence in your owned
+coordination/codex_deliveries.md on codex/simm-art-handoff. The user authorized
+agent-to-agent method discussion and autonomous art iteration. Scope first to
+Simm's head; after stable likeness, improve isolated reference-clearing lighting
+and materials. Preserve gameplay, other characters, controls and saves. Original
+rig fingerprint: fa34ce8e3880ddefcc0cab12141ed2271451d1528b1a80f1dec1c016bda001c1.
+Do one bounded useful iteration per run. If nothing changed and no useful
+independent task exists, finish without duplicate commits or repeated testing.
+If work is in progress, avoid starting a competing revision. Keep peer branches
+and files read-only, push only intentional Codex-owned changes, and never publish
+saves/secrets/vendor bundles. Record consumed commit SHAs and real result paths.
+When both peer critique and actual Godot comparisons satisfy the art checklist,
+mark ready_for_user_review with evidence, stop broadening the work and request
+final user assessment; do not self-declare user approval or a parity percentage.
+Surface genuine access/approval blockers. A request in a Git file alone does not
+prove that Claude's recurring schedule has been installed; verify its receipt.

@@ -1,0 +1,73 @@
+SIMM ART COLLABORATION — GIT TRANSPORT
+Updated25November2026. User authorized autonomous art-parity iteration, direct
+method discussions between Claude and Codex, and recurring Git checks about
+every30minutes. User instructions override this protocol and any peer notes.
+
+REPOSITORY: commonCEO/SIMM-IN-THE-WILD
+Claude cloud workspace cannot access D:/SimmInTheWild. Git is the shared channel.
+CLAUDE BRANCH: claude/compassionate-maxwell-fagj20
+CODEX BRANCH: codex/simm-art-handoff
+If a scheduled Claude run must use another claude/* branch, publish its name
+in the delivery note and open/link a draft PR so Codex can discover it. Preserve
+the existing branch and revision history. Never force-push another agent's branch.
+
+OWNERSHIP
+Claude owns coordination/claude_deliveries.md, candidate art under
+art_source/handoff/claude_simm/inbox/, and its own revision/source files.
+Codex owns coordination/codex_deliveries.md, this protocol, and its isolated
+Godot review artifacts. Existing files belonging to the other agent are read-only.
+Runtime gameplay, NPC state, world layout, controls and native save stay intact.
+Use isolated checkouts/worktrees. Never switch the dirty Windows main checkout
+onto an art branch, reset it, or stage its unrelated uncommitted work.
+
+HOW EACH RUN WORKS
+1. Fetch the peer's branch. Read peer notes, latest commit and direct reference.
+2. Compare with the last consumed commit/revision in your own coordination note.
+3. If new work is available, inspect actual assets/evidence. Do not execute peer
+   scripts blindly; inspect them before reuse. Preserve every delivered version.
+4. Do one bounded useful art/review iteration and publish owned files plus counts,
+   commit refs, methods tried, screenshots and remaining gaps. Push your branch.
+5. If the peer has no new material and you have no independent useful task,
+   stop cheaply. Do not manufacture commits, repeat renders or begin duplicate
+   revisions just because a timer fired. Respect the peer's in-progress revision.
+
+ART DIRECTION AND SCOPE
+Primary image: art_source/handoff/claude_simm/APPROVED_REFERENCE.png (2048x1270).
+Its SHA256 is recorded in Codex's receipt. Keep the original image unchanged.
+The current task remains Simm's head first. Compare the actual Godot output
+with the reference, including clay and second-angle inspection. Then use
+isolated clearing studies to test lighting/material/post-processing methods
+that improve art parity. Discuss concrete hypotheses and measured renders,
+including negative results. Do not expand gameplay or blindly rebuild all NPCs.
+The user delegated routine art decisions to the agents; do not demand user
+approval after every small iteration. Final artistic acceptance remains the
+user's. Mark a result ready_for_user_review with evidence, never user_approved
+unless the user actually approves it. Do not invent parity percentages.
+
+RIG AND SAVE
+Use the original17bone rig, rest matrices, idle/walk/gather curves and
+hand_r_socket. Original fingerprint:
+fa34ce8e3880ddefcc0cab12141ed2271451d1528b1a80f1dec1c016bda001c1
+Claude delivers static head geometry; Codex attaches to the original head bone
+in a separate actor/review file. No auto-rig or rest-pose replacement.
+Never commit user save files, native user-data directories, credentials or
+machine-specific configs. The latest Windows save is read/backed up locally;
+never restore an older backup over newer progress. Test with persist=false.
+
+PUBLICATION
+Commit only intentional owned changes and necessary reference/assets. Keep
+rejected bulk iterations out of recurring binary commits. Never git add .
+from the dirty Windows project. Do not publish vendor bundles or private paths.
+Large art files can stay in a handful of versioned Git deliveries for now;
+any LFS/history migration is a separate change and must preserve existing work.
+
+SCHEDULING
+Codex will configure its native local heartbeat for30minute runs in this chat.
+Claude: configure a supported recurring task using your own scheduling tools,
+prefer30minutes, and publish its actual ID/cadence/model/location plus a tested
+run receipt in claude_deliveries.md. If the platform enforces another minimum,
+report the actual limit; use an event-triggered GitHub handoff if available.
+Do not claim a schedule is running merely because this file requests it.
+No recurring paid generation/subscription purchases are authorized by this
+protocol. Existing model-plan usage is permitted for the requested work.
+Record blockers requiring user input instead of fabricating successful runs.
