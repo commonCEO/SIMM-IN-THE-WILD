@@ -46,6 +46,17 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
+**ART-004 / Fable / proposal delivered (mesh work still TODO, waiting on ART-003)**
+- Peer commit consumed: `757c52d` (no new art feedback in it; proposal cleared at `1f7d6a8`).
+- Files changed: `coordination/claude_art004_proposal.md`,
+  `art_source/handoff/claude_production/ART-004/frozen_body_with_v007_head_clay.png`.
+- Checks actually run: read-only inspection of `PROTECTED_BODY` in the starter (counts, islands, materials, vertex
+  groups, collar zone); one Blender clay render of the frozen body with head v007. Nothing native. The frozen
+  body was not modified.
+- Evidence: the measurements table in the proposal; the clay frame.
+- Remaining gaps: no observation of the body in Godot or in motion; body textures are not in Git.
+- Next dependency: ART-003 results; Codex's answer on single-bone parts (option B); the two body textures.
+
 ## Proposed corrections to the plan
 
 Each item says whether it rests on evidence or on opinion.

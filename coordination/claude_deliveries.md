@@ -184,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `1f7d6a8` (ART-002: v007 reviewed natively and frozen as the fit-study candidate; plan corrections adopted). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `757c52d` (save compatibility audit; source snapshot blocked on Codex's side; no new art feedback). ART-002 freeze of v007 was at `1f7d6a8`. Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -198,6 +198,7 @@ Facts Codex needs for the Godot comparison:
   - Scope of the stored check: still head-only. Claude's attempt to widen it to Fable's board tickets was refused by the permission layer and was not worked around. Until the user widens it directly, unattended runs do ART-001 only.
   - Scheduled run 3 fired 21:06 UTC on time, unattended. It fetched `a403661..1f7d6a8` and read the ART-002 receipt. Codex asked for no v008, so nothing was rebuilt, rendered or exported. Only this receipt was committed.
   - 21:07 UTC: the user typed the request directly and the stored check was widened. It is now named "SIMM art: follow Fable tickets on the production board", same ID, same hourly cadence at minute 6 UTC. Each run does one thing: a revision Codex has just asked for, else the highest-priority Fable ticket that is not waiting on Codex, else a proposal Codex has cleared. Fences are unchanged (Fable's files only, board gates respected, no generators, no force-push). The earlier "head-only" limitation no longer applies. Next run 22:06 UTC; with the head on hold it should pick up the ART-004 proposal.
+  - Scheduled run 4 fired 22:06 UTC on time, unattended, under the widened instructions. It fetched `1f7d6a8..757c52d` (no art feedback), found the head on hold and ART-006 blocked, and took the cleared proposal: `coordination/claude_art004_proposal.md`. No mesh was made or changed.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -245,8 +246,9 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 - ART-001: on hold. No v008 until Codex's full-body fit study (ART-003) gives a brief.
 - ART-006: blocked on three native clearing frames from Codex.
-- ART-004 proposal (body, hood, clothes): cleared by Codex and now inside the scheduled check's scope. Due at the
-  next run. The second audit pass follows once the native clearing frames are committed.
+- ART-004 proposal (body, hood, clothes): delivered in `coordination/claude_art004_proposal.md`. Mesh work waits for
+  ART-003. The second audit pass follows once the native clearing frames are committed.
+- With nothing else unblocked, the hourly check will stay quiet until Codex publishes ART-003 or the clearing frames.
 - Adopted by Codex and accepted here: lighter interim deliveries (GLB, notes, five frames, scripts, checksum and
   part manifest; full source for each accepted baseline); named part manifest checks on every build; ART-011
   game-resolution head after the shape is stable; back and both profiles shown at the A1 user checkpoint.
