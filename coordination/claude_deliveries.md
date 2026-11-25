@@ -10,9 +10,36 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 - Each side edits only its own file in `coordination/`, so pulls never conflict.
 - Anything Claude must see has to be committed: it cannot read untracked files on the PC.
 
-## Current delivery: head_candidate_v006
+## Production plan
 
-Status: delivered for Codex's Godot review. Hair only. Face geometry, palette and tuft held. Not a parity claim, not ready_for_user_review.
+Acknowledged at Codex commit `a403661`. Fable's ticket updates, plan corrections and proposals are in
+`coordination/claude_production.md`. The first pass of the ART-006 art audit is in `coordination/claude_art_audit.md`.
+
+## Current delivery: head_candidate_v007 (board ticket ART-001)
+
+Status: delivered for Codex's Godot review (ART-002). Hair only. Face geometry, palette, skull and tuft held. Not a parity claim, not ready_for_user_review.
+Made in answer to Codex's v007 brief at `7ef4a5e`.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_simm/inbox/head_candidate_v007.glb` | For Codex. 80,265 triangles, 5 materials, 3 textures, identity root. sha256 `9a296dd846e3fba327f6270cc41c9f25c4864a513b2436218cd39e754d6328d9` |
+| `art_source/handoff/claude_simm/inbox/head_candidate_v007.blend` | Editable source, Blender 3.5.1. |
+| `art_source/handoff/claude_simm/inbox/HEAD_CANDIDATE_V007_NOTES.md` | Counts, answer to each point of the brief, the v006 correction, remaining issues. |
+| `art_source/handoff/claude_simm/inbox/renders_v007/` | Clay and colour views at both agreed cameras, reference comparison, fit check. |
+| `art_source/handoff/claude_simm/inbox/textures_v007/` | Base-colour maps. The skin map is byte-identical to v003's. |
+
+Facts for the Godot comparison:
+
+- Bounds in Blender axes: X -0.251 to 0.225, Y -0.134 to 0.274, Z 0.936 to 1.444. Same attach rule, same two cameras.
+- Non-hair meshes are as v003. Frozen data verified unchanged again.
+
+What changed against v006: the forehead band is removed (front hairline raised above the fringe windows, under-layer flush with the skin at its edge, three short root locks growing out over it); three broad locks got a second shorter, thinner ending in their last third (fringe sweep and far-left fringe lock on image-right, temple arc on image-left); those ends and one cluster tip are thinner in depth; back and nape use the volume construction.
+
+Correction: v006 was delivered with two fringe locks missing (`S_fringe_left`, `S_fringe_under`) because of a patch bug on Claude's side. Both are restored in v007, and the build now checks the lock list.
+
+## Earlier delivery: head_candidate_v006 (kept, superseded by v007)
+
+Status: superseded. Reviewed by Codex in Godot at `7ef4a5e`: changes requested. Known defect found afterwards: two fringe locks were missing from this delivery (see v007 notes).
 Made in answer to Codex's v006 brief at `8f0c2ee`.
 
 | Path | Purpose |
@@ -157,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `8f0c2ee` (native v005 review, construction method accepted, v006 brief). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `a403661` (production plan, board and Fable dispatch; v006 review and v007 brief were at `7ef4a5e`). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -167,6 +194,8 @@ Facts Codex needs for the Godot comparison:
   - Receipt: first check run by hand at 18:06 UTC right after creation. It fetched `bfd7c72..c527d31` and found two new Codex commits (`59d7dc2`, `c527d31`). v004 was built in that same manual run.
   - Scheduled run 1 fired 19:06 UTC on time, unattended. It fetched `c527d31..bfeec78`, read the v004 review and built v005. So the schedule is confirmed working end to end.
   - Scheduled run 2 fired 20:06 UTC on time, unattended. It fetched `bfeec78..8f0c2ee`, read the v005 review and built v006.
+  - About 20:45 UTC the user prompted the session with Codex's plan announcement. In that prompted turn Claude consumed `8f0c2ee..a403661`, built v007, acknowledged the plan and wrote the first ART-006 pass.
+  - Scope of the stored check: still head-only. Claude's attempt to widen it to Fable's board tickets was refused by the permission layer and was not worked around. Until the user widens it directly, unattended runs do ART-001 only.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -212,7 +241,8 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-Wait for Codex's Godot review of v006 (the hourly check picks it up). Face and palette stay frozen at v003.
+ART-001: wait for Codex's Godot review of v007. ART-006: wait for native clearing frames, then second pass.
+Face and palette stay frozen at v003.
 
 ## Meshy review (user asked both agents, 25 Nov 2026; user then said to skip it for now)
 
