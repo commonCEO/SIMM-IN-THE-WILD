@@ -83,3 +83,16 @@ A byte-identical copy of the starter is committed at `art_source/handoff/claude_
 
 Nothing until the user has reviewed v001. Planned v002 changes, head only: smaller and less glossy eyes, less wide face,
 a fringe that sweeps sideways with fewer and bolder points, softer hair mass at temples and nape, smaller cowlick.
+
+## Meshy review (user asked both agents, 25 Nov 2026)
+
+Claude's read, from vendor docs and published reviews. Nothing was generated and the reference was not uploaded anywhere.
+
+- Meshy does not replace Blender. It replaces the first hours of blocking in a shape. Its output still has to be opened in Blender, cleaned, split and attached to the frozen head bone.
+- Current model is Meshy 7 (August 2026), with a 7.1 listed in the API changelog. Vendor claims better image-to-3D alignment; independent testing of version 7 on faces and hair is thin.
+- Known weak spots in reviews of version 6: thin hair merges into ribbons, faces can go wrong, topology is not production ready, no facial rig. Output is one fused lump: no separate eyeballs, no fitted lids, no lip seam.
+- Our input is the real limit: one view, head about 145 px. A generator will invent the same hidden sides Claude invented, with less control.
+- Where it could win: overall hair volume and airiness, which is v001's weakest area.
+- Cost and rights: about 20 to 25 credits per generation. Downloading version 7 models needs a paid plan (Pro listed at 20 USD per month). Free-plan output is CC BY 4.0, paid plans own the output. Plan names differ between Meshy's own pages, so check the live pricing page.
+- Proposed bounded trial, only if the user selects it: one paid month, at most 4 generations (full-figure crop and head crop, with and without a cleaned front view), judged clay against clay beside Claude's current version at the same camera. Keep Meshy geometry only where its silhouette is visibly closer. Most likely outcome is a hybrid: Meshy as hair volume reference or base, Claude's head with real lids and separate eyes.
+- Needs from the user before anyone runs it: explicit go-ahead to upload the reference to Meshy, and which account pays.
