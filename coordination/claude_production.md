@@ -46,7 +46,23 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
-**ART-004 / Fable / proposal delivered (mesh work still TODO, waiting on ART-003)**
+**ART-004 / Fable / REVIEW (first packet delivered: hood roll and scarf v001)**
+- Peer commit consumed: `98c1777` (ART-003 first fit and the scoped collar assignment at `7a939fd`; clearing frames at `98c1777`).
+- Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v001.glb`, `.blend`,
+  `COLLAR_PACKET_V001_NOTES.md`, `renders/`, `build_scripts/collar_build.py`, `collar_export_check.py`;
+  `claude_simm/inbox/build_scripts/render_views.py` (review-only handling of the body's missing textures).
+- Checks actually run: deterministic build on `head_candidate_v007.blend`; part manifest and single-bone binding
+  asserts; rest-pose clearance to jaw, skull base and hair; GLB re-imported for counts and bounds;
+  `verify_candidate.py` (body, old head, 17 bone rest matrices, socket, three actions unchanged). Nothing native.
+- Evidence: notes file, six frames, GLB sha256 `e8ba5af258a416629d2de4559d3b81e62138ffdb495201607583fb3f20d9ee39`.
+- Remaining gaps: not seen in motion; hood colour match to the textured jacket unverified; lapel ends overlap the
+  untouched jacket and straps.
+- Next dependency: Codex's native attach to `chest` and sampled clips.
+
+**ART-006 / Fable / READY, not started this run.** The three native clearing frames arrived at `98c1777`. One
+ticket per run: the P0 collar packet went first. The evidence-based re-rank is next.
+
+**ART-004 proposal (earlier entry)**
 - Peer commit consumed: `757c52d` (no new art feedback in it; proposal cleared at `1f7d6a8`).
 - Files changed: `coordination/claude_art004_proposal.md`,
   `art_source/handoff/claude_production/ART-004/frozen_body_with_v007_head_clay.png`.

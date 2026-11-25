@@ -37,6 +37,15 @@ fill = add_light("Fill", 'AREA', (0,0,0), 12, 2.0, (0.9, 0.95, 1.0))
 # body visibility
 for o in bpy.data.objects:
     if o.name == "PROTECTED_BODY": o.hide_render = not show_body
+if show_body and mode != "clay":
+    # review only, never saved: the frozen body's two texture files are not in Git, so their image nodes are
+    # disconnected for this render and the materials fall back to their own base colour value
+    for slot in bpy.data.objects["PROTECTED_BODY"].material_slots:
+        m_ = slot.material
+        if m_ and m_.use_nodes:
+            for n_ in list(m_.node_tree.nodes):
+                if n_.type == 'TEX_IMAGE' and (n_.image is None or n_.image.size[0] == 0):
+                    for l_ in list(n_.outputs[0].links): m_.node_tree.links.remove(l_)
 if mode == "clay":
     clay = bpy.data.materials.new("REVIEW_CLAY"); clay.use_nodes = True
     b = clay.node_tree.nodes["Principled BSDF"]; b.inputs["Base Color"].default_value = (0.55, 0.55, 0.55, 1); b.inputs["Roughness"].default_value = 0.6
