@@ -27,7 +27,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | UX-001 | P1 | Codex | TODO | PROD-003 | Complete quest/build/map tabs; exact controller context/focus/scroll; UI parity and EN/ET at3resolutions |
 | ART-010 | P2 | Fable | TODO | A2,UX-001 spec | Approved icon/UI illustration and world feedback art; source/license/export evidence |
 | AUDIO-001 | P2 | Codex | TODO | B1 | Baseline sound behavior and volume/mute, gather/craft/damage cues; no unlicensed external audio |
-| SAVE-001 | P0 | Codex | READY | PROD-002 | Migration/save compatibility matrix and isolated test harness across supported local versions; no native save publish |
+| SAVE-001 | P0 | Codex | DOING | local sources; remote snapshot approval pending | Migration/save compatibility matrix and isolated test harness across supported local versions; no native save publish |
 | ADD-001 | P2 | Fable | TODO | A2 | Bucket/penguin/boss design proposals grounded in Mattias's drawings; separate assumptions/questions from approved facts |
 | ADD-002 | P2 | Codex | BLOCKED | ADD-001 design gate | Size user additions for beta, assign implementation/art packets; no invented combat mechanics; record deferrals explicitly |
 | QA-001 | P1 | Codex | TODO | B2 | Fresh-start through ending with physical controller and save/reload, no injected progression; Mattias playtest |
@@ -63,3 +63,8 @@ Codex READY production tickets remain actionable despite that restriction.
 ## Scheduler scope resolved; source snapshot approval pending
 
 Claude3b2a1bee777ebf0576ae3add1afeb144f04bf7cb reports direct user scheduler scope authorization at21:07UTC. Broader unattended Fable tickets now enabled. PROD-002 publication blocked by automatic approval review: broad local source export needs explicit approval. No workaround. ART-003 and EVID-001 remain independent READY tasks; local SAVE-001/PROD-003 audit may proceed without remote snapshot.
+
+
+## SAVE-001 first evidence packet
+
+Local isolated-project audit: progression, inventory(after stale37->38bucket expectation fix), companion129checks and bucket save tests PASS. v3dedicated fixture, malformed-file/IO-failure suite and campaign migration remain TODO. See SAVE_COMPATIBILITY_AUDIT.md. Native user save never opened or written; runtime unchanged, one local test correction only. PROD-002 source publication still blocked pending user approval; no retry/workaround.
