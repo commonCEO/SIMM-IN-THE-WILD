@@ -430,3 +430,66 @@ v004 grooved straps beside it make the mixed construction obvious.
 The method change is moving the hair toward the reference. Full likeness
 still needs coherent hair flow, silhouette and a later final soft-light pass.
 The held face is not declared artistically approved. No parity percentage.
+
+
+## Native v006 review — 25 November 2026
+
+Consumed Claude commit `d7734f11a11b5a4915c3e5da3e83b353d4248f6a`.
+Read HEAD_CANDIDATE_V006_NOTES.md and updated loop receipt.
+Verified delivered GLB checksum
+`5aa8b9bc752c554befe3be0b52358331544318208f90d5bc2c9c62f2969f5ceb`,
+80,263triangles. Static head only; no rig/actions/cameras/lights.
+Independently compared non-hair vertex attributes and triangle membership
+against v003: unchanged. All41 original runtime baseline files unchanged.
+Native import/render logs clean. No live actor/game restart/save changes.
+
+Status: changes_requested, construction now more coherent, not art parity.
+
+- [v006 warm reference angle](reviews/head-v006-warm.png)
+- [v006 clay](reviews/head-v006-clay.png)
+- [v006 alternate angle](reviews/head-v006-alternate.png)
+- [Exact script](reviews/claude-v006-review.gd)
+
+Same24degree square camera, key0.8/#fff0df,ambient0.35,Filmic,
+range3m/angular0.25 as v005. Original crop unchanged. All image Git blob SHAs
+verified against local source before publishing. v005 control also captured
+locally under identical settings, without touching the playable actor.
+
+### Assessment and v007 brief
+
+The volume method is now coherent across temple, fringe and flicks. The
+parallel-groove strap appearance is reduced. Do not revert the construction.
+However, the hairstyle is still heavy, smooth and sculpted, with broad
+continuous lobes. The target reads lighter and tousled. This is not solved
+by simply adding more small grooves, noise or material shine.
+
+Next bounded pass:
+1. Fix the exposed under-layer band at the forehead. Recess the scalp locally
+   and overlap the fringe roots so the hair grows out naturally; preserve
+   the existing eye windows and avoid a thick secondary headband silhouette.
+2. Break2or3 of the broad outer edges into unequal shorter tapered endings.
+   Change only the last third of selected locks; keep rounded root/middle
+   volume. Target the image-right silhouette and lower image-left temple
+   where the reference has ragged outward flicks. Preserve the main tuft.
+3. Thin those selected ends in depth so they read light rather than as
+   blunt lobes. Avoid sharp needles and a uniform fringe-tooth pattern.
+4. Back/nape cleanup may use the same construction, without disturbing the
+   currently reviewed frontal shape. The hidden-side design is interpreted.
+5. Hold face/palette/skull. Judge both agreed clay cameras before export.
+   Do not describe the shape as passed just because it satisfies construction
+   steps: compare the overall silhouette to the actual reference too.
+
+Face held for isolated iteration is not final likeness approval. After the
+hairline/tips pass, Codex should review the full frozen-body fit and game-scale
+readability in a separate non-saving actor study before any live integration.
+Final soft lighting still pending; clean angular0.25 is a shape diagnostic.
+
+### Scheduling receipt confirmed
+
+Claude now reports ACTIVE recurring task `trig_01RTVFoanSgc82QmxWinsxYg`,
+hourly at minute6 UTC, model `claude-fable-5-2`; its platform rejected30min
+because the minimum interval is1hour. Direct user authorization was received
+there. Notes contain unattended run receipts for19:06 and20:06UTC, delivering
+v005 andv006 after consuming the matching Codex reviews.
+This supersedes all earlier inactive-schedule statements. No workaround of
+the prior refusal was used. Codex remains every30min. No user file relay needed.
