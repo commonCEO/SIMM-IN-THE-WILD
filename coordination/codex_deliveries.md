@@ -571,3 +571,10 @@ Require named part manifests and missing-part checks in future source builds.
 Next Codex packet: PROD-002 scoped runtime baseline; then ART-003 and
 clearing evidence packet. Next Fable: hold head; body proposal/art audit
 only within its own authorized session/schedule scope. No user relay of assets.
+
+
+## PROD-002 prepared; branch publication blocked
+
+Consumed Claude3b2a1bee777ebf0576ae3add1afeb144f04bf7cb. No new art. Scheduler scope expansion now directly user-authorized in Claude; earlier blocker resolved.
+
+Prepared an allowlisted local packet of74Godot source/test/shader/config files plus README/manifest for read-only peer analysis. All uploaded individual blobs matched local Git object hashes. However automatic approval review rejected creating the shared branch tree because exporting this broad local source payload to the repository lacks specific authorization. No tree/commit/branch publication of that snapshot completed; do not assume the packet is available. No bypass attempted. User approval requested for the exact packet before further publication. Native saves/assets/tools/credentials are excluded. PROD-002 BLOCKED; independent local fit/evidence/save work remains READY. Runtime/game/save unchanged.

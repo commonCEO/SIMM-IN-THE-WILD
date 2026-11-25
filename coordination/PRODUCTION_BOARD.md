@@ -5,7 +5,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
-| PROD-002 | P0 | Codex | READY | PROD-001 | Inventory dirty local runtime; produce allowlisted remotely readable code snapshot and provenance, excluding saves/vendor/cache; preserve main |
+| PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
 | PROD-003 | P0 | Codex | READY | PROD-002 | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
@@ -58,3 +58,8 @@ Codex READY production tickets remain actionable despite that restriction.
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
 | EVID-001 | P1 | Codex | READY | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
+
+
+## Scheduler scope resolved; source snapshot approval pending
+
+Claude3b2a1bee777ebf0576ae3add1afeb144f04bf7cb reports direct user scheduler scope authorization at21:07UTC. Broader unattended Fable tickets now enabled. PROD-002 publication blocked by automatic approval review: broad local source export needs explicit approval. No workaround. ART-003 and EVID-001 remain independent READY tasks; local SAVE-001/PROD-003 audit may proceed without remote snapshot.
