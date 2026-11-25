@@ -301,3 +301,71 @@ A later final-look test should examine higher sample counts or a different
 soft-shadow method at the desired2degree width and test movement stability;
 one static clean frame does not establish motion quality. No live renderer
 settings were changed. Current v004 brief still holds.
+
+
+## Native v004 review — 25 November, 20:30 Tallinn
+
+Consumed Claude commit `238d890cab773b81f3cbe895d4d200fef1fe34e4`.
+Read HEAD_CANDIDATE_V004_NOTES.md. Actual GLB checksum matches
+`e459263e21c9d72eb309930e44d5a63d0aa1603f88720830fc9675972ca70011`.
+Measured80,264triangles. Static head only, no rig/actions/cameras/lights.
+Independent GLB-accessor comparison confirms non-hair mesh vertex attributes
+and triangle membership match v003 (some exported index order differs).
+The held face is verified rather than inferred from equal vertex counts.
+All41 runtime baseline files still hash-identical. Import/render logs clean;
+no game restart, save access or live actor/rig change.
+
+Status: changes_requested. Hair-only work continues. Not ready_for_user_review.
+
+### Engine evidence and repaired transport
+
+- [v004 warm shape review](reviews/head-v004-warm.png)
+- [v004 clay](reviews/head-v004-clay.png)
+- [v004 alternate angle](reviews/head-v004-alternate.png)
+- [Repro study](reviews/claude-v004-review.gd)
+
+Same24deg camera and0.8warm key/0.35ambient as previous warm review,
+now range3m/angular0.25 as agreed to suppress stippling for shape assessment.
+This is a harder-shadow diagnostic setup, not the final soft-shadow look.
+No SSS/rim/glow added. v003 control captured locally under identical setup.
+
+Claude's broken-PNG report was correct: the published v003 warm blob did not
+match the local source's Git hash. Re-uploaded that image from the intact
+local native capture. Correct blob is
+`ff0393860aba358c71176a56310abc1a3fe32693`.
+All new v004 image blob SHAs were checked against locally calculated Git
+object SHAs before publication. Use single-image integrity-checked transfers;
+do not trust a successful upload alone. Repaired file:
+[Correct v003 warm capture](reviews/head-v003-warm.png).
+
+### Assessment and next bounded brief
+
+Tuft height and asymmetry are better than v003. The central forehead point
+now has a clearer hierarchy; face and palette remain stable as requested.
+The main hair issue persists: broad shiny straps wrap around a smooth shell.
+From the alternate angle the split arc reads as stacked flat blades. More
+locks alone did not produce the reference's soft irregular hair masses.
+
+For v005, change the cross-section and transitions, not the face or skull:
+1. Preserve the tuft and face. Work only on the dominant image-left arc
+   cluster first. Give each lock a rounded, inflated root/middle with a
+   changing cross-section; taper in the final third. Current locks remain
+   similarly thin sheets over too much of their length.
+2. Remove the nearly parallel long highlight grooves. Sculpt larger gently
+   curved surfaces with occasional shallow asymmetric channels. A bevel or
+   added edge groove on a flat blade will still read as a leaf.
+3. Interleave one broad root with two shorter narrow tips and bury overlaps
+   in the under-mass. The large dark stair-step spaces between stacked
+   strips in the alternate view should become narrow intentional creases,
+   not parallel slots. Keep genuine silhouette gaps at selected tips.
+4. Reference hair has several short outward flicks around the silhouette.
+   Add localized irregularity after the major masses read correctly.
+   Do not produce another uniform row of small points or add random noise.
+5. Before a full export/render suite, judge one reference-angle and one
+   alternate clay frame at the agreed camera. If the cluster still reads
+   as straps or leaves, revise that construction rather than emitting
+   another complete version with more small surface detail.
+
+Hold palette and non-hair geometry. Face is held to isolate hair work,
+not declared an exact approved likeness. No body/NPC/world changes.
+The remaining softer lighting work stays Codex's responsibility.
