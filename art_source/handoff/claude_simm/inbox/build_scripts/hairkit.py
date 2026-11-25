@@ -49,7 +49,11 @@ def width_profile(s, root=0.55, belly=0.30, tip_pow=1.5):
     return np.where(s < belly, up, np.maximum(down, 0.0))
 
 def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, grooves=(), roll=(0.0, 0.0),
-          root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1), root_cap=0.004):
+          root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1), root_cap=0.004,
+          vol=False, channels=()):
+    """vol=True (v005): a rounded, inflated volume instead of a flattened strap. Full round section through
+    root and middle, thickness tapering only in the final third. channels = occasional shallow asymmetric
+    channels that drift across the lock: (v_start, v_end, depth, s_start, s_end)."""
     n = len(spine)-1
     s = np.linspace(0, 1, n+1)
     wp = width_profile(s, root, belly, tip_pow)
@@ -64,14 +68,21 @@ def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, g
         r = math.radians(roll[0] + roll[1]*s[i]); cr, sr = math.cos(r), math.sin(r)
         Bi = B[i]*cr + N[i]*sr; Ni = N[i]*cr - B[i]*sr
         w = 0.5*width*wp[i]; t = thick*(wp[i]**0.6)
+        if vol:
+            swell = 0.72 + 0.28*math.sin(0.5*math.pi*min(s[i]/0.38, 1.0))
+            t = thick*swell*(1.0 - min(max((s[i] - 0.62)/0.38, 0.0), 1.0)**1.7)
         c, sn = np.cos(th), np.sin(th)
-        lat = np.sign(c)*np.abs(c)**0.85
-        top = np.clip(sn, 0, None)**0.8
+        lat = np.sign(c)*np.abs(c)**(1.0 if vol else 0.85)
+        top = np.clip(sn, 0, None)**(0.55 if vol else 0.8)
         prof = top*(1 + ridge*np.exp(-((lat - ridge_at)/0.5)**2))
         gd = 0.0
         for gv, gdep in grooves:
             depth = gdep*np.clip(s[i]/0.25, 0.15, 1)*np.clip((1 - s[i])/0.12, 0, 1)
             gd = gd + depth*np.exp(-((lat - gv)/0.15)**2)
+        for v0, v1, cdep, s0, s1 in channels:
+            if s0 < s[i] < s1:
+                k = (s[i] - s0)/(s1 - s0)
+                gd = gd + cdep*math.sin(math.pi*k)*np.exp(-((lat - (v0 + (v1 - v0)*k))/0.22)**2)
         prof = prof*(1 - np.clip(gd, 0, 0.75))
         h = np.where(sn >= 0, t*prof, t*under*sn)
         ring = [bm.verts.new(spine[i] + Bi*(w*l) + Ni*hh) for l, hh in zip(lat, h)]

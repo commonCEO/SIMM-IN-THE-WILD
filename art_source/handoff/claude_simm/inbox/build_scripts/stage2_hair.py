@@ -65,14 +65,20 @@ def L(name, pts, w, t=0.016, n=16, **kw):
 # one smooth shell.
 DOM = dict(t=.030)
 SUB = dict(t=.020)
-# ===== DOMINANT 1 (v004): the arc over Simm's right is three overlapping curved volumes, not one plate.
-# Different roots, different depths, different tip directions; each rises off the head, bends and twists as it tapers.
-L("D1a_arc_upper", [(-28, 79, -.014), (-56, 66, .014), (-82, 51, .034), (-98, 41, .058), (-104, 37, .074)], .080, n=20,
-  grooves=[(-.25, .45)], ridge_at=.25, tip_pow=1.7, root=.40, belly=.32, t=.026, roll=(-8, 26))
-L("D1b_arc_front", [(-44, 71, -.012), (-66, 54, .008), (-85, 34, .022), (-96, 18, .040), (-99, 10, .050)], .074, n=20,
-  grooves=[(.2, .45)], ridge_at=-.2, tip_pow=1.8, root=.45, belly=.3, t=.024, roll=(6, -22))
-L("D1c_arc_rear",  [(-60, 78, -.012), (-88, 66, .010), (-108, 52, .026), (-120, 44, .046)], .066, n=18,
-  grooves=[(0, .4)], ridge_at=.3, tip_pow=1.6, root=.45, belly=.3, t=.022, roll=(0, 18))
+# ===== DOMINANT 1 (v005): the arc cluster over Simm's right, rebuilt as VOLUMES after Codex's v004 review.
+# One broad inflated body carries the mass and ends in a blunt rounded shoulder; two shorter, narrower tips of
+# different length grow out of it; their roots are buried in the body so the joins are creases, not slots.
+# No ridge and no parallel grooves: each piece is one gently curved surface with at most one shallow drifting channel.
+VOL = dict(vol=True, ridge=0.0, under=1.0)
+L("D1_arc_body",  [(-34, 78, -.018), (-56, 67, -.002), (-78, 54, .006), (-92, 43, .010), (-99, 36, .010)], .126, n=22, t=.040,
+  channels=[(-.35, .15, .20, .30, .80)], tip_pow=3.0, root=.55, belly=.40, roll=(-6, 14), **VOL)
+# the tips continue the body's own flow and leave it at its end, each in its own direction and length
+L("D1_arc_tip_a", [(-82, 50, -.014), (-98, 40, .004), (-109, 31, .026), (-116, 24, .048), (-119, 20, .060)], .070, n=20, t=.030,
+  tip_pow=1.5, root=1.0, belly=0.0, roll=(0, 24), **VOL)
+L("D1_arc_tip_b", [(-80, 46, -.014), (-93, 33, .002), (-100, 18, .016), (-102, 6, .028), (-101, 0, .032)], .060, n=20, t=.026,
+  tip_pow=1.6, root=1.0, belly=0.0, roll=(6, -20), **VOL)
+L("D1_arc_rear",  [(-66, 76, -.018), (-92, 67, -.002), (-110, 58, .010), (-121, 52, .030), (-126, 49, .040)], .072, n=18, t=.032,
+  channels=[(.3, -.1, .16, .35, .8)], tip_pow=1.8, root=.6, belly=.35, roll=(0, 14), **VOL)
 # ===== DOMINANT 2: arcing temple lock: bows forward over the temple and hooks down in front of the ear
 L("D2_temple_arc",  [(-38, 66, -.010), (-56, 46, .012), (-70, 24, .018), (-74, 2, .016), (-70, -12, .014)], .100, n=20,
   grooves=[(.25, .45), (-.3, .35)], ridge_at=-.2, tip_pow=2.1, root=.5, belly=.3, **DOM)
@@ -86,8 +92,7 @@ L("D4_fringe_sweep", [(-12, 74, -.012), (10, 56, .012), (32, 32, .016), (48, 6, 
 L("D5_left_flick",   [(32, 77, -.012), (58, 64, .012), (80, 50, .030), (95, 40, .054), (101, 36, .072)], .084, n=20,
   grooves=[(.25, .45)], ridge_at=-.2, tip_pow=1.5, root=.42, belly=.3, t=.026, roll=(6, -24))
 # ===== SUBORDINATE, Simm's right: a shorter side flick under the big arc, sideburn, behind the ear
-L("S_right_flick",  [(-62, 58, -.010), (-84, 40, .004), (-98, 24, .020), (-105, 12, .044)], .078, grooves=[(.1, .4)], ridge_at=.3, tip_pow=1.7, **SUB)
-L("S_right_upper",  [(-92, 70, -.010), (-114, 58, .004), (-128, 44, .012), (-137, 32, .026)], .070, grooves=[(.1, .4)], ridge_at=-.3, tip_pow=1.7, **SUB)
+L("S_right_flick",  [(-84, 44, -.014), (-96, 30, .002), (-104, 16, .022), (-107, 8, .038)], .050, n=16, t=.028, tip_pow=1.8, root=.7, belly=.3, **VOL)
 L("S_right_burn",   [(-86, 38, -.008), (-88, 16, .000), (-86, -4, .004), (-80, -20, .010)], .064, t=.016, grooves=[(.15, .4)], ridge_at=-.2)
 L("S_right_behind", [(-106, 36, -.008), (-108, 10, .002), (-108, -12, .008), (-104, -31, .024)], .084, grooves=[(-.2, .4)], ridge_at=.2, **SUB)
 L("S_right_spike",  [(-72, 82, -.008), (-88, 76, .016), (-99, 70, .056)], .040, t=.014, n=12, grooves=[(0, .3)], tip_pow=1.5, root=.6, belly=.3)
@@ -140,7 +145,6 @@ L("nape_e", [(114, 8, -.012), (112, -18, .003), (110, -32, .014)], .060, **NP)
 L("nape_f", [(-114, 8, -.012), (-112, -18, .003), (-110, -31, .014)], .060, **NP)
 # ===== accents: thin strands that split from the dominant locks and break their edges
 A = dict(t=.009, n=14, tip_pow=1.3, root=.6, belly=.3)
-L("acc_arc",    [(-46, 72, .004), (-74, 58, .020), (-96, 42, .040), (-108, 32, .062)], .028, **A)
 L("acc_temple", [(-48, 62, .004), (-62, 44, .018), (-74, 26, .024), (-80, 10, .026)], .026, **A)
 L("acc_point",  [(-20, 66, .004), (-8, 44, .016), (4, 24, .018), (13, 6, .016)], .026, **A)
 L("acc_sweep",  [(0, 72, .004), (22, 54, .018), (42, 34, .022), (56, 16, .022)], .028, **A)

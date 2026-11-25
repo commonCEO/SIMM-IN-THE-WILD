@@ -48,6 +48,7 @@ VIEWS = {  # azimuth degrees from front (-Y) toward -X (character right), elevat
 }
 # ref angle: face pointing to screen-right => camera rotated toward character's right (-X)
 VIEWS["ref"] = (30, 15, 2.6)
+VIEWS["alt"] = (78, 15, 2.6)        # Codex's alternate angle: Simm's right side, same distance and elevation
 tz = float(argv[6]) if len(argv) > 6 else 1.21
 dist_scale = float(argv[7]) if len(argv) > 7 else 1.0
 target.z = tz
@@ -55,7 +56,7 @@ for v in views:
     az, el, dist = VIEWS[v]; dist *= dist_scale
     a = math.radians(az); e = math.radians(el)
     dirv = Vector((-math.sin(a)*math.cos(e), -math.cos(a)*math.cos(e), math.sin(e)))
-    cam_d.lens = 84.7 if v == "ref" else 110        # ref view matches Codex's Godot study: 24 degree FOV
+    cam_d.lens = 84.7 if v in ("ref", "alt") else 110        # ref view matches Codex's Godot study: 24 degree FOV
     cam.location = target + dirv*dist; aim(cam, target)
     # key light: upper-left of camera, soft; fill from right
     right = Vector((math.cos(a), -math.sin(a), 0))
