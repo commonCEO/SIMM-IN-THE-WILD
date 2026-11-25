@@ -1,0 +1,1151 @@
+{
+  "source": {
+    "version": "0.6.0",
+    "model": "src/model.js",
+    "interface": "src/game.js",
+    "note": "Exports and pure data only; context-dependent UI and simulation rules are specified in GAME-DESIGN-DOCUMENT.md."
+  },
+  "world": {
+    "width": 192,
+    "height": 144,
+    "seaX": 164,
+    "cave": {
+      "x": 2080,
+      "y": 928
+    },
+    "volcano": {
+      "x": 4224,
+      "y": 3584
+    },
+    "whale": {
+      "x": 5856,
+      "y": 2048
+    }
+  },
+  "initialState": {
+    "inventory": {
+      "bone": 0,
+      "cloth": 0,
+      "fang": 0,
+      "fur": 0,
+      "frostShard": 0,
+      "trollMoss": 0,
+      "gold": 0,
+      "banana": 0,
+      "salve": 0,
+      "wood": 0,
+      "stone": 0,
+      "berries": 0,
+      "crystal": 0,
+      "star": 0,
+      "herbs": 0,
+      "meat": 0,
+      "roast": 0,
+      "stew": 0,
+      "ironOre": 0,
+      "copperOre": 0,
+      "iron": 0,
+      "copper": 0,
+      "slab": 0,
+      "fish": 0,
+      "cookedFish": 0,
+      "carrot": 0,
+      "potato": 0,
+      "magicFlower": 0,
+      "healPotion": 0,
+      "speedPotion": 0,
+      "peacePotion": 0,
+      "water": 0,
+      "pearl": 0,
+      "fiber": 0,
+      "sand": 0,
+      "glass": 0,
+      "bakedPotato": 0
+    },
+    "bagSlots": 20,
+    "gathered": {
+      "wood": 0,
+      "stone": 0,
+      "berries": 0
+    },
+    "tools": [
+      "hand",
+      "axe"
+    ],
+    "buildings": [],
+    "skills": {
+      "combat": 0,
+      "craft": 0,
+      "gather": 0,
+      "star": 0
+    },
+    "level": 1,
+    "xp": 0,
+    "points": 0,
+    "health": 5,
+    "hunger": 100,
+    "day": 1,
+    "time": 0,
+    "worldAge": 0,
+    "drops": [],
+    "crystalFound": false,
+    "alienFriend": false,
+    "alienFollowing": true,
+    "alien": null,
+    "shelterFound": false,
+    "nightsSurvived": 0,
+    "beaconBuilt": false,
+    "meteorArrived": false,
+    "inCave": false,
+    "stumpsRemoved": [],
+    "regrowth": {},
+    "wildlifeReturns": [],
+    "effects": {},
+    "thirst": 100,
+    "heat": 0,
+    "camera": 0,
+    "jump": 0,
+    "interior": null,
+    "roomItems": [],
+    "npcQuests": {},
+    "harvested": 0,
+    "whalesReleased": 0,
+    "boatId": null,
+    "worldVersion": 6,
+    "home": {
+      "level": 0,
+      "x": 24,
+      "y": 33,
+      "order": null
+    },
+    "caveKind": null,
+    "caveDiscovered": false,
+    "rainbow": null,
+    "rainbowCheckedDay": 0
+  },
+  "stackSize": 20,
+  "dropLifetime": 600,
+  "items": {
+    "bone": "Luu",
+    "cloth": "Kangas",
+    "fang": "Kihv",
+    "fur": "Karusnahk",
+    "frostShard": "Jääkild",
+    "trollMoss": "Trollisammal",
+    "gold": "Kuld",
+    "banana": "Banaan",
+    "salve": "Ravisalv",
+    "wood": "Puit",
+    "stone": "Kivi",
+    "berries": "Marjad",
+    "crystal": "Kristall",
+    "star": "Tähemetall",
+    "herbs": "Maitsetaim",
+    "meat": "Metsloomaliha",
+    "roast": "Küpseliha",
+    "stew": "Metsahautis",
+    "ironOre": "Rauamaak",
+    "copperOre": "Vasemaak",
+    "iron": "Rauakang",
+    "copper": "Vasekang",
+    "slab": "Kiviplaat",
+    "fish": "Kala",
+    "cookedFish": "Küpsetatud kala",
+    "carrot": "Porgand",
+    "potato": "Kartul",
+    "magicFlower": "Võlulill",
+    "healPotion": "Tervendav jook",
+    "speedPotion": "Kiirusejook",
+    "peacePotion": "Loomasõbra jook",
+    "water": "Joogivesi",
+    "pearl": "Merepärl",
+    "fiber": "Taimekiud",
+    "sand": "Liiv",
+    "glass": "Klaas",
+    "bakedPotato": "Küpsekartul"
+  },
+  "tools": [
+    {
+      "id": "hand",
+      "icon": "✋",
+      "name": "Käsi"
+    },
+    {
+      "id": "axe",
+      "icon": "🪓",
+      "name": "Kirves"
+    },
+    {
+      "id": "pickaxe",
+      "icon": "⛏️",
+      "name": "Kirka"
+    },
+    {
+      "id": "bow",
+      "icon": "🏹",
+      "name": "Vibu"
+    },
+    {
+      "id": "torch",
+      "icon": "🔥",
+      "name": "Tõrvik"
+    },
+    {
+      "id": "rod",
+      "icon": "🎣",
+      "name": "Õng"
+    }
+  ],
+  "recipes": [
+    {
+      "id": "boneBow",
+      "name": "Tugevdatud vibu",
+      "icon": "🏹",
+      "cost": {
+        "bone": 3,
+        "fiber": 2,
+        "wood": 2
+      },
+      "gear": "bow"
+    },
+    {
+      "id": "salve",
+      "name": "Ravisalv",
+      "icon": "✚",
+      "cost": {
+        "trollMoss": 1,
+        "herbs": 1
+      },
+      "item": true,
+      "hand": true
+    },
+    {
+      "id": "fiberFromCloth",
+      "name": "Taimekiud kangast",
+      "icon": "〰",
+      "cost": {
+        "cloth": 1
+      },
+      "quantity": 4,
+      "item": true,
+      "output": "fiber",
+      "hand": true
+    },
+    {
+      "id": "hunterCharm",
+      "name": "Jahimehe amulett",
+      "icon": "◭",
+      "cost": {
+        "fang": 2,
+        "fur": 2,
+        "fiber": 1
+      },
+      "gear": "charm"
+    },
+    {
+      "id": "frostLamp",
+      "name": "Jäälatern",
+      "icon": "❄",
+      "cost": {
+        "frostShard": 2,
+        "bone": 1,
+        "stone": 2
+      },
+      "build": true
+    },
+    {
+      "id": "goldLamp",
+      "name": "Kuldlatern",
+      "icon": "☀",
+      "cost": {
+        "gold": 3,
+        "glass": 1,
+        "wood": 2
+      },
+      "build": true
+    },
+    {
+      "id": "fiber",
+      "name": "Taimekiud",
+      "icon": "〰",
+      "cost": {
+        "herbs": 1
+      },
+      "quantity": 3,
+      "item": true,
+      "hand": true
+    },
+    {
+      "id": "axe",
+      "name": "Kivikirves",
+      "icon": "🪓",
+      "cost": {
+        "wood": 3,
+        "stone": 4,
+        "fiber": 1
+      }
+    },
+    {
+      "id": "pickaxe",
+      "name": "Kivikirka",
+      "icon": "⛏️",
+      "cost": {
+        "wood": 3,
+        "stone": 3,
+        "fiber": 1
+      }
+    },
+    {
+      "id": "torch",
+      "name": "Tõrvik",
+      "icon": "🔥",
+      "cost": {
+        "wood": 2,
+        "fiber": 1
+      }
+    },
+    {
+      "id": "bow",
+      "name": "Vibu",
+      "icon": "🏹",
+      "cost": {
+        "wood": 6,
+        "fiber": 3
+      }
+    },
+    {
+      "id": "rod",
+      "name": "Õng",
+      "icon": "🎣",
+      "cost": {
+        "wood": 4,
+        "fiber": 2
+      }
+    },
+    {
+      "id": "ironAxe",
+      "name": "Raudkirves",
+      "icon": "🪓",
+      "cost": {
+        "wood": 3,
+        "iron": 2,
+        "fiber": 1
+      },
+      "gear": "axe"
+    },
+    {
+      "id": "copperPickaxe",
+      "name": "Vaskkirka",
+      "icon": "⛏️",
+      "cost": {
+        "wood": 3,
+        "copper": 2,
+        "fiber": 1
+      },
+      "gear": "pickaxe"
+    },
+    {
+      "id": "bag",
+      "name": "Suurem seljakott (+5 pesa)",
+      "icon": "🎒",
+      "cost": {
+        "fiber": 12,
+        "herbs": 2
+      },
+      "upgrade": true
+    },
+    {
+      "id": "roast",
+      "name": "Küpsetatud liha",
+      "icon": "🍗",
+      "cost": {
+        "meat": 1
+      },
+      "cook": true
+    },
+    {
+      "id": "bakedPotato",
+      "name": "Küpsekartul",
+      "icon": "🥔",
+      "cost": {
+        "potato": 1
+      },
+      "cook": true
+    },
+    {
+      "id": "stew",
+      "name": "Metsahautis",
+      "icon": "🍲",
+      "cost": {
+        "meat": 1,
+        "carrot": 1,
+        "potato": 1,
+        "herbs": 1,
+        "water": 1
+      },
+      "cook": true
+    },
+    {
+      "id": "cookedFish",
+      "name": "Küpsetatud kala",
+      "icon": "🍢",
+      "cost": {
+        "fish": 1
+      },
+      "cook": true
+    },
+    {
+      "id": "iron",
+      "name": "Rauakang",
+      "icon": "▰",
+      "cost": {
+        "ironOre": 2
+      },
+      "smelt": true
+    },
+    {
+      "id": "copper",
+      "name": "Vasekang",
+      "icon": "▰",
+      "cost": {
+        "copperOre": 2
+      },
+      "smelt": true
+    },
+    {
+      "id": "slab",
+      "name": "Kiviplaat",
+      "icon": "▱",
+      "cost": {
+        "stone": 2
+      },
+      "smelt": true
+    },
+    {
+      "id": "glass",
+      "name": "Klaas",
+      "icon": "◇",
+      "cost": {
+        "sand": 2
+      },
+      "smelt": true
+    },
+    {
+      "id": "fire",
+      "name": "Lõke",
+      "icon": "🔥",
+      "cost": {
+        "wood": 5,
+        "stone": 4
+      },
+      "build": true
+    },
+    {
+      "id": "furnace",
+      "name": "Sulatusahi",
+      "icon": "▣",
+      "cost": {
+        "stone": 12,
+        "wood": 4
+      },
+      "build": true
+    },
+    {
+      "id": "floor",
+      "name": "Puitpõrand",
+      "icon": "▦",
+      "cost": {
+        "wood": 1
+      },
+      "build": true
+    },
+    {
+      "id": "wall",
+      "name": "Puitsein",
+      "icon": "▤",
+      "cost": {
+        "wood": 2
+      },
+      "build": true
+    },
+    {
+      "id": "door",
+      "name": "Uks",
+      "icon": "▥",
+      "cost": {
+        "wood": 3,
+        "fiber": 1
+      },
+      "build": true
+    },
+    {
+      "id": "stoneFloor",
+      "name": "Kivipõrand",
+      "icon": "▱",
+      "cost": {
+        "slab": 1
+      },
+      "build": true
+    },
+    {
+      "id": "beacon",
+      "name": "Tähemajakas",
+      "icon": "✦",
+      "cost": {
+        "wood": 10,
+        "star": 4,
+        "crystal": 2,
+        "iron": 2,
+        "copper": 2
+      },
+      "build": true
+    },
+    {
+      "id": "roof",
+      "name": "Katus",
+      "icon": "⌂",
+      "cost": {
+        "wood": 2,
+        "fiber": 1
+      },
+      "build": true
+    },
+    {
+      "id": "window",
+      "name": "Aknaga sein",
+      "icon": "▣",
+      "cost": {
+        "wood": 2,
+        "glass": 1
+      },
+      "build": true
+    },
+    {
+      "id": "chest",
+      "name": "Hoiukast",
+      "icon": "▣",
+      "cost": {
+        "wood": 6,
+        "fiber": 2
+      },
+      "build": true
+    },
+    {
+      "id": "bed",
+      "name": "Voodi",
+      "icon": "▰",
+      "cost": {
+        "wood": 5,
+        "fiber": 6
+      },
+      "build": true
+    },
+    {
+      "id": "table",
+      "name": "Laud",
+      "icon": "▤",
+      "cost": {
+        "wood": 4
+      },
+      "build": true
+    },
+    {
+      "id": "stairs",
+      "name": "Trepp",
+      "icon": "▟",
+      "cost": {
+        "wood": 8
+      },
+      "build": true
+    },
+    {
+      "id": "ceiling",
+      "name": "Vahelagi",
+      "icon": "▦",
+      "cost": {
+        "wood": 1
+      },
+      "build": true
+    },
+    {
+      "id": "garden",
+      "name": "Kastpeenar",
+      "icon": "❀",
+      "cost": {
+        "wood": 4,
+        "stone": 1
+      },
+      "build": true
+    },
+    {
+      "id": "boat",
+      "name": "Sõudepaat",
+      "icon": "⛵",
+      "cost": {
+        "wood": 25,
+        "iron": 2,
+        "fiber": 4
+      },
+      "build": true
+    },
+    {
+      "id": "deskLamp",
+      "name": "Laualamp",
+      "icon": "♧",
+      "cost": {
+        "wood": 2,
+        "copper": 1,
+        "glass": 1
+      },
+      "build": true
+    },
+    {
+      "id": "wallLamp",
+      "name": "Seinalatern",
+      "icon": "☼",
+      "cost": {
+        "iron": 2,
+        "glass": 1
+      },
+      "build": true
+    },
+    {
+      "id": "yardLamp",
+      "name": "Õuelatern",
+      "icon": "☀",
+      "cost": {
+        "wood": 3,
+        "iron": 1,
+        "glass": 1
+      },
+      "build": true
+    },
+    {
+      "id": "crystalLamp",
+      "name": "Kristalllamp",
+      "icon": "✦",
+      "cost": {
+        "crystal": 1,
+        "copper": 1,
+        "stone": 2
+      },
+      "build": true
+    },
+    {
+      "id": "healPotion",
+      "name": "Tervendav jook",
+      "icon": "♥",
+      "cost": {
+        "herbs": 2,
+        "berries": 2,
+        "water": 1
+      },
+      "item": true
+    },
+    {
+      "id": "speedPotion",
+      "name": "Kiirusejook",
+      "icon": "➤",
+      "cost": {
+        "magicFlower": 1,
+        "carrot": 1,
+        "water": 1
+      },
+      "item": true
+    },
+    {
+      "id": "peacePotion",
+      "name": "Loomasõbra jook",
+      "icon": "❧",
+      "cost": {
+        "magicFlower": 1,
+        "herbs": 2,
+        "water": 1
+      },
+      "item": true
+    },
+    {
+      "id": "water",
+      "name": "Täida veepudel",
+      "icon": "💧",
+      "cost": {},
+      "item": true,
+      "water": true,
+      "hand": true
+    },
+    {
+      "id": "nest",
+      "name": "Tulnuka pesa",
+      "icon": "🛸",
+      "cost": {
+        "wood": 8,
+        "star": 2,
+        "fiber": 3
+      },
+      "build": true
+    }
+  ],
+  "skills": [
+    {
+      "id": "combat",
+      "branch": "combat",
+      "name": "Vapper seikleja",
+      "icon": "⚔",
+      "max": 3,
+      "description": "+1 löögijõudu ja üks lisasüda igal astmel."
+    },
+    {
+      "id": "quickdraw",
+      "branch": "combat",
+      "requires": "combat",
+      "name": "Täpsuslask",
+      "icon": "🏹",
+      "max": 1,
+      "description": "Vibu laeb 35% kiiremini ning laetud nool teeb rohkem kahju."
+    },
+    {
+      "id": "guardian",
+      "branch": "combat",
+      "requires": "combat",
+      "name": "Kindel süda",
+      "icon": "♥",
+      "max": 1,
+      "description": "Kolm lisasüdant. Pikem puutumatus pärast pihta saamist."
+    },
+    {
+      "id": "craft",
+      "branch": "craft",
+      "name": "Nutikas meister",
+      "icon": "⚒",
+      "max": 3,
+      "description": "Meisterdamine ja ehitamine maksab iga astmega 10% vähem."
+    },
+    {
+      "id": "mason",
+      "branch": "craft",
+      "requires": "craft",
+      "name": "Kivimeister",
+      "icon": "▱",
+      "max": 1,
+      "description": "Sulatusahjust saad kaks korda rohkem kiviplaate."
+    },
+    {
+      "id": "smelter",
+      "branch": "craft",
+      "requires": "craft",
+      "name": "Ahjumeister",
+      "icon": "🔥",
+      "max": 1,
+      "description": "Puit põleb ahjus ja lõkkes kaks korda kauem."
+    },
+    {
+      "id": "gather",
+      "branch": "gather",
+      "name": "Metsa sõber",
+      "icon": "❧",
+      "max": 3,
+      "description": "Korjad rohkem materjale ning tööriistad töötavad kiiremini."
+    },
+    {
+      "id": "logger",
+      "branch": "gather",
+      "requires": "gather",
+      "name": "Puuraidur",
+      "icon": "🪓",
+      "max": 1,
+      "description": "Igast puust saad veel kaks puitu. Kännud annavad kolm puitu."
+    },
+    {
+      "id": "angler",
+      "branch": "gather",
+      "requires": "gather",
+      "name": "Kalameister",
+      "icon": "🎣",
+      "max": 1,
+      "description": "Iga õnnestunud püügiga saad kaks kala."
+    },
+    {
+      "id": "star",
+      "branch": "star",
+      "name": "Täheleiutaja",
+      "icon": "✦",
+      "max": 3,
+      "description": "Nups aeglustab lähedasi vastaseid tugevamalt ja töötab kiiremini."
+    },
+    {
+      "id": "frost",
+      "branch": "star",
+      "requires": "star",
+      "name": "Täheudu",
+      "icon": "❄",
+      "max": 1,
+      "description": "Nupsi aeglustav aura ulatub kaugemale."
+    },
+    {
+      "id": "leap",
+      "branch": "gather",
+      "requires": "gather",
+      "name": "Kõrge hüpe",
+      "icon": "↟",
+      "max": 2,
+      "description": "Iga aste lubab hüpata ühe maapinna astme võrra kõrgemale."
+    },
+    {
+      "id": "helper",
+      "branch": "star",
+      "requires": "star",
+      "name": "Usin abiline",
+      "icon": "🛸",
+      "max": 1,
+      "description": "Baasi jäetud Nups toob kaks korda rohkem marju."
+    }
+  ],
+  "crops": {
+    "carrot": {
+      "name": "Porgand",
+      "duration": 180,
+      "yield": 3
+    },
+    "potato": {
+      "name": "Kartul",
+      "duration": 240,
+      "yield": 4
+    },
+    "berries": {
+      "name": "Marjad",
+      "duration": 210,
+      "yield": 3
+    },
+    "herbs": {
+      "name": "Ravimtaimed",
+      "duration": 180,
+      "yield": 3
+    },
+    "magicFlower": {
+      "name": "Võlulilled",
+      "duration": 300,
+      "yield": 2
+    }
+  },
+  "npcs": [
+    {
+      "id": "ranger",
+      "name": "LEINA",
+      "age": 13,
+      "role": "Aednik",
+      "sprite": 5,
+      "x": 928,
+      "y": 864,
+      "line": "TERE! SEEMNEST VÕIB KASVADA SUUR IDEE.",
+      "request": {
+        "carrot": 3
+      },
+      "reward": {
+        "herbs": 4,
+        "wood": 8
+      },
+      "task": "KASVATA JA TOO KOLM PORGANDIT."
+    },
+    {
+      "id": "miner",
+      "name": "BRONKINGS",
+      "age": 22,
+      "role": "Sepp",
+      "sprite": 2,
+      "x": 1120,
+      "y": 960,
+      "line": "HEA TÖÖ ALGAB AUSAST KAUBAST.",
+      "request": {
+        "iron": 2
+      },
+      "reward": {
+        "crystal": 2,
+        "copper": 3
+      },
+      "task": "TOO KAKS RAUAKANGI. AITAN SUL SEPANA EDASI JÕUDA."
+    },
+    {
+      "id": "trader",
+      "name": "SALTY",
+      "age": 27,
+      "role": "Kalamees",
+      "sprite": 4,
+      "x": 4992,
+      "y": 2048,
+      "line": "MERI JUTUSTAB LUGUSID. VAALAD ON MEIE SÕBRAD!",
+      "request": {
+        "fish": 3
+      },
+      "reward": {
+        "iron": 3,
+        "water": 5
+      },
+      "task": "TOO KOLM KALA. IDAS OOTAB SÕBRALIK VAAL."
+    },
+    {
+      "id": "karjon",
+      "name": "KARJON",
+      "age": 165,
+      "role": "Rändur",
+      "sprite": 1,
+      "x": 1280,
+      "y": 832,
+      "line": "165 AASTAT JA IKKA UUDISHIMULIK! KOOBAS PEIDAB END KAUGEL IDAS, MÄGEDE LÕUNASERVAS.",
+      "request": {
+        "bone": 3
+      },
+      "reward": {
+        "frostShard": 2,
+        "wood": 10
+      },
+      "task": "TOO KOLM LUUD LUUKEREDELT. KOOPA JAOKS VAJAD KIRKAT JA TÕRVIKUT."
+    },
+    {
+      "id": "anyo",
+      "name": "ANYO",
+      "age": 36,
+      "role": "Võlur",
+      "sprite": 3,
+      "x": 1792,
+      "y": 896,
+      "line": "MA HÕLJUN, SEST ÕPPIMINE EI PEA MAA KÜLJES KINNI OLEMA.",
+      "request": {
+        "crystal": 2
+      },
+      "reward": {
+        "star": 4,
+        "magicFlower": 3
+      },
+      "task": "TOO KAKS KRISTALLI. TASUKS TÄHEMETALL JA VÕLULILLED."
+    },
+    {
+      "id": "diego",
+      "name": "DIEGO",
+      "age": 7,
+      "role": "Džunglipoiss",
+      "sprite": 0,
+      "x": 800,
+      "y": 2880,
+      "line": "PSST! MINU ROTT TUNNEB SIIN IGA PUUD. MÄNGIME!",
+      "request": {
+        "berries": 5
+      },
+      "reward": {
+        "banana": 5,
+        "fiber": 6
+      },
+      "task": "TOO VIIS MARJA MULLE JA MU ROTILE."
+    }
+  ],
+  "housePlans": [
+    {
+      "level": 1,
+      "name": "Metsamaja",
+      "cost": {
+        "wood": 25,
+        "stone": 15,
+        "fiber": 6
+      },
+      "days": 3
+    },
+    {
+      "level": 2,
+      "name": "Suur metsamaja",
+      "cost": {
+        "wood": 45,
+        "slab": 12,
+        "iron": 4
+      },
+      "days": 3
+    },
+    {
+      "level": 3,
+      "name": "Tähekodu",
+      "cost": {
+        "wood": 60,
+        "slab": 20,
+        "glass": 8,
+        "crystal": 3
+      },
+      "days": 3
+    }
+  ],
+  "foodValues": {
+    "banana": [
+      22,
+      1
+    ],
+    "stew": [
+      65,
+      3
+    ],
+    "roast": [
+      40,
+      2
+    ],
+    "cookedFish": [
+      45,
+      2
+    ],
+    "berries": [
+      25,
+      1
+    ],
+    "carrot": [
+      30,
+      1
+    ],
+    "bakedPotato": [
+      35,
+      1
+    ]
+  },
+  "forage": {
+    "branch": {
+      "item": "wood",
+      "quantity": 1,
+      "label": "Korja oks",
+      "delay": 360
+    },
+    "pebble": {
+      "item": "stone",
+      "quantity": 1,
+      "label": "Korja väike kivi",
+      "delay": 720
+    },
+    "sand": {
+      "item": "sand",
+      "quantity": 3,
+      "label": "Korja liiva",
+      "delay": 360
+    }
+  },
+  "hostileTypes": [
+    "wolf",
+    "bear",
+    "skeleton",
+    "polarBear",
+    "troll",
+    "jaguar"
+  ],
+  "dungeon": {
+    "rooms": [
+      {
+        "x": 27,
+        "y": 18,
+        "w": 11,
+        "h": 13
+      },
+      {
+        "x": 9,
+        "y": 23,
+        "w": 12,
+        "h": 12
+      },
+      {
+        "x": 11,
+        "y": 42,
+        "w": 16,
+        "h": 12
+      },
+      {
+        "x": 39,
+        "y": 40,
+        "w": 14,
+        "h": 14
+      },
+      {
+        "x": 49,
+        "y": 23,
+        "w": 16,
+        "h": 11
+      },
+      {
+        "x": 49,
+        "y": 8,
+        "w": 15,
+        "h": 10
+      }
+    ],
+    "corridors": [
+      {
+        "x": 20,
+        "y": 27,
+        "w": 9,
+        "h": 3
+      },
+      {
+        "x": 15,
+        "y": 33,
+        "w": 3,
+        "h": 11
+      },
+      {
+        "x": 25,
+        "y": 46,
+        "w": 16,
+        "h": 3
+      },
+      {
+        "x": 44,
+        "y": 31,
+        "w": 3,
+        "h": 12
+      },
+      {
+        "x": 36,
+        "y": 27,
+        "w": 15,
+        "h": 3
+      },
+      {
+        "x": 55,
+        "y": 16,
+        "w": 3,
+        "h": 9
+      }
+    ],
+    "spawn": {
+      "x": 1024,
+      "y": 928
+    },
+    "crystal": {
+      "x": 1792,
+      "y": 384
+    }
+  },
+  "journal": [
+    {
+      "title": "Esimesed varud",
+      "text": "Korja maast oksi või raiu kirvega puud. Kogu viis puitu."
+    },
+    {
+      "title": "Tööriistad seikluseks",
+      "text": "Kivikirka vajab 3 puitu, 3 väikest kivi ja 1 taimekiudu. Kiud saad maitsetaimest; kirka valmista laual."
+    },
+    {
+      "title": "Valgus pimeduses",
+      "text": "Meisterda tõrvik: 2 puitu ja 1 taimekiud tahiks."
+    },
+    {
+      "title": "Metsa saladus",
+      "text": "Küsi Karjonilt vihjet. Koobas peitub kaugel idas, mägede lõunaservas."
+    },
+    {
+      "title": "Sõber tähtedelt",
+      "text": "Leia ida poolt meteoriit ja ütle Nupsile tere."
+    },
+    {
+      "title": "Oma paik maailmas",
+      "text": "Vii Bronkingsile maja materjalid. Kolme päeva pärast astu oma koju."
+    },
+    {
+      "title": "Kolm tähistaevast",
+      "text": "Ela üle kolm ööd. Seni üle elatud: 0/3."
+    },
+    {
+      "title": "Tähemajakas",
+      "text": "Sulata metallid ja ehita kristallist tähemajakas — sinu baasi särav süda."
+    }
+  ]
+}

@@ -493,3 +493,16 @@ there. Notes contain unattended run receipts for19:06 and20:06UTC, delivering
 v005 andv006 after consuming the matching Codex reviews.
 This supersedes all earlier inactive-schedule statements. No workaround of
 the prior refusal was used. Codex remains every30min. No user file relay needed.
+
+
+## Production planning dispatch —25November2026
+
+User explicitly requested an executive-producer plan through1.0 and larger
+production delegation to Fable. Read PRODUCTION_PLAN.md, PRODUCTION_BOARD.md,
+FABLE_NEXT_CHECK.md and DECISIONS_AND_RISKS.md. GDD/data/art-guide context
+is now published too; these were previously local-only. Source-code snapshot
+is queued as PROD-002, so do not assume your cloud Godot tree matches this PC.
+Please acknowledge PROD-001, keep ART-001 active, then pull ART-006 audit
+while waiting for head feedback. Write proposals in claude_production.md.
+The plan is an initial16-24week low-confidence envelope, not a release promise.
+No gameplay/save/art asset was changed during this planning dispatch.

@@ -71,3 +71,10 @@ Do not claim a schedule is running merely because this file requests it.
 No recurring paid generation/subscription purchases are authorized by this
 protocol. Existing model-plan usage is permitted for the requested work.
 Record blockers requiring user input instead of fabricating successful runs.
+
+PRODUCTION EXPANSION — USER REQUEST25NOV2026
+Read PRODUCTION_PLAN.md, PRODUCTION_BOARD.md and FABLE_NEXT_CHECK.md.
+User authorized planning through1.0 and division of work with Fable.
+Codex owns board/integration; Fable owns art and claude_production.md proposals.
+Parallel audit/spec/save-infrastructure work is allowed now; A1 still gates
+broader character/world production. Claude hourly schedule is now confirmed.
