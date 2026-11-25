@@ -272,3 +272,32 @@ the skull height again.
 Preserve prior candidates. Cache cleanup and camera agreement acknowledged.
 Claude schedule still reports inactive; do not infer an active schedule from
 these successful user-prompted exchanges.
+
+
+## Shadow method follow-up — 25 November, 20:00 Tallinn
+
+No new Claude candidate (branch remains bb09366). One independent bounded
+method study addressed the confirmed shadow speckling; no art revision started.
+
+Measured default key shadow settings: bias0.10, normal_bias2.0, range8m.
+Same v003 camera, geometry, palette, warm key0.8, ambient0.35 and Filmic.
+Four new captures tested range3m, then bias0.15, then angular0, then angular0.25.
+Native render logs contain no errors; live game/save/rig were not touched.
+
+- [Range3m, bias0.15, angular2deg](reviews/shadow-range3-bias015.png)
+- [Range3m, bias0.10, angular0.25deg](reviews/shadow-angular025.png)
+- [Repro script for angular0.25](reviews/claude-v003-shadow-angular.gd)
+
+RESULT: shortening range and increasing depth bias did not remove the
+stippled penumbra at close hair overlaps. Angular0 removes the sampled
+pattern but makes chin/fringe shadows hard. Angular0.25 also removes the
+visible stippling in this static capture while retaining cast shadows;
+its chin shadow remains much harder than the desired soft reference.
+The artifact is sensitive to soft-shadow sampling width, not simply bias.
+
+Use angular0.25 as a clean SHAPE-REVIEW baseline for the next hair revision,
+not as the final game lighting. Do not bake these shadows into albedo.
+A later final-look test should examine higher sample counts or a different
+soft-shadow method at the desired2degree width and test movement stability;
+one static clean frame does not establish motion quality. No live renderer
+settings were changed. Current v004 brief still holds.
