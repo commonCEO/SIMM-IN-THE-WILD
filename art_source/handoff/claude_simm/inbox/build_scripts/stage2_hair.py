@@ -65,9 +65,14 @@ def L(name, pts, w, t=0.016, n=16, **kw):
 # one smooth shell.
 DOM = dict(t=.030)
 SUB = dict(t=.020)
-# ===== DOMINANT 1: the big arc over Simm's right (upper-left of the reference): rolls off the crown, curves out
-L("D1_right_arc",   [(-36, 76, -.012), (-64, 60, .010), (-88, 42, .022), (-103, 28, .038), (-110, 20, .052)], .124, n=20,
-  grooves=[(-.3, .45), (.25, .4)], ridge_at=.2, tip_pow=1.9, root=.45, belly=.3, **DOM)
+# ===== DOMINANT 1 (v004): the arc over Simm's right is three overlapping curved volumes, not one plate.
+# Different roots, different depths, different tip directions; each rises off the head, bends and twists as it tapers.
+L("D1a_arc_upper", [(-28, 79, -.014), (-56, 66, .014), (-82, 51, .034), (-98, 41, .058), (-104, 37, .074)], .080, n=20,
+  grooves=[(-.25, .45)], ridge_at=.25, tip_pow=1.7, root=.40, belly=.32, t=.026, roll=(-8, 26))
+L("D1b_arc_front", [(-44, 71, -.012), (-66, 54, .008), (-85, 34, .022), (-96, 18, .040), (-99, 10, .050)], .074, n=20,
+  grooves=[(.2, .45)], ridge_at=-.2, tip_pow=1.8, root=.45, belly=.3, t=.024, roll=(6, -22))
+L("D1c_arc_rear",  [(-60, 78, -.012), (-88, 66, .010), (-108, 52, .026), (-120, 44, .046)], .066, n=18,
+  grooves=[(0, .4)], ridge_at=.3, tip_pow=1.6, root=.45, belly=.3, t=.022, roll=(0, 18))
 # ===== DOMINANT 2: arcing temple lock: bows forward over the temple and hooks down in front of the ear
 L("D2_temple_arc",  [(-38, 66, -.010), (-56, 46, .012), (-70, 24, .018), (-74, 2, .016), (-70, -12, .014)], .100, n=20,
   grooves=[(.25, .45), (-.3, .35)], ridge_at=-.2, tip_pow=2.1, root=.5, belly=.3, **DOM)
@@ -78,25 +83,25 @@ L("D3_fringe_point", [(-26, 70, -.012), (-16, 48, .010), (-5, 22, .014), (6, -8,
 L("D4_fringe_sweep", [(-12, 74, -.012), (10, 56, .012), (32, 32, .016), (48, 6, .014), (53, -6, .012)], .124, n=20,
   grooves=[(-.35, .45), (.05, .4), (.4, .35)], ridge_at=-.2, tip_pow=2.3, root=.5, belly=.3, **DOM)
 # ===== DOMINANT 5: the main flick on Simm's left, kicking out and up
-L("D5_left_flick",   [(34, 76, -.012), (62, 60, .010), (84, 42, .022), (98, 26, .038), (104, 15, .052)], .102, n=20,
-  grooves=[(.25, .45), (-.3, .35)], ridge_at=-.2, tip_pow=1.8, root=.45, belly=.3, **DOM)
+L("D5_left_flick",   [(32, 77, -.012), (58, 64, .012), (80, 50, .030), (95, 40, .054), (101, 36, .072)], .084, n=20,
+  grooves=[(.25, .45)], ridge_at=-.2, tip_pow=1.5, root=.42, belly=.3, t=.026, roll=(6, -24))
 # ===== SUBORDINATE, Simm's right: a shorter side flick under the big arc, sideburn, behind the ear
 L("S_right_flick",  [(-62, 58, -.010), (-84, 40, .004), (-98, 24, .020), (-105, 12, .044)], .078, grooves=[(.1, .4)], ridge_at=.3, tip_pow=1.7, **SUB)
-L("S_right_upper",  [(-84, 72, -.010), (-108, 60, .004), (-124, 46, .014), (-134, 34, .030)], .084, grooves=[(.1, .4)], ridge_at=-.3, tip_pow=1.7, **SUB)
+L("S_right_upper",  [(-92, 70, -.010), (-114, 58, .004), (-128, 44, .012), (-137, 32, .026)], .070, grooves=[(.1, .4)], ridge_at=-.3, tip_pow=1.7, **SUB)
 L("S_right_burn",   [(-86, 38, -.008), (-88, 16, .000), (-86, -4, .004), (-80, -20, .010)], .064, t=.016, grooves=[(.15, .4)], ridge_at=-.2)
 L("S_right_behind", [(-106, 36, -.008), (-108, 10, .002), (-108, -12, .008), (-104, -31, .024)], .084, grooves=[(-.2, .4)], ridge_at=.2, **SUB)
-L("S_right_spike",  [(-72, 82, -.008), (-88, 76, .012), (-99, 70, .040)], .042, t=.014, n=12, grooves=[(0, .3)], tip_pow=1.5, root=.6, belly=.3)
+L("S_right_spike",  [(-72, 82, -.008), (-88, 76, .016), (-99, 70, .056)], .040, t=.014, n=12, grooves=[(0, .3)], tip_pow=1.5, root=.6, belly=.3)
 # ===== SUBORDINATE, fringe: short lock by the parting (leaves the window over the right eye), far-left temple lock
 L("S_fringe_part",  [(-28, 60, -.010), (-26, 44, .002), (-24, 28, .004), (-21, 11, .004)], .068, t=.016, grooves=[(0, .4)], tip_pow=2.2)
-L("S_fringe_right", [(-34, 66, -.010), (-42, 44, .004), (-49, 20, .008), (-53, -9, .009)], .094, grooves=[(.1, .4)], ridge_at=.2, tip_pow=2.2, **SUB)
+L("S_fringe_right", [(-32, 67, -.010), (-44, 48, .004), (-57, 30, .010), (-68, 14, .014), (-73, 8, .016)], .086, grooves=[(.1, .4)], ridge_at=.2, tip_pow=2.0, roll=(0, 16), **SUB)   # offset, swept sideways to the temple
 L("S_fringe_left",  [(4, 76, -.012), (32, 62, .000), (56, 40, .006), (72, 14, .014), (77, 0, .018)], .092, grooves=[(.15, .4)], ridge_at=.2, tip_pow=2.0, **SUB)
-L("S_fringe_mid",   [(-18, 72, -.010), (-4, 50, .004), (10, 24, .008), (19, -6, .009)], .090, grooves=[(-.1, .4)], ridge_at=-.2, tip_pow=2.2, **SUB)
-L("S_fringe_under", [(0, 44, -.004), (10, 28, .005), (21, 8, .005), (28, -9, .005)], .096, t=.017, n=12, tip_pow=2.3)
-L("S_fringe_under2", [(-22, 42, -.004), (-15, 22, .005), (-8, -4, .005)], .082, t=.016, n=10, tip_pow=2.3)
+L("S_fringe_mid",   [(-18, 72, -.010), (-4, 52, .004), (9, 30, .008), (16, 9, .008)], .088, grooves=[(-.1, .4)], ridge_at=-.2, tip_pow=3.4, **SUB)   # shorter, rounded end
+L("S_fringe_under", [(0, 44, -.004), (10, 28, .005), (20, 10, .005), (25, -1, .005)], .096, t=.017, n=12, tip_pow=3.2)
+L("S_fringe_under2", [(-22, 42, -.004), (-15, 24, .005), (-9, 5, .005)], .078, t=.016, n=10, tip_pow=3.0)
 L("S_fringe_under3", [(40, 40, -.004), (52, 20, .005), (63, -8, .006)], .086, t=.016, n=10, tip_pow=2.3)
-L("S_temple_under", [(-48, 36, -.004), (-57, 16, .005), (-64, -9, .006)], .086, t=.016, n=10, tip_pow=2.3)
+L("S_temple_under", [(-46, 36, -.004), (-58, 18, .005), (-68, 2, .008), (-73, -6, .010)], .080, t=.016, n=12, tip_pow=2.2)
 # ===== SUBORDINATE, Simm's left: two lesser flicks of different length under the main one, sideburn, behind ear
-L("S_left_mid",    [(54, 68, -.010), (78, 50, .002), (93, 30, .014), (103, 14, .036)], .084, grooves=[(-.2, .4)], ridge_at=.2, tip_pow=1.7, **SUB)
+L("S_left_mid",    [(54, 68, -.010), (78, 50, .004), (94, 28, .020), (104, 8, .048), (106, 0, .056)], .070, grooves=[(-.2, .4)], ridge_at=.2, tip_pow=1.7, **SUB)
 L("S_left_low",    [(74, 54, -.008), (87, 34, .000), (94, 12, .008), (97, -6, .022)], .074, grooves=[(.1, .4)], ridge_at=-.3, tip_pow=1.8, t=.018)
 L("S_left_burn",   [(82, 34, -.008), (82, 14, .000), (80, -4, .004), (76, -18, .008)], .058, t=.015, grooves=[(-.15, .4)], ridge_at=.2)
 L("S_left_behind", [(108, 40, -.008), (110, 14, .002), (110, -10, .008), (106, -29, .026)], .084, grooves=[(.2, .4)], ridge_at=-.2, **SUB)
@@ -108,10 +113,11 @@ L("top_to_front", [(-176, 78, -.010), (-20, 89, .001), (-16, 80, .003), (-16, 74
 L("top_right_bk", [(-166, 74, -.010), (-134, 68, .000), (-108, 66, .005), (-96, 62, .010)], .096, grooves=[(.1, .4)], ridge_at=-.3, **TOP)
 L("top_left_bk",  [(166, 74, -.010), (134, 68, .000), (108, 66, .005), (96, 62, .010)], .092, grooves=[(-.1, .4)], ridge_at=.3, **TOP)
 # ===== tuft: ONE tapering swept lock rising out of the crown flow, root narrow and buried (no lobes, no pit)
-L("tuft",        [(-40, 78, -.016), (-14, 86, -.002), (14, 87, .020), (38, 80, .052), (56, 70, .086)], .070, n=22, t=.024,
-  grooves=[(.2, .4)], ridge_at=-.2, tip_pow=1.4, root=.30, belly=.42)
-L("tuft_strand", [(-6, 84, -.006), (20, 86, .010), (44, 80, .030), (60, 72, .046)], .030, t=.012, n=14, tip_pow=1.3, root=.4, belly=.4)
-L("tuft_second", [(44, 80, -.012), (72, 74, .006), (92, 66, .030), (105, 59, .056)], .052, t=.018, grooves=[(.1, .35)], tip_pow=1.5, root=.4, belly=.35)
+L("tuft",        [(-30, 80, -.016), (-8, 87, .000), (16, 88, .028), (36, 82, .066), (50, 74, .106)], .050, n=24, t=.020,
+  grooves=[(.2, .4)], ridge_at=-.2, tip_pow=1.25, root=.30, belly=.40, roll=(0, 20))
+L("tuft_strand", [(-10, 84, -.006), (14, 87, .012), (36, 82, .036), (50, 76, .060)], .026, t=.012, n=14, tip_pow=1.3, root=.4, belly=.4)
+L("tuft_second", [(44, 80, -.012), (70, 75, .010), (90, 68, .040), (103, 62, .072)], .044, t=.016, grooves=[(.1, .35)], tip_pow=1.5, root=.4, belly=.35)
+L("rise_front",  [(8, 80, -.008), (28, 78, .012), (46, 72, .032)], .034, t=.012, n=12, tip_pow=1.4, root=.5, belly=.35)
 L("tuft_back",   [(150, 83, -.010), (174, 76, .006), (-172, 66, .034)], .048, t=.016, n=12, grooves=[(.1, .35)], tip_pow=1.4, root=.4, belly=.35)
 # ===== back, lower tier: down to the nape, tips kicking out, lengths varied       [not visible in reference: invented]
 L("back_c",   [(180, 54, -.010), (180, 10, .000), (180, -32, .004), (180, -60, .026)], .122, grooves=[(-.35, .45), (.3, .4)], ridge_at=.1, t=.026)
