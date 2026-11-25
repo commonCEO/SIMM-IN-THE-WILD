@@ -55,6 +55,7 @@ for v in views:
     az, el, dist = VIEWS[v]; dist *= dist_scale
     a = math.radians(az); e = math.radians(el)
     dirv = Vector((-math.sin(a)*math.cos(e), -math.cos(a)*math.cos(e), math.sin(e)))
+    cam_d.lens = 84.7 if v == "ref" else 110        # ref view matches Codex's Godot study: 24 degree FOV
     cam.location = target + dirv*dist; aim(cam, target)
     # key light: upper-left of camera, soft; fill from right
     right = Vector((math.cos(a), -math.sin(a), 0))

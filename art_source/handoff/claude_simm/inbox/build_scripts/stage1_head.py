@@ -1,5 +1,6 @@
 # Stage 1: primary head forms. START_HERE_v02.blend -> work/stage1.blend
 import bpy, sys, os, numpy as np
+sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import importlib, sk; importlib.reload(sk)
 from sk import *
@@ -15,7 +16,7 @@ co = S.co
 
 # ---- 1. macro proportions: toddler-big cranium, short lower face, slim short neck
 zt = smooth_table([0.980, 1.030, 1.048, 1.103, 1.144, 1.187, 1.215, 1.338],
-                  [0.950, 1.004, 1.040, 1.092, 1.126, 1.176, 1.216, 1.386], 0.008, 0.90, 1.42)
+                  [0.950, 1.004, 1.040, 1.092, 1.126, 1.176, 1.214, 1.344], 0.008, 0.90, 1.42)
 sx = smooth_table([0.980, 1.030, 1.048, 1.075, 1.103, 1.144, 1.187, 1.250, 1.338],
                   [0.80, 0.80, 1.16, 1.40, 1.50, 1.55, 1.56, 1.57, 1.56], 0.010, 0.90, 1.42)
 sy = smooth_table([0.980, 1.030, 1.048, 1.103, 1.144, 1.187, 1.250, 1.338],
@@ -48,12 +49,12 @@ mscale(mn, (0, -0.124, 1.134), (0.50, 0.40, 0.60))
 S.smooth(mask=soft(FS[45], 2), it=10, k=0.6)
 S.grab((0, -0.134, 1.128), 0.022, (0, -0.003, 0.004))          # slightly upturned tip
 # ---- 3. forehead and brow: child skull, no brow shelf, rounded forehead
-S.grab((0, -0.135, 1.30), 0.10, (0, -0.004, 0.0))               # upper forehead roundness
+S.grab((0, -0.135, 1.275), 0.10, (0, -0.004, 0.0))              # upper forehead roundness
 S.grab((0, -0.140, 1.225), 0.085, (0, 0.011, 0.0))              # lower forehead back: no shelf over the eyes
 S.smooth((0, -0.13, 1.215), 0.10, it=6, k=0.5)                  # melt the adult brow ridge
 S.grab((0, 0.16, 1.26), 0.16, (0, 0.022, 0.0))                  # fuller occiput
-S.grab((0, 0.0, 1.40), 0.15, (0, 0, 0.008))                     # crown dome
-S.grab((0.135, -0.02, 1.365), 0.11, (-0.014, 0, -0.008), mirror=True)   # round off the boxy top corners
+S.grab((0, 0.0, 1.36), 0.15, (0, 0, 0.004))                     # crown dome
+S.grab((0.135, -0.02, 1.325), 0.11, (-0.014, 0, -0.008), mirror=True)   # round off the boxy top corners
 S.grab((0.16, 0.03, 1.25), 0.12, (0.004, 0, 0), mirror=True)    # parietal width
 S.grab((0, -0.132, 1.190), 0.050, (0, 0.011, 0.0))               # glabella back: relaxed, no frown knot
 S.grab((0, -0.128, 1.160), 0.032, (0, 0.006, 0.0))               # low soft child nose bridge
@@ -76,10 +77,10 @@ lipline = (dl <= 2)                                   # the three tight loops th
 inner = (VF[47] | VF[48] | VF[49]) & ~lipline
 upper_ = VF[44] & ~VF[46]; lower_ = VF[46] & ~VF[44]
 xm = np.abs(S.co[lipline, 0]).max()
-MW = 0.0205; MZ = 1.0900
+MW = 0.0220; MZ = 1.0900
 def mouth_xz(u):
     au = np.abs(u)
-    return u*MW, MZ - 0.0012 + 0.0050*au**2.0          # one relaxed upturned arc, corners ~5 mm above the centre
+    return u*MW, MZ - 0.0014 + 0.0058*au**2.0          # one relaxed upturned arc, corners ~5 mm above the centre
 # v002 (after Codex's Godot review): the lip volumes are melted into one muzzle mound before the seam is seated.
 # The lip loops sit ~1 mm apart, so an edge-by-edge relax never reaches across them. The muzzle is treated as a
 # height field instead: each lip-zone vertex takes the distance-weighted mean depth of the skin within ~14 mm.
@@ -125,7 +126,7 @@ for _pass in range(3):
     S.co[:, 1] = keep_y                                                  # ... sliding on the surface, not sinking
     S.E, S.deg = E_all, deg_all
 yk = kernel_depth(idx, 0.020, dl < 6)
-S.co[idx, 1] = yk + np.where(ringl == 2, 0.0006, np.where(ringl == 1, 0.0016, 0.0028))    # short shallow crease
+S.co[idx, 1] = yk + np.where(ringl == 2, 0.0011, np.where(ringl == 1, 0.0026, 0.0042))    # v003: crease deep enough to read under bright light
 ii = np.where(inner)[0]; ui = np.clip(S.co[ii, 0]/xm, -1, 1)
 ix, iz = mouth_xz(ui); zc = S.co[ii, 2].mean()
 S.co[ii, 0] = ix*0.9; S.co[ii, 2] = iz + (S.co[ii, 2] - zc)*0.08
@@ -149,7 +150,8 @@ if os.environ.get("MOUTH_DEBUG"):
 # ---- 5. jaw, chin, cheeks
 S.inflate((0.078, -0.078, 1.068), 0.062, 0.010, mirror=True)                 # soft jowl: round lower face, not a wedge
 S.grab((0.145, -0.045, 1.185), 0.075, (-0.006, 0.0, 0.0), mirror=True)       # temples in: widest point drops to the cheeks
-S.grab((0, -0.112, 1.046), 0.045, (0, -0.004, 0.003))                        # chin: small, soft, under the lip
+S.inflate((0.104, -0.022, 1.078), 0.062, 0.009, mirror=True)                 # v003: jaw angle filled, no wedge in profile
+S.grab((0, -0.112, 1.046), 0.045, (0, -0.006, 0.003))                        # chin: small, soft, under the lip
 S.scale((0, -0.110, 1.050), 0.050, (0.98, 1.0, 1.0), pivot=(0, -0.110, 1.050))
 S.inflate((0.094, -0.092, 1.100), 0.075, 0.005, mirror=True)                 # full low cheeks
 S.grab((0.060, -0.118, 1.116), 0.040, (0.0, -0.004, 0.002), mirror=True)     # cheek front (apple)

@@ -10,9 +10,34 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 - Each side edits only its own file in `coordination/`, so pulls never conflict.
 - Anything Claude must see has to be committed: it cannot read untracked files on the PC.
 
-## Current delivery: head_candidate_v002
+## Current delivery: head_candidate_v003
 
 Status: delivered for Codex's Godot review. Head, hair and eyes only. Not a parity claim, not ready_for_user_review.
+Made in answer to Codex's v002 review at `bfd7c72`.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_simm/inbox/head_candidate_v003.glb` | For Codex. 80,259 triangles, 5 materials, 3 textures, identity root. sha256 `6ad3103202b73c5e22a811e953312b3931328c73cdaa734d91ff248a24c92e8d` |
+| `art_source/handoff/claude_simm/inbox/head_candidate_v003.blend` | Editable source, Blender 3.5.1. |
+| `art_source/handoff/claude_simm/inbox/HEAD_CANDIDATE_V003_NOTES.md` | Counts, point-by-point answer to the v003 priorities, remaining issues. |
+| `art_source/handoff/claude_simm/inbox/renders_v003/` | Clay and colour views, reference comparison, fit check. |
+| `art_source/handoff/claude_simm/inbox/textures_v003/` | Base-colour maps, also embedded in the GLB. |
+
+Facts for the Godot comparison:
+
+- Bounds in Blender axes: X -0.259 to 0.238, Y -0.145 to 0.273, Z 0.936 to 1.434. Same attach rule: original `head` bone, no offset, no scale.
+- Camera: same position and target as before, FOV 24 degrees as Codex suggested. Claude's Blender lens details are in the notes file.
+- Frozen data verified unchanged again.
+
+What changed, in short: cranium top 4 cm lower and thinner hair over the crown; hair rebuilt as five dominant locks plus subordinate locks and accents at different depths; one tapering tuft; arcing temple lock plus a short side flick instead of the straight panel; jaw angle filled; mouth crease and tint stronger; deeper skin and hair albedo; hair flecks removed; no cache files.
+
+Where Claude expects Codex to still object: total hair volume is now smaller than the reference and may be overcorrected on top; the big arc lock reads as one large leaf from Simm's right; the tuft is too small; left flicks are modest.
+
+Albedo question for Codex: skin and hair base colours were deepened because the v002 engine frames read pale and orange-tan. If the lower, warmer key test fixes that without albedo help, say so and Claude will stop moving albedo.
+
+## Earlier delivery: head_candidate_v002 (kept, superseded by v003)
+
+Status: superseded. Reviewed by Codex in Godot at `bfd7c72`: changes requested.
 Built from the full `APPROVED_REFERENCE.png` and Codex's v001 Godot review.
 
 | Path | Purpose |
@@ -64,9 +89,9 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `8ffedf9` (native v001 review with colour and clay evidence). Reference and protocol taken from `b143f31`.
+- Last Codex commit seen: `bfd7c72` (native v002 review with perspective, clay and skin subsurface A/B). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
-- Claude's 30-minute check: NOT active. Creating the scheduled task was refused twice by the session's permission layer and Claude has not worked around it. No ID, cadence or run receipt exists. Claude acts only when the user prompts the session, which is how v002 was made.
+- Claude's 30-minute check: NOT active. Creating the scheduled task was refused twice by the session's permission layer and Claude has not worked around it. No ID, cadence or run receipt exists. Claude acts only when the user prompts the session, which is how v002 and v003 were made.
 - To activate: the user types the scheduling request directly in Claude's session, or adds a permission rule for the scheduling tool. If the platform minimum is hourly, Claude will report that.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -112,8 +137,8 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-Wait for Codex's Godot review of v002. Planned for v003 if Codex agrees: break the fringe into fewer, broader clumps,
-rougher clump separation and stronger left flicks, tuft root clean-up, and whatever the engine render exposes.
+Wait for Codex's Godot review of v003. Likely v004 work: split the big arc lock, a taller thinner tuft, stronger
+left flicks, and restoring some hair volume if the v002 against v003 comparison shows the crown went too low.
 
 ## Meshy review (user asked both agents, 25 Nov 2026; user then said to skip it for now)
 

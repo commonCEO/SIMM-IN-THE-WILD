@@ -1,5 +1,6 @@
 # Stage 3: brows, materials, base-colour textures, naming. work/stage2.blend -> inbox/head_candidate_vNNN.blend
 import bpy, bmesh, sys, os, math, numpy as np
+sys.dont_write_bytecode = True
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import importlib, hairkit; importlib.reload(hairkit)
 from hairkit import *
@@ -97,17 +98,17 @@ tmp = face.copy(); tmp.data = face.data.copy(); coll.objects.link(tmp)
 for md in tmp.modifiers: md.levels = 2
 activate(tmp); bpy.ops.object.modifier_apply(modifier=tmp.modifiers[0].name)
 co = co_of(tmp.data); x, y, z = co[:, 0], co[:, 1], co[:, 2]; ax = np.abs(x)
-base = srgb(246, 205, 172); blush = srgb(238, 150, 128); lipc = srgb(206, 110, 100); lash = srgb(52, 31, 22); warm = srgb(236, 168, 140)
+base = srgb(236, 186, 152); blush = srgb(226, 132, 112); lipc = srgb(186, 86, 80); lash = srgb(52, 31, 22); warm = srgb(224, 150, 122)
 col = np.tile(base, (len(co), 1))
 def mix(col, c, w): return col*(1-w[:, None]) + c[None, :]*w[:, None]
 front = sstep((-y - 0.05)/0.04)
 col = mix(col, blush, 0.42*np.exp(-(((ax-0.098)/0.034)**2 + ((z-1.116)/0.024)**2))*front)        # cheeks
 col = mix(col, warm, 0.22*np.exp(-((ax/0.016)**2 + ((z-1.130)/0.012)**2))*front)                 # nose tip
 col = mix(col, warm, 0.30*sstep((ax-0.150)/0.012)*sstep((z-1.09)/0.02)*sstep((1.21-z)/0.02))      # ears
-MW = 0.0205; u = np.clip(x/MW, -1.2, 1.2); zl = 1.0900 - 0.0012 + 0.0050*np.abs(u)**2
+MW = 0.0220; u = np.clip(x/MW, -1.2, 1.2); zl = 1.0900 - 0.0014 + 0.0058*np.abs(u)**2
 dz = z - zl; sig = np.where(dz < 0, 0.0040, 0.0026)
 lipw = np.exp(-(dz/sig)**2)*sstep((1.08 - np.abs(u))/0.25)*front*sstep((0.14 + y)/0.02 + 1.0)
-col = mix(col, lipc, 0.62*lipw)
+col = mix(col, lipc, 0.85*lipw)
 for sgn in (1, -1):                                                                               # upper lash line
     C = eye_c[sgn]; p = (x - C[0])*sgn; q = z - C[2]
     rho = ((np.abs(p)/OVAL_A)**OVAL_N + (np.abs(q)/np.where(q < 0, OVAL_B*0.94, OVAL_B))**OVAL_N)**(1/OVAL_N)
@@ -131,10 +132,16 @@ for i, p in enumerate(co):
     d = p - HC; r = np.linalg.norm(d)
     az = math.degrees(math.atan2(d[0], -d[1])); el = math.degrees(math.asin(d[2]/r))
     lift[i] = r - scalp.radius(az, el)
-h_root = srgb(98, 54, 33); h_mid = srgb(138, 80, 47); h_tip = srgb(164, 102, 60)
-t = sstep(lift/0.035)[:, None]; t2 = sstep((lift-0.03)/0.05)[:, None]
+h_root = srgb(84, 46, 29); h_mid = srgb(110, 62, 38); h_tip = srgb(134, 80, 48)
+# smooth the lift value over the surface first, so the tone has no flecks at clump junctions
+ed = np.empty(len(hair.data.edges)*2, dtype=np.int32); hair.data.edges.foreach_get('vertices', ed); ed = ed.reshape(-1, 2)
+dg_ = np.bincount(ed.ravel(), minlength=len(co)).astype(float)
+for _ in range(25):
+    acc = np.zeros(len(co)); np.add.at(acc, ed[:, 0], lift[ed[:, 1]]); np.add.at(acc, ed[:, 1], lift[ed[:, 0]])
+    lift = 0.5*lift + 0.5*acc/np.maximum(dg_, 1)
+t = sstep(lift/0.045)[:, None]; t2 = sstep((lift-0.04)/0.06)[:, None]
 hcol = h_root[None]*(1-t) + h_mid[None]*t; hcol = hcol*(1-t2) + h_tip[None]*t2
-hair_img = bake_vertex_colour(hair, hcol, os.path.join(texdir, "simm_head_hair_basecolor.png"), 1024, margin=6)
+hair_img = bake_vertex_colour(hair, hcol, os.path.join(texdir, "simm_head_hair_basecolor.png"), 1024, margin=10)
 m_hair = pbr("SCULPT_MAT_HAIR", img=hair_img, rough=0.52, spec=0.4)
 hair.data.materials.clear(); hair.data.materials.append(m_hair)
 
