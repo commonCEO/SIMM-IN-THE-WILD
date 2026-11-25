@@ -32,10 +32,47 @@ Facts Codex needs for the Godot comparison:
 - Frozen body, old head, 17 bone rest matrices, actions `gather`, `idle`, `walk` and `hand_r_socket` verified unchanged against the starter (sha256 `1157d3201b16be71e51323fcb7abfbeae78e5b3d388f1b35e417cbdfb52b9db4`).
 - Triangle count is review density. Reduction and bake come after the shape is approved.
 
+## Loop state
+
+- Last Codex commit seen: none. `codex/simm-art-handoff` was not on the remote when Claude last fetched (25 Nov 2026).
+- Claude's 30-minute check: NOT active yet. Creating the scheduled task was refused pending the user's direct go-ahead in Claude's session. Until then Claude checks only when the user prompts it.
+- Planned behaviour once active: fetch `codex/simm-art-handoff` and `main`; if nothing new, do nothing; if new feedback or the full reference arrived, make the next head-only version, publish it here, push.
+- Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
+
+## Method notes for Codex: Godot lighting and post for the comparison
+
+Suggestions to test, not measured results. Property names are Godot 4 `Environment`, `DirectionalLight3D` and `BaseMaterial3D`.
+
+Comparison camera (matches Claude's reference-angle render): target (0, 1.205, 0), position (-0.700, 1.676, 1.374) in Godot axes,
+looking at the target, FOV about 18.6 degrees on a square frame. That is azimuth 27 degrees toward Simm's right, elevation 17 degrees, distance 1.61 m.
+
+Stage 1, shape check (keep it plain so light cannot hide form):
+- One `DirectionalLight3D`, neutral white, energy about 1.5, from upper camera-left, shadows on, `light_angular_distance` 2 to 3 for a soft edge.
+- Sky or flat ambient at about 0.6 so shadows stay readable. No glow, no depth of field, no fog, no colour adjustment.
+- Render a grey override material first, then base colour. Same camera for both.
+
+Stage 2, reference look (warm sunlit diorama):
+- Sun colour near (1.0, 0.93, 0.80), energy 1.8 to 2.2, elevation 40 to 50 degrees, from upper camera-left as in the reference.
+- Directional shadow: 4 splits, max distance only as far as the clearing needs (25 to 40 m), so the fringe shadow on the forehead stays sharp enough to read.
+- Fill: sky ambient slightly cool at 0.6 to 0.9, or a second shadowless directional at 0.2 to 0.3 from the opposite side. The reference has no black shadows.
+- `tonemap_mode`: AgX or Filmic. ACES tends to push the yellow jacket and warm skin toward orange.
+- `ssao_enabled` with a small radius for contact shadow under the fringe, chin and ears. `ssil_enabled` at low intensity if the skin looks cut off from the warm ground bounce.
+- Glow last and low (intensity around 0.2 to 0.3), only after the shape is approved.
+- Mild `adjustment_saturation` 1.05 to 1.10 if the frame looks washed after tone mapping.
+
+Materials Codex can override in Godot (the GLB carries only base colour and roughness):
+- Skin: `subsurf_scatter_enabled`, strength 0.15 to 0.25, skin mode on. This is the main thing that turns flat peach into the reference's soft figurine skin. Optional `rim_enabled` at about 0.15.
+- Hair: roughness 0.5 is in the file. If the reference's broad soft highlights are missing, try a small rim before touching the texture.
+- Eyes: roughness 0.14. They need something bright to reflect. Prefer sky reflections. If they look dead, a small catch light restricted to the eye meshes by light cull mask is better than painting a highlight.
+- Brows and lashes: turn shadow casting off, they are 2 to 3 mm thick and will cause acne or stripes.
+- Import the three base-colour maps as sRGB with mipmaps; use a high-quality or lossless mode for the skin map so the cheek gradient does not band.
+
+Known things the engine render will expose: the neck is visible above the collar (the reference hides it with a hood and scarf), and the hair mass edge beside the ears is a clean line.
+
 ## Working files
 
 Not committed, rebuilt from the scripts: `art_source/handoff/claude_simm/inbox/work/stage1.blend`, `stage2.blend`.
-`START_HERE_v02.blend` is deliberately not committed, so a pull cannot collide with the local copy on the PC.
+A byte-identical copy of the starter is committed at `art_source/handoff/claude_simm/inbox/starter_copy/START_HERE_v02.blend` so Claude can rebuild if its container is replaced. It sits inside `inbox/`, not at the starter's own path, so a pull cannot collide with the local copy on the PC.
 
 ## Blocked, needs a commit from the PC side
 
