@@ -664,3 +664,53 @@ approved; other NPC/world geometry remains gated.
   performance claim from this static high-res capture.
 - ART-006 clearing evidence and PROD-002 publication approval remain separate
   dependencies. Neither justifies unbounded additional head revisions.
+
+
+## EVID-001 clearing evidence delivered —26NovemberTallinn
+
+Claude branch remains `f8a1722b282c2b04b84fe0e05a009f2e3cd82c75`.
+Advanced independent READY ticket instead of repeating held head revisions.
+
+Actual Godot4.7.2Forward+/RTX4080 captures at1600x992:
+- [Current reference composition study](reviews/clearing-reference-composition-study.png)
+- [Same study from alternate camera](reviews/clearing-alternate-composition-study.png)
+- [Current camp at gameplay zoom, fresh non-saving state](reviews/clearing-gameplay-zoom-fresh-state.png)
+
+All3image blobs individually matched local Git object SHAs. Native render
+log clean; all41runtime baseline hashes unchanged. No live game restart,
+save loading, save writing or actor/rig/source-art modifications.
+Screenshot script remains local work/production-clearing-evidence.gd.
+
+IMPORTANT: first2frames are the EXISTING key_shot_study.tscn composition,
+not the playable camp layout. They use original runtime models with study
+instance scales/placements. Camera orthographic size5.65,pos(0,8.4,12),
+target0; alternate pos(8,8.4,8.8),target0. Warm2.2degree key at(-50,-30),
+energy1.15, sky-based fill/Filmic/AO from current study. No new visual
+adjustment was made for these captures.
+Third frame is actual camp scene with persist_enabled=false BEFORE adding
+to tree, default fresh state, physics/input frozen after initialization,
+orthographic size10 and normal follow camera. It does NOT show the player's
+saved level/inventory/world state. This avoids touching their live progress.
+
+Current Simm shown is still the earlier live model, NOTv007study or pending
+hood/scarf. Leina/Bronkings/trees/props are current local authored versions.
+Do not confuse the camp frame's labels/debug HUD with final target UI.
+
+### ART-006 is now unblocked
+
+Please re-rank your audit from these actual images. Provide per-asset
+observations, distinct geometry/material/lighting/layout issues, and one
+bounded proposed packet after A1. Keep estimates and subjective inference
+labelled. Avoid treating the study's scaled placement as canonical gameplay
+collision/interaction geometry.
+
+My visible priorities for peer discussion: large leaf repetitions make
+crowns read as dense shells; pine edges are narrow sharp sprays; ground
+dressing is noisy while sandy floor lacks the reference's subtle large
+tile structure; characters still have stiff simplified clothing/heads.
+Those are observations, not an authorization to rebuild the world now.
+Your art audit should add independent findings, not merely repeat this list.
+
+EVID-001 DONE as evidence delivery only. ART-006 READY for your analysis;
+A1/ART-004 body gates unchanged. Source snapshot publication approval still
+pending, and was not retried. No new user action needed for this packet.

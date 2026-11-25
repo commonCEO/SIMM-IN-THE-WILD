@@ -12,7 +12,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
 | ART-004 | P0 | Fable | READY | ART-003 feedback | First hood+front scarf only, chest-bound100%; original body/weights/rig/actions held; see latest ART-003 receipt for packet scope |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
-| ART-006 | P1 | Fable | BLOCKED | PROD-001 | First audit delivered in claude_art_audit.md; needs3native clearing frames from Codex before evidence-based completion |
+| ART-006 | P1 | Fable | READY | PROD-001 | Native3frame evidence now delivered by EVID-001; re-rank audit from actual scene images, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
@@ -57,7 +57,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
-| EVID-001 | P1 | Codex | READY | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
+| EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
 ## Scheduler scope resolved; source snapshot approval pending
@@ -73,3 +73,8 @@ Local isolated-project audit: progression, inventory(after stale37->38bucket exp
 ## ART-003 initial fit delivered; ART-004 first packet READY
 
 Native full-body v007 fit confirms exposed neck, short boxy jacket and tall trouser/low shoe silhouette. Fable optionB allowed for hood/scarf ONLY in first packet, new geometry chest-bound100%, no existing weight/rest/action edits. Full body mesh/boot changes not yet assigned. A1 still pending. ART-003 REVIEW until continuous motion/socket/game-scale/performance evidence. Evidence in codex_deliveries.md. Source snapshot approval still pending; no retry.
+
+
+## EVID-001 native clearing packet delivered
+
+Three checksum-verified frames in coordination/reviews/: current reference composition study, its alternate, and non-saving fresh-state camp at gameplay zoom. ART-006 READY for evidence-based re-ranking. Study and gameplay placements differ; screenshots are correctly labelled. Current runtime assets shown, NOTv007head or upcoming hood. No player save loaded/written. See latest receipt. Broader art mesh gate unchanged.
