@@ -10,9 +10,31 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 - Each side edits only its own file in `coordination/`, so pulls never conflict.
 - Anything Claude must see has to be committed: it cannot read untracked files on the PC.
 
-## Current delivery: head_candidate_v005
+## Current delivery: head_candidate_v006
 
-Status: delivered for Codex's Godot review. Hair only, and only the arc cluster on Simm's right. Face geometry and palette are v003's. Not a parity claim, not ready_for_user_review.
+Status: delivered for Codex's Godot review. Hair only. Face geometry, palette and tuft held. Not a parity claim, not ready_for_user_review.
+Made in answer to Codex's v006 brief at `8f0c2ee`.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_simm/inbox/head_candidate_v006.glb` | For Codex. 80,263 triangles, 5 materials, 3 textures, identity root. sha256 `5aa8b9bc752c554befe3be0b52358331544318208f90d5bc2c9c62f2969f5ceb` |
+| `art_source/handoff/claude_simm/inbox/head_candidate_v006.blend` | Editable source, Blender 3.5.1. |
+| `art_source/handoff/claude_simm/inbox/HEAD_CANDIDATE_V006_NOTES.md` | Counts, answer to each point of the brief, remaining issues. |
+| `art_source/handoff/claude_simm/inbox/renders_v006/` | Clay and colour views at both agreed cameras, reference comparison, fit check. |
+| `art_source/handoff/claude_simm/inbox/textures_v006/` | Base-colour maps. The skin map is byte-identical to v003's. |
+
+Facts for the Godot comparison:
+
+- Bounds in Blender axes: X -0.251 to 0.225, Y -0.141 to 0.272, Z 0.936 to 1.450. Same attach rule, same two cameras.
+- Non-hair meshes are as v003. Frozen data verified unchanged again.
+
+What changed against v005: cluster body 17.5 percent thinner with its root sunk into the crown flow, rear lump thinned and lowered; rounded-volume construction now on the temple arc, fringe point, fringe sweep, all left flicks and the subordinate fringe locks, each thinner than the cluster body and with its own taper start; no parallel grooves anywhere, replaced by one or two drifting shallow channels on the top and back masses; five short unequal silhouette flicks added (three on Simm's left, two low on his right).
+
+Where Claude expects Codex to object: the hair may now be too smooth overall against the ragged reference; the under-layer band still shows at the hairline from the front; the new flicks are small.
+
+## Earlier delivery: head_candidate_v005 (kept, superseded by v006)
+
+Status: superseded. Reviewed by Codex in Godot at `8f0c2ee`: construction method accepted, changes requested.
 Made in answer to Codex's v005 brief at `bfeec78`.
 
 | Path | Purpose |
@@ -135,7 +157,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `bfeec78` (native v004 review, v005 brief, repaired v003 warm image). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `8f0c2ee` (native v005 review, construction method accepted, v006 brief). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -144,6 +166,7 @@ Facts Codex needs for the Godot comparison:
   - Each run: fetch `codex/simm-art-handoff`; if the tip equals "Last Codex commit seen", stop with no commit; otherwise read the review and make one bounded head-only revision.
   - Receipt: first check run by hand at 18:06 UTC right after creation. It fetched `bfd7c72..c527d31` and found two new Codex commits (`59d7dc2`, `c527d31`). v004 was built in that same manual run.
   - Scheduled run 1 fired 19:06 UTC on time, unattended. It fetched `c527d31..bfeec78`, read the v004 review and built v005. So the schedule is confirmed working end to end.
+  - Scheduled run 2 fired 20:06 UTC on time, unattended. It fetched `bfeec78..8f0c2ee`, read the v005 review and built v006.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -189,7 +212,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-Wait for Codex's Godot review of v005 (the hourly check picks it up). Face and palette stay frozen at v003.
+Wait for Codex's Godot review of v006 (the hourly check picks it up). Face and palette stay frozen at v003.
 
 ## Meshy review (user asked both agents, 25 Nov 2026; user then said to skip it for now)
 

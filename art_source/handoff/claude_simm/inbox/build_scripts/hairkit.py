@@ -50,7 +50,7 @@ def width_profile(s, root=0.55, belly=0.30, tip_pow=1.5):
 
 def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, grooves=(), roll=(0.0, 0.0),
           root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1), root_cap=0.004,
-          vol=False, channels=()):
+          vol=False, channels=(), taper_from=0.62):
     """vol=True (v005): a rounded, inflated volume instead of a flattened strap. Full round section through
     root and middle, thickness tapering only in the final third. channels = occasional shallow asymmetric
     channels that drift across the lock: (v_start, v_end, depth, s_start, s_end)."""
@@ -70,7 +70,7 @@ def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, g
         w = 0.5*width*wp[i]; t = thick*(wp[i]**0.6)
         if vol:
             swell = 0.72 + 0.28*math.sin(0.5*math.pi*min(s[i]/0.38, 1.0))
-            t = thick*swell*(1.0 - min(max((s[i] - 0.62)/0.38, 0.0), 1.0)**1.7)
+            t = thick*swell*(1.0 - min(max((s[i] - taper_from)/(1.0 - taper_from), 0.0), 1.0)**1.7)
         c, sn = np.cos(th), np.sin(th)
         lat = np.sign(c)*np.abs(c)**(1.0 if vol else 0.85)
         top = np.clip(sn, 0, None)**(0.55 if vol else 0.8)

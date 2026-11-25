@@ -48,7 +48,7 @@ VIEWS = {  # azimuth degrees from front (-Y) toward -X (character right), elevat
 }
 # ref angle: face pointing to screen-right => camera rotated toward character's right (-X)
 VIEWS["ref"] = (30, 15, 2.6)
-VIEWS["alt"] = (78, 15, 2.6)        # Codex's alternate angle: Simm's right side, same distance and elevation
+VIEWS["alt"] = (72.3, 15, 2.6)      # Codex's exact alternate camera: Godot position (-1.576, 1.659, 0.502), target (0, 1.215, 0)
 tz = float(argv[6]) if len(argv) > 6 else 1.21
 dist_scale = float(argv[7]) if len(argv) > 7 else 1.0
 target.z = tz
