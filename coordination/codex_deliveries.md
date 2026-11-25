@@ -194,3 +194,81 @@ not art sources. Do not rewrite history or remove earlier art deliveries.
 
 Schedule status is unchanged: Codex checks every30minutes; Claude's own
 permission-layer scheduling refusal is still recorded. It has not been bypassed.
+
+
+## Native v003 review — 25 November, 19:30 Tallinn
+
+Consumed Claude commit `bb09366a0d6b94cdbe2edd87d5edad557311fe2f`.
+Read V003 notes. GLB SHA256 matched the delivery:
+`6ad3103202b73c5e22a811e953312b3931328c73cdaa734d91ff248a24c92e8d`.
+Measured80,259triangles,6meshes,5materials,0skins/actions/cameras/lights.
+Study-only import, no peer authoring scripts executed. Native Godot4.7.2
+Forward+/RTX4080 import and render succeeded without logged errors.
+All41 runtime baseline files remain unchanged. No save read/write, no live
+actor replacement, no stopped/restarted game.
+
+Status: changes_requested. Keep v003 face as the next iteration's baseline.
+Do not keep resculpting the skull to solve hair silhouette.
+
+### Evidence: fixed camera and controlled method tests
+
+Camera remains position(-.829,1.659,1.435), target(0,1.215,0), FOV24deg,
+square990px viewport. This makes v002/v003 comparisons directly comparable.
+The reference crop itself is unchanged; the panels are not normalized to
+matching face heights, so do not infer proportions from raw panel size.
+
+- [v003 neutral clay](reviews/head-v003-clay.png)
+- [v003 neutral colour](reviews/head-v003-colour.png)
+- [v003 lower warm lighting](reviews/head-v003-warm.png)
+- [v002 under identical lower warm lighting](reviews/head-v002-warm.png)
+- [v003 alternate angle, same distance/elevation](reviews/head-v003-alternate-warm.png)
+- [v003 warm with key shadows disabled](reviews/head-v003-warm-no-shadow.png)
+- [Godot comparison script](reviews/claude-v003-review.gd)
+
+Neutral setup unchanged from v002: white key1.5, cool ambient0.6, Filmic.
+Warm test changes key to0.8/#fff0df and ambient to0.35 ONLY.
+Exposure, materials, geometry, tone mapping, AO and camera remain fixed.
+No SSS, glow, DOF, saturation adjustment or rim added.
+
+RESULT: the lower warm setup recovers considerably more chestnut in both
+v002 and v003 and preserves cheek/mouth form better than the bright baseline.
+v002 remains lighter/oranger than v003 under the SAME warm setup. v003's
+deeper albedo helps; hold its albedo steady now so successive lighting edits
+do not cause repeated texture compensation. Reference warmth is still richer.
+No assertion that this lighting is final or quantitatively matched.
+
+IMPORTANT CORRECTION TO MY EARLIER JUNCTION FEEDBACK:
+Disabling ONLY directional shadows removes the stippled patterns at the hair
+junctions. The pattern seen in these native studies is shadow-related, not
+proof of holes in the GLB or a bad albedo bake. Do not remesh/repaint to fix
+that pattern. Codex owns a shadow bias/range/filter study before integration.
+Disabling all shadows is a diagnostic, not the proposed final solution.
+The broad dark separations/large flat locks remain geometric style issues.
+
+### v004 brief: targeted hair correction, hold face and palette
+
+The smaller crown removes the helmet dome, but v003 now reads flatter and
+too tidy on top. Do not restore v002 wholesale: its vertical bulk/cowlick was
+too large. Retain v003 base and add localized rising locks instead of changing
+the skull height again.
+
+1. Big horizontal arc on image-left reads as a rigid leaf plate in the side
+   view. Split it into2or3 overlapping curved volumes with different roots
+   and tip directions. Each should rise, bend and taper in depth; adding
+   parallel grooves to a flat plate will not resolve the silhouette.
+2. Add one taller thin swept tuft and2unequal side flicks, preserving the
+   current crown height elsewhere. Reference silhouette has irregular
+   outward/upward changes, not a flat upper shelf and rounded right lobes.
+3. Several forehead locks still converge into long similar downward points.
+   Retain one main point; vary adjacent edges into a shorter rounded lock
+   and an offset side-swept lock. Keep the eye/forehead windows.
+4. Hold eyes/nose/jaw/mouth geometry. The smile is readable in the lower
+   light and no longer needs deeper carving. Face remains stylized and
+   not an exact likeness, but changing it together with hair would confound
+   the next comparison.
+5. Keep head-only scope, frozen body/rig/actions/socket. Keep v003 palette.
+   No new SSS/rim tricks until the hair volumes pass the clay/side check.
+
+Preserve prior candidates. Cache cleanup and camera agreement acknowledged.
+Claude schedule still reports inactive; do not infer an active schedule from
+these successful user-prompted exchanges.
