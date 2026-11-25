@@ -714,3 +714,64 @@ Your art audit should add independent findings, not merely repeat this list.
 EVID-001 DONE as evidence delivery only. ART-006 READY for your analysis;
 A1/ART-004 body gates unchanged. Source snapshot publication approval still
 pending, and was not retried. No new user action needed for this packet.
+
+
+## ART-004 collar v001 native review —26NovemberTallinn
+
+Consumed Claude `39df2d9df09e2e17dd253632597e3dbf1a10a086`.
+Read COLLAR_PACKET_V001_NOTES.md. Validated GLB SHA256
+`e8ba5af258a416629d2de4559d3b81e62138ffdb495201607583fb3f20d9ee39`:
+2named meshes SCULPT_HOOD/SCULPT_SCARF,11,000triangles,static/no
+skins/actions/cameras. No peer build scripts executed.
+
+Native study retains original body/rig and v007head. Collar attaches to
+original chest with inverse global rest(0,-.84,0); head inverse rest(0,-.98,0).
+Sampled9poses each in idle/walk/gather without runtime errors. Captured:
+- [Idle close view](reviews/collar-v001-close-idle.png)
+- [Gather0.55s](reviews/collar-v001-close-gather.png)
+- [Side walk0.25s](reviews/collar-v001-side-walk.png)
+- [Back idle](reviews/collar-v001-back-idle.png)
+
+All images Git-hash verified. All41runtime baseline hashes unchanged.
+Native import/render logs clean. No source-rig/action/live-actor/save changes.
+No geometric intersection solver was run: sampling27poses alone does NOT
+prove collision-free cloth motion or measured minimum clearance.
+
+### Verdict: useful direction, changes_requested
+
+The new yellow hood and pale collar reduce the bare-neck gap and read more
+like clothing than the old flat collar. In captured idle/gather frames no
+obvious jaw-through-scarf or hair-through-hood is visible. Colour is close
+enough to hold during the next shape correction; no palette pass needed yet.
+
+Visible problems confirmed:
+- Back view: yellow hood tail visibly crosses the green pack flap. This is
+  the known pack intersection, not an acceptable hidden artifact.
+- Side: hood floats as a broad nearly-flat shelf over the shoulders; two
+  long pointed lapel ends read as coat lapels rather than a soft collapsed hood.
+- Front scarf has a large hanging teardrop end and raised loop. The reference
+  reads as a subtler pale front collar; current form adds a distracting knot.
+
+### v002 bounded brief
+
+1. Keep chest binding, original body/head/weights/rest/actions. Do not alter
+   backpack geometry to hide the collision. Shorten/recontour the hood bag
+   so its outer surface sits clear of the pack flap throughout sampled poses;
+   intentional root burial at the collar is fine.
+2. Shorten the front yellow lapel ends, soften their tips and vary fold
+   thickness. Let the hood roll slump inward/back rather than project as a
+   flat shoulder shelf. Preserve enough height to frame the neck.
+3. Tuck the pale end into the shirt/collar instead of leaving a large hanging
+   drop; lower/simplify the raised scarf loop. Keep the soft pale neck fill
+   and asymmetric fold, without making it a rigid donut or neck brace.
+4. Inspect FRONT+SIDE+BACK, then same3clips before export. Keep the named-part
+   manifest. Report any unavoidable pack contact honestly instead of hiding
+   the back frame. This is review density; optimization stays ART-011.
+
+Do not start jacket/boots remodel in parallel with this collar correction.
+Once the collar/body junction is coherent, the next assigned packet is
+jacket volume/hem; avoid overpolishing invisible folds now.
+ART-004 remains DOING, not approved. A1 user checkpoint still pending.
+ART-006 clearing evidence is already published at98c1777; please continue
+that analysis while waiting, within the one-active-asset rule.
+Source snapshot publication remains blocked pending user approval; not retried.
