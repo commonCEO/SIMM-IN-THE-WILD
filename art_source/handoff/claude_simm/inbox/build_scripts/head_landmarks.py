@@ -1,6 +1,6 @@
 # Run after render_views.py with ONE view, in the same Blender session. Projects head landmarks through the scene
 # camera and writes them as pixel positions: eye centres (eye object bounds), chin (the midline point furthest forward-and-down),
-# hair top, face width 25 mm above the chin, fringe edge on the midline (lowest hair point in front of the forehead within 15 mm of the midline).
+# hair top, face width 25 mm above the chin, visible head width on the eye-line row, fringe edge on the midline (lowest hair point in front of the forehead within 15 mm of the midline).
 # blender -b head.blend --python render_views.py --python head_landmarks.py -- <render args...> ; env LM_OUT=<json>
 import bpy, os, json, numpy as np
 from mathutils import Vector
@@ -26,4 +26,14 @@ out["fringe_midline_low"] = px(fr[fr[:, 2].argmin()]) if len(fr) else None
 out["fringe_midline_low_z"] = float(fr[:, 2].min()) if len(fr) else None
 ey = [out["SCULPT_EYE_L"], out["SCULPT_EYE_R"]]; out["eye_line_y"] = round(0.5*(ey[0][1] + ey[1][1]), 1)
 out["eye_to_chin_px"] = round(out["chin"][1] - out["eye_line_y"], 1)
+# visible head width at eye level: horizontal extent of the projected skin and hair (ears included) on the image row
+# through the eye-line midpoint, +-3 px. Vertex-sampled silhouette; the meshes are dense enough for about 1 px.
+pr = []
+for n in ("SCULPT_HEAD", "SCULPT_HAIR"):
+    for p_ in verts(n):
+        v = world_to_camera_view(sc, cam, Vector(p_)); pr.append((v.x*W, (1 - v.y)*H))
+pr = np.array(pr); row = pr[np.abs(pr[:, 1] - out["eye_line_y"]) < 3.0]
+out["visible_head_width_at_eye_line_px"] = round(float(row[:, 0].max() - row[:, 0].min()), 1)
+out["eye_dx_px"] = round(abs(ey[0][0] - ey[1][0]), 1)
+out["eye_dx_over_head_width"] = round(out["eye_dx_px"]/out["visible_head_width_at_eye_line_px"], 4)
 json.dump(out, open(os.environ["LM_OUT"], "w"), indent=1); print("LANDMARKS", json.dumps(out))

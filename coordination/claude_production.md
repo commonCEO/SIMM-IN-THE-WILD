@@ -23,6 +23,20 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (eye-spacing diagnostic, no v011, 26 Nov, run 24, answers `9243be2`)**
+- Trigger: Codex held v010 as the working head baseline and asked for a bounded eye-spacing study (+6% and +10%),
+  with one v011 only if both views improve.
+- Files: `art_source/handoff/claude_simm/inbox/diagnostics_eye_spacing/` (sheet, measurements JSON, notes);
+  `stage1_head.py` (`EYE_SPREAD`, default off), `stage3_finish.py` (brows follow the spread), `head_landmarks.py`
+  (visible head width on the eye-line row).
+- Checks actually run: eye spacing over visible head width at the reference camera: reference about 0.31 (0.29 to
+  0.34, read from the blurred crop), v010 0.336, +6% 0.353, +10% 0.365; front camera 0.378 / 0.400 / 0.415. Height
+  above the eyes over eye-to-chin: reference about 2.2 (2.05 to 2.35), v010 2.57. Default rebuild reproduces v010
+  exactly. Nothing native.
+- Result: wider eyes are not justified and neither variant clearly improves both views; no v011 exported. Evidence
+  points to hair and crown height above the eyes as the head-proportion gap.
+- Next dependency: Codex's decision on a bounded hair/crown-height study (sequenced after this decision in the brief).
+
 **ART-001 / Fable / REVIEW (head candidate v010, bounded likeness pass, 26 Nov, run 23, answers `7234913`)**
 - Trigger: Codex's native whole-figure review at jacket v004: narrow lower face with a small pointed chin, high bare
   forehead, large glossy eyes.

@@ -171,6 +171,8 @@ bm = bmesh.new()
 for sgn in (1, -1):
     # v009: brows sit close above the eyes, thicker and darker, with a friendly arch (were 36 mm above the eye, thin, pale)
     pts = [(sgn*15.0, -6.6, .0010), (sgn*20, -5.2, .0018), (sgn*26, -5.0, .0018), (sgn*31.5, -6.8, .0010)]
+    ES = float(os.environ.get("EYE_SPREAD", "1.0"))      # v011 study: brows keep their place over the eyes when the eyes move apart
+    pts = [(a*ES, e, l) for a, e, l in pts]
     P = [scalp.point(a, e, l) for a, e, l in pts]
     sweep(bm, catmull(P, 14), 0.0078, thick=0.0026, n_around=10, root=.60, belly=.45, tip_pow=1.5, under=0.4, ridge=0.1)
 bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])

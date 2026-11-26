@@ -181,6 +181,21 @@ S.symmetrize()
 # ---- 8. eyes: fit the base's real lid rings onto eyeballs as upright ovals
 from collections import deque
 EYE_R = 0.036; EYE_X = 0.062; EYE_Z = 1.170; OVAL_A = 0.0174; OVAL_B = 0.0264; OVAL_N = 2.2
+# v011 study (Codex brief at 9243be2): eye-centre separation as a factor of v010's (EYE_SPREAD, default 1.0 = v010).
+# The lid, lid-ring and orbital-skin face sets are moved sideways together, fading out over the surrounding skin and to
+# nothing within 20 mm of the midline, so the nose, mouth and cheeks stay; the lids are then refitted on eyeballs at
+# the new centre. Eyeball size, eye height and depth are unchanged.
+EYE_SPREAD = float(os.environ.get("EYE_SPREAD", "1.0"))
+if EYE_SPREAD != 1.0:
+    dx = EYE_X*(EYE_SPREAD - 1.0)
+    for sgn in (1, -1):
+        side = (S.co[:, 0]*sgn) > 0
+        w = soft((VF[37] | VF[28] | VF[27]) & side, 8)*side
+        w = np.maximum(w, ((VF[37] | VF[28] | VF[27]) & side).astype(float))
+        w *= sstep_((np.abs(S.co[:, 0]) - 0.008)/0.012)
+        S.co[:, 0] += sgn*dx*w
+    EYE_X = EYE_X*EYE_SPREAD
+    print("EYE_SPREAD %.3f: eye centres at x = +-%.4f m (moved %.1f mm each)" % (EYE_SPREAD, EYE_X, dx*1000))
 adj = [[] for _ in range(S.n)]
 for a_, b_ in S.E: adj[a_].append(b_); adj[b_].append(a_)
 def bfs(src, allowed):
