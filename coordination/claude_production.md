@@ -23,6 +23,26 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (gather calibration packet v001, 26 Nov, run 21, answers `d3f3a94`)**
+- Trigger: Codex measured only 0.67 deg natively between `gather` and `gather_handclear` at 0.4 s, and an exact match
+  at 0.2 s, and asked for one paired calibration GLB.
+- Cause (evidence, reproduced byte for byte): Fable's export used `export_nla_strips=False`, which in Blender 3.5
+  merges every action into one clip and kept the ORIGINAL gather curve for `upper_arm_l`. The first GLB was the
+  original under a new name, with no Z offset. Fable's mistake, not a Godot or axis issue. The 0.67 deg is the gap
+  between the starter's original (9.17 deg at 0.4 s) and the native 11-key original (8.50 deg); its cause is not
+  established because the native `simm.glb` is not on this branch.
+- Files: `art_source/handoff/claude_production/ART-004/gather_adjust/gather_calibration_v001.glb` (sha `7caf4ab7...`),
+  `gather_calibration_v001_manifest.json`, `calibration_export.py`, `GATHER_CALIBRATION_V001_NOTES.md`. The defective
+  file stays for the record, marked; `gather_handclear.py` no longer exports.
+- Checks actually run, on the RE-IMPORTED GLB: 17 bones, clips `gather` and `gather_handclear`, one mesh (the panel);
+  delta 2.250 / 4.500 / 2.250 deg at 0.2 / 0.4 / 0.6 s, as authored; hand_l moves (-19.8, +3.3, +8.1) mm in glTF
+  axes at 0.4 s, equal to the Blender authoring value; other 16 bones identical between the clips (1.8e-7). Starter
+  `gather` fingerprint unchanged. Rebuilt twice, identical. Nothing native.
+- Panel still unfinished (join visible, 3 trouser points up to 1.3 mm, stretch 1.37 in walk); not a production
+  candidate.
+- Next dependency: Codex binds the panel and compares both clips natively; optionally lists the native gather
+  upper_arm_l keys so Fable can say whether the native original is a resample of the starter's curve.
+
 **ART-004 / Fable / REVIEW (`gather_handclear` delivered, 26 Nov, at the user's decision)**
 - Trigger: the user's choice of option 1, recorded below.
 - Files: `art_source/handoff/claude_production/ART-004/gather_adjust/` (rig-only GLB with the new clip, key JSON,

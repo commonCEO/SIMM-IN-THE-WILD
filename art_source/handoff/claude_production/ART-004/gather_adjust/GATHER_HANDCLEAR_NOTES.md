@@ -1,5 +1,10 @@
 # ART-004: `gather_handclear`, an adjusted copy of the gather clip (user decision "1 adjust")
 
+**Correction, 26 Nov 15:15 UTC:** `gather_handclear_rig_only.glb` is defective. Its export merged all actions and
+wrote the ORIGINAL gather curve under the new name (Codex found it natively at d3f3a94). The action in Blender is
+correct; the file was not. Use `gather_calibration_v001.glb` and `GATHER_CALIBRATION_V001_NOTES.md` instead. The
+"22.6 mm at 4 deg" figure below came from a separate probe; the exported clip gives 19.8 mm at 4.5 deg.
+
 Status: candidate for Codex's native validation. Made at the user's direct choice, 26 Nov 2026: option 1 of the
 long-jacket proposal, "adjust the gather clip so the hand stays clear of the hip". The original `gather`, `idle` and
 `walk` actions, the rest pose, all bones and the socket are unchanged. Not integrated into the game.

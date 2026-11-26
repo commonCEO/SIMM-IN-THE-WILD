@@ -30,7 +30,10 @@ print("ACTION gather_handclear: %d channels copied from gather, 1 changed (upper
 json.dump({"action": "gather_handclear", "source_action": "gather", "bone": "upper_arm_l", "channel": "rotation_euler", "index": 2, "rotation_mode": rig.pose.bones["upper_arm_l"].rotation_mode,
            "formula": "new = original + 4.5 deg * sin^2(pi * (frame - first) / (last - first))", "frame_range": [f0, f1], "keys": rows}, open(out_json, "w"), indent=1)
 bpy.ops.wm.save_as_mainfile(filepath=out)
-if out_glb:   # skeleton and the one new clip only, for the native study; no mesh
+if out_glb:   # DISABLED 26 Nov: this export used export_nla_strips=False, which in Blender 3.5 merges all actions and
+              # wrote the ORIGINAL gather curve under the new name. gather_handclear_rig_only.glb is therefore defective.
+    raise SystemExit("GLB export removed: use calibration_export.py, which exports each clip separately and re-imports to check")
+if False:
     for o in bpy.data.objects: o.select_set(False)
     rig.hide_set(False); rig.hide_select = False
     if not rig.visible_get(): bpy.context.scene.collection.objects.link(rig)

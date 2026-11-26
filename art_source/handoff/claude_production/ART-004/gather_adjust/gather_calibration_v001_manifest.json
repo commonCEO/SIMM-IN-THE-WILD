@@ -1,0 +1,249 @@
+{
+ "glb": "gather_calibration_v001.glb",
+ "sha256": "7caf4ab7719cf03f3a10e2f653236c0890e82bf962ee6c17fc4e68d660593d91",
+ "fps": 30.0,
+ "frame_to_time": "time_s = frame / 30; frame 0 = 0.0 s, frame 6 = 0.2 s, frame 12 = 0.4 s, frame 18 = 0.6 s, frame 24 = 0.8 s",
+ "reimport": {
+  "bones": 17,
+  "bone_names": [
+   "root",
+   "hips",
+   "spine",
+   "chest",
+   "head",
+   "upper_arm_l",
+   "forearm_l",
+   "hand_l",
+   "upper_arm_r",
+   "forearm_r",
+   "hand_r",
+   "thigh_l",
+   "shin_l",
+   "foot_l",
+   "thigh_r",
+   "shin_r",
+   "foot_r"
+  ],
+  "meshes": [
+   "SCULPT_JACKET_SKIRT"
+  ],
+  "clips": {
+   "gather_handclear": "gather_handclear_SimmRig",
+   "gather": "gather_SimmRig"
+  },
+  "clip_frame_range": {
+   "gather_handclear": [
+    0.0,
+    24.0
+   ],
+   "gather": [
+    0.0,
+    24.0
+   ]
+  },
+  "keys_upper_arm_l_rotation": {
+   "gather_handclear": 25,
+   "gather": 25
+  }
+ },
+ "source_actions": {
+  "fingerprint_sha256": {
+   "gather": "dda54d1bb5912f6d538884bc51cf093246cae5ac253cd39e21a7482b46ea0161",
+   "gather_handclear": "6d38ab088f55f0ee9e5b880e8d8f32876f031cae408dee6a637af6c96f1dba0a"
+  },
+  "frame_range": {
+   "gather": [
+    0.0,
+    24.0
+   ],
+   "gather_handclear": [
+    0.0,
+    24.0
+   ]
+  }
+ },
+ "panel": {
+  "object": "SCULPT_JACKET_SKIRT",
+  "vertices": 10194,
+  "triangles": 20384,
+  "bones_used": [
+   "hips",
+   "thigh_l",
+   "thigh_r"
+  ],
+  "vertices_per_bone": {
+   "hips": 10194,
+   "thigh_r": 6471,
+   "thigh_l": 6473
+  },
+  "weight_sum_per_bone": {
+   "hips": 7010.5103,
+   "thigh_r": 1591.5656,
+   "thigh_l": 1591.9241
+  },
+  "max_influences_per_vertex": 3,
+  "object_matrix_world_is_identity": true,
+  "z_range_blender": [
+   0.47884079813957214,
+   0.6644489169120789
+  ],
+  "unfinished": [
+   "join with jacket v003 hem is visible",
+   "3 trouser points up to 1.3 mm at rest (frame 0)",
+   "largest edge stretch 1.37 in walk frame 6"
+  ]
+ },
+ "samples": {
+  "0.2": {
+   "upper_arm_l_local_quat_wxyz": {
+    "gather": [
+     0.9992,
+     -0.039989,
+     -0.0,
+     -0.0
+    ],
+    "gather_handclear": [
+     0.999008,
+     -0.039982,
+     -0.000785,
+     0.019618
+    ]
+   },
+   "upper_arm_l_delta_deg": 2.25,
+   "delta_axis_local": [
+    -0.0,
+    -0.0799,
+    0.9968
+   ],
+   "expected_delta_deg": 2.25,
+   "hand_l_world_blender_zup_m": {
+    "gather": [
+     -0.2425,
+     -0.01229,
+     0.64671
+    ],
+    "gather_handclear": [
+     -0.25257,
+     -0.01609,
+     0.64874
+    ]
+   },
+   "hand_l_delta_mm_blender_zup": [
+    -10.07,
+    -3.8,
+    2.03
+   ],
+   "hand_l_delta_mm_gltf_yup": [
+    -10.07,
+    2.03,
+    3.8
+   ],
+   "authoring_hand_l_delta_mm_blender_zup": [
+    -10.07,
+    -3.8,
+    2.03
+   ]
+  },
+  "0.4": {
+   "upper_arm_l_local_quat_wxyz": {
+    "gather": [
+     0.996802,
+     -0.079915,
+     -0.0,
+     -0.0
+    ],
+    "gather_handclear": [
+     0.996033,
+     -0.079853,
+     -0.003137,
+     0.039134
+    ]
+   },
+   "upper_arm_l_delta_deg": 4.5,
+   "delta_axis_local": [
+    -0.0,
+    -0.1593,
+    0.9873
+   ],
+   "expected_delta_deg": 4.5,
+   "hand_l_world_blender_zup_m": {
+    "gather": [
+     -0.23451,
+     -0.01375,
+     0.64137
+    ],
+    "gather_handclear": [
+     -0.25427,
+     -0.02184,
+     0.64464
+    ]
+   },
+   "hand_l_delta_mm_blender_zup": [
+    -19.76,
+    -8.09,
+    3.27
+   ],
+   "hand_l_delta_mm_gltf_yup": [
+    -19.76,
+    3.27,
+    8.09
+   ],
+   "authoring_hand_l_delta_mm_blender_zup": [
+    -19.76,
+    -8.09,
+    3.27
+   ]
+  },
+  "0.6": {
+   "upper_arm_l_local_quat_wxyz": {
+    "gather": [
+     0.9992,
+     -0.039989,
+     -0.0,
+     -0.0
+    ],
+    "gather_handclear": [
+     0.999008,
+     -0.039982,
+     -0.000785,
+     0.019618
+    ]
+   },
+   "upper_arm_l_delta_deg": 2.25,
+   "delta_axis_local": [
+    -0.0,
+    -0.0799,
+    0.9968
+   ],
+   "expected_delta_deg": 2.25,
+   "hand_l_world_blender_zup_m": {
+    "gather": [
+     -0.2425,
+     -0.01229,
+     0.64671
+    ],
+    "gather_handclear": [
+     -0.25257,
+     -0.01609,
+     0.64874
+    ]
+   },
+   "hand_l_delta_mm_blender_zup": [
+    -10.07,
+    -3.8,
+    2.03
+   ],
+   "hand_l_delta_mm_gltf_yup": [
+    -10.07,
+    2.03,
+    3.8
+   ],
+   "authoring_hand_l_delta_mm_blender_zup": [
+    -10.07,
+    -3.8,
+    2.03
+   ]
+  }
+ },
+ "other_16_bones_max_local_matrix_difference": 1.7881393432617188e-07
+}

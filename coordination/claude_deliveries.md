@@ -11,6 +11,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`) |
 | Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Working shape and contact baseline (Codex `6a7da65`) |
+| Gather calibration | `art_source/handoff/claude_production/ART-004/gather_adjust/gather_calibration_v001.glb` | Diagnostic for Codex's native paired check; replaces the defective `gather_handclear_rig_only.glb` |
 
 Older versions below are kept for history only.
 
@@ -195,12 +196,12 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `0bcb1b8` (boot v002 kept as baseline and the longer-jacket method prototype assigned at `6a7da65`; `0bcb1b8` is a lighting mixture study). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `a54dd4d` (native gather-copy discrepancy and the paired calibration request at `d3f3a94`; `a54dd4d` is a shadow-motion study). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
   - Cadence: hourly at minute 6 (cron `6 * * * *`, UTC). 30 minutes was requested and refused by the platform: "the minimum interval is 1 hour".
-  - Location: Anthropic cloud session `session_019rvqHFAG36h6kZmjmt6P4H`, same conversation and checkout each time. Model configured and last served: `claude-fable-5-2`.
+  - Location: Anthropic cloud session `session_019rvqHFAG36h6kZmjmt6P4H`, same conversation and checkout each time.
   - Each run: fetch `codex/simm-art-handoff`; if the tip equals "Last Codex commit seen", stop with no commit; otherwise read the review and make one bounded head-only revision.
   - Receipt: first check run by hand at 18:06 UTC right after creation. It fetched `bfd7c72..c527d31` and found two new Codex commits (`59d7dc2`, `c527d31`). v004 was built in that same manual run.
   - Scheduled run 1 fired 19:06 UTC on time, unattended. It fetched `c527d31..bfeec78`, read the v004 review and built v005. So the schedule is confirmed working end to end.
@@ -224,6 +225,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 18 fired 12:06 UTC on time. It fetched `40bf439..0ff622e`, read the boot method decision and delivered boot candidate v001.
   - Scheduled run 19 fired 13:06 UTC on time. It fetched `0ff622e..f5a51de`, read the boot v001 review and delivered boot v002.
   - Scheduled run 20 fired 14:06 UTC on time. It fetched `f5a51de..0bcb1b8`, read the boot v002 review and the long-jacket brief, and delivered the long-jacket method prototype (no export).
+  - Scheduled run 21 fired 15:06 UTC on time. It fetched `0bcb1b8..a54dd4d`, read the gather discrepancy (only 0.67 deg natively instead of 4.5), found the cause in Fable's own export, and delivered the paired calibration packet `gather_calibration_v001.glb`.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -269,7 +271,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: the user chose option 1 (adjust the gather clip). `gather_handclear` delivered in `art_source/handoff/claude_production/ART-004/gather_adjust/` (see `GATHER_HANDCLEAR_NOTES.md`): one channel changed, hand clear of the hip and the long panel in all samples; original clips unchanged. Waiting for Codex's native validation.
+- ART-004: the user chose option 1 (adjust the gather clip). The first file, `gather_handclear_rig_only.glb`, was defective: its export merged all actions and carried the ORIGINAL gather under the new name. Replaced by `gather_calibration_v001.glb` (both clips plus the prototype panel, checked after re-import: 2.25 / 4.50 / 2.25 deg at 0.2 / 0.4 / 0.6 s, hand about 20 mm outward at 0.4 s). See `gather_adjust/GATHER_CALIBRATION_V001_NOTES.md`. Waiting for Codex's native paired check.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)
