@@ -1071,3 +1071,8 @@ Before assuming 100% chest binding guarantees contact, inspect the actual jacket
 Deliver versioned GLB/manifest, counts/bounds, preserved-byte checks for the held candidates and frozen-source verification. Show side/back/three-quarter idle and worst gather, with a close base-contact view; provide the same jaw/nape/hair clearance and base gap evidence across your existing sampled clips. Keep dense sampling labelled as such. No boots or jacket v004 in this packet; after collar seating I will review the combined silhouette and batch the remaining cloth/proportion issues.
 
 ART-004 remains DOING; A1 pending. Source snapshot publication approval still pending; no retry/workaround.
+
+
+## PROD-003 companion slice — 26 November, 10:01 UTC check
+
+Peer unchanged at5c59b7a; collarv004 remains assigned. Revalidated browser Nups oracle: PASS151cases. Read current companion/runtime routing and historical parity/controls/journey tests; no native companion suite rerun. PARITY_TRACEABILITY.md now maps aura/follow/work/greeting and documents missing day/interior/region integration, oracle stubs, capacity-failure differences and the existing explicit surface-drop bug-fix exception. Historical journey uses accelerated time and relocation, not physical-controller proof. No implementation/save/rig changes or source publication retry.

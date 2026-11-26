@@ -138,3 +138,30 @@ The25recipe rules are validated; entire crafting/world parity is still partial.
 The leap gap belongs to CORE-005's terrain/height/jump contract and UX-001's honest skill availability/feedback. Preserve the exact browser definition (one additional terrain step per rank during jump); do not silently substitute speed or invent a new 3D bonus. Purchasing metadata parity does not mean all 13 skill effects are playable. Before B2, require both ranks to cross the appropriate terrain boundaries, ordinary movement and no-jump rejection, boat/interior/context constraints and save/reload state.
 
 Still queued: companion and combat effect parity; full terrain traversal; normal-time controller journey; EN/ET and visual menu QA. PROD-003 remains DOING. No native user save opened; no optional backup fixture supplied. This publication contains audit findings only, not the still-blocked local source payload.
+
+
+## Fourth bounded slice: Nups state, skill effects and world contexts
+
+26 November 2026, 10:01 UTC check. No new peer delivery after 5c59b7a; Fable's collar seating packet remains assigned. This is an independent code/oracle audit, not a fresh native companion integration test.
+
+`node godot/tests/export-nups-fixture.mjs --check` PASS: 151 companion oracle cases match current browser sources. The oracle executes browser slowed/updateAlien in a VM and checks selected source tokens; it covers aura boundaries, unobstructed following and successful nest output. Its blocked function always returns false and its addOrDrop stub always succeeds: it does not prove obstacle handling or failure transactions. It does not execute the entire browser game.
+
+| Contract | Local path inspected | Result / limit |
+|---|---|---|
+| Arrival | camp_companion.tick, camp._tick_inventory_state | Local persisted companion_clock >55 active seconds; browser arrival is time>55 OR day>1. PARTIAL while day/sleep is absent; a future sleep/day migration must preserve first-arrival semantics |
+| Greeting | camp_companion.greet | Surface/strict55px range, 6 star and 35 XP once, follow enabled; fallback drop present. Ordinary path PRESENT; exhausted drop capacity differs as below |
+| Follow/wait and contexts | command, move_scene, tick; camp input/build/menu routing | B/T waits; resume only same cave flag and strictly within95px. Build cancel and open-menu handling precede world command. Surface/cave subset PRESENT; interiors and multiple campaign region identities missing |
+| Follow movement | tick and camp.companion_blocked | 28px trailing offset, >10px dead zone, 105px/s, axis-separated blocking through shared arrow/world obstruction helper, all at32px/m. Needs real-world navigation and doors/height/region tests |
+| Frost/Star aura | slowed and enemy_speed_factor | Strict100/160px radius; same-scene/friend/follow gates; enemy factor max(.25,.6-.08*Star), predator factor .45. Implementation PRESENT; historical nups_parity script tests these but was not rerun now |
+| Nest/Helper | tick waiting surface branch | Strict120px proximity, interval35/(1+.5*Star), yield2/4, one payout per tick, partial counter retained when leaving range. Existing tests and journey accelerate ticks; not normal-time play proof |
+| Persistence | progression companion fields, nups_save and prior SAVE-001 audit | Companion129-check save suite passed previously; current turn does not repeat it or claim fresh runtime behavior proof |
+
+### Differences and explicit exceptions to resolve
+
+- Browser updateAlien returns immediately inside a house. Local camp has no interior context; when CORE-003 adds interiors, it must suspend companion follow/work as in the browser, not accidentally let an outside nest produce during an indoor menu/room stay. Surface Nups working while player is in a cave is a separate existing browser behavior.
+- Local greeting aborts if both inventory and world-drop creation fail (drop cap4096 or exhausted ID space); browser marks friendship and grants XP before calling addOrDrop. Local work resets its counter only after successful add/drop; browser resets it before addOrDrop even if that fails. These are transactional safety differences under exhausted-capacity conditions, not covered by the151-case successful-output oracle. Record and decide intentionally before claiming exact parity; no behavior changed here.
+- Existing nups_parity.gd explicitly documents a deliberate browser bug fix: waiting surface Nups overflow is assigned to the surface even when the player is in a cave. The browser helper inherited the player's scene and could strand berries. Treat this as a tracked exception, not an unnoticed exact match.
+- Native companion scene identity is only alien_in_cave plus outside/cave drop tags. CORE-005/006 must define campaign region/room identities so a waiting companion cannot appear in every region sharing the same boolean.
+- nups_journey.gd directly advances55.01seconds, relocates the player to resource slots and advances nest production by a large tick; nups_controls injects events. Useful historical integration coverage, not an unaccelerated physical-controller journey. These scripts were read, not executed this turn.
+
+Next evidence: day/rest arrival migration, interior suppression, scene-local companion/drop transitions, both capacity-failure branches, real obstacles and controller-only recruitment/nest work without injected time or positioning. Coordinate CORE-001/003/005/006 and UX-001; do not rebuild Nups art before A1. PROD-003 remains DOING. No production source, rig, animation or native save changed. Only prose audit findings published; pending source-export approval was not bypassed.
