@@ -3,7 +3,7 @@
 # The lock's authored guide (SCULPT_HAIR_GUIDES spline, already carried through the head drop and the crown map) is
 # resampled as in stage 2. At 25, 50 and 75 percent of its length the final SCULPT_HAIR mesh is cut by the plane
 # normal to the guide; segments within 60 mm are kept and written in the lock's own frame: b across the lock, n out
-# from the head. The outer top curve (highest n per 2 mm of b within +-25 mm) gets a least-squares circle; its radius
+# from the head. The outer top curve (highest n above the guide, 3 mm bins every 2 mm of b within +-25 mm) gets a least-squares circle; its radius
 # and the share of that window flatter than 12 degrees describe how plate-like the surface is.
 import bpy, sys, os, json, math, numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -29,8 +29,8 @@ for s in (0.25, 0.50, 0.75):
     Q = np.array(segs); bb = (Q - p) @ Bv; nn = (Q - p) @ N
     top = []
     for x in np.arange(-0.025, 0.0251, 0.002):
-        m = np.abs(bb - x) < 0.001
-        if m.any(): top.append((x, nn[m].max()))
+        m = (np.abs(bb - x) < 0.0015) & (nn > 0)      # v013 fix: outer shell only, 3 mm bins (an empty 2 mm bin used to
+        if m.any(): top.append((x, nn[m].max()))      # fall through to an inner shell and fake a steep slope)
     top = np.array(top)
     A = np.c_[2*top[:, 0], 2*top[:, 1], np.ones(len(top))]; rhs = (top**2).sum(1)
     cx, cy, c0 = np.linalg.lstsq(A, rhs, rcond=None)[0]; R = math.sqrt(max(c0 + cx*cx + cy*cy, 0))

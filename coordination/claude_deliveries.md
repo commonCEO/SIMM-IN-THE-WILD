@@ -7,7 +7,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 
 | Item | Current file | Status |
 |---|---|---|
-| Head | `art_source/handoff/claude_simm/inbox/head_candidate_v012.glb` | Review candidate, four round-section locks with m001-B re-baked (Codex brief `cc6e2a8`); v011 working baseline archived |
+| Head | `art_source/handoff/claude_simm/inbox/head_candidate_v012.glb` | Working head and hair construction baseline (Codex `0f7f741`); v011 archived |
 | Hair material | `art_source/handoff/claude_simm/inbox/hair_material_m001/` | m001-B (roughness 0.70) held as working hair material (Codex `d6b9555`); C rejected |
 | Hair method gate | `art_source/handoff/claude_simm/inbox/hair_lock_method_d2/` | One-lock (D2) prototype; method accepted by Codex (`cc6e2a8`) |
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
@@ -199,7 +199,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `a945509` (round-section method accepted for one four-lock v012 at `cc6e2a8`; `e34a630` and `a945509` are audits). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `0f7f741` (v012 held; five crown guides plus a D1 source-isolation diagnostic assigned). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -236,6 +236,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 26 fired 20:07 UTC on time. It fetched `c320b11..4f9ac05`, read the native v011 review and the hair material brief, and delivered material packet m001 (no geometry change).
   - Scheduled run 27 fired 21:06 UTC on time. It fetched `4f9ac05..d6b9555`, read the native m001 review and the method-gate brief, and delivered the D2 lock method prototype (no head export).
   - Scheduled run 28 fired 22:07 UTC on time. It fetched `d6b9555..a945509`, read the method acceptance and the four-lock brief, and delivered head candidate v012.
+  - Scheduled run 29 fired 23:07 UTC on time. It fetched `a945509..0f7f741`, ran the D1 isolation and the five-lock crown study, found no visible improvement, and delivered diagnostics only (no v013).
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -282,7 +283,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
-- ART-001: head candidate v012 delivered (`HEAD_CANDIDATE_V012_NOTES.md`): round section on D1 body, D2, D4 and S_fringe_right only; crown envelope and fringe tips unchanged; m001-B re-baked through the new hair UVs; face, eye and skin textures byte-identical. Remaining scope labelled: the top crown masses. Waiting for Codex's native check.
+- ART-001: crown-family study and D1 isolation delivered as diagnostics (`inbox/diagnostics_crown_family/`, `inbox/diagnostics_d1_flat_middle/`). No v013: the five crown locks do not visibly change either camera. D1's flat middle is the crown map compressing a very wide lock, not the under-mass (corrects my v012 note); the section metric had an artefact, now fixed. Waiting for Codex's decision.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

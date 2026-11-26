@@ -54,6 +54,11 @@ for i in range(NA):
         bm.faces.new((a[j], b[j], b[j+1], a[j+1]))
     bm.faces.new((a[NE+2], b[NE+2], topv))
     bm.faces.new((b[0], a[0], innerc))                                 # close the volume inside the head
+# diagnostics only (both off by default): HAIR_SKIP leaves named source pieces out ("primary_mass" or lock names; guide
+# order is kept); HAIR_SOURCE_COPY keeps the unfused source as SCULPT_HAIR_SOURCE with a per-vertex "piece" index.
+SKIP = set(x for x in os.environ.get("HAIR_SKIP", "").split(",") if x)
+PIECES = [("primary_mass", 0, len(bm.verts))]
+if "primary_mass" in SKIP: bmesh.ops.delete(bm, geom=list(bm.verts), context='VERTS'); PIECES = [("primary_mass", 0, 0)]
 
 # ---------------- 2/3. clumps and strands
 GUIDES = []
@@ -67,7 +72,9 @@ def L(name, pts, w, t=0.016, n=16, **kw):
     if name in ROUND: kw["section"] = "round"; kw["round_w"] = ROUND[name]
     P = [scalp.point(a, e, mass(a, e) + r) for a, e, r in pts]
     kw.setdefault('under', 0.9)      # undersides sink into the mass: no hollow gaps beneath a clump
-    GUIDES.append((name, P)); sweep(bm, catmull(P, n), w, thick=t, **kw)
+    GUIDES.append((name, P))
+    if name in SKIP: PIECES.append((name, len(bm.verts), len(bm.verts))); return
+    n0 = len(bm.verts); sweep(bm, catmull(P, n), w, thick=t, **kw); PIECES.append((name, n0, len(bm.verts)))
 
 # v003 layout (after Codex's Godot review of v002): five DOMINANT locks are shaped first, each with its own arc,
 # depth and tip length; SUBORDINATE locks then fill between them at lower depth; a few thin accents break edges.
@@ -194,6 +201,13 @@ hair = bpy.data.objects.new("SCULPT_HAIR", me); coll.objects.link(hair)
 bpy.context.view_layer.objects.active = hair
 for o_ in bpy.context.view_layer.objects: o_.select_set(o_ is hair)
 print("SOURCE verts", len(me.vertices), "clumps", len(GUIDES))
+if os.environ.get("HAIR_SOURCE_COPY"):
+    src_me = me.copy(); src_me.name = "SCULPT_HAIR_SOURCE"; pa = src_me.attributes.new("piece", 'INT', 'POINT')
+    pid = np.zeros(len(src_me.vertices), dtype=np.int32)
+    for k_, (nm_, a_, b_) in enumerate(PIECES): pid[a_:b_] = k_
+    pa.data.foreach_set("value", pid.tolist())
+    so = bpy.data.objects.new("SCULPT_HAIR_SOURCE", src_me); coll.objects.link(so); so.hide_render = True
+    tx_ = bpy.data.texts.get("HAIR_PIECES") or bpy.data.texts.new("HAIR_PIECES"); tx_.clear(); tx_.write("\n".join(nm_ for nm_, a_, b_ in PIECES))
 # ---------------- fuse into one sculpted surface, relax the joins, reduce
 m = hair.modifiers.new("fuse", 'REMESH'); m.mode = 'VOXEL'; m.voxel_size = VOX; m.adaptivity = 0.0; m.use_smooth_shade = True
 bpy.ops.object.modifier_apply(modifier="fuse")

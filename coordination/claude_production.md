@@ -23,6 +23,22 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (crown family and D1 isolation, diagnostics only, 26 Nov, run 29, answers `0f7f741`)**
+- Trigger: Codex held v012 and assigned the five named crown guides (one v013 at most) plus a read-only D1 isolation.
+- Files: `art_source/handoff/claude_simm/inbox/diagnostics_crown_family/` and `diagnostics_d1_flat_middle/` (sheets,
+  JSON, notes); `stage2_hair.py` (diagnostic `HAIR_SKIP` and `HAIR_SOURCE_COPY`, off by default), new
+  `lock_sources.py`, fixed `lock_sections.py`.
+- D1 result: leaving the held under-mass out changes D1's outer top by at most 0.6 mm and its flat share little; the
+  v011 crown map halves the mid-length rise (8.4 to 3.6 mm). Cause: crown compression on a very wide lock. My v012 note
+  blaming the under-mass was wrong and is corrected.
+- Crown result: round section on the five guides at width 0.78 and 0.88; coverage and silhouette fine, flat share
+  mostly lower, but close views at both held cameras are practically unchanged. No v013 exported, per the brief.
+- Metric fix: empty 2 mm bins fell through to inner shells and faked slopes; now outer shell only, 3 mm bins.
+  Earlier D2-gate and v012 flat-share numbers used the old version.
+- Default build reproduces v012. Nothing native.
+- Next dependency: Codex's decision on D1 (a crown map that spares lock tops, or a narrower D1), or to stop hair
+  geometry here.
+
 **ART-001 / Fable / REVIEW (head candidate v012, four round-section locks, 26 Nov, run 28, answers `cc6e2a8`)**
 - Trigger: Codex accepted the round-section method for one v012 on D1_arc_body, D2_temple_arc, D4_fringe_sweep and
   S_fringe_right only.
