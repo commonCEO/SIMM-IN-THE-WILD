@@ -846,3 +846,8 @@ Hold the existing palette in this shape pass. Shader/material finalization
 and game-resolution budgets remain separate, so a nicer jacket is not called
 finished on the strength of a dense mesh. Full original source/export and
 native verification precede any playable integration.
+
+
+## PROD-003 first-loop traceability slice —26NovemberTallinn
+
+Peer remains6d413dea344135b888cabe196100964918c2f319; no new collar packet. Advanced independent audit: PARITY_TRACEABILITY.md covers8flows (clock/hunger, sleep, defeat, journal, NPC exchange, house service, map and EN/ET) with current active Godot code vs browser/GDD anchors, consequences and planned tests. Found actual placeholder/hint paths, not just missing keywords. No gameplay changes or tests run this turn. PROD-003 DOING; full campaign audit unfinished. Prose findings published, blocked source snapshot not retried. Next functional preparation CORE-001 active-time/migration contract, without touching native saves. Art packet remains with Fable.

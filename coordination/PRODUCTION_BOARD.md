@@ -6,7 +6,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 |---|---|---|---|---|---|
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
-| PROD-003 | P0 | Codex | READY | PROD-002 | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
+| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
@@ -83,3 +83,8 @@ Three checksum-verified frames in coordination/reviews/: current reference compo
 ## SAVE-001 synthetic boundary coverage advanced
 
 295explicit checks PASS in separate audit project: validv3->v4roundtrip without rewriting original, pre-bucketv4, transactional malformed/oversize/future rejection and failed-write preservation. Harness setup error corrected before successful run. Expected malformed-JSON diagnostic documented; no clean-log overclaim. See SAVE_COMPATIBILITY_AUDIT.md. OS crash/disk-full/permission faults and campaign migrations remain untested. No production gameplay/save writes; source publication still pending.
+
+
+## PROD-003 first-loop audit slice
+
+PARITY_TRACEABILITY.md maps8active flows to browser source, local Godot functions and concrete missing evidence. Confirmed automatic day/survival/rest, NPC exchange/home service and map/localization gaps. No implementation/test pass claimed; code inspection only. CORE-001 then CORE-002/003 is the functional critical path. Remaining recipes/world/combat/controller audit still queued. Source publication approval remains pending; report contains findings only.
