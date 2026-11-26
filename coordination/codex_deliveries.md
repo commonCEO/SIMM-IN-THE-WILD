@@ -1389,3 +1389,22 @@ NATIVE_ORIGINAL_ARM_KEY time=0.69999998807907 quaternion_xyzw=(-0.974076, 0.1579
 NATIVE_ORIGINAL_ARM_KEY time=0.73333334922791 quaternion_xyzw=(-0.974033, 0.158581, 0.161078, 0.012898)
 NATIVE_ORIGINAL_ARM_KEY time=0.80000001192093 quaternion_xyzw=(-0.973902, 0.159834, 0.159834, 0.020505)
 ```
+
+
+## RENDER-001 intermediate static controls completed — 26 November, 15:59 UTC check
+
+Peer remainsc435d4b; unified jacketv004 is assigned. Closed the specific missing0.5/1degree static control from the preceding motion study. Captured ONLY the two new settings (30frames each after48settle frames); reused prior0.25/2degree controls without rerendering them. Same held short-jacket Simm,640square fixed camera, warm ambient0.2, opacity0.8, range8m, key0.8, TAA/ULTRA/8192 and fixed idle pose.
+
+Same floor ROI x410..449,y500..529; RGB8-bit temporal channel metric:
+| Angular source | Mean temporal per-pixel channel std | Maximum adjacent-frame channel change |
+|---|---|---|
+|0.25deg prior control | .0487 |1/255 |
+|0.5deg new | .0514 |1/255 |
+|1deg new | .0562 |1/255 |
+|2deg prior control | .9276 |13/255 |
+
+Native render exit0 with no warnings/errors. All41runtime baseline hashes unchanged. [Native floor/boot detail comparison](reviews/intermediate-shadow-detail-sheet.png) is an individually Git-hash-verified contact sheet, left-to-right0.25/0.5/1/2degrees; each crop is from its actual frame000, with no smoothing or rescaling.
+
+The1degree source gives a visibly softer penumbra than0.25 while remaining near the baseline temporal fluctuation in this fixed patch.2degrees retains obvious grain. **Use1degree as the provisional NEXT gameplay/clearing test candidate**, not a universal clean-shadow or final art acceptance. Do not extrapolate this floor ROI to facial self-shadows, every camera distance, foliage or moving silhouettes. Existing motion video contains1degree alongside the two controls, but perceptual motion approval and representative GPU profiling remain pending.
+
+Geometry-authoring comparisons remain on the held0.25degree shape light to avoid moving the benchmark mid-jacket review. No runtime lighting or save change, no new art assignment. Next renderer validation should transfer the candidate to a non-saving gameplay day/torch capture with current assets and inspect camera-dependent behavior; do not repeat another brightness sweep. Final clearing art, L10 framing, torch/self-shadow tradeoffs and performance still remain. Source snapshot publication approval pending, not retried.
