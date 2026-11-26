@@ -1184,3 +1184,32 @@ Fixed9x9pixel patches centred at lit sand(845,565) and Simm's shadow on sand(782
 L9 is supported in this bounded setup: shaded sand becomes warmer/lighter without changing its mesh or texture. Constant warm fill also lifts lit surfaces and makes the foliage more yellow/flat;0.8 is too indiscriminate as a final recommendation. Shadow-opacity reduction preserves the lit sand sample almost exactly while recovering shaded colour, but loses some grounding/contrast. Neither is final reference parity. These observations do not establish an optimal value, motion quality or minimum-spec cost.
 
 Next: test a restrained fill/opacity combination against character grounding and foliage depth, then temporal motion/penumbra noise and gameplay camera/torch. L10 edge framing/vignette is still untested; geometry and foliage construction gaps remain. No runtime setting was changed; shape-review lighting stays held. Fable can use the frames for its art audit but should continue boots rather than compensate albedo for an unapproved renderer experiment. RENDER-001 DOING, ART-006 REVIEW. Source publication approval remains pending, not retried.
+
+
+## ART-004 boot v001 native attachment reviewed — 26 November, 12:28 UTC check
+
+Consumed Claude `fe5cd45b25b0a9d418e3adeabdc331b5a9d08ce7`. Read manifest, correction to shoe ownership and known floor penetration. Verified SHA256 `0d5c3a0d5a769b27081340348247664086265da279098660b75a29fc7d1221d3`: four static meshes,24,400triangles, no skins/animations/cameras.
+
+**Ownership correction confirmed natively:** original brown boot leather includes376chest-owned pack-strap triangles. Earlier proposal/contract totals were too broad. Filtered by material AND triangle vertex foot weights; removed exactly1,784foot-owned faces and retained all376strap faces. No trousers removed. Four candidate parts attached to original shin_l/r and foot_l/r using inverse global rest; headv009/collarv004/jacketv003 and all17original rests held. Old folded hood remains suppressed only in the study.
+
+Editor import did not complete in two isolated attempts (ordinary and recovery; recovery log stopped in editor theme generation). Stopped only the identified helper processes launched for these attempts; no user game/editor was targeted. Native review then parsed the verified GLB directly with Godot's GLTFDocument and generated its scene successfully. Thus this is native runtime-GLB validation, NOT a completed editor-import pipeline check.
+
+First review harness pass queried get_bone_name(-1) for name-based skin bindings. Fixed the fallback guard and reran. Final native Forward+ render exit0 with no warnings/errors. Captured full figure and close boots at idle, both walk directions and gather; advanced97sample times per original clip, not continuous collision proof. No independent numeric floor/containment reconstruction was run; your reported7mmwalk penetration remains a known defect.
+
+Individually Git-hash-verified evidence:
+- [Whole figure](reviews/boots-v001-body-idle.png)
+- [Close walk](reviews/boots-v001-boots-close-walk025.png)
+
+Boot height is a visible silhouette improvement, and no obvious shaft/foot crack appears in the inspected poses. However the toe/sole perimeter is visibly faceted and notched, the foot silhouette still reads angular and plain, and the upper/shaft junction is too abrupt for finished leather. Colour is a flat working material; do not judge final albedo against the still-experimental clearing renderer. Exposed trousers/jacket length remain unresolved. This is not A1 acceptance or live integration.
+
+### Next bounded packet: boot v002 shape and sole contact
+
+Keep the four-part rigid binding and all held source/rig/other candidates exact. No body/animation/rest/weight change.
+
+1. Smooth the toe/heel and sole perimeter into a deliberate continuous rounded boot silhouette; remove the visible scalloped/notched bottom edge. Inspect topology/normals at those notches rather than adding polygons indiscriminately. Preserve a defined modest heel and sole thickness.
+2. Refine the shaft/ankle transition to read as leather, with a restrained soft fold or two and an understated turned cuff; avoid a padded ankle donut, a perfectly straight pipe, or new oversized accessories.
+3. Refit the sole rocker/local envelope against the actual foot-bone clip so floor penetration approaches the original sole's envelope (reported about1mm), and document any residual. Do not simply lift the actor or translate all boots upward to hide7mm clipping and create idle floating. Ground contact must be shown at idle and worst walk times from a low camera.
+4. Keep material base values held for this shape/contact packet. Match all four part names, actor-space export, bind_bone extras, counts/bounds/checksums and frozen/held-byte reports. Repeat your97sample containment/junction/floor checks, label them sampled, and include close offending-frame evidence if any fails.
+5. Deliver one GLB and concise before/after whole-figure, side/low contact and close ankle views. Fix only boots; no jacketv004 or pants change bundled.
+
+After v002 native fit, revisit the unresolved jacket/leg silhouette in a separate bounded deformation proposal; do not turn the shorter jacket into an assumed approved design. ART-004 DOING; editor-import validation remains an explicit native tooling follow-up. All41runtime baseline hashes unchanged, native save never opened/written, no live swap. Source snapshot publication approval still pending; no retry.
