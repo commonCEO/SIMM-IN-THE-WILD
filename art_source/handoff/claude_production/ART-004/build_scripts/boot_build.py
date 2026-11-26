@@ -1,4 +1,7 @@
-# ART-004 boot candidate v001: rigid two-part boots per leg (method accepted by Codex at 465ccf1).
+# ART-004 boot candidate v002: rigid two-part boots per leg (method accepted by Codex at 465ccf1; v002 brief at f98e519).
+# v002: smooth continuous sole perimeter that always contains the upper, a softer shaft-to-foot transition with two
+# restrained folds, and a sole rocker fitted to the measured foot-bone motion in idle, walk and gather.
+# (v001 is in Git history at fe5cd45.)
 # blender -b <file with PROTECTED_BODY and SimmRig, e.g. work/collar_packet_v004.blend> --python boot_build.py -- <absolute out.blend>
 # Four static parts in actor space under SCULPT_BOOTS_ROOT. Each carries one vertex group at 1.0 naming the existing
 # bone it follows (shaft: shin_l / shin_r, foot: foot_l / foot_r) and a custom property "bind_bone" with the same
@@ -58,13 +61,13 @@ def finish(name, bm, bone, voxel, tris, sole_bm=None):
     ob = shell(name, bm, voxel, tris)
     ob.data.materials.clear(); ob.data.materials.append(M_LEATHER)
     if sole_bm is not None:                         # a separate clean sole shell, joined into the same part
-        so = shell(name + "_SOLE_TMP", sole_bm, 0.0020, 1200)
+        so = shell(name + "_SOLE_TMP", sole_bm, 0.0016, 3000)
         so.data.materials.clear(); so.data.materials.append(M_LEATHER); so.data.materials.append(M_SOLE)
         for p in so.data.polygons: p.material_index = 1
         ob.data.materials.append(M_SOLE)
         for o in bpy.context.view_layer.objects: o.select_set(o in (ob, so))
         bpy.context.view_layer.objects.active = ob; bpy.ops.object.join()
-    ob.data.use_auto_smooth = True; ob.data.auto_smooth_angle = math.radians(60)
+    ob.data.use_auto_smooth = True; ob.data.auto_smooth_angle = math.radians(80)
     for o in bpy.context.view_layer.objects: o.select_set(o is ob)
     bpy.context.view_layer.objects.active = ob
     bpy.ops.object.mode_set(mode='EDIT'); bpy.ops.mesh.select_all(action='SELECT')
@@ -78,27 +81,64 @@ for sd, tag, side in ((-1, "L", "l"), (1, "R", "r")):         # *_l bones are on
     sh = rig.data.bones["shin_" + side]; a0, a1 = Vector(sh.tail_local), Vector(sh.head_local)
     ax = lambda z: a0.lerp(a1, (z - a0.z)/(a1.z - a0.z))
     # ---- shaft: one smooth leather tube, slightly wider at the top, ending in a soft turned-down cuff
-    bm = bmesh.new(); zs = list(np.linspace(SHAFT_BOT, SHAFT_TOP - 0.012, 12))
-    c0 = ax(0.20); tube_z(bm, c0.x, c0.y, zs, [0.060 + 0.006*sstep((z - 0.18)/0.11) for z in zs], [0.064 + 0.004*sstep((z - 0.18)/0.11) for z in zs])
-    ct = ax(SHAFT_TOP - 0.010); czs = list(np.linspace(SHAFT_TOP - 0.030, SHAFT_TOP, 7))
-    tube_z(bm, ct.x, ct.y, czs, [0.071 + 0.004*math.sin(math.pi*(z - czs[0])/0.030) for z in czs], [0.075 + 0.004*math.sin(math.pi*(z - czs[0])/0.030) for z in czs])
-    shaft = finish("SCULPT_BOOT_SHAFT_" + tag, bm, "shin_" + side, 0.0022, 5000)
+    bm = bmesh.new(); zs = list(np.linspace(SHAFT_BOT, SHAFT_TOP - 0.010, 30))
+    fold = lambda z: 0.0025*math.exp(-((z - 0.186)/0.007)**2) + 0.0018*math.exp(-((z - 0.228)/0.008)**2)
+    flare = lambda z: 0.007*sstep((0.185 - z)/0.060)          # widens toward the ankle, meeting the boot foot softly
+    rxs = [0.060 + flare(z) + fold(z) + 0.004*sstep((z - 0.235)/0.045) for z in zs]
+    rys = [0.064 + flare(z) + fold(z) + 0.003*sstep((z - 0.235)/0.045) for z in zs]
+    c0 = ax(0.20); tube_z(bm, c0.x, c0.y, zs, rxs, rys, n_around=48)
+    ct = ax(SHAFT_TOP - 0.010); czs = list(np.linspace(SHAFT_TOP - 0.022, SHAFT_TOP, 7))
+    tube_z(bm, ct.x, ct.y, czs, [0.068 + 0.0035*math.sin(math.pi*(z - czs[0])/0.022) for z in czs], [0.071 + 0.0035*math.sin(math.pi*(z - czs[0])/0.022) for z in czs], n_around=48)
+    shaft = finish("SCULPT_BOOT_SHAFT_" + tag, bm, "shin_" + side, 0.0018, 6000)
     # ---- foot: one lofted boot from heel to toe. The ankle part rises round the shaft's lower edge, the instep
     #      slopes to a rounded toe; a 22 mm sole and a 30 mm heel, in a darker sole material below the welt line.
     fx = ax(0.16).x
-    prof = [  # y (front is -Y), half-width, top
-        (0.090, 0.030, 0.105), (0.080, 0.046, 0.140), (0.060, 0.058, 0.160), (0.030, 0.068, 0.168), (0.000, 0.071, 0.168),
-        (-0.030, 0.069, 0.160), (-0.060, 0.066, 0.140), (-0.090, 0.064, 0.105), (-0.120, 0.063, 0.082), (-0.150, 0.061, 0.068),
-        (-0.170, 0.056, 0.060), (-0.182, 0.046, 0.054), (-0.190, 0.028, 0.046)]   # toe tip at the original's length
+    base = [  # y (front is -Y), half-width, top: control points, resampled below with rounded ends in plan
+        (0.090, 0.040, 0.134), (0.075, 0.054, 0.152), (0.050, 0.064, 0.166), (0.020, 0.071, 0.172), (-0.010, 0.071, 0.170),
+        (-0.040, 0.069, 0.158), (-0.070, 0.066, 0.132), (-0.100, 0.064, 0.100), (-0.130, 0.063, 0.080), (-0.155, 0.060, 0.068),
+        (-0.172, 0.055, 0.061), (-0.186, 0.044, 0.054)]
+    Y0, Y1 = 0.094, -0.194                              # heel back and toe tip
+    ys = list(np.linspace(Y0, Y1, 46)); by = [p_[0] for p_ in base][::-1]
+    W = lambda y: float(np.interp(y, by, [p_[1] for p_ in base][::-1])); T = lambda y: float(np.interp(y, by, [p_[2] for p_ in base][::-1]))
+    def endround(y, w):                                 # quarter-ellipse in plan over the last 18 mm at each end
+        d = min(y - Y1, Y0 - y)
+        return w*math.sqrt(max(0.0, 1.0 - (max(0.0, 0.018 - d)/0.018)**2)) if d < 0.018 else w
+    # rocker: fitted to how the foot bone actually moves, so that no sole point goes below the floor in the clips
+    lift_y = np.zeros(len(ys)); fb = rig.data.bones["foot_" + side]; R0 = fb.matrix_local.copy()
+    samples = []
+    if rig.animation_data is None: rig.animation_data_create()
+    for an in ("idle", "walk", "gather"):
+        act = bpy.data.actions[an]; rig.animation_data.action = act; f0, f1 = act.frame_range
+        for fr in np.linspace(f0, f1, 49):
+            bpy.context.scene.frame_set(int(fr), subframe=float(fr - int(fr)))
+            samples.append(rig.matrix_world @ rig.pose.bones["foot_" + side].matrix @ R0.inverted())
+    rig.animation_data.action = None; bpy.context.scene.frame_set(0)
+    for pb_ in rig.pose.bones: pb_.matrix_basis.identity()
+    for it in range(6):
+        pen = np.zeros(len(ys))
+        for i, y in enumerate(ys):
+            w = endround(y, W(y)) + 0.003
+            for xx in (fx - w, fx - 0.5*w, fx, fx + 0.5*w, fx + w):
+                P = Vector((xx, y, lift_y[i]))
+                pen[i] = max(pen[i], max(-(M @ P).z for M in samples))
+        if pen.max() < 0.0005: break
+        lift_y = lift_y + np.clip(pen, 0, None)
+        lift_y = np.maximum.reduce([np.roll(lift_y, k) for k in (-1, 0, 1)])     # widen, then smooth
+        for _ in range(2): lift_y = np.maximum(lift_y, 0.25*np.roll(lift_y, 1) + 0.5*lift_y + 0.25*np.roll(lift_y, -1))
+        lift_y[0] = lift_y[1]; lift_y[-1] = lift_y[-2]
+    lift_y = lift_y - lift_y.min()                      # the lowest part of the sole stays on the floor at rest
+    print("ROCKER side %s: fitted in %d passes; lift at heel %.1f mm, mid-foot %.1f mm, toe %.1f mm; residual %.1f mm" % (side, it + 1, lift_y[0]*1000, lift_y[len(ys)//2]*1000, lift_y[-1]*1000, pen.max()*1000))
+    L = lambda i: float(lift_y[i])
     bm = bmesh.new()
-    # a rocker sole: toe spring over the front 70 mm and a rounded heel edge, so the boot rolls with the foot
-    # bone in the walk instead of digging its toe or heel corner into the floor
-    lift = lambda y: 0.022*sstep((-0.105 - y)/0.085)**1.4 + 0.018*sstep((y - 0.040)/0.050)**1.6
-    loft(bm, [(y, fx, w, 0.004 + lift(y), top) for y, w, top in prof])
-    sb = bmesh.new()                                   # sole: 3 mm proud of the upper all round, 22 mm, heel 30 mm
-    loft(sb, [(y, fx, w + 0.003, lift(y), lift(y) + SOLE_T) for y, w, top in prof[1:-1]], expo=5.0)
-    loft(sb, [(y, fx, w, lift(y), max(HEEL_T, lift(y) + SOLE_T)) for y, w in ((0.084, 0.044), (0.070, 0.058), (0.020, 0.063), (-0.012, 0.061))], expo=5.0)
-    foot = finish("SCULPT_BOOT_FOOT_" + tag, bm, "foot_" + side, 0.0022, 6000, sole_bm=sb)
+    loft(bm, [(y, fx, endround(y, W(y)), 0.006 + L(i), T(y)) for i, y in enumerate(ys)], n_around=48)
+    sb = bmesh.new()                                   # sole: one shell round the whole outline, 4 mm proud, 22 mm, heel 30 mm
+    ys2 = [Y0 + 0.004] + ys + [Y1 - 0.005]; lift2 = [L(0)] + [L(i) for i in range(len(ys))] + [L(len(ys)-1)]
+    def solew(y):
+        d = min(y - (Y1 - 0.005), (Y0 + 0.004) - y); w = W(min(max(y, Y1), Y0)) + 0.004
+        return max(0.004, w*math.sqrt(max(0.0, 1.0 - (max(0.0, 0.022 - d)/0.022)**2)))
+    heel_h = lambda y: HEEL_T if y > 0.000 else SOLE_T + (HEEL_T - SOLE_T)*sstep((y + 0.020)/0.020)
+    loft(sb, [(y, fx, solew(y), lz, lz + heel_h(y)) for y, lz in zip(ys2, lift2)], n_around=48, expo=3.6)
+    foot = finish("SCULPT_BOOT_FOOT_" + tag, bm, "foot_" + side, 0.0018, 8000, sole_bm=sb)
     parts += [shaft, foot]
 for ob in parts:
     co = np.array([v.co[:] for v in ob.data.vertices])

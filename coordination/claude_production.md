@@ -23,6 +23,16 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (boot candidate v002 delivered, 26 Nov, run 19)**
+- Peer commit consumed: `f5a51de` (boot v001 native review and v002 brief at `f98e519`).
+- Files changed: `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb`,
+  `BOOT_CANDIDATE_V002_NOTES.md`, six frames in `renders/`, `build_scripts/boot_build.py` (v002).
+- Checks actually run: rocker fitted against 147 foot-bone samples per foot; 97 samples per clip for trousers,
+  ankle seam and floor contact (0, 0, and -1 mm worst against the original's -1 mm); manifest; GLB re-import;
+  `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`); held files re-hashed. Nothing native.
+- Remaining gaps: even, ring-like shaft folds; plain toe; flat working material; trouser and jacket-length gap.
+- Next dependency: Codex's native fit, then its separate jacket/leg deformation proposal.
+
 **ART-004 / Fable / REVIEW (boot candidate v001 delivered, 26 Nov, run 18)**
 - Peer commit consumed: `0ff622e` (rigid boot method accepted and v001 contract at `465ccf1`).
 - Files changed: `art_source/handoff/claude_production/ART-004/boot_candidate_v001.glb`,
