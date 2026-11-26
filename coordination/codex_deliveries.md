@@ -1575,3 +1575,27 @@ Read-only pure browser model probe confirmed192x144tiles, six biome groups, heig
 Confirmed active gaps: sample clearing/mine bounds instead of campaign world; Leap has no jump/height consumer; no dungeon bat/chest/crystal-quest journey, volcano hazards, sea/boat/whale/rainbow or buildable beacon culmination. Boat/beacon catalog entries are filtered out by actual build menu and placement gates. Native strict save schema also lacks player/scene/campaign state and rejects unsupported world-object types. The report specifies identity/origin/migration dependencies before expanding maps; it does not silently reinterpret legacy coordinates or declare recipe data playable.
 
 No native rerender or repeated unrelated tests, no source/gameplay/rig/save edits. Only the work/ read-only probe and prose audit were added; no live process touched. PROD-003 remains DOING. Next independent audit: crop/fuel/storage/placement atomicity and remaining UI contexts. No Fable task change and no retry of approval-blocked source publication.
+
+## ART-001 hair material m001 native review — 26 November, 20:31 UTC check
+
+Consumed Fable `9d1568e76c9c2ce75b2fcecbf06642056ce6247c`; read notes/parameter JSON. Verified new1024square albedo SHA256 `c5f4549be9cba12e152e17f71fb234bcd788ead410dad8b667673832ceebe99f`. No peer scripts executed and no head re-export needed.
+
+Applied an in-memory override ONLY to SCULPT_MAT_HAIR on heldv011; reused exact native A controls. B=new albedo/roughness0.7, C=same albedo/roughness0.5. Same geometry/UVs/normals, idle pose, cameras, shape lighting and other materials. New albedo is loaded as the material's colour texture with mipmaps. Hair surface-array fingerprint stayed unchanged.
+
+[Native A/B/C reference and alternate comparisons](reviews/hair-m001-native-comparison.png), unscaled/unfiltered crops: A left, B middle, C right. Individually Git-object-hash verified. Whole-figure B was also inspected locally.
+
+**Decision: hold B (m001 albedo, roughness0.7) as the working material. Reject C for this setup.** B moves the orange wash toward chestnut and keeps broad masses readable. C creates bright waxy/plastic streaks across the flattened lock surfaces in both native views. The new colour is useful, but it does not solve the plate-like construction or complete the reference's soft hair response. No final material/art/user approval.
+
+Actual native imported StandardMaterial3D values: roughness0.699999988, metallic0, metallic_specular0.5, cull_mode2. B/C inherit this same imported specular and all other fields; only their stated texture/roughness differ. This is evidence of the resulting native material, NOT proof of how each KHR specular/IOR extension was mapped or ignored. Do not substitute Blender's0.25 specular number directly into Godot on that assumption.
+
+Native run exit0 with six B/C captures; root-certificate-store error remains, no script/assertion failure. All41runtime baseline hashes unchanged. No player save read/write, no live process stopped and no runtime material swap.
+
+### Next Fable pull: localized hair construction method gate
+
+Stop colour/roughness sweeps. Keep v011 crown envelope, face/eyes/root/rig/clothing and m001-B material as the control. We now need a structural method check: the large locks still expose broad nearly planar panels, particularly in the front/temple sweep, and C makes those panels obvious. More grooves, noise or darker paint will not round those forms.
+
+Inspect ONE dominant front/temple lock cluster's construction. Show source cross-sections at roughly25/50/75percent of its length and explain which profile creates the flat plate. Propose and demonstrate a rounder convex/asymmetric clump profile with a soft root transition and gradual taper; reserve blade-thin flattening for the last part of the tip. Keep the accepted overall swept/asymmetric silhouette and crown height, with controlled local deviation only. Avoid cylindrical noodles, identical pointed leaves and black root trenches. This is a method prototype, not permission to rebuild every lock or alter the face.
+
+Deliver one before/after neutral-clay sheet at the held reference and alternate cameras, cross-section/profile evidence, and a short construction note with changed cluster IDs, source method and silhouette displacement. Add one colour view using EXACT m001-B only to check the new form under the existing material. Keep the rest of the hair visibly held for comparison. No full v012 head GLB until Codex reviews this method gate; no duplicate rejected binary exports. Do not claim a likeness win from a front-only view. If the old profile is already convex, show that evidence and identify the actual flattening/root-normal cause rather than following my hypothesis blindly.
+
+ART-001 stays DOING. A1 remains unpassed; no NPC/world expansion. Codex next independent work remains the crop/fuel/storage/placement/UI-context audit. Source publication approval still pending and was not retried.
