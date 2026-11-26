@@ -1,5 +1,7 @@
 # ART-001 hair MATERIAL test m001 on frozen head v011 (Codex brief at 4f9ac05). Nothing is saved back to any .blend.
-# blender -b head_candidate_v011.blend --python hair_material_m001.py -- <absolute out albedo.png> <absolute out uv_proof.json>
+# blender -b head_candidate_v011.blend --python hair_material_m001.py -- <absolute out albedo.png> <absolute out uv_proof.json> [<absolute out.blend>]
+# With the third argument (v012 build step) the bake is installed as SCULPT_MAT_HAIR's base colour image (roughness 0.70,
+# the m001-B setting) and the file is saved there; without it nothing is saved.
 # Bakes ONE new chestnut albedo for SCULPT_HAIR through the hair's EXISTING UV map at the same 1024 px size as v011's
 # hair texture. Geometry, normals, UVs, transforms and every other texture are read only.
 # Colour design (albedo only, no lighting baked in):
@@ -11,7 +13,8 @@
 import bpy, sys, os, math, json, hashlib, numpy as np
 from mathutils.bvhtree import BVHTree
 sys.dont_write_bytecode = True
-out_png, out_json = sys.argv[sys.argv.index("--")+1:][:2]
+argv_ = sys.argv[sys.argv.index("--")+1:]; out_png, out_json = argv_[:2]
+out_blend = argv_[2] if len(argv_) > 2 else None     # v012: when given, install the bake in SCULPT_MAT_HAIR and save this file
 def srgb(r, g, b): return np.array([((c/255)/12.92 if c/255 <= 0.04045 else ((c/255 + 0.055)/1.055)**2.4) for c in (r, g, b)])
 def sstep(x): x = np.clip(x, 0, 1); return x*x*(3-2*x)
 ROOT, BODY, AMBER = srgb(72, 39, 24), srgb(104, 58, 34), srgb(146, 90, 50)
@@ -67,6 +70,18 @@ bpy.ops.object.bake(type='EMIT')
 img.filepath_raw = out_png; img.file_format = 'PNG'; img.save()
 uv2 = np.empty(len(me.loops)*2); me.uv_layers[0].data.foreach_get("uv", uv2)
 assert np.array_equal(uv, uv2), "UVs changed during the bake"
+if out_blend:
+    me.materials.clear()
+    for mm in old_mats: me.materials.append(mm)
+    bpy.data.materials.remove(m); me.color_attributes.remove(me.color_attributes["bakecol_m001"])
+    hm_ = bpy.data.materials["SCULPT_MAT_HAIR"]; tex = [n for n in hm_.node_tree.nodes if n.type == 'TEX_IMAGE'][0]
+    bsdf = [n for n in hm_.node_tree.nodes if n.type == 'BSDF_PRINCIPLED'][0]
+    oldimg = tex.image; img.name = "simm_head_hair_basecolor"; img.pack(); tex.image = img
+    if oldimg and oldimg.users == 0: bpy.data.images.remove(oldimg)
+    img.name = "simm_head_hair_basecolor"
+    bsdf.inputs["Roughness"].default_value = 0.70; assert abs(bsdf.inputs["Metallic"].default_value) < 1e-9
+    bpy.context.scene.render.engine = 'BLENDER_EEVEE'
+    bpy.ops.wm.save_as_mainfile(filepath=out_blend); print("INSTALLED", out_blend)
 srgb_med = lambda c: [int(round(255*((x*12.92) if x <= 0.0031308 else (1.055*x**(1/2.4) - 0.055)))) for x in np.median(c, 0)]
 json.dump({"hair_vertices": len(co), "uv_loops": len(me.loops), "uv_sha256_float32": uv_sha, "uv_unchanged_after_bake": True,
            "hair_positions_sha256_float32": geo_sha, "image_size": [1024, 1024], "bake_margin_px": 10,

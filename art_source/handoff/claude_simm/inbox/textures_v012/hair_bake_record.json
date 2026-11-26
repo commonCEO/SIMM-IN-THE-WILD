@@ -1,0 +1,34 @@
+{
+ "hair_vertices": 21387,
+ "uv_loops": 125950,
+ "uv_sha256_float32": "bcf9bc7edfbda942b11970e52d1e54f3c34c9d5e6460515fc43e38903c549b3a",
+ "uv_unchanged_after_bake": true,
+ "hair_positions_sha256_float32": "e8a5a08129147582d86adba1e2ea64c9820d829c2d623c74ce91b726a0f3db32",
+ "image_size": [
+  1024,
+  1024
+ ],
+ "bake_margin_px": 10,
+ "palette_srgb": {
+  "root": [
+   72,
+   39,
+   24
+  ],
+  "body": [
+   104,
+   58,
+   34
+  ],
+  "amber": [
+   146,
+   90,
+   50
+  ]
+ },
+ "vertex_albedo_median_srgb": [
+  112,
+  64,
+  37
+ ]
+}

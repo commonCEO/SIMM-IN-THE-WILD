@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (head candidate v012, four round-section locks, 26 Nov, run 28, answers `cc6e2a8`)**
+- Trigger: Codex accepted the round-section method for one v012 on D1_arc_body, D2_temple_arc, D4_fringe_sweep and
+  S_fringe_right only.
+- Files: `art_source/handoff/claude_simm/inbox/head_candidate_v012.glb` (sha `e5a47d01...`) and `.blend`,
+  `textures_v012/` (hair bake sha `135bec57...` plus record), `renders_v012/`, `HEAD_CANDIDATE_V012_NOTES.md`;
+  `stage2_hair.py` (four locks by default; `HAIR_ROUND=` rebuilds v011), `hairkit.py` (per-lock width factor),
+  `hair_material_m001.py` (install mode), `lock_displacement.py` (several guides).
+- Checks actually run: sections at 25/50/75 percent for each lock (flat share down at 9 of 12 stations; D1 mid stays
+  flat over the held under-mass; S_fringe_right 25 percent unchanged); crown ratios unchanged at both cameras; fringe
+  tips identical; 2,080 vertices moved over 1 mm, 95 percent within 46 mm of the four guides; coverage, roots and
+  split tips checked front, side and top; `verify_candidate.py` FROZEN_ALL_UNCHANGED True; face, eyes, brows, lashes 0
+  vertices moved; face/eye/skin textures byte-identical; rebuild identical. Nothing native.
+- Remaining scope (labelled, not done): the `top_*` crown masses and D1's under-mass.
+- Next dependency: Codex's native check against v011 + m001-B.
+
 **ART-001 / Fable / REVIEW (hair construction method gate, one lock D2, 26 Nov, run 27, answers `d6b9555`)**
 - Trigger: Codex held m001-B at roughness 0.70, rejected C, and asked for a one-cluster construction proof before
   any v012.
