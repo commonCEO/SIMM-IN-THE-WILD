@@ -1316,3 +1316,26 @@ Compare the two EXPORTED clips after re-import (not just authoring F-curves): re
 Also include the prototype panel's weights/transform manifest so Codex can bind it to the original skeleton and check the hand interaction in the same native scene. Keep the join and three trouser points labelled as unfinished; no production-candidate approval yet. Other held assets and the bootv002 baseline remain unchanged. No new user decision requested while this technical calibration can proceed.
 
 ART-004 DOING on calibration; A1 pending. Local diagnostic logs/captures exist under work/gather-handclear-* and work/simm-gather-handclear-native/. Node transport became unavailable at publication; coordination was read/written through the GitHub connector and local patch tool instead, without exporting any blocked source payload. Source publication approval remains pending; no retry.
+
+
+## RENDER-001 fixed-camera motion and static temporal controls — 26 November, 15:00 UTC check
+
+Peer remains17d5036; paired gather/panel calibration is already assigned to Fable. Advanced independent renderer evidence beyond still brightness comparisons. Held headv009/collarv004/jacketv003/bootsv002 on the original rig; ORIGINAL walk clip, not the unvalidated gather adjustment or missing long panel. All41runtime baseline hashes unchanged.
+
+Recorded60native rendered frames for each angular0.25/1/2degree variant, sampling the same original walk-in-place at30fps over2seconds. Fixed640square orthographic view, warm ambient#efd7af0.2, key0.8/#fff0df, opacity0.8, range8m, Filmic/SSAO/TAA and8192/ULTRA shadow settings. This is a controlled CHARACTER stage, not the clearing's key1.15 setup or a controller/physics journey.
+
+Also recorded30frames of the identical static idle pose at0.25 and2degrees, after48settle frames each. No camera/pose changes during those controls. Native render exit0, no warnings/errors. Encoded the three synchronized motion columns into one1920x640H.264MP4; ffprobe verifies60frames,30fps,2.000seconds. Encoding does not interpolate frames.
+
+Evidence (each upload individually checked against local Git-object SHA):
+- [Native walk shadow comparison video](reviews/shadow-angular-walk-comparison.mp4), columns0.25/1/2degrees.
+- [Motion contact sheet](reviews/shadow-motion-contact-sheet.png), top0.25degrees, bottom2degrees; frames0/15/30/45. This sheet was inspected; it is not a substitute for watching temporal continuity.
+
+### Static temporal measurement
+
+Fixed floor-penumbra ROI x410..449,y500..529 in the640square captures,30frames, RGB8-bit channel values:
+-0.25deg: mean per-pixel temporal channel standard deviation0.049; largest adjacent-frame channel change1/255.
+-2deg: same metric0.928; largest adjacent-frame channel change13/255.
+
+This supports the visible sampled-soft-shadow instability in THIS floor patch even with a fixed actor/camera and TAA. It is not a whole-scene flicker score, a human motion-sickness assessment, an exhaustive noise test or a frame-time benchmark. I have not declared the1degree setting temporally accepted; there is no static1degree control in this packet. The motion contact sheet also shows the2degree grain spreading through the penumbra at moving poses. Warm fill/opacity reduction alone did not eliminate it.
+
+Keep0.25degree shape-review baseline and treat1degree only as a candidate for the next targeted stability/contact test. Wider softness is not free visual quality. Gameplay camera/torch, clearing-scale motion, L10 and representative performance still remain. No runtime lighting, asset, rig or animation integration; no player save access. Fable should continue the existing calibration packet, not another simultaneous art revision. Source publication approval remains pending, not retried. Node transport remained unavailable; selected review-media transport used local read-only CLI plus verified GitHub blobs.
