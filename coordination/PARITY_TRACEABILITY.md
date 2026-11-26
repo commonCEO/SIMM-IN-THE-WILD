@@ -74,3 +74,41 @@ charged bow/melee/wildlife; skills/Nups; crop/fuel placement; scenes/world event
 boats/whale/rainbow/volcano; save migration across the full campaign; controller
 and localization journeys. Their prior fixtures/reports must be mapped to exact
 requirements and remaining native tests before PROD-003 can be DONE.
+
+## Second bounded slice: crafting/stations and ingredient evidence
+
+26November2026. Revalidated current source fixture and executed existing
+crafting_parity.gd in the separate minimal audit project/user-data namespace.
+No production code/fixtures changed; player save never accessed. Native4.7.2.
+
+| Requirement | Evidence actually checked now | Result / limit |
+|---|---|---|
+| Browser non-building recipe catalogue | node godot/tests/export-crafting-fixture.mjs --check | PASS:25recipes plus current model/game source hashes match stored oracle |
+| Costs/output/flags and skill discount | crafting_parity.gd compares browser-derived fixture to Progression | PASS within651total assertions: all25non-building recipes and craft levels0..3 |
+| XP/equip/ownership | Same suite | PASS:8XP, no autoequip, ownership/upgrade conditions |
+| Cooking/smelting/fuel | Same suite using synthetic station context | PASS fuel transaction/gates; does not prove native menu feel or world station reachability |
+| Capacity/nearby chest/failure rollback | Same suite | PASS rules within the suite; inventory seeded for isolated transactional tests |
+| Crafting/world-object save state | Same suite | PASS current schema roundtrip and invalid fuel rejection; no native player save used |
+| Remaining building and home service | camp_menu.gd _visible_recipes and camp.gd _begin_station_build inspected | Only fire/furnace/chest/garden/nest have active placement support; data presence is not playable home/interior/boat/beacon completion |
+| Ingredient gathering journey | resource_journey.gd read only, prior report reviewed | Historical automated coverage; test relocates player directly and advances world_age for crops/regrowth. NOT a normal-time controller-only journey |
+
+Actual output: `PASS:651 browser recipe, station, transaction, XP and save
+assertions.` Exit0, no runtime errors in work/crafting-audit-current.log.
+Independent oracle check also exit0. Counts include internal assertions, not
+651distinct player flows. This slice does not re-run resource_journey or
+station_menu/stations_world; their historical reports remain historical.
+
+The approved bucket is an extra recipe outside the25browser non-building
+records. Its isolated recipe/save test was exercised in SAVE-001, not silently
+added to the browser oracle. Existing crafting suite prepares inventory for
+each recipe; it cannot certify that all ingredients can be gathered in the
+campaign or that the starting resource budget is sufficient.
+
+### Remaining CORE-004 work
+
+Map every building record to its intended0.6UI context, active placement
+operation and actual world constraints. Keep obsolete modular-house data
+hidden as required; implement Bronkings service separately. Trace each
+ingredient to a real source in each intended region, plus bootstrap/capacity
+and depletion cases. Then run an unaccelerated first-loop controller journey.
+The25recipe rules are validated; entire crafting/world parity is still partial.

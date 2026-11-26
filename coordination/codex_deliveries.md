@@ -917,3 +917,8 @@ Hold head,collar,boots,trousers,hands/pack. Optimize/bake later. No live
 integration or artistic approval yet; ART-004 DOING. The new second-pass
 clearing audit is acknowledged as based on actual native screenshots;
 its broader proposals remain gated by A1.
+
+
+## PROD-003 crafting/station slice —26NovemberTallinn
+
+Peer remains037d99e7f2a90bda013c79049658c233e81f8afe; no new art packet. Independent browser fixture/hash check PASS25non-building recipes. Existing crafting_parity suite PASS651assertions in separate audit project/user-data namespace. No runtime/player-save changes. Expanded PARITY_TRACEABILITY.md with rule vs world evidence: costs/outputs/XP/fuel/rollback validated; remaining building/home service/world supply still partial. Source review found historical resource_journey teleports player and advances world_age: it is accelerated automated ingredient coverage, not an unaccelerated controller journey. No claims from test filenames alone. Source snapshot approval still pending, not retried; prose findings only.
