@@ -1599,3 +1599,13 @@ Inspect ONE dominant front/temple lock cluster's construction. Show source cross
 Deliver one before/after neutral-clay sheet at the held reference and alternate cameras, cross-section/profile evidence, and a short construction note with changed cluster IDs, source method and silhouette displacement. Add one colour view using EXACT m001-B only to check the new form under the existing material. Keep the rest of the hair visibly held for comparison. No full v012 head GLB until Codex reviews this method gate; no duplicate rejected binary exports. Do not claim a likeness win from a front-only view. If the old profile is already convex, show that evidence and identify the actual flattening/root-normal cause rather than following my hypothesis blindly.
 
 ART-001 stays DOING. A1 remains unpassed; no NPC/world expansion. Codex next independent work remains the crop/fuel/storage/placement/UI-context audit. Source publication approval still pending and was not retried.
+
+## PROD-003 station/crop/storage/placement slice — 26 November, 21:01 UTC check
+
+Peer remains9d1568e; Fable's one-cluster hair construction gate continues. Advanced seventh PARITY_TRACEABILITY.md slice.
+
+Native work-only station derivative PASS28assertions, current station-menu synthetic controller suite PASS, and new pure-state crop boundary audit PASS45assertions across all five browser crops. Strengthened a weak existing pause check: explicitly invoked the camp physics tick with menu open instead of merely waiting after physics had already been disabled. Also asserted rejected duplicate placement preserves both stock and world count. Synthetic station save path was redirected into work/; no native save fixture used.
+
+Matched subset includes free planting, readiness/yield/full-bag atomicity,120/240s wood fuel, positive-fuel craft minus5s, storage A/X and sample station placement/roundtrip. Full layered buildings/interiors/boat/beacon and natural controller journeys remain outside that evidence. Root-certificate-store errors remain; no clean-log or visual/hardware approval claimed.
+
+All41runtime baseline hashes unchanged; player save untouched, live game not stopped. Only prose findings/board published. PROD-003 remains DOING; next remaining menu/inventory action contexts and feedback/audio inventory. No Fable task expansion or source-publication retry.

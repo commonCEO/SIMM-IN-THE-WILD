@@ -6,7 +6,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 |---|---|---|---|---|---|
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
-| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | Six slices through world/height/campaign reachability; concrete scene/save/build gaps recorded; crop/fuel/storage/placement and remaining UI-context audit next |
+| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | Seven slices through crop/fuel/storage/placement; strengthened station28 and crop45 checks PASS; remaining menu/inventory action contexts and feedback/audio audit next |
 | ART-001 | P0 | Fable | DOING | native m001 A/B/C review | v011 geometry+m001-B roughness0.7 held; C rejected as waxy; next ONE-cluster construction/profile method gate before v012 export; A1 unpassed |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |

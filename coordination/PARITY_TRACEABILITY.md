@@ -232,3 +232,36 @@ CORE-005 must first define stable region+cave+room/level identity and coordinate
 Implement in dependency order: CORE-001 clock/survival and CORE-002/003 first-loop/home contract; shared CORE-005 scene/water/height model and migration; forest cave return/map/chests/crystal/combat; other biomes/volcano; boat/shore/whale and deterministic rainbow; then the actual journal/beacon path. Art remains gated by A1; these are behavioral dependencies, not permission to mass-produce all assets now.
 
 Required future proof: normal-time/controller routes with no teleports or injected progression, save/reload in each scene and at transition boundaries, local-only drops/companion/chests, blocked/failed placement with no payment loss, height/Leap limits, safe boat exit and one-time rewards. Current read-only probe establishes none of those native passes. PROD-003 remains DOING; next bounded audit is crop/fuel/storage/placement atomicity and remaining complete UI context coverage. No production source/rig/animation/native save modified; only prose findings published while source-export approval remains pending.
+
+## Seventh bounded slice: crop, fuel, storage and placement transactions
+
+Audited26November2026,21:01UTC. Browser model.js crops/plantCrop/cropProgress/harvestCrop/transferItem/craftItem and game.js fuel/craft/placement/place/chest/garden UI; native progression.gd equivalents, camp.gd station/build/tick and camp_menu.gd station/storage/garden routes.
+
+### Executed evidence and a corrected weak test
+
+- Reviewed existing stations_world.gd before using it. It writes a synthetic fixture to user:// and disables automatic camp physics, then merely waits a frame to assert fuel is paused. That wait alone does not test menu pausing.
+- Ran a LOCAL work/ derivative with the fixture redirected to an exact work/ path, preserving the native save. Replaced that weak wait with an explicit camp._physics_process(1.0) while the station menu is open; fuel stayed unchanged. Also compared both inventory and world-object count before/after occupied-square rejection. Result: PASS28station assertions, including fuel use/proximity/cooking/storage/roundtrip and the strengthened checks. Test fixture deleted only at its explicit work/ path.
+- Ran current station_menu.gd unchanged: PASS station-specific menu/source-order, injected controller A fuel/craft and X chest stack behavior, water/base-tool/bag gates and construction-selection-without-early-payment checks. It uses seeded stock and persist=false, not a natural gathering journey or physical pad/visual test.
+- New local pure-state crop boundary audit: PASS45assertions across the five CURRENT browser crop definitions. Tested free planting, occupied rejection, duration-minus0.001 rejection, exact readiness boundary, full-bag rejection preserving crop/inventory/XP/counter, then freeing one slot and retrying with exact yield/10XP/bed reset.
+- All three native processes exit0; root-certificate-store errors remain, so no clean-log claim. No script/assertion failure reported. All41runtime baseline hashes unchanged. The live player save was neither opened nor written; no active game process stopped.
+
+### Rules currently supported in the clearing subset
+
+| Rule | Evidence / limit |
+|---|---|
+| Crop data | Carrot180s/3, potato240/4, berries210/3, herbs180/3, magicFlower300/2 matched against browser model table in the boundary test |
+| Plant/harvest | No seed/payment requirement; occupied/immature/full-bag failures preserve bed and progression; successful harvest resets bed and gives10XP once. These pure transaction boundaries passed; crop visuals and unaccelerated route are separate |
+| Fuel | One nearby-paid wood adds120s or240s with smelter. Any strictly positive station fuel permits a craft, then deduct5s clamped to0; not a5second wait. Seeded station/menu tests passed |
+| Active time / pause | Explicit menu-open physics call returns before fuel tick; closed-menu direct inventory tick burns1fuel second per simulated second. No offline-time growth was inferred |
+| Recipe/station separation | Fire cooking and furnace smelting lists/context gates exercised; nearby chest/bench/water distances covered within the existing sample clearing |
+| Storage | Model transfers validate the full requested amount; menu caps stacks at20/available stock and reduces withdrawal amount until it fits. Injected A-one/X-twenty cases passed. Partial-fit fallback was source-inspected, not separately executed in this slice |
+| Placement | Selection does not pay; successful placement creates unlit station at absolute cursor cell and retains build selection. Explicit rejected-duplicate stock/world comparison passed. Cost/proximity/storage/save roundtrip validated in seeded sample |
+| Harvest/build overflow atomicity | Crop full-capacity failure tested directly. Cooking output-capacity rollback was covered by the earlier crafting slice. Do not generalize these to every UI/world failure combination |
+
+### Remaining scope and required evidence
+
+The active build filter, _begin_station_build and strict save validator still support ONLY fire/furnace/chest/garden/nest. Browser layer-aware floor/roof/ceiling/lamp/object coexistence, walls/doors/windows, furniture, stairs/interiors, boats/beacon and home plot/entrance reservations are not supplied by the five-type placement pass. Browser placement also has full water/sea, house footprint, resource and room rules; native _build_reason is a clearing approximation. CORE-003/004/005 must share geometry and validation rather than duplicating visually plausible but different blockers.
+
+Browser and native use a145px strict placement reach boundary and nearby chest120px inclusion; representative moving-player absolute cursor behavior, all rejected-payment cases and real approach paths still need controller journeys. No new resolution/layout/art acceptance was performed. Station UI tests inject events against prepared contexts, and the local crop test advances world_age explicitly; neither establishes a child's normal-time play flow.
+
+No production tests/source were edited or published. The reviewed test derivative and new boundary harness remain work-only while broad source export approval is pending. Only prose findings published. PROD-003 remains DOING, now narrowed to remaining menu/inventory use/action contexts, feedback/audio and verification of the full traceability inventory before opening implementation tickets. A1 art work continues independently.
