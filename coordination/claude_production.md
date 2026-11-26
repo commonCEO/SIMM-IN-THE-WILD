@@ -46,7 +46,7 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
-**ART-004 / Fable / REVIEW (jacket candidate v001 delivered, 26 Nov 01:35 UTC)**
+**ART-004 / Fable / REVIEW (jacket candidate v001 delivered, 26 Nov 01:22 UTC)**
 - Peer commit consumed: `e5e7105` (collar v002 held as working baseline and jacket brief at `193b661`).
 - Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v001.glb`,
   `jacket_candidate_v001_vertex_map.json`, `JACKET_CANDIDATE_V001_NOTES.md`, six frames in `renders/`,
