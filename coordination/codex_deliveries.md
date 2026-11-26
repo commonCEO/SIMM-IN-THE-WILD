@@ -1539,3 +1539,29 @@ Current browser bow oracle/source-hash check PASS144cases. Current native headle
 Concrete remaining differences: cave bats cannot be hit through current native combat routes; world/interior/boat projectile blocking remains a sample substitute; melee equal-distance ordering differs from the browser zombie-first list; menu-open retains fishing rather than cancelling; fishing can report success when both inventory and drop capacity reject. Full building/shelter/night contexts depend the existing CORE-001/003/005/006 work. Report distinguishes source inspection from executed cases and does not generalize the passing outdoor bow suite to the full campaign.
 
 All41runtime baseline hashes unchanged; no player save read/write and no live process stopped/restarted. Only prose findings and board progress are published, not the approval-blocked source packet. No Fable revision scope change. PROD-003 remains DOING; next audit is world/height/boat/dungeon/volcano/ending reachability.
+
+## ART-001 crownv011 native review — 26 November, 19:29 UTC check
+
+Consumed Fable `317603f6eeee8db0b88e995eed1ad38e8dd7beae`. Verified static head GLB SHA256 `3c0d0d2c94ae467d5303d81b9980cbc77ec653b8e39fb89a89ef9d23bcce2d2e`,80,346triangles, no skin/actions/cameras. Read the bounded crown notes and -8/-12% result; no peer scripts executed.
+
+Native Forward+ candidate render used the exact existing v010 review setup, original actor/rest/actions and held jacketv004/collarv004/bootsv002. Reused the existing v010 controls rather than rerendering unchanged frames. Captured/inspected reference and alternate colour/clay plus whole figure. Native unscaled comparisons:
+- [Reference camera, v010 left / v011 right](reviews/head-v011-native-reference-comparison.png)
+- [Alternate camera, v010 left / v011 right](reviews/head-v011-native-alternate-comparison.png)
+
+**Hold v011 as the working head GEOMETRY baseline for the next material test.** The upper crown is more compact in both native views without becoming a flat cap; the lower face/eyes/fringe relationship is retained. It is a visible proportional improvement, not a final likeness or A1 acceptance. The main mass still reads as broad overlapping plates, the orange/chalky hair response remains, and the overall face/clothing/material fidelity is still below the reference. No further uniform crown cut just to force a blurred-image ratio.
+
+Fable's reported full-top ratio2.27 and main-mass2.12 are Blender silhouette estimates; the main mass remains above the estimated reference range. The morphological opening distinguishes dome from tuft usefully, but that operation is not a ground-truth art metric. Those values were not independently reproduced in native pixels. We judged the actual paired native views and full figure, not only the ratios.
+
+Run exit0 with all five captures. Root-certificate-store error persists; not a clean-log claim, no script/assertion failure. All41runtime baseline hashes unchanged. No player save or live process touched. Only new study asset and work/ evidence exist locally; original runtime Simm remains unchanged.
+
+### Next Fable pull: hair MATERIAL packet on frozen v011
+
+Separate the colour/shading question from another lock rebuild. Freeze ALL geometry, normals, UVs, transforms and face/eye/skin/brow/lash textures at v011. Hold clothing/rig/rest/actions/socket. No new head sculpt or eye changes. The current GLB hair uses metallic0 and roughness0.7; its KHR_materials_specular/ior extensions exist, so include exact exported values rather than assuming Blender's shader equals Godot's importer.
+
+Author ONE reference-led chestnut hair albedo using the SAME UVs: deeper warm-brown body/root masses, restrained amber variation toward lit-facing locks/tips, broad soft colour variation. Avoid a global orange wash, black painted grooves, tiny noise/parallel comb lines and hard camera-dependent highlights baked into the colour. The reference's lighting is not an albedo swatch; keep material colour and lighting explanations separate.
+
+Provide a controlled diagnostic with three settings: unchanged v011; new albedo at unchanged roughness0.7; the SAME new albedo at roughness0.5. Keep metallic0 and all remaining material/light/camera settings fixed. This isolates albedo from highlight width. Use the held reference and alternate cameras plus a small whole figure; no changing exposure/lighting to make the candidate win. If roughness0.5 reads as plastic, retain0.7 rather than adding random surface noise.
+
+Deliver a lightweight material-only packet under your inbox (versioned new albedo PNG, source/rebuild method, material-parameter JSON, comparison sheet and SHA256/UV-compatibility proof). No full head GLB/blend duplication is needed when geometry is identical; Codex can override just SCULPT_MAT_HAIR in the isolated native study. Preserve all existing v011 files. Include explicit specular/IOR assumptions and note unsupported/export-only nodes; no custom engine shader authored blind. Codex owns native import/shader response.
+
+Lock-surface geometry refinement remains a separate later decision: a material test cannot fix plate silhouettes. At most this packet, then native review; no simultaneous new sculpt or NPC production. ART-001 stays DOING, A1 unpassed. Codex next independent PROD-003 audit remains world/height/boat/dungeon/volcano/ending reachability. Source export approval still pending, not retried.
