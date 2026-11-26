@@ -1487,3 +1487,23 @@ Test two modest horizontal eye-spacing variants, approximately+6% and+10% TOTAL 
 First inspect a single comparison sheet of v010/control and both variants at the same two cameras. Choose ONE only if both views visibly improve the reference relationship without a wall-eyed/exposed-white result. Export that single static head candidate as v011 with the usual source/manifest/checksums and frozen proof; keep the rejected alternatives out of repeated full binary deliveries. If neither is better, deliver the diagnostic sheet and stop rather than forcing a full revision. Hair/material rework follows this decision, not concurrently.
 
 ART-001 stays DOING; jacketv004 remains held fit. Codex's independent next ticket remains continuous fitted-character motion/socket/game-scale evidence with bounded frame-time measurement. No new cloth revision or brightness sweep. PROD-002 source export approval remains pending and was not retried.
+
+## ART-003 fitted-character motion/socket evidence — 26 November, 18:00 UTC check
+
+Peer remains `93c9508`; Fable's bounded eye-spacing diagnostic from `9243be2` continues. Advanced independent native fit evidence, without another art revision or light sweep.
+
+Recorded held headv010/jacketv004/collarv004/bootsv002 on the ORIGINAL native skeleton and hand_r_socket, with the existing procedural pickaxe. Original idle/walk and the separately calibrated relative hand-clear gather STUDY COPY are continuously advanced at1/30s per encoded frame:60idle,60walk,48gather =168frames /5.6seconds. This is deterministic animation playback in place, NOT physical-controller play, world locomotion, a new gather implementation or an unmodified original gather claim.
+
+Two simultaneous640square cameras show close full figure (ortho1.7) and the same actor at ortho10 scale on an empty study floor. The small view demonstrates projected size only; it is not the real camp's occlusion/camera/layout test. The first capture attempt exposed a blank secondary viewport caused by using the override world property instead of the active own-world instance. Corrected to the actual shared World3D, asserted equality and reran the complete packet; only the corrected result is published.
+
+Evidence, individually Git-object-hash verified:
+- [Native fitted animation recording,1280x640/30fps/168frames](reviews/fitted-simm-native-motion.mp4)
+- [Corrected-gather frame131 with both scales](reviews/fitted-simm-native-motion-frame131.png)
+
+Checks across168advanced poses: original17local rest matrices unchanged, HeldTool origin followed its authored socket follower with maximum measured positional error0m, lowest boot vertex -0.001382m (the previously recorded~1.38mm walk graze). This tests transform following, not art quality of the old pickaxe grip/geometry or a full mesh collision solver. Selected idle/walk/gather frames were visually inspected and retain the unified jacket outline. The video is encoded and metadata-verified; full perceptual playback/user acceptance remains pending, so ART-003 is still REVIEW.
+
+Bounded native renderer readings were collected for both viewports on the RTX4080: close CPU0.211–0.245ms/GPU0.202–1.464ms; scale CPU0.098–0.117ms/GPU0.165–1.178ms. **Only3distinct timestamp reports appeared during the recording**; repeated cached readings are not168independent frame samples. No p95/FPS claim, gameplay budget, total-process timing, minimum-spec or representative-camp acceptance is inferred. PNG encoding, two views, an empty stage and a potentially active user game make this diagnostic unsuitable as the release profile.
+
+Final native run exit0 and all168frames encoded successfully. One root-certificate-store error remains; no script/assertion failure or failed profile-log write in this run (engine log explicitly redirected to work/). All41runtime baseline hashes unchanged. No progression/save system instantiated and no live game stopped/restarted.
+
+ART-003 continuous-advancement/socket evidence advanced, but actual camp integration, moving-world camera/occlusion, full playback review, physical-controller journey and representative performance remain. A1 still unpassed. No Fable scope change: finish the current bounded diagnostic. Next independent Codex ticket is PROD-003 combat/fishing/controller-context audit, to keep the1.0 functional plan moving while art proceeds. PROD-002 source publication remains blocked by the existing approval, not retried.

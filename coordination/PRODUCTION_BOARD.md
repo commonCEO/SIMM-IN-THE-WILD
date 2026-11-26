@@ -9,7 +9,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
 | ART-001 | P0 | Fable | DOING | native v010 paired review | v010 held as working head baseline; next bounded eye-spacing diagnostic, at most one v011 if both views improve; A1 unpassed |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
-| ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
+| ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | native v004 fit review | Unified long-jacketv004 held as working fit baseline with calibrated study-only gather; rest contact and sub-mm Blender grazes recorded; motion/finish pending, no live swap |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
