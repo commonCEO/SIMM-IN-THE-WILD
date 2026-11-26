@@ -1408,3 +1408,30 @@ Native render exit0 with no warnings/errors. All41runtime baseline hashes unchan
 The1degree source gives a visibly softer penumbra than0.25 while remaining near the baseline temporal fluctuation in this fixed patch.2degrees retains obvious grain. **Use1degree as the provisional NEXT gameplay/clearing test candidate**, not a universal clean-shadow or final art acceptance. Do not extrapolate this floor ROI to facial self-shadows, every camera distance, foliage or moving silhouettes. Existing motion video contains1degree alongside the two controls, but perceptual motion approval and representative GPU profiling remain pending.
 
 Geometry-authoring comparisons remain on the held0.25degree shape light to avoid moving the benchmark mid-jacket review. No runtime lighting or save change, no new art assignment. Next renderer validation should transfer the candidate to a non-saving gameplay day/torch capture with current assets and inspect camera-dependent behavior; do not repeat another brightness sweep. Final clearing art, L10 framing, torch/self-shadow tradeoffs and performance still remain. Source snapshot publication approval pending, not retried.
+
+## ART-004 native longer-jacket v004 fit review — 26 November, 16:31 UTC check
+
+Consumed Fable `0573324e77cb73f391c1a74377df1bb697d06f66`. Verified jacket GLB SHA256 `2b73bba6a02a1dc1e83fb4be6a2ac4ce64565b4238fe8cc4ccd9d88657b66fe6`: two skinned parts, 15,556 triangles, 17 matching rest joints, no bundled actions. Rebound the replacement garment to the original native skeleton in memory, with held headv009/collarv004/bootsv002 and the separately calibrated CURRENT-native relative hand-clear study clip. The old folded hood and replaced garment/foot surfaces are suppressed only in this study; no source or live swap.
+
+Native Forward+ run exit0, no warnings/errors. Sampled97 poses per idle, walk and study/gather_native_handclear and captured full-body, both walk phases, side and close hip views. Original gather retained as a negative control. All41 runtime baseline files remain byte-identical. No player save was opened or written.
+
+Evidence (actual native frames; differently framed panels are qualitative, not measurements):
+- [Whole-figure idle versus original reference crop](reviews/jacket-v004-native-idle.png)
+- [Corrected gather / hip close view](reviews/jacket-v004-native-handclear.png)
+- [Side walk / unified garment](reviews/jacket-v004-native-side-walk.png)
+
+**Decision: hold v004 as the new working FIT baseline, superseding the short v003 in subsequent studies.** The long shell now reads as one garment rather than an extension or split tail. The selected corrected-gather close view does not show the former hand breakthrough, and the inspected side walk frame keeps the hem coherent. This is sampled visual fit acceptance, NOT continuous collision clearance, final cloth finish, art parity or user approval.
+
+Fable's quantitative residuals remain recorded, not erased by this visual review: rest hand clearance about0.01mm, walk grazes0.18/0.07mm and upper-sleeve stretch inherited from held geometry. Those are Blender results, not independently reproduced native collision measurements. For this provisional study accept the reported rest contact; do NOT change protected rest arms or thin to a fragile1mm solely to remove near-zero contact. Retain the known residuals for continuous-motion/socket testing. Reopen only if representative motion shows a visible defect. No more full garment exports for microscopic contact changes now.
+
+### Next Fable pull: ART-001 bounded head-likeness candidate v010
+
+We have spent multiple cycles making the garment fit; that does not close the principal style gap visible in the native full figure. Hold jacketv004, bootsv002, collarv004, pack, trousers, master rig/rest/actions/socket and live files. A1 remains unpassed. Next work returns to the HEAD, with a finite primary-form pass before surface-detail polishing or wider NPC production.
+
+Use the full approved original, headv009 and these native frames. The native face still reads as a narrow lower face with a tiny pointed chin and a high exposed forehead; the large shiny eye treatment pulls it toward a different doll/anime design. The reference reads as a softer, broader child's cheek/jaw mass with a lower fringe and restrained dark eyes. Hair also remains a broad sculpted plate arrangement, but do not rebuild every lock simultaneously with this face test. These are qualitative observations; camera mismatch must be controlled before proportion claims.
+
+Deliver ONE reversible v010 head candidate, keeping v009 archived. First normalize the reference/head comparison by eye-line and head height, then show what you actually altered. Prioritize cheek-to-jaw/chin softness and the forehead/fringe relationship. Retain the friendly expression and small visible catchlights the user preferred; avoid replacing it with the earlier blank/horror look. Eye/rim changes should support the reference's restrained dark oval read, not increase glossy white area. Do not change whole-head scale or attachment height from the differently framed full-body panels alone.
+
+Before a full packet, inspect a front/three-quarter neutral clay pair against v009 plus the approved head crop. Then provide the usual two fixed-camera colour/clay views, normalized reference comparison, static head-only GLB, source and manifest with counts/bounds/materials/checksums. Document exactly which face/fringe/eye meshes changed and why; no unbounded hair/texturing iteration. No paid tools, uploads or unrelated character edits. Codex will judge the native matched-camera result before the next art method is selected. ART-004 stays REVIEW/held fit, ART-001 becomes DOING for this bounded test.
+
+Codex next independent work remains the representative non-saving gameplay day/torch shadow candidate and continuous fitted-character motion/socket evidence; no further brightness sweep. The1degree source is only a provisional renderer test. PROD-002 broad source publication remains pending the existing user approval and was not retried.
