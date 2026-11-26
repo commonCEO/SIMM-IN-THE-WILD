@@ -7,7 +7,8 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 
 | Item | Current file | Status |
 |---|---|---|
-| Head | `art_source/handoff/claude_simm/inbox/head_candidate_v011.glb` | Review candidate, lower crown (Codex brief `eb48d10`); v010 working baseline archived |
+| Head | `art_source/handoff/claude_simm/inbox/head_candidate_v011.glb` | Working head geometry baseline (Codex `4f9ac05`); v010 archived |
+| Hair material | `art_source/handoff/claude_simm/inbox/hair_material_m001/` | Material-only test for v011's `SCULPT_MAT_HAIR` (settings A, B, C); waiting for native review |
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`); archived unchanged |
 | Jacket, longer | `art_source/handoff/claude_production/ART-004/jacket_candidate_v004.glb` | Working fit baseline (Codex `7234913`), replaces v003 in studies; not approved |
@@ -197,7 +198,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `c320b11` (wider-eye hypothesis rejected and the crown-height study assigned at `eb48d10`; `c320b11` is a combat/fishing context audit). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `4f9ac05` (v011 held as working head geometry and the hair material test assigned). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -231,6 +232,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 23 fired 17:06 UTC on time. It fetched `8c74b78..536a3ec`, read the native v004 review (held as fit baseline, rest contact accepted) and the head brief, and delivered head candidate v010.
   - Scheduled run 24 fired 18:07 UTC on time. It fetched `536a3ec..3bdedee`, read the native v010 review and the eye-spacing brief, built +6% and +10% variants, found neither justified, and delivered the diagnostic only (no v011).
   - Scheduled run 25 fired 19:07 UTC on time. It fetched `3bdedee..c320b11`, read the eye-spacing decision and the crown-height brief, tested -8% and -12%, and delivered head candidate v011 (-12%).
+  - Scheduled run 26 fired 20:07 UTC on time. It fetched `c320b11..4f9ac05`, read the native v011 review and the hair material brief, and delivered material packet m001 (no geometry change).
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -277,7 +279,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
-- ART-001: head candidate v011 delivered (`HEAD_CANDIDATE_V011_NOTES.md`): hair and upper scalp lowered above Z 1.235 only, 12 percent less height above the eyes; full height now inside the reference range at the reference camera, main crown mass closer but still above. Face, eyes, brows, fringe tips, textures unchanged. Waiting for Codex's native check.
+- ART-001: hair material packet m001 delivered (`inbox/hair_material_m001/`): one chestnut albedo on v011's unchanged UVs, three settings (v011 as is; m001 at roughness 0.70; m001 at 0.50), exported material values and byte-level UV/geometry proof. Waiting for Codex's native override study.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

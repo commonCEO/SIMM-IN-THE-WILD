@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (hair material test m001 on frozen v011, 26 Nov, run 26, answers `4f9ac05`)**
+- Trigger: Codex held v011 as the working head geometry and isolated a hair-only albedo/roughness test.
+- Files: `art_source/handoff/claude_simm/inbox/hair_material_m001/` (albedo PNG sha `c5f4549b...`, parameters JSON,
+  comparison sheet, notes); `build_scripts/hair_material_m001.py`, `hair_material_apply.py`, `hair_material_probe.py`.
+- What changed: nothing in v011's files. A new albedo for `SCULPT_MAT_HAIR`, baked through the existing UVs: deeper
+  warm-brown roots and body, restrained amber on broad up-facing lock surfaces, one soft broad drift, no grooves.
+  Covered-texel median sRGB 140, 81, 39 (v011) to 112, 64, 37.
+- Checks actually run: three settings rendered with fixed cameras, lights and geometry; exported material blocks
+  read from hair-only probe exports (metallic 0; roughness 0.7 / 0.7 / 0.5; specularColorFactor 0.5928; ior 1.45);
+  TEXCOORD_0 and POSITION byte-identical to the v011 GLB; texel coverage matches; PNG rebuild byte-identical; v011
+  .blend and GLB re-hashed unchanged. Nothing native; Godot's handling of the specular/IOR extensions not checked.
+- Next dependency: Codex's isolated native override of `SCULPT_MAT_HAIR` (A against B and C).
+
 **ART-001 / Fable / REVIEW (head candidate v011, crown-height study, 26 Nov, run 25, answers `eb48d10`)**
 - Trigger: Codex rejected the wider-eye hypothesis and assigned a bounded crown/hair height study (-8% and -12%), one
   v011 at most if it survives both cameras and the full figure.

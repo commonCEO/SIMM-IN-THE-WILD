@@ -1,0 +1,136 @@
+{
+ "packet": "hair_material_m001",
+ "applies_to": "head_candidate_v011.glb, material SCULPT_MAT_HAIR only (sha 3c0d0d2c94ae467d5303d81b9980cbc77ec653b8e39fb89a89ef9d23bcce2d2e)",
+ "albedo": {
+  "file": "simm_head_hair_basecolor_m001.png",
+  "sha256": "c5f4549be9cba12e152e17f71fb234bcd788ead410dad8b667673832ceebe99f",
+  "bytes": 544861,
+  "size": [
+   1024,
+   1024
+  ],
+  "colour_space": "sRGB",
+  "palette_srgb": {
+   "root": [
+    72,
+    39,
+    24
+   ],
+   "body": [
+    104,
+    58,
+    34
+   ],
+   "amber": [
+    146,
+    90,
+    50
+   ]
+  },
+  "covered_texel_median_srgb": [
+   112,
+   64,
+   37
+  ],
+  "v011_covered_texel_median_srgb": [
+   140,
+   81,
+   39
+  ],
+  "rebuild": "blender -b head_candidate_v011.blend --python build_scripts/hair_material_m001.py -- <abs png> <abs json>; rebuilt twice, byte-identical"
+ },
+ "uv_and_geometry_compatibility": {
+  "uv_map": "the hair's single existing UV map, unchanged (asserted before and after the bake)",
+  "uv_sha256_float32_blender": "d36f5fd3c918615547ea29f282c4c3ae7826d53cb2c9173495d3112bcf6905b6",
+  "glb_texcoord0_sha256_v011": "c616f0da7c4c870fcc69ee533284ee157a0c3985f9a1dcbbf44ecb3c9157ff35",
+  "glb_texcoord0_identical_in_all_three_probe_exports": true,
+  "glb_position_identical_in_all_three_probe_exports": true,
+  "texel_coverage": "837,517 of 837,518 v011 covered texels are covered; 13 texels differ at island margins (10 px bake margin, as v011)"
+ },
+ "settings": {
+  "A_v011_unchanged": {
+   "image": "v011 hair texture (sha 65df4984c3066413f2c6a787697f78689239747a728be49fdfa3a47bcf5b53f2)",
+   "exported_material": {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.5928394036103495,
+       0.5928394036103495,
+       0.5928394036103495
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_HAIR",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0,
+     "roughnessFactor": 0.699999988079071
+    }
+   }
+  },
+  "B_m001_rough_070": {
+   "image": "simm_head_hair_basecolor_m001.png",
+   "exported_material": {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.5928394036103495,
+       0.5928394036103495,
+       0.5928394036103495
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_HAIR",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0,
+     "roughnessFactor": 0.699999988079071
+    }
+   }
+  },
+  "C_m001_rough_050": {
+   "image": "simm_head_hair_basecolor_m001.png",
+   "exported_material": {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.5928394036103495,
+       0.5928394036103495,
+       0.5928394036103495
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_HAIR",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0,
+     "roughnessFactor": 0.5
+    }
+   }
+  }
+ },
+ "exporter": "Blender 3.5.1 glTF exporter, options as stage4_export.py; Principled BSDF Specular 0.25 exports as KHR_materials_specular specularColorFactor 0.5928 with KHR_materials_ior 1.45; metallicFactor 0; doubleSided true",
+ "assumptions": [
+  "Godot's handling of KHR_materials_specular and KHR_materials_ior was not checked here; if the importer ignores them it uses its own default specular. Codex owns native import and shader response.",
+  "No custom or export-only shader nodes: the hair material is one Principled BSDF with one image texture; the bake used a temporary emission material that is not in any delivered file.",
+  "Only roughness differs between B and C; metallic 0 and specular 0.25 held."
+ ]
+}
