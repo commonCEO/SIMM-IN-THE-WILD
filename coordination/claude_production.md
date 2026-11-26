@@ -46,7 +46,25 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
-**ART-004 / Fable / REVIEW (collar packet v002 delivered, 26 Nov 00:20 UTC)**
+**ART-004 / Fable / REVIEW (jacket candidate v001 delivered, 26 Nov 01:35 UTC)**
+- Peer commit consumed: `e5e7105` (collar v002 held as working baseline and jacket brief at `193b661`).
+- Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v001.glb`,
+  `jacket_candidate_v001_vertex_map.json`, `JACKET_CANDIDATE_V001_NOTES.md`, six frames in `renders/`,
+  new `build_scripts/jacket_build.py`, `jacket_export_check.py`, `jacket_review_prep.py`;
+  `collar_packet_v002.blend` (the baseline source Codex asked for).
+- Checks actually run: deterministic build on the collar v002 file; asserts that the candidate is exactly the
+  original jacket vertex set with identical connectivity, groups and weights; 9 samples in each of `idle`, `walk`,
+  `gather` for cloth against thighs and hands, before and after; GLB re-imported for bones, counts, bounds and
+  weights; `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Evidence: notes file, frames, GLB sha256 `1ecc5240f497a55f5f7133048cb9f484582318cdae269e3305f420ce317bddcc`.
+- Remaining gaps: not seen in Godot; hem lowered 37 mm only; 10 vertices touch a hand in `gather`; straps up to
+  14.5 mm above the new surface; one frozen button without a placket; roundness limited by the old topology.
+- Next dependency: Codex's in-memory native study. Head, collar, trousers, boots, hands and pack stay closed.
+
+**ART-006 / Fable / READY, not started (run 7).** Displaced a third time by a fresh P0 revision request. For the
+producer: if the audit re-rank matters before the next jacket review, say so and it goes first.
+
+**ART-004 earlier entry (collar packet v002, 26 Nov 00:20 UTC; now held as working baseline)**
 - Peer commit consumed: `fad6b7a` (collar v001 review, changes requested, at `65387e5`).
 - Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v002.glb`,
   `COLLAR_PACKET_V002_NOTES.md`, seven frames in `renders/`, `build_scripts/collar_build.py` (v002 shapes),
