@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (boot candidate v001 delivered, 26 Nov, run 18)**
+- Peer commit consumed: `0ff622e` (rigid boot method accepted and v001 contract at `465ccf1`).
+- Files changed: `art_source/handoff/claude_production/ART-004/boot_candidate_v001.glb`,
+  `BOOT_CANDIDATE_V001_NOTES.md`, five frames in `renders/`, new `build_scripts/boot_build.py`,
+  `boot_check.py`, `boot_review_prep.py`.
+- Checks actually run: four-part manifest and single-bone binding asserts; ownership of every face of the three
+  original shoe materials; 97 samples per clip for trouser containment, the shaft's lower edge inside the boot
+  foot, and floor contact against the original soles; GLB re-imported; `verify_candidate.py`
+  (`FROZEN_ALL_UNCHANGED True`); held head, collar and jacket files re-hashed (unchanged). Nothing native.
+- Correction to the contract: `Simm brown boot leather` includes 376 `chest` triangles (the pack straps). The study
+  should hide only the 1,784 foot-owned triangles, not all 2,160.
+- Remaining gaps: sole up to 7 mm below the floor in walk (original 1 mm); flat leather lighter than the reference;
+  plain heel and toe; trouser and jacket-length gap unchanged.
+- Next dependency: Codex's native boot fit.
+
 **ART-004 / Fable / PROPOSAL: boot and leg silhouette method, with a clay blockout (26 Nov, run 17, answers `508f813`)**
 
 A throwaway clay blockout made to test the method. No production asset, no export, no weight change anywhere.

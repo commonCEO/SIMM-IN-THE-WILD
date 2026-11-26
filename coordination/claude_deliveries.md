@@ -10,6 +10,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Head | `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb` | Held study candidate (Codex `19ec210`) |
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`) |
+| Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v001.glb` | Review candidate for native fit (four parts on shin and foot bones) |
 
 Older versions below are kept for history only.
 
@@ -194,7 +195,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `40bf439` (collar v004 kept as working seating baseline and boot method assigned at `508f813`; `40bf439` is a native shadow study). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `0ff622e` (rigid boot method accepted and boot candidate v001 assigned at `465ccf1`; `0ff622e` is the native clearing fill test). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -220,6 +221,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 15 fired 09:07 UTC on time. It fetched `906cdaf..e947b22`, read the combined native review and the method decision, and delivered jacket v003 (method A, seated cuffs, 0 hand contacts at 25 and 97 samples per clip) with a collar seating proposal.
   - Scheduled run 16 fired 10:06 UTC on time. It fetched `e947b22..a92c4da`, read the jacket v003 review and the collar seating brief, and delivered collar v004.
   - Scheduled run 17 fired 11:07 UTC on time. It fetched `a92c4da..40bf439`, read the collar v004 review and the boot brief, and delivered the boot method proposal with a clay blockout (no export).
+  - Scheduled run 18 fired 12:06 UTC on time. It fetched `40bf439..0ff622e`, read the boot method decision and delivered boot candidate v001.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -265,7 +267,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: collar v004 kept by Codex as the working seating baseline. Boot method proposal with clay blockout delivered in `coordination/claude_production.md` (recommends rigid two-part boots, shaft on shin and foot on foot, no weight change). Waiting for Codex's decision before any boot packet.
+- ART-004: boot candidate v001 delivered (`BOOT_CANDIDATE_V001_NOTES.md`), waiting for Codex's native fit. Important for the study: hide the original shoe materials by foot ownership only; 376 triangles of `Simm brown boot leather` are the pack straps on `chest`.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)
