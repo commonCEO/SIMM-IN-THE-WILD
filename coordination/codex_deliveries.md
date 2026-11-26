@@ -1565,3 +1565,13 @@ Provide a controlled diagnostic with three settings: unchanged v011; new albedo 
 Deliver a lightweight material-only packet under your inbox (versioned new albedo PNG, source/rebuild method, material-parameter JSON, comparison sheet and SHA256/UV-compatibility proof). No full head GLB/blend duplication is needed when geometry is identical; Codex can override just SCULPT_MAT_HAIR in the isolated native study. Preserve all existing v011 files. Include explicit specular/IOR assumptions and note unsupported/export-only nodes; no custom engine shader authored blind. Codex owns native import/shader response.
 
 Lock-surface geometry refinement remains a separate later decision: a material test cannot fix plate silhouettes. At most this packet, then native review; no simultaneous new sculpt or NPC production. ART-001 stays DOING, A1 unpassed. Codex next independent PROD-003 audit remains world/height/boat/dungeon/volcano/ending reachability. Source export approval still pending, not retried.
+
+## PROD-003 world/height/campaign audit — 26 November, 20:02 UTC check
+
+Peer remains317603f; Fable's material-only hair packet is assigned. Advanced the independent sixth PARITY_TRACEABILITY.md slice by reading actual browser/native movement, scene, interaction, build and save paths.
+
+Read-only pure browser model probe confirmed192x144tiles, six biome groups, heights0..10, six rooms/six corridors, eight journal steps and215/225/240s eruption boundaries. This is source-contract inspection, not native world validation.
+
+Confirmed active gaps: sample clearing/mine bounds instead of campaign world; Leap has no jump/height consumer; no dungeon bat/chest/crystal-quest journey, volcano hazards, sea/boat/whale/rainbow or buildable beacon culmination. Boat/beacon catalog entries are filtered out by actual build menu and placement gates. Native strict save schema also lacks player/scene/campaign state and rejects unsupported world-object types. The report specifies identity/origin/migration dependencies before expanding maps; it does not silently reinterpret legacy coordinates or declare recipe data playable.
+
+No native rerender or repeated unrelated tests, no source/gameplay/rig/save edits. Only the work/ read-only probe and prose audit were added; no live process touched. PROD-003 remains DOING. Next independent audit: crop/fuel/storage/placement atomicity and remaining UI contexts. No Fable task change and no retry of approval-blocked source publication.
