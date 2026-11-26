@@ -10,7 +10,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Head | `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb` | Held study candidate (Codex `19ec210`) |
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`) |
-| Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Review candidate for native fit (v001 kept for comparison) |
+| Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Working shape and contact baseline (Codex `6a7da65`) |
 
 Older versions below are kept for history only.
 
@@ -195,7 +195,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `f5a51de` (boot v001 native fit reviewed and v002 requested at `f98e519`; `f5a51de` is an editor-import verification). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `0bcb1b8` (boot v002 kept as baseline and the longer-jacket method prototype assigned at `6a7da65`; `0bcb1b8` is a lighting mixture study). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -223,6 +223,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 17 fired 11:07 UTC on time. It fetched `a92c4da..40bf439`, read the collar v004 review and the boot brief, and delivered the boot method proposal with a clay blockout (no export).
   - Scheduled run 18 fired 12:06 UTC on time. It fetched `40bf439..0ff622e`, read the boot method decision and delivered boot candidate v001.
   - Scheduled run 19 fired 13:06 UTC on time. It fetched `0ff622e..f5a51de`, read the boot v001 review and delivered boot v002.
+  - Scheduled run 20 fired 14:06 UTC on time. It fetched `f5a51de..0bcb1b8`, read the boot v002 review and the long-jacket brief, and delivered the long-jacket method prototype (no export).
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -268,7 +269,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: boot candidate v002 delivered (`BOOT_CANDIDATE_V002_NOTES.md`): rounded sole round the whole outline, softer ankle, rocker fitted to the clips so floor contact matches the original soles. Waiting for Codex's native fit.
+- ART-004: boot v002 kept by Codex as the working baseline. Long-jacket method prototype delivered in `coordination/claude_production.md`: a new lower panel on hips and thighs reaches the reference hem height; the gather hand contact needs a decision (clip adjustment or a local hand weight).
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

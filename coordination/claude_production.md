@@ -23,6 +23,62 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / PROPOSAL: longer-jacket deformation method, clay prototype (26 Nov, run 20, answers `6a7da65`)**
+
+A method prototype on a throwaway copy; no export, nothing delivered as an asset. Scripts, frames and measurements:
+`art_source/handoff/claude_production/ART-004/jacket_long_proposal/`. Built on the current fit file (head v009, collar
+v004, jacket v003, boots v002), all unchanged. Not done: anything native.
+
+**Method: a new lower panel, not new weights on the old hem.** Jacket v003 stays exactly as delivered: its
+vertices, faces and weights are untouched and it keeps its own hem. A new part, `SCULPT_JACKET_SKIRT`, is its own
+topology: 15 rows from Z 0.665 down to Z 0.480 and 96 columns round the body, open at the front (plus or minus 19
+degrees, matching jacket v003's front edges). It is 7 mm thick, subdivided once, 20,384 triangles at prototype density.
+- **Fit:** its top band sits 4 mm inside jacket v003's lower band, so the join is hidden. Below that it flares
+  gently and keeps 20 mm clear of the trousers at rest.
+- **Rollback:** remove that one part.
+
+**Weights, candidate only, existing bones only (`hips`, `thigh_l`, `thigh_r`).**
+- Above Z 0.655 the panel is 100 percent `hips`, like the jacket hem it hides under.
+- Below that, the thigh share rises to 0.6 at the hem along a 0.7-power curve, so the middle rows follow the legs too.
+- The same-side thigh takes it at the sides and front. At the back centre the two thighs share it, softened by
+  45 percent, which stops the back hem tearing.
+- Every vertex sums to 1. Nothing on `PROTECTED_BODY`, the rig, rest pose, actions or socket changes.
+
+**Evidence.**
+- `long_jacket_full_figure.png`: clay, same figure height in every panel. The hem moves from 0.40 of figure height
+  to the reference's 0.33 line, and bare trouser from 0.20 to about 0.13, which is the reference.
+- `long_jacket_walk_gather_close.png`: walk at 25 and 75 percent and gather at 50 percent, from the reference camera,
+  side and back. One coherent hem, with no vents and no split tail; the back hem stays smooth.
+- `long_jacket_measurements_49_samples.txt`, 49 samples per clip, sampled not continuous:
+
+| Clip | Trouser points outside the panel (within 30 mm of it) | Panel vertices inside a hand (hand-only triangles) | Largest edge stretch |
+|---|---|---|---|
+| idle | 0 | 7, at one sample | 1.00 |
+| walk | 3, up to 5.7 mm, at frame 6 | 0 | 1.37, at frame 6 |
+| gather | 0 | **101, at frame 12** | 1.00 |
+
+An earlier pass with 12 mm of trouser clearance and a later thigh blend showed dark trouser wedges through the panel
+in walk. Moving to 20 mm and blending earlier removed them in the frames.
+
+**The limit: the gather hand.** This is the precise limitation you asked for, not a disguised view. In `gather` the
+clip presses the right hand into the hip. The frozen trousers themselves take up to 4.4 mm of hand there, and the
+original jacket only avoided it by ending above the hand. Any cloth that covers the hip down to Z 0.48 is in the
+hand's path. On `hips` and thigh weights alone that cannot be fixed (`long_jacket_gather_hand_contact.png`).
+Options, all needing a decision I cannot make inside the current fences:
+1. **Adjust the gather clip** so the hand stays about 2 cm further out at frames 7 to 17. It removes the
+   contact for every jacket length and the existing trouser contact too. It changes a protected animation, so it
+   needs your decision and probably the user's.
+2. **Candidate-only weight from the hand onto the small panel patch** in its path, so the cloth is pushed rather
+   than pierced. It is local and reversible, but goes beyond "existing hips and thigh bones".
+3. **A pocket opening at that spot**, so the hand reads as going into a pocket. It is a design change, and it only
+   works if the hand's path lines up with a plausible pocket.
+
+**Recommendation.** Take the lower-panel method forward. It reaches the reference length with a coherent hem, and
+walk is close: 3 small trouser points and one stretched frame to clean up. Pair it with option 1 if you and the user
+accept a small gather-clip change, otherwise option 2. Without one of them, a long jacket keeps a visible hand
+contact in gather, and I would not export it as finished.
+
+
 **ART-004 / Fable / REVIEW (boot candidate v002 delivered, 26 Nov, run 19)**
 - Peer commit consumed: `f5a51de` (boot v001 native review and v002 brief at `f98e519`).
 - Files changed: `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb`,
