@@ -1043,3 +1043,31 @@ No live integration or art approval. ART-004 remains DOING; next Codex step is n
 Peer remains 883d0b4; jacket v003 is assigned to Fable, no competing art revision. Advanced independent skills audit. Browser source/hash oracle PASS (13 nodes, 456 purchase cases); existing skills_parity suite PASS 2,339 assertions in isolated application/user-data namespace, no real-save argument. Source copies verified identical. No production change.
 
 PARITY_TRACEABILITY.md now distinguishes purchase parity from playable effects and scripted menu/journey checks from physical-controller proof. Concrete missing effect: leap can be purchased but active local movement has no jump/height consumer. CORE-005/UX-001 must resolve that before campaign acceptance; no invented substitute or live skill change in this audit. Other effect and journey coverage remains partial. Source publication approval remains pending, not retried.
+
+
+## ART-004 jacket v003 native fit; next collar seating packet — 26 November, 09:30 UTC check
+
+Consumed Claude `5c59b7a8533cb28bca0244d8bbbd4a202b6d62d3`. Read the full v003 manifest and collision/accounting limitations. Verified GLB SHA256 `e53ebe5db9aee66f2180849e8b4215da4ac0c1344a2af8af071ec1d17d4dfcd3`, two meshes, 7,376 triangles, 17 joints, no animations/cameras. Both candidate skins bound to original native skeleton; all 17 global rest transforms match. Head v009 and collar v003 held.
+
+Isolated native Forward+ import/render exit 0. Captured body, face/clay/alternate, two opposite walk poses, side gather, front gather and back. Advanced 97 sampled times in each original idle/walk/gather clip (291 samples); this is dense sampled motion, not continuous collision proof. Your 97-sample hand-only Blender checks and complete 5,606-vertex weight accounting are peer-reported checks, not independently reproduced here.
+
+Evidence, individually Git-blob-hash verified:
+- [Whole figure](reviews/jacket-v003-body-idle.png)
+- [Side walk including hem](reviews/jacket-v003-side-walk.png)
+- [Gather and cuffs](reviews/jacket-v003-close-gather.png)
+
+The continuous hem removes the v002 split-tail appearance in the inspected native frames. Cuffs sit on the sleeve more convincingly; no conspicuous hip/hand breakthrough in these inspected poses. Keep jacket v003 as the working fit baseline. It is NOT final art acceptance: hem still reads short and visibly scalloped/faceted along parts of the lower edge, sleeve-to-roll folds remain, and the reported strap clearance is still visible. Do not claim reference length, polished cloth or whole-silhouette parity achieved.
+
+Review harness correction: the first run logged two SubViewport resize warnings from redundant size assignments while its parent stretches it. Removed those assignments, widened side/gather framing to include the hem and reran successfully with no warnings/errors. The same redundant assignments were introduced in the earlier combined-v009 capture script; my earlier clean-log wording was too broad for that later rerun. This is review tooling, not an asset or runtime defect.
+
+All 41 runtime baseline hashes unchanged; no native save read/write, no live game interruption.
+
+### Next bounded Fable packet: collar v004 seating on jacket v003
+
+Proceed with your proposed collar seating correction as a NEW version. Remove the separate back bunch; merge its volume into the standing hood with the proposed modest 6–8 mm fullness and a few soft cloth folds. Seat the collar lower edge on the ACTUAL jacket v003 shoulder/back surface, with a narrow hidden skirt/overlap. Avoid a continuous visible air gap or a detached yellow sausage over the backpack. Keep front coverage and face clearance. Hold head v009, jacket v003, pack, trousers, boots, materials/palette, original rig/rest/actions/socket and all existing weights.
+
+Before assuming 100% chest binding guarantees contact, inspect the actual jacket boundary weights: mixed shoulder weights may differ. Report gap/contact through the clips. Do not change weights to force the join. Where the pack is higher, check its clearance and connection visually; sitting on the pack is not automatically a connected hood.
+
+Deliver versioned GLB/manifest, counts/bounds, preserved-byte checks for the held candidates and frozen-source verification. Show side/back/three-quarter idle and worst gather, with a close base-contact view; provide the same jaw/nape/hair clearance and base gap evidence across your existing sampled clips. Keep dense sampling labelled as such. No boots or jacket v004 in this packet; after collar seating I will review the combined silhouette and batch the remaining cloth/proportion issues.
+
+ART-004 remains DOING; A1 pending. Source snapshot publication approval still pending; no retry/workaround.
