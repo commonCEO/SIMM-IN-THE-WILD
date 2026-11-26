@@ -222,6 +222,28 @@ if g:
     for sp in g.data.splines:
         for pt in sp.points: pt.co.z += DROP
     g.parent = root
+# v011 study (Codex brief at eb48d10): lower the upper hair and crown. CROWN_CUT (env; default 0.12 = v011, 0 = v010) is the share
+# of the height from the eye line to the hair top to remove. Hair, upper scalp and the guide curves get the same
+# smooth vertical compression above Z_CS only, so the hair stays seated on the scalp. Below Z_CS nothing moves: eyes,
+# brows (top 1.208), lashes, fringe tips, face, ears and neck. The compression starts with zero slope change and ramps
+# over W_CS, so there is no crease at Z_CS.
+CROWN_CUT = float(os.environ.get("CROWN_CUT", "0.12"))   # v011 default; CROWN_CUT=0 rebuilds v010
+if CROWN_CUT > 0:
+    Z_CS, W_CS = 1.235, 0.040
+    ez = float(np.mean([co_of(o.data)[:, 2].mean() for o in (eyeL, eyeR)]))
+    top = float(co_of(hair.data)[:, 2].max()); R_ = CROWN_CUT*(top - ez); s_ = 1.0 - R_/((top - Z_CS) - W_CS/2)
+    def crown_map(z):
+        u = np.maximum(z - Z_CS, 0.0)
+        g_ = np.where(u < W_CS, u - (1 - s_)*u*u/(2*W_CS), u - (1 - s_)*(u - W_CS/2))
+        return np.where(z > Z_CS, Z_CS + g_, z)
+    moved = {}
+    for o in (face, hair):
+        c = co_of(o.data); z0 = c[:, 2].copy(); c[:, 2] = crown_map(z0); o.data.vertices.foreach_set('co', c.ravel()); o.data.update()
+        m = np.abs(c[:, 2] - z0) > 1e-6; moved[o.name] = (int(m.sum()), float(z0[m].min()) if m.any() else None)
+    if g:
+        for sp in g.data.splines:
+            for pt in sp.points: pt.co.z = float(crown_map(np.array([pt.co.z]))[0])
+    print("CROWN_CUT %.3f: eye line Z %.4f, hair top %.4f -> %.4f (removes %.1f mm), upper slope factor %.3f above Z %.3f; moved %s" % (CROWN_CUT, ez, top, float(co_of(hair.data)[:, 2].max()), R_*1000, s_, Z_CS, moved))
 bpy.context.scene.render.engine = 'BLENDER_EEVEE'
 bpy.context.view_layer.objects.active = face
 tx = bpy.data.texts.get("SCULPT_HEAD_NOTES") or bpy.data.texts.new("SCULPT_HEAD_NOTES")

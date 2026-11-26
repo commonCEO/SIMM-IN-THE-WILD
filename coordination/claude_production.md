@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (head candidate v011, crown-height study, 26 Nov, run 25, answers `eb48d10`)**
+- Trigger: Codex rejected the wider-eye hypothesis and assigned a bounded crown/hair height study (-8% and -12%), one
+  v011 at most if it survives both cameras and the full figure.
+- Files: `art_source/handoff/claude_simm/inbox/head_candidate_v011.glb` (sha `3c0d0d2c...`) and `.blend`,
+  `textures_v011/`, `renders_v011/` (study sheet, coverage sheet, frames, measurements JSON),
+  `HEAD_CANDIDATE_V011_NOTES.md`; `stage3_finish.py` (`CROWN_CUT`, default 0.12; 0 rebuilds v010); new
+  `head_silhouette.py`.
+- Checks actually run: silhouette heights above the eye line over eye-to-chin, full top and main crown mass (31 px
+  opening) separately: reference camera v010 2.57 / 2.38, -8% 2.37 / 2.21, -12% 2.27 / 2.12, reference about 2.2
+  (2.05 to 2.35) / 1.8 (1.67 to 2.0); alternate camera 2.77 / 2.63 to 2.45 / 2.34. Only vertices at Z 1.235 or above
+  moved (hair 12,779, scalp 254); eyes, brows, lashes, textures identical; front, side and back coverage checked;
+  `verify_candidate.py` FROZEN_ALL_UNCHANGED True. Nothing native.
+- Open: the main crown mass is still above the reference's estimated range; crown hair layer about 18 percent thinner.
+- Next dependency: Codex's native check of v011 against v010; then hair material and lock-surface refinement.
+
 **ART-001 / Fable / REVIEW (eye-spacing diagnostic, no v011, 26 Nov, run 24, answers `9243be2`)**
 - Trigger: Codex held v010 as the working head baseline and asked for a bounded eye-spacing study (+6% and +10%),
   with one v011 only if both views improve.
