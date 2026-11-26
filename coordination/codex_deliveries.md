@@ -1285,3 +1285,34 @@ Individually Git-hash-verified native evidence:
 - Prior [unchanged baseline](reviews/clearing-fill-baseline-sky050.png).
 
 Native render exit0, no warnings/errors. All41runtime baseline hashes unchanged. No live lighting integration or art approval. Keep geometry-authoring shape light unchanged; Fable should not recolour assets to compensate for this test. Next renderer evidence must address temporal penumbra noise, gameplay/torch readability and grounding with the restrained mix, rather than another still-only brightness sweep. L10 framing and performance remain pending. Source publication approval still pending, not retried.
+
+
+## ART-004 native gather-copy calibration discrepancy — 26 November, 14:29 UTC check
+
+Consumed Claude `17d503670a1123eb07de51843a28d29ea702e0df`. Read the lower-panel method, collision/stretch evidence, your report of the user's option1 choice, and the new action notes/keys. Viewed the full-figure clay and walk/gather close sheets. Longer-panel proportions are promising, but visible join defects and reported1.3mmtrouser points/1.37edge stretch remain. No panel GLB was delivered, so native cloth clearance cannot yet be validated.
+
+Verified rig-only GLB SHA256 `b99079c04688bebb84612cf7912aa98b1090f02273f4ca31f75cb9ad06b14f29`:17-joint rest skeleton, one gather_handclear animation, no mesh. Native GLTFDocument import generates Skeleton3D plus AnimationPlayer. All17global rest transforms match the current original native model.
+
+For the isolated study I DUPLICATED the CURRENT native gather Animation, retained its14tracks, and replaced ONLY upper_arm_l's rotation keys with the candidate's25native-imported samples. All other track keys/times asserted unchanged, both endpoints matched, and original gather/idle/walk remained intact.97sampled native pose comparisons confirmed16other local bones and the opposite hand/socket arm unchanged. Forward+ capture exit0, no errors/warnings; all41runtime baseline hashes unchanged. No player save or master animation/source change.
+
+### Result: do not integrate the claimed4.5degree change yet
+
+The delivered curve differs from the CURRENT native gather by only about0.672degrees at0.4s. At that peak the native hand_l origin moves approximately(+1.2,-0.4,+3.0)mm in Godot axes, not the stated roughly2cm outward. Pure track interpolation produces the same discrepancy, so it is not just a rendered-pose settling observation. Rechecked with zero clip blending and process frames between poses; result unchanged.
+
+Calibration samples, native imported quaternion XYZW (q and -q represent the same rotation):
+- At0.2s ORIGINAL and DONOR are both(0.973943,-0.153314,-0.166098,0.018457).
+- At0.4s ORIGINAL=(0.972746,-0.147555,-0.171235,0.051692).
+- At0.4s DONOR=(0.972426,-0.146550,-0.172096,0.057389).
+- Both clips are0.8s; original imported arm track has11keys, donor25. Rest/end values agree.
+
+This may be an original-action/export-baseline mismatch; the evidence does not establish the cause. I am not applying an Euler offset blindly or modifying the protected master to force a result. Your reported Blender contact improvement therefore cannot be assumed reproduced on the current native clip. Existing native studies here still use the SHORT jacketv003; there is no claim of validating the missing long panel.
+
+### Next single Fable task: paired animation + panel CALIBRATION packet
+
+Continue the selected hand-clearance approach as a candidate, but reconcile the baseline before a finished long-jacket export. Please deliver ONE small diagnostic GLB containing the original17rest bones, BOTH original gather and gather_handclear as separately named clips, and ONLY the current prototype lower panel skinned to those existing bones. No frozen body, held head/collar/boots, camera/light or production integration. Include checksum, mesh/skin/clip manifest, source-action fingerprint and frame/time mapping.
+
+Compare the two EXPORTED clips after re-import (not just authoring F-curves): report upper_arm_l quaternions and world hand delta at0.2/0.4/0.6s, and verify all other intended unchanged channels. Determine why the donor already matches the current native original at0.2s; do not assume a global axis/sign fix. The calibration must make the intended delta reproducible against the actual control. Keep the original source/action untouched.
+
+Also include the prototype panel's weights/transform manifest so Codex can bind it to the original skeleton and check the hand interaction in the same native scene. Keep the join and three trouser points labelled as unfinished; no production-candidate approval yet. Other held assets and the bootv002 baseline remain unchanged. No new user decision requested while this technical calibration can proceed.
+
+ART-004 DOING on calibration; A1 pending. Local diagnostic logs/captures exist under work/gather-handclear-* and work/simm-gather-handclear-native/. Node transport became unavailable at publication; coordination was read/written through the GitHub connector and local patch tool instead, without exporting any blocked source payload. Source publication approval remains pending; no retry.
