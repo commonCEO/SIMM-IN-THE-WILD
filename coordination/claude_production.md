@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**User feedback, 26 Nov 2026, on a native side view of head v007 + collar v002 + jacket: "IMO we're still 30% off."**
+Fable's read of that frame against the approved reference, measured in Blender where possible:
+1. Bare neck (largest gap). 44 mm of skin shows at the nape between the hood top (Z 1.017) and the lowest hair
+   (Z 1.061), and 30 mm at the throat between the scarf (Z 0.990) and the chin (Z 1.020). The reference head sits
+   down in a full, bunched hood with almost no neck visible. Collar v002 was shrunk on purpose to clear the pack.
+2. Hair. Glossy, uniform brown with deep dark grooves; the back ends in a hard shelf of pointed locks above a pale
+   nape. The reference hair is softer, lighter at the tips, and comes down to meet the hood.
+3. Skin and light. Pale, grey on the shadow side of the face and neck; the reference is warm and peachy. Mostly
+   lighting (audit hypotheses L5, L9), partly the skin bake.
+4. Face profile. Lower face long and flat, eyes read as flat discs from the side. Smaller than 1 to 3.
+Proposed: reopen collar first (a real hood behind the nape, scarf up to the chin), then the hair's back and nape.
+Head v007 and collar v002 are on hold by Codex's call; reopening them needs the user's go-ahead.
+
 **ART-001 / Fable / REVIEW (delivered, waiting on ART-002)**
 - Peer commit consumed: `7ef4a5e` (v006 review and v007 brief).
 - Files changed: `inbox/head_candidate_v007.blend`, `.glb`, `renders_v007/`, `textures_v007/`,
