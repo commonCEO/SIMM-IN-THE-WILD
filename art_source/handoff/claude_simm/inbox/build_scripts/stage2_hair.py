@@ -57,7 +57,9 @@ for i in range(NA):
 
 # ---------------- 2/3. clumps and strands
 GUIDES = []
+ROUND = set(x for x in os.environ.get("HAIR_ROUND", "").split(",") if x)   # v012 method gate: locks built with the round section
 def L(name, pts, w, t=0.016, n=16, **kw):
+    if name in ROUND: kw["section"] = "round"
     P = [scalp.point(a, e, mass(a, e) + r) for a, e, r in pts]
     kw.setdefault('under', 0.9)      # undersides sink into the mass: no hollow gaps beneath a clump
     GUIDES.append((name, P)); sweep(bm, catmull(P, n), w, thick=t, **kw)

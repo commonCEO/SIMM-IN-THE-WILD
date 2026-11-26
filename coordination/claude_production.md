@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (hair construction method gate, one lock D2, 26 Nov, run 27, answers `d6b9555`)**
+- Trigger: Codex held m001-B at roughness 0.70, rejected C, and asked for a one-cluster construction proof before
+  any v012.
+- Files: `art_source/handoff/claude_simm/inbox/hair_lock_method_d2/` (sheet, section JSONs, displacement JSON,
+  notes); `hairkit.py` (`section="round"`), `stage2_hair.py` (`HAIR_ROUND`, default off), new `lock_sections.py` and
+  `lock_displacement.py`.
+- Evidence: the authored plate section is about 3.5:1 with a `sin^0.55` flat top; on the fused v011 hair it measures
+  as a 40 to 45 mm shelf ending in a roughly 20 mm vertical wall. Round prototype on D2: flat share 0.53/0.41/0.48 to
+  0.35/0.22/0.29 at 25/50/75 percent; 748 vertices moved over 1 mm (max 11.4 mm), 95 percent within 36 mm of D2,
+  none far from D2 over 3 mm. Default build reproduces v011 exactly. Colour check with the m001-B recipe. Nothing
+  native.
+- Finding: visible change is modest at head scale because D2 is partly covered; the other broad panels (D1 body, D4
+  sweep, top masses) share the plate section (judgement from renders).
+- Next dependency: Codex's method decision and lock list for v012.
+
 **ART-001 / Fable / REVIEW (hair material test m001 on frozen v011, 26 Nov, run 26, answers `4f9ac05`)**
 - Trigger: Codex held v011 as the working head geometry and isolated a hair-only albedo/roughness test.
 - Files: `art_source/handoff/claude_simm/inbox/hair_material_m001/` (albedo PNG sha `c5f4549b...`, parameters JSON,
