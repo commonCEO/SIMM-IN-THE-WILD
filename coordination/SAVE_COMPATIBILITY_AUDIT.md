@@ -73,3 +73,36 @@ structure, not proof of crash durability on every Windows failure mode.
 The immutable PROD-002 snapshot predates this test-only correction. If source
 publication is approved, keep its provenance explicit and deliver the corrected
 test separately only within that authorization; do not silently rewrite hashes.
+
+## Follow-up: synthetic boundary suite,26November2026
+
+Added a LOCAL-ONLY audit harness at
+`work/save-audit-project/tests/migration_boundaries.gd`; production sources
+were not changed. After correcting an audit-fixture typed-array assignment,
+the suite completed295checks, failed=false, exit0. The initial setup attempt
+timed out with exit2 before exercising migration; it was a harness error,
+not a production-load failure. Final evidence: work/save-audit-boundaries.log.
+
+Newly tested (supersedes the corresponding TODO rows above):
+
+- Valid syntheticv3 with inventory/tools/crafting/skills/gear/XP/placed chest
+  loads without changing any supplied field, writesv4only when explicitly
+  saved to a separate target, reloads, and leaves originalv3file bytes intact.
+- Pre-bucketv4 accepts absent bucket as0and retains all other item quantities.
+- Truncated JSON, null, array root, over1MiB input and future schemav5reject;
+  each rejection preserves every populated live-state field.
+- Invalid live state cannot overwrite an existing good destination. A
+  missing-parent write returns failure and preserves an existing valid file.
+- User-data namespace was asserted separate from the playable prototype.
+  The native player save was never opened or written.
+
+The truncated-JSON case intentionally emits Godot's `Parse JSON failed`
+diagnostic; this is expected evidence of the exercised invalid input, not a
+clean-log claim. Final run had no SCRIPT ERROR or failed assertion. Checks
+use explicit failure accounting; exit code alone is not sufficient evidence.
+
+Still untested: real OS crash/power interruption during flush/rename,
+recovery of leftover.tmp files, permissions/disk-full faults, browser import,
+and full campaign-scene migration. No guarantee of those behaviors is made.
+The audit project is isolated and source-only publication remains pending
+approval; no test code or save fixture was added to the remote branch.

@@ -775,3 +775,8 @@ ART-004 remains DOING, not approved. A1 user checkpoint still pending.
 ART-006 clearing evidence is already published at98c1777; please continue
 that analysis while waiting, within the one-active-asset rule.
 Source snapshot publication remains blocked pending user approval; not retried.
+
+
+## SAVE-001295synthetic boundary checks —26NovemberTallinn
+
+Peer remains39df2d9df09e2e17dd253632597e3dbf1a10a086, no new art. Advanced independent local audit: validv3->v4, pre-bucketv4, truncated/null/array/oversize/future rejection and invalid/missing-parent write preservation. Final suite295checks, failed=false, exit0. Expected invalid-JSON diagnostic present; initial harness typed-array error fixed. Full details in SAVE_COMPATIBILITY_AUDIT.md. Local-only harness, no source/fixtures published and no native player save accessed. Runtime unchanged. OS crash/disk-full and full-campaign migration remain gaps. Broad source snapshot still blocked pending the existing approval question; no retry.

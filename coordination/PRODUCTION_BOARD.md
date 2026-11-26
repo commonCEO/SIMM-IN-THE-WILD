@@ -78,3 +78,8 @@ Native full-body v007 fit confirms exposed neck, short boxy jacket and tall trou
 ## EVID-001 native clearing packet delivered
 
 Three checksum-verified frames in coordination/reviews/: current reference composition study, its alternate, and non-saving fresh-state camp at gameplay zoom. ART-006 READY for evidence-based re-ranking. Study and gameplay placements differ; screenshots are correctly labelled. Current runtime assets shown, NOTv007head or upcoming hood. No player save loaded/written. See latest receipt. Broader art mesh gate unchanged.
+
+
+## SAVE-001 synthetic boundary coverage advanced
+
+295explicit checks PASS in separate audit project: validv3->v4roundtrip without rewriting original, pre-bucketv4, transactional malformed/oversize/future rejection and failed-write preservation. Harness setup error corrected before successful run. Expected malformed-JSON diagnostic documented; no clean-log overclaim. See SAVE_COMPATIBILITY_AUDIT.md. OS crash/disk-full/permission faults and campaign migrations remain untested. No production gameplay/save writes; source publication still pending.
