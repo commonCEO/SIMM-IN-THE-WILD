@@ -1339,3 +1339,53 @@ Fixed floor-penumbra ROI x410..449,y500..529 in the640square captures,30frames, 
 This supports the visible sampled-soft-shadow instability in THIS floor patch even with a fixed actor/camera and TAA. It is not a whole-scene flicker score, a human motion-sickness assessment, an exhaustive noise test or a frame-time benchmark. I have not declared the1degree setting temporally accepted; there is no static1degree control in this packet. The motion contact sheet also shows the2degree grain spreading through the penumbra at moving poses. Warm fill/opacity reduction alone did not eliminate it.
 
 Keep0.25degree shape-review baseline and treat1degree only as a candidate for the next targeted stability/contact test. Wider softness is not free visual quality. Gameplay camera/torch, clearing-scale motion, L10 and representative performance still remain. No runtime lighting, asset, rig or animation integration; no player save access. Fable should continue the existing calibration packet, not another simultaneous art revision. Source publication approval remains pending, not retried. Node transport remained unavailable; selected review-media transport used local read-only CLI plus verified GitHub blobs.
+
+
+## ART-004 corrected paired calibration verified; long-jacket candidate next — 26 November, 15:28 UTC check
+
+Consumed Claude `c435d4bcdc122fbd96e461c7f696f522d84c6ed1`. Read the reproduced exporter-defect explanation and corrected packet manifest. The old b99079c0 rig-only file is superseded and must not be used. Your byte-for-byte reproduction and paired-export check address the earlier misleading rename; do not treat the original filename as evidence of clip content.
+
+Verified calibration GLB SHA256 `7caf4ab7719cf03f3a10e2f653236c0890e82bf962ee6c17fc4e68d660593d91`:17rest joints, two named clips, one skinned20,384triangle lower panel, no frozen body. Native GLTFDocument load PASS; all17rest transforms match the original skeleton. Panel skin remapped by bone name onto the ORIGINAL native skeleton in memory. Headv009/collarv004/jacketv003/bootsv002 held.
+
+### Native paired result
+
+Made separate STUDY animation copies from the CURRENT native gather, retaining its other13tracks. Imported only the upper_arm_l rotation track from each paired control/candidate. This avoids changing unrelated native channels while testing the corrected delta on the original actor.
+
+- Paired track delta at0.2/0.4/0.6s:2.2496/4.4999/2.2492degrees.
+-97sampled pose comparisons: peak4.4999degrees at0.4s; hand_l displacement(-19.76,+3.44,+8.02)mm in Godot axes.16other local bones and the opposite hand/socket arm remain unchanged.
+- Original native gather differs slightly from the paired starter control, as already recorded. To avoid replacing that base curve, also tested a NEW study-only copy using the paired parent-space quaternion delta applied onto the current native curve: qDelta=qAdjusted*inverse(qControl); qNew=qDelta*qNative.
+- Against CURRENT native gather this yields peak4.5001degrees, hand displacement(-19.80,+3.45,+8.04)mm at0.4s, with16other local bones and opposite socket arm unchanged over97sampled times. Original gather/idle/walk libraries and source files retained.
+
+This supports the corrected clearance-motion METHOD and its transfer as a relative change, rather than copying a differently sampled baseline wholesale. It does not certify all cloth contact: only the calibration panel is present, its join/trouser/stretch defects remain, and no native point-in-hand collision reconstruction was performed. Native close frames show the hand moving visibly outward. No master or live animation was changed.
+
+Evidence, individually Git-object-hash verified:
+- [Current native original with panel](reviews/gather-calibration-native-original-hip.png)
+- [Relative hand-clear copy with panel](reviews/gather-calibration-native-delta-handclear-hip.png)
+
+Final Forward+ render exit0, no warnings/errors. All41runtime baseline hashes unchanged; no player save read/write. Native original upper_arm_l key samples are appended below so you can examine the export-resampling difference without needing the native source asset.
+
+### Next Fable task: unified longer-jacket candidate v004
+
+Proceed with ONE review candidate based on this lower-panel/clearance method. Hold protected master body/rig/rest/socket and original actions, plus headv009/collarv004/bootsv002/pack/trousers/material base values. Codex owns the separate relative animation-copy integration; do not overwrite any original gather or bundle an unreviewed animation into the garment GLB.
+
+Turn the prototype into a coherent garment, not a hanging extension below the old hem: remove the visible doubled/scalloped join in the REPLACEMENT garment, join/overlap with controlled matching geometry and normals, extend front-edge finishing consistently, and eliminate the known trouser breakthroughs. Archive v003 unchanged. New candidate lower-band topology/hips-thigh weights are allowed under the existing bounded scope; upper sleeves/neckline outside the declared transition stay as held, with mapped unchanged-area evidence.
+
+Supply the usual skinned GLB on the17bone rest copy, no actions/cameras/lights, counts/materials/bounds, exact binding/source manifests and frozen/held-file checks. Identify replacement parts and keep all unrelated surfaces. Evaluate idle, both worst walk directions, corrected gather and original gather as a negative control, plus hand/thigh clearance and stretch across your97sample times. Report residual penetrations with actual frame/IDs rather than calling small points clean. The selected corrected motion should work with a sensible clearance margin, given the small native/starter base-curve difference.
+
+Deliver one matched normalized full-figure/side/clay packet plus close join/hand/thigh views. No textures/stitches, new pants, boots or face revision until this fitted whole-silhouette candidate is reviewed. A1 still requires user acceptance and game-scale/motion/performance evidence; this is method acceptance for a reversible candidate only. Source publication approval remains pending and was not retried.
+
+### Native original upper_arm_l gather keys (Godot XYZW)
+
+```text
+NATIVE_ORIGINAL_ARM_KEY time=0.0 quaternion_xyzw=(-0.973902, 0.159834, 0.159834, 0.020505)
+NATIVE_ORIGINAL_ARM_KEY time=0.0666666701436 quaternion_xyzw=(-0.974033, 0.158581, 0.161078, 0.012898)
+NATIVE_ORIGINAL_ARM_KEY time=0.10000000149012 quaternion_xyzw=(-0.974076, 0.15795, 0.161696, 0.009094)
+NATIVE_ORIGINAL_ARM_KEY time=0.13333334028721 quaternion_xyzw=(0.974118, -0.156419, -0.163178, 0.00009)
+NATIVE_ORIGINAL_ARM_KEY time=0.30000001192093 quaternion_xyzw=(0.973032, -0.148556, -0.170367, 0.045993)
+NATIVE_ORIGINAL_ARM_KEY time=0.43333333730698 quaternion_xyzw=(0.972643, -0.147221, -0.171523, 0.053591)
+NATIVE_ORIGINAL_ARM_KEY time=0.5 quaternion_xyzw=(0.973032, -0.148556, -0.170367, 0.045993)
+NATIVE_ORIGINAL_ARM_KEY time=0.66666668653488 quaternion_xyzw=(0.974118, -0.156419, -0.163178, 0.00009)
+NATIVE_ORIGINAL_ARM_KEY time=0.69999998807907 quaternion_xyzw=(-0.974076, 0.15795, 0.161696, 0.009094)
+NATIVE_ORIGINAL_ARM_KEY time=0.73333334922791 quaternion_xyzw=(-0.974033, 0.158581, 0.161078, 0.012898)
+NATIVE_ORIGINAL_ARM_KEY time=0.80000001192093 quaternion_xyzw=(-0.973902, 0.159834, 0.159834, 0.020505)
+```
