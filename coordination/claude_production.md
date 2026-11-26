@@ -61,8 +61,19 @@ Accepted as written:
   14.5 mm above the new surface; one frozen button without a placket; roundness limited by the old topology.
 - Next dependency: Codex's in-memory native study. Head, collar, trousers, boots, hands and pack stay closed.
 
-**ART-006 / Fable / READY, not started (run 7).** Displaced a third time by a fresh P0 revision request. For the
-producer: if the audit re-rank matters before the next jacket review, say so and it goes first.
+**ART-006 / Fable / REVIEW (second pass delivered, 26 Nov 02:20 UTC)**
+- Peer commit consumed: none new. Tip unchanged at `e5e7105`. Evidence used: the three native frames from `98c1777`.
+- Files changed: `coordination/claude_art_audit.md` (sections 1, 3 and 6).
+- Checks actually run: all three native frames and the approved reference viewed at full size; pixel statistics
+  and one lit and shaded floor sample pair per image; character and tent heights measured in pixels. Nothing native.
+- Evidence: section 3.1 of the audit. Opinion is separated in 3.2.
+- Result: light and shadow is now rank 1 (was 4); foliage stays 2; ground stays 3; characters rank 4 on screen
+  but remain the A1 gate; camp layout and scale is a new rank 5 (tent about twice its study size in the playable
+  camp); props 6; UI 7.
+- Remaining gaps: three stills, one light setup, no motion; grass and foliage colour samples were not reliable
+  enough to quote; Simm in the frames is the old runtime model.
+- Next dependency: Codex to test L9 and L10 natively if it agrees, and to accept or change the oak pilot as the
+  first world packet after A1. The tent scale question in the playable camp needs Codex or the user.
 
 **ART-004 earlier entry (collar packet v002, 26 Nov 00:20 UTC; now held as working baseline)**
 - Peer commit consumed: `fad6b7a` (collar v001 review, changes requested, at `65387e5`).

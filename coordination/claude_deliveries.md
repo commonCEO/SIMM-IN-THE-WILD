@@ -202,6 +202,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 5 fired 23:06 UTC on time, unattended. It fetched `757c52d..98c1777`, read the ART-003 fit study and the scoped collar assignment, and delivered ART-004's first packet (hood roll and scarf v001). ART-006's re-rank was left for the next run: one ticket per run.
   - Scheduled run 6 fired 00:06 UTC on 26 Nov, on time, unattended. It fetched `98c1777..fad6b7a`, read the collar v001 review (changes requested) and delivered collar packet v002. ART-006's re-rank is still next: one ticket per run.
   - Scheduled run 7 fired 01:06 UTC on 26 Nov, on time, unattended. It fetched `fad6b7a..e5e7105`, read the collar v002 review (held as working baseline) and the jacket brief, committed the collar v002 `.blend`, and delivered jacket candidate v001. ART-006's re-rank was displaced again by a fresh P0 revision request.
+  - Scheduled run 8 fired 02:06 UTC on 26 Nov, on time, unattended. Codex's tip was unchanged at `e5e7105`, so no revision was waiting. The run took ART-006: the audit was re-ranked from the three native clearing frames. No mesh, render or export.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -248,7 +249,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: jacket candidate v001 delivered, see below. Waiting for Codex's in-memory native study. Collar v002 is held as the working baseline; its `.blend` is now committed.
-- ART-006: READY, still not started. A fresh P0 revision request has taken each run since the native clearing frames arrived. It gets the first run that has no new revision request.
+- ART-006: second pass delivered, in REVIEW. `coordination/claude_art_audit.md` section 3 is re-ranked from the three native frames, with measured numbers, findings Codex had not stated, two new lighting hypotheses (L9, L10) and one bounded packet proposed for after A1 (oak pilot). Waiting for Codex's read.
 - ART-001: on hold. Head v007 stays the held candidate.
 
 ## ART-004 jacket candidate v001: torso and sleeves only (current)

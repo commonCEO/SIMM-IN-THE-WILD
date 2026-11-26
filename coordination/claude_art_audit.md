@@ -1,4 +1,4 @@
-# Clearing art audit and asset production proposal (board ticket ART-006, first pass)
+# Clearing art audit and asset production proposal (board ticket ART-006, second pass)
 
 Written by Claude (Fable), 25 November 2026. A proposal for Codex and the user, not an approved plan.
 No meshes were made for this ticket and nothing outside the head was changed.
@@ -13,13 +13,17 @@ Looked at directly:
   the game design document, `godot/assets/manifest.json`.
 - Seven head iterations and Codex's six native Godot reviews of them.
 
-Not seen: **any current Godot render of the clearing, the NPCs, the props or the trees.** Those live on the PC and
-are not in Git. Every statement below about the *current* state of the scene is taken from Codex's art guide,
-not from Claude's eyes. Statements about the *reference* are Claude's own reading of the picture.
+Added in the second pass (26 November 2026), looked at directly, at full 1600 x 992:
 
-**Request to Codex (new dependency for this ticket):** commit three current native frames to
-`coordination/reviews/`: the clearing at the reference camera, one alternate angle, and one at gameplay zoom.
-With those the gap list in section 3 can be made from evidence instead of second hand.
+- `coordination/reviews/clearing-reference-composition-study.png` and `clearing-alternate-composition-study.png`:
+  Codex's native Godot captures of the existing key-shot study scene. Not the playable camp. Original runtime
+  models at study scales, orthographic size 5.65.
+- `coordination/reviews/clearing-gameplay-zoom-fresh-state.png`: the actual camp scene, fresh state, orthographic
+  size 10, with debug HUD and world labels.
+
+Limits of this evidence: three still frames, one light setup, no motion. Simm in them is the old runtime model,
+not head v007, collar v002 or the jacket candidate. Claude did not run Godot. Section 2 (style rules), section 5
+(contracts) and section 7 (questions) are unchanged from the first pass. Section 3 is rewritten from the frames.
 
 ## 2. Style rules read from the reference
 
@@ -50,18 +54,74 @@ These are observations of the approved picture. Where a rule goes beyond what is
    percent of the frame width. The picture has blur at the edges; the guide already says not to copy that.
 9. **Detail priority (opinion):** characters first, then the two camp props, then foliage clusters, then ground.
 
-## 3. Biggest scene-level gaps, in the order they hurt the picture
+## 3. Biggest scene-level gaps, re-ranked from the native frames
 
-Ranked from the guide's own descriptions and the head experience. To be re-ranked once native frames are in Git.
+### 3.1 Measured (evidence)
 
-| Rank | Gap | Why it is first | Owner |
+Pixel statistics, reference with its UI band cropped off against the native frames. Luminance is 0 to 1.
+
+| Frame | Mean RGB | Luminance 5th / 50th / 95th percentile | Pixels darker than 0.15 |
 |---|---|---|---|
-| 1 | Characters: sculpt, cloth volume, expression | The eye goes to them; A1 is the gate | Fable, then Codex fit |
-| 2 | Foliage construction: crowns as counted clusters of fat rounded lobes | Covers the outer third of every frame; guide reports pointed, repetitive sprays | Fable |
-| 3 | Ground: tile floor, grass carpet, feathered boundary, contact dressing | Covers the middle of every frame | Fable (materials, kit), Codex (placement) |
-| 4 | Light: warm key, soft shadow without stipple, cool fill, contact pools | Decides whether good forms read as clay or as plastic | Codex, hypotheses in section 6 |
-| 5 | Camp props: tent, workbench, rock, bush | Fewer and smaller on screen | Fable |
-| 6 | UI frame: hearts, day badge, hotbar | Separate lane, after A2 | Fable art, Codex UI |
+| Approved reference | 126, 121, 58 | 0.13 / 0.46 / 0.83 | 7.6 percent |
+| Native study | 116, 128, 65 | 0.18 / 0.53 / 0.73 | 1.2 percent |
+| Native alternate | 113, 125, 62 | 0.18 / 0.51 / 0.72 | 1.8 percent |
+| Native gameplay | 140, 144, 76 | 0.17 / 0.57 / 0.75 | 3.0 percent |
+
+- The reference is warm: red is above green in its mean. All three native frames are green above red.
+- The reference has a wider range: brighter highlights (0.83 against 0.73) and more deep darks, which sit in the
+  framing foliage at the edges. The native frames are flatter overall.
+- Shadow on the floor, one sample pair each. Reference: lit tile 248, 210, 147 and shaded tile 166, 136, 88.
+  The shadow keeps the hue (38 and 37 degrees) and 67 percent of the lit value. Native study: lit sand
+  206, 183, 137 and shaded sand 64, 69, 56. The shadow drops to 33 percent of the lit value and the hue swings
+  from 40 to 86 degrees, a grey green. So the native shadow is about twice as deep and loses its warmth.
+- I also sampled grass and foliage, but my hand-picked points were not reliable enough to quote.
+- Sizes, by pixel measurement, approximate. Simm's height as a share of frame height: reference 21 percent,
+  native study 22 percent, native gameplay 12 percent. Tent height against Simm's height: reference about 1.0,
+  native study about 1.0, native gameplay about 1.95.
+
+### 3.2 Ranking (opinion, based on 3.1 and the frames)
+
+Rank is how much the gap hurts the picture in these frames. It is not the work order: A1 still comes first.
+
+| Rank | Was | Gap | Kind | What the frames show | Owner |
+|---|---|---|---|---|---|
+| 1 | 4 | Light and shadow | Lighting | Hard-edged, near-black shadow masses cover roughly a quarter of the study frame and cut straight across the clearing. Shadows lose the warm hue (3.1). No warm cast on grass, no dark framing at the edges | Codex, hypotheses L1, L4, L5 and new L9, L10 |
+| 2 | 2 | Foliage construction | Geometry | Deciduous crowns are balls covered in hundreds of small pointed scales. The reference has 15 to 25 fat rounded clumps per crown with a light top and dark underside. Conifers are flat blades on visible sticks, not layered soft boughs. The birch is one bare white stick, not two or three marked trunks with hanging clumps | Fable |
+| 3 | 3 | Ground | Material and layout | Grass is one flat green plane. The sand has no tile grid. In the alternate frame the sand edge is stair-stepped on the right. Grass tufts are one wreath shape stamped at even spacing | Fable (materials, kit), Codex (mask, placement) |
+| 4 | 1 | Characters | Geometry | Capsule limbs, dot faces, stiff arms. Still the largest gap up close, but they are small on screen and the A1 path is already running | Fable, then Codex fit |
+| 5 | new | Camp layout and scale | Layout | In the playable camp the tent is about twice Simm's height, double its study size. The sand is a wide empty field, and nothing frames the bottom or right edge. The reference clearing is compact and ringed by overlapping crowns | Codex and user decision |
+| 6 | 5 | Camp props | Geometry and material | From the alternate angle the tent reads as a flat sheet with no depth. The bench is clean and light where the reference is chunky and dark with a vise and bucket. The rock's moss is a flat bright cap. Berry bushes are sparse where the reference has dense round ones | Fable |
+| 7 | 6 | UI | Separate lane | Debug text, floating world labels and a text hotbar | Fable art, Codex UI, after A2 |
+
+Why light moved to the top: it is the difference that reads first at thumbnail size, it affects every asset
+already in the scene, and it is testable now without any new mesh. Characters moved down in rank only. Their
+priority as the A1 gate is unchanged.
+
+### 3.3 Findings Codex's notes did not already state
+
+- The tent scale differs between the study scene and the playable camp by about a factor of two.
+- The tent has no visible depth from the alternate camera.
+- Shadow on sand loses hue as well as value (numbers in 3.1).
+- The sand mask edge is stair-stepped at this zoom.
+- All grass tufts are one shape at near-even spacing, which reads as a stamp.
+- The birch has a single trunk and no bark marks.
+
+### 3.4 One bounded packet proposed for after A1
+
+**Oak pilot: one deciduous tree built as a clump kit.** Board ticket ART-008, first slice. Not started; no world
+mesh before A1.
+
+- Contents: one trunk with root flare and two visible main branches; three clump modules (large, medium, small),
+  each a fused rounded mass of 8 to 12 leaf lobes; one assembled tree of about 18 to 22 clump instances.
+- Contract: static GLB, metres, Y-up, pivot at the trunk base on the ground, front toward the camera side. Two
+  materials (bark, leaf). Leaf shading from a baked top-light to underside-dark gradient in vertex colour or one
+  small texture. No alpha cards. Source density free for review; game budget set after PERF-001.
+- Test: Codex swaps it for the two left-hand trees of the study scene, same camera and light, and publishes the
+  frame next to the reference.
+- It passes if the crown reads as clumps at thumbnail size and the silhouette is lumpy rather than a scaly ball.
+  It fails if it reads as a smooth blob or costs more than the agreed budget.
+- If it passes, the pine, birch and bush follow the same kit method. If it fails, the kit idea in section 4 is
+  wrong and should be replaced before more foliage is made.
 
 ## 4. Proposed asset packets, in order
 
@@ -120,6 +180,8 @@ Negative results are useful and should be published.
 | L6 | Contact pools need a short-radius occlusion pass, separate from the sun shadow | SSAO radius small, intensity up, on and off | Feet, rock, tent and bench sit on the ground | Dark halos round characters |
 | L7 | Depth at the forest edge can come from tinted distance fog instead of blur | Light green-blue depth fog starting past the clearing | Background crowns separate without losing sharpness | Clearing itself gets milky |
 | L8 | Yellow jacket and warm skin survive better under AgX than Filmic | Tone mapper only | Yellows stay yellow at the same exposure | No difference or duller reds |
+| L9 | The near-black, hue-shifted shadows come from too little warm fill, not from the key | Keep the key. Lower the directional light's shadow opacity or raise ambient energy, and tint ambient warm, until shaded sand holds about two thirds of its lit value at the same hue | Shadow shapes stay readable, shaded sand reads as darker sand (near 166, 136, 88 against lit 248, 210, 147 in the reference) | Scene goes flat and the characters stop sitting on the ground |
+| L10 | The reference's depth comes from dark framing at the edges, which light alone cannot give | With L9 applied, add a mild vignette or darken the outer ring of foliage only | Centre reads brighter, eye goes to Simm | Edges look dirty, or no change because the edges are still open grass |
 
 ## 7. Questions that need the user or Codex
 
