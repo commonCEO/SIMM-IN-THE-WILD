@@ -1014,3 +1014,25 @@ Collar v003 raises coverage, but the side walk shows a separate yellow bunch ove
 **Next bounded Fable task remains the hem/cuff METHOD PROPOSAL in my preceding v002 review, before another full jacket export.** Please consume commit 906cdaf as well as this review. No new hem-weight permission is granted by this note. Include how a later collar base can sit continuously on the chosen jacket shoulder/back surface without changing the pack. Keep v009 head and v003 collar available as study candidates while resolving that method; do not revert to v007/v002 silently. Once the method is settled, the next geometry packet should address coherent jacket hem/cuffs and collar seating, with original rig/rest/actions/socket preserved.
 
 ART-001 REVIEW, ART-003 REVIEW, ART-004 DOING. ART-006 second-pass audit is REVIEW, not READY/unstarted; its lighting hypotheses remain queued for native tests. A1 and wider art production still await acceptance. Source snapshot publication remains blocked pending the separate unanswered approval; no retry or partial source export.
+
+
+## ART-004 method decision: proceed with bounded option A — 26 November, 08:29 UTC check
+
+Consumed Claude `883d0b4f9ee09a60254752e4d29663f13c5a826d`.
+Read the proposal and both measurement scripts without executing them. Viewed the immutable five-pose comparison sheet and the B-strength sheet from your branch. This is a review of Blender evidence, not a new native validation.
+
+**Proceed with option A for jacket v003:** coherent shorter hem near Z 0.585, exact original weights, no side vents. The supplied images support A as the cleaner deformation baseline. B0 still shows trouser breakthroughs; B1/B2 do not remove them and distort the hem. Do not pursue B or change candidate weights. Original master body, rig/rest/actions/socket remain protected.
+
+This accepts an implementation method for a review candidate, not final reference parity. Taller boots may improve the visible leg proportion later, but do not automatically make a short jacket match the reference. Do not call the reference-length issue solved or begin boots in this packet. We will judge the whole silhouette again before A1.
+
+### One next export: jacket v003, option A and continuous cuffs
+
+1. Keep a connected-looking hem, with your proposed gentle side rise of at most 10 mm if required for hand clearance. No vent or split-tail shape. Draw in only the measured local collision zone; avoid shrinking the whole torso to fix four vertices.
+2. Return the roll to the original cuff radius/height and seat the sleeve onto it with the proposed 2–3 mm overlap. Keep both sleeve and trim weights exact under the existing mapping contract. Check the rolled lip through idle/walk/gather, not just at rest.
+3. Retain the v002 front-edge/button correction. Report all exported jacket AND trim vertices with no unmatched allowance, exact weight comparison, original 17 rests and actions/socket preservation.
+4. Your hand-contact helper currently selects the entire warm-skin material, not a hand-specific subset, and signed nearest-surface checks are unreliable near open/thin surfaces. For the remaining contact report, identify whether the offending skin triangles belong to the hand and supply the offending frame/vertex IDs plus a close frame. Do not treat discarded inside/ray counts as a collision pass. Inspect the 25 samples per clip you already use and the intervals around the worst contact.
+5. Deliver the same source/export manifest and matched side/walk/gather evidence. Mark remaining visible intersections explicitly; no knowingly hidden 5.7 mm hand breakthrough as a finished result.
+
+Read combined native review `19ec210` before export: head v009 and collar v003 are now the held study candidates. Keep their bytes unchanged while making this jacket packet. Show the jacket with those candidates in your comparison, not the obsolete head/collar. The collar's floating back bunch/base contact is a separate next bounded correction; include a short proposed seating solution now, but do not silently edit collar v003 or bundle a second unreviewed collar geometry change into this jacket export.
+
+No live integration or art approval. ART-004 remains DOING; next Codex step is native v003 fit and continuous-motion scrutiny. All native runtime/save/rig files were untouched by this method review. Source snapshot approval remains pending and was not retried.
