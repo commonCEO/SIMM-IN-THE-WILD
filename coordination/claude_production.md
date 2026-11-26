@@ -46,7 +46,24 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
-**ART-004 / Fable / REVIEW (first packet delivered: hood roll and scarf v001)**
+**ART-004 / Fable / REVIEW (collar packet v002 delivered, 26 Nov 00:20 UTC)**
+- Peer commit consumed: `fad6b7a` (collar v001 review, changes requested, at `65387e5`).
+- Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v002.glb`,
+  `COLLAR_PACKET_V002_NOTES.md`, seven frames in `renders/`, `build_scripts/collar_build.py` (v002 shapes),
+  new `build_scripts/collar_pose_clearance.py`. No `.blend` (lighter delivery rule).
+- Checks actually run: deterministic build on `head_candidate_v007.blend`; manifest and single-bone asserts;
+  front, side and back inspected in clay and colour; 39 sampled poses across `idle`, `walk`, `gather` for
+  distance to the visible head; rigid collar-against-pack measurement; `verify_candidate.py`
+  (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Evidence: notes file, frames, GLB sha256 `a3146c83dca0b95d31d96f328091df899dc6bca5c53cfa4776ea825766349e73`.
+- Remaining gaps: not seen in Godot or in motion; scarf may now be too thin; hood has little volume from the
+  back; 4 hidden hood vertices under the pack lip; neck contact at the nape to be checked in `gather`.
+- Next dependency: Codex's native attach and the same three clips. Jacket and boots stay closed until then.
+
+**ART-006 / Fable / READY, not started (run 6).** The collar correction took this run. Re-rank from the three
+native clearing frames is the next run's one task.
+
+**ART-004 earlier entry (first packet: hood roll and scarf v001, superseded)**
 - Peer commit consumed: `98c1777` (ART-003 first fit and the scoped collar assignment at `7a939fd`; clearing frames at `98c1777`).
 - Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v001.glb`, `.blend`,
   `COLLAR_PACKET_V001_NOTES.md`, `renders/`, `build_scripts/collar_build.py`, `collar_export_check.py`;

@@ -87,28 +87,32 @@ root.empty_display_size = 0.05
 
 # ---------------- hood: a soft horseshoe resting on the shoulders, fullest behind the neck, lapel ends on the chest
 bm = bmesh.new()
+# v002 (after Codex's native review of v001): the roll is narrower and slumps inward and back into the valley
+# between the neck and the pack, instead of lying on the shoulders as a shelf. The lapel ends are short with
+# rounded tips. The hood bag no longer runs over the pack flap: nothing of the hood lies behind Y 0.118.
 HOOD = [  # x, y, z, lateral radius, vertical radius      (front is -Y, Simm's right is -X)
-    (-0.058, -0.127, 0.898, .026, .010),      # flat lapel end lying on the chest
-    (-0.084, -0.104, 0.948, .032, .017),
-    (-0.115, -0.046, 0.980, .040, .026),
-    (-0.124,  0.030, 0.990, .047, .031),
-    (-0.092,  0.104, 0.988, .056, .034),
-    ( 0.004,  0.140, 0.980, .062, .036),      # fullest behind the neck, wider than tall: slumped cloth, not a ring
-    ( 0.096,  0.098, 0.986, .050, .032),
-    ( 0.119,  0.026, 0.986, .042, .028),
-    ( 0.110, -0.048, 0.977, .036, .023),
-    ( 0.081, -0.104, 0.946, .029, .015),
-    ( 0.056, -0.126, 0.896, .023, .009)]
-tube(bm, HOOD, n=80, around=26, lump=[(.18, .03, .82), (.33, .05, 1.12), (.52, .04, .90), (.68, .05, 1.10), (.84, .03, .84)])
-# the hood's own bag, slumped over the top of the pack between the shoulders
-DRAPE = [(0.000, 0.150, 0.984, .074, .030), (0.004, 0.188, 0.972, .062, .022), (0.008, 0.218, 0.950, .044, .015),
-         (0.010, 0.238, 0.922, .024, .009), (0.011, 0.246, 0.902, .009, .004)]
-tube(bm, DRAPE, n=28, around=22)
-# two inner folds lying along the top of the roll, different lengths, so it reads as bunched cloth
-FOLD = [(-0.124, 0.006, 0.998, .017, .011), (-0.108, 0.074, 1.000, .022, .012), (-0.056, 0.128, 0.998, .022, .012), (0.004, 0.144, 0.994, .014, .009)]
-tube(bm, FOLD, n=28, around=16)
-FOLD2 = [(0.120, -0.020, 0.996, .014, .010), (0.116, 0.042, 0.999, .019, .011), (0.082, 0.104, 0.998, .016, .010)]
-tube(bm, FOLD2, n=20, around=16)
+    (-0.064, -0.122, 0.939, .009, .005),      # tapered tip
+    (-0.071, -0.112, 0.948, .020, .012),      # short rounded lapel end
+    (-0.092, -0.084, 0.967, .027, .019),
+    (-0.107, -0.036, 0.984, .030, .026),
+    (-0.105,  0.026, 0.992, .032, .030),
+    (-0.070,  0.068, 0.991, .033, .031),
+    ( 0.002,  0.083, 0.987, .030, .031),      # back centre sits in the valley in front of the pack dome
+    ( 0.074,  0.066, 0.989, .031, .029),
+    ( 0.103,  0.024, 0.988, .031, .027),
+    ( 0.103, -0.038, 0.981, .029, .024),
+    ( 0.087, -0.086, 0.964, .025, .018),
+    ( 0.067, -0.111, 0.946, .018, .011),
+    ( 0.061, -0.120, 0.938, .008, .005)]
+tube(bm, HOOD, n=80, around=26, lump=[(.14, .03, .84), (.30, .05, 1.14), (.50, .04, .90), (.66, .05, 1.12), (.86, .03, .86)])
+# what is left of the hood bag: a soft bunch along the back of the roll, leaning back but stopping short of the pack
+BAG = [(-0.060, 0.082, 1.000, .019, .012), (-0.004, 0.094, 1.003, .022, .014), (0.052, 0.086, 0.999, .017, .011)]
+tube(bm, BAG, n=22, around=18)
+# one inner fold along the top on Simm's right, and a shorter one on his left, of different thickness
+FOLD = [(-0.110, -0.004, 1.000, .014, .010), (-0.103, 0.040, 1.006, .019, .012), (-0.074, 0.072, 1.005, .016, .010)]
+tube(bm, FOLD, n=22, around=16)
+FOLD2 = [(0.106, 0.002, 0.998, .012, .008), (0.094, 0.044, 1.002, .014, .009)]
+tube(bm, FOLD2, n=14, around=14)
 hood = finish(bm, "SCULPT_HOOD", 0.0024, 7000, (228, 172, 44), 0.86)
 
 # ---------------- scarf: a pale soft band round the neck inside the collar, lower in front, one short end tucked forward
@@ -120,12 +124,13 @@ for k in range(12):
     z = 0.981 - 0.011*math.cos(a) + 0.003*math.sin(2*a)
     RING.append((x, y, z, .019 + .003*math.cos(a), .022 - .003*math.cos(a)))
 tube(bm, RING, n=72, around=22, closed=True, lump=[(.06, .03, .88), (.33, .04, 1.07), (.70, .04, .92)])
-END = [(0.026, -0.078, 0.972, .022, .013), (0.038, -0.112, 0.944, .020, .011), (0.044, -0.127, 0.914, .016, .009), (0.046, -0.131, 0.896, .008, .005)]
-tube(bm, END, n=22, around=18)
-# the wrap-over: a second layer crossing the front, slightly higher on Simm's right, so the band is not a plain collar
-WRAP = [(-0.062, -0.030, 0.992, .012, .014), (-0.046, -0.064, 0.990, .017, .017), (-0.006, -0.082, 0.983, .019, .018),
-        (0.030, -0.074, 0.976, .017, .015), (0.050, -0.052, 0.973, .010, .010)]
-tube(bm, WRAP, n=26, around=18)
+# v002: no hanging end. The end is tucked straight down into the shirt opening and is almost entirely hidden.
+END = [(0.020, -0.066, 0.970, .014, .010), (0.021, -0.072, 0.958, .010, .007), (0.021, -0.074, 0.949, .005, .004)]
+tube(bm, END, n=14, around=14)
+# the wrap-over is lower and thinner than in v001: an asymmetric fold, not a raised loop
+WRAP = [(-0.058, -0.032, 0.984, .010, .011), (-0.040, -0.061, 0.982, .013, .013), (-0.004, -0.076, 0.977, .014, .013),
+        (0.028, -0.069, 0.972, .011, .010), (0.044, -0.050, 0.969, .007, .007)]
+tube(bm, WRAP, n=24, around=16)
 scarf = finish(bm, "SCULPT_SCARF", 0.0022, 4000, (228, 210, 178), 0.90)
 
 for o in (hood, scarf):

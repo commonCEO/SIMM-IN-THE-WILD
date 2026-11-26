@@ -184,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `98c1777` (three native clearing frames; ART-003 first fit and the scoped hood and scarf assignment were at `7a939fd`). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `fad6b7a` (collar v001 native review at `65387e5`; `fad6b7a` is a save-audit record with no art). ART-003 first fit and the scoped hood and scarf assignment were at `7a939fd`. Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -200,6 +200,7 @@ Facts Codex needs for the Godot comparison:
   - 21:07 UTC: the user typed the request directly and the stored check was widened. It is now named "SIMM art: follow Fable tickets on the production board", same ID, same hourly cadence at minute 6 UTC. Each run does one thing: a revision Codex has just asked for, else the highest-priority Fable ticket that is not waiting on Codex, else a proposal Codex has cleared. Fences are unchanged (Fable's files only, board gates respected, no generators, no force-push). The earlier "head-only" limitation no longer applies. Next run 22:06 UTC; with the head on hold it should pick up the ART-004 proposal.
   - Scheduled run 4 fired 22:06 UTC on time, unattended, under the widened instructions. It fetched `1f7d6a8..757c52d` (no art feedback), found the head on hold and ART-006 blocked, and took the cleared proposal: `coordination/claude_art004_proposal.md`. No mesh was made or changed.
   - Scheduled run 5 fired 23:06 UTC on time, unattended. It fetched `757c52d..98c1777`, read the ART-003 fit study and the scoped collar assignment, and delivered ART-004's first packet (hood roll and scarf v001). ART-006's re-rank was left for the next run: one ticket per run.
+  - Scheduled run 6 fired 00:06 UTC on 26 Nov, on time, unattended. It fetched `98c1777..fad6b7a`, read the collar v001 review (changes requested) and delivered collar packet v002. ART-006's re-rank is still next: one ticket per run.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -245,11 +246,32 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: first packet delivered, see below. Waiting for Codex's native attach and sampled clips.
+- ART-004: collar packet v002 delivered, see below. Waiting for Codex's native attach and the same three clips. No jacket or boots work until the collar passes.
 - ART-006: READY. Re-rank the audit from the three native clearing frames at the next run.
 - ART-001: on hold. Head v007 stays the held candidate.
 
-## ART-004 first packet: hood roll and scarf v001
+## ART-004 collar packet v002 (current)
+
+Status: delivered for Codex's native test, in answer to the review at `65387e5`. Not a parity claim, not ready_for_user_review.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_production/ART-004/collar_packet_v002.glb` | For Codex. Same two named parts, same root, same `chest` binding and attach as v001. 10,998 triangles, 2 flat materials. sha256 `a3146c83dca0b95d31d96f328091df899dc6bca5c53cfa4776ea825766349e73`. |
+| `art_source/handoff/claude_production/ART-004/COLLAR_PACKET_V002_NOTES.md` | Manifest, what changed per brief point, clip clearances, contact report, known issues. |
+| `art_source/handoff/claude_production/ART-004/renders/collar_v002_*.png` | Colour front, side, back and both agreed camera directions; clay back; v001 against v002. |
+| `art_source/handoff/claude_production/ART-004/build_scripts/collar_pose_clearance.py` | New read-only check through `idle`, `walk` and `gather`, and collar against pack. |
+
+Facts for the native test:
+
+- The hood bag over the pack flap is removed. The hood stops at Y 0.115 (v001: 0.250). The pack is not edited.
+- Lapel ends are about 45 mm shorter with tapered tips. The roll is narrower and pulled in against the neck.
+- The hanging scarf end is removed: it tucks into the shirt. The wrap-over is lower and thinner.
+- 39 sampled poses in Blender: nearest approach to the visible head is 10.7 mm (hood to skull base, `gather`); scarf to chin 22.5 mm.
+- Reported contact: both parts rest against the neck column by design; 4 hood vertices sit up to 11.5 mm under the front lip of the pack on the hidden underside of the roll; the visible hood surface comes within 3.2 mm of the pack. A pack strap crosses the roll in the side view.
+- No `.blend` committed for v002 (lighter delivery rule). The build command is in the notes.
+- Body, old head, rig, socket and actions verified unchanged.
+
+## ART-004 first packet: hood roll and scarf v001 (kept, superseded by v002)
 
 Status: delivered for Codex's native test. Not a parity claim, not ready_for_user_review.
 
