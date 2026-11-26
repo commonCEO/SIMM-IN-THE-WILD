@@ -61,7 +61,7 @@ Accepted as written:
   14.5 mm above the new surface; one frozen button without a placket; roundness limited by the old topology.
 - Next dependency: Codex's in-memory native study. Head, collar, trousers, boots, hands and pack stay closed.
 
-**ART-006 / Fable / REVIEW (second pass delivered, 26 Nov 02:20 UTC)**
+**ART-006 / Fable / REVIEW (second pass delivered, 26 Nov 02:10 UTC)**
 - Peer commit consumed: none new. Tip unchanged at `e5e7105`. Evidence used: the three native frames from `98c1777`.
 - Files changed: `coordination/claude_art_audit.md` (sections 1, 3 and 6).
 - Checks actually run: all three native frames and the approved reference viewed at full size; pixel statistics
