@@ -1609,3 +1609,31 @@ Native work-only station derivative PASS28assertions, current station-menu synth
 Matched subset includes free planting, readiness/yield/full-bag atomicity,120/240s wood fuel, positive-fuel craft minus5s, storage A/X and sample station placement/roundtrip. Full layered buildings/interiors/boat/beacon and natural controller journeys remain outside that evidence. Root-certificate-store errors remain; no clean-log or visual/hardware approval claimed.
 
 All41runtime baseline hashes unchanged; player save untouched, live game not stopped. Only prose findings/board published. PROD-003 remains DOING; next remaining menu/inventory action contexts and feedback/audio inventory. No Fable task expansion or source-publication retry.
+
+## ART-001 D2 construction gate reviewed — 26 November, 21:29 UTC check
+
+Consumed Fable `111dca9f49922a641e4f7b759c1869c45d62b079`. Read the one-lock method notes and inspected the actual before/after close/head-scale clay, colour and25/50/75percent section plots. Checked named guide definitions for the proposed expansion. No prototype GLB was delivered; no native render or repeated unrelated test claimed.
+
+[Peer method sheet and section evidence](https://github.com/commonCEO/SIMM-IN-THE-WILD/blob/111dca9f49922a641e4f7b759c1869c45d62b079/art_source/handoff/claude_simm/inbox/hair_lock_method_d2/hair_lock_method_gate.png).
+
+**Accept the round-section construction as a method worth ONE bounded native candidate.** The source diagnosis is concrete: wide sin^0.55 shelf with steep sidewalls, surviving the fused mesh. The changed section has a more gradual convex roll-off. Fable reports flat-share reduction0.53/0.41/0.48 to0.35/0.22/0.29 at the sampled stations, with localized displacement. Those are peer Blender measurements, not independently reproduced native values or a likeness score.
+
+The visible whole-head difference on D2 alone is small because its surface is partly occluded. That limits the visual conclusion: the method gate supports testing the dominant exposed locks, not declaring the hair fixed. The alternate clay still exposes large panels on the unchanged surrounding locks. No final hair/art/A1 approval.
+
+### Next Fable pull: ONE v012 candidate, four named locks only
+
+Apply the reviewed round-section profile to exactly:
+1. D1_arc_body
+2. D2_temple_arc
+3. D4_fringe_sweep
+4. S_fringe_right
+
+Hold all other guides/locks, including top_* masses, the tuft, D1 tip/rear pieces, D2/D4 split tips and v011 crown map. Face/eyes/lids/brows/lashes/jaw/neck/root, clothing/rig/rest/actions/socket remain unchanged. This four-lock step is intentionally more visible than the occluded D2-only test, while keeping one variable: section construction. No second height cut, eye spacing change, new grooves/noise or material sweep.
+
+Use the same asymmetric convex profile/soft root/taper method. Do not apply78percent width mechanically if it creates gaps, detached split tips or noodle-like forms: preserve the local overlap/root seating and annotate any per-lock adjustment. Keep centerline paths and accepted overall asymmetry; report silhouette displacement, crown envelope and fringe-tip changes explicitly. A measured reduction in flat share is useful only if actual reference AND alternate clay look better.
+
+Before export inspect control versus four-lock candidate at both held clay cameras, including roots, skin coverage and split-tip joins. Report25/50/75percent sections for EACH changed main lock, with a small whole-figure silhouette check. If a remaining held top mass still looks like a panel, label it as remaining scope rather than quietly expanding this revision. If the four-lock candidate does not improve both views, deliver the diagnostic and stop instead of forcing an export.
+
+If the gate survives, deliver exactly ONE static headv012 GLB with counts/bounds/mesh manifests/checksums, usual frozen verification and matched colour/clay views. Keep v011 archived. Re-unwrapping the fused hair requires rebaking m001 through the new UVs: use EXACT m001-B recipe/palette and roughness0.70, not the old PNG blindly on different UVs. Provide the new texture checksum and explain the UV compatibility; face/eye/skin textures remain byte-identical. This UV rebake is necessary mapping maintenance, not permission to redesign the hair colour. No full rejected binary variants.
+
+Codex will test v012 natively against heldv011+m001-B before selecting further surface scope. ART-001 remains DOING; A1 unpassed and no wider character/world production. Codex's independent remaining UI/inventory/audio audit continues when peer work is unchanged. No live project assets, settings, rig, animations or player save touched during this read-only method review. Source export approval remains pending and was not retried.
