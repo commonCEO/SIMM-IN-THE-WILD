@@ -7,12 +7,12 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
 | PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
-| ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
+| ART-001 | P0 | Fable | REVIEW | existing v006 review | User reopened expression/collar in Fable; v009 + collarv003 native combined review delivered, no final approval; next jacket method proposal |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
 | ART-004 | P0 | Fable | DOING | ART-003 feedback | Jacketv002 reviewed; side-vent silhouette and detached cuff rolls rejected; next bounded hem/cuff METHOD PROPOSAL before v003 geometry; original rig/rest/actions/socket held |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
-| ART-006 | P1 | Fable | READY | PROD-001 | Native3frame evidence now delivered by EVID-001; re-rank audit from actual scene images, no mesh work before A1 |
+| ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-001; Codex production foundation. Next Fable: ART-006 audit while waiting for head review. Next Codex: PROD-002 then SAVE-001/PROD-003, while reviewing new head deliveries. No one waits idle solely for the other if an owned READY task exists. Current art checkpoint remains protected: no uncontrolled character/world rebuild before A1.
+Current active: Fable ART-004 hem/cuff method proposal; Codex combined-fit review and production audit. ART-001 v009 is a review candidate, ART-006 audit is delivered. PROD-002 publication awaits user approval; independent SAVE-001/PROD-003 and renderer work proceed. No one waits idle solely for the other if an owned READY task exists. Current art checkpoint remains protected: no uncontrolled character/world rebuild before A1.
 
 ## Ticket update format
 

@@ -985,3 +985,32 @@ do not widen the wrist opening blindly until the ring floats. Hold palette.
 Do not produce another full v003 export suite until this method decision is
 reviewed. Head/collar/boots/pack remain held meanwhile. Art is not approved.
 Source snapshot approval remains pending; no retry.
+
+
+## ART-001/004 combined native review: head v009 and collar v003 — 26 November, 08:00 UTC check
+
+Consumed Claude `fce709bcb36c6efd245e4a33dce7dca777b94ea4`, including your production-file account of direct user feedback reopening collar/hair and face expression. Those new delivery notes supersede the older v007 hold. Your claude_deliveries.md top heading still calls v007 current; please update it to avoid ambiguous packet selection.
+
+Verified delivery hashes before import:
+- Head v009: `255f781e7be19dda8775b3b6f297d4f8327705eea30ef7ca12298861c2f94e7b`, 80,345 triangles, static.
+- Collar v003: `f233e2693f5060e234f4741f62c0acad0f9855298b78379ee540f46c96878961`, 12,998 triangles, static.
+- Jacket remains v002. Both jacket meshes remapped onto the original 17-bone skeleton; all 17 global rest transforms match. Head and collar use inverse-rest attachments, not a second rig.
+
+Native Forward+ import and isolated combined capture exit 0; no errors in render log. Nine sampled poses per idle/walk/gather, not continuous collision proof. Seven frames captured locally. Head reference/clay/alternate use the agreed 24-degree camera with square viewport; body/side use the existing orthographic fit cameras. All 41 runtime baseline hashes unchanged. No native save loaded or written, no live game interruption.
+
+Published evidence (each PNG independently verified against returned Git blob SHA):
+- [Native face and reference](reviews/simm-v009-head-warm.png)
+- [Native clay](reviews/simm-v009-head-clay.png)
+- [Combined side walk](reviews/simm-v009-side-walk.png)
+
+### Finding and next task
+
+v009's visible catchlights and brows make the expression clearer and friendlier than the previous dark eyes. Keep this as the working expression candidate for combined-fit work; this is not final likeness approval. The native eye highlights remain visible without bloom in this setup. Do not automatically brighten or enlarge them again.
+
+The remaining mismatch is not just skin albedo: broad hair surfaces and large repeated clumps still read as constructed slabs; the painted upturned smile is much more explicit than the soft reference expression. The clay frame exposes the existing cheek/jaw proportions. Avoid changing hair, face, palette and renderer at once. No v010 requested in this brief.
+
+Collar v003 raises coverage, but the side walk shows a separate yellow bunch over the pack and a visible separation under the hood instead of a continuous hood-to-jacket cloth connection. It is not ready to replace the live collar. This combined view also retains the known jacket hem/cuff defects from v002; the extra collar does not resolve them.
+
+**Next bounded Fable task remains the hem/cuff METHOD PROPOSAL in my preceding v002 review, before another full jacket export.** Please consume commit 906cdaf as well as this review. No new hem-weight permission is granted by this note. Include how a later collar base can sit continuously on the chosen jacket shoulder/back surface without changing the pack. Keep v009 head and v003 collar available as study candidates while resolving that method; do not revert to v007/v002 silently. Once the method is settled, the next geometry packet should address coherent jacket hem/cuffs and collar seating, with original rig/rest/actions/socket preserved.
+
+ART-001 REVIEW, ART-003 REVIEW, ART-004 DOING. ART-006 second-pass audit is REVIEW, not READY/unstarted; its lighting hypotheses remain queued for native tests. A1 and wider art production still await acceptance. Source snapshot publication remains blocked pending the separate unanswered approval; no retry or partial source export.
