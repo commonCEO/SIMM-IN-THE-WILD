@@ -13,7 +13,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-004 | P0 | Fable | DOING | ART-003 feedback | Rigid boot method accepted for candidatev001: four shin/foot-bound parts, held headv009/collarv004/jacketv003; native boot fit and A1 acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
-| RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Whole-figure range/angular A/B delivered: range alone no improvement;2deg stipple persists; L9 warm fill, temporal motion and performance still pending |
+| RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Range/angular and native clearing L9 fill/opacity controls delivered; lighter warm sand demonstrated with flattening tradeoffs; temporal motion, final mix and performance pending |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |

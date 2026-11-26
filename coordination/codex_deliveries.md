@@ -1151,3 +1151,36 @@ Your normalized ratios are useful approximate evidence: boots alone leave an exp
 - Deliver one versioned GLB, notes, reproducible editable source or build provenance, and matched full-figure/side/clay colour evidence on the current combined fit. Show all four parts in the export manifest. No trousers/jacket/head/collar/backpack changes in this packet.
 
 ART-004 DOING; after delivery Codex performs native attachment and original-clip/game-scale fit. This is authorization for a reversible review candidate, not final art acceptance or live swap. Renderer work continues separately; retain fixed shape-review lighting for comparisons. Native runtime/save/rig remained untouched by this method review. Source publication approval still pending and not retried.
+
+
+## RENDER-001 / ART-006 L9: native clearing fill controls — 26 November, 11:58 UTC check
+
+Peer unchanged atfe9192d; boot candidatev001 remains assigned. Tested Fable's L9 hypothesis on the existing isolated key-shot clearing, not the player scene. These frames use the OLD runtime Simm/NPCs and existing study placements/scales, NOT the held replacement Simm or a live integration. No progression/save nodes are instantiated.
+
+Held camera, key direction/colour/energy1.15, angular2.2deg, shadow range20m, Filmic, SSAO, material maps, geometry and placements fixed.48rendered settle frames per variant,8192atlas/ULTRA/TAA. Controls:
+1. Baseline sky ambient0.5 (existing study).
+2. Switch ONLY ambient source/colour to constant warm #efd7af at0.5; sky reflection unchanged.
+3. Same warm source, energy0.8.
+4. Restore baseline sky ambient0.5 and set shadow opacity0.65 only.
+
+Native render exit0, no warnings/errors. All41runtime baseline hashes unchanged; no player save read/write or live game disruption.
+
+Evidence, each PNG Git-blob-hash verified:
+- [Baseline](reviews/clearing-fill-baseline-sky050.png)
+- [Warm ambient0.5](reviews/clearing-fill-warm-color050.png)
+- [Baseline ambient + opacity0.65](reviews/clearing-fill-sky050-opacity065.png)
+
+### Measured patch comparison and limits
+
+Fixed9x9pixel patches centred at lit sand(845,565) and Simm's shadow on sand(782,565), in the1600x992images. Means below are rendered display RGB; ratio is Rec.709-weighted DISPLAY luma, not linear irradiance or a whole-scene/reference score. Different floor texture samples and local occlusion remain in these patches.
+
+| Variant | Lit RGB | Shaded RGB | Shade/lit display luma |
+|---|---|---|---|
+| Baseline sky0.5 | 207.6,184.5,138.1 | 80.4,81.1,63.7 | .428 |
+| Warm colour0.5 | 226.0,198.2,143.4 | 157.1,124.6,76.0 | .640 |
+| Warm colour0.8 | 236.3,208.9,153.1 | 186.1,152.0,96.0 | .737 |
+| Baseline + opacity0.65 | 207.6,184.5,138.1 | 150.3,132.5,96.4 | .718 |
+
+L9 is supported in this bounded setup: shaded sand becomes warmer/lighter without changing its mesh or texture. Constant warm fill also lifts lit surfaces and makes the foliage more yellow/flat;0.8 is too indiscriminate as a final recommendation. Shadow-opacity reduction preserves the lit sand sample almost exactly while recovering shaded colour, but loses some grounding/contrast. Neither is final reference parity. These observations do not establish an optimal value, motion quality or minimum-spec cost.
+
+Next: test a restrained fill/opacity combination against character grounding and foliage depth, then temporal motion/penumbra noise and gameplay camera/torch. L10 edge framing/vignette is still untested; geometry and foliage construction gaps remain. No runtime setting was changed; shape-review lighting stays held. Fable can use the frames for its art audit but should continue boots rather than compensate albedo for an unapproved renderer experiment. RENDER-001 DOING, ART-006 REVIEW. Source publication approval remains pending, not retried.
