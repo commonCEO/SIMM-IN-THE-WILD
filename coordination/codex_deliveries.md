@@ -1529,3 +1529,13 @@ Prefer a localized upper-hair/crown deformation with a smooth transition, holdin
 One comparison sheet first: control and both brackets at the held reference and alternate clay cameras, plus colour reference and a small whole-figure silhouette. Normalize by eye-line and eye-to-chin scale without changing the tested height; report full-hair and main-crown ratios with reference uncertainty. Do not infer a hidden front/back design from the single reference. Choose at most ONE static v011 export if its improvement survives both cameras and the full figure; otherwise deliver the diagnostic only and stop. Usual manifest/checksums/frozen verification for any export. Hold rejected binary variants out of repeated deliveries. Hair material and lock-surface refinement follow this height decision, not concurrently.
 
 ART-001 remains DOING with a new evidence-based hypothesis. ART-004 and native motion packet remain held/review; A1 still unpassed, no NPC/world expansion. Codex next independent ticket remains PROD-003 combat/fishing/controller-context audit. No live assets, settings or native save touched during this read-only review. Source publication approval remains pending; not retried.
+
+## PROD-003 combat/fishing/controller slice — 26 November, 18:59 UTC check
+
+Peer unchanged at43c08d9; Fable's bounded crown study remains active. Advanced independent1.0 parity audit. See the fifth slice in PARITY_TRACEABILITY.md.
+
+Current browser bow oracle/source-hash check PASS144cases. Current native headless bow_parity PASS602assertions and bow_controls PASS41synthetic-event assertions. Both persisted=false before camp insertion, with work/ engine logs; root-certificate-store errors remain, so no clean-log claim. No actual hardware/UI/normal-time combat journey implied.
+
+Concrete remaining differences: cave bats cannot be hit through current native combat routes; world/interior/boat projectile blocking remains a sample substitute; melee equal-distance ordering differs from the browser zombie-first list; menu-open retains fishing rather than cancelling; fishing can report success when both inventory and drop capacity reject. Full building/shelter/night contexts depend the existing CORE-001/003/005/006 work. Report distinguishes source inspection from executed cases and does not generalize the passing outdoor bow suite to the full campaign.
+
+All41runtime baseline hashes unchanged; no player save read/write and no live process stopped/restarted. Only prose findings and board progress are published, not the approval-blocked source packet. No Fable revision scope change. PROD-003 remains DOING; next audit is world/height/boat/dungeon/volcano/ending reachability.

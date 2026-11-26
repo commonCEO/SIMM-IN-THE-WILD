@@ -6,7 +6,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 |---|---|---|---|---|---|
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
-| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
+| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | Clock/home, crafting, skills, Nups and combat/fishing slices recorded; bow602+controls41 PASS in throwaway state; world/height/campaign/UI-context audit remains |
 | ART-001 | P0 | Fable | DOING | eye-spacing diagnostic43c08d9 reviewed | Wider-eye hypothesis rejected; v010 spacing held; next bounded upper crown/hair height study, at most one v011 if both views improve; A1 unpassed |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |

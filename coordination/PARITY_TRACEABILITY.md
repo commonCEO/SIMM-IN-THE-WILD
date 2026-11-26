@@ -165,3 +165,36 @@ Still queued: companion and combat effect parity; full terrain traversal; normal
 - nups_journey.gd directly advances55.01seconds, relocates the player to resource slots and advances nest production by a large tick; nups_controls injects events. Useful historical integration coverage, not an unaccelerated physical-controller journey. These scripts were read, not executed this turn.
 
 Next evidence: day/rest arrival migration, interior suppression, scene-local companion/drop transitions, both capacity-failure branches, real obstacles and controller-only recruitment/nest work without injected time or positioning. Coordinate CORE-001/003/005/006 and UX-001; do not rebuild Nups art before A1. PROD-003 remains DOING. No production source, rig, animation or native save changed. Only prose audit findings published; pending source-export approval was not bypassed.
+
+## Fifth bounded slice: charged bow, combat contexts and fishing
+
+Audited26November2026,18:59UTC. Browser sources: model.js bowStats; game.js beginAction/endAction/attack/hitEntity/updateArrows/blocked/shorePoint/beginFishing and active update/menu flow. Native sources: bow_combat.gd, camp_wildlife.gd and camp.gd action/input/fishing/scene paths. Existing native tests were inspected before execution.
+
+### Evidence actually run
+
+- `node godot/tests/export-bow-fixture.mjs --check`: PASS144bow-stat cases and current model/game source hashes. Formula cases execute browser model.js; seven game.js token guards detect selected controller/projectile contract changes. These token checks are NOT execution of the whole browser combat simulation.
+- Native headless `tests/bow_parity.gd`: PASS602assertions. Covers the formula grid plus charge cap/cancellation/no-ammo behavior, shot edge counting, substepped hits/range, fractional damage, current-aim knockback, strict20px impact boundary, zombie-first overlapping projectile hits, chest blocking, decorative-tree exception and real loot/XP.
+- Native headless `tests/bow_controls.gd`: PASS41assertions. Synthetic keyboard/mouse/pad events, RT>.25 and radial stick>.2 thresholds, R3zoom reservation, instantX versus heldRT/Space/mouse, menu-held trigger edges, pause, tool/focus/scene/defeat cancellation.
+- Both suites instantiate current camp with persist_enabled=false BEFORE tree insertion. They relocate/seed targets and tools and tick charge directly. No physical controller, normal-time gathering/combat journey or rendered UI acceptance is inferred.
+- Both processes exit0; both log a root-certificate-store error. They are not clean-log passes. No script/assertion failure reported. Engine logs redirected into work/. All41runtime baseline hashes unchanged; native player save not opened/written.
+
+### Active-flow traceability
+
+| Contract | Reviewed current behavior / evidence | Status and next dependency |
+|---|---|---|
+| Charge/full power |1.2s base /0.78s quickdraw; time capped1.5s; range120+300power, speed220+220power, damage1+3power+upgrade/combat/quickdraw;32px/m conversion | Formula and selected native effects validated in suites; physical timing/feedback remains UX-001/QA-001 |
+| Fire input and cancellation | X fires an immediate tap; RT/Space/mouse hold-release; menu/tool/focus/scene/defeat cancel transient charge |41injected-event checks PASS; no hardware/visual/audio sign-off |
+| Projectile collision and targets |7px substeps and20px impact radius; zombie-first outdoor order; current aim supplies knockback | Selected outdoor cases PASS. Geometry, scene identity and complete target populations remain partial |
+| Cave / campaign combat | Browser attacks and arrows hit living bats in the selected dungeon; native wildlife.attack/hit_projectile return false in_cave and there is no native bat combat route in these active paths | MISSING cave enemy interaction; CORE-005/006 must add dungeon/room identity and actual target/loot route before campaign claims |
+| Blocking contexts | Browser blocked resolves interiors, dungeon map, world-water/prefabs/solid buildings and boat context; native arrow_blocked uses small outside/cave bounds, one pond and chests | PARTIAL layout substitute, not full collision parity; CORE-003/005/006 |
+| Melee target selection | Browser stable nearest target list begins zombies then animals; native nearest iteration follows fixed actors dictionary (animals before zombies) | Equal-distance melee tie can select a different target. Projectile ordering is tested/fixed separately; do not generalize that pass to melee. Add explicit tie fixture in CORE-006 |
+| Wall chopping / shelter immunity | Browser axe can demolish nearby walls before targeting an enemy; shelter suppresses appropriate enemy damage | Full building/shelter context absent from reviewed prototype; CORE-003/006, not covered by bow suite |
+| Wildlife / night returns | Native outdoor types,720s wildlife return, torch/fire fear, Nups slow hooks, damage/invulnerability/XP/loot exist | PARTIAL sample population and layout; automatic night/spawn cadence and survival/defeat depend CORE-001; full AI oracle/journey still unverified |
+| Fishing shore/duration/yield | Same discrete20..70px shore rays (16angles),3active seconds, cancel when movement>12px,1fish or2with angler,8XP; native shore is the prototype pond | Present flat-camp subset. Historical resource_journey teleports to shore and ticks2.99+.01s; read only this turn. Full water/boat/interior contexts and normal-time controller route pending |
+| Menu while fishing | Browser openModal clears fishing. Native menu opened signal cancels bow only; _physics_process pauses while open and retains fishing state | DIFFERENCE: native cast resumes after closing instead of being cancelled. UX-001/CORE-006 require an explicit menu/context regression |
+| Fishing capacity failure | Native tries inventory then a world drop; it always announces +fish afterward. Browser only shows catch-success notification when addOrDrop succeeds (8XP occurs either way) | Misleading success message if both storage and drop capacity reject. Verify both full-capacity branches in CORE-006/UX-001; do not silently change reward rules |
+| Vertical movement and fishing | Native cancellation uses Vector3 distance, browser planar2D distance | Currently flat-player subset. CORE-005's future jump/height contract must deliberately choose planar equivalence or record a3D exception |
+
+The native existing bow tests verify useful rules and a selected outdoor route, not complete combat/browser/world parity. No bow_save suite was rerun here; previous synthetic save audit is separate. No live combat/source changes made in this slice. Sound cues remain AUDIO-001; launch/charge/hit visual feedback still needs native controller play at the target resolutions.
+
+Next PROD-003 slices: active world/height/boat/dungeon/volcano and ending reachability; crop/fuel placement and complete UI context coverage. CORE-001 clock/survival then CORE-002/003 remain the first-loop functional critical path. Audit remains DOING. Publication includes findings only; blocked production-source export was not retried or split into smaller code uploads.
