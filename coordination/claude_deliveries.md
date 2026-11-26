@@ -205,6 +205,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 8 fired 02:06 UTC on 26 Nov, on time, unattended. Codex's tip was unchanged at `e5e7105`, so no revision was waiting. The run took ART-006: the audit was re-ranked from the three native clearing frames. No mesh, render or export.
   - Scheduled runs 9 to 12 (03:06 to 06:06 UTC, 26 Nov) fired on time and found Codex's tip unchanged at `e5e7105`. Nothing was rebuilt or committed.
   - Scheduled run 13 fired 07:06 UTC on time, unattended. It fetched `e5e7105..bfd7ce4`, read the jacket v001 native review (changes requested, six-point brief) and delivered jacket candidate v002.
+  - About 07:30 UTC the user reviewed a native side view ("IMO we're still 30% off") and then typed "Yes, this needs to have full parity, for Mattias to be happy", approving reopening the collar and the hair, which Codex had on hold. Collar v003 was delivered in that prompted turn.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -250,11 +251,27 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: jacket candidate v002 delivered, see below. Waiting for Codex's in-memory native study. Collar v002 and head v007 stay held.
-- ART-006: second pass in REVIEW. Codex has acknowledged it; its proposals stay gated by A1.
-- ART-001: on hold. Head v007 stays the held candidate.
+- ART-004: collar v003 delivered (user-approved reopen), see below. Jacket candidate v002 is still waiting for Codex's study. The two have not been combined yet.
+- ART-001: reopened by the user. Head v008 is next: hair back and nape down to meet the hood, softer, lighter tips, less gloss.
+- ART-006: second pass in REVIEW; proposals gated by A1.
 
-## ART-004 jacket candidate v002: torso, sleeves and soft trim (current)
+## ART-004 collar packet v003: standing hood around the neck (current, user-approved reopen)
+
+Status: delivered for Codex's native test. Not a parity claim, not ready_for_user_review.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_production/ART-004/collar_packet_v003.glb` | For Codex. Same two named parts, same root, same `chest` binding and attachment as v002. 12,998 triangles. sha256 `f233e2693f5060e234f4741f62c0acad0f9855298b78379ee540f46c96878961`. |
+| `art_source/handoff/claude_production/ART-004/COLLAR_PACKET_V003_NOTES.md` | Why, what changed, clearances, known issues. |
+| `art_source/handoff/claude_production/ART-004/renders/collar_v003_*.png` | The user's native frame next to v003; colour and clay views. |
+
+Facts for the native test:
+
+- v002 left about 9 cm of bare neck at the sides, 44 mm at the back and 30 mm at the throat. v003 stands up round the neck to just under the jaw and the hair line, 11 mm off the skin, and the scarf is raised to fill the throat.
+- 39 sampled poses: nearest approach 9.5 mm to the jaw, 7.6 mm to the nape, 2.8 mm to a hair tip (all in gather). No pack contact.
+- Please test it with jacket candidate v002, not the original jacket.
+
+## ART-004 jacket candidate v002: torso, sleeves and soft trim (waiting for Codex)
 
 Status: delivered for Codex's in-memory native study, in answer to the six-point brief at `367f484`. Not a parity claim, not ready_for_user_review, not for playable integration.
 
@@ -297,7 +314,7 @@ Facts for the native study:
 - Known: straps sit up to 14.5 mm above the new surface; one frozen brass button has lost the placket behind it; hem still far from 0.47 to 0.50; old topology limits roundness.
 - Body, old head, rig, socket and actions verified unchanged.
 
-## ART-004 collar packet v002 (held by Codex as working baseline)
+## ART-004 collar packet v002 (held by Codex as working baseline; superseded by v003 at the user's request)
 
 Status: delivered for Codex's native test, in answer to the review at `65387e5`. Not a parity claim, not ready_for_user_review.
 

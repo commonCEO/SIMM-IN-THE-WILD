@@ -1,4 +1,4 @@
-# ART-004 first packet: hood roll and front scarf for Simm. Static meshes in the frozen actor's coordinates,
+# ART-004 collar: hood and front scarf for Simm (v003; v001 and v002 are in Git history). Static meshes in the frozen actor's coordinates,
 # intended to follow the existing `chest` bone at 100 percent. The frozen body, rig and actions are not edited.
 # blender -b <head_candidate_v007.blend> --python collar_build.py -- <out.blend>
 import bpy, bmesh, sys, math, numpy as np
@@ -85,35 +85,46 @@ root = bpy.data.objects.get("SCULPT_COLLAR_ROOT") or bpy.data.objects.new("SCULP
 if root.name not in coll.objects: coll.objects.link(root)
 root.empty_display_size = 0.05
 
-# ---------------- hood: a soft horseshoe resting on the shoulders, fullest behind the neck, lapel ends on the chest
+# ---------------- hood v003: a standing, bunched hood around the neck, after the user's review of the native side view
+# v002 lay on the shoulders and left up to 9 cm of bare neck at the sides and 6 cm at the back. In the reference
+# the head sits down in the hood. v003 stands up around the neck to just under the jaw and the hair line, fitted to
+# the head mesh in this file: inner surface 11 mm off the neck skin, top below the jaw and the hair tips.
 bm = bmesh.new()
-# v002 (after Codex's native review of v001): the roll is narrower and slumps inward and back into the valley
-# between the neck and the pack, instead of lying on the shoulders as a shelf. The lapel ends are short with
-# rounded tips. The hood bag no longer runs over the pack flap: nothing of the hood lies behind Y 0.118.
-HOOD = [  # x, y, z, lateral radius, vertical radius      (front is -Y, Simm's right is -X)
-    (-0.064, -0.122, 0.939, .009, .005),      # tapered tip
-    (-0.071, -0.112, 0.948, .020, .012),      # short rounded lapel end
-    (-0.092, -0.084, 0.967, .027, .019),
-    (-0.107, -0.036, 0.984, .030, .026),
-    (-0.105,  0.026, 0.992, .032, .030),
-    (-0.070,  0.068, 0.991, .033, .031),
-    ( 0.002,  0.083, 0.987, .030, .031),      # back centre sits in the valley in front of the pack dome
-    ( 0.074,  0.066, 0.989, .031, .029),
-    ( 0.103,  0.024, 0.988, .031, .027),
-    ( 0.103, -0.038, 0.981, .029, .024),
-    ( 0.087, -0.086, 0.964, .025, .018),
-    ( 0.067, -0.111, 0.946, .018, .011),
-    ( 0.061, -0.120, 0.938, .008, .005)]
-tube(bm, HOOD, n=80, around=26, lump=[(.14, .03, .84), (.30, .05, 1.14), (.50, .04, .90), (.66, .05, 1.12), (.86, .03, .86)])
-# what is left of the hood bag: a soft bunch along the back of the roll, leaning back but stopping short of the pack
-BAG = [(-0.060, 0.082, 1.000, .019, .012), (-0.004, 0.094, 1.003, .022, .014), (0.052, 0.086, 0.999, .017, .011)]
-tube(bm, BAG, n=22, around=18)
-# one inner fold along the top on Simm's right, and a shorter one on his left, of different thickness
-FOLD = [(-0.110, -0.004, 1.000, .014, .010), (-0.103, 0.040, 1.006, .019, .012), (-0.074, 0.072, 1.005, .016, .010)]
-tube(bm, FOLD, n=22, around=16)
-FOLD2 = [(0.106, 0.002, 0.998, .012, .008), (0.094, 0.044, 1.002, .014, .009)]
-tube(bm, FOLD2, n=14, around=14)
-hood = finish(bm, "SCULPT_HOOD", 0.0024, 7000, (228, 172, 44), 0.86)
+CX, CY = 0.0, 0.040                                  # neck centre in plan view
+hv = np.array([v.co[:] for v in bpy.data.objects["SCULPT_HEAD"].data.vertices]) @ np.array(bpy.data.objects["SCULPT_HEAD"].matrix_world)[:3, :3].T + np.array(bpy.data.objects["SCULPT_HEAD"].matrix_world)[:3, 3]
+h_az = np.degrees(np.arctan2(hv[:, 0]-CX, -(hv[:, 1]-CY))); h_r = np.hypot(hv[:, 0]-CX, hv[:, 1]-CY)
+#        |az|  base   top    thickness (radial)
+PROF = [( 38, 0.976, 1.004, 0.026), ( 50, 0.978, 1.020, 0.028), ( 65, 0.980, 1.036, 0.030), ( 80, 0.982, 1.050, 0.032),
+        (100, 0.983, 1.060, 0.034), (125, 0.986, 1.062, 0.036), (150, 0.990, 1.054, 0.039), (180, 0.994, 1.045, 0.042)]
+P_az = np.array([p_[0] for p_ in PROF], float)
+def prof(a, i): return float(np.interp(abs(a), P_az, [p_[i] for p_ in PROF]))
+def r_inner(a, zb, zt):
+    m = (np.abs(((h_az - a + 180) % 360) - 180) < 9) & (hv[:, 2] > zb) & (hv[:, 2] < zt + 0.008) & (h_r < 0.095)
+    return (h_r[m].max() if m.any() else 0.06) + 0.011
+rows = []
+for a in list(range(-38, -181, -8)) + [-180] + list(range(172, 37, -8)) + [38]:
+    if a == -180: a = 180.0
+    zb, zt, t = prof(a, 1), prof(a, 2), prof(a, 3)
+    rc = r_inner(a, zb, zt) + t/2
+    ar = math.radians(a)
+    rows.append((CX + rc*math.sin(ar), CY - rc*math.cos(ar), 0.5*(zb + zt), t/2, 0.5*(zt - zb)))
+rows = sorted(rows, key=lambda r_: math.atan2(r_[0], -(r_[1]-CY)) % (2*math.pi))   # from Simm's left front, round the back
+# the stand turns down into short lapels on the chest at each front edge (v002 lapel ends kept)
+# short, flat turn-downs: the stand folds over onto the chest and ends, it does not hang as a separate roll
+LAP_R = [(-0.074, -0.100, 0.962, .010, .005), (-0.082, -0.088, 0.970, .019, .009), (-0.090, -0.068, 0.978, .022, .012)]
+LAP_L = [(0.089, -0.068, 0.978, .021, .012), (0.080, -0.088, 0.970, .018, .009), (0.072, -0.100, 0.962, .009, .005)]
+left = [r_ for r_ in rows if r_[0] > 0]; right = [r_ for r_ in rows if r_[0] <= 0]
+left.sort(key=lambda r_: -r_[1]); right.sort(key=lambda r_: r_[1])         # left side from back to front, right from front to back
+HOOD = LAP_R + right + left + LAP_L
+tube(bm, HOOD, n=150, around=28, lump=[(.12, .03, .88), (.25, .04, 1.10), (.36, .03, .92), (.46, .05, 1.12), (.56, .03, .90), (.66, .04, 1.10), (.78, .03, .93), (.90, .03, .88)])
+# gathered hood cloth bunched behind the neck, sitting on the stand and on top of the pack, not over the flap
+BUNCH = [(-0.060, 0.128, 1.012, .022, .020), (-0.020, 0.146, 1.020, .026, .024), (0.024, 0.144, 1.016, .025, .022), (0.062, 0.124, 1.010, .020, .018)]
+tube(bm, BUNCH, n=30, around=20, lump=[(.30, .10, 1.10), (.70, .10, .92)])
+# a soft rolled top lip on the stand, uneven in thickness, longer on Simm's right
+LIP_R = [r_ for r_ in right if 70 < abs(math.degrees(math.atan2(r_[0], -(r_[1]-CY)))) < 175]
+FOLD = [(x_*1.02, CY + (y_-CY)*1.02, z_ + v_*0.85, 0.011, 0.009) for x_, y_, z_, l_, v_ in LIP_R]
+if len(FOLD) > 2: tube(bm, FOLD, n=3*len(FOLD), around=14)
+hood = finish(bm, "SCULPT_HOOD", 0.0024, 9000, (228, 172, 44), 0.86)
 
 # ---------------- scarf: a pale soft band round the neck inside the collar, lower in front, one short end tucked forward
 bm = bmesh.new()
@@ -121,15 +132,15 @@ RING = []
 for k in range(12):
     a = 2*math.pi*k/12                      # a = 0 is the front
     x = 0.071*math.sin(a); y = -0.006 - 0.067*math.cos(a)
-    z = 0.981 - 0.011*math.cos(a) + 0.003*math.sin(2*a)
-    RING.append((x, y, z, .019 + .003*math.cos(a), .022 - .003*math.cos(a)))
-tube(bm, RING, n=72, around=22, closed=True, lump=[(.06, .03, .88), (.33, .04, 1.07), (.70, .04, .92)])
+    z = 0.990 - 0.008*max(0.0, math.cos(a))**3 + 0.003*math.sin(2*a)   # v003: raised; dips in a soft V at the throat
+    RING.append((x, y, z, .015 + .002*math.cos(a), .017 - .003*math.cos(a)))   # thinner than v002, cloth not a pillow
+tube(bm, RING, n=72, around=22, closed=True, lump=[(.04, .03, .80), (.12, .03, 1.12), (.33, .04, 1.07), (.70, .04, .92), (.93, .03, 1.10)])
 # v002: no hanging end. The end is tucked straight down into the shirt opening and is almost entirely hidden.
-END = [(0.020, -0.066, 0.970, .014, .010), (0.021, -0.072, 0.958, .010, .007), (0.021, -0.074, 0.949, .005, .004)]
+END = [(0.020, -0.066, 0.982, .014, .010), (0.021, -0.072, 0.966, .010, .007), (0.021, -0.074, 0.952, .005, .004)]
 tube(bm, END, n=14, around=14)
 # the wrap-over is lower and thinner than in v001: an asymmetric fold, not a raised loop
-WRAP = [(-0.058, -0.032, 0.984, .010, .011), (-0.040, -0.061, 0.982, .013, .013), (-0.004, -0.076, 0.977, .014, .013),
-        (0.028, -0.069, 0.972, .011, .010), (0.044, -0.050, 0.969, .007, .007)]
+WRAP = [(-0.058, -0.032, 0.997, .010, .011), (-0.040, -0.060, 0.996, .013, .013), (-0.004, -0.074, 0.992, .014, .013),
+        (0.028, -0.068, 0.987, .011, .010), (0.044, -0.050, 0.984, .007, .007)]
 tube(bm, WRAP, n=24, around=16)
 scarf = finish(bm, "SCULPT_SCARF", 0.0022, 4000, (228, 210, 178), 0.90)
 

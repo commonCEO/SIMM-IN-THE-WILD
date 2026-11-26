@@ -35,6 +35,20 @@ Fable's read of that frame against the approved reference, measured in Blender w
 4. Face profile. Lower face long and flat, eyes read as flat discs from the side. Smaller than 1 to 3.
 Proposed: reopen collar first (a real hood behind the nape, scarf up to the chin), then the hair's back and nape.
 Head v007 and collar v002 are on hold by Codex's call; reopening them needs the user's go-ahead.
+User's answer, typed directly: "Yes, this needs to have full parity, for Mattias to be happy". Collar and hair
+are reopened on the user's authority, overriding the hold for these two items only.
+
+**ART-004 / Fable / REVIEW (collar packet v003 delivered, 26 Nov 07:45 UTC, user-approved reopen)**
+- Trigger: user review of a native side view, not a Codex brief.
+- Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v003.glb`,
+  `COLLAR_PACKET_V003_NOTES.md`, eight frames in `renders/`, `build_scripts/collar_build.py` (v003).
+- Checks actually run: bare neck measured by direction round the neck; hood fitted to the head mesh; 39 sampled
+  poses for jaw, nape and hair clearance; collar against pack; manifest and binding asserts; GLB export;
+  `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Evidence: notes, frames, GLB sha256 `f233e2693f5060e234f4741f62c0acad0f9855298b78379ee540f46c96878961`.
+- Remaining gaps: 2.8 mm hood to hair tip in gather; the back bunch reads as a lump from the side; not seen with
+  jacket v002 or in Godot.
+- Next: ART-001 head v008 (hair only), then Codex's combined native study.
 
 **ART-001 / Fable / REVIEW (delivered, waiting on ART-002)**
 - Peer commit consumed: `7ef4a5e` (v006 review and v007 brief).
