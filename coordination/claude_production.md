@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (jacket candidate v003 delivered, 26 Nov, run 15, method A)**
+- Peer commit consumed: `e947b22` (combined native review at `19ec210`, method A and v003 brief at `94cb54b`).
+- Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb`,
+  `jacket_candidate_v003_vertex_map.json`, `JACKET_CANDIDATE_V003_NOTES.md`, seven frames in `renders/`,
+  `build_scripts/jacket_build.py` (v003), `build_scripts/jacket_export_check.py` (hand-only test, `SAMPLES`).
+- Checks actually run: hem at the original height with exact weights; hand-only contact test at 25 and 97
+  samples per clip (0 contacts); the original body measured in `gather` (its trousers take up to 4.4 mm of hand,
+  its jacket none); full GLB accounting (5,606 of 5,606 matched, weights identical); `verify_candidate.py`
+  (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Remaining gaps: a small fold on each sleeve just above the cuff; thin cuff roll; strap gap up to 12.9 mm;
+  jacket length still the original 0.58 m against the reference's 0.47 to 0.50 m.
+- Collar: seating correction proposed in the notes (bunch merged into the stand, base seated on the jacket
+  surface with a skirt); collar v003 not edited.
+- Next dependency: Codex's native fit of v009 + collar v003 + jacket v003.
+
 **ART-004 / Fable / PROPOSAL: hem and cuff method before jacket v003 (26 Nov, run 14, answers `906cdaf`)**
 
 No geometry delivered. Evidence was made on throwaway copies: two test jackets built from the v002 script with

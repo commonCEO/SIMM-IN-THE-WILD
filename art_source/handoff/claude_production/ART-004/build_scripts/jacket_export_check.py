@@ -62,33 +62,50 @@ bd = [min(trim_t.find_nearest(bco[k], 0.1)[3], new_t.find_nearest(bco[k], 0.1)[3
 back = [d for k, d in zip(btn, bd) if bco[k].y > -0.1385]
 print("BUTTON %d frozen vertices; its back face is %.1f to %.1f mm from the trim or jacket surface; whole button within %.1f mm" % (len(btn), min(back)*1000, max(back)*1000, max(bd)*1000))
 
-# ---- clips: cloth against thighs and hands, and trim against jacket; before against after --------------------
-tm, sm = mat_index["Simm charcoal olive trousers"], mat_index["Simm warm skin"]; bm_ = mat_index[PARTS["SCULPT_JACKET_TRIM"]]
+# ---- clips: cloth against the hands, 25 samples per clip -------------------------------------------------------
+# Hand triangles only: warm-skin triangles whose every vertex is more than 50 percent on hand_l or hand_r.
+# Inside test: a cloth vertex counts when it is more than 1 mm behind the nearest hand surface AND a ray from it
+# along that surface normal leaves the hand (an odd number of hand crossings), so thin or open surfaces do not count.
+gn_ = [g.name for g in body.vertex_groups]
+def hand_side(k):
+    w = {gn_[g.group]: g.weight for g in body.data.vertices[k].groups}
+    return "hand_l" if w.get("hand_l", 0) > 0.5 else "hand_r" if w.get("hand_r", 0) > 0.5 else None
+sm = mat_index["Simm warm skin"]
+hand_faces = [tuple(p.vertices) for p in body.data.polygons if p.material_index == sm and all(hand_side(k) for k in p.vertices)]
+other_skin = sum(1 for p in body.data.polygons if p.material_index == sm) - len(hand_faces)
+print("HANDS %d hand triangles used (all vertices over 50 percent on hand_l or hand_r); %d other warm-skin faces excluded" % (len(hand_faces), other_skin))
+from mathutils import Vector
+def inside_hand(tree, c):
+    loc, nrm, idx, d = tree.find_nearest(c, 0.03)
+    if loc is None or (c - loc).dot(nrm) > -0.001: return 0.0
+    n = 0; o = c.copy(); dirv = Vector((0.13, 0.27, 0.95)).normalized()
+    for _ in range(12):
+        h = tree.ray_cast(o, dirv, 0.2)
+        if h[0] is None: break
+        n += 1; o = h[0] + dirv*1e-5
+    return d if n % 2 == 1 else 0.0
+import os
+NS = int(os.environ.get("SAMPLES", "25"))               # samples per clip; 25 by default, more for a dense check
 if rig.animation_data is None: rig.animation_data_create()
-def inside(tree, pts):
-    cnt = 0; deep = 0.0
-    for c in pts:
-        loc, nrm, idx, d = tree.find_nearest(c, 0.04)
-        if loc is not None and (c - loc).dot(nrm) < -0.0005: cnt += 1; deep = max(deep, d)
-    return cnt, deep
-def gap(tree, pts): return max(tree.find_nearest(c, 0.2)[3] for c in pts)
+contacts = []
 for an in ("idle", "walk", "gather"):
-    act = bpy.data.actions[an]; rig.animation_data.action = act; f0, f1 = act.frame_range; res = {}
-    for fr in np.linspace(f0, f1, 9):
+    act = bpy.data.actions[an]; rig.animation_data.action = act; f0, f1 = act.frame_range; per = {}
+    for fr in np.linspace(f0, f1, NS):
         sc.frame_set(int(fr), subframe=float(fr - int(fr))); dg = bpy.context.evaluated_depsgraph_get()
-        eb = body.evaluated_get(dg); mb = eb.to_mesh(); bv = [v.co.copy() for v in mb.vertices]; polys = [(p.material_index, tuple(p.vertices)) for p in mb.polygons]
-        ej = jk.evaluated_get(dg); mj = ej.to_mesh(); jv = [v.co.copy() for v in mj.vertices]; jp = [tuple(p.vertices) for p in mj.polygons]
-        et = tr.evaluated_get(dg); mt = et.to_mesh(); tv = [v.co.copy() for v in mt.vertices]
-        for label, mi_ in (("thighs", tm), ("hands", sm)):
-            t = BVHTree.FromPolygons(bv, [f for m_, f in polys if m_ == mi_])
-            for state, pts in (("jacket before", [bv[k] for k in joi]), ("jacket after", jv), ("trim before", [bv[k] for k in toi]), ("trim after", tv)):
-                c_, d_ = inside(t, pts); w = res.get((label, state), (0, 0.0)); res[(label, state)] = (max(w[0], c_), max(w[1], d_))
-        g_b = gap(BVHTree.FromPolygons(bv, [f for m_, f in polys if m_ == jm]), [bv[k] for k in toi]); g_a = gap(BVHTree.FromPolygons(jv, jp), tv)
-        res["gap before"] = max(res.get("gap before", 0), g_b); res["gap after"] = max(res.get("gap after", 0), g_a)
-        eb.to_mesh_clear(); ej.to_mesh_clear(); et.to_mesh_clear()
-    for label in ("thighs", "hands"):
-        print("CLIP %-6s inside %-6s worst of 9: jacket before %3d (%4.1f mm) after %3d (%4.1f mm) | trim before %3d (%4.1f mm) after %3d (%4.1f mm)" % ((an, label) + tuple(x for st in ("jacket before", "jacket after", "trim before", "trim after") for x in (res[(label, st)][0], res[(label, st)][1]*1000))))
-    print("CLIP %-6s farthest trim vertex from the jacket surface, worst of 9: before %.1f mm, after %.1f mm" % (an, res["gap before"]*1000, res["gap after"]*1000))
+        eb = body.evaluated_get(dg); mb = eb.to_mesh(); bv = [v.co.copy() for v in mb.vertices]
+        t = BVHTree.FromPolygons(bv, hand_faces)
+        for name, (ob, oi) in parts.items():
+            ev = ob.evaluated_get(dg); me_ = ev.to_mesh(); n = 0; deep = 0.0
+            for i, v in enumerate(me_.vertices):
+                d = inside_hand(t, v.co)
+                if d > 0: n += 1; deep = max(deep, d); contacts.append((an, round(float(fr), 2), name, oi[i], round(d*1000, 1)))
+            ev.to_mesh_clear(); w = per.get(name, (0, 0.0, None)); per[name] = (n, deep, round(float(fr), 2)) if n > w[0] else w
+        eb.to_mesh_clear()
+    for name in parts:
+        n, deep, at = per.get(name, (0, 0.0, None))
+        print("CLIP %-6s %-18s inside a hand, worst of %d samples: %d vertices, up to %.1f mm, at frame %s" % (an, name, NS, n, deep*1000, at))
+for c in contacts[:40]: print("CONTACT clip %s frame %s part %s original vertex %d depth %.1f mm" % c)
+print("CONTACT total vertex-frame contacts: %d" % len(contacts))
 rig.animation_data.action = None; sc.frame_set(0)
 for pb in rig.pose.bones: pb.matrix_basis.identity()        # in memory only: back to rest before export
 

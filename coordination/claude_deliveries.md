@@ -3,6 +3,16 @@
 Written by Claude only. Codex reads this file and writes its own file next to it.
 Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in a cloud checkout.
 
+## Current candidates (read this first)
+
+| Item | Current file | Status |
+|---|---|---|
+| Head | `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb` | Held study candidate (Codex `19ec210`) |
+| Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v003.glb` | Held study candidate; back seating to be corrected in a separate packet |
+| Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Delivered for native fit, method A |
+
+Older versions below are kept for history only.
+
 ## How to exchange
 
 - Claude pushes to branch `claude/compassionate-maxwell-fagj20` and to no other branch.
@@ -15,7 +25,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 Acknowledged at Codex commit `a403661`. Fable's ticket updates, plan corrections and proposals are in
 `coordination/claude_production.md`. The first pass of the ART-006 art audit is in `coordination/claude_art_audit.md`.
 
-## Current delivery: head_candidate_v007 (board ticket ART-001)
+## Earlier delivery: head_candidate_v007 (board ticket ART-001; kept. The current study candidates are listed under "Current candidates" below)
 
 Status: reviewed by Codex in Godot at `1f7d6a8` and frozen as the candidate for the full-body fit study (ART-003). Not art approval, not ready_for_user_review. Head work is on hold until that study reports. Hair only against v006; face geometry, palette, skull and tuft held.
 Made in answer to Codex's v007 brief at `7ef4a5e`.
@@ -184,7 +194,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `906cdaf` (jacket v002 native review: vents and cuff rings rejected, hem/cuff method proposal requested before v003). Jacket v001 review at `367f484`. Reference and protocol from `b143f31`.
+- Last Codex commit seen: `e947b22` (combined native review of head v009 + collar v003 at `19ec210`; method A accepted and jacket v003 assigned at `94cb54b`; `e947b22` is a skills audit with no art). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -207,6 +217,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 13 fired 07:06 UTC on time, unattended. It fetched `e5e7105..bfd7ce4`, read the jacket v001 native review (changes requested, six-point brief) and delivered jacket candidate v002.
   - About 07:30 UTC the user reviewed a native side view ("IMO we're still 30% off") and then typed "Yes, this needs to have full parity, for Mattias to be happy", approving reopening the collar and the hair, which Codex had on hold. Collar v003 was delivered in that prompted turn.
   - Scheduled run 14 fired 08:06 UTC on time. It fetched `bfd7ce4..906cdaf`, read the jacket v002 review and wrote the hem and cuff method proposal in `coordination/claude_production.md` (recommends option A). No geometry. Codex had not yet seen collar v003, head v008 or head v009 at that commit.
+  - Scheduled run 15 fired 09:07 UTC on time. It fetched `906cdaf..e947b22`, read the combined native review and the method decision, and delivered jacket v003 (method A, seated cuffs, 0 hand contacts at 25 and 97 samples per clip) with a collar seating proposal.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -252,10 +263,26 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: collar v003 delivered (user-approved reopen). Jacket v002 reviewed by Codex (vents and cuffs rejected); method proposal delivered in `coordination/claude_production.md`, recommending option A (original hem height, exact weights) and cuffs back at the original ring radius. Waiting for Codex's decision before jacket v003.
-- ART-001: head v009 delivered (user request: the face read as creepy, the concept is cute). New eyes with white, brown iris and emissive catchlights, closer darker brows, a real smile, warmer skin. `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb`, sha256 `255f781e7be19dda8775b3b6f297d4f8327705eea30ef7ca12298861c2f94e7b`; notes in `HEAD_CANDIDATE_V009_NOTES.md`. Supersedes v008 for testing. Please test head v009 + collar v003 + jacket v002 together.
-- (earlier) ART-001: head v008 delivered (user-approved reopen): hair colour and gloss only, geometry identical to v007. `art_source/handoff/claude_simm/inbox/head_candidate_v008.glb`, sha256 `c74a310fc198f8c28eca4de3857ce84a3563a4b5176b38c83ad5e081c7ec5116`; notes in `HEAD_CANDIDATE_V008_NOTES.md`. Please test head v008 + collar v003 + jacket v002 together, at the same side view the user reviewed.
-- ART-006: second pass in REVIEW; proposals gated by A1.
+- ART-004: jacket v003 delivered, see below. Waiting for Codex's native fit. Collar seating correction proposed in `JACKET_CANDIDATE_V003_NOTES.md`, not started.
+- ART-001: head v009 held as the study candidate. Codex: hair slabs and the explicit smile noted; no v010 requested.
+- ART-006: second pass in REVIEW.
+
+## ART-004 jacket candidate v003: method A, seated cuffs (current)
+
+Status: delivered for Codex's native fit, answering `94cb54b`. Not a parity claim, not ready_for_user_review.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | For Codex. Same two parts as v002, same replacement. sha256 `e53ebe5db9aee66f2180849e8b4215da4ac0c1344a2af8af071ec1d17d4dfcd3`. |
+| `art_source/handoff/claude_production/ART-004/JACKET_CANDIDATE_V003_NOTES.md` | The five points answered, contact report with vertex IDs, manifest, known issues, collar seating proposal. |
+| `art_source/handoff/claude_production/ART-004/renders/jacket_v003_*.png` | Before and after in the clips and at rest, close gather frame and cuffs, both cameras; all with head v009 and collar v003. |
+
+Facts for the native fit:
+
+- Hem at the original height (lowest Z 0.582), exact weights, no vents. Only the hand zone at the right hip is blended back toward the original surface.
+- Cuff rings at their original positions; the sleeve end is drawn into them.
+- 0 cloth vertices inside a hand in idle, walk and gather, with a hand-only test, at 25 and at 97 samples per clip.
+- All 5,606 exported vertices matched with identical weights. Body, rig, socket and actions verified unchanged.
 
 ## ART-004 collar packet v003: standing hood around the neck (current, user-approved reopen)
 
@@ -273,7 +300,7 @@ Facts for the native test:
 - 39 sampled poses: nearest approach 9.5 mm to the jaw, 7.6 mm to the nape, 2.8 mm to a hair tip (all in gather). No pack contact.
 - Please test it with jacket candidate v002, not the original jacket.
 
-## ART-004 jacket candidate v002: torso, sleeves and soft trim (waiting for Codex)
+## ART-004 jacket candidate v002: torso, sleeves and soft trim (reviewed by Codex: vents and cuff rings rejected; superseded by v003)
 
 Status: delivered for Codex's in-memory native study, in answer to the six-point brief at `367f484`. Not a parity claim, not ready_for_user_review, not for playable integration.
 
