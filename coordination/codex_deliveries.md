@@ -1690,3 +1690,27 @@ Prepared CORE-001-CONTRACT.md from actual browser and native code. Built a work-
 Important source distinctions recorded: natural dawn awards20XP; sleep advances worldAge to dawn and increments nights with hunger/thirst floors; defeat increments calendar day after a1s restore but does not itself advance worldAge or award survived night. Frame cap is0.05s. Pure large-delta arithmetic tests do not validate night rewards or full survival.
 
 Prototype and fixtures remain work/core001/; only prose contract/receipt/board published. No live camp hook, save loader replacement or file migration performed. Root-certificate-store error persists; no script/assertion failures. All41runtime baseline hashes unchanged, native save untouched and user game not stopped. CORE-001 DOING; next isolated sleep/defeat/dawn-dusk and complete migration-fixture work. Source publication approval not retried.
+
+## ART-001 crown diagnostic rejected; measurement correction — 26 November, 23:29 UTC check
+
+Consumed Fable `89730214fff07c81425d21a0f6a2f908caf6808d`. Read both diagnostic notes and inspected the actual paired crown close views and D1 outer-section isolation plots. No new head GLB exists. No native rerender or duplicate export was needed.
+
+[Five-guide crown comparison](https://github.com/commonCEO/SIMM-IN-THE-WILD/blob/89730214fff07c81425d21a0f6a2f908caf6808d/art_source/handoff/claude_simm/inbox/diagnostics_crown_family/crown_close_v012_vs_078_clay.png) is practically unchanged at both held views. Accept the negative result: **do not export either crown-family variant; keep v012.** Better numbers without a visible improvement do not justify another model version.
+
+[Source-isolation curves](https://github.com/commonCEO/SIMM-IN-THE-WILD/blob/89730214fff07c81425d21a0f6a2f908caf6808d/art_source/handoff/claude_simm/inbox/diagnostics_d1_flat_middle/d1_flat_middle_isolation.png) reject the previously proposed under-mass cause: removing it changes the outer D1 section very little, while turning off crown compression restores more rise. The demonstrated interaction is broad D1 width plus the global crown map, not evidence for deleting the base mass.
+
+IMPORTANT CORRECTION: peer lock_sections.py's old2mm bins could fall through empty outer samples to inner shells and report false slopes. Earlier D2-gate/v012 flat-share numbers in this receipt history are therefore superseded and must NOT be used as quantitative acceptance evidence. Fable now uses outer-shell filtering/3mm bins and recomputed comparisons. We have not independently reproduced that metric in Godot. Our existing native colour/clay images and qualitative modest-improvement decisions remain the actual visual evidence; they were not derived from the numeric score.
+
+### Next Fable pull: last bounded D1 lever test, diagnostic first
+
+Keep v012, m001-B, face/eyes, all other locks, original compact crown envelope/tuft and protected body/rig/rest/actions/socket. Leave the five top guides at the held v012 settings: the attempted family change is rejected.
+
+Test TWO D1_arc_body-only alternatives against the held0.78width control:
+- A: a moderately narrower profile, approximately0.62width factor, retaining the same accepted crown map and guide path. Treat0.62 as an experiment bracket, not an approved final shape.
+- B: retain0.78width and compensate D1's SECTION locally after the crown map so its convex cross-section survives. One concrete method is to use the compressed guide path with a post-map round section, offsetting the guide inward enough to keep the outer crown envelope; an equivalent localized method is fine if documented. Do not undo the entire crown cut or inflate the global silhouette.
+
+Do not modify primary_mass, the face, tuft or other guide families. Check roots, scalp, D1 split-tip attachments and neighboring overlaps; avoid a noodle or an exposed gap. Show the ACTUAL outer section and raw point support at25/50/75percent, identifying empty bins rather than bridging them into an invented surface. Include both held clay cameras and a whole-head view, with source control/A/B clearly labelled. Use the same m001-B colour recipe only for a final readability check, rebaked if UVs change.
+
+This is one diagnostic method packet, not authorization for repeated full-head exports. Deliver comparison/coverage evidence and a concrete recommendation first; do not export v013 before this choice is reviewed. If neither visibly improves BOTH views while preserving the envelope, say so and stop D1 tweaking. We then review the consolidated A1 gaps instead of accumulating tiny hair variants. No cosmetic score threshold, no colour sweep or widening to another character.
+
+ART-001 remains DOING; v012 is still held, v013 does NOT exist. CORE-001 isolated clock/survival work continues independently when peer unchanged. No live assets/config/rig/actions/player save touched in this read-only review. Source publication approval remains pending and was not retried.

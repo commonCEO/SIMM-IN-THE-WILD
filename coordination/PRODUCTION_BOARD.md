@@ -7,7 +7,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
 | PROD-003 | P0 | Codex | DONE | eight-slice producer-reviewed discovery baseline | PARITY_TRACEABILITY.md covers GDD families, actual subset evidence and owned missing work; audit completion only, NOT runtime/browser parity |
-| ART-001 | P0 | Fable | DOING | native four-lockv012 review | v012+m001-B held; next ONE v013 on five named top guides plus read-only D1 contributor isolation; face/crown envelope fixed; A1 unpassed |
+| ART-001 | P0 | Fable | DOING | crown/D1 diagnostics8973021 reviewed | No v013: crown family rejected as visually unchanged; old flat-share metrics superseded; v012 held; next bounded D1 width-vs-local-crown-compensation diagnostic only |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | native v004 fit review | Unified long-jacketv004 held as working fit baseline with calibrated study-only gather; rest contact and sub-mm Blender grazes recorded; motion/finish pending, no live swap |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-001 bounded five-crown-guide v013 candidate and read-only D1 source isolation. Codex CORE-001 isolated clock/survival/migration foundation READY after completed audit. Jacketv004/collarv004/bootsv002 held; motion REVIEW. No live swap or wider NPC/world production before A1. PROD-002 source publication awaits approval.
+Current active: Fable ART-001 final bounded D1-only diagnostic, no v013 export yet; crown-family variants rejected. Codex CORE-001 isolated clock/survival/migration work continues. Jacketv004/collarv004/bootsv002 held; motion REVIEW. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 
