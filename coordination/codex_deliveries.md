@@ -1076,3 +1076,33 @@ ART-004 remains DOING; A1 pending. Source snapshot publication approval still pe
 ## PROD-003 companion slice — 26 November, 10:01 UTC check
 
 Peer unchanged at5c59b7a; collarv004 remains assigned. Revalidated browser Nups oracle: PASS151cases. Read current companion/runtime routing and historical parity/controls/journey tests; no native companion suite rerun. PARITY_TRACEABILITY.md now maps aura/follow/work/greeting and documents missing day/interior/region integration, oracle stubs, capacity-failure differences and the existing explicit surface-drop bug-fix exception. Historical journey uses accelerated time and relocation, not physical-controller proof. No implementation/save/rig changes or source publication retry.
+
+
+## ART-004 collar v004 native review and whole-figure checkpoint — 26 November, 10:28 UTC check
+
+Consumed Claude `348088661b2c0435862c76d7d4c6ea47812e7cb5`. Read manifest, known gap and hidden-skirt/pack contact report. Verified static collar SHA256 `b093418b37d135b44ec2762cbfac76e9b975e3fcc3a382730738ceb76588056f`, two meshes, 12,998 triangles, no rig/animations/cameras. Attached to original chest with inverse rest. Head v009 and jacket v003 held; original 17-bone rest compatibility asserted again.
+
+Your original folded-hood proposal is accepted for the ISOLATED replacement study: removed only material `simm folded hood canvas`, asserted exactly 320 triangles, after a control capture with it present. Source/master mesh untouched. It is redundant under the replacement collar; this is not permission to delete the frozen source.
+
+Native Forward+ import/render exit 0, final log has no warnings/errors. Captured whole figure, head/clay/alternate, both walk sides, side/front gather and back; 97 sampled times per original clip (291 total), not continuous collision proof. Your reported 5 mm directional seat gap and clearance metrics are Blender measurements, not independently reproduced numerical collision metrics.
+
+Published individually Git-hash-verified frames:
+- [Whole figure against reference](reviews/collar-v004-body-idle.png)
+- [Side walk](reviews/collar-v004-side-walk.png)
+- [Back](reviews/collar-v004-back-idle.png)
+
+The detached back bunch and broad floating gap are substantially reduced in these views. Keep collar v004 as the working seating baseline; v003 stays archived. Remaining stand reads stiff/high rather than softly folded cloth. This is a fit improvement, NOT final reference fidelity or A1 approval. Original folded hood remains suppressed in future combined studies. All 41 runtime baseline hashes unchanged; native save and live game untouched.
+
+### Combined silhouette assessment and next bounded task
+
+The full figure still has long exposed trouser legs and very low, bulbous shoes, whereas the reference has substantial boot shafts and a compact child-adventurer outline. Other held gaps: jacket length/edge scalloping, floating strap contact, stiff collar, broad hair masses and facial proportions. We should batch these by silhouette/material family instead of polishing a hidden contact line indefinitely. Do not use lighting to declare shape differences solved.
+
+**Next Fable task: Simm boot/leg silhouette METHOD + CLAY BLOCKOUT proposal under ART-004, before a finished export.** This is preparation for the Simm A1 benchmark, not a wider character ticket.
+
+- Use the original full reference and current head v009/collar v004/jacket v003. Show a matched full-figure reference-direction clay before/after and side view. Normalize figure height when measuring visible ratios; do not treat the differently cropped panels above as exact measurements or claim a parity percentage.
+- Propose rounded mid-calf leather boots with a defined shaft/cuff, heel and restrained sole, removing the low slipper appearance. Keep trousers, body pose, rig/rest/actions/socket, head/collar/jacket and backpack fixed in the first blockout. Do not scale the whole skeleton, shorten bones or move knees.
+- State which ORIGINAL shoe surfaces/materials a native study would hide, which new boot parts replace them, and how new shaft/foot geometry would follow the existing calf/foot bones through idle/walk/gather. New parts may be planned; do not alter master weights. Compare a calf-bound shaft plus foot-bound boot with a small documented candidate-only deformation blend if rigid parts leave an ankle gap. Do not assume an overlapping tube is sufficient without bending evidence.
+- Identify source/binding ownership, ankle/trouser intersections and rollback. Provide one simple bending check at the worst original walk pose. No auto-rig, new skeleton, animation edits, whole-body weight painting or live integration.
+- This authorizes a throwaway clay proposal and binding design, not a production-weight exception or full high-density textured boot export. Recommend one method with evidence. If proportions still require a body/leg change beyond boots, document it as a later proposal rather than secretly changing protected limbs.
+
+Hold other art while this bounded proposal is prepared. After the boot method decision we will review the whole Simm again and return one consolidated cloth/proportion brief. Codex can independently work on renderer/game-scale evidence in parallel. ART-004 remains DOING; ART-005 user acceptance still pending. Source snapshot publication approval remains pending and was not retried.
