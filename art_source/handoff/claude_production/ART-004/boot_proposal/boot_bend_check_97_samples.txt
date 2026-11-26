@@ -1,0 +1,8 @@
+== rigid
+BEND idle   97 samples: max ankle angle 62.8 deg at frame 0.0 | shaft bottom out of the boot foot: 481 vertices up to 10.8 mm at 0.0 | foot collar off the shaft: up to 9.5 mm at 0.0 | trouser vertices out of the shaft: 0 at None
+BEND walk   97 samples: max ankle angle 69.6 deg at frame 6.0 | shaft bottom out of the boot foot: 578 vertices up to 15.8 mm at 6.0 | foot collar off the shaft: up to 23.6 mm at 4.5 | trouser vertices out of the shaft: 0 at None
+BEND gather 97 samples: max ankle angle 62.8 deg at frame 0.0 | shaft bottom out of the boot foot: 481 vertices up to 10.8 mm at 0.0 | foot collar off the shaft: up to 19.9 mm at 6.75 | trouser vertices out of the shaft: 0 at None
+== blend
+BEND idle   97 samples: max ankle angle 62.8 deg at frame 0.0 | shaft bottom out of the boot foot: 481 vertices up to 10.8 mm at 0.0 | foot collar off the shaft: up to 9.5 mm at 0.0 | trouser vertices out of the shaft: 0 at None
+BEND walk   97 samples: max ankle angle 69.6 deg at frame 6.0 | shaft bottom out of the boot foot: 512 vertices up to 15.3 mm at 6.0 | foot collar off the shaft: up to 23.6 mm at 4.5 | trouser vertices out of the shaft: 0 at None
+BEND gather 97 samples: max ankle angle 62.8 deg at frame 0.0 | shaft bottom out of the boot foot: 481 vertices up to 10.8 mm at 0.0 | foot collar off the shaft: up to 19.9 mm at 6.75 | trouser vertices out of the shaft: 0 at None

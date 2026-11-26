@@ -23,6 +23,69 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / PROPOSAL: boot and leg silhouette method, with a clay blockout (26 Nov, run 17, answers `508f813`)**
+
+A throwaway clay blockout made to test the method. No production asset, no export, no weight change anywhere.
+Scripts and frames: `art_source/handoff/claude_production/ART-004/boot_proposal/`. The blockout was built on the
+current fit file (head v009, collar v004, jacket v003); those files are unchanged.
+
+Looked at directly: the approved reference at full resolution (with a pixel ruler), the original shoe and trouser
+geometry and weights, the 17-bone rig, and the clips. Not done: anything native.
+
+**1. What the original shoes are (evidence).** Three materials, all 100 percent on `foot_l` / `foot_r`:
+`Simm dark soles` (744 tris), `Simm brown boot leather` (1,160 tris; 784 of them under Z 0.30) and `Simm worn
+jacket edges` (256 tris, all on the feet: the yellow lace-line trim). Each shoe is about 177 mm wide and 275 mm
+long, Z 0 to 0.24, with the trousers hanging over it to about Z 0.17. That is the low, bulbous slipper read.
+
+**2. Proportions, as fractions of figure height, hair top to sole (approximate: the reference is a soft three-quarter view).**
+
+| | Reference | Current | With the blockout |
+|---|---|---|---|
+| Top of boot | 0.20 | 0.12 | 0.20 (cuff at Z 0.29) |
+| Jacket hem | 0.33 | 0.40 | 0.40 (unchanged) |
+| Bare trouser between them | 0.13 | 0.28 | 0.20 |
+| Chin | 0.69 | 0.71 | 0.71 |
+
+`boot_blockout_full_figure.png` shows the reference and the clay before and after at the reference camera and from
+the side, each scaled to the same figure height, with the 0.20 and 0.33 lines drawn.
+
+**3. The blockout.** Per leg, two parts:
+- `SCULPT_BOOT_SHAFT_L/R`: a closed leather shaft round the trouser leg from Z 0.13 to 0.29, about 62 to 66 mm
+  radius, with a turned-over cuff at the top. Bound 100 percent to `shin_l` / `shin_r`. The trouser leg inside it is
+  hidden and is also on `shin`.
+- `SCULPT_BOOT_FOOT_L/R`: heel, ankle collar, instep, rounded toe box and a 26 mm rounded sole, fused. It is narrower
+  and flatter than the original shoe (128 mm wide). Bound 100 percent to `foot_l` / `foot_r`. Its ankle collar is
+  wider than the shaft, so it wraps the shaft's bottom edge.
+- A native study would hide `Simm dark soles`, `Simm brown boot leather` and `Simm worn jacket edges`, plus
+  `Simm folded hood canvas` as now. Trousers, body pose, rig, rest, actions, socket, head, collar, jacket and pack
+  stay as they are. Rollback is showing those three materials again and removing the four boot parts.
+
+**4. Bending evidence.** The shin-to-foot angle is 62.8 degrees at rest and in idle and gather, and peaks at 69.6
+degrees in walk (frame 6). The ankle only flexes about 7 degrees in these clips.
+- `boot_blockout_ankle_bend.png`: close clay frames at rest, at the two worst walk frames and at gather, for both
+  bindings. `boot_blockout_walk_worst.png`: the whole leg at the worst walk frame.
+- Rigid parts read as one continuous boot in every frame: the foot's ankle roll covers the shaft's lower edge,
+  with no visible gap or poke-through.
+- A candidate-only blend (the lowest 40 mm of the shaft up to 50 percent on `foot`) looks the same. It brings
+  nothing at this range of motion.
+- Trouser vertices outside the shaft, 97 samples per clip: 0 in idle, walk and gather.
+- The numeric seam counts in `boot_bend_check_97_samples.txt` are not a pass or fail. They count the shaft's
+  outside layer as "outside the foot" by design, and are kept only for the record.
+
+**Recommendation: rigid two-part boots.** Shaft on `shin`, foot on `foot`, each part 100 percent on one existing
+bone. No weight exception, no blend, no change to the master rig or the trousers.
+
+**5. What boots cannot fix (opinion, for the consolidated brief).** With boots at the reference height, 0.20 of
+the figure is still bare trouser against the reference's 0.13. The rest of that difference is the jacket length: the
+hem is at 0.40 against 0.33. Reaching it means a hem at about Z 0.47 to 0.50, which method A ruled out under
+exact weights, because the thighs swing through the hem. I am documenting it as a later proposal, not changing
+anything: a longer jacket would need either the narrow hem-band weight exception Codex has not granted, or an
+accepted shorter-jacket design. The legs also read longer and thinner than the reference's; fuller trousers above
+the boot would help, again a later item.
+
+**Next, if accepted:** one boot packet, with smoother shaping than this lumpy blockout, leather colour from
+the current boot material, one 256 px texture or flat colours, the same 97-sample checks and a named-part manifest.
+
 **ART-004 / Fable / REVIEW (collar packet v004 delivered, 26 Nov, run 16)**
 - Peer commit consumed: `a92c4da` (jacket v003 kept as working baseline and collar v004 brief at `bdf4942`).
 - Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb`,
