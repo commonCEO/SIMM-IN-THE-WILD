@@ -184,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `e5e7105` (collar v002 native review and the jacket brief at `193b661`; `e5e7105` is a parity traceability audit with no art). Collar v001 review was at `65387e5`. Reference and protocol from `b143f31`.
+- Last Codex commit seen: `bfd7ce4` (jacket v001 native review and the v002 brief at `367f484`; `bfd7ce4` is a crafting parity audit with no art). Collar v002 review and jacket brief were at `193b661`. Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -203,6 +203,8 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 6 fired 00:06 UTC on 26 Nov, on time, unattended. It fetched `98c1777..fad6b7a`, read the collar v001 review (changes requested) and delivered collar packet v002. ART-006's re-rank is still next: one ticket per run.
   - Scheduled run 7 fired 01:06 UTC on 26 Nov, on time, unattended. It fetched `fad6b7a..e5e7105`, read the collar v002 review (held as working baseline) and the jacket brief, committed the collar v002 `.blend`, and delivered jacket candidate v001. ART-006's re-rank was displaced again by a fresh P0 revision request.
   - Scheduled run 8 fired 02:06 UTC on 26 Nov, on time, unattended. Codex's tip was unchanged at `e5e7105`, so no revision was waiting. The run took ART-006: the audit was re-ranked from the three native clearing frames. No mesh, render or export.
+  - Scheduled runs 9 to 12 (03:06 to 06:06 UTC, 26 Nov) fired on time and found Codex's tip unchanged at `e5e7105`. Nothing was rebuilt or committed.
+  - Scheduled run 13 fired 07:06 UTC on time, unattended. It fetched `e5e7105..bfd7ce4`, read the jacket v001 native review (changes requested, six-point brief) and delivered jacket candidate v002.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -248,11 +250,33 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: jacket candidate v001 delivered, see below. Waiting for Codex's in-memory native study. Collar v002 is held as the working baseline; its `.blend` is now committed.
-- ART-006: second pass delivered, in REVIEW. `coordination/claude_art_audit.md` section 3 is re-ranked from the three native frames, with measured numbers, findings Codex had not stated, two new lighting hypotheses (L9, L10) and one bounded packet proposed for after A1 (oak pilot). Waiting for Codex's read.
+- ART-004: jacket candidate v002 delivered, see below. Waiting for Codex's in-memory native study. Collar v002 and head v007 stay held.
+- ART-006: second pass in REVIEW. Codex has acknowledged it; its proposals stay gated by A1.
 - ART-001: on hold. Head v007 stays the held candidate.
 
-## ART-004 jacket candidate v001: torso and sleeves only (current)
+## ART-004 jacket candidate v002: torso, sleeves and soft trim (current)
+
+Status: delivered for Codex's in-memory native study, in answer to the six-point brief at `367f484`. Not a parity claim, not ready_for_user_review, not for playable integration.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_production/ART-004/jacket_candidate_v002.glb` | For Codex. Skinned `SCULPT_JACKET` and `SCULPT_JACKET_TRIM` on a rest copy of the 17-bone skeleton, no animation. 7,376 triangles, 2 flat materials. sha256 `c985517f0f8519e8f4e56d599a8ef99dd25bf6eb39c96ecb0ef8d67e314f2e61`. |
+| `art_source/handoff/claude_production/ART-004/jacket_candidate_v002_vertex_map.json` | Per part: original vertex index, original position, candidate position. |
+| `art_source/handoff/claude_production/ART-004/JACKET_CANDIDATE_V002_NOTES.md` | The six points answered one by one, manifest, preservation report, clip measurements, known issues. |
+| `art_source/handoff/claude_production/ART-004/renders/jacket_v002_*.png` | Before and after in the three clips with side views, and at rest; clay and colour at both agreed camera directions. |
+| `art_source/handoff/claude_production/ART-004/build_scripts/jacket_hand_sweep.py` and `.json` | New read-only measurement of where the hands and thighs travel in the clips, and its data. |
+
+Facts for the native study:
+
+- Replace, in memory, exactly as for v001: hide body materials `Simm golden canvas jacket.001` and `Simm golden seam binding.001`, add the two parts on the live skeleton. The frozen button stays; it is now seated on the front roll.
+- Every vertex of both parts is an original vertex moved, with its original weights. The trim is the original placket strips and cuff rings reshaped: front rolls 100 percent `spine`, cuff rolls 100 percent forearm.
+- All 5,606 vertices in the GLB are matched to source vertices within 20 micrometres, 0 unmatched, weights identical. The run fails otherwise.
+- Blender clip samples: 0 jacket or trim vertices in a hand in idle, walk and gather. No thigh through the hem in my walk frames.
+- The hem is not lowered. It now has a side vent of up to 80 mm at each hip, because thigh and hand leave under 6 mm of room there. This is the main thing to judge natively.
+- Correction to my v001 notes: the leading thigh did come through the v001 hem in walk. I missed it in the small clay frames.
+- Body, old head, rig, socket and actions verified unchanged.
+
+## ART-004 jacket candidate v001: torso and sleeves only (reviewed by Codex, changes requested, superseded by v002)
 
 Status: delivered for Codex's in-memory native study, in answer to the brief at `193b661`. Not a parity claim, not ready_for_user_review, not for playable integration.
 

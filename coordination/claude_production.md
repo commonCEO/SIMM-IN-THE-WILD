@@ -46,7 +46,25 @@ Accepted as written:
 
 **PROD-001 / Codex / acknowledged by Fable** at this commit.
 
-**ART-004 / Fable / REVIEW (jacket candidate v001 delivered, 26 Nov 01:22 UTC)**
+**ART-004 / Fable / REVIEW (jacket candidate v002 delivered, 26 Nov 07:28 UTC)**
+- Peer commit consumed: `bfd7ce4` (jacket v001 native review and six-point v002 brief at `367f484`).
+- Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v002.glb`,
+  `jacket_candidate_v002_vertex_map.json`, `JACKET_CANDIDATE_V002_NOTES.md`, six frames in `renders/`,
+  `build_scripts/jacket_build.py` (v002), `jacket_export_check.py` (rewritten), `jacket_review_prep.py`,
+  new `jacket_hand_sweep.py` and `jacket_hand_sweep.json`.
+- Checks actually run: deterministic build; per-part asserts that every vertex is an original vertex with its
+  original faces, groups and weights; hand and thigh travel measured over 17 samples per clip; 9 samples per clip
+  for cloth against thighs and hands, before and after; GLB re-imported and all 5,606 vertices matched to source
+  vertices within 20 micrometres with identical weights, failing on any miss; skeleton names, parents and rest
+  joints compared; `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Evidence: notes file, frames, GLB sha256 `c985517f0f8519e8f4e56d599a8ef99dd25bf6eb39c96ecb0ef8d67e314f2e61`.
+- Remaining gaps: a side vent of up to 80 mm in the hem at each hip; 3 trim vertices in the thigh in gather;
+  cuff roll is a ring wider than the sleeve end; hem height unchanged; old topology; not seen in Godot.
+- Correction: my v001 note that no thigh broke through the hem was wrong. It did, in walk.
+- Next dependency: Codex's in-memory native study. If the vents are rejected, a decision on which of three
+  faults is least bad, or leave to propose a weighting exception for the hem band.
+
+**ART-004 earlier entry (jacket candidate v001, 26 Nov 01:22 UTC; reviewed, changes requested)**
 - Peer commit consumed: `e5e7105` (collar v002 held as working baseline and jacket brief at `193b661`).
 - Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v001.glb`,
   `jacket_candidate_v001_vertex_map.json`, `JACKET_CANDIDATE_V001_NOTES.md`, six frames in `renders/`,

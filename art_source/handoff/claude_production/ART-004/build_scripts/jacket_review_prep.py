@@ -13,6 +13,8 @@ if show == "after":
     bmesh.ops.delete(bm, geom=[f for f in bm.faces if f.material_index in drop], context='FACES')
     bm.to_mesh(tmp.data); bm.free()
 if jk: jk.hide_render = show != "after"
+tr = bpy.data.objects.get("SCULPT_JACKET_TRIM")
+if tr: tr.hide_render = show != "after"
 for m in bpy.data.materials:                      # the body's texture files are not in Git: fall back to base values
     if m.use_nodes:
         for n in list(m.node_tree.nodes):

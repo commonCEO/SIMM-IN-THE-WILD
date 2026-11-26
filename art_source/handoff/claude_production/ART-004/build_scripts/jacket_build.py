@@ -1,4 +1,5 @@
-# ART-004 jacket candidate: torso and sleeves only, on a working copy of the frozen body's jacket faces.
+# ART-004 jacket candidate v002: torso and sleeves, plus a soft front and cuff trim, on working copies of the
+# frozen body's jacket and seam-binding faces. (v001 of this script is in Git history at 43144e9.)
 # blender -b <collar_packet_v002.blend> --python jacket_build.py -- <absolute out.blend>
 # PROTECTED_BODY, SimmRig, the actions, the head and the collar are read, never written.
 # Contract: no vertex is added, merged or re-weighted. Every candidate vertex is one original jacket vertex,
@@ -97,7 +98,8 @@ for isl in sleeves:
         s = superscale((q1-C1)/A1, (q2-C2)/A2, 2.0)
         k = sstep(t/0.22)                                    # the shoulder end stays put inside the torso
         f = 1.0 + (s*(S_PUFF + 0.07*np.sin(np.pi*t)) - 1.0)*k
-        f *= 1.0 - 0.10*sstep((t-0.86)/0.14)                 # gathered cuff
+        f *= 1.0 + 0.17*sstep((t-0.78)/0.22)                 # v002: the sleeve opens toward the cuff, because the frozen
+                                                             # mitten hand is wider than a gathered sleeve end and the cuff roll must clear it
         n1, n2 = C1 + (q1-C1)*f, C2 + (q2-C2)*f
         v.co = c + ax*T + e1*n1 + e2*n2
 
@@ -153,6 +155,114 @@ for v in torso:
     CY = float(np.interp(min(max(v.co.z, zc[0]), zc[-1]), zc, cy)); f = want[v]
     v.co.x *= f; v.co.y = CY + (v.co.y - CY)*f
 print("TORSO vertices brought out under the frozen straps and pack: %d, largest factor %.3f" % (sum(1 for f in want.values() if f > 1.002), max(want.values())))
+# ======================= v002 corrections, after Codex's native review of v001 =================================
+import math
+from mathutils.kdtree import KDTree
+lay = bm.verts.layers.int["orig_index"]
+orig = lambda v: src.data.vertices[v[lay]].co
+cyz = lambda z: float(np.interp(min(max(z, zc[0]), zc[-1]), zc, cy))
+
+# A. Strap contact in 3D. Each frozen strap or pack vertex that lay within 12 mm of the old jacket should sit at
+#    the same height above the new cloth. The cloth is lifted under it with a smooth falloff; the strap is not moved.
+old_jacket = BVHTree.FromPolygons([v.co.copy() for v in src.data.vertices], [tuple(p.vertices) for p in src.data.polygons if p.material_index == mi])
+sv = set()
+for p in src.data.polygons:
+    if p.material_index in on_i: sv.update(p.vertices)
+rest_gap = []
+for k in sv:
+    c = src.data.vertices[k].co; lo = old_jacket.find_nearest(c, 0.012)
+    if lo[0] is not None: rest_gap.append((c.copy(), lo[3]))
+for it in range(5):
+    cur = BVHTree.FromBMesh(bm); recs = []
+    for c, d_old in rest_gap:
+        loc, nrm, idx, d = cur.find_nearest(c, 0.06)
+        if loc is None: continue
+        ex = (d if (c - loc).dot(nrm) >= 0 else -d) - d_old
+        if ex > 0.0015: recs.append((loc.copy(), (c - loc).normalized(), ex))
+    if not recs: break
+    kd = KDTree(len(recs))
+    for i, r in enumerate(recs): kd.insert(r[0], i)
+    kd.balance()
+    for v in torso:
+        bw = 0.0; best = None
+        for co_, i, dist in kd.find_range(v.co, 0.04):
+            w = recs[i][2]*(1.0 - dist/0.04)**2
+            if w > bw: bw = w; best = recs[i][1]
+        if best is not None: v.co += best*bw*0.9
+print("TORSO strap contact passes: %d, strap and pack vertices tracked: %d, still more than 1.5 mm high after the last pass: %d" % (it + 1, len(rest_gap), len(recs)))
+
+# B. Gathered, sewn hem. In v001 the hem flared 2 to 3 cm past the old line at the hips, the right hand went into
+#    it in the gather clip, and its outline followed every trouser detail. Here the bottom band is drawn to one
+#    smooth outline: the trousers' outer envelope by angle, widened and low-passed, plus 11 mm of air. The hem is
+#    not lowered.
+NBIN = 72; SIDE_LIFT = 0.080; req = np.zeros(NBIN); band = []
+for v in torso:
+    if v.co.z > 0.645: continue
+    CY = cyz(v.co.z); d = Vector((v.co.x, v.co.y - CY, 0.0)); r = d.length
+    if r < 1e-5: continue
+    d /= r; th = math.atan2(d.y, d.x); k = int((th + math.pi)/(2*math.pi)*NBIN) % NBIN
+    hit = under_t.ray_cast(Vector((0.0, CY, v.co.z)) + d*0.6, -d, 0.6)
+    if hit[0] is not None: req[k] = max(req[k], 0.6 - hit[3] + 0.011)
+    band.append((v, CY, r, th))
+import json, os
+sweep = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "jacket_hand_sweep.json")))
+# The thighs swing under the hem in walk and gather. The outline must clear where the trousers actually travel
+# (hips rest space, measured over the clips), not only where they are at rest. 7 mm of air to the swept surface.
+zb0 = min(v.co.z for v, CY, r, th in band) - 0.004; swr = np.zeros(NBIN)
+for x, y, z in sweep["hips_trousers"]:
+    if z < zb0 or z > 0.645: continue
+    k = int((math.atan2(y - cyz(z), x) + math.pi)/(2*math.pi)*NBIN) % NBIN
+    swr[k] = max(swr[k], math.hypot(x, y - cyz(z)))
+rest_req = req.copy(); req = np.maximum(req, swr + 0.007)
+print("TORSO hem outline widened for the thighs' swing in %d of %d directions, by up to %.1f mm" % (int((req > rest_req + 1e-6).sum()), NBIN, (req - rest_req).max()*1000))
+if (req == 0).any():                                       # empty bins take their neighbours' value
+    idx = np.arange(NBIN); good = req > 0; req = np.interp(idx, idx[good], req[good], period=NBIN)
+env = np.maximum.reduce([np.roll(req, sft) for sft in (-2, -1, 0, 1, 2)])
+for _ in range(4): env = 0.25*np.roll(env, 1) + 0.5*env + 0.25*np.roll(env, -1)
+env = np.maximum(env, req)
+# The hands' measured travel (jacket_hand_sweep.json, hips rest space) caps the outline: 6 mm of air to the hand
+# where that is possible, never closer than 2 mm to the trousers.
+zlo = min(v.co.z for v, CY, r, th in band) - 0.012; hmin = np.full(NBIN, 9.0)
+for x, y, z in sweep["hips"]:
+    if z < zlo or z > 0.660: continue
+    th = math.atan2(y - cyz(z), x); k = int((th + math.pi)/(2*math.pi)*NBIN) % NBIN
+    hmin[k] = min(hmin[k], math.hypot(x, y - cyz(z)))
+hmin = np.minimum.reduce([np.roll(hmin, sft) for sft in (-1, 0, 1)])
+# Where the swinging thigh and the hand leave less than 6 mm for cloth, there is no outline that clears both.
+# There the thigh wins (a trouser corner through the hem shows in every walk cycle) and the hem is lifted,
+# out of the hand's way, as a side vent. The lift is computed further down from how high the hand reaches.
+room = (hmin - 0.006) - (req - 0.011 + 0.004)
+cap = np.maximum(hmin - 0.006, req - 0.011 + 0.004); capped = int((cap < env).sum()); env = np.minimum(env, cap)
+for _ in range(2): env = np.minimum(0.25*np.roll(env, 1) + 0.5*env + 0.25*np.roll(env, -1), cap)
+# How high the hand reaches inside the cloth's radius, per direction: the hem is lifted to just above that.
+hz = np.zeros(NBIN)
+for x, y, z in sweep["hips"]:
+    if z < zlo or z > 0.660: continue
+    k = int((math.atan2(y - cyz(z), x) + math.pi)/(2*math.pi)*NBIN) % NBIN
+    if math.hypot(x, y - cyz(z)) < env[k] + 0.006: hz[k] = max(hz[k], z)
+need_lift = np.where(hz > 0, np.clip(hz + 0.006 - zb0, 0.0, SIDE_LIFT), 0.0)
+lift = np.maximum.reduce([np.roll(need_lift, sft) for sft in (-1, 0, 1)])
+for _ in range(2): lift = np.maximum(0.25*np.roll(lift, 1) + 0.5*lift + 0.25*np.roll(lift, -1), need_lift)
+print("TORSO hem outline capped by the hand sweep in %d of %d directions; directions with under 6 mm of room between swinging thigh and hand: %d; hem lifted in %d directions, by up to %.0f mm" % (capped, NBIN, int((room < 0.006).sum()), int((lift > 0.001).sum()), lift.max()*1000))
+for v, CY, r, th in band:
+    u = (th + math.pi)/(2*math.pi)*NBIN - 0.5; k0 = int(math.floor(u)) % NBIN; fr_ = u - math.floor(u)
+    target = env[k0]*(1-fr_) + env[(k0+1) % NBIN]*fr_
+    w = sstep((0.645 - v.co.z)/0.055); f = (r + (target - r)*w)/r
+    v.co.x *= f; v.co.y = CY + (v.co.y - CY)*f
+    lw = lift[k0]*(1-fr_) + lift[(k0+1) % NBIN]*fr_
+    if lw > 0.0: v.co.z += lw*max(0.0, (0.660 - v.co.z)/(0.660 - zb0))
+inside = 0; nearest = 9.0
+for v, CY, r, th in band:
+    loc, nrm, idx_, dd = under_t.find_nearest(v.co, 0.05)
+    if loc is None: continue
+    sd_ = dd if (v.co - loc).dot(nrm) >= 0 else -dd
+    nearest = min(nearest, sd_); inside += sd_ < 0
+print("TORSO hem band: %d vertices on one smooth outline, radius %.3f to %.3f m; closest to the trousers %.1f mm; inside the trousers: %d" % (len(band), env.min(), env.max(), nearest*1000, inside))
+cuff_fit = {}
+for isl in sleeves:
+    co_ = np.array([v.co[:] for v in isl]); zmin = co_[:, 2].min(); end = co_[co_[:, 2] < zmin + 0.012]
+    cxy = end[:, :2].mean(0); cuff_fit[int(np.sign(cxy[0]))] = (float(cxy[0]), float(cxy[1]), float(zmin), float(np.hypot(end[:, 0]-cxy[0], end[:, 1]-cxy[1]).mean()))
+# ======================= end of v002 torso corrections ==========================================================
 pushed = 0
 for isl, clear in ((sleeves[0], 0.004), (sleeves[1], 0.004)):
     for v in isl:
@@ -173,4 +283,92 @@ me.materials.clear(); me.materials.append(mat)
 for p in me.polygons: p.material_index = 0
 md = ob.modifiers.new("Armature", 'ARMATURE'); md.object = rig        # reads the rig, does not edit it
 print("JACKET verts %d tris %d" % (len(me.vertices), sum(len(p.vertices)-2 for p in me.polygons)))
+
+# ---- v002 trim: the original front placket strips and cuff rings, reshaped into soft rolled edges -------------
+# Same contract as the jacket: original vertices moved, original groups and weights (plackets 100 percent spine,
+# cuffs 100 percent forearm). The pocket strips and the two-triangle end fragments are left out.
+import math
+BIND_MAT = "Simm golden seam binding.001"
+tme = src.data.copy(); tme.name = "SCULPT_JACKET_TRIM"; tob = bpy.data.objects.new("SCULPT_JACKET_TRIM", tme); col.objects.link(tob)
+ta = tme.attributes.new("orig_index", 'INT', 'POINT'); ta.data.foreach_set("value", list(range(len(tme.vertices))))
+bi = [i for i, m in enumerate(tme.materials) if m and m.name == BIND_MAT][0]
+tb = bmesh.new(); tb.from_mesh(tme)
+bmesh.ops.delete(tb, geom=[f for f in tb.faces if f.material_index != bi], context='FACES')
+bmesh.ops.delete(tb, geom=[v for v in tb.verts if not v.link_faces], context='VERTS')
+tb.verts.ensure_lookup_table(); tb.verts.index_update()
+seen = set(); tis = []
+for v in tb.verts:
+    if v.index in seen: continue
+    st = [v]; comp = []; seen.add(v.index)
+    while st:
+        a_ = st.pop(); comp.append(a_)
+        for e in a_.link_edges:
+            b_ = e.other_vert(a_)
+            if b_.index not in seen: seen.add(b_.index); st.append(b_)
+    tis.append(comp)
+cuffs = [c for c in tis if len(c) == 726]; plackets = [c for c in tis if len(c) == 96]
+assert len(cuffs) == 2 and len(plackets) == 2, [len(c) for c in tis]
+dropped = [c for c in tis if len(c) not in (726, 96)]
+print("TRIM kept: 2 cuff rings, 2 placket strips. Left out: %d islands, %d vertices (pocket strips and end fragments)" % (len(dropped), sum(len(c) for c in dropped)))
+jt = BVHTree.FromPolygons([v.co.copy() for v in me.vertices], [tuple(p.vertices) for p in me.polygons])
+hem_z = min(v.co.z for v in me.vertices if abs(v.co.x) < 0.12 and v.co.y < 0)
+def front_edge(sd, z):                                    # innermost point of the jacket front at this height
+    for k in range(70):
+        x = sd*(0.016 + 0.002*k); h = jt.ray_cast(Vector((x, -0.5, z)), Vector((0, 1, 0)), 0.9)
+        if h[0] is not None and h[0].y < -0.02: return x, h[0].y
+    return None
+RHO = 0.0075; BTN_Z, BTN_X, BTN_BACK = 0.876, 0.047, -0.1378      # frozen brass button: centre height, centre X, back face Y
+for comp in plackets:
+    sd = 1.0 if sum(v.co.x for v in comp) > 0 else -1.0
+    zs = np.linspace(hem_z + 0.006, 0.966, 28); ex = []; ey = []
+    for z in zs:
+        e = front_edge(sd, z)
+        if e is None: e = (ex[-1], ey[-1]) if ex else (sd*0.05, -0.12)
+        ex.append(e[0]); ey.append(e[1])
+    ex, ey = smooth1d(ex, 3), smooth1d(ey, 3)
+    levels = []; srt = sorted(comp, key=lambda v: v.co.z)
+    for v in srt:
+        if levels and v.co.z - levels[-1][-1].co.z < 0.004: levels[-1].append(v)
+        else: levels.append([v])
+    for li, lv in enumerate(levels):
+        zo = sum(v.co.z for v in lv)/len(lv); z = zo
+        z = max(z, hem_z + 0.006)                         # the strip keeps its original height: it ends above the gathered hem band
+        xc = float(np.interp(z, zs, ex)) - sd*0.003; yc = float(np.interp(z, zs, ey)) + 0.002
+        b = math.exp(-((z - BTN_Z)/0.038)**2)             # the roll comes forward to seat the button, both sides alike
+        xc += (sd*BTN_X - xc)*b; yc += ((BTN_BACK + RHO) - yc)*b
+        rho = RHO*(0.55 if li in (0, len(levels)-1) or len(lv) < 6 else 1.0)
+        cx_ = sum(v.co.x for v in lv)/len(lv); cy_ = sum(v.co.y for v in lv)/len(lv)
+        for v in lv:
+            dx, dy = v.co.x - cx_, v.co.y - cy_; n = math.hypot(dx, dy) or 1.0
+            v.co = (xc + rho*dx/n, yc + rho*dy/n, z)
+RC = 0.0060
+for comp in cuffs:
+    c0 = np.array([v.co[:] for v in comp]); ctr = c0.mean(0); sd = int(np.sign(ctr[0]))
+    r0 = np.hypot(c0[:, 0]-ctr[0], c0[:, 1]-ctr[1]); Rm = 0.5*(r0.min()+r0.max()); zm = 0.5*(c0[:, 2].min()+c0[:, 2].max())
+    fx, fy, fz, fr = cuff_fit[sd]
+    # The roll sits at the sleeve end and is opened up until the hand, as it travels in the clips (forearm
+    # rest space), keeps 2.5 mm of air to it. The mitten hand is wider than the sleeve end, so the roll is too.
+    zc_ = fz + 0.006; hp = np.array(sweep["forearm_l" if sd < 0 else "forearm_r"])
+    hr = np.hypot(hp[:, 0]-fx, hp[:, 1]-fy); hz = hp[:, 2] - zc_
+    Rc = fr + 0.003
+    while Rc < fr + 0.024 and np.hypot(hr - Rc, hz).min() < RC + 0.0025: Rc += 0.0005
+    air = float(np.hypot(hr - Rc, hz).min()) - RC
+    print("TRIM cuff side %+d: sleeve end radius %.1f mm, roll centre radius %.1f mm, roll thickness %.1f mm, air to the hand over the clips %.1f mm" % (sd, fr*1000, Rc*1000, 2*RC*1000, air*1000))
+    for v, rr in zip(comp, r0):
+        th = math.atan2(v.co.y - ctr[1], v.co.x - ctr[0]); a_, b_ = rr - Rm, v.co.z - zm
+        ph = math.atan2(b_, a_) if math.hypot(a_, b_) > 1e-6 else 0.0
+        R = Rc + RC*math.cos(ph)
+        v.co = (fx + R*math.cos(th), fy + R*math.sin(th), zc_ + RC*math.sin(ph))
+bmesh.ops.delete(tb, geom=[v for c in dropped for v in c], context='VERTS')
+bmesh.ops.recalc_face_normals(tb, faces=tb.faces)
+for f in tb.faces: f.smooth = True
+tb.to_mesh(tme); tb.free(); tme.update()
+tmat = bpy.data.materials.get("SCULPT_MAT_JACKET_TRIM") or bpy.data.materials.new("SCULPT_MAT_JACKET_TRIM")
+tmat.use_nodes = True; tbs = tmat.node_tree.nodes["Principled BSDF"]
+tbs.inputs["Base Color"].default_value = (0.468, 0.22, 0.019, 1.0)        # the frozen seam-binding material's own base value
+tbs.inputs["Roughness"].default_value = 0.86; tbs.inputs["Specular"].default_value = 0.2
+tme.materials.clear(); tme.materials.append(tmat)
+for p in tme.polygons: p.material_index = 0
+tob.modifiers.new("Armature", 'ARMATURE').object = rig
+print("TRIM verts %d tris %d" % (len(tme.vertices), sum(len(p.vertices)-2 for p in tme.polygons)))
 bpy.ops.wm.save_as_mainfile(filepath=out)
