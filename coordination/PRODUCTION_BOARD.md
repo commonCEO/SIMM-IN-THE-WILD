@@ -10,7 +10,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
-| ART-004 | P0 | Fable | DOING | ART-003 feedback | Collarv002 held as working baseline after native review; next jacket torso/sleeve packet only, preserve original rig/weights; see latest receipt |
+| ART-004 | P0 | Fable | DOING | ART-003 feedback | Jacketv001 native original-rig study reviewed; v002 cuff/front edge/contact and complete weight verification requested; collarv002/headv007 held |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | READY | PROD-001 | Native3frame evidence now delivered by EVID-001; re-rank audit from actual scene images, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
@@ -88,3 +88,8 @@ Three checksum-verified frames in coordination/reviews/: current reference compo
 ## PROD-003 first-loop audit slice
 
 PARITY_TRACEABILITY.md maps8active flows to browser source, local Godot functions and concrete missing evidence. Confirmed automatic day/survival/rest, NPC exchange/home service and map/localization gaps. No implementation/test pass claimed; code inspection only. CORE-001 then CORE-002/003 is the functional critical path. Remaining recipes/world/combat/controller audit still queued. Source publication approval remains pending; report contains findings only.
+
+
+## Jacketv001 native review
+
+Original17bone rests matched and candidate skin bound to original animated skeleton in memory. Rounder shape but raw cuffs/front, floating button, reported hand intersection/strap gaps remain. Partial26vertex weight-comparison gap must close. Bounded v002 brief published; ART-004 DOING, no live integration. All41runtime files unchanged.

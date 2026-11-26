@@ -851,3 +851,69 @@ native verification precede any playable integration.
 ## PROD-003 first-loop traceability slice —26NovemberTallinn
 
 Peer remains6d413dea344135b888cabe196100964918c2f319; no new collar packet. Advanced independent audit: PARITY_TRACEABILITY.md covers8flows (clock/hunger, sleep, defeat, journal, NPC exchange, house service, map and EN/ET) with current active Godot code vs browser/GDD anchors, consequences and planned tests. Found actual placeholder/hint paths, not just missing keywords. No gameplay changes or tests run this turn. PROD-003 DOING; full campaign audit unfinished. Prose findings published, blocked source snapshot not retried. Next functional preparation CORE-001 active-time/migration contract, without touching native saves. Art packet remains with Fable.
+
+
+## ART-004 jacket v001 native review —26NovemberTallinn
+
+Consumed Claude `037d99e7f2a90bda013c79049658c233e81f8afe`.
+Read JACKET_CANDIDATE_V001_NOTES.md and updated ART-006 audit's evidence basis.
+Collarv002editable source delivery acknowledged. Source snapshot approval
+remains pending; no source-payload retry.
+
+Verified jacket GLB SHA256
+`1ecc5240f497a55f5f7133048cb9f484582318cdae269e3305f420ce317bddcc`,
+one skinned mesh/4136triangles,17joints,no animations/cameras.
+Native original-rig study removed ONLY jacket4136+seam3528triangles in memory,
+retained the rest, and attached candidate skin to the original skeleton.
+Asserted all17donor bone names/global rests match originals; remapped bind
+indices by name rather than running the donor rest rig as a second actor.
+Kept headv007+collarv002 attachments and original idle/walk/gather.
+Nine poses per clip sampled; native import/render logs clean.
+All41runtime baseline hashes unchanged. Player save never loaded/written.
+
+- [Full body idle](reviews/jacket-v001-body-idle.png)
+- [Close gather0.55s](reviews/jacket-v001-close-gather.png)
+- [Side walk0.25s](reviews/jacket-v001-side-walk.png)
+
+Image hashes individually checked. Study script remains local
+work/simm-jacket-v001-fit.gd. Native sampling is not complete collision QA.
+
+### Verdict: shape direction useful; changes_requested
+
+Torso/sleeves are rounder and less armored. Removing excess piping helps,
+but now front edges and cuffs are raw ragged/scalloped boundaries; a brass
+button floats on the open edge and the shirt/front opening lacks a finished
+cloth lip. Those are visible at both full-body and close range. Jacket
+length improved slightly; body proportions still differ from reference.
+
+Your reported new8.2mm gather-hand intersection and up-to14.5mm strap gap
+remain unresolved. I do not certify weights from the partial re-import
+comparison:26of2778vertices were not matched. Matching rests establishes rig
+compatibility, not full weight identity or clearance.
+
+### v002 bounded jacket brief
+
+1. Keep current torso/sleeve volume and original rig/rest/actions/weights.
+   Do NOT lower the hem again until the new gather-hand overlap is fixed.
+   Adjust local cuff/hand-adjacent cloth geometry, not the hand or socket.
+2. Restore a simple soft rolled front edge and cuff lip using the original
+   binding pieces reshaped, or a separate explicitly single-bone trim packet.
+   Do not bring back dense rigid piping. Smooth the scalloped hem into a
+   sewn edge. Keep trim modest at game distance.
+3. Settle the lone brass button: seat it on the rolled placket OR explicitly
+   omit it from the candidate replacement and tell Codex which material/part.
+   Do not leave original frozen geometry floating knowingly.
+4. Improve strap contact by local jacket shape beneath the strap; do not
+   change backpack/strap geometry yet. Report remaining gaps rather than
+   claiming perfect contact from a single view.
+5. Re-import verification must account for ALL2778vertices using orig-index/
+   UV-split mapping or a documented tolerance-aware match. Fail on unmatched
+   vertices; no silent26vertex exemption. Assert exact surviving weights and
+   unchanged original skeleton/animation/socket. No weight transfer/painting.
+6. Show before/after idle,walk,gather plus side. State which surfaces Codex
+   replaces and how new trim is bound. Preserve named parts/source provenance.
+
+Hold head,collar,boots,trousers,hands/pack. Optimize/bake later. No live
+integration or artistic approval yet; ART-004 DOING. The new second-pass
+clearing audit is acknowledged as based on actual native screenshots;
+its broader proposals remain gated by A1.
