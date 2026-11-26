@@ -1,0 +1,19 @@
+PART SCULPT_JACKET_LONG replaces SCULPT_JACKET: 4294 verts (1778 v003 vertices kept with identical position and weights, 2516 new), 8576 tris, 296 v003 vertices removed (highest at Z 0.651); non-manifold edges 0; max influences 4; bones ['chest', 'forearm_l', 'forearm_r', 'hips', 'spine', 'thigh_l', 'thigh_r', 'upper_arm_l', 'upper_arm_r']
+PART SCULPT_JACKET_LONG_TRIM replaces SCULPT_JACKET_TRIM: 3516 verts (1596 v003 vertices kept with identical position and weights, 1920 new), 6980 tris, 48 v003 vertices removed (highest at Z 0.662); non-manifold edges 36; max influences 4; bones ['forearm_l', 'forearm_r', 'hips', 'spine', 'thigh_l', 'thigh_r']
+CLIP idle             all         97 samples: trouser points through the cloth worst 0 (deepest 0.0 mm) at None | cloth vertices in a hand worst 0 (deepest 0.0 mm) at None | stretch held v003 jacket 1.03 trim 1.00; NEW jacket 1.01 at 66.56, NEW trim 1.01 at 66.56
+CLIP idle             smallest gap between a hand and a cloth vertex outside it: 0.01 mm (frame 2.81, SCULPT_JACKET_LONG vertex 2746)
+CLIP idle             closest covered trouser point to the cloth: 3.8 mm (frame 66.56, body vertex 1174)
+CLIP walk             first half  97 samples: trouser points through the cloth worst 1 (deepest 0.0 mm) at 5.75 | cloth vertices in a hand worst 0 (deepest 0.0 mm) at None | stretch held v003 jacket 1.60 trim 1.00; NEW jacket 1.36 at 6.0, NEW trim 1.22 at 6.0
+CLIP walk             second half 97 samples: trouser points through the cloth worst 1 (deepest 0.1 mm) at 18.0 | cloth vertices in a hand worst 0 (deepest 0.0 mm) at None | stretch held v003 jacket 1.60 trim 1.00; NEW jacket 1.36 at 18.0, NEW trim 1.19 at 18.0
+CLIP walk             smallest gap between a hand and a cloth vertex outside it: 2.97 mm (frame 1.75, SCULPT_JACKET_LONG vertex 2793)
+CLIP walk             closest covered trouser point to the cloth: 0.0 mm (frame 17.75, body vertex 1183)
+CLIP gather           all         97 samples: trouser points through the cloth worst 0 (deepest 0.0 mm) at None | cloth vertices in a hand worst 35 (deepest 8.1 mm) at 12.0 | stretch held v003 jacket 2.11 trim 1.00; NEW jacket 1.16 at 12.0, NEW trim 1.00 at 4.75
+CLIP gather           smallest gap between a hand and a cloth vertex outside it: 0.0 mm (frame 10.75, SCULPT_JACKET_LONG vertex 3118)
+CLIP gather           closest covered trouser point to the cloth: 3.7 mm (frame 12.0, body vertex 1182)
+CLIP gather_handclear all         97 samples: trouser points through the cloth worst 0 (deepest 0.0 mm) at None | cloth vertices in a hand worst 0 (deepest 0.0 mm) at None | stretch held v003 jacket 2.11 trim 1.00; NEW jacket 1.16 at 12.0, NEW trim 1.00 at 4.75
+CLIP gather_handclear smallest gap between a hand and a cloth vertex outside it: 0.15 mm (frame 0.0, SCULPT_JACKET_LONG vertex 2746)
+CLIP gather_handclear closest covered trouser point to the cloth: 3.7 mm (frame 12.0, body vertex 1182)
+RESIDUAL vertex-sample counts: {('walk', 'trousers inside the cloth'): 3, ('walk', 'trousers outside the cloth'): 1, ('gather', 'cloth inside a hand'): 1035}
+GLB SCULPT_JACKET_LONG: 5002 vertices, 8576 tris, bounds [-0.301 -0.145  0.48 ]..[0.301 0.149 0.974]; unmatched 0; source covered 4294 of 4294; weight mismatches 0
+GLB SCULPT_JACKET_LONG_TRIM: 4668 vertices, 6980 tris, bounds [-0.3   -0.148  0.478]..[0.3   0.153 0.965]; unmatched 0; source covered 3516 of 3516; weight mismatches 0
+EXPORTED /tmp/claude-0/-home-user-SIMM-IN-THE-WILD/123b77e6-9052-5b75-9d37-583dd569ada8/scratchpad/j4/jacket_candidate_v004.glb 2b73bba6a02a1dc1e83fb4be6a2ac4ce64565b4238fe8cc4ccd9d88657b66fe6

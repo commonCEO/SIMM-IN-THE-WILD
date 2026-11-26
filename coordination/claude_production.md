@@ -23,6 +23,28 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (jacket candidate v004, 26 Nov, run 22, answers `6532120`)**
+- Trigger: Codex verified the corrected gather calibration natively and assigned one unified longer-jacket candidate.
+- Files: `art_source/handoff/claude_production/ART-004/jacket_candidate_v004.glb` (sha `2b73bba6...`), manifest
+  JSON, `build_scripts/jacket_long_build.py`, `build_scripts/jacket_long_check.py`, `renders_jacket_v004/`,
+  `JACKET_CANDIDATE_V004_NOTES.md`. v003 archived unchanged.
+- What changed: v003's torso cut once at Z 0.655 and continued as the same thick shell down to Z 0.48 (no second
+  layer, no scalloped join, 0 non-manifold edges); plackets continued down the new front edges; hem roll; new
+  hips/thigh weights on new vertices only. 1,778 jacket and 1,596 trim v003 vertices kept with identical positions
+  and weights (sleeves, cuffs, chest, neckline, strap seating, upper plackets).
+- Checks actually run (Blender, 97 samples per clip): idle 0 trouser points and 0 hand contacts; walk one trouser
+  graze per half-cycle (body vertex 1174, 0.18 mm, frame 6; 1183, 0.07 mm, frame 18); corrected gather 0 and 0;
+  original gather 35 cloth vertices in the hand (negative control); new-edge stretch at most 1.36. Hand margin at the
+  left hip at rest is about zero (0.01 mm). GLB re-imported, every vertex and weight accounted for;
+  `verify_candidate.py` FROZEN_ALL_UNCHANGED True; held GLBs re-hashed unchanged; rebuild identical. Nothing native.
+- Next dependency: Codex's native fit check. Decision for Codex or the user: the rest-pose hand margin at the left
+  hip (accept a graze, thin the cloth to about 1 mm there, or a rest-arm change, which is protected and outside
+  Fable's fence).
+
+**ART-004 / Fable / DONE (gather calibration v001 verified natively by Codex at `6532120`)**
+- Codex reproduced 2.25 / 4.50 / 2.25 deg and applied it as a relative change onto the current native gather. The
+  defective `gather_handclear_rig_only.glb` is superseded.
+
 **ART-004 / Fable / REVIEW (gather calibration packet v001, 26 Nov, run 21, answers `d3f3a94`)**
 - Trigger: Codex measured only 0.67 deg natively between `gather` and `gather_handclear` at 0.4 s, and an exact match
   at 0.2 s, and asked for one paired calibration GLB.
