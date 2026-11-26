@@ -75,11 +75,12 @@ px = ((xx + 0.5)/N - 0.5)*2*EYE_R; pz = ((yy + 0.5)/N - 0.5)*2*EYE_R
 # the lid opening, so each eye read as one black glossy oval with no white and no highlight. Now, as in the concept
 # art: white shows at both sides, a warm brown iris touches both lids, and two catchlights are painted in and
 # made emissive so they read in any light.
-IA, IB, ICZ = 0.0140, 0.0262, 0.0000             # lid opening is 0.0174 x 0.0264 (half sizes)
+IA, IB, ICZ = 0.0163, 0.0262, 0.0000             # v010: iris fills more of the opening (less white), as the reference's dark ovals
+# v009 was 0.0140             # lid opening is 0.0174 x 0.0264 (half sizes)
 r_i = np.sqrt((px/IA)**2 + ((pz-ICZ)/IB)**2)
-PA, PB = 0.0068, 0.0118
+PA, PB = 0.0086, 0.0142                           # v010: larger pupil, darker read (v009 0.0068, 0.0118)
 r_p = np.sqrt((px/PA)**2 + ((pz-ICZ+0.0015)/PB)**2)
-sclera = srgb(244, 238, 230); ir_out = srgb(48, 27, 16); ir_low = srgb(140, 86, 44); pup = srgb(18, 11, 9)
+sclera = srgb(236, 227, 215); ir_out = srgb(30, 18, 12); ir_low = srgb(92, 56, 32); pup = srgb(18, 11, 9)   # v010: darker iris, softer white
 img = np.zeros((N, N, 3)); img[:] = sclera
 shade = sstep((1.35 - r_i)/0.45)                 # soft grey toward the iris edge, so the white is not flat paper
 img = img*(1 - 0.12*shade[..., None])
@@ -90,7 +91,7 @@ iris = iris*(1 - 0.55*ring[..., None])           # dark outer ring
 k = sstep((1.0 - r_i)/0.05)[..., None]; img = img*(1-k) + iris*k
 k = sstep((1.0 - r_p)/0.12)[..., None]; img = img*(1-k) + pup[None, None, :]*k
 def blob(cx, cz, ra, rb): return sstep((1.0 - np.sqrt(((px-cx)/ra)**2 + ((pz-cz)/rb)**2))/0.18)
-glint = np.maximum(blob(0.0045, 0.0105, 0.0052, 0.0060), 0.85*blob(-0.0050, -0.0110, 0.0022, 0.0022))
+glint = np.maximum(blob(0.0045, 0.0105, 0.0040, 0.0046), 0.85*blob(-0.0050, -0.0110, 0.0020, 0.0020))   # v010: catchlights kept, smaller
 white = srgb(255, 252, 246); img = img*(1-glint[..., None]) + white[None, None, :]*glint[..., None]
 eye_img = bpy.data.images.new("simm_head_eye_basecolor", N, N, alpha=False)
 eye_img.pixels.foreach_set(np.concatenate([img, np.ones((N, N, 1))], 2).astype(np.float32).ravel())
@@ -99,7 +100,7 @@ em = np.repeat(glint[..., None], 3, 2)
 eye_em = bpy.data.images.new("simm_head_eye_emissive", N, N, alpha=False)
 eye_em.pixels.foreach_set(np.concatenate([em, np.ones((N, N, 1))], 2).astype(np.float32).ravel())
 eye_em.filepath_raw = os.path.join(texdir, "simm_head_eye_emissive.png"); eye_em.file_format = 'PNG'; eye_em.save(); eye_em.pack()
-m_eye = pbr("SCULPT_MAT_EYE", img=eye_img, rough=0.30, spec=0.5)
+m_eye = pbr("SCULPT_MAT_EYE", img=eye_img, rough=0.42, spec=0.35)   # v010: less glassy (v009 0.30 / 0.5)
 et = m_eye.node_tree.nodes.new("ShaderNodeTexImage"); et.image = eye_em
 eb_ = m_eye.node_tree.nodes["Principled BSDF"]; m_eye.node_tree.links.new(et.outputs[0], eb_.inputs["Emission"])
 eb_.inputs["Emission Strength"].default_value = 1.0

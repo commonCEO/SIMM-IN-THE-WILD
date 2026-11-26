@@ -156,6 +156,18 @@ S.scale((0, -0.110, 1.050), 0.050, (0.98, 1.0, 1.0), pivot=(0, -0.110, 1.050))
 S.inflate((0.094, -0.092, 1.100), 0.075, 0.005, mirror=True)                 # full low cheeks
 S.grab((0.060, -0.118, 1.116), 0.040, (0.0, -0.004, 0.002), mirror=True)     # cheek front (apple)
 S.smooth((0, -0.10, 1.07), 0.09, it=3, k=0.4, mask=(~(lipline | inner)).astype(float))
+# v010 (Codex's native whole-figure review, 26 Nov): the lower face read narrow, ending in a small pointed chin.
+# Measured against the reference crop (eye centres found in the image), v009's eye-to-chin depth over eye spacing,
+# about 1.13, already matched the reference's (about 1.13, chin read to +-5 px): the problem is width and point, not
+# length. So the chin is lifted only a little, broadened and rounded, and the cheek-to-jaw mass filled so the face
+# widens down to a soft jaw. The lip seam and its ring stay masked out; head size, crown, eyes and neck base do not move.
+keep = (~(lipline | inner)).astype(float)
+S.grab((0, -0.108, 1.030), 0.044, (0, 0.003, 0.002), mask=keep)                 # chin a little up and back: blunter tip
+S.scale((0, -0.104, 1.040), 0.046, (1.20, 1.0, 1.0), pivot=(0, -0.104, 1.040), mask=keep)   # broader, blunt chin
+S.inflate((0.072, -0.085, 1.058), 0.058, 0.011, mirror=True, mask=keep)          # fill between chin and jaw corner
+S.inflate((0.098, -0.060, 1.075), 0.062, 0.009, mirror=True, mask=keep)          # fuller jaw angle: cheek runs into jaw
+S.inflate((0.088, -0.098, 1.098), 0.050, 0.004, mirror=True, mask=keep)          # rounder low cheek
+S.smooth((0, -0.095, 1.055), 0.075, it=4, k=0.45, mask=keep)
 # ---- 6. ears: smaller, simpler, set lower (child ear sits between eye and nose base)
 me_ = soft(ear, 2)
 for s_ in (1, -1):

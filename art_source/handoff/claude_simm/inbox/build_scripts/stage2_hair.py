@@ -103,13 +103,13 @@ L("S_right_burn",   [(-86, 38, -.008), (-88, 16, .000), (-86, -4, .004), (-80, -
 L("S_right_behind", [(-106, 36, -.008), (-108, 10, .002), (-108, -12, .008), (-104, -31, .024)], .084, grooves=[(-.2, .4)], ridge_at=.2, **SUB)
 L("S_right_spike",  [(-72, 82, -.008), (-88, 76, .016), (-99, 70, .056)], .040, t=.014, n=12, grooves=[(0, .3)], tip_pow=1.5, root=.6, belly=.3)
 # ===== SUBORDINATE, fringe: short lock by the parting (leaves the window over the right eye), far-left temple lock
-L("S_fringe_part",  [(-28, 60, -.010), (-26, 44, .002), (-24, 28, .004), (-21, 11, .004)], .068, t=.016, grooves=[(0, .4)], tip_pow=2.2)
+L("S_fringe_part",  [(-28, 60, -.010), (-26, 44, .002), (-24, 24, .005), (-21, 7, .006), (-19, -4, .006)], .068, t=.016, grooves=[(0, .4)], tip_pow=2.2)
 L("S_fringe_right", [(-32, 67, -.014), (-44, 48, .000), (-57, 30, .007), (-68, 14, .011), (-73, 8, .013)], .078, n=18, t=.021,
   channels=[(-.2, .2, .14, .3, .7)], tip_pow=2.0, root=.55, belly=.34, roll=(0, 16), taper_from=.58, **VOL)   # offset, swept sideways to the temple
 L("S_fringe_left",  [(4, 76, -.016), (32, 62, -.004), (56, 40, .004), (72, 14, .012), (77, 0, .016)], .082, n=18, t=.022,
   channels=[(.25, -.1, .15, .3, .7)], tip_pow=1.7, root=.5, belly=.34, taper_from=.48, **VOL)
 L("S_fringe_left_split", [(60, 36, -.010), (73, 27, .008), (82, 20, .026), (86, 17, .036)], .034, n=14, t=.013, tip_pow=1.4, taper_from=.35, **FLK)
-L("S_fringe_mid",   [(-18, 72, -.014), (-4, 52, .000), (9, 30, .005), (16, 9, .006)], .080, n=16, t=.020, tip_pow=3.4, root=.55, belly=.36, taper_from=.72, **VOL)   # shorter, rounded end
+L("S_fringe_mid",   [(-18, 72, -.014), (-4, 52, .000), (9, 26, .006), (14, 7, .007), (16, -5, .007)], .080, n=16, t=.020, tip_pow=3.4, root=.55, belly=.36, taper_from=.72, **VOL)   # shorter, rounded end
 L("S_fringe_under", [(0, 44, -.004), (10, 28, .005), (20, 10, .005), (25, -1, .005)], .096, t=.017, n=12, tip_pow=3.2)
 L("S_fringe_under2", [(-22, 42, -.004), (-15, 24, .005), (-9, 5, .005)], .078, t=.016, n=10, tip_pow=3.0)
 L("S_fringe_under3", [(40, 40, -.004), (52, 20, .005), (63, -8, .006)], .086, t=.016, n=10, tip_pow=2.3)
@@ -123,8 +123,10 @@ L("S_left_burn",   [(82, 34, -.008), (82, 14, .000), (80, -4, .004), (76, -18, .
 L("S_left_behind", [(108, 40, -.008), (110, 14, .002), (110, -10, .008), (106, -29, .026)], .084, grooves=[(.2, .4)], ridge_at=-.2, **SUB)
 # ===== v007 hairline: short root locks over the two window tops, so the hair grows out of the scalp there
 RT = dict(vol=True, ridge=0.0, under=1.0, root=.35, belly=.45)
-L("root_win_right", [(-34, 50, -.010), (-33, 38, .003), (-31, 27, .004), (-29, 19, .003)], .058, n=12, t=.015, tip_pow=2.6, taper_from=.55, **RT)
-L("root_win_left",  [(22, 50, -.010), (22, 38, .003), (22, 28, .004), (21, 20, .003)], .052, n=12, t=.014, tip_pow=2.6, taper_from=.55, **RT)
+# v010: the two window locks now hang on down to just above the brows, so the fringe covers the forehead as in the
+# reference instead of leaving two bare windows. Same roots and widths; longer, pointed tips.
+L("root_win_right", [(-34, 50, -.010), (-33, 34, .003), (-31, 18, .006), (-29, 4, .007), (-27, -5, .006)], .062, n=16, t=.016, tip_pow=1.9, taper_from=.50, **RT)
+L("root_win_left",  [(22, 50, -.010), (22, 34, .003), (22, 18, .006), (21, 4, .007), (19, -5, .006)], .056, n=16, t=.015, tip_pow=1.9, taper_from=.50, **RT)
 L("root_temple_r",  [(-52, 40, -.010), (-56, 30, .003), (-60, 21, .004)], .048, n=10, t=.013, tip_pow=2.4, taper_from=.5, **RT)
 # ===== v006 silhouette flicks: few, short, unequal, each placed where the reference outline breaks
 FL = dict(vol=True, ridge=0.0, under=1.0, root=.75, belly=.28)

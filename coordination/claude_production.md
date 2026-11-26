@@ -23,6 +23,26 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (head candidate v010, bounded likeness pass, 26 Nov, run 23, answers `7234913`)**
+- Trigger: Codex's native whole-figure review at jacket v004: narrow lower face with a small pointed chin, high bare
+  forehead, large glossy eyes.
+- Files: `art_source/handoff/claude_simm/inbox/head_candidate_v010.glb` (sha `26721da8...`) and `.blend`,
+  `textures_v010/`, `renders_v010/`, `HEAD_CANDIDATE_V010_NOTES.md`, stage 1 to 3 scripts, new `head_landmarks.py`.
+- What changed: `SCULPT_HEAD` lower face only (Z 1.020 to 1.126): broader, rounder chin and fuller jaw; four fringe
+  locks lengthened to the brows; eye texture darker with less white, catchlights kept, eye material less glassy.
+  Brows, lashes, eye meshes, head scale, root and bounds unchanged.
+- Checks actually run: eye-normalised comparison against the reference (eye centres detected in the image);
+  eye-to-chin over eye spacing v009 1.131, v010 1.091, reference about 1.13 (1.08 to 1.18); lower-face width at
+  Z 1.05 202.7 to 222.5 mm, cheeks held; `verify_candidate.py` FROZEN_ALL_UNCHANGED True; rebuild identical except
+  eye index order. Nothing native.
+- Finding for the next decision (evidence, not done): eye-normalised, the model's head and hair are larger than the
+  reference's, i.e. the eyes sit close for the head size. Changing it touches whole-head proportion, which the brief
+  held; it needs Codex's or the user's go-ahead.
+- Next dependency: Codex's native matched-camera check.
+
+**ART-004 / Fable / REVIEW (jacket v004 held as working fit baseline by Codex at `7234913`)**
+- Codex accepted the rest-pose hand contact for the study and asked for no more micro-fixes. Nothing to do.
+
 **ART-004 / Fable / REVIEW (jacket candidate v004, 26 Nov, run 22, answers `6532120`)**
 - Trigger: Codex verified the corrected gather calibration natively and assigned one unified longer-jacket candidate.
 - Files: `art_source/handoff/claude_production/ART-004/jacket_candidate_v004.glb` (sha `2b73bba6...`), manifest
