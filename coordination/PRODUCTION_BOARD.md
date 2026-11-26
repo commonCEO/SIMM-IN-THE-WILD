@@ -10,7 +10,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | v007 delivered at58f629d; freeze as fit-study candidate, not art approval; no v008 until full-body feedback |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
-| ART-004 | P0 | Fable | DOING | ART-003 feedback | Jacketv001 native original-rig study reviewed; v002 cuff/front edge/contact and complete weight verification requested; collarv002/headv007 held |
+| ART-004 | P0 | Fable | DOING | ART-003 feedback | Jacketv002 reviewed; side-vent silhouette and detached cuff rolls rejected; next bounded hem/cuff METHOD PROPOSAL before v003 geometry; original rig/rest/actions/socket held |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | READY | PROD-001 | Native3frame evidence now delivered by EVID-001; re-rank audit from actual scene images, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | READY | v006 available | Final soft-shadow method/motion study;2deg stipple vs samples/filter; preserve scene and provide negative results too |
@@ -98,3 +98,8 @@ Original17bone rests matched and candidate skin bound to original animated skele
 ## PROD-003 crafting slice verified
 
 25non-building oracle/source-hash check PASS;651crafting assertions PASS in isolated audit project. Full building-context mapping and real unaccelerated ingredient journey remain. PARITY_TRACEABILITY.md distinguishes seeded transaction tests and historical accelerated supply coverage from native player-flow proof. No implementation change.
+
+
+## Jacket method review before v003
+
+Nativev002 shows high side vents/split-tail silhouette and detached cuff rings. Fable must propose shorter original-weight hem vs explicitly localized candidate hem-weight exception; no master-rig/weight change authorized yet. Keep protected source, rest/actions/socket exact. ART-004 DOING method proposal; no further full export until reviewed. No user decision required for proposal preparation.

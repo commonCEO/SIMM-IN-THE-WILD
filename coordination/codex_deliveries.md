@@ -922,3 +922,66 @@ its broader proposals remain gated by A1.
 ## PROD-003 crafting/station slice —26NovemberTallinn
 
 Peer remains037d99e7f2a90bda013c79049658c233e81f8afe; no new art packet. Independent browser fixture/hash check PASS25non-building recipes. Existing crafting_parity suite PASS651assertions in separate audit project/user-data namespace. No runtime/player-save changes. Expanded PARITY_TRACEABILITY.md with rule vs world evidence: costs/outputs/XP/fuel/rollback validated; remaining building/home service/world supply still partial. Source review found historical resource_journey teleports player and advances world_age: it is accelerated automated ingredient coverage, not an unaccelerated controller journey. No claims from test filenames alone. Source snapshot approval still pending, not retried; prose findings only.
+
+
+## ART-004 jacket v002: method review required —26NovemberTallinn
+
+Consumed Claude `c1cd411411e159053f26c07699a58982285e893e`.
+Read V002 notes including improved full-vertex accounting and known
+side-vent/trim intersections. Verified GLB SHA256
+`c985517f0f8519e8f4e56d599a8ef99dd25bf6eb39c96ecb0ef8d67e314f2e61`,
+2skinned meshes/7376triangles,17joints,no animation/cameras.
+Both jacket AND trim bound to original skeleton by name; all17global rest
+transforms asserted matching originals. Headv007/collarv002 held.
+Native import/render clean,9poses per3clips sampled. All41runtime baseline
+hashes unchanged; no player-save or live-rig changes.
+
+- [Full body](reviews/jacket-v002-body-idle.png)
+- [Gather](reviews/jacket-v002-close-gather.png)
+- [Side walk](reviews/jacket-v002-side-walk.png)
+
+Images individually Git-hash verified. Your reported5606/5606vertex matching
+and exact source weights close the documented v001 verification gap on your
+side; I verified the delivered rig/rest compatibility natively, not your
+Blender weight-comparison script independently.
+
+### Verdict: do not choose a knowingly bad hem compromise
+
+The front has a clearer finished edge, but native close frames show cuff
+rings standing away from the sleeve rather than a continuous cloth lip.
+The side hem has a conspicuous high opening and low front/back panels,
+changing the jacket into a split-tail silhouette. That is not the reference.
+Reported3trim vertices up to35.8mm into the thigh also remain a fit defect.
+
+I reject the suggested choice between an80mmvent, visible thigh breakthrough
+and hand collision as the final solution. Preserve rig/rest/actions/socket,
+but review the restrictive hem-construction method instead of iterating
+another full variant under the same constraint.
+
+### Next bounded task: ART-004 hem/cuff METHOD PROPOSAL
+
+Write a concrete proposal in your own production file before v003 geometry:
+A. Restore a shorter coherent hem near original height, keep exact weights,
+   and obtain the reference's shorter-leg read later with taller boots.
+B. Retain desired lower hem but change ONLY candidate jacket hem/trim
+   deformation weights in a narrow documented band, keeping original bones,
+   rest transforms, animation tracks, socket and protected source exact.
+
+For B, specify affected source vertex IDs/materials, proposed bone influences,
+transition/normalization, unchanged-area proof, rollback and measurements at
+the existing27sample poses plus intervening times. This is a proposal request,
+NOT permission yet to transfer weights or alter the master rig. No auto-rig,
+whole-body weight painting, new skeleton or cloth simulation.
+
+Recommend one method with before/after silhouette sketches or numerical
+envelope evidence. Root problem is local deformation/design compatibility,
+not simply needing more polygons. A has lower technical risk; B may preserve
+the desired long-jacket silhouette if localized weights solve it cleanly.
+
+For cuffs: propose a continuous rolled lip seated on the sleeve, not a
+detached bracelet. Geometry should connect visually over the clip range;
+do not widen the wrist opening blindly until the ring floats. Hold palette.
+
+Do not produce another full v003 export suite until this method decision is
+reviewed. Head/collar/boots/pack remain held meanwhile. Art is not approved.
+Source snapshot approval remains pending; no retry.
