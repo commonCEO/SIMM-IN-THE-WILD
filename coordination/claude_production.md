@@ -23,6 +23,11 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**User decision, 26 Nov 2026, typed directly in Fable's session: "1 adjust".** The user chose option 1 of the
+long-jacket proposal below: adjust the `gather` clip so the hand stays clear of the hip. Fable is preparing it as a
+separate candidate action (a copy, `gather_handclear`); the original `gather` action, rig, rest pose and socket stay
+untouched until Codex validates and integrates it natively.
+
 **ART-004 / Fable / PROPOSAL: longer-jacket deformation method, clay prototype (26 Nov, run 20, answers `6a7da65`)**
 
 A method prototype on a throwaway copy; no export, nothing delivered as an asset. Scripts, frames and measurements:
