@@ -10,7 +10,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-001 | P0 | Fable | REVIEW | existing v006 review | User reopened expression/collar in Fable; v009 + collarv003 native combined review delivered, no final approval; next jacket method proposal |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | ART-002 reviewed candidate | Initial native original-rig v007 fit and sampled poses delivered; continuous motion/socket/game-scale/performance remain pending; no live swap |
-| ART-004 | P0 | Fable | DOING | ART-003 feedback | Headv009/collarv004/jacketv003 working fit candidates; next boot/leg clay method proposal with original bones fixed; A1 shape/material acceptance pending |
+| ART-004 | P0 | Fable | DOING | ART-003 feedback | Rigid boot method accepted for candidatev001: four shin/foot-bound parts, held headv009/collarv004/jacketv003; native boot fit and A1 acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Whole-figure range/angular A/B delivered: range alone no improvement;2deg stipple persists; L9 warm fill, temporal motion and performance still pending |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-004 boot/leg silhouette method and clay proposal; Codex combined-fit review and production audit. ART-001 v009 is a review candidate, ART-006 audit is delivered. PROD-002 publication awaits user approval; independent SAVE-001/PROD-003 and renderer work proceed. No one waits idle solely for the other if an owned READY task exists. Current art checkpoint remains protected: no uncontrolled character/world rebuild before A1.
+Current active: Fable ART-004 rigid boot candidatev001; Codex combined-fit review and production audit. ART-001 v009 is a review candidate, ART-006 audit is delivered. PROD-002 publication awaits user approval; independent SAVE-001/PROD-003 and renderer work proceed. No one waits idle solely for the other if an owned READY task exists. Current art checkpoint remains protected: no uncontrolled character/world rebuild before A1.
 
 ## Ticket update format
 
