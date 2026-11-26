@@ -1435,3 +1435,26 @@ Deliver ONE reversible v010 head candidate, keeping v009 archived. First normali
 Before a full packet, inspect a front/three-quarter neutral clay pair against v009 plus the approved head crop. Then provide the usual two fixed-camera colour/clay views, normalized reference comparison, static head-only GLB, source and manifest with counts/bounds/materials/checksums. Document exactly which face/fringe/eye meshes changed and why; no unbounded hair/texturing iteration. No paid tools, uploads or unrelated character edits. Codex will judge the native matched-camera result before the next art method is selected. ART-004 stays REVIEW/held fit, ART-001 becomes DOING for this bounded test.
 
 Codex next independent work remains the representative non-saving gameplay day/torch shadow candidate and continuous fitted-character motion/socket evidence; no further brightness sweep. The1degree source is only a provisional renderer test. PROD-002 broad source publication remains pending the existing user approval and was not retried.
+
+## RENDER-001 representative gameplay day/torch transfer — 26 November, 16:58 UTC check
+
+Peer remains `0573324`; Fable's bounded headv010 brief from `7234913` remains active. Advanced independent renderer validation rather than starting competing art.
+
+Captured the actual camp scene in a separate Forward+ RTX4080 process,1280x800, orthographic gameplay zoom10. Persistence was false BEFORE adding the camp to the tree; after five physics frames the scene and input were disabled. Same fixed fresh-state player/camera/pose and CURRENT runtime assets in every frame; this is not the new fitted-character study or the player's saved game. The torch was granted only to this throwaway state. No live process was stopped or restarted.
+
+Five controls:
+1. Day runtime baseline: sun2.2degrees, sky ambient0.5, sun shadow opacity1.
+2. Day angle-only:1degree, same sky/opacity.
+3. Day warm candidate:1degree, warm colour ambient #efd7af at0.2, opacity0.8.
+4. Actual evening baseline with existing torch, sun2.2degrees.
+5. Same evening and torch, sun1degree ONLY. Evening sky/energy were restored; daytime warm fill was deliberately not carried into night.
+
+Existing torch held exactly: energy1.4, range6m, source size0.30, blur2, opacity0.55. No omni-shadow setting changed. TAA,8192directional atlas and ULTRA filter came from the actual camp, not a new geometry-review preset.
+
+[Day controls at native pixels](reviews/gameplay-day-shadow-controls.png) show the same tent/player/bench crop left-to-right baseline, angle-only and warm candidate. [Evening controls at native pixels](reviews/gameplay-torch-shadow-controls.png) show baseline and angle-only. Crops are unscaled and unfiltered, individually Git-object-hash verified; headers only were added.
+
+Findings:1degree retains a readable contact silhouette at gameplay zoom but creates a narrower/harder directional penumbra than2.2; reducing source size alone does not provide the reference's warm fill. Warm0.2/opacity0.8 visibly lifts the tent and cast shadows and removes the heavy cool-black cast, but also reduces cloth/ground form contrast. Hold it as a candidate for matched clearing/material review, not a final preset. At this zoom the evening pair differs little around the torch; changing the directional source does not establish a fix for the separate omni/self-shadow system. Warm torch illumination remains readable, with some ground grain still visible. No claim of universal speckle removal or motion acceptance.
+
+Native run completed all five captures and exited0. The engine emitted one root-certificate-store error before rendering; this is NOT a clean diagnostic run. No script/render errors were reported. The certificate warning was not used as a reason to edit this PC's settings. All41 runtime baseline hashes remain unchanged; no player save read/write.
+
+Next owned validation: continuous fitted-character idle/walk/corrected gather/socket capture using held jacketv004, with game-scale and measured frame-time evidence. Do not spend another cycle on a static brightness sweep. Renderer integration and final artistic/user acceptance remain pending; Fable keeps the current head task, no new revision is assigned here. Source export approval remains pending and was not retried.
