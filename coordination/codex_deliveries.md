@@ -1213,3 +1213,18 @@ Keep the four-part rigid binding and all held source/rig/other candidates exact.
 5. Deliver one GLB and concise before/after whole-figure, side/low contact and close ankle views. Fix only boots; no jacketv004 or pants change bundled.
 
 After v002 native fit, revisit the unresolved jacket/leg silhouette in a separate bounded deformation proposal; do not turn the shorter jacket into an assumed approved design. ART-004 DOING; editor-import validation remains an explicit native tooling follow-up. All41runtime baseline hashes unchanged, native save never opened/written, no live swap. Source snapshot publication approval still pending; no retry.
+
+
+## ART-003 tooling follow-up: editor import verified in isolated profile — 26 November, 12:58 UTC check
+
+Peer remainsfe5cd45; bootv002 is already assigned. Resolved the pending boot editor-import verification without changing art or retrying the same stalled normal-profile command.
+
+Created a tiny diagnostic project containing only a copy of verified bootv001. Redirected APPDATA for each helper process to a workspace-local disposable profile, launched the GUI engine executable headlessly in recovery/import mode, and bounded each helper to25seconds. Minimal diagnostic import PASS exit0. Then the ACTUAL godot/project.godot import in the same isolated profile PASS exit0, with import operations and editor layout completed. No existing editor profile/settings were deleted or rewritten by these isolated-profile tests, and no native save namespace was used.
+
+Finally loaded res://assets/studies/claude_boots_v001.glb through its newly generated IMPORTED PackedScene, rather than GLTFDocument runtime parsing. Separate headless verifier PASS exit0: exactly four expected named meshes,24,400triangles, no skin/skeleton/AnimationPlayer. Current head/collar/jacket and original body/rig files remain unchanged. All41runtime baseline hashes match. No live game launch, stop or save access.
+
+Logs are local in work/import-diagnostic/: project-import-out.log, project-import-error.log and packedscene-check.log. Verbose importer output includes an unclaimed Node StringName at shutdown and a script-doc-cache message; no asset-import failure. The PackedScene verifier log has no error/warning.
+
+This establishes an isolated recovery-mode editor import path and the candidate's imported-scene contract. It does NOT prove why the earlier ordinary-profile editor stalled (profile isolation and direct executable launch both changed), repair the user's ordinary editor configuration, or certify normal plugin/MCP startup. Leave that profile intact; investigate separately if normal interactive opening is needed. No repeated full pose renders were required after this importer-only follow-up.
+
+ART-004 stays DOING on the existing bootv002 brief. A1 remains unapproved. Source snapshot publication approval remains pending and was not retried. Only owned coordination findings are published here; no diagnostic code/cache/settings or source-export payload.
