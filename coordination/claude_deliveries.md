@@ -8,8 +8,8 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Item | Current file | Status |
 |---|---|---|
 | Head | `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb` | Held study candidate (Codex `19ec210`) |
-| Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v003.glb` | Held study candidate; back seating to be corrected in a separate packet |
-| Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Delivered for native fit, method A |
+| Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Delivered for native test: seated on jacket v003 (v003 kept as the previous held candidate) |
+| Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`) |
 
 Older versions below are kept for history only.
 
@@ -194,7 +194,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `e947b22` (combined native review of head v009 + collar v003 at `19ec210`; method A accepted and jacket v003 assigned at `94cb54b`; `e947b22` is a skills audit with no art). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `a92c4da` (jacket v003 native fit kept as the working baseline and collar v004 assigned at `bdf4942`; `a92c4da` is a parity audit with no art). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -218,6 +218,7 @@ Facts Codex needs for the Godot comparison:
   - About 07:30 UTC the user reviewed a native side view ("IMO we're still 30% off") and then typed "Yes, this needs to have full parity, for Mattias to be happy", approving reopening the collar and the hair, which Codex had on hold. Collar v003 was delivered in that prompted turn.
   - Scheduled run 14 fired 08:06 UTC on time. It fetched `bfd7ce4..906cdaf`, read the jacket v002 review and wrote the hem and cuff method proposal in `coordination/claude_production.md` (recommends option A). No geometry. Codex had not yet seen collar v003, head v008 or head v009 at that commit.
   - Scheduled run 15 fired 09:07 UTC on time. It fetched `906cdaf..e947b22`, read the combined native review and the method decision, and delivered jacket v003 (method A, seated cuffs, 0 hand contacts at 25 and 97 samples per clip) with a collar seating proposal.
+  - Scheduled run 16 fired 10:06 UTC on time. It fetched `e947b22..a92c4da`, read the jacket v003 review and the collar seating brief, and delivered collar v004.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -263,11 +264,28 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: jacket v003 delivered, see below. Waiting for Codex's native fit. Collar seating correction proposed in `JACKET_CANDIDATE_V003_NOTES.md`, not started.
-- ART-001: head v009 held as the study candidate. Codex: hair slabs and the explicit smile noted; no v010 requested.
-- ART-006: second pass in REVIEW.
+- ART-004: collar v004 delivered, see below. Waiting for Codex's native test with head v009 and jacket v003. No boots or jacket v004 until Codex reviews the combined silhouette.
+- ART-001: head v009 held. ART-006: second pass in REVIEW.
 
-## ART-004 jacket candidate v003: method A, seated cuffs (current)
+## ART-004 collar packet v004: hood seated on jacket v003 (current)
+
+Status: delivered for Codex's native test, answering `bdf4942`. Not a parity claim.
+
+| Path | Purpose |
+|---|---|
+| `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | For Codex. Same parts, root and `chest` attachment as v003. sha256 `b093418b37d135b44ec2762cbfac76e9b975e3fcc3a382730738ceb76588056f`. |
+| `art_source/handoff/claude_production/ART-004/COLLAR_PACKET_V004_NOTES.md` | Changes, jacket weights under the collar, seat gap and clearance through the clips, known issues. |
+| `art_source/handoff/claude_production/ART-004/renders/collar_v004_*.png` | Before and after, idle views, worst gather, close base contact, clay. |
+
+Facts for the native test:
+
+- The separate bunch is gone; the stand is fuller at the back with two soft folds, and its lower edge is seated on the jacket v003 surface with a hidden 6 mm skirt.
+- Seat gap through idle, walk and gather (25 and 97 samples per clip): largest 5.0 mm, in 3 of 32 directions, at Simm's left front side.
+- Clearances in gather: jaw 9.5 mm, nape 8.1 mm, hair 5.6 mm. No hood surface over the pack flap.
+- Proposal: hide the frozen body's `Simm folded hood canvas` piece in the study; it still shows at the front neckline and as a small flap at the back right.
+- Head v009, jacket v003 and collar v003 files are unchanged.
+
+## ART-004 jacket candidate v003: method A, seated cuffs (working fit baseline)
 
 Status: delivered for Codex's native fit, answering `94cb54b`. Not a parity claim, not ready_for_user_review.
 
@@ -284,7 +302,7 @@ Facts for the native fit:
 - 0 cloth vertices inside a hand in idle, walk and gather, with a hand-only test, at 25 and at 97 samples per clip.
 - All 5,606 exported vertices matched with identical weights. Body, rig, socket and actions verified unchanged.
 
-## ART-004 collar packet v003: standing hood around the neck (current, user-approved reopen)
+## ART-004 collar packet v003: standing hood around the neck (user-approved reopen; superseded by v004)
 
 Status: delivered for Codex's native test. Not a parity claim, not ready_for_user_review.
 

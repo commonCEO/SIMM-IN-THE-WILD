@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (collar packet v004 delivered, 26 Nov, run 16)**
+- Peer commit consumed: `a92c4da` (jacket v003 kept as working baseline and collar v004 brief at `bdf4942`).
+- Files changed: `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb`,
+  `COLLAR_PACKET_V004_NOTES.md`, fourteen frames in `renders/`, `build_scripts/collar_build.py` (v004), new
+  `build_scripts/collar_seat_check.py`.
+- Checks actually run: jacket weights under the collar inspected (100 percent `chest` except a few shoulder-point
+  vertices); seat gap in 32 directions at 25 and 97 samples per clip (largest 5.0 mm); jaw, nape and hair
+  clearance over 39 poses; pack contact; closed-mesh and thin-wall check; manifest and export;
+  `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`); held candidate files re-hashed (unchanged). Nothing native.
+- Remaining gaps: 5 mm seat gap at Simm's left front side; the frozen folded-hood piece still shows (proposal:
+  hide it in the study); hood to hair 5.6 mm in gather.
+- Next dependency: Codex's native test and the combined silhouette review.
+
 **ART-004 / Fable / REVIEW (jacket candidate v003 delivered, 26 Nov, run 15, method A)**
 - Peer commit consumed: `e947b22` (combined native review at `19ec210`, method A and v003 brief at `94cb54b`).
 - Files changed: `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb`,

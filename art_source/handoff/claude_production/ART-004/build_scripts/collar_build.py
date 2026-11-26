@@ -1,4 +1,6 @@
-# ART-004 collar: hood and front scarf for Simm (v003; v001 and v002 are in Git history). Static meshes in the frozen actor's coordinates,
+# ART-004 collar: hood and front scarf for Simm (v004; v001 to v003 are in Git history, v003 at fb2bcac).
+# v004 (Codex at bdf4942): no separate back bunch; the stand's lower edge is seated on the jacket v003 surface.
+# Build on the file that holds jacket v003: work/jacket_candidate_v003.blend. Static meshes in the frozen actor's coordinates,
 # intended to follow the existing `chest` bone at 100 percent. The frozen body, rig and actions are not edited.
 # blender -b <head_candidate_v007.blend> --python collar_build.py -- <out.blend>
 import bpy, bmesh, sys, math, numpy as np
@@ -94,20 +96,54 @@ CX, CY = 0.0, 0.040                                  # neck centre in plan view
 hv = np.array([v.co[:] for v in bpy.data.objects["SCULPT_HEAD"].data.vertices]) @ np.array(bpy.data.objects["SCULPT_HEAD"].matrix_world)[:3, :3].T + np.array(bpy.data.objects["SCULPT_HEAD"].matrix_world)[:3, 3]
 h_az = np.degrees(np.arctan2(hv[:, 0]-CX, -(hv[:, 1]-CY))); h_r = np.hypot(hv[:, 0]-CX, hv[:, 1]-CY)
 #        |az|  base   top    thickness (radial)
-PROF = [( 38, 0.976, 1.004, 0.026), ( 50, 0.978, 1.020, 0.028), ( 65, 0.980, 1.036, 0.030), ( 80, 0.982, 1.050, 0.032),
-        (100, 0.983, 1.060, 0.034), (125, 0.986, 1.062, 0.036), (150, 0.990, 1.054, 0.039), (180, 0.994, 1.045, 0.042)]
+PROF = [( 38, 0.976, 1.004, 0.026), ( 50, 0.978, 1.020, 0.028), ( 65, 0.980, 1.036, 0.030), ( 80, 0.982, 1.050, 0.033),
+        (100, 0.983, 1.060, 0.036), (125, 0.986, 1.062, 0.041), (150, 0.990, 1.054, 0.046), (180, 0.994, 1.045, 0.049)]
+# v004: the back is 5 to 7 mm fuller (the volume of the removed bunch); the base column is replaced below by a seat
 P_az = np.array([p_[0] for p_ in PROF], float)
 def prof(a, i): return float(np.interp(abs(a), P_az, [p_[i] for p_ in PROF]))
 def r_inner(a, zb, zt):
     m = (np.abs(((h_az - a + 180) % 360) - 180) < 9) & (hv[:, 2] > zb) & (hv[:, 2] < zt + 0.008) & (h_r < 0.095)
     return (h_r[m].max() if m.any() else 0.06) + 0.011
-rows = []
+# v004 seat: the surface the stand stands on is jacket v003 plus the pack, straps and folded-hood piece of the frozen
+# body where they are higher. The original jacket faces of the frozen body are hidden in game, so they are left out.
+from mathutils import Vector as _V
+from mathutils.bvhtree import BVHTree as _T
+_jk = bpy.data.objects["SCULPT_JACKET"]; _bd = bpy.data.objects["PROTECTED_BODY"]
+_keep = [i for i, m in enumerate(_bd.data.materials) if m and m.name in ("Simm olive canvas", "Simm woven olive straps", "Simm canvas seams", "Simm folded hood canvas", "Simm warm dark undershirt.001")]
+_bv = [_bd.matrix_world @ v.co for v in _bd.data.vertices]
+seat_trees = [_T.FromPolygons([_jk.matrix_world @ v.co for v in _jk.data.vertices], [tuple(p.vertices) for p in _jk.data.polygons]),
+              _T.FromPolygons(_bv, [tuple(p.vertices) for p in _bd.data.polygons if p.material_index in _keep])]
+def seat_z(x, y):
+    best = None
+    for t in seat_trees:
+        h = t.ray_cast(_V((x, y, 1.20)), _V((0, 0, -1)), 0.40)
+        if h[0] is not None and (best is None or h[0].z > best): best = h[0].z
+    return best
+SKIRT = 0.006                                        # how far the stand's lower edge goes into the jacket, hidden
+MAXDROP = 0.070                                      # the base never drops more than 70 mm below the v003 base
+rows = []; seat_log = []; pend = []
 for a in list(range(-38, -181, -8)) + [-180] + list(range(172, 37, -8)) + [38]:
     if a == -180: a = 180.0
-    zb, zt, t = prof(a, 1), prof(a, 2), prof(a, 3)
-    rc = r_inner(a, zb, zt) + t/2
-    ar = math.radians(a)
-    rows.append((CX + rc*math.sin(ar), CY - rc*math.cos(ar), 0.5*(zb + zt), t/2, 0.5*(zt - zb)))
+    zb0, zt, t = prof(a, 1), prof(a, 2), prof(a, 3)
+    ri = r_inner(a, zb0, zt); rc = ri + t/2; ar = math.radians(a)
+    h = seat_z(CX + rc*math.sin(ar), CY - rc*math.cos(ar))              # the surface under the stand's centre line
+    pend.append([a, zb0, zt, t, rc, ar, h])
+hs = np.array([p_[6] if p_[6] is not None else np.nan for p_ in pend]); ok = ~np.isnan(hs)
+idx = np.arange(len(hs)); hs[~ok] = np.interp(idx[~ok], idx[ok], hs[ok])   # no hit: take the neighbours' height
+zbs = np.array([max(min(p_[1], hh - SKIRT), p_[1] - MAXDROP) for p_, hh in zip(pend, hs)])
+for _ in range(3):                                   # smooth along the path, never upward: sharp steps twisted the sweep
+    pad = np.concatenate([[zbs[0]], zbs, [zbs[-1]]]); zbs = np.minimum(zbs, 0.25*pad[:-2] + 0.5*pad[1:-1] + 0.25*pad[2:])
+# The stand keeps its v003 cross-section, with a rounded top. A separate seat band underneath, fused into it by the
+# remesh, reaches from inside the stand down to the seat. One tall section stretched to the jacket gave a knife-thin
+# top ridge that rendered as dark pits.
+seat_rows = []
+for (a, zb0, zt, t, rc, ar, h), hh, zb in zip(pend, hs, zbs):
+    seat_log.append((a, zb0, zb, hh, h is not None))
+    rows.append((CX + rc*math.sin(ar), CY - rc*math.cos(ar), 0.5*(zb0 + zt), t/2, 0.5*(zt - zb0)))
+    top = zb0 + 0.25*(zt - zb0)
+    seat_rows.append((CX + rc*math.sin(ar), CY - rc*math.cos(ar), 0.5*(zb + top), 0.46*t, max(0.5*(top - zb), 0.006)))
+for a, zb0, zb, hh, hit in seat_log[::4]:
+    print("SEAT az %6.1f: v003 base %.3f -> v004 base %.3f (surface under the stand's centre %.3f%s)" % (a, zb0, zb, hh, "" if hit else ", from neighbours"))
 rows = sorted(rows, key=lambda r_: math.atan2(r_[0], -(r_[1]-CY)) % (2*math.pi))   # from Simm's left front, round the back
 # the stand turns down into short lapels on the chest at each front edge (v002 lapel ends kept)
 # short, flat turn-downs: the stand folds over onto the chest and ends, it does not hang as a separate roll
@@ -116,14 +152,18 @@ LAP_L = [(0.089, -0.068, 0.978, .021, .012), (0.080, -0.088, 0.970, .018, .009),
 left = [r_ for r_ in rows if r_[0] > 0]; right = [r_ for r_ in rows if r_[0] <= 0]
 left.sort(key=lambda r_: -r_[1]); right.sort(key=lambda r_: r_[1])         # left side from back to front, right from front to back
 HOOD = LAP_R + right + left + LAP_L
-tube(bm, HOOD, n=150, around=28, lump=[(.12, .03, .88), (.25, .04, 1.10), (.36, .03, .92), (.46, .05, 1.12), (.56, .03, .90), (.66, .04, 1.10), (.78, .03, .93), (.90, .03, .88)])
-# gathered hood cloth bunched behind the neck, sitting on the stand and on top of the pack, not over the flap
-BUNCH = [(-0.060, 0.128, 1.012, .022, .020), (-0.020, 0.146, 1.020, .026, .024), (0.024, 0.144, 1.016, .025, .022), (0.062, 0.124, 1.010, .020, .018)]
-tube(bm, BUNCH, n=30, around=20, lump=[(.30, .10, 1.10), (.70, .10, .92)])
+tube(bm, HOOD, n=150, around=28, lump=[(.12, .03, .88), (.25, .04, 1.10), (.36, .05, .94), (.46, .06, 1.08), (.56, .06, .96), (.66, .05, 1.08), (.78, .03, .93), (.90, .03, .88)])   # v004: softer pinches at the back
+SEAT_L = [r_ for r_ in seat_rows if r_[0] > 0]; SEAT_R = [r_ for r_ in seat_rows if r_[0] <= 0]
+SEAT_L.sort(key=lambda r_: -r_[1]); SEAT_R.sort(key=lambda r_: r_[1])
+tube(bm, SEAT_R + SEAT_L, n=120, around=20)
+# v004: no separate bunch behind the neck. Two soft diagonal folds on the back of the stand instead, half buried in it.
+for sgn in (-1, 1):
+    F = [(sgn*0.030, 0.126, 1.026, .009, .007), (sgn*0.056, 0.116, 1.010, .010, .008), (sgn*0.074, 0.100, 0.994, .008, .006)]   # ends below the top edge
+    tube(bm, F, n=18, around=14)
 # a soft rolled top lip on the stand, uneven in thickness, longer on Simm's right
 LIP_R = [r_ for r_ in right if 70 < abs(math.degrees(math.atan2(r_[0], -(r_[1]-CY)))) < 175]
 FOLD = [(x_*1.02, CY + (y_-CY)*1.02, z_ + v_*0.85, 0.011, 0.009) for x_, y_, z_, l_, v_ in LIP_R]
-if len(FOLD) > 2: tube(bm, FOLD, n=3*len(FOLD), around=14)
+# v004: the rolled top lip is left out: where it fused with the taller stand it left small pits along the top edge
 hood = finish(bm, "SCULPT_HOOD", 0.0024, 9000, (228, 172, 44), 0.86)
 
 # ---------------- scarf: a pale soft band round the neck inside the collar, lower in front, one short end tucked forward
