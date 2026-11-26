@@ -1106,3 +1106,28 @@ The full figure still has long exposed trouser legs and very low, bulbous shoes,
 - This authorizes a throwaway clay proposal and binding design, not a production-weight exception or full high-density textured boot export. Recommend one method with evidence. If proportions still require a body/leg change beyond boots, document it as a later proposal rather than secretly changing protected limbs.
 
 Hold other art while this bounded proposal is prepared. After the boot method decision we will review the whole Simm again and return one consolidated cloth/proportion brief. Codex can independently work on renderer/game-scale evidence in parallel. ART-004 remains DOING; ART-005 user acceptance still pending. Source snapshot publication approval remains pending and was not retried.
+
+
+## RENDER-001 first whole-figure shadow controls — 26 November, 10:59 UTC check
+
+Peer remains3480886; boot method/clay proposal is Fable's current task. Advanced independent native renderer study rather than rebuilding held art. Read your ART-006 L9/L10 proposals; this packet isolates shadow range/angular softness before changing fill, tone mapping or albedo. L9/L10 are not claimed tested yet.
+
+Same headv009/collarv004/jacketv003, original body/rig, old hood suppressed in memory. Same whole-figure orthographic camera, warm key0.8/#fff0df, ambient0.35, Filmic, SSAO, 8192 directional atlas, SOFT_ULTRA filter and SubViewport TAA. Static captures settle24 rendered frames. No material or geometry edits.
+
+| Variant | Observed in native full-figure frame |
+|---|---|
+| 3m maximum shadow distance,0.25deg | Existing clean-but-hard shape-review baseline |
+| 8m,0.25deg | No material visible improvement to floor shadow shape. Negative result: range increase alone does not solve the look |
+| 8m,1deg | Broader/softer penumbra; visually less conspicuous pattern than2deg at this figure scale, but not established clean in close-up or motion |
+| 8m,2deg | Broader soft shadow with visibly stippled floor penumbra despite TAA/ULTRA. Not acceptable as final clean-shadow solution |
+
+Published individually verified PNGs:
+- [1degree native frame](reviews/shadow-range8-angle1.png)
+- [2degree negative control](reviews/shadow-range8-angle2.png)
+- Existing0.25degree whole-figure comparison: [prior fit baseline](reviews/collar-v004-body-idle.png)
+
+Also captured two discrete walk poses at2degrees locally; they are pose samples, not a temporal stability recording or frame-time profile. Full study/imported scene render exit0, no warnings/errors. All41runtime baseline hashes unchanged. No native save access or live game interruption.
+
+Do not declare that camera-distance clipping caused the old shadow blocks: the range A/B did not support that hypothesis. The whole-body camera is about4.69m from its target, while the original close-up study used a much closer camera; settings still need testing per view. Neither increasing range nor enabling the existing highest filter solves sampled penumbra noise by itself.
+
+Next owned renderer work: test L9 warm ambient/shadow-opacity separately on the clearing's lit/shaded sand, then record fixed-camera temporal motion and compare a restrained angular source to a denser shadow solution. Keep shape-review baseline0.25deg for reproducible geometry judgments in the meantime. No runtime lighting recommendation applied, no lightmap bake or paid service. RENDER-001 DOING; final soft-shadow/motion and measured performance evidence remain pending. Fable should continue the boot proposal without another face/collar revision. Source publication approval remains pending, not retried.
