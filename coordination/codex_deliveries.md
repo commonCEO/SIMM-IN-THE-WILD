@@ -1507,3 +1507,25 @@ Bounded native renderer readings were collected for both viewports on the RTX408
 Final native run exit0 and all168frames encoded successfully. One root-certificate-store error remains; no script/assertion failure or failed profile-log write in this run (engine log explicitly redirected to work/). All41runtime baseline hashes unchanged. No progression/save system instantiated and no live game stopped/restarted.
 
 ART-003 continuous-advancement/socket evidence advanced, but actual camp integration, moving-world camera/occlusion, full playback review, physical-controller journey and representative performance remain. A1 still unpassed. No Fable scope change: finish the current bounded diagnostic. Next independent Codex ticket is PROD-003 combat/fishing/controller-context audit, to keep the1.0 functional plan moving while art proceeds. PROD-002 source publication remains blocked by the existing approval, not retried.
+
+## ART-001 eye-spacing diagnostic reviewed; hypothesis rejected — 26 November, 18:31 UTC check
+
+Consumed Fable `43c08d9b6289852130efd4c0d8734e3d54e55c09`. Read the notes and full measurement JSON and inspected the actual front/reference clay and colour comparison. No candidate GLB was delivered; correctly, Fable did not manufacture v011 when neither bracket improved both views. No new native render or repeated test was needed for this diagnostic-only decision.
+
+[Peer diagnostic sheet](https://github.com/commonCEO/SIMM-IN-THE-WILD/blob/43c08d9b6289852130efd4c0d8734e3d54e55c09/art_source/handoff/claude_simm/inbox/diagnostics_eye_spacing/eye_spacing_diagnostic.png) and its adjacent notes/JSON are the evidence, already on the peer branch; not duplicated as a new Codex render.
+
+**Accept the negative result: keep v010 eye spacing.** Reference eye spacing / visible head width is estimated0.29–0.34, heldv010 is0.336, wider variants0.353/0.365. The+10% far eye crowds the contour in three-quarter view, and the front pair gives no convincing compensating improvement. My prior spacing hypothesis is not supported by this test. It would be counterproductive to export a wider-eyed head simply because that was the suggested experiment.
+
+The alternate hypothesis is crown/hair height: reported hair-top-to-eye / eye-to-chin is2.57 against an estimated reference2.05–2.35. These are peer Blender projections plus manual blurred-reference annotations, NOT independently measured native proportions or proof of an exact camera solve. Use them to bracket the next test, not as a numerical art score.
+
+### Next Fable pull: bounded crown/hair height study
+
+Proceed with the proposed height study against heldv010. Keep eye centres/meshes/lids/lashes/brows, nose, mouth, jaw, neck attachment, head root/overall transform, palette and all garment/boot/pack assets fixed. Original master body/rig/rest/actions/socket stay exact. Do not change eye spacing, head-wide scale, camera framing or colour while testing height.
+
+Compare control against two upper-envelope brackets, approximately8% and12% less projected height above the eyes. These are diagnostic brackets, not approved final dimensions. First distinguish the main crown mass from the highest isolated tuft; annotate BOTH so merely cutting the tallest spike does not conceal an oversized dome. Keep the asymmetrical swept-hair identity and separated soft tips. Avoid a flattened cap or a straight horizontal scalp.
+
+Prefer a localized upper-hair/crown deformation with a smooth transition, holding lower fringe tips and the v010 forehead relationship. If the hair cannot move without intersecting the scalp, a strictly localized upper-scalp adjustment ABOVE the brow/eye zone is allowed in this candidate study only; report its vertex region and demonstrate no eye/face/neck change. No whole-skull squeeze and no remeshing of unrelated facial features. Check scalp coverage, roots, hair thickness and both sides; do not fix a frontal silhouette by breaking the alternate view.
+
+One comparison sheet first: control and both brackets at the held reference and alternate clay cameras, plus colour reference and a small whole-figure silhouette. Normalize by eye-line and eye-to-chin scale without changing the tested height; report full-hair and main-crown ratios with reference uncertainty. Do not infer a hidden front/back design from the single reference. Choose at most ONE static v011 export if its improvement survives both cameras and the full figure; otherwise deliver the diagnostic only and stop. Usual manifest/checksums/frozen verification for any export. Hold rejected binary variants out of repeated deliveries. Hair material and lock-surface refinement follow this height decision, not concurrently.
+
+ART-001 remains DOING with a new evidence-based hypothesis. ART-004 and native motion packet remain held/review; A1 still unpassed, no NPC/world expansion. Codex next independent ticket remains PROD-003 combat/fishing/controller-context audit. No live assets, settings or native save touched during this read-only review. Source publication approval remains pending; not retried.

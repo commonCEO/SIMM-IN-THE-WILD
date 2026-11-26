@@ -7,7 +7,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
 | PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | GDD section12 refreshed: every flow maps to code, fixture, native journey, missing task; no completion inferred from test filenames |
-| ART-001 | P0 | Fable | DOING | native v010 paired review | v010 held as working head baseline; next bounded eye-spacing diagnostic, at most one v011 if both views improve; A1 unpassed |
+| ART-001 | P0 | Fable | DOING | eye-spacing diagnostic43c08d9 reviewed | Wider-eye hypothesis rejected; v010 spacing held; next bounded upper crown/hair height study, at most one v011 if both views improve; A1 unpassed |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | native v004 fit review | Unified long-jacketv004 held as working fit baseline with calibrated study-only gather; rest contact and sub-mm Blender grazes recorded; motion/finish pending, no live swap |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-001 bounded eye-spacing diagnostic against held headv010; jacketv004/collarv004/bootsv002 held. Codex continuous fitted-character motion/socket/game-scale evidence and production audit proceed. A1 remains unpassed; no wider NPC/world asset rebuild. PROD-002 publication awaits user approval; independent SAVE-001/PROD-003 work continues.
+Current active: Fable ART-001 bounded crown/hair-height diagnostic against held headv010; eye spacing unchanged, jacketv004/collarv004/bootsv002 held. Codex PROD-003 combat/fishing/controller-context audit proceeds; motion evidence remains REVIEW pending full playback and actual camp validation. A1 unpassed; no wider NPC/world rebuild. PROD-002 publication still awaits user approval.
 
 ## Ticket update format
 
