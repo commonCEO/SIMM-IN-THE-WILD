@@ -50,7 +50,18 @@ are reopened on the user's authority, overriding the hold for these two items on
   jacket v002 or in Godot.
 - Next: ART-001 head v008 (hair only), then Codex's combined native study.
 
-**ART-001 / Fable / REVIEW (head v008 delivered, 26 Nov, user-approved reopen)**
+**ART-001 / Fable / REVIEW (head v009 delivered, 26 Nov, at the user's request)**
+- Trigger: the user, typed directly: "your version looks like it's from Silent Hill or from some horror cartoon,
+  and what's on the concept is very cute ... you should fix it." This lifts the face hold for the expression.
+- Files changed: `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb`, `.blend`, `textures_v009/`,
+  `renders_v009/`, `HEAD_CANDIDATE_V009_NOTES.md`, `build_scripts/stage3_finish.py` (eyes, brows, smile, skin).
+- Cause found in the build: the iris was wider than the eye opening, so the eyes were solid dark ovals with no
+  white and no highlight; brows thin, pale and 36 mm above the eyes.
+- Checks actually run: rebuild; meshes compared with v008 after re-import (only brows changed); emissive eye
+  texture confirmed in the GLB; `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Next dependency: Codex's combined native study of head v009 + collar v003 + jacket v002.
+
+**ART-001 earlier entry (head v008, hair colour and gloss)**
 - Trigger: the same user review.
 - Files changed: `art_source/handoff/claude_simm/inbox/head_candidate_v008.glb`, `.blend`, `textures_v008/`,
   `renders_v008/`, `HEAD_CANDIDATE_V008_NOTES.md`, `build_scripts/stage3_finish.py` (hair palette and material).

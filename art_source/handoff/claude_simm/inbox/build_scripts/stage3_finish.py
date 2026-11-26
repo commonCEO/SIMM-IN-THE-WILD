@@ -71,24 +71,38 @@ for eo, sgn in ((eyeL, 1), (eyeR, -1)):
         uvl[lp.index].uv = (0.5 + (p[0]-C[0])*sgn/(2*EYE_R), 0.5 + (p[2]-C[2])/(2*EYE_R))
 N = 512; yy, xx = np.mgrid[0:N, 0:N]
 px = ((xx + 0.5)/N - 0.5)*2*EYE_R; pz = ((yy + 0.5)/N - 0.5)*2*EYE_R
-IA, IB, ICZ = 0.0260, 0.0340, 0.0000          # v002: iris fills the opening, the eye reads as one dark oval           # iris taller than the lid opening: lids always rest on it
+# v009 (user: "looks like it's from Silent Hill ... the concept is very cute"): the v002 to v008 iris was wider than
+# the lid opening, so each eye read as one black glossy oval with no white and no highlight. Now, as in the concept
+# art: white shows at both sides, a warm brown iris touches both lids, and two catchlights are painted in and
+# made emissive so they read in any light.
+IA, IB, ICZ = 0.0140, 0.0262, 0.0000             # lid opening is 0.0174 x 0.0264 (half sizes)
 r_i = np.sqrt((px/IA)**2 + ((pz-ICZ)/IB)**2)
-PA, PB = 0.0110, 0.0160
-r_p = np.sqrt((px/PA)**2 + ((pz-ICZ+0.001)/PB)**2)
-sclera = srgb(236, 228, 218); ir_out = srgb(34, 20, 15); ir_low = srgb(70, 42, 28); pup = srgb(16, 10, 9)
+PA, PB = 0.0068, 0.0118
+r_p = np.sqrt((px/PA)**2 + ((pz-ICZ+0.0015)/PB)**2)
+sclera = srgb(244, 238, 230); ir_out = srgb(48, 27, 16); ir_low = srgb(140, 86, 44); pup = srgb(18, 11, 9)
 img = np.zeros((N, N, 3)); img[:] = sclera
-shade = sstep((1.25 - r_i)/0.35)                 # soft darkening of the white toward the iris edge (limbus)
-img = img*(1 - 0.10*shade[..., None])
-low = sstep((-(pz-ICZ)/IB + 0.15)/0.9)           # warmer, lighter lower iris: pigment gradient, not a painted highlight
+shade = sstep((1.35 - r_i)/0.45)                 # soft grey toward the iris edge, so the white is not flat paper
+img = img*(1 - 0.12*shade[..., None])
+low = sstep((-(pz-ICZ)/IB + 0.10)/0.95)          # iris lighter and warmer toward the bottom
 iris = ir_out[None, None, :]*(1-low[..., None]) + ir_low[None, None, :]*low[..., None]
-ring = sstep((r_i - 0.80)/0.2)
-iris = iris*(1 - 0.45*ring[..., None])
+ring = sstep((r_i - 0.82)/0.18)
+iris = iris*(1 - 0.55*ring[..., None])           # dark outer ring
 k = sstep((1.0 - r_i)/0.05)[..., None]; img = img*(1-k) + iris*k
-k = sstep((1.0 - r_p)/0.10)[..., None]; img = img*(1-k) + pup[None, None, :]*k
+k = sstep((1.0 - r_p)/0.12)[..., None]; img = img*(1-k) + pup[None, None, :]*k
+def blob(cx, cz, ra, rb): return sstep((1.0 - np.sqrt(((px-cx)/ra)**2 + ((pz-cz)/rb)**2))/0.18)
+glint = np.maximum(blob(0.0045, 0.0105, 0.0052, 0.0060), 0.85*blob(-0.0050, -0.0110, 0.0022, 0.0022))
+white = srgb(255, 252, 246); img = img*(1-glint[..., None]) + white[None, None, :]*glint[..., None]
 eye_img = bpy.data.images.new("simm_head_eye_basecolor", N, N, alpha=False)
 eye_img.pixels.foreach_set(np.concatenate([img, np.ones((N, N, 1))], 2).astype(np.float32).ravel())
 eye_img.filepath_raw = os.path.join(texdir, "simm_head_eye_basecolor.png"); eye_img.file_format = 'PNG'; eye_img.save(); eye_img.pack()
+em = np.repeat(glint[..., None], 3, 2)
+eye_em = bpy.data.images.new("simm_head_eye_emissive", N, N, alpha=False)
+eye_em.pixels.foreach_set(np.concatenate([em, np.ones((N, N, 1))], 2).astype(np.float32).ravel())
+eye_em.filepath_raw = os.path.join(texdir, "simm_head_eye_emissive.png"); eye_em.file_format = 'PNG'; eye_em.save(); eye_em.pack()
 m_eye = pbr("SCULPT_MAT_EYE", img=eye_img, rough=0.30, spec=0.5)
+et = m_eye.node_tree.nodes.new("ShaderNodeTexImage"); et.image = eye_em
+eb_ = m_eye.node_tree.nodes["Principled BSDF"]; m_eye.node_tree.links.new(et.outputs[0], eb_.inputs["Emission"])
+eb_.inputs["Emission Strength"].default_value = 1.0
 for eo in (eyeL, eyeR):
     eo.data.materials.clear(); eo.data.materials.append(m_eye)
     for p in eo.data.polygons: p.use_smooth = True
@@ -98,17 +112,19 @@ tmp = face.copy(); tmp.data = face.data.copy(); coll.objects.link(tmp)
 for md in tmp.modifiers: md.levels = 2
 activate(tmp); bpy.ops.object.modifier_apply(modifier=tmp.modifiers[0].name)
 co = co_of(tmp.data); x, y, z = co[:, 0], co[:, 1], co[:, 2]; ax = np.abs(x)
-base = srgb(236, 186, 152); blush = srgb(226, 132, 112); lipc = srgb(186, 86, 80); lash = srgb(52, 31, 22); warm = srgb(224, 150, 122)
+base = srgb(244, 186, 148); blush = srgb(232, 124, 104); lipc = srgb(150, 62, 58); lash = srgb(52, 31, 22); warm = srgb(228, 146, 116)   # v009: warmer
 col = np.tile(base, (len(co), 1))
 def mix(col, c, w): return col*(1-w[:, None]) + c[None, :]*w[:, None]
 front = sstep((-y - 0.05)/0.04)
-col = mix(col, blush, 0.42*np.exp(-(((ax-0.098)/0.034)**2 + ((z-1.116)/0.024)**2))*front)        # cheeks
+col = mix(col, blush, 0.58*np.exp(-(((ax-0.096)/0.036)**2 + ((z-1.114)/0.026)**2))*front)        # cheeks (v009: rosier)
 col = mix(col, warm, 0.22*np.exp(-((ax/0.016)**2 + ((z-1.130)/0.012)**2))*front)                 # nose tip
 col = mix(col, warm, 0.30*sstep((ax-0.150)/0.012)*sstep((z-1.09)/0.02)*sstep((1.21-z)/0.02))      # ears
-MW = 0.0220; u = np.clip(x/MW, -1.2, 1.2); zl = 1.0900 - 0.0014 + 0.0058*np.abs(u)**2
-dz = z - zl; sig = np.where(dz < 0, 0.0040, 0.0026)
-lipw = np.exp(-(dz/sig)**2)*sstep((1.08 - np.abs(u))/0.25)*front*sstep((0.14 + y)/0.02 + 1.0)
-col = mix(col, lipc, 0.85*lipw)
+MW = 0.0220; u = np.clip(x/MW, -1.6, 1.6); zl = 1.0900 - 0.0016 + 0.0050*np.abs(u)**2 + 0.0016*np.abs(u)**4
+dz = z - zl; sig = np.where(dz < 0, 0.0024, 0.0016)          # v009: a crisp smile line, wider than the mouth seam,
+lipw = np.exp(-(dz/sig)**2)*sstep((1.42 - np.abs(u))/0.22)*front*sstep((0.14 + y)/0.02 + 1.0)   # corners turned up
+col = mix(col, lipc, 0.92*lipw)
+for sgn in (1, -1):                                          # small dimples at the smile corners
+    col = mix(col, lipc, 0.35*np.exp(-(((x - sgn*1.47*MW)/0.0016)**2 + ((z - (1.0884 + 0.0050*2.16 + 0.0016*4.67 + 0.0006))/0.0016)**2))*front)
 for sgn in (1, -1):                                                                               # upper lash line
     C = eye_c[sgn]; p = (x - C[0])*sgn; q = z - C[2]
     rho = ((np.abs(p)/OVAL_A)**OVAL_N + (np.abs(q)/np.where(q < 0, OVAL_B*0.94, OVAL_B))**OVAL_N)**(1/OVAL_N)
@@ -152,14 +168,15 @@ old = bpy.data.objects.get("SCULPT_BROWS")
 if old: bpy.data.objects.remove(old)
 bm = bmesh.new()
 for sgn in (1, -1):
-    pts = [(sgn*16.0, -1.4, .0008), (sgn*21, -0.7, .0014), (sgn*27, -1.0, .0014), (sgn*32.0, -2.8, .0008)]
+    # v009: brows sit close above the eyes, thicker and darker, with a friendly arch (were 36 mm above the eye, thin, pale)
+    pts = [(sgn*15.0, -6.6, .0010), (sgn*20, -5.2, .0018), (sgn*26, -5.0, .0018), (sgn*31.5, -6.8, .0010)]
     P = [scalp.point(a, e, l) for a, e, l in pts]
-    sweep(bm, catmull(P, 12), 0.0052, thick=0.0018, n_around=10, root=.55, belly=.35, tip_pow=1.6, under=0.4, ridge=0.1)
+    sweep(bm, catmull(P, 14), 0.0078, thick=0.0026, n_around=10, root=.60, belly=.45, tip_pow=1.5, under=0.4, ridge=0.1)
 bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
 for f in bm.faces: f.smooth = True
 bme = bpy.data.meshes.new("SCULPT_BROWS"); bm.to_mesh(bme); bm.free()
 brows = bpy.data.objects.new("SCULPT_BROWS", bme); coll.objects.link(brows)
-m_brow = pbr("SCULPT_MAT_BROW", colour=tuple(srgb(150, 98, 68)), rough=0.6, spec=0.3)
+m_brow = pbr("SCULPT_MAT_BROW", colour=tuple(srgb(98, 54, 30)), rough=0.7, spec=0.2)          # v009: darker
 bme.materials.append(m_brow)
 
 # ---------------- upper lashes: real geometry on the lid edge (crisp from any angle, nothing painted)
