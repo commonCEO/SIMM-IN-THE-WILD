@@ -1228,3 +1228,36 @@ Logs are local in work/import-diagnostic/: project-import-out.log, project-impor
 This establishes an isolated recovery-mode editor import path and the candidate's imported-scene contract. It does NOT prove why the earlier ordinary-profile editor stalled (profile isolation and direct executable launch both changed), repair the user's ordinary editor configuration, or certify normal plugin/MCP startup. Leave that profile intact; investigate separately if normal interactive opening is needed. No repeated full pose renders were required after this importer-only follow-up.
 
 ART-004 stays DOING on the existing bootv002 brief. A1 remains unapproved. Source snapshot publication approval remains pending and was not retried. Only owned coordination findings are published here; no diagnostic code/cache/settings or source-export payload.
+
+
+## ART-004 boot v002 native fit and next jacket deformation prototype — 26 November, 13:28 UTC check
+
+Consumed Claude `7e57a2390de96147618ca95df177093d557c57b1`. Verified boot GLB SHA256 `f430933f0112901e6d95c05b7c0cbafaccf8c9b2772262eff0db8d6957faf925`, four static named parts,33,996triangles, no skins/animations/cameras. Isolated-profile recovery editor import PASS exit0; separately loaded imported PackedScene and asserted four names/counts/no rig or actions. Native Forward+ combined review also exit0 with no warnings/errors.
+
+Same inverse-rest attachment on original shin/foot bones. Exactly1,784old foot faces suppressed;376chest pack-strap faces retained. Headv009/collarv004/jacketv003 and all17original rests held. All41runtime baseline hashes unchanged. No native save access or live integration.
+
+I added a native floor check over the transformed boot-foot mesh vertices at97times per original clip:
+- idle minimum y +0.000010m;
+- walk minimum y -0.001382m at0.700s;
+- gather minimum y -0.000009m.
+This independently supports reduction of the reported7mm defect to about1.4mm at sampled times. It is geometric floor-plane sampling, not continuous collision/locomotion or numerical proof of trouser containment.
+
+Individually Git-hash-verified frames:
+- [Whole figure](reviews/boots-v002-body-idle.png)
+- [Close walk](reviews/boots-v002-boots-close-walk025.png)
+
+Toe/sole perimeter is visibly smoother and more coherent. Keep bootv002 as the working shape/contact baseline; no bootv003 requested now. Even ring folds, flat material and plain toe remain finish issues, not the next critical silhouette task.34ktriangles is review density, not an approved game budget. A1 remains unapproved.
+
+### Next Fable task: longer-jacket deformation METHOD + CLAY PROTOTYPE
+
+The whole figure still exposes substantially more trouser length than the reference. Boots did not solve the jacket's short hem. We will not silently approve that design difference, and should not return to the failed long-vent compromise.
+
+**The earlier exact-weight restriction is now relaxed ONLY for an isolated replacement jacket's bounded lower-hem prototype.** You may test candidate-only lower-garment topology and skin weights on the EXISTING hips/thigh bones, keeping the ORIGINAL protected body, original rig/rest/actions/socket and all held assets untouched. This is a routine reversible method investigation, not permission to paint the master body or alter skeleton/animations. No live integration, auto-rig, new bones, cloth simulation, whole-body weight transfer or final production export.
+
+Before/with the experiment, define the affected lower-garment band, source boundary and intended influences. Preserve upper jacket/sleeves/neckline outside the documented transition; state how held positions/weights there are compared. A new lower-panel topology with sufficient deformation rows is allowed on the candidate copy. Do not simply repeat the failed B1/B2 weights on the old topology and call it a new method.
+
+Target a coherent open-front jacket whose projected hem/trouser proportions approach the reference (previous Z0.47–0.50 guide is approximate, not an exact orthographic measurement). Keep trousers, headv009/collarv004/bootsv002/pack, pose and material/light setup held. No side vents/split tails, sharp back tear, thigh breakthrough or gather-hand collision disguised in one view.
+
+Deliver ONE method/prototype review packet: normalized full-figure clay before/after at the agreed camera and side, opposite worst-walk and gather close views, affected vertex/material/bone map and normalization, unchanged-area/source proof, rollback, and sampled hand/thigh/contact findings with their limitations. Recommend the method on actual deformation evidence. If this cannot meet the target with the existing skeleton, report the precise limitation and alternatives rather than exporting another known-defective full suite. A clean fitted benchmark comes before stitches/textures.
+
+This supersedes the earlier candidate hem-weight experiment hold for this prototype only. It does not approve broader body/leg deformation, boots/collar edits, or a final longer-jacket asset. After its method review, Codex will either assign a bounded production candidate or document the remaining decision with evidence. ART-004 DOING; user visual checkpoint and game-resolution/performance/motion work remain pending. Source snapshot publication approval remains pending, not retried.
