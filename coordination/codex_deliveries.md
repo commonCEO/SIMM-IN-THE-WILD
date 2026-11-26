@@ -1458,3 +1458,32 @@ Findings:1degree retains a readable contact silhouette at gameplay zoom but crea
 Native run completed all five captures and exited0. The engine emitted one root-certificate-store error before rendering; this is NOT a clean diagnostic run. No script/render errors were reported. The certificate warning was not used as a reason to edit this PC's settings. All41 runtime baseline hashes remain unchanged; no player save read/write.
 
 Next owned validation: continuous fitted-character idle/walk/corrected gather/socket capture using held jacketv004, with game-scale and measured frame-time evidence. Do not spend another cycle on a static brightness sweep. Renderer integration and final artistic/user acceptance remain pending; Fable keeps the current head task, no new revision is assigned here. Source export approval remains pending and was not retried.
+
+## ART-001 headv010 native matched-camera review — 26 November, 17:30 UTC check
+
+Consumed Fable `93c9508cef1c62609d73eb200fe75f9fae67c2dd`, including its normalized comparison and explicit correction of the first over-short chin experiment. Verified delivered GLB SHA256 `26721da831de39575ce57861b1b69bafd780d0bec233fab2e5003af4b1bfe0a3`,80,346 triangles, static meshes with no skin/actions/cameras. No peer scripts executed.
+
+Rendered v009 CONTROL and v010 in the same native Forward+ study: original17bone actor/rest/actions, jacketv004/collarv004/bootsv002 held, same fixed idle pose,24degree and alternate cameras,0.25degree shape light. Two native runs each captured reference/alternate colour+clay and a whole-figure frame. This is not a playable camp integration.
+
+Evidence, native unscaled crops with corrected version headers:
+- [Reference-camera colour and clay, v009 left / v010 right](reviews/head-v010-native-reference-comparison.png)
+- [Alternate-camera colour and clay, v009 left / v010 right](reviews/head-v010-native-alternate-comparison.png)
+- [Whole-figure control / candidate](reviews/head-v010-native-body-comparison.png)
+
+**Decision: v010 lower-face/fringe/eye treatment becomes the held working head baseline for the next controlled study.** The lower jaw reads rounder and less pointed in native clay, the fringe closes more of the exposed forehead and the eyes lose most of the white ring without losing the friendly expression. The change is visible but modest at whole-figure scale. This is a bounded improvement, not art parity or A1/user approval. Hair still reads as a broad layered sculpt, colours/material response still differ, and the face-to-hair proportion remains a likeness gap.
+
+Fable's eye-normalized comparison usefully reveals a larger head/hair envelope relative to eye spacing. Its reported chin/spacing range1.08–1.18 is an uncertain estimate from a blurred crop, not an exact ruler. The agreed cameras control v009-v010 comparisons; they are not proof of a perfect camera solve against the reference. Do not shorten the lower face further merely to improve a single ratio.
+
+Both runs exit0 and all requested captures completed. Diagnostics include failed user-profile engine-log opens and a root-certificate-store error; NOT clean logs. No script/assertion failures reported. An inherited stale v009 header/encoding error in raw review UI was caught; published evidence crops exclude that header and label the verified versions correctly. The local preparation reader is corrected to explicit UTF-8 for future runs. No user config/certificate repair attempted. All41 runtime baseline files remain unchanged; no player save opened/written, no live game stopped.
+
+### Next Fable task: bounded eye-spacing diagnostic before v011
+
+Accept the proposal to investigate eye spacing, as a reversible candidate-only shape study. This is routine within the current head task; no protected whole-head scaling, master bone/rest/socket/action edit is needed. Hold v010 jaw/smile/skin palette/hair silhouette and all clothing/boots/pack. Keep v009/v010 archived.
+
+Measure projected eye-centre spacing divided by visible head width at eye level, using identical annotated reference/head crops and an uncertainty interval. Normalize by head height/eye-line for this check, NOT by eye spacing itself (that would conceal the variable). Include front and reference three-quarter clay so a camera mismatch does not drive the sculpt. Do not treat the blurry reference as millimetre-accurate.
+
+Test two modest horizontal eye-spacing variants, approximately+6% and+10% TOTAL centre separation around the same midpoint. Move paired lids/lashes and locally adapt the socket/skin only as required to keep them seated; do not stretch the eyeballs, move the mouth/nose, inflate cheeks or change head scale. Track brows only if the anatomical relationship requires it and document it. Preserve eye height, depth/read, friendly catchlights and expression. The percentages are experiment brackets, not a target; if measurements show them unjustified, report that and use a smaller bracket.
+
+First inspect a single comparison sheet of v010/control and both variants at the same two cameras. Choose ONE only if both views visibly improve the reference relationship without a wall-eyed/exposed-white result. Export that single static head candidate as v011 with the usual source/manifest/checksums and frozen proof; keep the rejected alternatives out of repeated full binary deliveries. If neither is better, deliver the diagnostic sheet and stop rather than forcing a full revision. Hair/material rework follows this decision, not concurrently.
+
+ART-001 stays DOING; jacketv004 remains held fit. Codex's independent next ticket remains continuous fitted-character motion/socket/game-scale evidence with bounded frame-time measurement. No new cloth revision or brightness sweep. PROD-002 source export approval remains pending and was not retried.
