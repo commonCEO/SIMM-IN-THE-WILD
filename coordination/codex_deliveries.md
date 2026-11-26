@@ -1637,3 +1637,13 @@ Before export inspect control versus four-lock candidate at both held clay camer
 If the gate survives, deliver exactly ONE static headv012 GLB with counts/bounds/mesh manifests/checksums, usual frozen verification and matched colour/clay views. Keep v011 archived. Re-unwrapping the fused hair requires rebaking m001 through the new UVs: use EXACT m001-B recipe/palette and roughness0.70, not the old PNG blindly on different UVs. Provide the new texture checksum and explain the UV compatibility; face/eye/skin textures remain byte-identical. This UV rebake is necessary mapping maintenance, not permission to redesign the hair colour. No full rejected binary variants.
 
 Codex will test v012 natively against heldv011+m001-B before selecting further surface scope. ART-001 remains DOING; A1 unpassed and no wider character/world production. Codex's independent remaining UI/inventory/audio audit continues when peer work is unchanged. No live project assets, settings, rig, animations or player save touched during this read-only method review. Source export approval remains pending and was not retried.
+
+## PROD-003 baseline audit completed — 26 November, 22:00 UTC check
+
+Peer unchanged at111dca9; Fable's four-lock v012 candidate remains assigned. Completed the eighth PARITY_TRACEABILITY.md slice and producer-reviewed coverage against current GDD system families.
+
+Current menu_parity and inventory_world native headless suites PASS in throwaway state; root-certificate-store errors remain. Geometry checks cover actual720p/1080p/4K viewports but do not certify rendered fidelity or physical-controller usability. Confirmed missing full world pause/help/language/reset and native audio flows. Corrected a potential false finding BEFORE implementation: current browser C/I/J/K all open bag through openMain(), so native bag routing matches; no shortcut-tab rewrite is needed.
+
+PROD-003 marked DONE strictly as the discovery/traceability baseline. It records concrete missing/partial systems and test limits; browser parity, gameplay QA and art gates are NOT complete. CORE-001 becomes READY for an isolated local clock/survival/migration contract and fixtures, with no live runtime/save integration until reviewed. Other implementation tickets remain open; SAVE-001 campaign/OS-fault coverage remains DOING.
+
+All41runtime baseline hashes unchanged, native player save untouched and no live game stopped. Only prose audit/board files published; no retry/workaround of source-export approval. Fable task and A1 scope unchanged.

@@ -265,3 +265,40 @@ The active build filter, _begin_station_build and strict save validator still su
 Browser and native use a145px strict placement reach boundary and nearby chest120px inclusion; representative moving-player absolute cursor behavior, all rejected-payment cases and real approach paths still need controller journeys. No new resolution/layout/art acceptance was performed. Station UI tests inject events against prepared contexts, and the local crop test advances world_age explicitly; neither establishes a child's normal-time play flow.
 
 No production tests/source were edited or published. The reviewed test derivative and new boundary harness remain work-only while broad source export approval is pending. Only prose findings published. PROD-003 remains DOING, now narrowed to remaining menu/inventory use/action contexts, feedback/audio and verification of the full traceability inventory before opening implementation tickets. A1 art work continues independently.
+
+## Eighth bounded slice: shared menu, inventory actions and feedback
+
+Audited26November2026,22:00UTC. Browser game.js openMain/openModal/keyboard/pad/explicit bag actions, model.js useInventoryItem/usePotion/foodValues, audio.js; native camp_menu.gd frame/actions/input, progression.gd use_item/drop/claim and camp.gd world input/pause/drop simulation.
+
+### Evidence actually executed
+
+- Current native headless menu_parity.gd PASS: explicit inspect/use/drop, opening-press guard, one-shot controller crafting, bench rejection, retained tab/recipe selection, stick/category navigation, over-capacity legacy stacks/scroll and native-size shared-frame geometry at720p/1080p/4K.
+- Current native headless inventory_world.gd PASS: drop beside player, pause lifetime in menus, reclaim/expiry/full-bag reward on ground, and retry after freeing capacity. This test injects stock, places the player at targets and advances expiry directly; not an unaccelerated physical-controller route.
+- Both create throwaway state with persistence disabled before scene insertion, exit0 and report no script/assertion failure. Root-certificate-store errors remain; not clean-log passes. Engine logs are work-only. All41runtime baseline hashes unchanged, no player save read/write and no running user game stopped.
+
+Headless geometry assertions establish layout bounds, NOT visual fidelity, font/icon rendering or human usability. The three requested viewport sizes were actually set by the test; there is no new screenshot or physical display/controller acceptance in this slice.
+
+### Supported subset versus remaining UX work
+
+| Flow | Finding / evidence |
+|---|---|
+| Shared six-tab frame | Bag/journal/craft/build/skills/map frame and contextual navigation exist; menu test covers bounds/focus subset. Journal is still a fixed first-pickaxe panel, map explicitly unported. Empty tab framing is not campaign UI |
+| Explicit inventory actions | Inspecting does not consume; use/drop are separate confirm actions. Water restores up to60thirst and reduces heat35, full-state water is retained. Food values and healing/speed/peace branches are present and source-inspected; no new all-consumable boundary sweep is claimed |
+| Capacity/legacy drops | Visible saved stacks are retained even above current capacity; no auto-truncation. Native drop/reclaim/expiry subset passed. Full region/room identity remains the CORE-005/SAVE-001 gap from earlier slices |
+| C/I/J/K shortcuts | IMPORTANT source reconciliation: CURRENT browser maps C/I/J/K through openMain(), which always opens bag. Native routing all four to bag matches that code. Do not implement separate shortcut tabs from an older/general GDD description without an intentional change |
+| World pause versus modal back | Browser world Escape and padStart open pause; modal Escape/Start close/back. Native menu has back handling, but camp world input has no corresponding pause-menu opening flow (Escape is handled only while building). MISSING full pause shell, not fixed by modal pausing |
+| Pause/help/language/new-game | Browser pause offers resume/help/skills/new game/journal/language/zoom with safe existing-adventure default on reset confirmation. Native shared menu is not this complete pause/settings/start/reset flow. UX-001/SAVE-001 need safe confirmation/default and independent preferences |
+| World camera and controls | Native calm follow, wheel/R3zoom, quickbar LB/RB and world action subset exist. Browser Z/V and pad left/right camera rotation are absent from the inspected native world-input route; menu/build context direction handling does not supply world rotation. Preserve the user-approved calm follow while restoring requested context behavior deliberately |
+| EN/ET | Native names/descriptions/actions/hints are hardcoded ET; no complete language preference/path. Browser uses i18n and explicit language menu. UX-001 requires both languages, stable IDs and resolution/controller checks |
+| Feedback | Native labels, held tools, charge bar/reticle, primitive loot/animations/lights exist. Browser also has sound/particles/damage flash/event notices; selected action tests do not establish matched feel/clarity |
+| Audio/mute/volume | Browser audio.js synthesizes original cue/music/footstep/bird/fire sounds and exposes toggle/volume. Inspected native active scripts/scenes/config do not implement the corresponding audio subsystem/settings. AUDIO-001 remains MISSING implementation and auditory acceptance, not a licensing blocker requiring downloaded samples |
+
+### Producer review: discovery baseline complete, implementation is not
+
+Codex reviewed this eight-slice register against the current GDD families: initial state/economy/recipes/stations/storage/farming; world/height/scenes/events/campaign; NPC/quests/home; time/survival/defeat; combat/skills/Nups/fishing; inventory/menu/controller/language/feedback/audio; durable save migration and art gates. Every family now has an active-code assessment, available evidence boundaries and an owning board ticket. No remaining system family is silently treated as complete because data, a filename or a green subset test exists.
+
+**PROD-003 DONE means this initial discovery/traceability baseline is reviewed and actionable. It does not mean browser parity, QA, A1 or B1 is complete.** Detailed edge cases stay in their implementation tickets, which require new targeted tests and normal-time physical journeys. The separate SAVE-001 audit remains DOING for OS fault/campaign migration evidence. Reopen/refresh affected traceability rows as implementation changes.
+
+Release implementations remain explicitly TODO/PARTIAL: CORE-001 clock/survival, CORE-002 NPC/quests, CORE-003 homes, CORE-004 full reachability/context, CORE-005 world/height/scenes, CORE-006 campaign, UX-001 and AUDIO-001. ART-001 and A1 still gate broader art production. User additions (bucket use, penguin, Mattias bosses) retain their separate design gates; the browser baseline does not authorize invented mechanics.
+
+Next owned READY pull is CORE-001: prepare a bounded local isolated clock/survival/state-migration contract and fixtures before integrating anything into the live camp. Use the existing strict nativev3/v4 schema as legacy input; preserve original runtime/save and do not publish source while PROD-002 export approval is pending. No automatic upgrade of the user's real save and no broad live gameplay rewrite is part of this audit closure.

@@ -6,7 +6,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 |---|---|---|---|---|---|
 | PROD-001 | P0 | Codex | DONE | none | Publish plan/board/dispatch + GDD context; Fable acknowledges next check |
 | PROD-002 | P0 | Codex | BLOCKED | PROD-001 | Local allowlisted74source-file packet prepared; automatic approval review blocked branch publication pending explicit user approval of source export |
-| PROD-003 | P0 | Codex | DOING | local source audit; remote snapshot pending | Seven slices through crop/fuel/storage/placement; strengthened station28 and crop45 checks PASS; remaining menu/inventory action contexts and feedback/audio audit next |
+| PROD-003 | P0 | Codex | DONE | eight-slice producer-reviewed discovery baseline | PARITY_TRACEABILITY.md covers GDD families, actual subset evidence and owned missing work; audit completion only, NOT runtime/browser parity |
 | ART-001 | P0 | Fable | DOING | D2 method gate111dca9 reviewed | Round-section method accepted for ONE v012 with D1body/D2/D4/S_fringe_right only; v011+m001-B held, other locks/top/face fixed; A1 unpassed |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
@@ -17,7 +17,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
-| CORE-001 | P1 | Codex | TODO | PROD-003 | Day/survival/pause/sleep/defeat browser parity, migrated time state; normal-time and defeat recovery tests |
+| CORE-001 | P1 | Codex | READY | PROD-003 baseline reviewed | First bounded pull: isolated local clock/survival/state-migration contract and fixtures; keep live camp/save untouched, then reviewed integration and normal-time defeat recovery checks |
 | CORE-002 | P1 | Codex | TODO | PROD-003 | Quest data/journal/NPC six identities and one-time exchange rewards; atomic full-bag behavior |
 | CORE-003 | P1 | Codex | TODO | CORE-001/002 | Bronkings home order/upgrade/three-day-or-rest/interiors, preserve furnishings/clear doors; B1 controller journey |
 | CORE-004 | P1 | Codex | TODO | PROD-003 | Audit all48recipes/context gates and ingredient reachability; baseline25nonbuilding already reported locally, revalidate gaps only |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-001 bounded four-lock v012 candidate using reviewed D2 section method and m001-B rebake. Codex remaining UI/inventory action and feedback/audio audit proceeds when peer unchanged. Jacketv004/collarv004/bootsv002 held; motion REVIEW. No live swap or wider NPC/world rebuild before A1. PROD-002 source publication awaits user approval.
+Current active: Fable ART-001 bounded four-lock v012 candidate, m001-B rebake; Codex CORE-001 isolated clock/survival/migration foundation after completed PROD-003 discovery baseline. Jacketv004/collarv004/bootsv002 held; motion REVIEW. No live swap or wider NPC/world rebuild before A1. PROD-002 source publication awaits user approval.
 
 ## Ticket update format
 
