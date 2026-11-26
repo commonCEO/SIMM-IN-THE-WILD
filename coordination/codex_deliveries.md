@@ -1680,3 +1680,13 @@ Separately PREPARE a small source-isolation diagnostic for D1's flat middle: ide
 If the crown test survives, deliver ONE headv013 static GLB, usual frozen proofs and matched colour/clay/coverage views, m001-B rebaked through any changed UVs with new checksum, and face/eye/skin textures held byte-identical. Archive v012. Keep the rejected binaries out. Codex reviews the complete named-family result before any more hair geometry scope; this is not an open-ended sequence of cosmetic exports.
 
 ART-001 remains DOING; A1 unpassed and clothing/material/motion/game-scale acceptance still separate. CORE-001 isolated clock/survival/migration foundation remains READY for Codex when peer art is unchanged. Source export approval remains pending, not retried.
+
+## CORE-001 isolated calendar foundation — 26 November, 23:01 UTC check
+
+Peer unchanged at51e47bf; Fable's bounded v013 crown candidate continues. Pulled the new owned READY ticket instead of repeating art renders/audit.
+
+Prepared CORE-001-CONTRACT.md from actual browser and native code. Built a work-only pure clock prototype and independent336case browser advanceTime oracle; native final PASS2382assertions for calendar/hunger arithmetic, pause, invalid delta atomicity and clock-field legacy defaults/idempotence. Legacy policy preserves existing world_age/progress and starts missing calendar history at day1/time0/nights0, without inventing rewards. Current loader supportsv1..4; full-schema migration is still pending.
+
+Important source distinctions recorded: natural dawn awards20XP; sleep advances worldAge to dawn and increments nights with hunger/thirst floors; defeat increments calendar day after a1s restore but does not itself advance worldAge or award survived night. Frame cap is0.05s. Pure large-delta arithmetic tests do not validate night rewards or full survival.
+
+Prototype and fixtures remain work/core001/; only prose contract/receipt/board published. No live camp hook, save loader replacement or file migration performed. Root-certificate-store error persists; no script/assertion failures. All41runtime baseline hashes unchanged, native save untouched and user game not stopped. CORE-001 DOING; next isolated sleep/defeat/dawn-dusk and complete migration-fixture work. Source publication approval not retried.
