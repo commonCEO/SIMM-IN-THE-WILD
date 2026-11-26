@@ -1261,3 +1261,27 @@ Target a coherent open-front jacket whose projected hem/trouser proportions appr
 Deliver ONE method/prototype review packet: normalized full-figure clay before/after at the agreed camera and side, opposite worst-walk and gather close views, affected vertex/material/bone map and normalization, unchanged-area/source proof, rollback, and sampled hand/thigh/contact findings with their limitations. Recommend the method on actual deformation evidence. If this cannot meet the target with the existing skeleton, report the precise limitation and alternatives rather than exporting another known-defective full suite. A clean fitted benchmark comes before stitches/textures.
 
 This supersedes the earlier candidate hem-weight experiment hold for this prototype only. It does not approve broader body/leg deformation, boots/collar edits, or a final longer-jacket asset. After its method review, Codex will either assign a bounded production candidate or document the remaining decision with evidence. ART-004 DOING; user visual checkpoint and game-resolution/performance/motion work remain pending. Source snapshot publication approval remains pending, not retried.
+
+
+## RENDER-001 L9 restrained-mixture follow-up — 26 November, 13:59 UTC check
+
+Peer unchanged at7e57a23; longer-jacket method/clay prototype remains Fable's active task. Advanced independent renderer work on the same isolated OLD-runtime-model key-shot stage. No replacement Simm, player scene, progression or save nodes; unchanged camera/key/angular2.2deg/materials/placements/Filmic/SSAO/sky reflection.48settle frames per variant.
+
+Added controls to separate low warm ambient from reduced shadow opacity. Same9x9lit/shade sand patches(845,565)/(782,565) and display-RGB weighted luma as the preceding study:
+
+| Variant | Lit RGB | Shaded RGB | Shade/lit display luma |
+|---|---|---|---|
+| Sky0.5,opacity1 control | 207.6,184.5,138.1 | 80.4,81.1,63.7 | .428 |
+| Sky0.5,opacity0.8 | 207.6,184.5,138.1 | 127.4,114.4,83.9 | .618 |
+| Warm#efd7af0.2,opacity1 | 212.9,184.9,132.2 | 107.8,82.7,48.6 | .457 |
+| Warm0.2,opacity0.8 | 213.0,184.9,132.2 | 143.6,115.3,72.9 | .632 |
+| Warm0.35,opacity0.8 | 219.8,191.9,138.0 | 162.7,131.8,83.9 | .696 |
+
+The repeat baseline matches the prior patch values. Lower warm fill alone retains a very dark, brown shadow; opacity makes the larger recovery. Warm0.2/opacity0.8 is the more restrained FOLLOW-UP TEST candidate: shade stays warm and lit sand changes less than with the earlier0.5–0.8warm fill. Warm0.35 lifts foliage and centre further and risks the same flat yellow-green look. A numerical ratio near the reference is not visual parity; global canopy/ground/material/form gaps remain.
+
+Individually Git-hash-verified native evidence:
+- [Restrained warm0.2/opacity0.8](reviews/clearing-mixture-warm020-opacity080.png)
+- [Brighter warm0.35 control](reviews/clearing-mixture-warm035-opacity080.png)
+- Prior [unchanged baseline](reviews/clearing-fill-baseline-sky050.png).
+
+Native render exit0, no warnings/errors. All41runtime baseline hashes unchanged. No live lighting integration or art approval. Keep geometry-authoring shape light unchanged; Fable should not recolour assets to compensate for this test. Next renderer evidence must address temporal penumbra noise, gameplay/torch readability and grounding with the restrained mix, rather than another still-only brightness sweep. L10 framing and performance remain pending. Source publication approval still pending, not retried.
