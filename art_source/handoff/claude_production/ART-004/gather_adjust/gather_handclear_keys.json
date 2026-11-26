@@ -1,0 +1,69 @@
+{
+ "action": "gather_handclear",
+ "source_action": "gather",
+ "bone": "upper_arm_l",
+ "channel": "rotation_euler",
+ "index": 2,
+ "rotation_mode": "XYZ",
+ "formula": "new = original + 4.5 deg * sin^2(pi * (frame - first) / (last - first))",
+ "frame_range": [
+  0.0,
+  24.0
+ ],
+ "keys": [
+  {
+   "frame": 0.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.0,
+   "new_rad": 0.0
+  },
+  {
+   "frame": 3.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.011501889806382627,
+   "new_rad": 0.011501889806382627
+  },
+  {
+   "frame": 6.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.03926990816987241,
+   "new_rad": 0.03926990816987241
+  },
+  {
+   "frame": 9.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.0670379265333622,
+   "new_rad": 0.0670379265333622
+  },
+  {
+   "frame": 12.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.07853981633974483,
+   "new_rad": 0.07853981633974483
+  },
+  {
+   "frame": 15.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.0670379265333622,
+   "new_rad": 0.0670379265333622
+  },
+  {
+   "frame": 18.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.03926990816987242,
+   "new_rad": 0.03926990816987242
+  },
+  {
+   "frame": 21.0,
+   "original_rad": 0.0,
+   "offset_rad": 0.011501889806382632,
+   "new_rad": 0.011501889806382632
+  },
+  {
+   "frame": 24.0,
+   "original_rad": 0.0,
+   "offset_rad": 1.1779085788399792e-33,
+   "new_rad": 1.1779085788399792e-33
+  }
+ ]
+}

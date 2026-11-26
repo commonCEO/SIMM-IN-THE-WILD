@@ -27,11 +27,23 @@ zs = list(np.linspace(Z_TOP, Z_HEM, 15))
 rj = np.array([radial_hit(jt, a, 0.600) or 0.17 for a in azs])          # jacket v003 radius at its lower band
 rt = {z: np.array([radial_hit(tro, a, z) or 0.10 for a in azs]) for z in zs}
 for _ in range(3): rj = 0.25*np.roll(rj, 1) + 0.5*rj + 0.25*np.roll(rj, -1)
+# v2: keep the panel's sides clear of the hands where they hang at rest (5 mm), never closer than 10 mm to the trousers
+gn = [g.name for g in bd.vertex_groups]
+hand = [bd.data.vertices[k].co for k in range(len(bd.data.vertices)) if any(gn[g.group] in ("hand_l", "hand_r") and g.weight > 0.5 for g in bd.data.vertices[k].groups)]
+def hand_cap(a, z):
+    best = 9.0
+    for c in hand:
+        if abs(c.z - z) > 0.030: continue
+        aa = math.atan2(c.x, -(c.y - CY))
+        if abs((aa - a + math.pi) % (2*math.pi) - math.pi) > math.radians(9): continue
+        best = min(best, math.hypot(c.x, c.y - CY))
+    return best - 0.005
 bm = bmesh.new(); rows = []
 for z in zs:
     t = sstep((Z_JOIN - z)/(Z_JOIN - Z_HEM))
     r = np.maximum(rj - 0.004 + 0.016*t, rt[z] + 0.020)   # inside the jacket at the top, flaring, 20 mm clear of the trousers
     for _ in range(2): r = 0.25*np.roll(r, 1) + 0.5*r + 0.25*np.roll(r, -1)
+    r = np.maximum(np.minimum(r, np.array([hand_cap(a, z) for a in azs])), rt[z] + 0.010)
     rows.append([bm.verts.new((math.sin(a)*ri, CY - math.cos(a)*ri, z)) for a, ri in zip(azs, r)])
 for i in range(len(rows)-1):
     for k in range(len(azs)-1): bm.faces.new((rows[i][k], rows[i][k+1], rows[i+1][k+1], rows[i+1][k]))

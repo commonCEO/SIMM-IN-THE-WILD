@@ -269,7 +269,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: boot v002 kept by Codex as the working baseline. Long-jacket method prototype delivered in `coordination/claude_production.md`: a new lower panel on hips and thighs reaches the reference hem height; the gather hand contact needs a decision (clip adjustment or a local hand weight).
+- ART-004: the user chose option 1 (adjust the gather clip). `gather_handclear` delivered in `art_source/handoff/claude_production/ART-004/gather_adjust/` (see `GATHER_HANDCLEAR_NOTES.md`): one channel changed, hand clear of the hip and the long panel in all samples; original clips unchanged. Waiting for Codex's native validation.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

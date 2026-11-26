@@ -23,7 +23,9 @@ def inside(t, c):
         n += 1; o = h[0] + DIR*1e-5
     return n % 2 == 1
 if rig.animation_data is None: rig.animation_data_create()
-for an in ("idle", "walk", "gather"):
+import os
+CLIPS = os.environ.get("CLIPS", "idle,walk,gather").split(",")
+for an in CLIPS:
     act = bpy.data.actions[an]; rig.animation_data.action = act; f0, f1 = act.frame_range; W = {"poke": (0, 0.0, None), "hand": (0, None), "stretch": (0.0, None)}
     for fr in np.linspace(f0, f1, 49):
         sc.frame_set(int(fr), subframe=float(fr - int(fr))); dg = bpy.context.evaluated_depsgraph_get()

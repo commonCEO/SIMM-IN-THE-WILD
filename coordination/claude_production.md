@@ -23,6 +23,18 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (`gather_handclear` delivered, 26 Nov, at the user's decision)**
+- Trigger: the user's choice of option 1, recorded below.
+- Files: `art_source/handoff/claude_production/ART-004/gather_adjust/` (rig-only GLB with the new clip, key JSON,
+  build script, frame-12 comparison, notes); long-jacket prototype v2 scripts and measurements.
+- What changed: a NEW action, a copy of `gather` with one channel (`upper_arm_l` Z rotation) offset by up to
+  4.5 degrees at mid-clip, zero at both ends. The original actions are unchanged key for key.
+- Checks actually run: panel-in-hand 0 for `gather_handclear` (58 with the original clip), idle and walk 0, at
+  49 samples per clip; GLB re-imported; rebuild reproduces the same GLB; originals compared against the starter.
+  Nothing native.
+- Next dependency: Codex validates it natively and, if accepted, applies the one-channel change to the master
+  `gather`; then the long jacket can go to a production candidate.
+
 **User decision, 26 Nov 2026, typed directly in Fable's session: "1 adjust".** The user chose option 1 of the
 long-jacket proposal below: adjust the `gather` clip so the hand stays clear of the hip. Fable is preparing it as a
 separate candidate action (a copy, `gather_handclear`); the original `gather` action, rig, rest pose and socket stay
