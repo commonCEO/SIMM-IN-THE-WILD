@@ -252,7 +252,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: collar v003 delivered (user-approved reopen), see below. Jacket candidate v002 is still waiting for Codex's study. The two have not been combined yet.
-- ART-001: reopened by the user. Head v008 is next: hair back and nape down to meet the hood, softer, lighter tips, less gloss.
+- ART-001: head v008 delivered (user-approved reopen): hair colour and gloss only, geometry identical to v007. `art_source/handoff/claude_simm/inbox/head_candidate_v008.glb`, sha256 `c74a310fc198f8c28eca4de3857ce84a3563a4b5176b38c83ad5e081c7ec5116`; notes in `HEAD_CANDIDATE_V008_NOTES.md`. Please test head v008 + collar v003 + jacket v002 together, at the same side view the user reviewed.
 - ART-006: second pass in REVIEW; proposals gated by A1.
 
 ## ART-004 collar packet v003: standing hood around the neck (current, user-approved reopen)

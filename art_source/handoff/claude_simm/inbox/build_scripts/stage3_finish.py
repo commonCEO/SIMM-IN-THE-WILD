@@ -132,7 +132,9 @@ for i, p in enumerate(co):
     d = p - HC; r = np.linalg.norm(d)
     az = math.degrees(math.atan2(d[0], -d[1])); el = math.degrees(math.asin(d[2]/r))
     lift[i] = r - scalp.radius(az, el)
-h_root = srgb(84, 46, 29); h_mid = srgb(110, 62, 38); h_tip = srgb(134, 80, 48)
+# v008 (user review, 26 Nov 2026): lighter, warmer and more saturated, measured against the reference's hair
+# (median 138, 76, 36; shadows 88, 37, 12; highlights 179, 111, 56). Was root 84, 46, 29 / mid 110, 62, 38 / tip 134, 80, 48.
+h_root = srgb(102, 52, 24); h_mid = srgb(128, 70, 32); h_tip = srgb(162, 100, 50)
 # smooth the lift value over the surface first, so the tone has no flecks at clump junctions
 ed = np.empty(len(hair.data.edges)*2, dtype=np.int32); hair.data.edges.foreach_get('vertices', ed); ed = ed.reshape(-1, 2)
 dg_ = np.bincount(ed.ravel(), minlength=len(co)).astype(float)
@@ -142,7 +144,7 @@ for _ in range(25):
 t = sstep(lift/0.045)[:, None]; t2 = sstep((lift-0.04)/0.06)[:, None]
 hcol = h_root[None]*(1-t) + h_mid[None]*t; hcol = hcol*(1-t2) + h_tip[None]*t2
 hair_img = bake_vertex_colour(hair, hcol, os.path.join(texdir, "simm_head_hair_basecolor.png"), 1024, margin=10)
-m_hair = pbr("SCULPT_MAT_HAIR", img=hair_img, rough=0.52, spec=0.4)
+m_hair = pbr("SCULPT_MAT_HAIR", img=hair_img, rough=0.70, spec=0.25)          # v008: less gloss (was rough 0.52, spec 0.4)
 hair.data.materials.clear(); hair.data.materials.append(m_hair)
 
 # ---------------- brows: thin relaxed arcs resting on the brow, hair-coloured

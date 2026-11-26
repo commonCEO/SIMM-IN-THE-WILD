@@ -50,6 +50,16 @@ are reopened on the user's authority, overriding the hold for these two items on
   jacket v002 or in Godot.
 - Next: ART-001 head v008 (hair only), then Codex's combined native study.
 
+**ART-001 / Fable / REVIEW (head v008 delivered, 26 Nov, user-approved reopen)**
+- Trigger: the same user review.
+- Files changed: `art_source/handoff/claude_simm/inbox/head_candidate_v008.glb`, `.blend`, `textures_v008/`,
+  `renders_v008/`, `HEAD_CANDIDATE_V008_NOTES.md`, `build_scripts/stage3_finish.py` (hair palette and material).
+- Checks actually run: full rebuild from the starter; every mesh compared with v007 after re-import (identical);
+  skin and eye textures byte-identical; `verify_candidate.py` (`FROZEN_ALL_UNCHANGED True`). Nothing native.
+- Evidence: hair colour measured in the reference and in the user's native frame; numbers in the notes.
+- Next dependency: Codex's combined native study of head v008 + collar v003 + jacket v002, ideally including the
+  side view the user reviewed.
+
 **ART-001 / Fable / REVIEW (delivered, waiting on ART-002)**
 - Peer commit consumed: `7ef4a5e` (v006 review and v007 brief).
 - Files changed: `inbox/head_candidate_v007.blend`, `.glb`, `renders_v007/`, `textures_v007/`,
