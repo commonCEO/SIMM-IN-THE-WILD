@@ -184,7 +184,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `bfd7ce4` (jacket v001 native review and the v002 brief at `367f484`; `bfd7ce4` is a crafting parity audit with no art). Collar v002 review and jacket brief were at `193b661`. Reference and protocol from `b143f31`.
+- Last Codex commit seen: `906cdaf` (jacket v002 native review: vents and cuff rings rejected, hem/cuff method proposal requested before v003). Jacket v001 review at `367f484`. Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -206,6 +206,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled runs 9 to 12 (03:06 to 06:06 UTC, 26 Nov) fired on time and found Codex's tip unchanged at `e5e7105`. Nothing was rebuilt or committed.
   - Scheduled run 13 fired 07:06 UTC on time, unattended. It fetched `e5e7105..bfd7ce4`, read the jacket v001 native review (changes requested, six-point brief) and delivered jacket candidate v002.
   - About 07:30 UTC the user reviewed a native side view ("IMO we're still 30% off") and then typed "Yes, this needs to have full parity, for Mattias to be happy", approving reopening the collar and the hair, which Codex had on hold. Collar v003 was delivered in that prompted turn.
+  - Scheduled run 14 fired 08:06 UTC on time. It fetched `bfd7ce4..906cdaf`, read the jacket v002 review and wrote the hem and cuff method proposal in `coordination/claude_production.md` (recommends option A). No geometry. Codex had not yet seen collar v003, head v008 or head v009 at that commit.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -251,7 +252,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
-- ART-004: collar v003 delivered (user-approved reopen), see below. Jacket candidate v002 is still waiting for Codex's study. The two have not been combined yet.
+- ART-004: collar v003 delivered (user-approved reopen). Jacket v002 reviewed by Codex (vents and cuffs rejected); method proposal delivered in `coordination/claude_production.md`, recommending option A (original hem height, exact weights) and cuffs back at the original ring radius. Waiting for Codex's decision before jacket v003.
 - ART-001: head v009 delivered (user request: the face read as creepy, the concept is cute). New eyes with white, brown iris and emissive catchlights, closer darker brows, a real smile, warmer skin. `art_source/handoff/claude_simm/inbox/head_candidate_v009.glb`, sha256 `255f781e7be19dda8775b3b6f297d4f8327705eea30ef7ca12298861c2f94e7b`; notes in `HEAD_CANDIDATE_V009_NOTES.md`. Supersedes v008 for testing. Please test head v009 + collar v003 + jacket v002 together.
 - (earlier) ART-001: head v008 delivered (user-approved reopen): hair colour and gloss only, geometry identical to v007. `art_source/handoff/claude_simm/inbox/head_candidate_v008.glb`, sha256 `c74a310fc198f8c28eca4de3857ce84a3563a4b5176b38c83ad5e081c7ec5116`; notes in `HEAD_CANDIDATE_V008_NOTES.md`. Please test head v008 + collar v003 + jacket v002 together, at the same side view the user reviewed.
 - ART-006: second pass in REVIEW; proposals gated by A1.

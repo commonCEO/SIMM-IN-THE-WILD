@@ -23,6 +23,49 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / PROPOSAL: hem and cuff method before jacket v003 (26 Nov, run 14, answers `906cdaf`)**
+
+No geometry delivered. Evidence was made on throwaway copies: two test jackets built from the v002 script with
+changed constants, and, for option B, hem weights changed on the candidate copy in memory only. Nothing was
+saved, exported or written to `PROTECTED_BODY`, the rig, the actions or the socket. Frames and scripts are in
+`art_source/handoff/claude_production/ART-004/method_proposal/`.
+
+Options tested, same camera and light, walk at 25 and 75 percent, gather at 50 percent (`hem_options_walk_gather.png`):
+
+| Option | Hem lowest Z | Weights | What the frames show |
+|---|---|---|---|
+| v002 as delivered | 0.545 | original | side vents, split-tail silhouette (as you found) |
+| **A** | **0.585** | **original, exact** | **one coherent hem, no vents; no trouser showing through in any of the frames** |
+| B0 | 0.545, no vents | original | a small dark trouser corner pokes through the side of the hem in walk |
+| B1 | 0.545, no vents | 186 hem-band vertices (Z under 0.635, now 100 percent `hips`) blended toward the same-side thigh, up to 0.5 at the hem | the same corner, slightly smaller |
+| B2 | 0.545, no vents | same band, up to 0.8 | smaller again, still there, and the back hem starts to separate into a torn edge (`hem_option_B_weight_strength.png`) |
+
+Numbers I tried and do not rely on: a nearest-surface "inside the trousers" count, which flips sign near thin
+cloth and gave nonsense values, and a ray test that also counted the open front of the jacket. The frames are
+the evidence. Cloth more than 2 mm into a hand, 25 samples per clip: A 0 / 0 / 4 vertices up to 5.7 mm (idle,
+walk, gather); B0 to B2 0 / 0 / 4 up to 4.7 mm; v002 0 / 0 / 0.
+
+**Recommendation: A.** A coherent hem at the original height, every weight exact, no vents. The 0.47 to 0.50 m
+reference length is given up here; the shorter-legged read comes later from taller boots and a fuller lower
+jacket, as you suggested. B would need per-vertex weight tuning to remove the corner and would still tear at the
+back. If you want B anyway, the band, bones and blend are in `hem_method_test_weights.py`: affected vertices
+are the jacket vertices under Z 0.635 that are 100 percent `hips` today, inside |X| 0.215; same-side thigh
+weight `fz*W*(0.35 + 0.65*s)`, other thigh `fz*W*0.35*(1 - s)`, `hips` the remainder, so each sums to 1;
+`fz` rises from 0 at Z 0.635 to 1 at the hem, `s` from 0 at the centre line to 1 at |X| 0.10. Rollback is the
+original weights, which the export check already compares vertex by vertex.
+
+Open item for A: the gather hand. 4 vertices reach up to 5.7 mm into a hand at the hip side. v003 would draw the
+hem in locally where the measured hand path passes, with a gentle rise of at most 10 mm at the sides (a curve,
+not a vent), and report the measured result.
+
+**Cuffs: a continuous rolled lip, not a bracelet.** The original cuff rings sat at a mean radius of about
+47 mm and never touched a hand in any clip (measured on the original body). v002 moved them to about 51 mm and
+opened the sleeve to 43 mm to clear the hand, which is what made them float. v003: the cuff roll goes back to
+the original ring radius and height, and the sleeve end is shaped to meet it, with the roll overlapping the
+sleeve by 2 to 3 mm so it reads as one turned-back edge. No flare, no widening past the original ring.
+
+Next: on your go, jacket v003 with option A and these cuffs, one export, the same checks as v002.
+
 **User feedback, 26 Nov 2026, on a native side view of head v007 + collar v002 + jacket: "IMO we're still 30% off."**
 Fable's read of that frame against the approved reference, measured in Blender where possible:
 1. Bare neck (largest gap). 44 mm of skin shows at the nape between the hood top (Z 1.017) and the lowest hair
