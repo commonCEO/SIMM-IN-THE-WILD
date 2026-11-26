@@ -1647,3 +1647,36 @@ Current menu_parity and inventory_world native headless suites PASS in throwaway
 PROD-003 marked DONE strictly as the discovery/traceability baseline. It records concrete missing/partial systems and test limits; browser parity, gameplay QA and art gates are NOT complete. CORE-001 becomes READY for an isolated local clock/survival/migration contract and fixtures, with no live runtime/save integration until reviewed. Other implementation tickets remain open; SAVE-001 campaign/OS-fault coverage remains DOING.
 
 All41runtime baseline hashes unchanged, native player save untouched and no live game stopped. Only prose audit/board files published; no retry/workaround of source-export approval. Fable task and A1 scope unchanged.
+
+## ART-001 four-lock v012 native review — 26 November, 22:31 UTC check
+
+Consumed Fable `51e47bf394e8f97d5a5b70d5389085917c860e3e`. Verified static head GLB SHA256 `e5a47d01d203f1438226850632b58a2c7b1e657eaec05d4a6c4faf8019e1e2de`,80,344triangles, no skin/actions/cameras. Read the per-lock section/coverage/UV-rebake notes; no peer scripts executed.
+
+Rendered v012 natively on the original actor/rest/actions with held jacketv004/collarv004/bootsv002, same idle, light and two cameras. Correct controls are v011+m001-B COLOUR and v011 CLAY, reused without rerender; the old orange v011 material was not used as the colour control. New hair UVs carry the peer's m001-B recipe rebake at roughness0.7. Inspected both colour/clay pairs and whole figure.
+
+[Reference-camera native pair](reviews/head-v012-native-reference-comparison.png) and [alternate native pair](reviews/head-v012-native-alternate-comparison.png): v011 left, v012 right, unscaled/unfiltered native crops, individually Git-object-hash verified.
+
+**Hold v012 as the working head/hair construction baseline.** The exposed front/temple sweeps have a rounder light transition and less abrupt shelf edge, particularly in the alternate view; the face/fringe relationship and accepted overall outline remain. At whole-figure scale this is a modest improvement. Remaining top panels, root trenches and the still-flatter D1 middle prevent a final likeness claim. No A1/user approval or live replacement.
+
+The peer's9of12 improved flat-share samples support a localized method effect, not a whole-hair score. D1 middle0.85->0.88 and S_fringe_right's unchanged/worse samples are explicitly retained as limitations. The proposed held under-mass explanation has not been isolated experimentally; do not claim that cause established.
+
+Native exit0/five captures; root-certificate-store error remains, no script/assertion failure. All41runtime baseline hashes unchanged. No player save read/write and no live process stopped.
+
+### Next Fable pull: remaining named crown locks, one v013 at most
+
+Retain v012's four changed locks, crown map/envelope, tuft, face/eyes/fringe tips/root, body/clothing/rig/rest/actions/socket and m001-B material recipe. Extend the reviewed section method to exactly these five currently held broad crown guides:
+- top_to_part
+- top_to_left
+- top_to_front
+- top_right_bk
+- top_left_bk
+
+This completes the same named construction family; it is not a new hair design or permission to keep widening the scope. Use per-lock width/root overlap choices that preserve scalp coverage and the compact v011/v012 crown rather than mechanically narrowing every crown lock into gaps or noodles. Keep the asymmetrical sweep and readable soft tips. No extra height compression, colour/roughness sweep, fine grooves or face change.
+
+Before export inspect both held clay cameras, front/back/top coverage, root transitions and whole-figure silhouette. Avoid deep new trenches at the part and detached crown caps. Report per-lock profiles and silhouette/crown deltas; a lower flat-share number is insufficient if visible clump shapes regress. If the complete crown treatment does not improve both views, deliver the diagnostic only rather than forcing v013.
+
+Separately PREPARE a small source-isolation diagnostic for D1's flat middle: identify the actual held contributing source piece(s), compare the D1 section with and without that contributor, and report whether it explains the plateau. Do NOT alter the under-mass or silently add a sixth production guide in this candidate. A short evidence note is enough; no unreviewed replacement base volume.
+
+If the crown test survives, deliver ONE headv013 static GLB, usual frozen proofs and matched colour/clay/coverage views, m001-B rebaked through any changed UVs with new checksum, and face/eye/skin textures held byte-identical. Archive v012. Keep the rejected binaries out. Codex reviews the complete named-family result before any more hair geometry scope; this is not an open-ended sequence of cosmetic exports.
+
+ART-001 remains DOING; A1 unpassed and clothing/material/motion/game-scale acceptance still separate. CORE-001 isolated clock/survival/migration foundation remains READY for Codex when peer art is unchanged. Source export approval remains pending, not retried.
