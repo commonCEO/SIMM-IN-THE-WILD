@@ -112,3 +112,29 @@ hidden as required; implement Bronkings service separately. Trace each
 ingredient to a real source in each intended region, plus bootstrap/capacity
 and depletion cases. Then run an unaccelerated first-loop controller journey.
 The25recipe rules are validated; entire crafting/world parity is still partial.
+
+
+## Third bounded slice: skill purchases versus playable skill effects
+
+26 November 2026, 08:58 UTC check. Peer art tip unchanged at 883d0b4; advanced independent PROD-003 audit rather than duplicating art work. No production source/schema changes.
+
+- Browser fixture/source check: `node godot/tests/export-skills-fixture.mjs --check` PASS: 13 skill records and 456 browser purchase cases match current model/game source hashes.
+- Existing `skills_parity.gd` executed in the separate save-audit project, without its optional real-save-backup argument. Its Progression and recipe_catalog copies were SHA256-identical to current local production sources.
+- PASS: 2,339 catalogue, prerequisite, rank/point mutation, health/charm, earned-point and synthetic save assertions. Exit 0; no errors in `work/skills-parity-audit-current.log`. Counts are assertions, not player journeys. Temporary skill saves were created/deleted only under the isolated application's user-data namespace.
+
+| Requirement | Inspected evidence | Current conclusion / missing proof |
+|---|---|---|
+| Four branches, 13 nodes, 22 total ranks; prerequisite and one-point costs | Current browser-derived purchase oracle and passing native suite | Rules validated within these cases; not physical-controller acceptance |
+| Injury-preserving combat/guardian health increases and charm stacking | Same suite, including injured states | Validated purchase behavior and synthetic roundtrip |
+| Skill selection versus purchase | camp_menu _build_skills, _skill_mouse, select_skill, upgrade_action and _input read | Single click selects, double click learns; A/Enter activates once per press with release latch; source path PRESENT, not newly exercised here |
+| Menu focus/scroll/layout | skills_controls.gd read only | Historical scripted event/geometry checks at 720p/1080p/4K; not rerun, not visual QA or actual controller proof |
+| Earn points, buy combat/quickdraw, craft bow | skills_journey.gd read only | Historical automated integration: teleports to harvest positions and directly ticks bow charge; not an unaccelerated physical-controller journey |
+| Quickdraw/combat bow effects | bow_combat.get_stats and skills_rules.gd read | Present formula: 0.78s versus 1.2s full charge, combat/quickdraw damage additions. This slice does not execute projectile/combat effects |
+| Craft/mason/smelter | progression recipe_cost/craft/add_fuel; preceding crafting audit | Implemented and transactional craft slice already validated; skill purchase alone is not station/world reachability |
+| Gather/logger and angler | resource_rules.collect and camp fishing completion | Present yield/damage and two-fish branch; no fishing world journey newly verified |
+| Star/frost/helper | camp_companion follow/work/slow functions | Present implementation paths; dedicated companion behavior audit still queued |
+| Leap, two ranks | Browser model canStep and game jump; complete local scripts search and active movement paths | MISSING active effect: local leap is in catalogue/purchasing, but local scripts have no jump/height traversal implementation consuming it. A point can buy a rank whose promised movement effect is absent |
+
+The leap gap belongs to CORE-005's terrain/height/jump contract and UX-001's honest skill availability/feedback. Preserve the exact browser definition (one additional terrain step per rank during jump); do not silently substitute speed or invent a new 3D bonus. Purchasing metadata parity does not mean all 13 skill effects are playable. Before B2, require both ranks to cross the appropriate terrain boundaries, ordinary movement and no-jump rejection, boat/interior/context constraints and save/reload state.
+
+Still queued: companion and combat effect parity; full terrain traversal; normal-time controller journey; EN/ET and visual menu QA. PROD-003 remains DOING. No native user save opened; no optional backup fixture supplied. This publication contains audit findings only, not the still-blocked local source payload.

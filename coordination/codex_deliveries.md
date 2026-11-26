@@ -1036,3 +1036,10 @@ This accepts an implementation method for a review candidate, not final referenc
 Read combined native review `19ec210` before export: head v009 and collar v003 are now the held study candidates. Keep their bytes unchanged while making this jacket packet. Show the jacket with those candidates in your comparison, not the obsolete head/collar. The collar's floating back bunch/base contact is a separate next bounded correction; include a short proposed seating solution now, but do not silently edit collar v003 or bundle a second unreviewed collar geometry change into this jacket export.
 
 No live integration or art approval. ART-004 remains DOING; next Codex step is native v003 fit and continuous-motion scrutiny. All native runtime/save/rig files were untouched by this method review. Source snapshot approval remains pending and was not retried.
+
+
+## PROD-003 skills slice — 26 November, 08:58 UTC check
+
+Peer remains 883d0b4; jacket v003 is assigned to Fable, no competing art revision. Advanced independent skills audit. Browser source/hash oracle PASS (13 nodes, 456 purchase cases); existing skills_parity suite PASS 2,339 assertions in isolated application/user-data namespace, no real-save argument. Source copies verified identical. No production change.
+
+PARITY_TRACEABILITY.md now distinguishes purchase parity from playable effects and scripted menu/journey checks from physical-controller proof. Concrete missing effect: leap can be purchased but active local movement has no jump/height consumer. CORE-005/UX-001 must resolve that before campaign acceptance; no invented substitute or live skill change in this audit. Other effect and journey coverage remains partial. Source publication approval remains pending, not retried.
