@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: camera64 locally integrated for new instances; use work/simm-runtime-baseline-camera64.json. Held fitted Simm now has isolated camp/static and controlled movement/tool evidence; next Codex matched original/fitted shoulder/torch-contact control. Fable ART-012 and ART-006 REVIEW; A1 unpassed, no fitted live asset swap/wider art production. PROD-002 publication awaits approval.
+Current active: camera64 locally integrated; current baseline work/simm-runtime-baseline-camera64.json. Fitted camp motion and matched original-actor tool control delivered; inherited shoulder/torch presentation flagged. Next Codex in-memory anchored tool-carry calibration, no rig/action changes. Fable ART-012/006 REVIEW; A1 unpassed, no fitted live swap/wider art. PROD-002 approval pending.
 
 ## Ticket update format
 
@@ -119,3 +119,8 @@ Fable3cc1c45 hardens the v012 build helper and distinguishes PC evidence from mi
 ### 10:02UTC fitted camp movement evidence
 
 RENDER-001/ART-003 remain open: actual camp physics and explicitly advanced original animations exercised in persistfalse instance for axe/pickaxe walking/gather activation and torch walking.384steps/192frames,80foot poses,2.1264m travel; socket POSITION error max4.915e-7m; rests/actions/socket count and protected41runtime hashes preserved. See codex_deliveries.md and reviews/fitted-simm-native-camp-motion-samples.png / .mp4. Flagged tool proximity/overlap at shoulder and torch/face silhouette needs a matched original-actor control; do not infer fitted mesh fault or claim contact acceptance. Fable art remains held; no new revision assigned.
+
+
+### 10:31UTC original/fitted tool negative control
+
+RENDER-001/ART-003 remain open. Original actor reproduces shoulder/tool and side torch/face silhouette concerns at matching sample poses; no jacket/head rebuild justified by this evidence alone.384paired steps, identical clip times/local hand+foot pose strings; root difference max0.611mm. Six labelled native pairs reviewed, not geometric-clearance acceptance. Next Codex: grip-preserving in-memory carry transform calibration across multiple views/motion; no live changes. Fabled51af57 receipt consumed; no new Fable production task.

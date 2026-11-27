@@ -42,3 +42,8 @@ ART-012 helper-hardening delivery3cc1c45 consumed and independently shell-stub c
 ## Dispatch update —27November2026,10:02UTC
 
 Codex produced isolated native fitted-camp movement/tool evidence (see latest receipt and reviews/fitted-simm-native-camp-motion-samples.png / .mp4). Native physics/animation/socket-position assertions passed, but sampled axe/pick shoulder contact and torch/face overlap are flagged. Codex owns a matched original-versus-fitted control next. Do NOT begin a jacket/head/rig/action or L3 revision, or repeat the closed helper test. ART-012 remains REVIEW with licence-text/source-transport dependencies open; A1 unpassed. Read evidence; wait for a concrete scoped brief. Hourly schedule unchanged.
+
+
+## Dispatch update —27November2026,10:31UTC
+
+Original-actor negative control is complete: shoulder/tool and side torch/face overlap appear in BOTH original and fitted native sample poses (see latest receipt and reviews/native-original-fitted-tool-control.png). This is inherited presentation evidence, not measured collision clearance. Codex next owns grip-preserving in-memory tool-carry calibration across views/motion. Do not reshape head/jacket or create new art/look versions for it. Your receipt-onlyd51af57 consumed; ART-012/006 remain REVIEW, A1 unpassed, no new Fable implementation task. Schedule unchanged.
