@@ -50,7 +50,7 @@ def width_profile(s, root=0.55, belly=0.30, tip_pow=1.5):
 
 def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, grooves=(), roll=(0.0, 0.0),
           root=1.0, belly=0.0, tip_pow=2.1, under=0.45, uv_layer=None, uv_u=(0, 1), root_cap=0.004,
-          vol=False, channels=(), taper_from=0.62, section="plate", round_w=0.78):
+          vol=False, channels=(), taper_from=0.62, section="plate", round_w=0.78, round_t=1.0):
     """vol=True (v005): a rounded, inflated volume instead of a flattened strap. Full round section through
     root and middle, thickness tapering only in the final third. channels = occasional shallow asymmetric
     channels that drift across the lock: (v_start, v_end, depth, s_start, s_end)."""
@@ -76,7 +76,7 @@ def sweep(bm, spine, width, thick=0.016, n_around=22, ridge=0.3, ridge_at=0.0, g
             w *= round_w                      # 0.78 by default; per-lock values are annotated in stage 2
         if vol and section == "round":
             swell = 0.60 + 0.40*math.sin(0.5*math.pi*min(s[i]/0.30, 1.0))          # soft root: rises over 30 percent
-            t = thick*swell*(1.0 - min(max((s[i] - 0.75)/0.25, 0.0), 1.0)**1.4)
+            t = round_t*thick*swell*(1.0 - min(max((s[i] - 0.75)/0.25, 0.0), 1.0)**1.4)   # round_t: D1 diagnostic B
         elif vol:
             swell = 0.72 + 0.28*math.sin(0.5*math.pi*min(s[i]/0.38, 1.0))
             t = thick*swell*(1.0 - min(max((s[i] - taper_from)/(1.0 - taper_from), 0.0), 1.0)**1.7)

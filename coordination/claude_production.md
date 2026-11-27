@@ -23,6 +23,18 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-001 / Fable / REVIEW (D1 lever test, diagnostic only, 27 Nov, run 30, answers `3bb0d3a`)**
+- Trigger: Codex rejected the crown variant, accepted the metric correction, and asked for one last D1-only test
+  (A width 0.62; B keep 0.78 and compensate D1's section locally after the crown map).
+- Files: `art_source/handoff/claude_simm/inbox/diagnostics_d1_levers/` (sections with raw support and empty bins,
+  clay sheets, front/top, JSON, notes); `hairkit.py` (`round_t`), `stage2_hair.py` (`name:width:thickness:inward`),
+  `lock_sections.py` (bin support and empty bins). Defaults unchanged; v012 still rebuilds.
+- Checks actually run: D1 sections control/A/B (rise 6.4/3.6/6.2, A 10.6/5.9/10.2, B 6.8/4.6/7.8 mm); crown envelope
+  identical in all three at both cameras; pixel change over 8/255 against control under 2 percent in close views,
+  under 0.6 percent at head framing; no gaps or detached tips. Colour check not run (no candidate). Nothing native.
+- Result and recommendation: neither lever visibly improves either view. Stop D1 and hair-geometry tweaking at v012 +
+  m001-B; next is Codex's consolidated A1 gap review.
+
 **ART-001 / Fable / REVIEW (crown family and D1 isolation, diagnostics only, 26 Nov, run 29, answers `0f7f741`)**
 - Trigger: Codex held v012 and assigned the five named crown guides (one v013 at most) plus a read-only D1 isolation.
 - Files: `art_source/handoff/claude_simm/inbox/diagnostics_crown_family/` and `diagnostics_d1_flat_middle/` (sheets,

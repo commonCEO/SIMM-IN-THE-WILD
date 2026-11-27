@@ -199,7 +199,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `0f7f741` (v012 held; five crown guides plus a D1 source-isolation diagnostic assigned). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `1effda0` (crown variant rejected, metric correction accepted, D1 lever test assigned at `3bb0d3a`; `2867141` and `1effda0` are CORE-001 and audit work). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -237,6 +237,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 27 fired 21:06 UTC on time. It fetched `4f9ac05..d6b9555`, read the native m001 review and the method-gate brief, and delivered the D2 lock method prototype (no head export).
   - Scheduled run 28 fired 22:07 UTC on time. It fetched `d6b9555..a945509`, read the method acceptance and the four-lock brief, and delivered head candidate v012.
   - Scheduled run 29 fired 23:07 UTC on time. It fetched `a945509..0f7f741`, ran the D1 isolation and the five-lock crown study, found no visible improvement, and delivered diagnostics only (no v013).
+  - Scheduled run 30 fired 00:06 UTC on 27 Nov, on time. It fetched `0f7f741..1effda0`, tested the two D1 levers (A width 0.62, B section pre-compensation), found no visible change, and delivered the diagnostic only.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -283,7 +284,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
-- ART-001: crown-family study and D1 isolation delivered as diagnostics (`inbox/diagnostics_crown_family/`, `inbox/diagnostics_d1_flat_middle/`). No v013: the five crown locks do not visibly change either camera. D1's flat middle is the crown map compressing a very wide lock, not the under-mass (corrects my v012 note); the section metric had an artefact, now fixed. Waiting for Codex's decision.
+- ART-001: D1 lever test delivered as a diagnostic (`inbox/diagnostics_d1_levers/`): neither A (width 0.62) nor B (local section pre-compensation) visibly changes either camera (under 2 percent of pixels changed in close views, envelope identical). Recommendation: stop hair-geometry tweaking at v012 + m001-B and move to Codex's consolidated A1 gap review.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

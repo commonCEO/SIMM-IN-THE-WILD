@@ -32,11 +32,14 @@ for s in (0.25, 0.50, 0.75):
         m = (np.abs(bb - x) < 0.0015) & (nn > 0)      # v013 fix: outer shell only, 3 mm bins (an empty 2 mm bin used to
         if m.any(): top.append((x, nn[m].max()))      # fall through to an inner shell and fake a steep slope)
     top = np.array(top)
+    support = [int(((np.abs(bb - x) < 0.0015) & (nn > 0)).sum()) for x in np.arange(-0.025, 0.0251, 0.002)]
+    empty = [round(float(x)*1000) for x, c in zip(np.arange(-0.025, 0.0251, 0.002), support) if c == 0]
     A = np.c_[2*top[:, 0], 2*top[:, 1], np.ones(len(top))]; rhs = (top**2).sum(1)
     cx, cy, c0 = np.linalg.lstsq(A, rhs, rcond=None)[0]; R = math.sqrt(max(c0 + cx*cx + cy*cy, 0))
     slope = np.abs(np.gradient(top[:, 1], top[:, 0]))
     res["sections"][str(s)] = {"points_b_n_mm": np.round(np.c_[bb, nn]*1000, 2).tolist(), "top_curve_b_n_mm": np.round(top*1000, 2).tolist(),
                                "top_circle_radius_mm": round(R*1000, 1), "flat_share_under_12deg": round(float((slope < math.tan(math.radians(12))).mean()), 3),
-                               "top_rise_mm": round(float((top[:, 1].max() - top[:, 1].min())*1000), 1)}
-    print("SECTION s=%.2f: top circle radius %.1f mm, flat share %.2f, rise across +-25 mm %.1f mm" % (s, R*1000, res["sections"][str(s)]["flat_share_under_12deg"], res["sections"][str(s)]["top_rise_mm"]))
+                               "top_rise_mm": round(float((top[:, 1].max() - top[:, 1].min())*1000), 1),
+                               "bin_support_counts": support, "empty_bins_b_mm": empty}
+    print("SECTION s=%.2f: top circle radius %.1f mm, flat share %.2f, rise across +-25 mm %.1f mm, empty bins %s" % (s, R*1000, res["sections"][str(s)]["flat_share_under_12deg"], res["sections"][str(s)]["top_rise_mm"], empty or "none"))
 json.dump(res, open(out, "w"))

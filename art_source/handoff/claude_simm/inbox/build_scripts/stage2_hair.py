@@ -66,11 +66,15 @@ GUIDES = []
 # Default = the four v012 locks, all at width factor 0.78 (no per-lock adjustment was needed: no gaps, roots seated,
 # split tips attached). HAIR_ROUND= (set but empty) rebuilds v011's hair.
 ROUND = {}
+# Optional extra fields "name:width:thickness:inward" (D1 diagnostic B): thickness factor for the round section and an
+# inward offset (m) of the guide's lift, so a thicker section keeps the same outer envelope.
 for x in os.environ.get("HAIR_ROUND", "D1_arc_body,D2_temple_arc,D4_fringe_sweep,S_fringe_right").split(","):
-    if x: nm_, _, wf_ = x.partition(":"); ROUND[nm_] = float(wf_) if wf_ else 0.78
+    if x:
+        f_ = x.split(":"); ROUND[f_[0]] = (float(f_[1]) if len(f_) > 1 and f_[1] else 0.78, float(f_[2]) if len(f_) > 2 else 1.0, float(f_[3]) if len(f_) > 3 else 0.0)
 def L(name, pts, w, t=0.016, n=16, **kw):
-    if name in ROUND: kw["section"] = "round"; kw["round_w"] = ROUND[name]
-    P = [scalp.point(a, e, mass(a, e) + r) for a, e, r in pts]
+    inward = 0.0
+    if name in ROUND: kw["section"] = "round"; kw["round_w"], kw["round_t"], inward = ROUND[name]
+    P = [scalp.point(a, e, mass(a, e) + r - inward) for a, e, r in pts]
     kw.setdefault('under', 0.9)      # undersides sink into the mass: no hollow gaps beneath a clump
     GUIDES.append((name, P))
     if name in SKIP: PIECES.append((name, len(bm.verts), len(bm.verts))); return
