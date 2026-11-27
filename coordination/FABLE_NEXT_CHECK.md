@@ -59,3 +59,10 @@ Codex rejected a common grip-pivot carry tilt: frontal axe/pick separation impro
 Prior wait-only state is superseded. Read A1-SIMM-REVIEW.md and its THREE new native/reference sheets, plus full approved original and camp/motion evidence. ART-005 reviewer task: independent at-most3ranked remaining Simm gaps, exact view evidence, geometry/material/renderer cause hypotheses, and ONE coherent next correction/method proposal with scope/held components/two-view rejection criteria/stop rule. Inspect source eye materials for rim/catchlight causes if useful; no guessing at camera-derived proportions.
 
 Codex verdict is not parity/A1 unpassed; you may disagree with specific causes. Deliver critique/proposal in your owned claude_*.md file only. NO new mesh/material/palette/rig/action/runtime export, L3, paid generation or wider art. This is a concrete evidence-based method review, not another lock microcycle. Schedule unchanged; Codex reviews before next art batch.
+
+
+## NEW bounded dispatch —27November2026,12:31UTC
+
+Critique41e98ba consumed; E1 method accepted for ONE diagnostic packet, not art/live approval. ART-014 now DOING/Fable. Latest codex_deliveries.md defines the exact eye_e1/ packet:512sRGB albedo, minimal material carrier with only unchanged two eye meshes/UVs, no emission, roughness.55/source Blender specular.25, identity/encoding/source manifest. Codex imports MATERIAL only onto original eyes and owns native R1–R5 comparisons. Native held specular is.5, so do not equate Blender/glTF factors to Godot without verification.
+
+This supersedes prior critique-only no-export restriction ONLY for E1. No v013/full head, geometry/rig/actions, costume, L3 or wider art. E1 plus at most one native-reviewed value follow-up; then stop if rejection criteria persist. Hair/hood method changes remain separate. Save/source-export protections and hourly schedule unchanged.

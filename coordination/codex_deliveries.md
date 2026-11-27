@@ -2161,3 +2161,25 @@ Peer unchanged372ec64; Fable's new A1 critique remains pending. Advanced an inde
 Native2060assertions PASS/exit0 against54actual-browser-function oracle sequences. Source hashes checked, original advanceTime owns each test clock step once. Identity/content/position/optional scene metadata and strict expiry survivors match; projected entries pass actual complete v4 validator. Critical semantic: immediate sleep saves retain expired entries as lifetime0; prune only on next active step, including dt0. Defeat does not skip worldAge. No actual file/save-loader/scene integration or full frame/survival/fuel ownership claim.
 
 All new source/oracle/harness files remain LOCAL in work/core001/ while PROD-002 export approval is pending. Initial synthetic fixture/validator-method setup errors corrected; final certificate-store diagnostic remains. No runtime/live game/native save access. Fable art task/held versions unchanged; next peer check consumes the A1 critique when available. Next independent foundation is a combined single-clock-owner sequence, not chaining helper advances.
+
+
+## Fable critique consumed; E1 eye-only packet authorized —27November,12:31UTC
+
+Consumed41e98ba630bdffc1581dbd16e4dea7475d205175. Read the full critique and45line demo source; extracted and visually reviewed the Blender comparison (SHA256ec5936c3ed1256befbc0eb99c0f4b9978561957118bd22b7e2bf74a57014f0d8). Did not execute the peer script or treat Blender views as native proof. Agree with the ranked eye/face, whole-form hair and costume gaps. The E1 demo reduces the glowing/sticker read, but its weak alternate highlight is a real risk. No parity acceptance.
+
+Independent native held-eye inspection (work/a1-e1-review/inspect_native_eye.gd, exit0): both original512x512eye textures import with emission enabled, white emission factor/energy1, emission texture present, roughness0.41999999. **Native metallic_specular is0.5**, not the critique's glTF specular factor0.83 or Blender value0.35. Those numbers are different representations; do not assign Blender0.25 directly to Godot and call it a verified conversion. No native scene/render/save changes. Known certificate-store diagnostic remains.
+
+Authorize ONE reversible E1 eye-only material/texture packet for native A/B, ART-014 below. This supersedes the critique-only no-export fence ONLY for that named packet. Head/eye/lid geometry, skin, brows/lashes, mouth, hair, costume, palette, original rig/actions/socket remain held. No v013/full-head export, new look preset or wider art. E1 is not approved for live game. Existing R1–R5 and one value-only follow-up stop rule retained; no geometry inference if a single material test is inconclusive.
+
+### ART-014 / Fable next bounded delivery
+
+Under art_source/handoff/claude_production/ART-005/eye_e1/, deliver:
+- E1512x512sRGB eye albedo PNG with SHA256, dimensions/encoding and sample colour checks. Use the proposed iris/pupil/single lit-albedo highlight; no emissive map.
+- A minimal material-carrier GLB containing ONLY the two unchanged held static eye meshes/UVs and SCULPT_MAT_EYE with the proposed texture, no emission, roughness.55 and Blender specular.25. No rig/actions/lights/cameras or other head/body geometry. Codex consumes its IMPORTED MATERIAL only; does not replace either eye mesh. Include exported glTF material fields so native mapping is explicit.
+- A small JSON/notes manifest recording held v012 eye vertex/triangle/UV identity checks, texture/material change list, source/rebuild commands, actual parameters and known risks. Existing E1 demo authoring script plus a narrow exporter is sufficient editable source; don't duplicate full frozen body/source bundles. No overwrite/delete of previous versions.
+
+Confirm native renderer assumptions as UNKNOWN until Codex imports it. Codex will compare both agreed A1 studio views and camp zoom10, plus a shadow/darker context to confirm highlights no longer emit. R4 is a VISUAL target at small scale, not permission to paint giant dots or change geometry. R5 all non-eye materials/textures/meshes held; original geometry is used in Codex's A/B. If texture/GLB colour conversion changes the intended look, fix the packet/export mapping before artistic iteration, with evidence.
+
+Hair/hood whole-form changes remain separate method proposals. The user's standing request already authorizes scoped reversible work toward Simm likeness while preserving rig/save; do not invent a requirement for approval at each routine modelling step. Final artistic acceptance remains the user's. For now, deliver E1 only, then wait for native review rather than starting a second task.
+
+ART-005 remains REVIEW/not parity; ART-014 DOING/Fable; Codex owns native evaluation after delivery. Live game/rig/save untouched; source-export PROD-002 blocker remains unchanged and no PC source is shared.

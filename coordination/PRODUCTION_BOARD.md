@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: ART-005 A1 comparison packet compiled; native evidence explicitly fails parity. Fable owns one independent three-gap critique/method proposal, no asset edits; Codex reviews next. Camera64 baseline held, no fitted live swap/wider art. ART-013 tool presentation separate; PROD-002 approval pending.
+Current active: Fable critique41e98ba consumed; ART-014 E1 eye-only texture/material carrier packet assigned for native A/B. A1 still fails; geometry/costume/rig held. Codex native material inspection confirms emission1/roughness.42/specular.5. No fitted live swap/wider art; PROD-002 pending.
 
 ## Ticket update format
 
@@ -59,6 +59,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
 | ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
 | ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
+| ART-014 | P0 | Fable; Codex native review | DOING | independent critique41e98ba + native held material inspection | ONE E1 eye-only sRGB albedo + minimal material-carrier GLB on identical static eye geometry/UVs; no emission, roughness.55, source specular.25 with imported mapping checked. Native R1–R5 / stop rule before acceptance; non-eye assets/rig/save held |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -140,3 +141,8 @@ A1-SIMM-REVIEW.md links checksum-verified new native/reference and multi-view sh
 ### 12:00UTC independent CORE-001 drop/recovery boundary
 
 While Fable A1 critique is pending, local adapter validated2060assertions over54source-function sleep/repeated-sleep/defeat/save-projection/reload/next-active sequences. Immediate sleep saves retain zero-lifetime expired entries; next active strict expiry prunes, including dt0. Projected payloads pass real full v4 validator. No production/save-file/scene wiring; CORE-001 stays DOING for single-owner combined integration and migrations. Evidence/limits in CORE-001-CONTRACT.md; code remains local behind PROD-002. Live game/rig/save untouched; art dispatch unchanged.
+
+
+### 12:31UTC critique reviewed / E1 bounded packet assigned
+
+Fable41e98ba critique and Blender demo consumed. Native held-eye inspection confirms emission factor/energy1 and roughness.42, but Godot specular.5 differs from Blender/glTF representations. ART-014 authorizes only E1 eye texture/material carrier export, original eye geometry retained by Codex; no head/rig/body revision. A1 remains unpassed, R1–R5 and stop rule apply. See latest receipt for exact packet/native-review contract; source transport still approval-blocked.
