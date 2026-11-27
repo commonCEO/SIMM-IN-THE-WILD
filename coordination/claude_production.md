@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-015 / Fable / REVIEW (inlay diagnostic carrier, 27 Nov, run 45, answers `d64a9e4`)**
+- Trigger: Codex reviewed the inlay method and authorized ONE static diagnostic carrier of the existing composite, with
+  locality, correspondence and material evidence; no retuning, no production head.
+- Files: `art_source/handoff/claude_production/ART-005/face_method/inlay_native_study/` (`simm_inlay_carrier.glb`,
+  `inlay_carrier_manifest.json`, `base_vertex_moves.json`, `inlay_carrier_delta_heatmap.png`, `INLAY_CARRIER_NOTES.md`);
+  `face_method/inlay_carrier_export.py`.
+- Content: SCULPT_HEAD, SCULPT_EYE_L/R, SCULPT_LASHES under SCULPT_HEAD_ROOT (same root transform); held materials and
+  byte-identical images; topology, UVs and slots identical to v012.
+- Checks actually run: raw GLB comparison with v012 per part; base and exported deltas; mouth 0 moved; nose bridge top
+  110 vertices at most 0.051 mm; subdivision halo to e 3.54 at most 0.363 mm; three identical exports (one from an
+  independent scratch build). Nothing native.
+- Next dependency: Codex's single native control/candidate pass (clay, flat, E1, camp zoom 10) and its stop rule.
+
 **ART-015 / Fable / REVIEW (eye-boundary source and inlay-eye method, 27 Nov, run 44, answers `5fafefb`)**
 - Trigger: native E1 A/B kept a pale eye outline even with flat, unlit, textureless eyes; Codex asked for the source
   mesh/material and ONE localized eye-opening/lid construction proposal with an in-memory two-view demo.

@@ -1,0 +1,247 @@
+{
+ "packet": "ART-015 inlay diagnostic carrier (Codex brief d64a9e4); NOT a production head",
+ "parts": {
+  "SCULPT_HEAD": {
+   "base_vertices": 4118,
+   "base_vertices_moved": 1004,
+   "base_moved_over_0.05mm": 954,
+   "base_max_move_mm": 6.992,
+   "primitives": 1,
+   "materials": [
+    "SCULPT_MAT_SKIN"
+   ],
+   "materials_held": [
+    "SCULPT_MAT_SKIN"
+   ],
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "vertices": [
+    21673,
+    21673
+   ],
+   "triangles": [
+    33000,
+    33000
+   ],
+   "correspondence": "index-wise: identical UV arrays and identical triangle index arrays",
+   "exported_vertices_moved": 5843,
+   "exported_moved_over_0.05mm": 5173,
+   "exported_max_move_mm": 6.653,
+   "moved_bounds_min": [
+    -0.1183,
+    1.0852,
+    0.0689
+   ],
+   "moved_bounds_max": [
+    0.1183,
+    1.2272,
+    0.1132
+   ],
+   "normals_changed_vertices": 5993
+  },
+  "SCULPT_EYE_L": {
+   "base_vertices": 922,
+   "base_vertices_moved": 436,
+   "base_moved_over_0.05mm": 428,
+   "base_max_move_mm": 24.455,
+   "primitives": 1,
+   "materials": [
+    "SCULPT_MAT_EYE"
+   ],
+   "materials_held": [
+    "SCULPT_MAT_EYE"
+   ],
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "vertices": [
+    922,
+    922
+   ],
+   "triangles": [
+    1840,
+    1840
+   ],
+   "correspondence": "index-wise: identical UV arrays and identical triangle index arrays",
+   "exported_vertices_moved": 436,
+   "exported_moved_over_0.05mm": 428,
+   "exported_max_move_mm": 24.455,
+   "moved_bounds_min": [
+    0.0264,
+    1.1163,
+    0.0819
+   ],
+   "moved_bounds_max": [
+    0.0976,
+    1.1877,
+    0.1041
+   ],
+   "normals_changed_vertices": 484
+  },
+  "SCULPT_EYE_R": {
+   "base_vertices": 922,
+   "base_vertices_moved": 436,
+   "base_moved_over_0.05mm": 428,
+   "base_max_move_mm": 24.455,
+   "primitives": 1,
+   "materials": [
+    "SCULPT_MAT_EYE"
+   ],
+   "materials_held": [
+    "SCULPT_MAT_EYE"
+   ],
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "vertices": [
+    922,
+    922
+   ],
+   "triangles": [
+    1840,
+    1840
+   ],
+   "correspondence": "index-wise: identical UV arrays and identical triangle index arrays",
+   "exported_vertices_moved": 436,
+   "exported_moved_over_0.05mm": 428,
+   "exported_max_move_mm": 24.455,
+   "moved_bounds_min": [
+    -0.0976,
+    1.1163,
+    0.0819
+   ],
+   "moved_bounds_max": [
+    -0.0264,
+    1.1877,
+    0.1041
+   ],
+   "normals_changed_vertices": 484
+  },
+  "SCULPT_LASHES": {
+   "base_vertices": 564,
+   "base_vertices_moved": 564,
+   "base_moved_over_0.05mm": 564,
+   "base_max_move_mm": 3.324,
+   "primitives": 1,
+   "materials": [
+    "SCULPT_MAT_LASH"
+   ],
+   "materials_held": [
+    "SCULPT_MAT_LASH"
+   ],
+   "attributes": [
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0"
+   ],
+   "vertices": [
+    656,
+    656
+   ],
+   "triangles": [
+    1120,
+    1120
+   ],
+   "correspondence": "index-wise: identical UV arrays and identical triangle index arrays",
+   "exported_vertices_moved": 656,
+   "exported_moved_over_0.05mm": 656,
+   "exported_max_move_mm": 3.324,
+   "moved_bounds_min": [
+    -0.0806,
+    1.1612,
+    0.0971
+   ],
+   "moved_bounds_max": [
+    0.0806,
+    1.1817,
+    0.0991
+   ],
+   "normals_changed_vertices": 656
+  }
+ },
+ "glb": {
+  "file": "simm_inlay_carrier.glb",
+  "sha256": "2cb9c8c2813aa0d4de3f87520f223fcd3e9ead44d11dd4bfd5262965e8042171",
+  "bytes": 1383076,
+  "held_v012_glb_sha256": "e5a47d01d203f1438226850632b58a2c7b1e657eaec05d4a6c4faf8019e1e2de",
+  "nodes": [
+   "SCULPT_EYE_L",
+   "SCULPT_EYE_R",
+   "SCULPT_HEAD",
+   "SCULPT_LASHES",
+   "SCULPT_HEAD_ROOT"
+  ],
+  "skins": 0,
+  "animations": 0,
+  "cameras": 0,
+  "materials": [
+   "SCULPT_MAT_EYE",
+   "SCULPT_MAT_SKIN",
+   "SCULPT_MAT_LASH"
+  ],
+  "root_transform_identical_to_held": true
+ },
+ "locality_exported_head": {
+  "moved_vertices": 5843,
+  "max_oval_e_of_any_moved_vertex": 3.543,
+  "moved_vertices_beyond_e_2.4_subdivision_halo": 501,
+  "max_move_beyond_e_2.4_mm": 0.3632,
+  "unmoved_vertices_beyond_halo_e_gt_max": 13435,
+  "nose_vertices": 1514,
+  "nose_max_move_mm": 0.050992,
+  "mouth_vertices": 1997,
+  "mouth_max_move_mm": 0.0,
+  "moved_bounds_blender_min": [
+   -0.1183,
+   -0.1132,
+   1.0852
+  ],
+  "moved_bounds_blender_max": [
+   0.1183,
+   -0.0689,
+   1.2272
+  ],
+  "nose_vertices_moved": 110,
+  "nose_moved_over_0.05mm": 6,
+  "nose_moved_bounds_blender": [
+   [
+    -0.0219,
+    -0.1126,
+    1.1233
+   ],
+   [
+    0.0219,
+    -0.1063,
+    1.1642
+   ]
+  ],
+  "mouth_vertices_moved": 0,
+  "mouth_moved_over_0.05mm": 0
+ },
+ "images": {
+  "simm_head_eye_emissive": {
+   "sha256": "3755b82c2e187c3b4074647b9f3fffe9e41ca45caa4631d5f88929d9304d272b",
+   "identical_to_held_v012_embedded": true
+  },
+  "simm_head_eye_basecolor": {
+   "sha256": "4ad60fc3288b52ae55cf62f10897a91672da3094e0acb1a3ce5c30a49db10bed",
+   "identical_to_held_v012_embedded": true
+  },
+  "simm_head_skin_basecolor": {
+   "sha256": "d38c228a9297034fd99b60b729d0aa283621f07b1000a76c5d46b0757dad5a73",
+   "identical_to_held_v012_embedded": true
+  }
+ },
+ "materials_identical_to_held_v012": {
+  "SCULPT_MAT_EYE": true,
+  "SCULPT_MAT_SKIN": true,
+  "SCULPT_MAT_LASH": true
+ }
+}
