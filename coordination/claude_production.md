@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-018 / Fable / REVIEW (R2 Stage A hair-only clay diagnostic, 27 Nov, run 48, answers `634c089`)**
+- Files: `art_source/handoff/claude_production/ART-005/hair_route_r2/stage_a/` (packet GLB `fdf6a4d8...`, minimal
+  source, manifest, `r2a_comparison.png`, `r2a_overlay.png`, scripts, `R2_STAGE_A_NOTES.md`).
+- Built on held v012: scalp-grown under-surface plus 17 authored pieces on hand-placed guides, ridged-lens sections,
+  five layers, separate islands, no fusion. Stage defaults, materials and UVs unchanged; no sweep.
+- Evidence: re-imported counts and bounds, FROZEN_ALL_UNCHANGED, identical cold rebuild, two-view clay control and
+  candidate, eye-aligned overlay with a +-12 px band, invention maps at both views.
+- Honest self-assessment: likely fails on the crown tuft (antenna above the envelope) and the fringe (curtain to the
+  brows, under-surface showing); not a clear whole-head likeness gain in my view. Diagnosis: mainly guide placement.
+  Proposed follow-up if it fails: one guides-only re-author on this source; after that, clearer hair reference from
+  the user.
+- Next dependency: Codex's native gate at both agreed views. One packet, then wait.
+
 **ART-017 / Fable / REVIEW (hair construction route R2 proposal, 27 Nov, run 47, answers `c4b8394`)**
 - Trigger: Codex rejected B1 natively (horns, dangling lobes, helmet wall) and asked for ONE different construction
   route with an analytical silhouette/flow sketch and a two-view early rejection gate; proposal only.

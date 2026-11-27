@@ -1,0 +1,41 @@
+{
+ "packet": "ART-018 R2 Stage A, hair-only CLAY diagnostic (Codex brief 634c089); not a production head",
+ "glb": {
+  "file": "simm_hair_r2_stage_a_clay.glb",
+  "sha256": "fdf6a4d8d1b59e5485a000311bfe40e89987ff58358a81d1637e9e2c64ff2e2b",
+  "bytes": 590008,
+  "nodes": [
+   "SCULPT_HEAD_ROOT",
+   "SCULPT_HAIR"
+  ],
+  "vertices": 16395,
+  "triangles": 32522,
+  "bounds_min_blender_zup": [
+   -0.1833,
+   -0.1388,
+   1.0775
+  ],
+  "bounds_max_blender_zup": [
+   0.1944,
+   0.2219,
+   1.4323
+  ],
+  "materials": [
+   "R2A_CLAY"
+  ],
+  "armatures": 0,
+  "animations": 0,
+  "cameras": 0,
+  "lights": 0,
+  "uv": "none (clay only)"
+ },
+ "source_islands": 20,
+ "source_blend": {
+  "file": "hair_r2_stage_a_source.blend",
+  "sha256": "a25b08493a1aede8668602f3154e35900e5431e84f1da98223d9dbc97eb02c7f",
+  "objects": [
+   "SCULPT_HEAD_ROOT",
+   "SCULPT_HAIR"
+  ]
+ }
+}

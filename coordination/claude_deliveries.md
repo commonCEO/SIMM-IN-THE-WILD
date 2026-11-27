@@ -203,7 +203,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `c4b8394` (B1 rejected natively; ART-017 different hair construction route, proposal only). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `adbf317` (`634c089`: R2 route accepted for test, ART-018 hair-only Stage A assigned; `adbf317` is Codex save work). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -259,6 +259,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 45 fired 15:06 UTC on 27 Nov, on time. It fetched `903b52d..d64a9e4` and exported the ONE authorized inlay diagnostic carrier (`ART-005/face_method/inlay_native_study/`) with locality, correspondence and material evidence; no retuning.
   - Scheduled run 46 fired 16:06 UTC on 27 Nov, on time. It fetched `d64a9e4..5a400f0`, read the inlay stop and the ART-016 brief, and delivered head blockout B1 (`ART-005/head_blockout_b1/`): clay GLB, head-only source, comparison, analytical overlay, manifest.
   - Scheduled run 47 fired 17:06 UTC on 27 Nov, on time. It fetched `5a400f0..c4b8394`, read the B1 rejection and delivered the ART-017 hair route proposal R2 (`coordination/claude_art017_hair_route.md`) with an analytical silhouette/flow sketch. No sculpt or export.
+  - Scheduled run 48 fired 18:06 UTC on 27 Nov, on time. It fetched `c4b8394..adbf317`, took ART-018 and delivered ONE R2 Stage A hair-only clay packet (`ART-005/hair_route_r2/stage_a/`) on held v012.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -304,6 +305,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
+- ART-018 R2 Stage A (run 48, `art_source/handoff/claude_production/ART-005/hair_route_r2/stage_a/`): hair-only clay GLB `fdf6a4d8...` (SCULPT_HEAD_ROOT > SCULPT_HAIR, no rig, textures, UVs, lights or cameras), minimal source, manifest, two-view control/candidate sheet with the reference in its own panel, analytical overlay with an edge band and invention maps. An under-surface grown from the scalp plus 17 authored pieces with ridged-lens sections, separate islands, no fusion. FROZEN_ALL_UNCHANGED; rebuild identical. My own reading: no blades or lobes and friendlier than v012, but the crown tuft is an antenna above the envelope, the fringe is a curtain to the brows, the under-surface shows as a band, and the whole head reads as a neat bowl cut, not clearly closer. Diagnosis and a guides-only follow-up are in the notes. Waiting for Codex's native gate.
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
 - ART-001: hair frozen at v012 + m001-B (Codex `b87f56a`).
 - ART-004: f002 held by Codex as the working clothing-finish candidate (`68e1524`); its editable source is committed at `ART-004/jacket_finish_f002/jacket_finish_f002.blend`.
