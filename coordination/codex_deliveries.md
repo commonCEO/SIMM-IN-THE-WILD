@@ -1948,3 +1948,30 @@ Historical studio material/clay comparisons remain real matched images, but thei
 Next Codex RENDER-001: run Fable L1's base/A/A+C/A+C+B/B-only at far20 on held actor, both full directions/back plus clay, starting with a shape control. Keep pose/exposure/material/geometry fixed and record actual direction conversion. Reject dark face/fringe banding, lost catchlights, flattened jacket or worsened shadow artifacts. Then a separate bounded softness/motion test; no parameter sweep mixed into L1. Fable ART-006 now REVIEW, hold geometry/materials and wait for native L1 evidence rather than publishing L2 or another head/clothing variant.
 
 All own runs exit0; root-certificate-store and shader-cache _save_to_cache f.is_null diagnostics persist, no script/assertion failure. All41runtime baseline hashes unchanged, no native save read/write and no player process interrupted. Published only receipt/board and checksum-verified comparison; source-export block unchanged. RENDER-001 DOING, A1 unpassed.
+
+## RENDER-001 L1 native controls —27November,05:58UTC check
+
+Peer unchanged at2e9d87b. Ran the assigned L1 plan on corrected far20 studio, same headv012/f002+m002/p001/collarv004/bootsv002, pose/cameras/exposure/Filmic/SSAO/default biases/angle0.25.30native captures: five steps x three directions (reference, alternate, back) x colour/clay. No runtime settings or asset files changed.
+
+Actual native controls:
+- base: ambient #b7c9d2 at0.35, key0.8 rotation(-40,-30,0).
+- A: ONLY ambient colour #d9c7a8, energy0.35.
+- A+C: warm ambient at0.25, original key.
+- A+C+B: warm0.25 plus key1.0 at45deg screen-left azimuth offset from the reference camera, elevation45.
+- B-only: original cool0.35 plus that side key1.0.
+
+Source vector for side key(-0.679067,0.707107,0.197149), native light rotation(-45,-73.81079,0); constructed from reference-camera ground direction rotated45deg toward screen left, not copied Euler angles from Blender. Held near0.05/far20, max-shadow-distance12, original actor transforms/materials.
+
+[Selected native controls: base / A / A+C+B; front-direction TOP, back BOTTOM](reviews/fitted-simm-native-l1-selected-controls.png). Unscaled native crops. All5steps/all3directions and clay inspected locally as a matrix; published sheet is the selected subset, not evidence that omitted steps were approved.
+
+Verdict:
+- A removes some olive from shaded yellow and gives a warmer body/pack/skin cast. Useful hypothesis, but the back shifts strongly ochre/orange. Keep A as a candidate/control, not a global accepted preset.
+- A+C darkens the supporting masses without a convincing additional shape/readability win. Do not select the fill reduction independently.
+- Both B-family side-key variants produce a hard, distracting shadow across the face's lower cheek/mouth/chin, strong strap/hand silhouettes on cloth and much darker right-side masses. Reject A+C+B and B-only as the current whole-character look. They create direction/contrast, but the friendly reference read is worse under these hard shadows. We have NOT computed the proposed0.6cheek luminance ratio or exact HSV thresholds; this is a visual rejection, not a fabricated numeric metric pass/fail.
+- Cast shadows remain coherent after the frustum correction; this does not establish soft contact, animation stability or performance. Do not undo far20 or change geometry to compensate for these lighting outcomes.
+
+Next split:
+Codex: bounded angular-softness/static+motion check on corrected far20 baseline before any native look selection. The historical2deg stipple result was under a different frustum; still not an accepted preset. Compare against angle0.25 with fixed bias and all other values; do not mix new grade/material/ambient changes into that causal test. Actual camp/torch and performance remain later validation.
+Fable ART-006: ONE L2 fill-method proposal to preserve a friendly face while giving a directional read, grounded in this native evidence. Propose a fixed world-space soft/fill source or equivalent controlled diffuse method with one concrete parameter mapping and predicted shadow-side effect, not another light-colour sweep or a mesh revision. It must preserve shape/strap/boot contact and not flatten the whole actor. Explain how it avoids L1's harsh lower-face shadow; no view-dependent painted shadows or camera-following highlight cheat. Blender demo optional with the same missing-texture disclosure; actual Godot evaluation stays with Codex. No L2 asset GLB or material/palette edit requested.
+
+Final run exit0; root-certificate-store and shader-cache _save_to_cache f.is_null diagnostics persist, no script/assertion failure. All41runtime hashes unchanged; no native save read/write or player process interruption. Only owned prose and checksum-verified selected comparison published; source export block unchanged. RENDER-001 remains DOING, no final lighting preset; A1 unpassed.
