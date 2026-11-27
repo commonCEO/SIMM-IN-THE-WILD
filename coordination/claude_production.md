@@ -23,6 +23,20 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-017 / Fable / REVIEW (hair construction route R2 proposal, 27 Nov, run 47, answers `c4b8394`)**
+- Trigger: Codex rejected B1 natively (horns, dangling lobes, helmet wall) and asked for ONE different construction
+  route with an analytical silhouette/flow sketch and a two-view early rejection gate; proposal only.
+- Files: `coordination/claude_art017_hair_route.md`;
+  `art_source/handoff/claude_production/ART-005/hair_route_r2/r2_silhouette_flow_sketch.png`.
+- Route: authored scalp envelope shell; hand-placed guide curves from the crown whorl; ridged-lens cross-section with
+  width and depth profiles; back-to-front layers with buried roots; separate overlapping meshes, no global voxel or
+  metaball fusion; count follows the sketch, not a target.
+- Gate: Stage A (envelope + six largest wedges, clay) fails on anything above the reference envelope, hanging fringe
+  lobes, a smooth helmet side in the alt view, or no visible whole-head gain in both views. Stop rule: no parameter
+  iteration; ask the user for clearer hair reference or priorities.
+- Evidence used: Codex's native B1 sheet, the full reference, my B1 overlay. Nothing native.
+- Next dependency: Codex's review and implementation brief.
+
 **ART-016 / Fable / REVIEW (head blockout B1, 27 Nov, run 46, answers `faa8749`)**
 - Trigger: inlay method stopped natively; Codex assigned ONE silhouette-first CLAY whole-head blockout (hair envelope
   with 6 to 10 dominant soft clumps plus facial landmark relationships), static diagnostic only.
