@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: E1 native A/B confirms colour/emission improvement, but pale boundary persists even with textureless/unlit eyes. ART-014 REVIEW; stop material tuning. ART-015 Fable source diagnosis + one eye/lid construction method demo only. A1 unpassed, no live swap/wider art; PROD-002 pending.
+Current active: Fable5b394e7 inlay-eye method reviewed; ART-015 ONE localized diagnostic geometry carrier assigned, no production head. Codex native method gate next, no parameter sweep. E1 remains diagnostic; A1 unpassed, no fitted live swap/wider art. PROD-002 pending.
 
 ## Ticket update format
 
@@ -60,7 +60,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
 | ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
 | ART-014 | P0 | Fable; Codex native review | REVIEW | d53fde4 native A/B13:30 | E1 colour/emission improved; R3/R5 pass, normal-view R2 retains highlight, R4 highlight unresolved at zoom10, R1 boundary FAIL persists with flat unlit eye materials. Hold E1 diagnostic, stop material tuning; no live baseline |
-| ART-015 | P0 | Fable; Codex method review | DOING | E1 native flat-eye diagnostic / R1 fail | Identify actual light-boundary source mesh/material; ONE localized eye/lid construction proposal and in-memory two-view clay gate. No exported geometry/full-head version or material retry before review; whole face read must visibly improve |
+| ART-015 | P0 | Fable; Codex native method review | DOING | source diagnosis/demo5b394e7 reviewed | ONE existing localized inlay composite as four-mesh diagnostic carrier, with evaluated/exported locality/UV/topology/texture evidence; no whole stage rebuild drift or retuning. Native flat/E1/clay two-view and whole-face gate next; no production version |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -162,3 +162,8 @@ Local combined prototype passes17602assertions over64actual-source-slice sequenc
 ### 14:00UTC defeat-recovery composition
 
 Work-only combined owner now handles actual-source defeat transition through restoration/phase end and resumed ordinary world work.80354new assertions/32sequences/2592steps plus17602+6768regressions PASS. Hostiles missing home coordinates retain position while calming; isolated helper corrected. No production scene/save/rig/art changes. CORE-001 still DOING for native3D mapping/migration/faults; Fable ART-015 unchanged. Details in CORE-001-CONTRACT.md.
+
+
+### 14:30UTC inlay method reviewed
+
+Fable5b394e7 source/patch/local composite and Blender demo reviewed; native result still UNKNOWN. Accept ONE diagnostic carrier of existing composite, not full-stage rebuild (reported brow/hair drift rejected). Require exported locality/UV/topology proof and periorbital-mask halo bounds; no blanket cheek/forehead identity claim. Whole-face Blender difference small; native normal-scale benefit and flat boundary must both pass or method stops. ART-015 DOING for that packet only; art/save/rig/live game untouched.

@@ -73,3 +73,10 @@ This supersedes prior critique-only no-export restriction ONLY for E1. No v013/f
 E1d53fde4 consumed and natively tested. Read latest Codex receipt and reviews/e1-native-head-controls.png plus e1-native-eye-and-camp-detail.png. Encoding/emission improved; material imports specular.5, roughness.55, emissionoff. R1 still fails: pale boundary persists even on constant-brown, textureless, unlit/specular0 eye materials. R4 highlight unresolved at camp zoom10. ART-014 REVIEW; STOP material tuning, no E1.1/value follow-up automatically.
 
 ART-015 now DOING/Fable: source-identify actual boundary mesh/material; ONE localized eye-opening/lid-transition construction proposal and ONE in-memory clay control/candidate at both agreed views, testing whole-face benefit. Exact scope/stop rules in receipt. No production geometry export/new head version, eye material retry, mouth/cheek/hair/costume/rig/action changes. Codex reviews method first. A1 unpassed, protected save/source transport and hourly schedule unchanged.
+
+
+## NEW bounded dispatch —27November2026,14:30UTC
+
+ART-015 diagnosis/demo5b394e7 reviewed. Export ONE diagnostic carrier of the EXISTING localized in-memory composite (no retuning) under face_method/inlay_native_study/: four static meshes HEAD/EYE_L/EYE_R/LASHES only, held UV/topology/materials, evaluated/exported locality and base-ID delta evidence, exact periorbital bounds/halo and heatmap. No full-stage rebuild drift, brows/hair/body/rig/actions, production head version or E1 repaint.
+
+Latest Codex receipt specifies the full packet and ONE native pass/stop rule. This supersedes no-export fence only for the diagnostic carrier; final production geometry still unapproved. A1 unpassed, E1 diagnostic held, no parameter sweep or broader art. Schedule/save/source-transport protections unchanged.
