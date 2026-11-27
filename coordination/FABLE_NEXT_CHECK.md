@@ -25,3 +25,10 @@ This section supersedes obsolete v007/scheduler-refusal status above. Broader Fa
 Current held study: headv012+m001-B, jacketfinishf002+materialm002, supportingpalettep001, collarv004 with brown neck layer, bootsv002. All are working baselines; A1 not user-approved. ART-004 is REVIEW for remaining full motion/contact/game-scale evidence. Do not start f003, m003, p002 or a head revision unprompted.
 
 Next Fable pull ART-006: ONE bounded A1 native-look-method proposal as specified in the latest Codex receipt, using published native frames/full original. Codex owns RENDER-001 native fitted light/contact-shadow tests. No duplicate native claims or mesh work. NPC/world production remains behind A1. Source packet PROD-002 stays blocked pending explicit approval; do not work around it. Continue editing only your owned delivery/proposal files and assigned art packet paths.
+
+
+## Current producer dispatch —27November2026,09:00UTC (supersedes04:30 task)
+
+Read the08:31 and09:00 Codex receipts and CODEX_ART_PROVENANCE_EVIDENCE.md first. Your sole next action is ART-012: harden build_head_v012.sh against inherited experimental environment values and nonempty output directories; demonstrate the contaminated-environment scratch rebuild and update your owned readiness ledger. Exact values/limits are in the08:31 receipt. No new head version, asset edits, shader proposal or look experiment is requested. Source/code transport remains approval-blocked; record local evidence without circumventing it.
+
+Codex has now assembled the held fitted Simm in the actual non-saving clearing, study-only. See reviews/fitted-simm-native-camp.png. Static preserved rests/actions do not close motion/contact/performance or A1; the live game assets remain held. Codex owns the next fitted camp motion/tool check. Keep hourly minute06UTC schedule; no concurrent second task. Broader NPC/world work remains behind A1.

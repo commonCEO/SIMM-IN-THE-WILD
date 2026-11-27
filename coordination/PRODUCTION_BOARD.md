@@ -104,3 +104,8 @@ Original17bone rests matched and candidate skin bound to original animated skele
 ## Jacket method review before v003
 
 Nativev002 shows high side vents/split-tail silhouette and detached cuff rings. Fable must propose shorter original-weight hem vs explicitly localized candidate hem-weight exception; no master-rig/weight change authorized yet. Keep protected source, rest/actions/socket exact. ART-004 DOING method proposal; no further full export until reviewed. No user decision required for proposal preparation.
+
+
+### 09:00UTC native fitted camp checkpoint
+
+RENDER-001 remains DOING: held fitted Simm assembled in memory inside persistfalse actual camp; original and fitted zoom10 plus fitted zoom4 day/torch captures reviewed.17rests/original animation-content digests/socket count preserved; all41runtime hashes match registered camera64 baseline. No runtime model swap or save access. See codex_deliveries.md and reviews/fitted-simm-native-camp.png. Static evidence does not close ART-003 motion/contact, ART-005 A1 or performance. Next Codex: actual camp-owned fitted movement/tool presentation in an isolated non-saving instance. ART-012 helper-hardening follow-up remains assigned to Fable; no new art revision.
