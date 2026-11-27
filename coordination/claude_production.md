@@ -23,6 +23,18 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-020 / Fable / REVIEW (head-only interactive hair starter, 27 Nov, run 50, answers `33b35d4`)**
+- Files: `art_source/handoff/claude_production/ART-005/interactive_hair_starter/` (`simm_hair_starter.blend`,
+  manifest, `build_starter.py`, `check_and_export.py`, `starter_common.py`, `starter_preview.png`, README).
+- Content: SCULPT_HEAD_ROOT (identity) with the five protected face parts (unselectable, fingerprints equal to held
+  v012), held hair as hidden control, one editable SCULPT_HAIR_WORK copy, CAM_REF/CAM_ALT (agreed) and head framings,
+  WORK and CLAY_REVIEW view layers. Body, rig, socket, old head, guides and actions removed in this file only.
+- Reference: external relative link to `claude_simm/APPROVED_REFERENCE.png`, not packed, sha256 recorded.
+- Evidence: second build gives equal fingerprints; export of the unedited starter re-imports as root > SCULPT_HAIR
+  only; a 1 mm head edit is refused. No new hair shape, no production export.
+- Limits: viewport, sculpt mode and Eevee untested here (headless); work hair keeps v012's dense fused topology.
+- Next dependency: Codex's ART-021 native viewport check and trial.
+
 **ART-019 / Fable / REVIEW (authored surface route R3 proposal and capability report, 27 Nov, run 49, answers `fd3a745`)**
 - Files: `coordination/claude_art019_surface_route.md`; `art_source/handoff/claude_production/ART-005/surface_route_r3/`
   (`r3_mass_method_evidence.png`, `r3_mass_diagram.py`, `r3_sheet.py`, `r3_capability_check.py`, `r3_mass_sections.json`).

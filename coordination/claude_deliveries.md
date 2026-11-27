@@ -203,7 +203,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `ed587d7` (`fd3a745`: R2 Stage A failed natively, ART-019 authored surface route proposal assigned; `ed587d7` is Codex save work). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `33b35d4` (ART-019 capability limit accepted; ART-020 head-only interactive starter assigned; Codex owns ART-021 local viewport check). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -261,6 +261,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 47 fired 17:06 UTC on 27 Nov, on time. It fetched `5a400f0..c4b8394`, read the B1 rejection and delivered the ART-017 hair route proposal R2 (`coordination/claude_art017_hair_route.md`) with an analytical silhouette/flow sketch. No sculpt or export.
   - Scheduled run 48 fired 18:06 UTC on 27 Nov, on time. It fetched `c4b8394..adbf317`, took ART-018 and delivered ONE R2 Stage A hair-only clay packet (`ART-005/hair_route_r2/stage_a/`) on held v012.
   - Scheduled run 49 fired 19:06 UTC on 27 Nov, on time. It fetched `adbf317..ed587d7`, read the R2 rejection and delivered the ART-019 proposal and capability report (`coordination/claude_art019_surface_route.md`) with one abstract mass demo. No head sculpt or export.
+  - Scheduled run 50 fired 20:06 UTC on 27 Nov, on time. It fetched `ed587d7..33b35d4`, took ART-020 and delivered the head-only interactive hair starter (`ART-005/interactive_hair_starter/`). No new hair shape.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -306,6 +307,7 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 ## Next
 
+- ART-020 (run 50, `art_source/handoff/claude_production/ART-005/interactive_hair_starter/`): `simm_hair_starter.blend` `ea99c9b0...` built from held v012: protected face parts unselectable and fingerprint-identical to the source; held hair as a hidden control; one editable SCULPT_HAIR_WORK copy; agreed ref/alt cameras plus head framings; clay view layer; the reference linked by relative path, not packed. `check_and_export.py` checks the protected parts and exports only the work hair (tested positive and with a 1 mm head edit refused). README with the workflow. Viewport behaviour untested here (headless). Waiting for Codex's ART-021.
 - ART-019 (run 49): authored connected-cage route R3 specified (five masses, D-shaped root sections, creased grooves splitting each mass into unequal tips, buried tucked tips, layered root loops, no scalp shell, no fusion; inspection by two-view silhouette and fixed cross-sections). Capability report: headless sculpt brushes fail; cage tools work; three passes on one abstract mass still read as wax drips, not hair. I do not offer another scripted build. Decision for the user: who sculpts the hair (a person in interactive Blender with Fable preparing and QA-ing; Claude via computer use on the user's computer; or a licensed asset or paid generator with approval). Evidence: `ART-005/surface_route_r3/r3_mass_method_evidence.png`. Waiting for Codex's review and the user's choice.
 - ART-018 R2 Stage A (run 48, `art_source/handoff/claude_production/ART-005/hair_route_r2/stage_a/`): hair-only clay GLB `fdf6a4d8...` (SCULPT_HEAD_ROOT > SCULPT_HAIR, no rig, textures, UVs, lights or cameras), minimal source, manifest, two-view control/candidate sheet with the reference in its own panel, analytical overlay with an edge band and invention maps. An under-surface grown from the scalp plus 17 authored pieces with ridged-lens sections, separate islands, no fusion. FROZEN_ALL_UNCHANGED; rebuild identical. My own reading: no blades or lobes and friendlier than v012, but the crown tuft is an antenna above the envelope, the fringe is a curtain to the brows, the under-surface shows as a band, and the whole head reads as a neat bowl cut, not clearly closer. Diagnosis and a guides-only follow-up are in the notes. Waiting for Codex's native gate.
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.

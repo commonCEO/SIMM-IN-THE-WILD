@@ -1,0 +1,254 @@
+{
+ "ticket": "ART-020 head-only interactive hair starter (Codex 33b35d4); preparation only, no new hair shape",
+ "source_blend": "head_candidate_v012.blend",
+ "source_blend_sha256": "cb9f9ff1fa68f790442546a739dfd039164bad3bf081ca3a0ecc08564afa94fa",
+ "starter_blend": "simm_hair_starter.blend",
+ "units": "metres, Blender Z up, front -Y, Simm's right -X; glTF export is Y up",
+ "attachment_root": "SCULPT_HEAD_ROOT (empty, identity world matrix, as v012); all head parts are its children",
+ "collections": {
+  "00_PROTECTED_FACE_DO_NOT_EDIT": [
+   "SCULPT_HEAD",
+   "SCULPT_EYE_L",
+   "SCULPT_EYE_R",
+   "SCULPT_BROWS",
+   "SCULPT_LASHES",
+   "SCULPT_HEAD_ROOT"
+  ],
+  "01_HELD_HAIR_CONTROL": [
+   "SCULPT_HAIR_HELD_CONTROL (hidden)"
+  ],
+  "10_WORK_HAIR": [
+   "SCULPT_HAIR_WORK (the only editable object)"
+  ],
+  "20_REVIEW": [
+   "CAM_ALT",
+   "CAM_ALT_HEAD",
+   "CAM_REF",
+   "CAM_REF_HEAD",
+   "KEY_REF",
+   "FILL_REF"
+  ]
+ },
+ "view_layers": {
+  "WORK": "own materials",
+  "CLAY_REVIEW": "material override REVIEW_CLAY (grey 0.55, roughness 0.6)"
+ },
+ "cameras": {
+  "CAM_REF": {
+   "azimuth_deg": 30,
+   "elevation_deg": 15,
+   "distance_m": 2.6,
+   "lens_mm": 84.7,
+   "target": [
+    0.0,
+    0.0,
+    1.215000033378601
+   ],
+   "location": [
+    -1.2557,
+    -2.1749,
+    1.8879
+   ]
+  },
+  "CAM_ALT": {
+   "azimuth_deg": 72.3,
+   "elevation_deg": 15,
+   "distance_m": 2.6,
+   "lens_mm": 84.7,
+   "target": [
+    0.0,
+    0.0,
+    1.215000033378601
+   ],
+   "location": [
+    -2.3925,
+    -0.7636,
+    1.8879
+   ]
+  },
+  "CAM_REF_HEAD": {
+   "azimuth_deg": 30,
+   "elevation_deg": 15,
+   "distance_m": 1.43,
+   "lens_mm": 84.7,
+   "target": [
+    0.0,
+    0.0,
+    1.215000033378601
+   ],
+   "location": [
+    -0.6906,
+    -1.1962,
+    1.5851
+   ]
+  },
+  "CAM_ALT_HEAD": {
+   "azimuth_deg": 72.3,
+   "elevation_deg": 15,
+   "distance_m": 1.43,
+   "lens_mm": 84.7,
+   "target": [
+    0.0,
+    0.0,
+    1.215000033378601
+   ],
+   "location": [
+    -1.3159,
+    -0.42,
+    1.5851
+   ]
+  }
+ },
+ "removed_from_this_file_only": [
+  "PROTECTED_BODY",
+  "REFERENCE_FAILED_OLD_HEAD",
+  "SimmRig",
+  "simm",
+  "hand_r_socket",
+  "SCULPT_HAIR_GUIDES",
+  "all actions"
+ ],
+ "objects": {
+  "SCULPT_HEAD": {
+   "mesh": "SCULPT_HEAD",
+   "vertices": 4118,
+   "polygons": 4134,
+   "fingerprint": "752ee89f0159e66eb9fc861511e6dc301575924f55367af76f11084ded817d7a",
+   "modifiers": [
+    "SUBSURF"
+   ],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.1812,
+    -0.1303,
+    0.9354
+   ],
+   "bounds_max": [
+    0.1812,
+    0.1992,
+    1.3136
+   ]
+  },
+  "SCULPT_EYE_L": {
+   "mesh": "SCULPT_EYE_L",
+   "vertices": 922,
+   "polygons": 960,
+   "fingerprint": "ddca7f713978f73cb251d6e6b555b1ad0a02945bea3ceff7b1adbcfa40a23f51",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    0.026,
+    -0.1043,
+    1.116
+   ],
+   "bounds_max": [
+    0.098,
+    -0.0323,
+    1.188
+   ]
+  },
+  "SCULPT_EYE_R": {
+   "mesh": "SCULPT_EYE_R",
+   "vertices": 922,
+   "polygons": 960,
+   "fingerprint": "c1e4e8b07bef93f63f976eee439e81170321991e10e85f16cbd791443a6e0ac0",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.098,
+    -0.1043,
+    1.116
+   ],
+   "bounds_max": [
+    -0.026,
+    -0.0323,
+    1.188
+   ]
+  },
+  "SCULPT_BROWS": {
+   "mesh": "SCULPT_BROWS",
+   "vertices": 284,
+   "polygons": 300,
+   "fingerprint": "05737ccd724a307449925c974de8d94146c39b3313ef941727b4bef6974150b4",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.0768,
+    -0.1124,
+    1.1986
+   ],
+   "bounds_max": [
+    0.0768,
+    -0.1002,
+    1.2084
+   ]
+  },
+  "SCULPT_LASHES": {
+   "mesh": "SCULPT_LASHES",
+   "vertices": 564,
+   "polygons": 580,
+   "fingerprint": "63fdfae4f64a398471054a90547be79f0d4053312a3bc1c268590ef639e4c182",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.0806,
+    -0.1004,
+    1.1612
+   ],
+   "bounds_max": [
+    0.0806,
+    -0.0943,
+    1.1817
+   ]
+  },
+  "SCULPT_HAIR_HELD_CONTROL": {
+   "mesh": "SCULPT_HAIR_HELD_CONTROL",
+   "vertices": 21387,
+   "polygons": 41983,
+   "fingerprint": "eaee0e2eff5a06ba9b09909395ab80e1ef4d02797ef4e9cdecb3cacd9cc8138b",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.2511,
+    -0.1335,
+    1.0613
+   ],
+   "bounds_max": [
+    0.225,
+    0.2737,
+    1.4087
+   ]
+  },
+  "SCULPT_HAIR_WORK": {
+   "mesh": "SCULPT_HAIR_WORK",
+   "vertices": 21387,
+   "polygons": 41983,
+   "fingerprint": "eaee0e2eff5a06ba9b09909395ab80e1ef4d02797ef4e9cdecb3cacd9cc8138b",
+   "modifiers": [],
+   "parent": "SCULPT_HEAD_ROOT",
+   "matrix_world_identity": true,
+   "bounds_min": [
+    -0.2511,
+    -0.1335,
+    1.0613
+   ],
+   "bounds_max": [
+    0.225,
+    0.2737,
+    1.4087
+   ]
+  }
+ },
+ "reference": {
+  "image": "APPROVED_REFERENCE (external, not packed)",
+  "relative_path": "//../../../claude_simm/APPROVED_REFERENCE.png",
+  "packed": false,
+  "sha256_of_file_read": "d2af5084cfb432892eeee62ee37f4a72348e49a9b1fec27ca633e4520cc2d9fb"
+ }
+}
