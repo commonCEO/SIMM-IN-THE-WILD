@@ -91,3 +91,18 @@ Independent VM oracle uses actual desert/starvation source slices, original adva
 Preserve source semantics: feeding/positive hunger does not reset starve; rehydration/leaving desert does not explicitly reset heatDamage. Threshold crossing resets an accumulator even if shared invulnerability suppresses damage. No offline catchup, automatic extra resets or immediate defeat recovery added.
 
 An initial VM fixture omitted the game-initialized player position; corrected in the synthetic context. Native root-certificate-store error persists. No production code/save hooks, all41runtime baselines unchanged. Next bounded foundation is single world-age/effect/drop/fuel ownership and full pause/death wrapper semantics, before live wiring and production migration. Source/oracles/harness remain work-only while export approval is pending.
+
+## Full-frame gating and ownership evidence — 27 November,03:58UTC
+
+2496assertions PASS /exit0 from64actual-frame gate scenarios. VM executes current frame, update prefix/returns, original tickEffects/advanceTime and actual fuel statement; omitted gameplay body and callback stubs prevent a full-update claim. Covers first frame,50ms and14s-gap timestamps, all started/ready/paused/hidden/death/health gates; compares effects/jump/invulnerability, active age/calendar/hunger, drop identities/fuel and callback counts. Source hashes current; root-certificate-store error persists.
+
+The OUTER frame suppresses update for pause/hidden/not-started/not-ready, so effects and invulnerability do not tick then. Active death runs the effect/invulnerability prefix then returns before world/calendar/drop/fuel. Do not extrapolate pause semantics from update's prefix without its caller. Long gaps cap active delta0.05; no offline catchup. Windows focus/visibility and Godot physics catchup remain unvalidated mappings.
+
+Single-owner integration plan:
+- One orchestrator owns active calendar/world_age/hunger advance; remove existing camp world_age+=delta at the integration site. Night-event and survival prototype helpers currently each advance for their independent tests; refactor into pre/post phases before combining, never call both advances.
+- One effect/invulnerability prefix under the outer frame gate, including death but excluding pause. Remove/route old camp effect/invulnerability decrements so there is no duplicate.
+- Fuel only under ordinary active-world gate; companion/wildlife/bow each tick once, retaining their distinct clocks/contracts.
+- Browser absolute drop expiry versus native remaining lifetime needs an explicit adapter, preserving source_scene/IDs/content. Sleep worldAge skip expires old drops on next active browser step; effects/fuel do not retroactively drain. Defeat does not advance worldAge. Prior recovery field comparisons did not validate drop handling.
+- Before live wiring: isolated combined-controller sequence with sleep/save/drop conversion and pause/death/clock transitions; then actual non-saving scene/controller checks and production version/migration fault path. Current tests do not install any of that behavior.
+
+All41runtime baselines unchanged; no native player save read/write. Code/data remain work-only; source export approval is still pending.
