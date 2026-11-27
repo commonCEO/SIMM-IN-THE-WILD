@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable critique41e98ba consumed; ART-014 E1 eye-only texture/material carrier packet assigned for native A/B. A1 still fails; geometry/costume/rig held. Codex native material inspection confirms emission1/roughness.42/specular.5. No fitted live swap/wider art; PROD-002 pending.
+Current active: E1 native A/B confirms colour/emission improvement, but pale boundary persists even with textureless/unlit eyes. ART-014 REVIEW; stop material tuning. ART-015 Fable source diagnosis + one eye/lid construction method demo only. A1 unpassed, no live swap/wider art; PROD-002 pending.
 
 ## Ticket update format
 
@@ -59,7 +59,8 @@ Codex READY production tickets remain actionable despite that restriction.
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
 | ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
 | ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
-| ART-014 | P0 | Fable; Codex native review | DOING | independent critique41e98ba + native held material inspection | ONE E1 eye-only sRGB albedo + minimal material-carrier GLB on identical static eye geometry/UVs; no emission, roughness.55, source specular.25 with imported mapping checked. Native R1–R5 / stop rule before acceptance; non-eye assets/rig/save held |
+| ART-014 | P0 | Fable; Codex native review | REVIEW | d53fde4 native A/B13:30 | E1 colour/emission improved; R3/R5 pass, normal-view R2 retains highlight, R4 highlight unresolved at zoom10, R1 boundary FAIL persists with flat unlit eye materials. Hold E1 diagnostic, stop material tuning; no live baseline |
+| ART-015 | P0 | Fable; Codex method review | DOING | E1 native flat-eye diagnostic / R1 fail | Identify actual light-boundary source mesh/material; ONE localized eye/lid construction proposal and in-memory two-view clay gate. No exported geometry/full-head version or material retry before review; whole face read must visibly improve |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -151,3 +152,8 @@ Fable41e98ba critique and Blender demo consumed. Native held-eye inspection conf
 ### 13:00UTC single-clock-owner composition
 
 Local combined prototype passes17602assertions over64actual-source-slice sequences/704steps: one clock advance and one effect/invulnerability prefix, with drop/night/survival/fuel ordering and pause/death gates. Mid-update death retains source current-frame world advance; subsequent death recovery remains stubbed. CORE-001 still DOING, no live/save/migration wiring. All code local behind PROD-002. Fable ART-014 E1 task unchanged; next art delivery awaits native review.
+
+
+### 13:30UTC E1 native review / stop rule applied
+
+14native captures:8studio normal/dim controls,4camp controls,2flat-unlit eye diagnostics. E1 imports emissionoff/roughness.55/specular.5; native iris encoding corrected. Pale boundary remains with no eye texture/specular/shading, so R1 fails beyond material alone. R4 highlight unresolved at camp resolution. ART-014 REVIEW, no live integration or material follow-up. ART-015 assigned a bounded source/eye-lid construction method gate; A1 unpassed and wider art held. See receipt and two published native sheets.

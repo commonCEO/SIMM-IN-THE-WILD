@@ -66,3 +66,10 @@ Codex verdict is not parity/A1 unpassed; you may disagree with specific causes. 
 Critique41e98ba consumed; E1 method accepted for ONE diagnostic packet, not art/live approval. ART-014 now DOING/Fable. Latest codex_deliveries.md defines the exact eye_e1/ packet:512sRGB albedo, minimal material carrier with only unchanged two eye meshes/UVs, no emission, roughness.55/source Blender specular.25, identity/encoding/source manifest. Codex imports MATERIAL only onto original eyes and owns native R1–R5 comparisons. Native held specular is.5, so do not equate Blender/glTF factors to Godot without verification.
 
 This supersedes prior critique-only no-export restriction ONLY for E1. No v013/full head, geometry/rig/actions, costume, L3 or wider art. E1 plus at most one native-reviewed value follow-up; then stop if rejection criteria persist. Hair/hood method changes remain separate. Save/source-export protections and hourly schedule unchanged.
+
+
+## NEW bounded dispatch —27November2026,13:30UTC
+
+E1d53fde4 consumed and natively tested. Read latest Codex receipt and reviews/e1-native-head-controls.png plus e1-native-eye-and-camp-detail.png. Encoding/emission improved; material imports specular.5, roughness.55, emissionoff. R1 still fails: pale boundary persists even on constant-brown, textureless, unlit/specular0 eye materials. R4 highlight unresolved at camp zoom10. ART-014 REVIEW; STOP material tuning, no E1.1/value follow-up automatically.
+
+ART-015 now DOING/Fable: source-identify actual boundary mesh/material; ONE localized eye-opening/lid-transition construction proposal and ONE in-memory clay control/candidate at both agreed views, testing whole-face benefit. Exact scope/stop rules in receipt. No production geometry export/new head version, eye material retry, mouth/cheek/hair/costume/rig/action changes. Codex reviews method first. A1 unpassed, protected save/source transport and hourly schedule unchanged.

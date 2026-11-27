@@ -2192,3 +2192,30 @@ Peer unchanged41e98ba; ART-014 E1 packet remains the active Fable task. Advanced
 17602native assertions PASS/exit0 across64source-slice sequences/704steps, with actual-browser VM oracle and current game/model hashes. Compares full selected state and clock/effect/fuel/callback counts.32sequences demonstrate death can begin mid-update while that frame still advances world time; the next frame gates ordinary world work. Repeated raw sleep calls and drop expiry are covered, but actual defeat recovery, bed/controller eligibility, production save path and omitted world systems are NOT integrated by this test. Details in [CORE-001 contract](CORE-001-CONTRACT.md).
 
 Work/core001 source/oracle/harness stay LOCAL behind PROD-002. Root-certificate-store diagnostic remains. No runtime/live game/native save changes. ART-005 A1 still unpassed; no new art revision or duplicate Fable assignment. Next changed E1 delivery gets native review; independent CORE-001 still needs defeat-recovery composition and non-saving scene/migration validation.
+
+
+## E1 native A/B: colour/emission improved, lid boundary still fails —27November,13:30UTC
+
+Consumed Fabled53fde4a0f240075cf0d4223aa3e4fba1bf87394. Read packet notes/manifest; extracted only declared PNG/GLB/notes into work/a1-e1-native, checking full SHA256s: albedoec3932b9716ecc34f82c27994e1efbcf48509fe81f86406d0410948b0e34e8a6, carrier61c34fc958d437fbbcf72b50101af2e3c8820bc5434bd3418a356cb211e3d61f. No peer build script executed. Confirmed512RGB PNG sample colours exactly match manifest: iris58/34/22 and122/78/46, pupil30/18/12, highlight205/195/181, sclera214/190/168. Independently read held GLB's embedded eye PNG: lower iris27/10/4, pupil2/1/1, sclera214/196/173, consistent with the reported missing-sRGB-encoding bug. Held skin/hair encoding not independently audited here.
+
+Applied ONLY the carrier's imported MATERIAL onto the two ORIGINAL held eye meshes. No donor geometry used; Fable's carrier mesh-identity report remains attributed. Native E1: roughness.55000001, emission disabled/no emission texture, metallic_specular.5 (unchanged from native control despite different Blender/glTF factor). No invented direct specular conversion.
+
+[Eight studio controls](reviews/e1-native-head-controls.png): held/E1 at both agreed head views, normal A1 lighting and dim key0/ambient.10. [Eye/camp/flat detail](reviews/e1-native-eye-and-camp-detail.png): native pixel crops at2xNEAREST, four actual persistfalse camp zoom10 day/torch controls, and two additional flat-unlit-eye diagnostics. All native runs exit0; original geometry ResourceIDs and all non-eye active material ResourceIDs held during toggles, original17rests/actions/socket held in camp; all41protected runtime file hashes match camera64 register. No live game/save/source edits. Certificate-store/shader-cache errors remain; not clean logs.
+
+### R1–R5 result / no full acceptance
+
+- R1 **FAIL**: thin pale lid/boundary outline remains. Importantly, it also remains when both eye materials have NO albedo texture, constant brown, unshaded, specular0. It is not solely painted eye sclera, emission or eye-surface gloss. Adjacent lid/head geometry/material boundary needs source diagnosis; exact offending surface not yet established.
+- R2 normal reference and near alternate eye retain a visible soft highlight; dim E1 highlights darken with the face as intended, while control white emissive spots keep glowing. No claim of identical readability in all gameplay lights.
+- R3 **PASS visually** in normal reference: warm brown iris distinguishable from darker pupil.
+- R4 dark eyes remain visible in native camp zoom10; distinct catchlight at that1280x800scale is NOT reliably resolvable. Do not call full R4 passed or enlarge highlights merely to force a pixel.
+- R5 **PASS for native A/B isolation**: original eye geometry and every non-eye geometry/material resource unchanged; original source rig/animations/save held. This is not independent validation of every donor export's geometry arrays.
+
+E1 fixes a real encoding/emission problem and stays a useful diagnostic candidate. ART-014 REVIEW, NOT a fully accepted replacement or live baseline. Because R1 persists in the textureless/unlit control, STOP eye-material tuning now; no automatic value-only follow-up or E1.1 export. Preserve E1 and heldv012 side by side. A1 still fails on broader face/hair/costume read.
+
+### ART-015 / next ONE Fable method gate
+
+Inspect existing head/lid/lash/eye source and identify the mesh/material that makes the light boundary seen in native flat controls. Return ONE localized eye-opening/lid-transition construction proposal plus ONE in-memory clay demonstration at both agreed views, aiming for the reference's soft inset-free dark eye read. Show control/candidate face crops, identify exact changed geometry and give stop/rejection criteria; reject a tweak that changes only a magnified rim without improving the whole face read.
+
+Proposal/in-memory method demo ONLY under your owned claude_*.md and ART-005/face_method/ paths. No new full-head GLB/version, no production geometry packet yet, no eye-material retry, no mouth/cheek/hair/costume/rig/action edits. Hold E1 texture for coloured diagnosis and include a textureless/flat control to separate boundary from gloss. Do not infer physical measurements from blurred/unmatched reference. Codex reviews before any geometry export. This is a scoped reversible method study within the user's Simm request; no additional approval needed for this proposal.
+
+Local helper/records under work/a1-e1-* remain LOCAL behind PROD-002. Published review-image SHA256s: head-controls0d74de35ff58df5c1246cc61d3610bb3388ff1ec95533f5151e1be820bfcd5c0; detail6f5facaf6ea133d93dc650de638fb009c74e42585cf273f563671f2a8b6e1dba. Blob hashes verified before linking. Initial local shell-generation error was corrected before the valid flat-control run; only final verified images shared.
