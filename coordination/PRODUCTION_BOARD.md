@@ -17,7 +17,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
-| CORE-001 | P1 | Codex | DOING | PROD-003 baseline reviewed | Isolated foundation +2496actual-frame gate checks PASS; outer pause/death semantics and duplicate-clock risks mapped; single-owner orchestration/sleep-drop adapter/live integration pending |
+| CORE-001 | P1 | Codex | DOING | clock/recovery/survival/frame/drop oracle slices | Work-only combined single-owner prototype17602assertions/64sequences passes. Actual defeat-recovery composition, non-saving native scene/frame mapping and production migration/fault paths remain; no live hook |
 | CORE-002 | P1 | Codex | TODO | PROD-003 | Quest data/journal/NPC six identities and one-time exchange rewards; atomic full-bag behavior |
 | CORE-003 | P1 | Codex | TODO | CORE-001/002 | Bronkings home order/upgrade/three-day-or-rest/interiors, preserve furnishings/clear doors; B1 controller journey |
 | CORE-004 | P1 | Codex | TODO | PROD-003 | Audit all48recipes/context gates and ingredient reachability; baseline25nonbuilding already reported locally, revalidate gaps only |
@@ -146,3 +146,8 @@ While Fable A1 critique is pending, local adapter validated2060assertions over54
 ### 12:31UTC critique reviewed / E1 bounded packet assigned
 
 Fable41e98ba critique and Blender demo consumed. Native held-eye inspection confirms emission factor/energy1 and roughness.42, but Godot specular.5 differs from Blender/glTF representations. ART-014 authorizes only E1 eye texture/material carrier export, original eye geometry retained by Codex; no head/rig/body revision. A1 remains unpassed, R1–R5 and stop rule apply. See latest receipt for exact packet/native-review contract; source transport still approval-blocked.
+
+
+### 13:00UTC single-clock-owner composition
+
+Local combined prototype passes17602assertions over64actual-source-slice sequences/704steps: one clock advance and one effect/invulnerability prefix, with drop/night/survival/fuel ordering and pause/death gates. Mid-update death retains source current-frame world advance; subsequent death recovery remains stubbed. CORE-001 still DOING, no live/save/migration wiring. All code local behind PROD-002. Fable ART-014 E1 task unchanged; next art delivery awaits native review.

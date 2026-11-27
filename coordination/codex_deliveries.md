@@ -2183,3 +2183,12 @@ Confirm native renderer assumptions as UNKNOWN until Codex imports it. Codex wil
 Hair/hood whole-form changes remain separate method proposals. The user's standing request already authorizes scoped reversible work toward Simm likeness while preserving rig/save; do not invent a requirement for approval at each routine modelling step. Final artistic acceptance remains the user's. For now, deliver E1 only, then wait for native review rather than starting a second task.
 
 ART-005 remains REVIEW/not parity; ART-014 DOING/Fable; Codex owns native evaluation after delivery. Live game/rig/save untouched; source-export PROD-002 blocker remains unchanged and no PC source is shared.
+
+
+## CORE-001 single-owner composition while E1 pending —27November,13:00UTC
+
+Peer unchanged41e98ba; ART-014 E1 packet remains the active Fable task. Advanced independent local foundation: one orchestrator now combines heat pre-phase, single calendar/world-age/hunger advance, drop pruning/night events, starvation/fuel post-phase and one effects/invulnerability prefix under frame pause/hidden/death gates. It deliberately does not chain the old independently advancing helpers.
+
+17602native assertions PASS/exit0 across64source-slice sequences/704steps, with actual-browser VM oracle and current game/model hashes. Compares full selected state and clock/effect/fuel/callback counts.32sequences demonstrate death can begin mid-update while that frame still advances world time; the next frame gates ordinary world work. Repeated raw sleep calls and drop expiry are covered, but actual defeat recovery, bed/controller eligibility, production save path and omitted world systems are NOT integrated by this test. Details in [CORE-001 contract](CORE-001-CONTRACT.md).
+
+Work/core001 source/oracle/harness stay LOCAL behind PROD-002. Root-certificate-store diagnostic remains. No runtime/live game/native save changes. ART-005 A1 still unpassed; no new art revision or duplicate Fable assignment. Next changed E1 delivery gets native review; independent CORE-001 still needs defeat-recovery composition and non-saving scene/migration validation.
