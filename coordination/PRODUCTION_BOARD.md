@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: ART-018 Fable ONE R2 hair-only Stage A diagnostic on heldv012. ART-017 proposal reviewed; B1/inlay remain rejected. No fixed wedge count, field fusion, material/detail pass or B1 face transplant. Codex owns native gate; A1 unpassed, no live swap/wider art. Rig/save/source-export protections held.
+Current active: ART-019 Fable authored surface/sculpt route proposal with concrete editable topology and capability evidence. R2 Stage A failed native gate; no guide/section/count sweep. Heldv012 control/A1 unpassed; no live swap/wider art. Rig/save/source-export protections held.
 
 ## Ticket update format
 
@@ -189,8 +189,14 @@ Raw GLB topology/UV/transforms/images independently verified;16native studio/cam
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-017 | P0 | Fable | REVIEW | c3dc5d0 proposal/sketch reviewed17:28 | R2 authored guides/rounded lens/layered roots accepted for diagnostic test only; crown/uncertainty/count/stop rules corrected in receipt, not art acceptance |
-| ART-018 | P0 | Fable; Codex native gate | DOING | ART-017 R2 proposal reviewed17:28 | ONE authored-guide rounded-wedge layered HAIR-ONLY clay Stage A on heldv012; two-view normal-scale likeness gate before detail/material; original face/body/rig/save held |
+| ART-018 | P0 | Fable; Codex native gate | REVIEW | 3abaa00; four matched native captures18:31 | STOPPED/FAIL: narrow bowl cap, repeated leaf fringe, smooth hairline band and antenna tuft; no whole-head likeness gain. No guides-only follow-up/material/detail/live adoption |
 
 ### 18:00UTC interrupted-write state matrix
 
 Nine synthetic primary/temp combinations through CURRENT native v4 loader:72checks PASS; valid primary wins, invalid/missing primary rejects without state mutation even beside valid temp, all file bytes preserved. Confirms recovery gap, not implemented auto-recovery or crash durability. SAVE-001 stays DOING; source/fixtures local, player save/runtime untouched. Fable ART-018 pending unchanged.
+
+## Next method ticket
+
+| ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
+|---|---|---|---|---|---|
+| ART-019 | P0 | Fable | DOING | ART-018 native rejection18:31 | ONE authored editable surface/sculpt workflow proposal + topology/volume diagram; demonstrate route differs from swept leaves/metaballs and tooling can author it; no sculpt/export until scoped review |

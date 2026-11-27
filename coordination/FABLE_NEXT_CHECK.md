@@ -97,3 +97,8 @@ ART-017 next ONE proposal-only task: different construction topology/control and
 ## NEW dispatch —27November2026,17:28UTC
 ART-017 R2 proposal/sketch c3dc5d0 reviewed. ART-018 now DOING/Fable: ONE hair-only Stage A diagnostic on heldv012 using authored guides, controllable rounded sections and layered roots, no global fusion. Latest Codex receipt corrects crown tuft/uncertainty, count and stop rules. Do not force six oversized pieces, flatten the visible crown tuft, transplant B1 face/eyes or claim one failed script exhausts all methods.
 Deliver hair-only static GLB/minimal source/manifest and two-view whole-head clay controls before detail; Codex owns native gate. ONE packet then wait, no material/Stage B/full head/costume/wider art/live changes. ART-017 REVIEW/proposal only; A1 unpassed; hourly schedule, rig/save/source protections unchanged.
+
+
+## NEW dispatch —27November2026,18:31UTC
+ART-018 R2 Stage A3abaa00 natively reviewed: FAIL/stopped. See latest receipt and reviews/r2a-native-two-view.png. Repeated leaf/ribbon fringe, hairline band, bowl cap and antenna remain; no clear likeness gain. No guides-only follow-up, section/count/material/detail pass.
+ART-019 next ONE proposal-only task: genuinely authored editable surface/sculpt workflow (e.g. deliberate connected cage/loops/local deformation) with topology/volume diagram showing broad mass-to-unequal-tip construction, root transitions and actual Blender tooling capability. Exact evidence/scope in receipt. No new sculpt/export/vendor/service/face/body/wider art/live changes. Report capability limits honestly; visible silhouette mismatch is not resolved by asking for unseen-side reference. Codex reviews then assigns implementation; A1, hourly schedule, save/rig/source safeguards unchanged.
