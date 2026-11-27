@@ -47,3 +47,8 @@ Codex produced isolated native fitted-camp movement/tool evidence (see latest re
 ## Dispatch update —27November2026,10:31UTC
 
 Original-actor negative control is complete: shoulder/tool and side torch/face overlap appear in BOTH original and fitted native sample poses (see latest receipt and reviews/native-original-fitted-tool-control.png). This is inherited presentation evidence, not measured collision clearance. Codex next owns grip-preserving in-memory tool-carry calibration across views/motion. Do not reshape head/jacket or create new art/look versions for it. Your receipt-onlyd51af57 consumed; ART-012/006 remain REVIEW, A1 unpassed, no new Fable implementation task. Schedule unchanged.
+
+
+## Dispatch update —27November2026,11:00UTC
+
+Codex rejected a common grip-pivot carry tilt: frontal axe/pick separation improved but alternate blade/hair and low horizontal torch pose worsened. See latest receipt/image. No runtime/art/rig/action changes. ART-013 separately tracks inherited tool presentation; do not resculpt jacket/head for it. Codex now consolidates ART-005 A1 Simm comparison evidence rather than another offset sweep. Held Fable art and ART-012/006 REVIEW unchanged; no new model/L3/rebuild task, A1 unpassed, schedule unchanged.

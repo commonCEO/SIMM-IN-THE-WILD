@@ -11,7 +11,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held fitted actor; native camp motion10:02 |384controlled physics/original-animation steps,192frames,2.1264m travel, socket position tracking pass. Flag shoulder/torch presentation; matched original control and full motion/contact/controller/performance/A1 acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
-| ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
+| ART-005 | P0 | Codex | DOING | held Simm and native camp/motion evidence | Prepare consolidated reference/face/body/alternate/back comparison with motion and explicit known gaps; final user A1 acceptance pending, no fitted live integration |
 | ART-006 | P1 | Fable | REVIEW | L2 native controls e909d36 evaluated | L2 improves directional read/friendly face but occlusion/leak and floor wash remain; no accepted preset or automatic L3; hold assets pending native softness/occlusion evidence |
 | RENDER-001 | P1 | Codex | DOING | local camera64 integration +fresh-instance travel/cave check | Current camp defaults64m locally after360step/26checkpoint PASS; live game not restarted. Baseline register updated; fitted actor/camp, torch/foliage/performance pending |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: camera64 locally integrated; current baseline work/simm-runtime-baseline-camera64.json. Fitted camp motion and matched original-actor tool control delivered; inherited shoulder/torch presentation flagged. Next Codex in-memory anchored tool-carry calibration, no rig/action changes. Fable ART-012/006 REVIEW; A1 unpassed, no fitted live swap/wider art. PROD-002 approval pending.
+Current active: camera64 locally integrated; use current work/simm-runtime-baseline-camera64.json. Common tool carry tilt rejected after multi-view trial; inherited presentation tracked ART-013. Next Codex ART-005 consolidate A1 Simm evidence and known gaps. Fable ART-012/006 REVIEW; A1 unpassed, no fitted live swap/wider art. PROD-002 approval pending.
 
 ## Ticket update format
 
@@ -58,6 +58,7 @@ Codex READY production tickets remain actionable despite that restriction.
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
 | ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
+| ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -124,3 +125,8 @@ RENDER-001/ART-003 remain open: actual camp physics and explicitly advanced orig
 ### 10:31UTC original/fitted tool negative control
 
 RENDER-001/ART-003 remain open. Original actor reproduces shoulder/tool and side torch/face silhouette concerns at matching sample poses; no jacket/head rebuild justified by this evidence alone.384paired steps, identical clip times/local hand+foot pose strings; root difference max0.611mm. Six labelled native pairs reviewed, not geometric-clearance acceptance. Next Codex: grip-preserving in-memory carry transform calibration across multiple views/motion; no live changes. Fabled51af57 receipt consumed; no new Fable production task.
+
+
+### 11:00UTC common carry tilt rejected
+
+36static native captures preserve grip to1.20137e-7m and protected rests/actions/socket, but common20degree outward+15degree forward tilt trades frontal separation for blade/hair conflict and near-horizontal torch carry. No integration or further arbitrary offset sweep. ART-013 tracks inherited per-tool/per-state presentation; zero static projected AABB overlaps do not cover the flagged interpolated turn. Next Codex ART-005 consolidates concrete Simm A1 review evidence with known issues; A1 still unpassed. See latest receipt and reviews/native-tool-carry-rejected.png. Fable held; runtime/live game/save untouched.
