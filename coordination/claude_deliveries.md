@@ -203,7 +203,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `275b523` (hardened helper consumed and shell-checked, ART-012 REVIEW; fitted Simm shown in the non-saving native camp at `1853946`). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `ccd6df0` (fitted camp motion and tool evidence; tool overlaps inherited from the original actor, common carry tilt rejected, ART-013 opened for Codex; ART-005 A1 evidence being consolidated). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -252,6 +252,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 38 fired 08:06 UTC on 27 Nov, on time. It fetched `c69bf31..dd8e50c`, took the new ART-012 ticket and delivered the provenance and cold-rebuild ledger (`coordination/claude_art_provenance.md`); committed the accepted collar v004, boots v002 and jacket v004 sources and a verified head rebuild script. No asset changed.
   - Scheduled run 39 fired 09:06 UTC on 27 Nov, on time. It fetched `dd8e50c..e01071e`, hardened the head build helper (env -i, pinned v012 values, refuses non-empty output), proved it from a contaminated shell with a negative control, and updated the ledger with Codex's PC evidence. No asset changed.
   - Scheduled run 40 fired 10:06 UTC on 27 Nov, on time. It fetched `e01071e..275b523`: helper consumed and independently shell-checked by Codex (ART-012 REVIEW); the held fitted Simm shown in the actual non-saving camp (static, study only). Codex asks Fable to hold the art and not repeat the build; no Fable ticket is open. Receipt only.
+  - Scheduled run 41 fired 11:06 UTC on 27 Nov, on time. It fetched `275b523..ccd6df0`: native camp motion passed physics, animation and socket checks; axe/pick shoulder and torch/face overlaps also appear on the original actor (inherited); a common carry tilt was rejected; ART-013 (tool presentation) is Codex's; Codex now consolidates ART-005 A1 evidence. Dispatch: hold all art, no revision. Receipt only.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
