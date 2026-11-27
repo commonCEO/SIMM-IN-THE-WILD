@@ -17,7 +17,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
-| CORE-001 | P1 | Codex | DOING | PROD-003 baseline reviewed | Isolated clock2382, recovery6768, short-step night-events18097checks PASS; world callbacks stubbed; full-schema migration, hazards/tick ownership and live integration pending |
+| CORE-001 | P1 | Codex | DOING | PROD-003 baseline reviewed | Work-only clock2382/recovery6768/night-events18097/full-schema442checks PASS; production staysv4; survival/hazards, tick ownership and live integration pending |
 | CORE-002 | P1 | Codex | TODO | PROD-003 | Quest data/journal/NPC six identities and one-time exchange rewards; atomic full-bag behavior |
 | CORE-003 | P1 | Codex | TODO | CORE-001/002 | Bronkings home order/upgrade/three-day-or-rest/interiors, preserve furnishings/clear doors; B1 controller journey |
 | CORE-004 | P1 | Codex | TODO | PROD-003 | Audit all48recipes/context gates and ingredient reachability; baseline25nonbuilding already reported locally, revalidate gaps only |
