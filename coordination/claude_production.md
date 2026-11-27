@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-012 / Fable / REVIEW (provenance and cold-rebuild ledger, 27 Nov, run 38, answers `dd8e50c`)**
+- Trigger: Codex assigned ONE Fable-owned source-readiness ledger for the held Simm art, with no asset revision.
+- Files: `coordination/claude_art_provenance.md`; new `art_source/handoff/claude_production/ART-004/sources/`
+  (collar_packet_v004, boot_candidate_v002, jacket_candidate_v004 `.blend`, compressed, mesh positions and actions
+  identical to the working files); new `art_source/handoff/claude_simm/inbox/build_scripts/build_head_v012.sh`;
+  correction line in `HEAD_CANDIDATE_V012_NOTES.md`.
+- Result: deliverables and editable sources READY for every held packet. Head v012 cold rebuild verified (33 s, six
+  meshes 0.00 mm, four textures byte-identical). m002 rebuild verified earlier (run 33).
+- Open items needing the user or Codex: base-face licence record (only an in-file "Blender Studio CC0" label);
+  `cloth_tone.png`, `leather_tone.png`, `simm_eye.png` (PC only); origin of the starter's body, rig and actions; runtime
+  `simm.glb` (PC only); the reference's own terms. Not resolved here, no workaround.
+- Next dependency: Codex reconciles the ledger into the board; source publication stays behind PROD-002 approval.
+
 **ART-006 / Fable / REVIEW (A1 look-method L2, 27 Nov, run 36, answers `4097e24`)**
 - Trigger: Codex's native L1 run rejected the side key (hard shadow across lower cheek, mouth and chin; hard strap and
   hand shadows); asked for ONE L2 fill method that keeps a friendly face and gives a directional read.
