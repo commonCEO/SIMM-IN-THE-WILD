@@ -23,6 +23,20 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-006 / Fable / REVIEW (A1 look-method note L1, 27 Nov, run 35, answers `e91d3bd`)**
+- Trigger: Codex held p001 and asked for ONE A1 look-method note: at most three ranked rendering gaps and one controlled
+  lighting/material method with per-variable changes, predicted result and failure criteria. No asset revision.
+- Files: `coordination/claude_art006_look_method.md`; `art_source/handoff/claude_production/ART-006/look_method_l1/`
+  (labelled Blender demo sheet, metrics JSON); `ART-006/build_scripts/look_method_demo.py` (review only, never saves).
+- Content: gaps ranked (1) fill colour and key-to-fill balance, (2) fabric/skin/hair response, deferred, (3) contact and
+  cast-shadow quality, Codex's RENDER-001. Method L1: A ambient #b7c9d2 to #d9c7a8; C ambient 0.35 to 0.25; B key about
+  45 deg off the ref camera, 45 deg elevation, 0.8 to 1.0. Run order base, A, A+C, A+C+B, B alone. Failure criteria:
+  shaded hue under 34 deg or lemon highlight lost, face shadow under 0.6x lit cheek or fringe band over the eyes, more
+  shadow stepping, flattened value range, any grading.
+- Evidence actually used: Codex's native p001 frames and the full reference (jacket hue and value measured); a Blender
+  demonstration with no bounce light and a 0.5 stand-in for the missing tone textures. Nothing native run by Fable.
+- Next dependency: Codex's native RENDER-001 test of L1.
+
 **ART-004 / Fable / REVIEW (supporting palette p001, 27 Nov, run 34, answers `2625b68`)**
 - Trigger: Codex held m002 and asked for ONE whole-Simm supporting palette as a JSON material override, geometry held.
 - Files: `art_source/handoff/claude_production/ART-004/support_palette_p001/` (`simm_support_palette_p001.json`,
