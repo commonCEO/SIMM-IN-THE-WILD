@@ -27,7 +27,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | UX-001 | P1 | Codex | TODO | PROD-003 | Complete quest/build/map tabs; exact controller context/focus/scroll; UI parity and EN/ET at3resolutions |
 | ART-010 | P2 | Fable | TODO | A2,UX-001 spec | Approved icon/UI illustration and world feedback art; source/license/export evidence |
 | AUDIO-001 | P2 | Codex | TODO | B1 | Baseline sound behavior and volume/mute, gather/craft/damage cues; no unlicensed external audio |
-| SAVE-001 | P0 | Codex | DOING | synthetic v1-v4 and current native save code; source export pending | Prior compatibility tests +85real Windows destination-lock/retry checks pass; no player save access. Crash/disk-full/ACL, leftover auto-recovery, proposed v5 migration and campaign-scene coverage remain |
+| SAVE-001 | P0 | Codex | DOING | synthetic v1-v4 and current native save code; source export pending | Prior compatibility +85Windows lock/retry +72leftover-state checks pass; current loader NEVER auto-promotes tmp, including missing/corrupt primary. No player save access. Recovery policy/crash/disk-full/ACL/v5/campaign remain |
 | ADD-001 | P2 | Fable | TODO | A2 | Bucket/penguin/boss design proposals grounded in Mattias's drawings; separate assumptions/questions from approved facts |
 | ADD-002 | P2 | Codex | BLOCKED | ADD-001 design gate | Size user additions for beta, assign implementation/art packets; no invented combat mechanics; record deferrals explicitly |
 | QA-001 | P1 | Codex | TODO | B2 | Fresh-start through ending with physical controller and save/reload, no injected progression; Mattias playtest |
@@ -189,5 +189,8 @@ Raw GLB topology/UV/transforms/images independently verified;16native studio/cam
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-017 | P0 | Fable | REVIEW | c3dc5d0 proposal/sketch reviewed17:28 | R2 authored guides/rounded lens/layered roots accepted for diagnostic test only; crown/uncertainty/count/stop rules corrected in receipt, not art acceptance |
-
 | ART-018 | P0 | Fable; Codex native gate | DOING | ART-017 R2 proposal reviewed17:28 | ONE authored-guide rounded-wedge layered HAIR-ONLY clay Stage A on heldv012; two-view normal-scale likeness gate before detail/material; original face/body/rig/save held |
+
+### 18:00UTC interrupted-write state matrix
+
+Nine synthetic primary/temp combinations through CURRENT native v4 loader:72checks PASS; valid primary wins, invalid/missing primary rejects without state mutation even beside valid temp, all file bytes preserved. Confirms recovery gap, not implemented auto-recovery or crash durability. SAVE-001 stays DOING; source/fixtures local, player save/runtime untouched. Fable ART-018 pending unchanged.
