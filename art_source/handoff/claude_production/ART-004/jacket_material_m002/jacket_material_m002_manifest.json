@@ -1,0 +1,250 @@
+{
+ "glb": {
+  "file": "jacket_material_m002.glb",
+  "sha256": "ab0d800f3342338ecfdc324cb79e5cfbf30e03b5040878c22759f039e1ae736d",
+  "bytes": 2409492,
+  "images": [
+   {
+    "name": "jacket_m002_albedo",
+    "mimeType": "image/png",
+    "sha256": "49f81dd17285e1de59423ae318269aca3f0a533b41d84729a023398eaab68555",
+    "bytes": 207378
+   },
+   {
+    "name": "jacket_m002_roughness",
+    "mimeType": "image/png",
+    "sha256": "b0203bccc76f5b7156292398e7738dda409cd0f6b80354e2d75260d65abad883",
+    "bytes": 105616
+   }
+  ],
+  "materials": [
+   {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.474271529955476,
+       0.474271529955476,
+       0.474271529955476
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_JACKET_M002",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0,
+     "metallicRoughnessTexture": {
+      "index": 1
+     }
+    }
+   },
+   {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.474271529955476,
+       0.474271529955476,
+       0.474271529955476
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_JACKET_TRIM_M002",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 2
+     },
+     "metallicFactor": 0,
+     "metallicRoughnessTexture": {
+      "index": 3
+     }
+    }
+   }
+  ],
+  "textures": [
+   {
+    "sampler": 0,
+    "source": 0
+   },
+   {
+    "sampler": 0,
+    "source": 1
+   },
+   {
+    "sampler": 0,
+    "source": 0
+   },
+   {
+    "sampler": 0,
+    "source": 1
+   }
+  ],
+  "samplers": [
+   {
+    "magFilter": 9729,
+    "minFilter": 9987
+   }
+  ],
+  "skins": 1,
+  "animations": 0,
+  "cameras": 0,
+  "extensionsUsed": [
+   "KHR_materials_specular",
+   "KHR_materials_ior"
+  ]
+ },
+ "f002_glb_sha256": "4cbac9bad20fb1986ce92bedc2271f54ce0fe8c4076ec21cc2d6730b288bf3e1",
+ "parts": {
+  "SCULPT_JACKET_LONG": {
+   "reimport_vertices_in_file": 19437,
+   "triangles": 34304,
+   "bounds_min": [
+    -0.301,
+    -0.1446,
+    0.48
+   ],
+   "bounds_max": [
+    0.301,
+    0.1482,
+    0.974
+   ],
+   "unmatched": 0,
+   "covered": 17158,
+   "source_vertices": 17158,
+   "weight_mismatches": 0,
+   "glb_vertices_m002": 19437,
+   "glb_vertices_f002": 18548,
+   "distinct_records_m002": 17158,
+   "distinct_records_f002": 17158,
+   "max_normal_difference": 9.41e-05,
+   "same_position_joint_weight_records_as_f002": true,
+   "normals_within": 0.0005,
+   "same_triangles_as_f002": true,
+   "attributes_m002": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "attributes_f002": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "TEXCOORD_1",
+    "WEIGHTS_0"
+   ],
+   "materials_m002": [
+    "SCULPT_MAT_JACKET_M002"
+   ],
+   "materials_f002": [
+    "SCULPT_MAT_JACKET"
+   ]
+  },
+  "SCULPT_JACKET_LONG_TRIM": {
+   "reimport_vertices_in_file": 5657,
+   "triangles": 6980,
+   "bounds_min": [
+    -0.2979,
+    -0.1483,
+    0.4785
+   ],
+   "bounds_max": [
+    0.2978,
+    0.1519,
+    0.9655
+   ],
+   "unmatched": 0,
+   "covered": 3516,
+   "source_vertices": 3516,
+   "weight_mismatches": 0,
+   "glb_vertices_m002": 5657,
+   "glb_vertices_f002": 4668,
+   "distinct_records_m002": 3516,
+   "distinct_records_f002": 3516,
+   "max_normal_difference": 0.0,
+   "same_position_joint_weight_records_as_f002": true,
+   "normals_within": 0.0005,
+   "same_triangles_as_f002": true,
+   "attributes_m002": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "attributes_f002": [
+    "COLOR_0",
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "TEXCOORD_1",
+    "WEIGHTS_0"
+   ],
+   "materials_m002": [
+    "SCULPT_MAT_JACKET_TRIM_M002"
+   ],
+   "materials_f002": [
+    "SCULPT_MAT_JACKET_TRIM"
+   ]
+  },
+  "SCULPT_JACKET_POCKETS": {
+   "reimport_vertices_in_file": 2195,
+   "triangles": 3104,
+   "bounds_min": [
+    -0.1498,
+    -0.1306,
+    0.5127
+   ],
+   "bounds_max": [
+    0.1518,
+    -0.0883,
+    0.5842
+   ],
+   "unmatched": 0,
+   "covered": 1560,
+   "source_vertices": 1560,
+   "weight_mismatches": 0,
+   "glb_vertices_m002": 2195,
+   "glb_vertices_f002": 1560,
+   "distinct_records_m002": 1560,
+   "distinct_records_f002": 1560,
+   "max_normal_difference": 0.0,
+   "same_position_joint_weight_records_as_f002": true,
+   "normals_within": 0.0005,
+   "same_triangles_as_f002": true,
+   "attributes_m002": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "TEXCOORD_0",
+    "WEIGHTS_0"
+   ],
+   "attributes_f002": [
+    "JOINTS_0",
+    "NORMAL",
+    "POSITION",
+    "WEIGHTS_0"
+   ],
+   "materials_m002": [
+    "SCULPT_MAT_JACKET_M002"
+   ],
+   "materials_f002": [
+    "SCULPT_MAT_JACKET"
+   ]
+  }
+ }
+}

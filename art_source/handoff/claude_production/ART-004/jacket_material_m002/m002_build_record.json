@@ -1,0 +1,168 @@
+{
+ "textures": {
+  "albedo": {
+   "file": "jacket_m002_albedo.png",
+   "sha256": "49f81dd17285e1de59423ae318269aca3f0a533b41d84729a023398eaab68555",
+   "size": 1024,
+   "colour_space": "sRGB"
+  },
+  "roughness": {
+   "file": "jacket_m002_roughness.png",
+   "sha256": "9cf43b68f32e0e01a8da6eb7ef66e1fd6e5b2065072829bebc72b8cf0fb28fe1",
+   "size": 1024,
+   "colour_space": "linear (Non-Color); value in R, G and B"
+  }
+ },
+ "per_part_values": {
+  "SCULPT_JACKET_LONG": {
+   "albedo_linear_min": [
+    0.5533,
+    0.2646,
+    0.0171
+   ],
+   "albedo_linear_max": [
+    0.8033,
+    0.4606,
+    0.0311
+   ],
+   "albedo_linear_mean": [
+    0.6737,
+    0.3495,
+    0.0239
+   ],
+   "roughness_min": 0.861,
+   "roughness_max": 0.8955
+  },
+  "SCULPT_JACKET_LONG_TRIM": {
+   "albedo_linear_min": [
+    0.3932,
+    0.1868,
+    0.0216
+   ],
+   "albedo_linear_max": [
+    0.4085,
+    0.194,
+    0.0225
+   ],
+   "albedo_linear_mean": [
+    0.3991,
+    0.1896,
+    0.0219
+   ],
+   "roughness_min": 0.8,
+   "roughness_max": 0.8
+  },
+  "SCULPT_JACKET_POCKETS": {
+   "albedo_linear_min": [
+    0.633,
+    0.3101,
+    0.0215
+   ],
+   "albedo_linear_max": [
+    0.7238,
+    0.3813,
+    0.0267
+   ],
+   "albedo_linear_mean": [
+    0.6832,
+    0.349,
+    0.0244
+   ],
+   "roughness_min": 0.8705,
+   "roughness_max": 0.8879
+  }
+ },
+ "island_pixels_shared_by_two_parts": {
+  "albedo": 0,
+  "roughness": 0
+ },
+ "uv": {
+  "SCULPT_JACKET_LONG": {
+   "uv_layers": [
+    "M002_UV"
+   ],
+   "uv_min": [
+    0.0043,
+    0.0043
+   ],
+   "uv_max": [
+    0.9636,
+    0.9792
+   ]
+  },
+  "SCULPT_JACKET_LONG_TRIM": {
+   "uv_layers": [
+    "M002_UV"
+   ],
+   "uv_min": [
+    0.0043,
+    0.0043
+   ],
+   "uv_max": [
+    0.9957,
+    0.9614
+   ]
+  },
+  "SCULPT_JACKET_POCKETS": {
+   "uv_layers": [
+    "M002_UV"
+   ],
+   "uv_min": [
+    0.0043,
+    0.1872
+   ],
+   "uv_max": [
+    0.9635,
+    0.9627
+   ]
+  }
+ },
+ "mesh_snapshot_unchanged": true,
+ "materials": {
+  "SCULPT_MAT_JACKET_M002": [
+   "SCULPT_JACKET_LONG",
+   "SCULPT_JACKET_POCKETS"
+  ],
+  "SCULPT_MAT_JACKET_TRIM_M002": [
+   "SCULPT_JACKET_LONG_TRIM"
+  ]
+ },
+ "parameters": {
+  "base_linear": [
+   0.723,
+   0.381,
+   0.027
+  ],
+  "sleeve_mult": [
+   1.06,
+   1.13,
+   1.1
+  ],
+  "back_mult": [
+   0.88,
+   0.84,
+   0.8
+  ],
+  "hem_mult": [
+   0.9,
+   0.86,
+   0.82
+  ],
+  "trim_linear": [
+   0.4,
+   0.19,
+   0.022
+  ],
+  "noise_value_amp": 0.06,
+  "noise_green_amp": 0.05,
+  "noise_scales_m": [
+   0.09,
+   0.045
+  ],
+  "noise_seed": 20261127,
+  "roughness_shell": 0.88,
+  "roughness_shell_var": 0.025,
+  "roughness_trim": 0.8,
+  "specular_metallic_ior": "copied from the f002 materials, unchanged"
+ }
+}

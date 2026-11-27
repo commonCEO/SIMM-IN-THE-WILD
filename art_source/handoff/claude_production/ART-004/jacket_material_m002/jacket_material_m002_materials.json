@@ -1,0 +1,36 @@
+{
+ "packet": "jacket_material_m002 (Codex brief at 68e1524), material only on the held f002 geometry",
+ "textures": {
+  "jacket_m002_albedo.png": {"size": "1024 x 1024, 8-bit RGB PNG", "colour_space": "sRGB", "sha256": "49f81dd17285e1de59423ae318269aca3f0a533b41d84729a023398eaab68555",
+                             "contents": "base colour of jacket shell, pockets and trim in one atlas; background outside the islands = front-panel colour sRGB 221, 166, 46"},
+  "jacket_m002_roughness.png": {"size": "1024 x 1024, 8-bit RGB PNG", "colour_space": "linear (Non-Color), same value in R, G and B", "sha256": "9cf43b68f32e0e01a8da6eb7ef66e1fd6e5b2065072829bebc72b8cf0fb28fe1",
+                                "range": "shell 0.861 to 0.896 (0.88 plus or minus 0.025 low-frequency noise), trim 0.80, background 0.88"},
+  "in_the_glb": "The exporter embeds the albedo PNG byte-identical (same sha256). It re-packs roughness into a glTF metallicRoughness image (sha256 b0203bcc...): G = roughness, R and B = 255; B (metallic) has no effect because metallicFactor is 0."
+ },
+ "uv": "One UV set M002_UV (TEXCOORD_0) shared by the three parts, all inside 0..1, no island pixel shared by two parts. The f002 UV layers UVMap and SurfaceUV (overlapping, outside 0..1, never used by a texture) are removed in the candidate.",
+ "materials_blender": {
+  "SCULPT_MAT_JACKET_M002": {"used_by": ["SCULPT_JACKET_LONG", "SCULPT_JACKET_POCKETS"], "base_colour": "albedo map", "roughness": "roughness map, G channel", "metallic": 0.0, "specular": 0.2, "ior": 1.45},
+  "SCULPT_MAT_JACKET_TRIM_M002": {"used_by": ["SCULPT_JACKET_LONG_TRIM"], "base_colour": "albedo map", "roughness": "roughness map, G channel", "metallic": 0.0, "specular": 0.2, "ior": 1.45},
+  "unchanged_from_f002": "metallic, specular, specular tint, sheen, clearcoat, IOR, double-sided; neck layer SCULPT_MAT_SCARF (collar v004) stays linear 0.200, 0.112, 0.058, roughness 0.9"
+ },
+ "colour_plan_linear": {
+  "front_panels": [0.723, 0.381, 0.027],
+  "sleeves_multiplier": [1.06, 1.13, 1.10],
+  "back_panel_multiplier": [0.88, 0.84, 0.80],
+  "lower_band_multiplier": [0.90, 0.86, 0.82],
+  "lower_band": "full below z 0.53, fading out by z 0.60 (rest pose, metres); not on sleeves",
+  "trim": [0.400, 0.190, 0.022],
+  "dye_noise": "3D value noise in rest-pose world space, scales 0.09 and 0.045 m, seed 20261127; value multiplier 1 + 0.06 n, green multiplier 1 + 0.05 n (shell, pockets); trim value 1 + 0.03 n",
+  "panel_blends": "sleeves by arm-bone skin weight (smoothstep 0.35 to 0.75); back by distance behind the torso's mid-depth at that height (smoothstep -15 to +35 mm), so the side transitions are about 5 cm wide",
+  "not_used": "no occlusion, curvature, cavity, directional light, seam lines, stitching, weave or grunge"
+ },
+ "godot_proposal_not_tested": {
+  "note": "Blender values do not map one-to-one through glTF. Codex owns the Godot import, shader and lighting; these are starting points only.",
+  "albedo_texture": "jacket_m002_albedo (sRGB, as Godot treats albedo by default); albedo_color white",
+  "roughness": "roughness_texture = the GLB metallicRoughness image, roughness_texture_channel = GREEN, roughness = 1.0 (multiplier)",
+  "metallic": "0",
+  "specular": "Blender specular 0.2 exports as KHR_materials_specular specularColorFactor 0.474 and KHR_materials_ior 1.45, unchanged from f002. If the Godot importer ignores these, StandardMaterial3D metallic_specular stays 0.5; a lower value (about 0.3) would be the cloth-side choice if the jacket reads glossy, to be judged under the native lights.",
+  "vertex_colour": "COLOR_0 on shell and trim is all white, exactly as in f002; using it as albedo changes nothing",
+  "diagnosis": "render the jacket with an unshaded material and compare with jacket_material_m002_texture_preview.png"
+ }
+}

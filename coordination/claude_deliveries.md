@@ -13,7 +13,8 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`); archived unchanged |
 | Jacket, longer | `art_source/handoff/claude_production/ART-004/jacket_candidate_v004.glb` | Working fit baseline (Codex `7234913`), replaces v003 in studies; not approved |
-| Jacket finish | `art_source/handoff/claude_production/ART-004/jacket_finish_f002/jacket_finish_f002.glb` | Repair candidate f002 on v004 fit (f001 changes requested: notches, rings); waiting for Codex's native study |
+| Jacket finish | `art_source/handoff/claude_production/ART-004/jacket_finish_f002/jacket_finish_f002.glb` | Held as working clothing-finish candidate (Codex `68e1524`); editable source now committed (`jacket_finish_f002.blend`) |
+| Jacket material | `art_source/handoff/claude_production/ART-004/jacket_material_m002/jacket_material_m002.glb` | Material-only candidate m002 on f002 geometry (one 1024 albedo + roughness atlas); waiting for Codex's native study |
 | Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Working shape and contact baseline (Codex `6a7da65`) |
 | Gather calibration | `art_source/handoff/claude_production/ART-004/gather_adjust/gather_calibration_v001.glb` | Diagnostic for Codex's native paired check; replaces the defective `gather_handclear_rig_only.glb` |
 
@@ -200,7 +201,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `5d761be` (f001 changes requested at `9de793b`: scalloped placket, notched wrist, sleeve rings; `5d761be` is CORE-001 evidence). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `4296abf` (f002 held at `68e1524` with a material-only m002 brief; `4296abf` is CORE-001 evidence). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -241,6 +242,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 30 fired 00:06 UTC on 27 Nov, on time. It fetched `0f7f741..1effda0`, tested the two D1 levers (A width 0.62, B section pre-compensation), found no visible change, and delivered the diagnostic only.
   - Scheduled run 31 fired 01:07 UTC on 27 Nov, on time. It fetched `1effda0..0488f10`, read the consolidated A1 review and the clothing brief, and delivered jacket finish candidate f001.
   - Scheduled run 32 fired 02:07 UTC on 27 Nov, on time. It fetched `0488f10..5d761be`, read the f001 native review, found the cause of the notches, and delivered repair candidate f002 with a density-independent contact check.
+  - Scheduled run 33 fired 03:06 UTC on 27 Nov, on time. It fetched `5d761be..4296abf`, read the f002 native hold and the material brief, committed the f002 editable source, and delivered material candidate m002 (geometry asserted identical to f002).
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -288,7 +290,8 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
 - ART-001: hair frozen at v012 + m001-B (Codex `b87f56a`).
-- ART-004: finish candidate f002 delivered (`ART-004/jacket_finish_f002/`): the f001 notches came from the per-vertex trim flatten (step diagnostic included); f002 flattens each roll about its own centre, drops cuff widening, keeps the hem roll, fades folds at the plackets and cuffs, and replaces the sleeve rings with three unequal inner-elbow folds. Surface contact check: no new hand, strap or collar crossings; trouser crossings stay in v004's hem-roll band. Waiting for Codex's native study.
+- ART-004: f002 held by Codex as the working clothing-finish candidate (`68e1524`); its editable source is committed at `ART-004/jacket_finish_f002/jacket_finish_f002.blend`.
+- ART-004: material candidate m002 delivered (`ART-004/jacket_material_m002/`): one shared unwrap and one 1024 albedo (sRGB) and roughness (linear) atlas, baked as emission from per-vertex values (no lighting or occlusion). Front panels keep the f002 colour; sleeves lighter and slightly lemon; back and lower band deeper ochre; trim a restrained darker ochre; canvas roughness about 0.88, trim 0.80. Positions, weights and triangles asserted bit-identical to the f002 GLB, normals within 1e-4. Neutral unlit preview included for colour-space checks. Waiting for Codex's native study.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

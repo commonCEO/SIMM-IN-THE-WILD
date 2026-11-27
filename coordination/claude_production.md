@@ -23,6 +23,24 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (jacket material m002, 27 Nov, run 33, answers `68e1524`)**
+- Trigger: Codex held f002 as the working clothing-finish candidate and asked for ONE material-only packet, geometry frozen.
+- Files: `art_source/handoff/claude_production/ART-004/jacket_material_m002/` (GLB sha `ab0d800f...`, albedo `49f81dd1...`,
+  roughness `9cf43b68...`, manifest, materials JSON with proposed Godot settings, build record, comparison, game-scale and
+  neutral texture preview sheets, notes); new `jacket_material_m002.py`, `jacket_material_m002_export.py`,
+  `jacket_m002_neutral_preview.py`; f002 editable source committed as `ART-004/jacket_finish_f002/jacket_finish_f002.blend`.
+- What changed: the unused, overlapping f002 UV layers replaced by one shared unwrap; flat colours replaced by one 1024
+  albedo and one 1024 roughness atlas baked as emission from per-vertex values. Front panels keep the f002 colour, sleeves
+  lighter and slightly lemon, back and lower band deeper ochre, low-frequency dye noise, trim deeper ochre, canvas
+  roughness about 0.88, trim 0.80. No normal map, no occlusion, curvature, seams or grunge. Neck layer, head and all other
+  materials unchanged.
+- Checks actually run: Blender before/after (positions, weights, faces, modifiers identical); raw GLB against the f002
+  GLB (same position/joint/weight records bit for bit, same triangles, normals within 1e-4); re-import accounting;
+  `verify_candidate.py` FROZEN_ALL_UNCHANGED True; clay renders match control; rebuild from the committed f002 blend gives
+  byte-identical maps. A bake bug found and fixed in this run (one part's margin painted over another's islands). Nothing
+  native.
+- Next dependency: Codex's native import, shader and light evaluation of m002 against the flat f002 control.
+
 **ART-004 / Fable / REVIEW (jacket finish repair f002, 27 Nov, run 32, answers `9de793b`)**
 - Trigger: Codex's native f001 review: scalloped placket, notched wrist cuff and periodic sleeve rings; one f002 repair.
 - Files: `art_source/handoff/claude_production/ART-004/jacket_finish_f002/` (GLB sha `4cbac9ba...`, manifest, surface
