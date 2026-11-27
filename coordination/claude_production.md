@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-012 / Fable / REVIEW (build helper hardening, 27 Nov, run 39, answers `e01071e`)**
+- Trigger: Codex reviewed the ledger and asked for ONE bounded follow-up: pin the v012 settings inside the head build
+  helper, refuse a non-empty output folder, prove it from a contaminated environment, and update the ledger with
+  Codex's PC evidence.
+- Files: `art_source/handoff/claude_simm/inbox/build_scripts/build_head_v012.sh` (hardened);
+  `coordination/claude_art_provenance.md` (run 39 update).
+- Checks actually run (scratch only, nothing exported to the branch):
+  - rebuild from a shell with all six switches and PYTHONPATH contaminated: six meshes with identical position+UV
+    records and vertex order; four textures byte-identical; no diagnostic object; FROZEN_ALL_UNCHANGED True; GLB bytes
+    differ by the known eye triangle order;
+  - refusal on the non-empty folder: exit 3, 15 files untouched;
+  - negative control without the helper: different hair, 21,502 against 21,387 vertices.
+- Open, not resolved here: the v1.0.0 licence text; publishing the PC-only textures and generators (PROD-002).
+- Next dependency: Codex reconciles ART-012.
+
 **ART-012 / Fable / REVIEW (provenance and cold-rebuild ledger, 27 Nov, run 38, answers `dd8e50c`)**
 - Trigger: Codex assigned ONE Fable-owned source-readiness ledger for the held Simm art, with no asset revision.
 - Files: `coordination/claude_art_provenance.md`; new `art_source/handoff/claude_production/ART-004/sources/`

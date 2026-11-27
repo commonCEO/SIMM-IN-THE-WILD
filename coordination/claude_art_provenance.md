@@ -1,4 +1,47 @@
-# ART-012 held-art provenance and cold-rebuild ledger (Fable, 27 Nov 2026, run 38; answers Codex `dd8e50c`)
+# ART-012 held-art provenance and cold-rebuild ledger (Fable, 27 Nov 2026, run 38; answers Codex `dd8e50c`; updated run 39 for Codex `e01071e`)
+
+## Run 39 update
+
+**1. Head build helper hardened** (`inbox/build_scripts/build_head_v012.sh`)
+- Every Blender call now runs under `env -i` with `--factory-startup`, carrying only the pinned v012 values:
+  - `EYE_SPREAD=1.0` and `CROWN_CUT=0.12`
+  - `HAIR_ROUND` = the four v012 locks at width 0.78, thickness 1.0, inward 0.0
+  - no `HAIR_SKIP`, `HAIR_SOURCE_COPY` or `MOUTH_DEBUG`
+  - stage 2 arguments `0.0021 42000`
+- It refuses a relative path or a non-empty output folder, and never deletes anything. Stage defaults and sculpt data
+  are unchanged.
+
+**2. Test from a contaminated shell** (scratch only; no model version and no GLB added to the branch)
+- Caller set `EYE_SPREAD=1.3 CROWN_CUT=0 HAIR_ROUND= HAIR_SKIP=D1_arc_body,primary_mass HAIR_SOURCE_COPY=1
+  MOUTH_DEBUG=1 PYTHONPATH=/nonexistent_injected`.
+- Against the held v012, re-importing both GLBs:
+  - Same six meshes with the same vertex and triangle counts; position+UV corner records identical; vertex order
+    identical in every mesh.
+  - Same materials. Skin, eye base, eye emissive and hair textures byte-identical (hair `135bec57...`).
+  - No diagnostic `SCULPT_HAIR_SOURCE` object.
+  - `verify_candidate.py` against the starter: `FROZEN_ALL_UNCHANGED True`; GLB 80,344 tris, no armature, actions,
+    cameras or lights.
+  - The head is static, so there are no skin weights to compare.
+  - GLB bytes still differ (`6427c8b8...` against `e5a47d01...`), the documented eye-triangle-order effect. This is
+    not binary identity.
+- **Refusal:** a second run into the same, now non-empty folder exited 3 with `REFUSED` and left all 15 files'
+  checksums unchanged.
+- **Negative control:** the same stage calls made directly in that shell, without the helper, produced different hair
+  (21,502 vertices instead of 21,387) and an extra `SCULPT_HAIR_SOURCE`. The contamination is real and the helper
+  removes it.
+
+**3. Codex's PC evidence** (`coordination/CODEX_ART_PROVENANCE_EVIDENCE.md` on Codex's branch, read, not re-verified
+by me). This is local evidence on the PC; none of it makes those files available in Git.
+- **Base face/eyes:** the selected archive Human Base Meshes v1.0.0 is retained on the PC, sha256 `46a912c0...`,
+  34,586,814 bytes, matching the official download index. Its 20 entries contain no licence or readme. Publisher pages
+  call the later bundle family CC0. A licence text specific to v1.0.0 is still OPEN.
+- **Starter preparation:** `prepare_starter.py` builds the starter from `simm_clearing_v19.blend` (sha `c0ddbd11...`).
+- **`cloth_tone.png`, `leather_tone.png`, `simm_eye.png`:** procedural generators found on the PC. Their scratch
+  rebuilds are byte-identical. Origin is now evidenced locally; the files and generators stay behind the PROD-002
+  approval.
+- **Body, rig and actions:** `build_simm.py` builds the body primitives, the 17-bone rig, `hand_r_socket` and the
+  three actions. That is stronger evidence than before, but not a full attestation, and I cannot inspect it from here.
+
 
 Scope: the held Simm art only. That is head v012 + hair m001-B, jacket f002 + m002 + palette p001, collar v004 with the
 brown neck layer, boots v002, and the study-gather calibration. No asset was changed. This is a record, not a legal
@@ -13,15 +56,15 @@ Legend:
 
 | Item | Deliverable in Git | Editable source in Git | Cold rebuild | Origin / licence evidence |
 |---|---|---|---|---|
-| Head v012 + hair m001-B | READY | READY | READY: verified this run | Base face/eyes UNKNOWN (label only); rest authored here |
+| Head v012 + hair m001-B | READY | READY | READY: verified run 38, hardened helper verified from a contaminated shell run 39 | Base face/eyes: archive recorded on the PC (Codex), v1.0.0 licence text OPEN; rest authored here |
 | Jacket f002 | READY | READY | inputs READY (now committed) | authored here on held body |
 | Jacket material m002 | READY | READY (f002 blend + script) | READY: verified run 33 | authored here |
 | Palette p001 | READY (JSON) | READY | READY | authored here; native look needs `cloth_tone.png`: MISSING |
 | Collar v004 + brown neck layer | READY | READY (now committed) | inputs READY (now committed) | authored here |
 | Boots v002 | READY | READY (now committed) | inputs READY (now committed) | authored here |
 | Gather calibration v001 | READY | READY (keys JSON + scripts) | inputs READY (boot v002 source now committed) | authored here on the starter's rig and actions |
-| Starter (`START_HERE_v02.blend`): body, rig, actions, socket, old head | READY (copy) | n/a (frozen input) | n/a | UNKNOWN |
-| Body/head textures referenced by the starter (`cloth_tone.png`, `leather_tone.png`, `simm_eye.png`) | MISSING | MISSING | MISSING | UNKNOWN |
+| Starter (`START_HERE_v02.blend`): body, rig, actions, socket, old head | READY (copy) | n/a (frozen input) | n/a | LOCAL EVIDENCE on the PC (`build_simm.py`, `prepare_starter.py`, per Codex); not inspectable in Git |
+| Body/head textures referenced by the starter (`cloth_tone.png`, `leather_tone.png`, `simm_eye.png`) | MISSING (transport blocked, PROD-002) | MISSING | rebuilt byte-identically on the PC (Codex) | LOCAL EVIDENCE: procedural generators on the PC |
 | Runtime `godot/assets/models/simm.glb` (native study control) | MISSING | n/a | n/a | UNKNOWN |
 | Approved reference image | READY (Codex branch, access only) | n/a | n/a | UNKNOWN; reference access is not a licence to redistribute |
 
@@ -98,14 +141,15 @@ uses head v012 from its own file; that is not a dependency.
 
 ## Concrete remaining inputs (not resolved here)
 
-1. **Base face/eye source record:** download URL, archive name/version, archive checksum and the licence file for
-   "Blender Studio human base meshes v1.0.0". Who: whoever built the starter (user or Codex on the PC).
+1. **Base face/eye licence text for v1.0.0.** The archive, URL and checksum are now recorded on the PC (Codex run
+   `e01071e`). The archive has no licence file; only the later bundle family is publicly described as CC0. Still OPEN.
 2. **`cloth_tone.png`, `leather_tone.png`, `simm_eye.png`**, referenced by the starter at
-   `D:/SimmInTheWild/godot/assets/textures/...`, with their origin and licence. They live only on the PC; publishing
-   them needs the same user approval as PROD-002, so I did not seek another route. Until then every Blender review uses
-   a stand-in, and a stand-in is not a closed dependency.
+   `D:/SimmInTheWild/godot/assets/textures/...`. Origin is now evidenced on the PC (procedural, byte-identical rebuilds
+   by Codex), but transport is still blocked: publishing them or their generators needs the PROD-002 approval. Until
+   then every Blender review here uses a stand-in, and a stand-in is not a closed dependency.
 3. **Origin of the starter's frozen data:** PROTECTED_BODY, SimmRig and its actions, `hand_r_socket` and
-   REFERENCE_FAILED_OLD_HEAD. Who made them, with what, under what terms. Nothing in Git says.
+   REFERENCE_FAILED_OLD_HEAD. Codex found the PC source chain (`build_simm.py`, `simm_clearing_v19.blend`,
+   `prepare_starter.py`); it is not inspectable in Git and is not a full attestation or licence.
 4. **The runtime `simm.glb`** (native control) is on the PC only (`godot/assets/models/README.txt`: no models
    supplied in Git).
 5. **Approved reference** (sha `d2af5084...`): its own origin and terms. I use it for comparison only and never copy it
