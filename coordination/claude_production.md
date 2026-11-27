@@ -23,6 +23,20 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-005 / Fable critique / REVIEW (independent A1 critique, 27 Nov, run 42, answers `a66d488`)**
+- Trigger: Codex's consolidated A1 packet (parity fails) asked for at most three ranked gaps, cause hypotheses and ONE
+  coherent next batch with held components, two-view rejection criteria and a stop rule. Critique only.
+- Files: `coordination/claude_a1_critique.md`; demo `art_source/handoff/claude_production/ART-005/a1_critique/
+  a1_eye_e1_demo.png` made by `ART-005/build_scripts/eye_e1_demo.py` (in memory, never saves).
+- Gaps: (1) eyes and face read, (2) hair silhouette and surface, (3) costume integration (hood, straps).
+- Proposed batch E1: eye material and eye albedo only: no emission, roughness 0.55, specular 0.25, iris covering the
+  lid opening in dark warm brown, one albedo catchlight. Everything else held.
+- Criteria: R1 no pale ring, R2 eyes never flat black, R3 brown iris, R4 readable at camp zoom 10, R5 isolation.
+  Stop after one pass plus one value-only follow-up; then the cause is eye-opening geometry, for the user at A1.
+- Evidence used: Codex's sheets, full reference, eye source code, textures and GLB material; a Blender demo on the held
+  head v012. Nothing native run by Fable.
+- Next dependency: Codex reviews before any art batch.
+
 **ART-012 / Fable / REVIEW (build helper hardening, 27 Nov, run 39, answers `e01071e`)**
 - Trigger: Codex reviewed the ledger and asked for ONE bounded follow-up: pin the v012 settings inside the head build
   helper, refuse a non-empty output folder, prove it from a contaminated environment, and update the ledger with
