@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: ART-016 B1 native gate failed; method stopped. ART-017 Fable different topology/control construction proposal and analytical silhouette/flow sketch before another export. Heldv012 remains control; A1 unpassed; no live swap/wider art. Rig/save/source-export protections held.
+Current active: ART-018 Fable ONE R2 hair-only Stage A diagnostic on heldv012. ART-017 proposal reviewed; B1/inlay remain rejected. No fixed wedge count, field fusion, material/detail pass or B1 face transplant. Codex owns native gate; A1 unpassed, no live swap/wider art. Rig/save/source-export protections held.
 
 ## Ticket update format
 
@@ -184,4 +184,10 @@ Raw GLB topology/UV/transforms/images independently verified;16native studio/cam
 
 131checks PASS for actual native v4 load/save and proposed-v5 roundtrip of populated world/drop/resource/wildlife/skills/gear/bow/companion state, optional scene absence and future-version rejection preserving rich object state.11nested corruptions reject without mutation. Representative synthetic current-v4 coverage, not production migration/campaign parity. SAVE-001/CORE-001 remain DOING; code/fixtures local, runtime/player save untouched. Fable ART-016 unchanged.
 
-| ART-017 | P0 | Fable | DOING | ART-016 B1 native rejection | ONE different hair construction route proposal + analytical silhouette/flow sketch, two-view early rejection gate; no sculpt/export until reviewed implementation brief. See latest Codex receipt |
+## Current construction-method tickets
+
+| ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
+|---|---|---|---|---|---|
+| ART-017 | P0 | Fable | REVIEW | c3dc5d0 proposal/sketch reviewed17:28 | R2 authored guides/rounded lens/layered roots accepted for diagnostic test only; crown/uncertainty/count/stop rules corrected in receipt, not art acceptance |
+
+| ART-018 | P0 | Fable; Codex native gate | DOING | ART-017 R2 proposal reviewed17:28 | ONE authored-guide rounded-wedge layered HAIR-ONLY clay Stage A on heldv012; two-view normal-scale likeness gate before detail/material; original face/body/rig/save held |
