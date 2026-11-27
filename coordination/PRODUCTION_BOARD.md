@@ -11,7 +11,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held fitted actor; native camp motion10:02 |384controlled physics/original-animation steps,192frames,2.1264m travel, socket position tracking pass. Flag shoulder/torch presentation; matched original control and full motion/contact/controller/performance/A1 acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
-| ART-005 | P0 | Codex | DOING | held Simm and native camp/motion evidence | Prepare consolidated reference/face/body/alternate/back comparison with motion and explicit known gaps; final user A1 acceptance pending, no fitted live integration |
+| ART-005 | P0 | Codex; Fable critique | REVIEW | A1-SIMM-REVIEW.md + native sheets11:30 | Consolidated reference/head/body/alternate/back/clay, camp and motion evidence; parity explicitly fails. Fable assigned <=3gap independent critique and ONE coherent next-method proposal only. Final A1 acceptance pending; no fitted live swap |
 | ART-006 | P1 | Fable | REVIEW | L2 native controls e909d36 evaluated | L2 improves directional read/friendly face but occlusion/leak and floor wash remain; no accepted preset or automatic L3; hold assets pending native softness/occlusion evidence |
 | RENDER-001 | P1 | Codex | DOING | local camera64 integration +fresh-instance travel/cave check | Current camp defaults64m locally after360step/26checkpoint PASS; live game not restarted. Baseline register updated; fitted actor/camp, torch/foliage/performance pending |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: camera64 locally integrated; use current work/simm-runtime-baseline-camera64.json. Common tool carry tilt rejected after multi-view trial; inherited presentation tracked ART-013. Next Codex ART-005 consolidate A1 Simm evidence and known gaps. Fable ART-012/006 REVIEW; A1 unpassed, no fitted live swap/wider art. PROD-002 approval pending.
+Current active: ART-005 A1 comparison packet compiled; native evidence explicitly fails parity. Fable owns one independent three-gap critique/method proposal, no asset edits; Codex reviews next. Camera64 baseline held, no fitted live swap/wider art. ART-013 tool presentation separate; PROD-002 approval pending.
 
 ## Ticket update format
 
@@ -130,3 +130,8 @@ RENDER-001/ART-003 remain open. Original actor reproduces shoulder/tool and side
 ### 11:00UTC common carry tilt rejected
 
 36static native captures preserve grip to1.20137e-7m and protected rests/actions/socket, but common20degree outward+15degree forward tilt trades frontal separation for blade/hair conflict and near-horizontal torch carry. No integration or further arbitrary offset sweep. ART-013 tracks inherited per-tool/per-state presentation; zero static projected AABB overlaps do not cover the flagged interpolated turn. Next Codex ART-005 consolidates concrete Simm A1 review evidence with known issues; A1 still unpassed. See latest receipt and reviews/native-tool-carry-rejected.png. Fable held; runtime/live game/save untouched.
+
+
+### 11:30UTC consolidated A1 packet
+
+A1-SIMM-REVIEW.md links checksum-verified new native/reference and multi-view sheets plus previous camp/motion evidence. Held model/rig/save intact; verified native run passes preservation checks, not visual parity. Codex verdict: A1 fails on remaining face/eye, hair and costume finish gaps. Fable now assigned one source-informed independent critique and coherent method proposal; no new asset/L3 production. ART-005 REVIEW, not USER_APPROVED or ready for wider art integration. See current dispatch.

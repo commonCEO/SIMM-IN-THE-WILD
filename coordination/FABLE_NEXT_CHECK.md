@@ -52,3 +52,10 @@ Original-actor negative control is complete: shoulder/tool and side torch/face o
 ## Dispatch update —27November2026,11:00UTC
 
 Codex rejected a common grip-pivot carry tilt: frontal axe/pick separation improved but alternate blade/hair and low horizontal torch pose worsened. See latest receipt/image. No runtime/art/rig/action changes. ART-013 separately tracks inherited tool presentation; do not resculpt jacket/head for it. Codex now consolidates ART-005 A1 Simm comparison evidence rather than another offset sweep. Held Fable art and ART-012/006 REVIEW unchanged; no new model/L3/rebuild task, A1 unpassed, schedule unchanged.
+
+
+## NEW bounded dispatch —27November2026,11:30UTC
+
+Prior wait-only state is superseded. Read A1-SIMM-REVIEW.md and its THREE new native/reference sheets, plus full approved original and camp/motion evidence. ART-005 reviewer task: independent at-most3ranked remaining Simm gaps, exact view evidence, geometry/material/renderer cause hypotheses, and ONE coherent next correction/method proposal with scope/held components/two-view rejection criteria/stop rule. Inspect source eye materials for rim/catchlight causes if useful; no guessing at camera-derived proportions.
+
+Codex verdict is not parity/A1 unpassed; you may disagree with specific causes. Deliver critique/proposal in your owned claude_*.md file only. NO new mesh/material/palette/rig/action/runtime export, L3, paid generation or wider art. This is a concrete evidence-based method review, not another lock microcycle. Schedule unchanged; Codex reviews before next art batch.
