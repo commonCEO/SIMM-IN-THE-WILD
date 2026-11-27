@@ -119,3 +119,10 @@ After the parent released its own lock in finally, a fresh invocation changed th
 This is real Windows replacement-lock failure/retry evidence for CURRENT v4 saving, not an injected fake return code. It closes one concrete OS-fault case. It does NOT establish v5 migration atomicity, crash/power-loss durability, disk-full/ACL behavior, automatic recovery/promotion of leftovers, multi-process race safety or full campaign migration. Retry regenerates the temporary state through save_game; no automatic stale.tmp promotion was implemented or claimed.
 
 Local script work/save-rename-lock-study.gd, per-phase own logs and synthetic manifests/result JSONs under work/save-rename-lock-study/. Native certificate-store diagnostic persists; no clean-log claim. All test code/fixtures remain local behind PROD-002; only these owned findings published. Runtime source, art, rig, live game and native save untouched.
+
+
+## Populated collection compatibility —27November,16:00UTC
+
+131checks PASS on one synthetic rich-v4 actual-load/actual-save ->work-only proposed-v5 envelope/JSON roundtrip fixture. Covers6station/storage/garden/nest objects,3drops including both scenes and absent legacy source_scene,3resource states,6wildlife types,13skills,4gear flags, bow stats and companion/effect clocks. All existing fields/optional absence preserved; only proposed calendar defaults added. Current loader's future-v5 rejection preserves the complete populated in-memory v4 state, and original input bytes remain unchanged.
+
+Eleven malformed nested variants reject without mutation. See CORE-001-CONTRACT.md for precise scope. This supplements the previous sparse fixtures; not exhaustive schema fuzzing, earned-game legality or production migration. Workspace-only files, native save untouched, no runtime version change. Root-certificate-store error remains. All new code/data stay local behind PROD-002.

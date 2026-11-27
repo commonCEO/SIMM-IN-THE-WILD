@@ -178,3 +178,8 @@ CURRENT native v4 serializer tested under .NET-held no-delete-share destination 
 ### 15:30UTC inlay gate stopped / major forms reset
 
 Raw GLB topology/UV/transforms/images independently verified;16native studio/camp captures preserve protected runtime/rig/save. Candidate reduces flat lip but E1 upper arc worsens and normal-scale whole-face improvement is insufficient; nose changes nonzero. ART-015 stopped, no production head or parameter sweep. ART-016 assigns ONE coherent clay whole-head silhouette/face blockout under existing user authorization; no material detail/wider art. See current receipt for exact scope and stop rule; A1 still unpassed.
+
+
+### 16:00UTC rich nested save fixture
+
+131checks PASS for actual native v4 load/save and proposed-v5 roundtrip of populated world/drop/resource/wildlife/skills/gear/bow/companion state, optional scene absence and future-version rejection preserving rich object state.11nested corruptions reject without mutation. Representative synthetic current-v4 coverage, not production migration/campaign parity. SAVE-001/CORE-001 remain DOING; code/fixtures local, runtime/player save untouched. Fable ART-016 unchanged.

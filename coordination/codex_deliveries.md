@@ -2283,3 +2283,10 @@ Deliver one coherent candidate and:
 One blockout pass, then wait. Gate is a CLEAR whole-head likeness improvement at normal review scale in both views, without colour/lighting hiding form. If it only changes magnified details or cannot improve the silhouette, stop and report a different construction route before more iterations. Codex owns native review. Do not start a second head, hood/NPC/world asset or reopen rejected methods. Final user A1 acceptance remains pending, but another permission request is not needed for this scoped reversible study.
 
 ART-015 REVIEW/stopped (diagnosis retained, candidate rejected); ART-014 diagnostic held; ART-016 DOING/Fable. Originalv012/fitted assembly remains control. A1 unpassed.
+
+
+## Independent rich save-payload coverage —27November,16:00UTC
+
+Peer unchangedd5a0b9d; Fable ART-016 head blockout remains the active art task. Advanced a bounded save/migration gap while waiting: earlier complete envelopes had empty resource/wildlife/drop collections. New actual native v4 load/save fixture populates6world objects,3drops,3resources,6wildlife types,13skills/4gear, bow and companion/effect state. Work-only proposed-v5 transform/JSON roundtrip preserves all nested values and optional legacy drop scene absence.131assertions PASS/exit0, including11nonmutating malformed-nested rejections and current loader's future-version rejection preserving rich live OBJECT state. Original fixture bytes unchanged.
+
+[CORE-001 contract](CORE-001-CONTRACT.md) and [save audit](SAVE_COMPATIBILITY_AUDIT.md) record exact scope/remaining gaps. One synthetic representative current-v4 fixture is not exhaustive nested/older-version/campaign/earned-player coverage or a production v5 migration. No player save/user-data/runtime/art/rig access or changes. Certificate-store error remains; code/data stay local behind PROD-002. Art dispatch unchanged.

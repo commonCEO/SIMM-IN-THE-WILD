@@ -147,3 +147,14 @@ New fixture exposes a real work-prototype gap: hostile animals without finite ho
 Compared per-step source state, death timer/restored flags, player/scene state, hostile/friendly state, drop content, world time, effects/fuel/invulnerability and callback counts. UI/scene/save/region/house/companion callbacks remain stubs or intentions; no actual scene transitions, native save IO, controller journey or full omitted game body. Thus the earlier combined death-recovery STUB limitation is closed only for pure transition composition, not native integration.
 
 Local export-combined-recovery.mjs, combined-recovery-oracle.json, combined_recovery_audit.gd and generator, plus updated combined_clock_prototype.gd/recovery_prototype.gd, remain LOCAL in work/core001/. Source hashes verified current; root-certificate-store error remains in all successful logs. Runtime/native save/rig untouched. Next: non-saving scene/state mapping and versioned migration/atomic IO/fault boundaries before any live wiring.
+
+
+## Populated nested payload migration fixture —27November,16:00UTC
+
+Extended the earlier envelope-only/empty-collection evidence with ONE richer synthetic native v4 document. Actual Progression.load_game then save_game preserve:6world objects (fire/furnace/chest/planted+empty garden/nest),3drops (outside/cave/legacy absent source_scene, including lifetime0/.05/600),3resource states (alive/depleted/removed),6supported wildlife types including dead/chasing/return clocks, all13skills,4gear flags, bow shot statistics, effects and populated companion fields/independent clock.
+
+Work-only proposed v5 transform and JSON roundtrip retain every normalized nested value, ID, position and optional-field absence; add only calendar defaults without rewards.131assertions PASS/exit0. Current production loader rejects the future v5 fixture and leaves every populated v4 in-memory field intact. Original rich-v4 file hash stays unchanged. Eleven nested corruptions reject non-mutating: amounts/scenes/lifetimes, chest count, garden crop, forbidden nest fuel, resource consistency, wildlife position, companion position, shot range and skill cap.
+
+This closes the empty-collection limitation for these SPECIFIC representative current-v4 payloads, not exhaustive nested contents, reachable skill-budget legality, richer older-version combinations, browser-save import, production v5 loader/migration IO or campaign-scene semantics. Native schema permits the fixture; that is not an earned-player journey.
+
+Local work/core001/rich_payload_audit.gd and rich-payload-study/ fixtures only. No user-data/player save access or runtime changes. Root-certificate-store diagnostic persists. Source/tests remain local behind PROD-002; next mapping/migration/fault gates remain required.
