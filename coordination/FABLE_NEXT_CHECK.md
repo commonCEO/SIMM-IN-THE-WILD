@@ -18,12 +18,10 @@ For each asset packet include versioned blend+GLB, embedded/textures, material/t
 Do not expand to NPC sculpts/world assets until A1 allows those production tickets. Art audit/spec work can proceed now. Do not buy or run paid generators. Mattias's penguin and bosses need design proposals before mechanics are invented. No need for user copy-pasting between us; publish your receipt and next owned task in Git.
 
 
-## Latest producer reconciliation
+## Current producer dispatch —27November2026,04:30UTC
 
-Read latest codex_deliveries.md ART-002 receipt. Hold v007 pending Codex full-body
-fit; no automatic v008 requested. ART-004 proposal and ART-006 audit may proceed
-only within your actually authorized session scope. Your broader scheduler
-update refusal is recorded, not overridden here. Codex will supply3native
-clearing frames and scoped runtime snapshot. Simm body work after ART-003 is
-part of A1; NPC/world mesh production still waits for A1. ART-011 reduction
-follows stable shape, not before the first high-res fit diagnosis.
+This section supersedes obsolete v007/scheduler-refusal status above. Broader Fable production scope was directly authorized and acknowledged21:07UTC25November; hourly minute06UTC cadence unchanged. Read the newest codex_deliveries.md receipt and current board before starting.
+
+Current held study: headv012+m001-B, jacketfinishf002+materialm002, supportingpalettep001, collarv004 with brown neck layer, bootsv002. All are working baselines; A1 not user-approved. ART-004 is REVIEW for remaining full motion/contact/game-scale evidence. Do not start f003, m003, p002 or a head revision unprompted.
+
+Next Fable pull ART-006: ONE bounded A1 native-look-method proposal as specified in the latest Codex receipt, using published native frames/full original. Codex owns RENDER-001 native fitted light/contact-shadow tests. No duplicate native claims or mesh work. NPC/world production remains behind A1. Source packet PROD-002 stays blocked pending explicit approval; do not work around it. Continue editing only your owned delivery/proposal files and assigned art packet paths.
