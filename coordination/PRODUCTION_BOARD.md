@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable5b394e7 inlay-eye method reviewed; ART-015 ONE localized diagnostic geometry carrier assigned, no production head. Codex native method gate next, no parameter sweep. E1 remains diagnostic; A1 unpassed, no fitted live swap/wider art. PROD-002 pending.
+Current active: inlay native whole-face gate failed; ART-015 stopped. ART-016 Fable ONE holistic silhouette/face clay head blockout, no material microcycles. Heldv012/E1 remain controls; A1 unpassed, no live swap/wider art. Rig/save/body and source-export protections held.
 
 ## Ticket update format
 
@@ -60,7 +60,8 @@ Codex READY production tickets remain actionable despite that restriction.
 | ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
 | ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
 | ART-014 | P0 | Fable; Codex native review | REVIEW | d53fde4 native A/B13:30 | E1 colour/emission improved; R3/R5 pass, normal-view R2 retains highlight, R4 highlight unresolved at zoom10, R1 boundary FAIL persists with flat unlit eye materials. Hold E1 diagnostic, stop material tuning; no live baseline |
-| ART-015 | P0 | Fable; Codex native method review | DOING | source diagnosis/demo5b394e7 reviewed | ONE existing localized inlay composite as four-mesh diagnostic carrier, with evaluated/exported locality/UV/topology/texture evidence; no whole stage rebuild drift or retuning. Native flat/E1/clay two-view and whole-face gate next; no production version |
+| ART-015 | P0 | Fable; Codex | REVIEW | carrierd5a0b9d native gate15:30 | STOPPED: flat lip improves but E1 arc worsens and whole-face likeness does not clearly improve; strict nose freeze fails. Diagnosis retained, carrier not adopted; no parameter sweep or production head |
+| ART-016 | P0 | Fable; Codex native gate | DOING | eye/hair micro-method stop rules; user Simm likeness scope | ONE whole-head silhouette/face clay blockout B1,6–10major hair clumps + facial landmark relationships; static diagnostic/source only, protected neck/body/rig/actions/save. Clear whole-head two-view improvement required before detail |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -172,3 +173,8 @@ Fable5b394e7 source/patch/local composite and Blender demo reviewed; native resu
 ### 15:00UTC actual Windows save-replace failure/retry
 
 CURRENT native v4 serializer tested under .NET-held no-delete-share destination lock: failed rename preserves original bytes/in-memory state and leaves valid.tmp. Released-lock retry writes newest state and consumes.tmp.85explicit checks PASS across setup/locked/retry; workspace-only fixture, no native player save/runtime/rig/art changes. SAVE-001 still DOING for broader IO/migration/campaign faults; see SAVE_COMPATIBILITY_AUDIT.md. Fable ART-015 dispatch unchanged.
+
+
+### 15:30UTC inlay gate stopped / major forms reset
+
+Raw GLB topology/UV/transforms/images independently verified;16native studio/camp captures preserve protected runtime/rig/save. Candidate reduces flat lip but E1 upper arc worsens and normal-scale whole-face improvement is insufficient; nose changes nonzero. ART-015 stopped, no production head or parameter sweep. ART-016 assigns ONE coherent clay whole-head silhouette/face blockout under existing user authorization; no material detail/wider art. See current receipt for exact scope and stop rule; A1 still unpassed.

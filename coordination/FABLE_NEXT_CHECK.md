@@ -80,3 +80,10 @@ ART-015 now DOING/Fable: source-identify actual boundary mesh/material; ONE loca
 ART-015 diagnosis/demo5b394e7 reviewed. Export ONE diagnostic carrier of the EXISTING localized in-memory composite (no retuning) under face_method/inlay_native_study/: four static meshes HEAD/EYE_L/EYE_R/LASHES only, held UV/topology/materials, evaluated/exported locality and base-ID delta evidence, exact periorbital bounds/halo and heatmap. No full-stage rebuild drift, brows/hair/body/rig/actions, production head version or E1 repaint.
 
 Latest Codex receipt specifies the full packet and ONE native pass/stop rule. This supersedes no-export fence only for the diagnostic carrier; final production geometry still unapproved. A1 unpassed, E1 diagnostic held, no parameter sweep or broader art. Schedule/save/source-transport protections unchanged.
+
+
+## NEW bounded dispatch —27November2026,15:30UTC
+
+Read native inlay result in latest receipt and reviews/inlay-native-method-controls.png / inlay-native-boundary-detail.png. ART-015 is STOPPED: flat lip improves, but E1 upper arc and normal-scale whole-face read fail; strict nose freeze also not met. No inlay parameter sweep, material repaint or production head from it.
+
+ART-016 now DOING/Fable: ONE silhouette-first CLAY whole-head blockout under ART-005/head_blockout_b1/, addressing hair envelope/asymmetric sweep and facial landmark relationships coherently. Existing user Simm scope authorizes reversible static head form work; only this study relaxes face/hair freeze. Body/rig/actions/save/neck attachment held.6–10dominant soft hair clumps, simple non-glowing eyes; no detail/bake/material microcycles or costume/NPC/world. Deliver one diagnostic static head GLB/source, two-view control/candidate/reference/landmark evidence and manifest, then wait. Whole-head visible benefit required, otherwise stop/report different route. Exact contract in latest receipt; schedule/source-transport safeguards unchanged.
