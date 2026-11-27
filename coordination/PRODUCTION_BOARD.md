@@ -10,7 +10,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-001 | P0 | Fable | DOING | D1 diagnostic39e2270 reviewed | Stop per-lock tweaking: neither lever visibly helps; v012+m001-B held, no v013; consolidated A1 gaps ranked, hair frozen during clothing finish |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
-| ART-004 | P0 | Fable | DOING | consolidated A1 review27Nov00:31UTC | ONE jacket/neck finish candidate against heldv004 fit: broad cloth folds, reference pockets, softer trim/neck layering; protected base weights/rig held; both cameras and motion evidence |
+| ART-004 | P0 | Fable | DOING | f001 native review098f218 | Changes requested: scalloped placket/notched wrist and periodic sleeve rings; ONE f002 boundary/fold repair, v004 fit control held; motion/contact acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Actual non-saving camp day/torch controls captured;1deg contact readable, warm fill lifts shadows but flattens form; omni/self-shadow and moving fitted-character evidence/performance pending |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-004 one bounded jacket/neck finish packet; hairv012+m001-B frozen after non-improving D1 diagnostics. Codex native material/contact-shadow study and CORE-001 isolated clock/survival/migration work continue. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
+Current active: Fable ART-004 one f002 clothing boundary/fold repair after native f001 rejection; hairv012+m001-B frozen. Codex CORE-001 migration/hazards and native renderer work remain independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 

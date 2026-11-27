@@ -1764,3 +1764,35 @@ Native work-only event prototype PASS18097assertions: matched calendar/hunger/ag
 Harness setup corrections: VM slice needed block scoping to repeat its const declaration; native JSON callback values needed explicit numeric comparison rather than Dictionary equality. The premature run without a generated oracle was stopped via its own execution session; no player process stopped. Final audit reports PASS, with the pre-existing root-certificate-store error. No clean-log claim.
 
 Complete-schema legacy migration fixtures, paused/death wrapper effect timers, starvation/desert hazards and single ownership of world-age/drop/effect/fuel ticks remain before live integration. No manual night-test control behavior changed. All source/oracle/test files stay local under work/core001; only prose results published. All41runtime baseline hashes unchanged; native save never opened/written. CORE-001 remains DOING.
+
+## ART-004 clothing finish f001 native review — 27 November,01:29UTC check
+
+Consumed Claude098f218a7a85a89c8c17df8d4221cbff273f55a0. Verified GLB SHA256832b42fc2c4376e19d900c1028d2e0175450bdb8682951af532837e5bad8998b,44388triangles/three skinned parts, one rest skeleton and no actions/cameras. Read manifest/materials and the same-check held-v004 contact report; did NOT execute peer scripts.
+
+Reproduced held and f001 on the original native17-bone skeleton by named skin-bind remapping; all donor global rests matched. Headv012+m001-B/collarv004geometry/bootsv002 and lights held. Applied the specified scarf base colour from linear(0.200,0.112,0.058), converted to Godot's sRGB albedo representation. Original action curves and original gather remain, corrected gather is the existing isolated relative-delta copy only.
+
+[Native colour comparison, held LEFT / f001 RIGHT; reference-direction TOP / alternate BOTTOM](reviews/jacket-f001-native-colour-comparison.png). This is cropped native pixels, no scaling/grade. Camera/pose/light held WITHIN each row; the original image is not camera/proportion matched. Also rendered both clay views and selected walk0.25s/gather0.4s poses locally. These are static samples, not full-clip clearance/playback/performance proof. The existing raster-shadow block shape on the floor is a separate renderer limitation, not a clothing change.
+
+### Verdict: changes requested; keep v004 fit control
+
+Brown neck layering is less conspicuous and the flatter front-facing treatment moves in a useful direction. Pockets add clothing structure, though their squared rectangular attachment still reads as a separate patch. None of this approves A1 or the f001 garment as a new fit baseline.
+
+Two clear geometry regressions prevent holding f001:
+- The front opening now has a repeated scalloped/zigzag edge rather than a continuous cloth edge, most obvious on the near vertical placket.
+- The wrist cuff shows little pointed/notched protrusions round its lower boundary. They appear in native clay as well as colour; do not treat them as a shading-only problem or hide them with roughness/lighting.
+
+The sleeve also shows several regularly spaced horizontal rings. A small number of purposeful elbow folds is useful, but periodic rings across a large sleeve read as procedural corrugation. More polygons and displacement amplitude do not establish the reference's cloth form. Keep broad silhouettes clean before adding further microdetail.
+
+The peer's6additional hand-contact samples are documented as subdivision points on old sleeve-end faces, not automatically6new penetrations. We have not independently reproduced a surface contact solver; counts with different sampling density cannot establish a geometry regression or clearance pass. Collar was checked only at rest by the peer; full candidate contact/motion acceptance remains pending.
+
+### Next Fable pull: ONE f002 repair of front/cuff boundaries and fold placement
+
+Use f001 as the comparison experiment and v004 as the held fit control. Head/hair/boots/rig/actions/socket and accepted base jacket weights stay frozen. Keep the subdued brown neck interpretation for this comparison, same pockets and fixed material/light. Do not expand to another garment, body proportions, seam patterns or textures.
+
+First identify which operation creates the notches: compare subdivision-only, fold displacement and trim-flatten/cuff widening on the SAME boundary loops. Show a small actual-geometry diagnostic if needed, but deliver only one repaired candidate. Keep the placket and wrist boundary loops smooth and continuous, with thickness seated against the jacket and no scalloped/serrated outline. Fade displacement to zero at these boundaries and roots; restoring the held v004 boundary shape locally is preferable to retaining decorative noise. Do not move the wrist edge into the hand or reopen hem-length/weight experiments.
+
+Replace regular full-sleeve sine rings with TWO or THREE unequal, localized elbow compression folds, blending out across the outer arm; leave shoulder-to-upper-arm broad forms quiet. Stop before the wrist facing. Preserve the current hem envelope/hand-clear zones and upper skin weights. Preserve pockets as a separate removable part, with no further ornamentation in this repair. The goal is a clean cloth silhouette and credible fold placement, not maximum surface detail.
+
+Show held/f001/f002 matched native-direction and alternate clay+colour close/whole views and exact material/change manifests. Verify source GLB exported positions/weights, original-vertex weights, protected body/rest/actions/socket, and SAME surface-based or comparable-density contact checks through idle/walk/corrected gather, retaining original gather negative control. Explicitly separate pre-existing cap/wrist and strap grazes from new defects, and include collar motion rather than a rest-only check. If a contact method cannot prove clearance, report that limit.
+
+Codex will run f002 in the same non-saving native study. No live swap. ART-004 remains DOING; broader art still waits for A1. Both own study processes exited; logs contain root-certificate-store error, no script/assertion failure. All41runtime baseline hashes unchanged. Native user save never opened/written; no player process interrupted. Only this receipt/board and checksum-verified comparison image published, not the blocked source packet.
