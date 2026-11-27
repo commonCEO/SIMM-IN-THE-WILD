@@ -13,7 +13,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | L2 native controls e909d36 evaluated | L2 improves directional read/friendly face but occlusion/leak and floor wash remain; no accepted preset or automatic L3; hold assets pending native softness/occlusion evidence |
-| RENDER-001 | P1 | Codex | DOING | far20 softness controls/144walk frames |1deg provisional studio control,2deg alternative;8frame mixed-ROI metrics only, full playback/perf pending. Next actual non-saving camp frustum/day/torch validation; no runtime preset |
+| RENDER-001 | P1 | Codex | DOING | actual persist=false camp frustum/day/torch captures | Actual far4000 confirmed;64m candidate improves sun shadows, six AABB probes max45.197m; cave/travel/visibility before minimal integration; torch/foliage/perf unresolved |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Codex RENDER-001 actual non-saving camp camera/frustum validation; studio far20/angle1 provisional only. Fable ART-006 REVIEW, no automatic L3/art exports. Headv012/clothingf002+m002/p001 held. CORE-001 remains independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
+Current active: Codex RENDER-001 non-saving camp travel/cave visibility before camera-far integration; Fable ART-012 provenance/rebuild-readiness ledger, ART-006 REVIEW. Held art unchanged. CORE-001 remains independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 
@@ -57,6 +57,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
+| ART-012 | P1 | Fable | DOING | held Simm art packets available | Fable-owned provenance/cold-rebuild ledger: paths/checksums, base/add-on/texture origins and license evidence, READY/MISSING/UNKNOWN; no asset revisions or blocked-source workaround |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
