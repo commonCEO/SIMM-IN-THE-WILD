@@ -55,3 +55,15 @@ Prototype, oracle and harness remain under work/core001/ only. Only this prose c
 Next: extend the isolated harness with source-derived sleep/defeat and short-step dawn/dusk event oracles; build a complete cloned-state migration fixture path around the existing native validator. Keep all code/data under an isolated work project until reviewed. Then integrate once with explicit clock/tick ownership and meaningful pause/save/defeat checks, preserving latest native save.
 
 User-approved manual evening test controls must not be silently removed or used as an alternate untested calendar/reward source. Resolve their debug-versus-calendar integration in a concrete review before live wiring. No rig, animation, art, world layout or controller redesign belongs to this first clock task.
+
+## Recovery prototype evidence — 26 November,23:58UTC
+
+Advanced the work-only prototype with sleep and defeat state transitions. An independent Node VM executes the ACTUAL current browser sleepUntilMorning/updateDeath function declarations extracted from game.js, using original model.maxHealth/resetHostilesAfterDefeat. DOM, save, house-completion, regrowth, notification and companion callbacks are stubbed/counted; no browser app or native player save is loaded.
+
+Oracle:288sleep combinations across calendar phase, hunger/thirst floors, combat/guardian/charm health capacity;16defeat scenarios with four boundary steps each. Final native PASS6768assertions over state fields, callback intentions, hostile-home/calm values, one-time restore and completion idempotence. Both functions preserve inventory/tools/XP and the distinct calendar/world-age/night semantics. Heat remains unchanged.
+
+This is function-level evidence only. Direct large boundary steps are test inputs, not actual0.05s browser frame playback. The full update wrapper's effect/invulnerability ticking, input/charge cancellation, zombie spawning/clearing nodes, overlay rendering, physical base placement, actual home completion/regrowth/Nups movement and real file saving are NOT validated by stub callback counts. A return value describing intended work is not a world integration.
+
+Native exit0; root-certificate-store error remains, no script/assertion failures. All41runtime baseline hashes unchanged, no live scene/save hook or new save version written. All source/oracles/harnesses remain under work/core001/; only prose contract/board/receipt published.
+
+Next bounded foundation work: short-step dusk/dawn reward events and complete-schema legacy fixtures in an isolated cloned-state path. Then starvation/region hazards and one-tick world-age/effect/fuel/drop ownership before any live integration. CORE-001 is DOING, not browser survival complete.

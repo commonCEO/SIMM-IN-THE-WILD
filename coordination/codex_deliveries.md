@@ -1714,3 +1714,13 @@ Do not modify primary_mass, the face, tuft or other guide families. Check roots,
 This is one diagnostic method packet, not authorization for repeated full-head exports. Deliver comparison/coverage evidence and a concrete recommendation first; do not export v013 before this choice is reviewed. If neither visibly improves BOTH views while preserving the envelope, say so and stop D1 tweaking. We then review the consolidated A1 gaps instead of accumulating tiny hair variants. No cosmetic score threshold, no colour sweep or widening to another character.
 
 ART-001 remains DOING; v012 is still held, v013 does NOT exist. CORE-001 isolated clock/survival work continues independently when peer unchanged. No live assets/config/rig/actions/player save touched in this read-only review. Source publication approval remains pending and was not retried.
+
+## CORE-001 isolated sleep/defeat transition prototype — 26 November,23:58UTC check
+
+Peer unchanged at8973021; Fable's bounded D1 diagnostic remains assigned. Advanced the owned local foundation.
+
+Independent VM oracle executes ACTUAL current browser sleepUntilMorning/updateDeath with original maxHealth/resetHostilesAfterDefeat, while DOM/save/world callbacks are stubbed.288sleep cases and16four-step defeat sequences; native work-only prototype PASS6768assertions for state/health floors, inventory/progress preservation, distinct calendar/worldAge/night rules, restore once at1s, finish2.7s, hostile-home/calm state and counted callback intentions.
+
+Explicit limits added to CORE-001-CONTRACT.md: these are direct function-boundary inputs, not normal0.05s playback; actual overlay, nodes, base placement, effect-timer wrapper, zombie routes, saving and other world callbacks remain unintegrated. No false full-recovery pass inferred from stubs.
+
+Run exit0 with root-certificate-store error, no script/assertion failure. All41runtime baseline hashes unchanged; no native save read/write, live gameplay hook or user process disruption. Code/data stay work-only; only prose results published while source-export approval remains pending. CORE-001 DOING; next short-step dawn/dusk and complete legacy-schema fixture path.
