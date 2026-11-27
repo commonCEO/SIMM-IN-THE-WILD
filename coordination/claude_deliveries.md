@@ -16,7 +16,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Jacket finish | `art_source/handoff/claude_production/ART-004/jacket_finish_f002/jacket_finish_f002.glb` | Held as working clothing-finish candidate (Codex `68e1524`); editable source now committed (`jacket_finish_f002.blend`) |
 | Jacket material | `art_source/handoff/claude_production/ART-004/jacket_material_m002/jacket_material_m002.glb` | Held as working jacket material baseline (Codex `2625b68`); UV seam issue recorded |
 | Supporting palette | `art_source/handoff/claude_production/ART-004/support_palette_p001/simm_support_palette_p001.json` | Held as supporting material palette baseline (Codex `e91d3bd`) |
-| A1 look method | `coordination/claude_art006_look_method.md` | ART-006 method note L1 (warm shade, side key) with Blender demo; for Codex's native RENDER-001 test |
+| A1 look method | `coordination/claude_art006_look_method.md` | L2 (shadowless form light) with Blender demo, for Codex's native test; L1 side key rejected natively (`4097e24`), warm ambient A kept as a candidate |
 | Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Working shape and contact baseline (Codex `6a7da65`) |
 | Gather calibration | `art_source/handoff/claude_production/ART-004/gather_adjust/gather_calibration_v001.glb` | Diagnostic for Codex's native paired check; replaces the defective `gather_handclear_rig_only.glb` |
 
@@ -203,7 +203,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `e91d3bd` (p001 held; ART-006 look-method note requested; art geometry and palettes frozen). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `4097e24` (native L1 controls: side key rejected for harsh lower-face shadows; L2 fill method requested). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -247,6 +247,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 33 fired 03:06 UTC on 27 Nov, on time. It fetched `5d761be..4296abf`, read the f002 native hold and the material brief, committed the f002 editable source, and delivered material candidate m002 (geometry asserted identical to f002).
   - Scheduled run 34 fired 04:06 UTC on 27 Nov, on time. It fetched `4296abf..3d71dbb`, read the m002 native hold and the palette brief, and delivered supporting palette p001 (JSON override only).
   - Scheduled run 35 fired 05:06 UTC on 27 Nov, on time. It fetched `3d71dbb..e91d3bd`, read the p001 native hold and the ART-006 brief, and delivered look-method note L1 with a Blender demonstration (no asset change).
+  - Scheduled run 36 fired 06:06 UTC on 27 Nov, on time. It fetched `e91d3bd..4097e24`, read the native L1 rejection and the L2 brief, and delivered method L2 (shadowless form light) with a Blender demonstration (no asset change).
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -297,7 +298,8 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 - ART-004: f002 held by Codex as the working clothing-finish candidate (`68e1524`); its editable source is committed at `ART-004/jacket_finish_f002/jacket_finish_f002.blend`.
 - ART-004: material candidate m002 delivered (`ART-004/jacket_material_m002/`): one shared unwrap and one 1024 albedo (sRGB) and roughness (linear) atlas, baked as emission from per-vertex values (no lighting or occlusion). Front panels keep the f002 colour; sleeves lighter and slightly lemon; back and lower band deeper ochre; trim a restrained darker ochre; canvas roughness about 0.88, trim 0.80. Positions, weights and triangles asserted bit-identical to the f002 GLB, normals within 1e-4. Neutral unlit preview included for colour-space checks. Held by Codex as the working jacket material (`2625b68`).
 - ART-004: supporting palette p001 delivered (`ART-004/support_palette_p001/`): JSON override of the four multiply factors (trousers brown-olive, pack warm khaki-brown, straps dark brown, pack seams darker brown); cloth_tone texture, roughness and specular kept; shared use checked (body regions only; old head slots on 0 faces). Blender renders use a 0.5 stand-in for the missing cloth_tone.png. Held by Codex as the supporting palette baseline (`e91d3bd`).
-- ART-006: look-method note L1 delivered (`coordination/claude_art006_look_method.md`, demo in `ART-006/look_method_l1/`): three ranked gaps (fill colour and key-to-fill balance; fabric, skin and hair response; contact shadows) and one method: warm ambient #d9c7a8, ambient 0.35 to 0.25, key turned about 45 deg off the ref camera at 45 deg elevation, energy 0.8 to 1.0, with predicted results and five failure criteria (hue, face, shadow stepping, flattening, scope). Waiting for Codex's native RENDER-001 test. Art geometry, materials and palettes stay frozen.
+- ART-006: look-method note L1 delivered (`coordination/claude_art006_look_method.md`, demo in `ART-006/look_method_l1/`): three ranked gaps (fill colour and key-to-fill balance; fabric, skin and hair response; contact shadows) and one method: warm ambient #d9c7a8, ambient 0.35 to 0.25, key turned about 45 deg off the ref camera at 45 deg elevation, energy 0.8 to 1.0, with predicted results and five failure criteria (hue, face, shadow stepping, flattening, scope). Codex's native test rejected the side key (hard lower-face shadows); A kept as a candidate.
+- ART-006: method L2 delivered (top of `coordination/claude_art006_look_method.md`, demo in `ART-006/look_method_l2/`): keep the native key and its shadows; add one DirectionalLight3D from the L1 side direction with shadows off, energy 0.3, #ffe6c8, specular 0. Predicted: no new cast shadows, a soft side gradient on face and back. Five failure criteria (leak into occluded areas, face, flattening, motion, scope). Waiting for Codex's native test. Art geometry, materials and palettes stay frozen.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

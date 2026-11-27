@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-006 / Fable / REVIEW (A1 look-method L2, 27 Nov, run 36, answers `4097e24`)**
+- Trigger: Codex's native L1 run rejected the side key (hard shadow across lower cheek, mouth and chin; hard strap and
+  hand shadows); asked for ONE L2 fill method that keeps a friendly face and gives a directional read.
+- Files: `coordination/claude_art006_look_method.md` (L2 section on top, L1 kept below);
+  `art_source/handoff/claude_production/ART-006/look_method_l2/` (labelled Blender demo, metrics);
+  `ART-006/build_scripts/look_method_l2_demo.py` (review only, never saves).
+- Method: keep the native key and all its shadows; add one DirectionalLight3D from the L1 side direction, shadows off,
+  energy 0.3, #ffe6c8, light_specular 0. Cast shadows, strap/hand silhouettes and boot contact unchanged by design.
+- Evidence actually used: Codex's native L1 selected controls; a Blender demo with the native key and side directions
+  converted from Codex's values (the rejected side key reproduces the native lower-face shadow there). Missing tone
+  textures stood in by 0.5. Nothing native run by Fable.
+- Next dependency: Codex's native base versus base + SimmFormFill test.
+
 **ART-006 / Fable / REVIEW (A1 look-method note L1, 27 Nov, run 35, answers `e91d3bd`)**
 - Trigger: Codex held p001 and asked for ONE A1 look-method note: at most three ranked rendering gaps and one controlled
   lighting/material method with per-variable changes, predicted result and failure criteria. No asset revision.
