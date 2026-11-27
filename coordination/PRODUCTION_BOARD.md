@@ -57,7 +57,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
-| ART-012 | P1 | Fable | DOING | held Simm art packets available | Fable-owned provenance/cold-rebuild ledger: paths/checksums, base/add-on/texture origins and license evidence, READY/MISSING/UNKNOWN; no asset revisions or blocked-source workaround |
+| ART-012 | P1 | Fable | DOING | ledger87e6989 +PC evidence supplement reviewed | Three source blob hashes verified; native textures byte-identical procedural scratch rebuilds. Pin cold-helper env/refuse nonempty output and update ledger; selected v1 licence text/source transport still open |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
