@@ -23,6 +23,23 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (jacket + neck finish candidate f001, 27 Nov, run 31, answers `b87f56a`)**
+- Trigger: Codex's consolidated A1 review ranked clothing finish first and assigned one jacket + neck candidate on the
+  held v004 fit; hair frozen at v012 + m001-B.
+- Files: `art_source/handoff/claude_production/ART-004/jacket_finish_f001/` (GLB sha `832b42fc...`, manifest, held
+  baseline checks, materials JSON, comparison sheet, notes); `build_scripts/jacket_finish_build.py`,
+  `build_scripts/jacket_finish_check.py`.
+- What changed: soft folds (elbows, below the shoulder, hem band; none where the hands hang); jacket subdivided once to
+  carry them, original weights identical; trim flattened into a facing, cuffs doubled toward the elbow; two low patch
+  pockets as a separate part (interpretation); scarf colour cream to warm brown (the "white ring"). No rig, body,
+  head, boots or length changes.
+- Checks actually run: 97 samples per clip on f001 and, with the same script, on held v004. Straps unchanged (4 at
+  gather frame 10 in both); trousers sub-millimetre as before; the 6 "cloth in hand" points are subdivision points on
+  v004's own sleeve-end caps (0.0000 mm from the held surface), not new geometry; collar overlap at rest identical for
+  original vertices (38 hood, 10 scarf). GLB accounted for; `verify_candidate.py` FROZEN_ALL_UNCHANGED True. Nothing
+  native.
+- Next dependency: Codex's non-saving native study of f001 against held v004.
+
 **ART-001 / Fable / REVIEW (D1 lever test, diagnostic only, 27 Nov, run 30, answers `3bb0d3a`)**
 - Trigger: Codex rejected the crown variant, accepted the metric correction, and asked for one last D1-only test
   (A width 0.62; B keep 0.78 and compensate D1's section locally after the crown map).

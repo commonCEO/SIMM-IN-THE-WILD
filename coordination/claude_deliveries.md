@@ -13,6 +13,7 @@ Channel: this git repository. Claude cannot see `D:\SimmInTheWild`; it works in 
 | Collar | `art_source/handoff/claude_production/ART-004/collar_packet_v004.glb` | Working seating baseline (Codex `508f813`) |
 | Jacket | `art_source/handoff/claude_production/ART-004/jacket_candidate_v003.glb` | Working fit baseline (Codex `bdf4942`); archived unchanged |
 | Jacket, longer | `art_source/handoff/claude_production/ART-004/jacket_candidate_v004.glb` | Working fit baseline (Codex `7234913`), replaces v003 in studies; not approved |
+| Jacket finish | `art_source/handoff/claude_production/ART-004/jacket_finish_f001/jacket_finish_f001.glb` | Comparison candidate on v004 fit: folds, flatter edges and cuffs, pockets, brown neck layer (scarf colour); waiting for Codex's native study |
 | Boots | `art_source/handoff/claude_production/ART-004/boot_candidate_v002.glb` | Working shape and contact baseline (Codex `6a7da65`) |
 | Gather calibration | `art_source/handoff/claude_production/ART-004/gather_adjust/gather_calibration_v001.glb` | Diagnostic for Codex's native paired check; replaces the defective `gather_handclear_rig_only.glb` |
 
@@ -199,7 +200,7 @@ Facts Codex needs for the Godot comparison:
 
 ## Loop state
 
-- Last Codex commit seen: `1effda0` (crown variant rejected, metric correction accepted, D1 lever test assigned at `3bb0d3a`; `2867141` and `1effda0` are CORE-001 and audit work). Reference and protocol from `b143f31`.
+- Last Codex commit seen: `0488f10` (hair tweaking stopped, A1 gaps consolidated and one jacket + neck finish candidate assigned at `b87f56a`; `0488f10` is CORE-001 evidence). Reference and protocol from `b143f31`.
 - `coordination/START_HERE.txt` read. Claude follows it; nothing in it conflicts with the user's scope.
 - Claude's recurring check: ACTIVE since 25 Nov 2026 18:06 UTC. The user typed the request directly in Claude's session.
   - ID: `trig_01RTVFoanSgc82QmxWinsxYg`, name "Simm art: check Codex git handoff".
@@ -238,6 +239,7 @@ Facts Codex needs for the Godot comparison:
   - Scheduled run 28 fired 22:07 UTC on time. It fetched `d6b9555..a945509`, read the method acceptance and the four-lock brief, and delivered head candidate v012.
   - Scheduled run 29 fired 23:07 UTC on time. It fetched `a945509..0f7f741`, ran the D1 isolation and the five-lock crown study, found no visible improvement, and delivered diagnostics only (no v013).
   - Scheduled run 30 fired 00:06 UTC on 27 Nov, on time. It fetched `0f7f741..1effda0`, tested the two D1 levers (A width 0.62, B section pre-compensation), found no visible change, and delivered the diagnostic only.
+  - Scheduled run 31 fired 01:07 UTC on 27 Nov, on time. It fetched `1effda0..0488f10`, read the consolidated A1 review and the clothing brief, and delivered jacket finish candidate f001.
   - No GitHub event trigger is set up. If Codex needs a faster turnaround than hourly, the user can prompt Claude's session.
 - Claude treats Codex's notes as peer input. Scope stays: new `SCULPT_*` head objects only, files only under `art_source/handoff/claude_simm/inbox/` and `coordination/claude_*.md`.
 
@@ -284,7 +286,8 @@ Nothing on the art side. Reference and protocol arrived. Only the schedule above
 ## Next
 
 - ART-004: jacket v004 held by Codex as the working fit baseline (`7234913`); rest contact accepted, no more micro-fixes.
-- ART-001: D1 lever test delivered as a diagnostic (`inbox/diagnostics_d1_levers/`): neither A (width 0.62) nor B (local section pre-compensation) visibly changes either camera (under 2 percent of pixels changed in close views, envelope identical). Recommendation: stop hair-geometry tweaking at v012 + m001-B and move to Codex's consolidated A1 gap review.
+- ART-001: hair frozen at v012 + m001-B (Codex `b87f56a`).
+- ART-004: jacket + neck finish candidate f001 delivered (`ART-004/jacket_finish_f001/`): elbow and hem folds, flattened front edges and cuff bands, low patch pockets (interpretation, separate part), scarf recoloured to a warm brown; held v004 weights identical; no new strap, collar or hand intersections against a like-for-like v004 run. Waiting for Codex's native study.
 - ART-001: head v009 held. ART-006: second pass in REVIEW.
 
 ## ART-004 collar packet v004: hood seated on jacket v003 (current)

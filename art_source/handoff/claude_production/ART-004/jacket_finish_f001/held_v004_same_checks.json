@@ -1,0 +1,8464 @@
+{
+ "held_v004_blend_sha256": "0616bebd442132096ac8cfb96a11ae228a467667c30375497d28776837f6b37c",
+ "parts": {
+  "SCULPT_JACKET_LONG": {
+   "vertices": 4294,
+   "triangles": 8576,
+   "non_manifold_edges": 0,
+   "bounds_min": [
+    -0.301,
+    -0.1446,
+    0.48
+   ],
+   "bounds_max": [
+    0.301,
+    0.1489,
+    0.974
+   ],
+   "material": [
+    "SCULPT_MAT_JACKET"
+   ],
+   "held_v004_vertices": 4294,
+   "held_v004_triangles": 8576,
+   "held_vertices_weights_identical": true,
+   "held_vertices_moved_over_0_1mm": 0,
+   "held_vertices_max_move_mm": 0.0,
+   "new_vertices": 0
+  },
+  "SCULPT_JACKET_LONG_TRIM": {
+   "vertices": 3516,
+   "triangles": 6980,
+   "non_manifold_edges": 36,
+   "bounds_min": [
+    -0.3,
+    -0.1483,
+    0.4785
+   ],
+   "bounds_max": [
+    0.3,
+    0.153,
+    0.965
+   ],
+   "material": [
+    "SCULPT_MAT_JACKET_TRIM"
+   ],
+   "held_v004_vertices": 3516,
+   "held_v004_triangles": 6980,
+   "held_vertices_weights_identical": true,
+   "held_vertices_moved_over_0_1mm": 0,
+   "held_vertices_max_move_mm": 0.0,
+   "new_vertices": 0
+  }
+ },
+ "clips": {
+  "idle": {
+   "trouser_points_through_jacket_worst": 0,
+   "deepest_mm": 0.0,
+   "at": null,
+   "cloth_vertices_in_hand_worst": 0,
+   "hand_deepest_mm": 0.0,
+   "hand_at": null,
+   "smallest_hand_gap_mm": 0.01,
+   "gap_at": 2.81,
+   "strap_vertices_inside_jacket_worst": 0,
+   "strap_at": null
+  },
+  "walk": {
+   "trouser_points_through_jacket_worst": 1,
+   "deepest_mm": 0.01,
+   "at": 5.75,
+   "cloth_vertices_in_hand_worst": 0,
+   "hand_deepest_mm": 0.0,
+   "hand_at": null,
+   "smallest_hand_gap_mm": 2.97,
+   "gap_at": 1.75,
+   "strap_vertices_inside_jacket_worst": 0,
+   "strap_at": null
+  },
+  "gather": {
+   "trouser_points_through_jacket_worst": 0,
+   "deepest_mm": 0.0,
+   "at": null,
+   "cloth_vertices_in_hand_worst": 35,
+   "hand_deepest_mm": 8.11,
+   "hand_at": 12.0,
+   "smallest_hand_gap_mm": 0.0,
+   "gap_at": 10.75,
+   "strap_vertices_inside_jacket_worst": 4,
+   "strap_at": 10.0
+  },
+  "gather_handclear": {
+   "trouser_points_through_jacket_worst": 0,
+   "deepest_mm": 0.0,
+   "at": null,
+   "cloth_vertices_in_hand_worst": 0,
+   "hand_deepest_mm": 0.0,
+   "hand_at": null,
+   "smallest_hand_gap_mm": 0.15,
+   "gap_at": 0.0,
+   "strap_vertices_inside_jacket_worst": 4,
+   "strap_at": 10.0
+  }
+ },
+ "residuals": [
+  {
+   "clip": "walk",
+   "frame": 5.75,
+   "kind": "trousers through the jacket",
+   "body_vertex": 1174,
+   "depth_mm": 0.01
+  },
+  {
+   "clip": "walk",
+   "frame": 6.0,
+   "kind": "trousers through the jacket",
+   "body_vertex": 1174,
+   "depth_mm": 0.18
+  },
+  {
+   "clip": "walk",
+   "frame": 6.25,
+   "kind": "trousers through the jacket",
+   "body_vertex": 1174,
+   "depth_mm": 0.01
+  },
+  {
+   "clip": "walk",
+   "frame": 18.0,
+   "kind": "trousers through the jacket",
+   "body_vertex": 1183,
+   "depth_mm": 0.07
+  },
+  {
+   "clip": "gather",
+   "frame": 3.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 1.44
+  },
+  {
+   "clip": "gather",
+   "frame": 4.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 4.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 1.58
+  },
+  {
+   "clip": "gather",
+   "frame": 4.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 4.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 4.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 3.25
+  },
+  {
+   "clip": "gather",
+   "frame": 4.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 2.78
+  },
+  {
+   "clip": "gather",
+   "frame": 4.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.07
+  },
+  {
+   "clip": "gather",
+   "frame": 4.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 3.85
+  },
+  {
+   "clip": "gather",
+   "frame": 5.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 3.38
+  },
+  {
+   "clip": "gather",
+   "frame": 5.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.21
+  },
+  {
+   "clip": "gather",
+   "frame": 5.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 5.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 3.97
+  },
+  {
+   "clip": "gather",
+   "frame": 5.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.06
+  },
+  {
+   "clip": "gather",
+   "frame": 5.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 5.05
+  },
+  {
+   "clip": "gather",
+   "frame": 5.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 1.35
+  },
+  {
+   "clip": "gather",
+   "frame": 5.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 4.57
+  },
+  {
+   "clip": "gather",
+   "frame": 5.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 5.65
+  },
+  {
+   "clip": "gather",
+   "frame": 5.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 2.0
+  },
+  {
+   "clip": "gather",
+   "frame": 5.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 5.17
+  },
+  {
+   "clip": "gather",
+   "frame": 5.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 6.26
+  },
+  {
+   "clip": "gather",
+   "frame": 5.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 1.36
+  },
+  {
+   "clip": "gather",
+   "frame": 5.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 2.65
+  },
+  {
+   "clip": "gather",
+   "frame": 6.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 5.77
+  },
+  {
+   "clip": "gather",
+   "frame": 6.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 6.86
+  },
+  {
+   "clip": "gather",
+   "frame": 6.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 2.01
+  },
+  {
+   "clip": "gather",
+   "frame": 6.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 3.31
+  },
+  {
+   "clip": "gather",
+   "frame": 6.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.23
+  },
+  {
+   "clip": "gather",
+   "frame": 6.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 6.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 7.46
+  },
+  {
+   "clip": "gather",
+   "frame": 6.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 2.66
+  },
+  {
+   "clip": "gather",
+   "frame": 6.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 3.96
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.52
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 1.43
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 1.61
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 8.07
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.2
+  },
+  {
+   "clip": "gather",
+   "frame": 6.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 4.62
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.82
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 1.87
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.05
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 8.67
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.59
+  },
+  {
+   "clip": "gather",
+   "frame": 6.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 5.28
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.11
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 2.32
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 1.84
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.98
+  },
+  {
+   "clip": "gather",
+   "frame": 7.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 5.94
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.4
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 2.77
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 2.28
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.95
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 4.37
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 1.24
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 1.43
+  },
+  {
+   "clip": "gather",
+   "frame": 7.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 6.54
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.69
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 3.21
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 2.72
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 3.4
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 4.76
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 1.62
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 7.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 6.94
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.12
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 3.66
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 3.16
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 3.85
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 1.98
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.15
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 2.2
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 2.09
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 7.33
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 7.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2672,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 4.11
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 3.59
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 4.29
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 2.6
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.54
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 2.68
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 2.56
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 2.87
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 1.08
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 1.19
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 1.9
+  },
+  {
+   "clip": "gather",
+   "frame": 8.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 1.55
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.47
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2672,
+   "depth_mm": 1.97
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 4.55
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 1.66
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.2
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.03
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 4.74
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.93
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 3.16
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.03
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 3.35
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2940,
+   "depth_mm": 1.49
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 1.86
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 2.45
+  },
+  {
+   "clip": "gather",
+   "frame": 8.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.02
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.64
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 2.07
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.0
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.09
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.47
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 5.19
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 6.33
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 3.64
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.5
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2940,
+   "depth_mm": 2.17
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 2.46
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 2.27
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 8.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.49
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.81
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 2.69
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.45
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.53
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.91
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 5.64
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 1.42
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 1.68
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.12
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.97
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.31
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 3.15
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 2.78
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 2.91
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 3.51
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 1.7
+  },
+  {
+   "clip": "gather",
+   "frame": 8.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.98
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.3
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.9
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.35
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.09
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.06
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.1
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.6
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.24
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.44
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.8
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 3.84
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.33
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.29
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.35
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.44
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.03
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.43
+  },
+  {
+   "clip": "gather",
+   "frame": 9.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 1.54
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.05
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.55
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.15
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.55
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.53
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.28
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.32
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.8
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.44
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.05
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.64
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.12
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.53
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.5
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.56
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.66
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.24
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.63
+  },
+  {
+   "clip": "gather",
+   "frame": 9.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 1.78
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.11
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.8
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.27
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.33
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.6
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.71
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.46
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.57
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.92
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.0
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.63
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.12
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.83
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.19
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.41
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.44
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.72
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.78
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.88
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.1
+  },
+  {
+   "clip": "gather",
+   "frame": 9.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.02
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.06
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.45
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.51
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.64
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.9
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.65
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.83
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.2
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.2
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.83
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.18
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.03
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.39
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.7
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.93
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.0
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.1
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.67
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.24
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 4.02
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 9.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.26
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.25
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.31
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.64
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.69
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.8
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.24
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.48
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.4
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.02
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.24
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.22
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.59
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.98
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.11
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.01
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.14
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.22
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.32
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.88
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.53
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 4.22
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.57
+  },
+  {
+   "clip": "gather",
+   "frame": 10.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.32
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.56
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.8
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.88
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.26
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.96
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.34
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.52
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.76
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.6
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.42
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.79
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.27
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.31
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.29
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.35
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.43
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.54
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.09
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.1
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.7
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.81
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 10.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.23
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.38
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.82
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.96
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.06
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.44
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.12
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 4.04
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.8
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.41
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.62
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.99
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.56
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.57
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.57
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.76
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.31
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.1
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.94
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.45
+  },
+  {
+   "clip": "gather",
+   "frame": 10.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.45
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.07
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.12
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.24
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.82
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.62
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.28
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.84
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.09
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.99
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.61
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.44
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.81
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.19
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.84
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.86
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.78
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.85
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.11
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.52
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.39
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.28
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.23
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.75
+  },
+  {
+   "clip": "gather",
+   "frame": 10.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.79
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.52
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.32
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.27
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.42
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.86
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.81
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.43
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.1
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.38
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.19
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.5
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.01
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.39
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.13
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.14
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.06
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.21
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.21
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.73
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.67
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.42
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.51
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.47
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.06
+  },
+  {
+   "clip": "gather",
+   "frame": 11.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.08
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.58
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.58
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.43
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.6
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.59
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.35
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.66
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.39
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.0
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.56
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.2
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.42
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.82
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.43
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.21
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.27
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.43
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.95
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.96
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.66
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.71
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 11.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.65
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.83
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.59
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.79
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.95
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 7.17
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.75
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.61
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.95
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.2
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.63
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.4
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.79
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.71
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.38
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.9
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.72
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.42
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.48
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.65
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 6.16
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 5.24
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.9
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.98
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.96
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3265,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 11.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.71
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.74
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.97
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 7.35
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.9
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.86
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 5.23
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.79
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.39
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.6
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.67
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 4.0
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.63
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.69
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.88
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 6.37
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 5.53
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3116,
+   "depth_mm": 1.29
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 3.14
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 4.2
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3265,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 11.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.93
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.78
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 6.34
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.9
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 5.15
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 7.53
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 8.06
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 8.11
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 5.52
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.75
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.79
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 7.19
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 7.28
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.97
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 3.05
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 4.29
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.84
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.9
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.62
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 6.1
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 5.82
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 3.31
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3116,
+   "depth_mm": 1.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 3.39
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3118,
+   "depth_mm": 1.18
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 3.46
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 4.44
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 3.28
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3265,
+   "depth_mm": 1.58
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.93
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 3.21
+  },
+  {
+   "clip": "gather",
+   "frame": 12.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3384,
+   "depth_mm": 1.27
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.71
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.74
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.97
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 7.35
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.9
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.86
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 5.23
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.79
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.39
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.6
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.67
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 4.0
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.63
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.69
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.88
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 6.37
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 5.53
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3116,
+   "depth_mm": 1.29
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 3.14
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 4.2
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3265,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 12.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.93
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.65
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.83
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.79
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.95
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 7.17
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.75
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.61
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.95
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.2
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.63
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.4
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.79
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.71
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.38
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.9
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.72
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.42
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.48
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.65
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 6.16
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 5.24
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.9
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.98
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.96
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3265,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 12.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.58
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.58
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.43
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.6
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.99
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.35
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.66
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.39
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 4.0
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.56
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.2
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.42
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2966,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.82
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.43
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 5.21
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.27
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.43
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.95
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.96
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.66
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.71
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3382,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 12.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.52
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.32
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.27
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.42
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.86
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.43
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 7.1
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.38
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 6.19
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.5
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 6.01
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.39
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 6.13
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 3.14
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 3.06
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.21
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 5.21
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.73
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.67
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.42
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.51
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.47
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 2.06
+  },
+  {
+   "clip": "gather",
+   "frame": 13.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 2.08
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.45
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 5.07
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 7.12
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.24
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.82
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.62
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.28
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.84
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 4.09
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.99
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.61
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.44
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 6.19
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.84
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.86
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.78
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.85
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.11
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.52
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.39
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.28
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 3.23
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.75
+  },
+  {
+   "clip": "gather",
+   "frame": 13.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.79
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.38
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.82
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.96
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 4.06
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.44
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 7.12
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.59
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 4.04
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.8
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.41
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.62
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.99
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.56
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.57
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.57
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3085,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.76
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.31
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 4.1
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.94
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.45
+  },
+  {
+   "clip": "gather",
+   "frame": 13.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.32
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.56
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.8
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.88
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.26
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.96
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.34
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.52
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.76
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.6
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.42
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.79
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 5.27
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.31
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.29
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.35
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.43
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.54
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 5.09
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3090,
+   "depth_mm": 1.1
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.7
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.81
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.75
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3236,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 13.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3383,
+   "depth_mm": 1.23
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.25
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.31
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.64
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.69
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.69
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.8
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 3.24
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.48
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.4
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 3.02
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.24
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.22
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.59
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.98
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 2.11
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 2.01
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 4.14
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.22
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.32
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.88
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.53
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 4.22
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.57
+  },
+  {
+   "clip": "gather",
+   "frame": 14.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 4.06
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.45
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.51
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.64
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.9
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.65
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.83
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 3.2
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.2
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.83
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.18
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 5.03
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.39
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.7
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.93
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 2.0
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 4.1
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.67
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 3.24
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 4.02
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3117,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 14.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.26
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.11
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.8
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.27
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.33
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.6
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.71
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.46
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.57
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.92
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 5.0
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.63
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.12
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.83
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 5.19
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.41
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.44
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.72
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.78
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.88
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3234,
+   "depth_mm": 1.1
+  },
+  {
+   "clip": "gather",
+   "frame": 14.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 2.02
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 2.05
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.55
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 6.08
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 3.15
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.55
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.53
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.28
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.32
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.8
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.44
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2937,
+   "depth_mm": 1.05
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.64
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.99
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 4.12
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.53
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2968,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.5
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.56
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.66
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.24
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.67
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.63
+  },
+  {
+   "clip": "gather",
+   "frame": 14.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 1.78
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.98
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 3.3
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.9
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.97
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.51
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 5.35
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 6.09
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 5.06
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 2.1
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 2.36
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.6
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 2.24
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 4.44
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.8
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 3.84
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2967,
+   "depth_mm": 1.33
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 3.29
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2970,
+   "depth_mm": 1.35
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 3.44
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 4.03
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 3.43
+  },
+  {
+   "clip": "gather",
+   "frame": 15.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3235,
+   "depth_mm": 1.54
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.81
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 2.69
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.45
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.53
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.91
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 5.64
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2818,
+   "depth_mm": 1.42
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 1.68
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 4.12
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.97
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 4.31
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 3.15
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 2.78
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 2.91
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 3.51
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 1.7
+  },
+  {
+   "clip": "gather",
+   "frame": 15.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.96
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.64
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 2.07
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 5.0
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 2.09
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.47
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 5.19
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 6.33
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2820,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 3.64
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2822,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.5
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 3.83
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2940,
+   "depth_mm": 2.17
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 2.46
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 2.27
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 2.99
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3088,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 15.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.49
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.47
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2670,
+   "depth_mm": 1.46
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2672,
+   "depth_mm": 1.97
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 4.55
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 1.66
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.2
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 4.03
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 4.74
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 3.22
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.93
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 3.16
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 3.03
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 3.35
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2940,
+   "depth_mm": 1.49
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 1.77
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 1.73
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 1.86
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 2.45
+  },
+  {
+   "clip": "gather",
+   "frame": 15.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 2.02
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.3
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2672,
+   "depth_mm": 1.31
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 4.11
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2674,
+   "depth_mm": 1.22
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2789,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 3.59
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 4.29
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 2.6
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.54
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 2.68
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 2.56
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 2.87
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2942,
+   "depth_mm": 1.08
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2969,
+   "depth_mm": 1.19
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3086,
+   "depth_mm": 1.34
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 1.9
+  },
+  {
+   "clip": "gather",
+   "frame": 16.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 1.55
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2645,
+   "depth_mm": 1.12
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 3.66
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 3.16
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 3.85
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 1.98
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 5.15
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 2.2
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 2.09
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 2.39
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 7.33
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3087,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 16.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 3089,
+   "depth_mm": 1.09
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.69
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 3.21
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 2.72
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 3.4
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2794,
+   "depth_mm": 1.37
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 4.76
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 1.72
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 1.62
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 1.91
+  },
+  {
+   "clip": "gather",
+   "frame": 16.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 6.94
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.4
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 2.77
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 2.28
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.95
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 4.37
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2821,
+   "depth_mm": 1.24
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2938,
+   "depth_mm": 1.15
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2939,
+   "depth_mm": 1.43
+  },
+  {
+   "clip": "gather",
+   "frame": 16.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 6.54
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 7.11
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 2.32
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 1.84
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.5
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.98
+  },
+  {
+   "clip": "gather",
+   "frame": 17.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 5.94
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.82
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 1.87
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2790,
+   "depth_mm": 1.41
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 2.05
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 8.67
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.59
+  },
+  {
+   "clip": "gather",
+   "frame": 17.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 5.28
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.52
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2673,
+   "depth_mm": 1.43
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 1.61
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 8.07
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 3.2
+  },
+  {
+   "clip": "gather",
+   "frame": 17.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 4.62
+  },
+  {
+   "clip": "gather",
+   "frame": 17.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 6.23
+  },
+  {
+   "clip": "gather",
+   "frame": 17.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2791,
+   "depth_mm": 1.01
+  },
+  {
+   "clip": "gather",
+   "frame": 17.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 7.46
+  },
+  {
+   "clip": "gather",
+   "frame": 17.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 2.66
+  },
+  {
+   "clip": "gather",
+   "frame": 17.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 3.96
+  },
+  {
+   "clip": "gather",
+   "frame": 18.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 5.77
+  },
+  {
+   "clip": "gather",
+   "frame": 18.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 6.86
+  },
+  {
+   "clip": "gather",
+   "frame": 18.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 2.01
+  },
+  {
+   "clip": "gather",
+   "frame": 18.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 3.31
+  },
+  {
+   "clip": "gather",
+   "frame": 18.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 5.17
+  },
+  {
+   "clip": "gather",
+   "frame": 18.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 6.26
+  },
+  {
+   "clip": "gather",
+   "frame": 18.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2819,
+   "depth_mm": 1.36
+  },
+  {
+   "clip": "gather",
+   "frame": 18.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 2.65
+  },
+  {
+   "clip": "gather",
+   "frame": 18.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 4.57
+  },
+  {
+   "clip": "gather",
+   "frame": 18.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 5.65
+  },
+  {
+   "clip": "gather",
+   "frame": 18.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 2.0
+  },
+  {
+   "clip": "gather",
+   "frame": 18.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 3.97
+  },
+  {
+   "clip": "gather",
+   "frame": 18.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.06
+  },
+  {
+   "clip": "gather",
+   "frame": 18.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 5.05
+  },
+  {
+   "clip": "gather",
+   "frame": 18.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2941,
+   "depth_mm": 1.35
+  },
+  {
+   "clip": "gather",
+   "frame": 19.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 3.38
+  },
+  {
+   "clip": "gather",
+   "frame": 19.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.21
+  },
+  {
+   "clip": "gather",
+   "frame": 19.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 4.45
+  },
+  {
+   "clip": "gather",
+   "frame": 19.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 2.78
+  },
+  {
+   "clip": "gather",
+   "frame": 19.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2792,
+   "depth_mm": 1.07
+  },
+  {
+   "clip": "gather",
+   "frame": 19.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 3.85
+  },
+  {
+   "clip": "gather",
+   "frame": 19.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 2.18
+  },
+  {
+   "clip": "gather",
+   "frame": 19.5,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 3.25
+  },
+  {
+   "clip": "gather",
+   "frame": 19.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2671,
+   "depth_mm": 1.58
+  },
+  {
+   "clip": "gather",
+   "frame": 19.75,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 2.64
+  },
+  {
+   "clip": "gather",
+   "frame": 20.0,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 2.04
+  },
+  {
+   "clip": "gather",
+   "frame": 20.25,
+   "kind": "cloth inside a hand",
+   "part": "SCULPT_JACKET_LONG",
+   "vertex": 2793,
+   "depth_mm": 1.44
+  }
+ ],
+ "glb": {
+  "file": "held.glb",
+  "sha256": "9fba86561f867d2826b5e8c8cf049227bd7828dc23371585640c9d903a910449",
+  "bytes": 836676,
+  "bones": 17,
+  "animations": 0,
+  "parts": {
+   "SCULPT_JACKET_LONG": {
+    "vertices_in_file": 5002,
+    "triangles": 8576,
+    "materials": [
+     "SCULPT_MAT_JACKET"
+    ],
+    "bounds_min": [
+     -0.301,
+     -0.1446,
+     0.48
+    ],
+    "bounds_max": [
+     0.301,
+     0.1489,
+     0.974
+    ],
+    "unmatched": 0,
+    "covered": 4294,
+    "source_vertices": 4294,
+    "weight_mismatches": 0
+   },
+   "SCULPT_JACKET_LONG_TRIM": {
+    "vertices_in_file": 4668,
+    "triangles": 6980,
+    "materials": [
+     "SCULPT_MAT_JACKET_TRIM"
+    ],
+    "bounds_min": [
+     -0.3,
+     -0.1483,
+     0.4785
+    ],
+    "bounds_max": [
+     0.3,
+     0.153,
+     0.965
+    ],
+    "unmatched": 0,
+    "covered": 3516,
+    "source_vertices": 3516,
+    "weight_mismatches": 0
+   }
+  }
+ }
+}

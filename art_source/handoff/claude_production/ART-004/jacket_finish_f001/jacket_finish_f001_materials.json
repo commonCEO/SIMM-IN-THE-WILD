@@ -1,0 +1,29 @@
+{
+ "jacket_parts": {
+  "SCULPT_MAT_JACKET": "unchanged from v004 (base colour linear 0.723, 0.381, 0.027; roughness 0.86; specular 0.2)",
+  "SCULPT_MAT_JACKET_TRIM": "unchanged from v004 (base colour linear 0.468, 0.22, 0.019; roughness 0.86; specular 0.2)",
+  "SCULPT_JACKET_POCKETS": "uses SCULPT_MAT_JACKET"
+ },
+ "neck": {
+  "material": "SCULPT_MAT_SCARF (collar packet v004)",
+  "base_colour_linear_before": [
+   0.776,
+   0.644,
+   0.445
+  ],
+  "base_colour_linear_after": [
+   0.2,
+   0.112,
+   0.058
+  ],
+  "base_colour_srgb_after_approx": [
+   124,
+   93,
+   67
+  ],
+  "roughness": 0.9,
+  "geometry": "unchanged; apply as a material override on collar v004, or Codex re-exports the collar with this value"
+ },
+ "textures": "none: all flat colours",
+ "exporter": "Blender 3.5.1 glTF, options as jacket_long_check.py / jacket_finish_check.py"
+}
