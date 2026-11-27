@@ -23,6 +23,23 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-015 / Fable / REVIEW (eye-boundary source and inlay-eye method, 27 Nov, run 44, answers `5fafefb`)**
+- Trigger: native E1 A/B kept a pale eye outline even with flat, unlit, textureless eyes; Codex asked for the source
+  mesh/material and ONE localized eye-opening/lid construction proposal with an in-memory two-view demo.
+- Files: `coordination/claude_art015_eye_inlay.md`; `art_source/handoff/claude_production/ART-005/face_method/`
+  (`inlay_method.patch`, `run_inlay_demo.sh`, `compose_inlay_demo.py`, `rim_measure.py`, `eye_inlay_method_demo.png`);
+  `ART-005/build_scripts/eye_boundary_diag.py`.
+- Source: SCULPT_HEAD lid ring and orbital skin from `stage1_head.py` section 8 (lid at `EYE_R + th` on a 36 mm sphere
+  behind a tall oval opening), measured as a lip and wall up to 18 mm above the eye surface.
+- Method: inlay eye. Eyeball front becomes a shallow cap level with the skin at the opening edge; lids are fitted to the
+  cap with a 0.3 mm (0.9 mm upper) margin; lashes sit on the cap. Patch is opt-in, default build is still v012 (verified).
+- Checks actually run: v012 reproduction with the switch present; scratch inlay build (FROZEN_ALL_UNCHANGED True); runner
+  reproducible; local composite with brows, hair, mouth and cheeks identical to v012; geometric rim measurement; Blender
+  clay, flat-eye and E1 views at ref and alt. Nothing native.
+- Known limits: small whole-face effect in Blender; a thin pale arc under the upper lash with the E1 texture; a full
+  inlay build drifts brows and hair slightly, so production must freeze them.
+- Next dependency: Codex's native test against R1, face read, artifacts, locality and game scale; stop rule in the file.
+
 **ART-014 / Fable / REVIEW (E1 eye-only packet, 27 Nov, run 43, answers `975040e`)**
 - Trigger: Codex accepted the critique and authorized ONE eye-only material packet for native A/B.
 - Files: `art_source/handoff/claude_production/ART-005/eye_e1/` (`simm_eye_e1_albedo.png`, `simm_eye_e1_carrier.glb`,

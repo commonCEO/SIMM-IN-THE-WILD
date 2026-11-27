@@ -1,0 +1,74 @@
+diff --git a/art_source/handoff/claude_simm/inbox/build_scripts/stage1_head.py b/art_source/handoff/claude_simm/inbox/build_scripts/stage1_head.py
+index 4c3d604..0c525be 100644
+--- a/art_source/handoff/claude_simm/inbox/build_scripts/stage1_head.py
++++ b/art_source/handoff/claude_simm/inbox/build_scripts/stage1_head.py
+@@ -181,6 +181,14 @@ S.symmetrize()
+ # ---- 8. eyes: fit the base's real lid rings onto eyeballs as upright ovals
+ from collections import deque
+ EYE_R = 0.036; EYE_X = 0.062; EYE_Z = 1.170; OVAL_A = 0.0174; OVAL_B = 0.0264; OVAL_N = 2.2
++# ART-015 method study (Codex brief at 5fafefb), OFF by default so the default build is still v012. INLAY=1 replaces the
++# 36 mm eyeball sphere, in every formula that fits the lids, by a shallow "inlay" cap whose depth behind the front pole is
++# x^2/(2 RX) + z^2/(2 RZ), INLAY_EDGE (default 6 mm) at the opening edge in every direction, and thins the lid margin
++# (0.3 mm + 0.6 mm toward the upper lid instead of 1.2 mm + 2.2 mm). stage3_finish.py reshapes the eyeball front and seats
++# the lashes on the same cap. Radii R in the lid formulas become offsets R - EYE_R in front of (or behind) that cap.
++INLAY = os.environ.get("INLAY", "") == "1"
++INLAY_EDGE = float(os.environ.get("INLAY_EDGE", "0.006"))
++IN_RX = (OVAL_A**2 + INLAY_EDGE**2)/(2*INLAY_EDGE); IN_RZ = (OVAL_B**2 + INLAY_EDGE**2)/(2*INLAY_EDGE)
+ # v011 study (Codex brief at 9243be2): eye-centre separation as a factor of v010's (EYE_SPREAD, default 1.0 = v010).
+ # The lid, lid-ring and orbital-skin face sets are moved sideways together, fading out over the surrounding skin and to
+ # nothing within 20 mm of the midline, so the nose, mouth and cheeks stay; the lids are then refitted on eyeballs at
+@@ -256,12 +264,15 @@ for sgn in (1, -1):
+     C = np.array([EYE_X*sgn, skin_y + 0.0035 + EYE_R, EYE_Z])
+     eye_info[sgn] = C
+     def on_sphere(p, q, R):
++        if INLAY:   # inlay cap, offset by R - EYE_R toward the viewer
++            return np.stack([C[0] + p*sgn, (C[1] - EYE_R) + p*p/(2*IN_RX) + q*q/(2*IN_RZ) - (R - EYE_R), C[2] + q], 1)
+         return np.stack([C[0] + p*sgn, C[1] - np.sqrt(np.maximum(R*R - p*p - q*q, 1e-8)), C[2] + q], 1)
+     idx = np.where(region)[0]
+     new = S.co.copy()
+     for v in idx:
+         ph = phi[v]; up = max(np.sin(ph), 0.0)
+         th = 0.0012 + 0.0022*up                         # v002: thinner, softer lid edge
++        if INLAY: th = 0.0003 + 0.0006*up              # ART-015: no raised lip, only a thin upper-lid margin
+         if A[v] and not L0[v]:
+             p, q = oval(np.array([ph]), -0.002*min(d0[v], 6))
+             new[v] = on_sphere(p, q, EYE_R - 0.003 - 0.002*min(d0[v], 6))[0]
+diff --git a/art_source/handoff/claude_simm/inbox/build_scripts/stage3_finish.py b/art_source/handoff/claude_simm/inbox/build_scripts/stage3_finish.py
+index af61f61..baa5092 100644
+--- a/art_source/handoff/claude_simm/inbox/build_scripts/stage3_finish.py
++++ b/art_source/handoff/claude_simm/inbox/build_scripts/stage3_finish.py
+@@ -11,6 +11,9 @@ coll = bpy.data.collections["10_SCULPT_NEW_HEAD"]
+ face = bpy.data.objects["SCULPT_BASE_FACE"]; hair = bpy.data.objects["SCULPT_HAIR"]
+ eyeL = bpy.data.objects["SCULPT_BASE_EYE_L"]; eyeR = bpy.data.objects["SCULPT_BASE_EYE_R"]
+ EYE_R = 0.036; OVAL_A = 0.0174; OVAL_B = 0.0264; OVAL_N = 2.2
++INLAY = os.environ.get("INLAY", "") == "1"          # ART-015 method study, OFF by default (see stage1_head.py)
++INLAY_EDGE = float(os.environ.get("INLAY_EDGE", "0.006"))
++IN_RX = (OVAL_A**2 + INLAY_EDGE**2)/(2*INLAY_EDGE); IN_RZ = (OVAL_B**2 + INLAY_EDGE**2)/(2*INLAY_EDGE)
+ def srgb(r, g, b):
+     c = np.array([r, g, b], float)/255.0
+     return np.where(c <= 0.04045, c/12.92, ((c + 0.055)/1.055)**2.4)
+@@ -61,6 +64,11 @@ for eo, sgn in ((eyeL, 1), (eyeR, -1)):
+     # the base eye's cornea-bulge loops shade as a ring once spherical: rebuild the surface as a clean sphere
+     eb = bmesh.new(); bmesh.ops.create_uvsphere(eb, u_segments=40, v_segments=24, radius=EYE_R)
+     for v in eb.verts: v.co = v.co + Vector(C)
++    if INLAY:   # front half follows the inlay cap; the UV below is a straight-on x/z projection, so it is unaffected
++        for v in eb.verts:
++            if v.co.y < C[1]:
++                dx, dz = v.co.x - C[0], v.co.z - C[2]
++                v.co.y = min((C[1] - EYE_R) + dx*dx/(2*IN_RX) + dz*dz/(2*IN_RZ), C[1])
+     eb.loops.layers.uv.verify()
+     for f in eb.faces: f.smooth = True
+     eb.to_mesh(eo.data); eb.free(); eo.data.update()
+@@ -194,7 +202,11 @@ for sgn in (1, -1):
+         p_ = (OVAL_A+g)*np.sign(c_)*abs(c_)**e_; q_ = (OVAL_B+g)*np.sign(s_)*abs(s_)**e_
+         if q_ < 0: q_ *= 0.94
+         Rr = EYE_R + 0.0012 + 0.0022*up - 0.0002
+-        P.append(np.array([C[0] + p_*sgn, C[1] - math.sqrt(max(Rr*Rr - p_*p_ - q_*q_, 1e-8)), C[2] + q_]))
++        if INLAY:
++            Rr = EYE_R + 0.0003 + 0.0006*up - 0.0002         # seated on the thinner inlay lid margin
++            P.append(np.array([C[0] + p_*sgn, (C[1] - EYE_R) + p_*p_/(2*IN_RX) + q_*q_/(2*IN_RZ) - (Rr - EYE_R), C[2] + q_]))
++        else:
++            P.append(np.array([C[0] + p_*sgn, C[1] - math.sqrt(max(Rr*Rr - p_*p_ - q_*q_, 1e-8)), C[2] + q_]))
+     sweep(bm, catmull(P, 28), 0.0022, thick=0.0010, n_around=10, root=.35, belly=.30, tip_pow=1.5, under=0.5, ridge=0.0, root_cap=0.0004)
+ bmesh.ops.recalc_face_normals(bm, faces=bm.faces[:])
+ for f in bm.faces: f.smooth = True
