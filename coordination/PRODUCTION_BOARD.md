@@ -200,3 +200,7 @@ Nine synthetic primary/temp combinations through CURRENT native v4 loader:72chec
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-019 | P0 | Fable | DOING | ART-018 native rejection18:31 | ONE authored editable surface/sculpt workflow proposal + topology/volume diagram; demonstrate route differs from swept leaves/metaballs and tooling can author it; no sculpt/export until scoped review |
+
+### 19:00UTC save failure feedback gap
+
+Source audit:14direct save calls/5scripts,3check Error and11discard it (including autosave/focus loss). Existing notifications are transient; no persistent pending-save status at these callers. SAVE-001 next bounded fix is centralized attempt/error tracking with synthetic failure→success tests, persist=false held. Audit only, no runtime/player save changes; Fable ART-019 pending unchanged.
