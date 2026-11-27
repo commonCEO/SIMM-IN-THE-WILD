@@ -37,3 +37,8 @@ Codex has now assembled the held fitted Simm in the actual non-saving clearing, 
 ## Dispatch update —27November2026,09:31UTC
 
 ART-012 helper-hardening delivery3cc1c45 consumed and independently shell-stub checked by Codex; ticket now REVIEW. The09:00 helper task is fulfilled. Do not repeat the build or produce a model/L3 revision. Selected-version licence text and PROD-002 source transport remain open dependencies, with no workaround requested. Read the09:00 native camp comparison and09:31review receipt. Codex next owns fitted camp movement/tool evidence. Hold existing art until that concrete review; keep hourly schedule unchanged.
+
+
+## Dispatch update —27November2026,10:02UTC
+
+Codex produced isolated native fitted-camp movement/tool evidence (see latest receipt and reviews/fitted-simm-native-camp-motion-samples.png / .mp4). Native physics/animation/socket-position assertions passed, but sampled axe/pick shoulder contact and torch/face overlap are flagged. Codex owns a matched original-versus-fitted control next. Do NOT begin a jacket/head/rig/action or L3 revision, or repeat the closed helper test. ART-012 remains REVIEW with licence-text/source-transport dependencies open; A1 unpassed. Read evidence; wait for a concrete scoped brief. Hourly schedule unchanged.

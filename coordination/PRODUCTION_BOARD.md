@@ -9,7 +9,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | PROD-003 | P0 | Codex | DONE | eight-slice producer-reviewed discovery baseline | PARITY_TRACEABILITY.md covers GDD families, actual subset evidence and owned missing work; audit completion only, NOT runtime/browser parity |
 | ART-001 | P0 | Fable | DOING | D1 diagnostic39e2270 reviewed | Stop per-lock tweaking: neither lever visibly helps; v012+m001-B held, no v013; consolidated A1 gaps ranked, hair frozen during clothing finish |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
-| ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
+| ART-003 | P0 | Codex | REVIEW | held fitted actor; native camp motion10:02 |384controlled physics/original-animation steps,192frames,2.1264m travel, socket position tracking pass. Flag shoulder/torch presentation; matched original control and full motion/contact/controller/performance/A1 acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | L2 native controls e909d36 evaluated | L2 improves directional read/friendly face but occlusion/leak and floor wash remain; no accepted preset or automatic L3; hold assets pending native softness/occlusion evidence |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: local camera64 integrated for new camp instances; use work/simm-runtime-baseline-camera64.json (old baseline intentionally differs for camp.gd only). Next Codex fitted actor in non-saving camp; Fable ART-012 readiness ledger, ART-006 REVIEW. A1 unpassed; no fitted live asset swap or wider art production. PROD-002 publication awaits approval.
+Current active: camera64 locally integrated for new instances; use work/simm-runtime-baseline-camera64.json. Held fitted Simm now has isolated camp/static and controlled movement/tool evidence; next Codex matched original/fitted shoulder/torch-contact control. Fable ART-012 and ART-006 REVIEW; A1 unpassed, no fitted live asset swap/wider art production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 
@@ -114,3 +114,8 @@ RENDER-001 remains DOING: held fitted Simm assembled in memory inside persistfal
 ### 09:31UTC ART-012 delivery consumed
 
 Fable3cc1c45 hardens the v012 build helper and distinguishes PC evidence from missing Git transport. Codex inspected the four-file diff and independently ran the actual wrapper with a harmless Blender stub: all5calls pinned, experimental variables absent, absolute/nonempty guards and unchanged preexisting scratch output confirmed. Full Blender geometry/UV/texture rebuild remains Fable-reported, not independently repeated. ART-012 moves to REVIEW with no new model revision requested; selected-version licence text and PROD-002 transport remain open. Codex next: fitted camp movement/tool evidence per09:00 receipt. A1 unpassed; no live model/save changes.
+
+
+### 10:02UTC fitted camp movement evidence
+
+RENDER-001/ART-003 remain open: actual camp physics and explicitly advanced original animations exercised in persistfalse instance for axe/pickaxe walking/gather activation and torch walking.384steps/192frames,80foot poses,2.1264m travel; socket POSITION error max4.915e-7m; rests/actions/socket count and protected41runtime hashes preserved. See codex_deliveries.md and reviews/fitted-simm-native-camp-motion-samples.png / .mp4. Flagged tool proximity/overlap at shoulder and torch/face silhouette needs a matched original-actor control; do not infer fitted mesh fault or claim contact acceptance. Fable art remains held; no new revision assigned.
