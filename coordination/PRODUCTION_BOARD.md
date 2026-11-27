@@ -17,7 +17,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
-| CORE-001 | P1 | Codex | DOING | clock/recovery/survival/frame/drop oracle slices | Work-only combined single-owner prototype17602assertions/64sequences passes. Actual defeat-recovery composition, non-saving native scene/frame mapping and production migration/fault paths remain; no live hook |
+| CORE-001 | P1 | Codex | DOING | source-slice clock/recovery/survival/drop/frame fixtures | Combined death phase80354assertions/32sequences passes; prior17602+6768regressions pass. Pure source transition composition only; native3D scene/frame mapping, production migration/IO faults and full journey remain, no live hook |
 | CORE-002 | P1 | Codex | TODO | PROD-003 | Quest data/journal/NPC six identities and one-time exchange rewards; atomic full-bag behavior |
 | CORE-003 | P1 | Codex | TODO | CORE-001/002 | Bronkings home order/upgrade/three-day-or-rest/interiors, preserve furnishings/clear doors; B1 controller journey |
 | CORE-004 | P1 | Codex | TODO | PROD-003 | Audit all48recipes/context gates and ingredient reachability; baseline25nonbuilding already reported locally, revalidate gaps only |
@@ -157,3 +157,8 @@ Local combined prototype passes17602assertions over64actual-source-slice sequenc
 ### 13:30UTC E1 native review / stop rule applied
 
 14native captures:8studio normal/dim controls,4camp controls,2flat-unlit eye diagnostics. E1 imports emissionoff/roughness.55/specular.5; native iris encoding corrected. Pale boundary remains with no eye texture/specular/shading, so R1 fails beyond material alone. R4 highlight unresolved at camp resolution. ART-014 REVIEW, no live integration or material follow-up. ART-015 assigned a bounded source/eye-lid construction method gate; A1 unpassed and wider art held. See receipt and two published native sheets.
+
+
+### 14:00UTC defeat-recovery composition
+
+Work-only combined owner now handles actual-source defeat transition through restoration/phase end and resumed ordinary world work.80354new assertions/32sequences/2592steps plus17602+6768regressions PASS. Hostiles missing home coordinates retain position while calming; isolated helper corrected. No production scene/save/rig/art changes. CORE-001 still DOING for native3D mapping/migration/faults; Fable ART-015 unchanged. Details in CORE-001-CONTRACT.md.
