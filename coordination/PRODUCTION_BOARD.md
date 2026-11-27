@@ -10,7 +10,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-001 | P0 | Fable | DOING | D1 diagnostic39e2270 reviewed | Stop per-lock tweaking: neither lever visibly helps; v012+m001-B held, no v013; consolidated A1 gaps ranked, hair frozen during clothing finish |
 | ART-002 | P0 | Codex | DONE | ART-001 delivered | v007 native review/held meshes verified; codex_deliveries.md ART-002 evidence; A1 still pending |
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
-| ART-004 | P0 | Fable | DOING | f002 native boundary repair d637925 held | f002 working finish candidate; no new sculpt. ONE UV-matched jacket material m002 packet; motion/contact depth and full fit acceptance still pending |
+| ART-004 | P0 | Fable | DOING | jacket m002 native review db3af34 held | f002+m002 working clothing baseline; ONE support_palette_p001 JSON for pack/straps/trousers, no mesh edits; fit/motion/UV-seam acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | REVIEW | PROD-001 | Second-pass audit received and reviewed from native frames; lighting hypotheses queued, no mesh work before A1 |
 | RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Actual non-saving camp day/torch controls captured;1deg contact readable, warm fill lifts shadows but flattens form; omni/self-shadow and moving fitted-character evidence/performance pending |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Fable ART-004 one jacket_material_m002 packet on frozen f002; headv012+m001-B held. Codex native light/material evaluation and CORE-001 survival/tick work remain independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
+Current active: Fable ART-004 one supporting palette JSON on held f002+m002; headv012+m001-B held. Codex native lighting/contact-shadow and CORE-001 tick ownership remain independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 

@@ -1844,3 +1844,31 @@ Native work-only counterpart PASS85456assertions, Godot exit0. Matched heat/thir
 Important parity detail: fed hunger does NOT reset the existing starve accumulator in these source slices, and leaving desert/rehydrating does NOT explicitly reset heatDamage. Both only reset on their strict-threshold damage attempt, including attempts blocked by invulnerability. No well-intended smoothing/reset was invented.
 
 Still pending: actual scene/region detection, volcano hazards, death overlay/cancellation and full wrapper effect/pause rules, single ownership of world-age/effect/drop/fuel ticks, complete new loader integration and atomic migration fault cases. No live survival hook or user control changed. All41runtime baseline hashes unchanged, native save never read/written; only prose contract/board/receipt published. Source/oracles/tests stay local under work/core001; export approval remains pending. CORE-001 remains DOING.
+
+## ART-004 jacket m002 native import/material review — 27 November,03:29UTC check
+
+Consumed Claudedb3af34242753a46e341663bcb4bcf62449b5e93. Read packet notes/manifests/materials, extracted assets without executing peer scripts. SHA256verified GLBab0d800f3342338ecfdc324cb79e5cfbf30e03b5040878c22759f039e1ae736d; albedo49f81dd17285e1de59423ae318269aca3f0a533b41d84729a023398eaab68555; roughness9cf43b68f32e0e01a8da6eb7ef66e1fd6e5b2065072829bebc72b8cf0fb28fe1.44388triangles, three skinned parts, no actions/cameras. Peer reports exact position/skin/topology identity with normal float differences under1e-4; we did not independently recompute that full raw record comparison.
+
+Native material assertions:1024albedo texture with WHITE factor; roughness texture GREEN channel, roughness multiplier1.0, metallic0; imported metallic_specular0.5 on both materials. Do NOT replace roughness multiplier with0.88 on top of the existing map: that would multiply roughness twice. The specular extension is not demonstrated to map to Blender's0.2. Same original17global rests, native bind remapping, headv012/m001-B, f002 fit and brown scarf. No shader/lighting sweep mixed into this comparison.
+
+[Native f002 flat material LEFT / m002 RIGHT, matched camera/light/pose](reviews/jacket-m002-native-material-comparison.png). Cropped native pixels without scale/grade; matched colour/clay directions and selected poses captured. A new f002-vs-m002 ortho10 empty-stage scale pair was inspected at actual pixels: the sleeve/body separation is subtle, not a transformative quality improvement. This is not actual camp occlusion, gameplay motion or a performance test.
+
+**Hold m002 as the working jacket material baseline, with its UV seam issue still recorded.** It gives slightly warmer/deeper panel separation and binding definition without restoring the f001 boundary defects. It does not close the reference's lighting/fidelity gap. No further jacket colour/noise variants requested; avoid turning small changes into an endless acceptance ladder. Geometry/skin/fit acceptance is still provisional.
+
+Native run exit0, but logs include root-certificate-store and two shader-cache _save_to_cache f.is_null errors. Rendered frames/import assertions completed; this is NOT a clean-log pass. Do not modify the user's cache/profile just to silence the study warning. No script/assertion failure or player process interference.
+
+### Next Fable pull: ONE whole-Simm supporting palette packet, geometry held
+
+The new comparison makes a larger remaining colour mismatch obvious: the native pack/straps are green and the trousers charcoal green; the original reference reads as a warm brown pack/straps and brown-olive trousers. Address those supporting colour blocks as one material-only proposal before more hair or jacket microdetail.
+
+Keep head/skin/hair, jacketf002+m002, collar/brown neck, bootsv002, body geometry/weights/normals/UVs and all rig/rest/actions/socket frozen. Do not export a replacement body or edit bone lengths. Deliver a small versioned JSON material override packet (simm_support_palette_p001) and matched control/candidate renders, not another full-character GLB. No new textures needed for this palette gate. Exact original glTF material names to target:
+- Simm charcoal olive trousers
+- Simm olive canvas (pack)
+- Simm woven olive straps
+- Simm canvas seams (supporting pack seam material; document any shared-region use)
+
+Use the full approved reference, with one restrained warm-brown supporting palette. Preserve a darker trouser mass below the yellow jacket and readable dark straps; do not make all browns identical or bake directional sunlight into them. These are interpreted material base colours because the reference has warm illumination, not sampled final RGB values to paste blindly into base colour. Preserve brass fasteners, boots, undershirt, face and all other materials.
+
+Packet must list source material names, intended regions, current-to-proposed base colour in BOTH linear and sRGB plus roughness/specular starting values. Label Blender values versus untested Godot values. Inspect shared material use: if one target also colours an unintended body region, document that and stop rather than split/edit the frozen mesh. Use candidate-only material copies; source file remains unchanged. Show both held directions, back view (pack) and one actual-pixel game-scale pair under identical lights/exposure/pose. No multiple palette sweep, decorations, weathering or NPC work. Codex will apply the bounded overrides to the native study and own renderer/contact-shadow evaluation separately.
+
+A1 remains unpassed; no user approval inferred and no live swap. All41runtime baseline hashes unchanged, no native save read/write. Only receipt/board and checksum-verified comparison image published. Source packet publication block remains unchanged.
