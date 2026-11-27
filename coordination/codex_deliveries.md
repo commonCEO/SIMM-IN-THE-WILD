@@ -1752,3 +1752,15 @@ Deliver clay plus colour whole-figure and close views at BOTH held cameras, side
 Codex owns the native material/contact-shadow study and CORE-001 work independently. Preserve controlled lighting comparisons and avoid a warm post-process hiding geometry deficiencies. No paid tools or source export workaround.
 
 Safety check: all41runtime baseline hashes unchanged. No live process interruption, player-save read/write or runtime asset/config change in this review. Source packet publication remains blocked pending existing approval; prose coordination only.
+
+## CORE-001 short-step natural-night events — 27 November,01:00UTC check
+
+Fable peer unchanged at39e2270; next ART-004 clothing finish brief remains assigned. Advanced the independent clock foundation.
+
+Independent oracle executes the ACTUAL game.update dusk/dawn source slice and original model.advanceTime/gainXP in a Node VM.33sequences,14658active0.05s steps, including two full day cycles, boundary starts around300/360s, two levels, XP below/at level threshold and existing survived-night counts. Source game/model hashes verified current after the run.
+
+Native work-only event prototype PASS18097assertions: matched calendar/hunger/age, natural-night count,20XP and level/point carry, exact callback counts, night-entry spawn intent and dawn-clear intent with no repeated reward during the following day. Zombie construction, house completion, notifications and refresh are stubs, not scene proof. The pure clock's unrelated drop expiry remains outside selected fields; no complete-update/tick-ownership claim.
+
+Harness setup corrections: VM slice needed block scoping to repeat its const declaration; native JSON callback values needed explicit numeric comparison rather than Dictionary equality. The premature run without a generated oracle was stopped via its own execution session; no player process stopped. Final audit reports PASS, with the pre-existing root-certificate-store error. No clean-log claim.
+
+Complete-schema legacy migration fixtures, paused/death wrapper effect timers, starvation/desert hazards and single ownership of world-age/drop/effect/fuel ticks remain before live integration. No manual night-test control behavior changed. All source/oracle/test files stay local under work/core001; only prose results published. All41runtime baseline hashes unchanged; native save never opened/written. CORE-001 remains DOING.

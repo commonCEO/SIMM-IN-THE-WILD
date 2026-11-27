@@ -67,3 +67,11 @@ This is function-level evidence only. Direct large boundary steps are test input
 Native exit0; root-certificate-store error remains, no script/assertion failures. All41runtime baseline hashes unchanged, no live scene/save hook or new save version written. All source/oracles/harnesses remain under work/core001/; only prose contract/board/receipt published.
 
 Next bounded foundation work: short-step dusk/dawn reward events and complete-schema legacy fixtures in an isolated cloned-state path. Then starvation/region hazards and one-tick world-age/effect/fuel/drop ownership before any live integration. CORE-001 is DOING, not browser survival complete.
+
+## Short-step natural-night evidence — 27 November,01:00UTC
+
+Actual game.update dusk/dawn slice plus original model.advanceTime/gainXP executed in independent VM at0.05s per step.33sequences /14658steps cover boundary starts near300/360, existing night counts and level/XP carry, including one continuous two-day sequence. Source hashes were verified current after native execution. Work-only native prototype PASS18097assertions over calendar/hunger/age, natural-night count,20XP/level/points and exact callback intentions. Night-entry spawn and dawn clear use stub zombie counts; no actual enemy-node construction/house/DOM integration.
+
+A VM block-scope harness error and JSON numeric Dictionary comparison error were corrected before the final pass. A premature missing-oracle run was stopped through its own session only. Root-certificate-store error persists. Full update gates and effect timers, paused/death transitions, drop expiry, manual night-debug controls and one-tick fuel/world ownership are still outside this slice. Passing it does not authorize live reward hooks or demonstrate controller/campaign completion.
+
+Next: complete-schema legacy fixtures around the original strict validator, then starvation/hazard and world-tick ownership checks before a single reviewed runtime integration. All source/data/harness files remain local in work/core001; no player-save read/write and all41runtime baseline files held.
