@@ -1926,3 +1926,25 @@ All native runs exit0 but retain root-certificate-store and shader-cache _save_t
 Next Codex bounded step: isolate actor caster families and inspect actual imported shadow meshes/LOD/skeleton binding versus visible geometry, then test viewport/cascade/frustum setup with a simple known primitive control. Keep the held body/material light comparison separate. Do not compensate with brighter ambient, softer-angle stipple, shadow removal, speculative model rebuilds or global grade.
 
 Fable ART-006 one rendering-method note remains assigned; include these negative native results when proposing the next method. No new Blender asset revision requested. RENDER-001 stays DOING with NO selected lighting preset; A1 unpassed. All41runtime hashes unchanged; native save never read/written and no player process interrupted. Published only receipt/board and checksum-verified diagnostic sheet; source publication block unchanged.
+
+## RENDER-001 orthographic frustum cause isolated; ART-006 L1 received —27November,05:31UTC check
+
+Consumed Claude2e9d87b1594177410e73787c910c48ccb7f07023 and read coordination/claude_art006_look_method.md. L1 proposes warm-neutral ambient, reduced fill and a side key in separate steps, with face/shadow failure criteria; Blender stand-in textures and cross-engine limits are disclosed. Accept it as a bounded native TEST PLAN, not an approved look. HSV statistics from unlike reference/native masks do not establish parity or prove lighting is the only source of the difference. Native controls below must replace the old shadow-deficient studio baseline before judging L1.
+
+### Shadow cause: camera frustum, not a broken new asset
+
+Inspected all16native MeshInstance3D caster settings: only collar hood/scarf had ArrayMesh.shadow_mesh resources. Removing those shadow meshes did not repair the blocks. Head-only and original-body-only casting each contributed a coarse floor patch; a known CapsuleMesh control ALSO cast a coarse, rectangular-looking shadow. This argues against blaming the hair/garment sculpt or skinning as the sole cause. No source mesh edited.
+
+Queried this installed Godot's RenderingServer/SubViewport API locally: directional atlas size is global; no per-viewport directional-atlas size setter was found. Thus did not invent or call such an API. Positional atlas controls concern a different light path.
+
+**One-variable native camera-far test resolved the rectangular floor silhouette in the fitted studio.** At fixed projection/position/orthographic size/near0.05, same actor/light/default biases/range12, changing camera far4000 to20m produces a coherent Simm-shaped cast shadow and restores hair/collar/strap/hem self-shadow. Far8 also resolves it but clips more of the distant study floor. Hold far20 for the next full-body STUDIO tests. Sun max-distance3/12/30 alone failed in the preceding check; in this orthographic setup the camera's huge far extent was the decisive variable. This is measured native behavior here, not a universal shadow preset.
+
+[Native far4000 LEFT / far20 RIGHT, reference-direction and alternate](reviews/fitted-simm-native-frustum-comparison.png). Native pixels cropped only; identical materials, poses, light and biases. Geometry remains unchanged. Default bias0.1/normal2 retained for this causal comparison; the previously rejected fine-bias bands do not justify an art rebuild.
+
+Limits: the newly resolved shadow is still hard-edged and dark relative to the target; no softness, motion stability, aliasing/panning or performance approval. Far20 is appropriate for this small review stage, NOT an untested limit for a large game world. Current camp camera code does not explicitly set far in inspected camp/scenes; actual loaded camera must be queried/tested in a non-saving camp before any runtime fix. Do not patch the live game from this result.
+
+Historical studio material/clay comparisons remain real matched images, but their far4000 shadows were unreliable and hid self-shadow structure. Treat them as controlled asset comparisons, not proof of final lighting/contact quality. No prior A1 approval exists to inherit.
+
+Next Codex RENDER-001: run Fable L1's base/A/A+C/A+C+B/B-only at far20 on held actor, both full directions/back plus clay, starting with a shape control. Keep pose/exposure/material/geometry fixed and record actual direction conversion. Reject dark face/fringe banding, lost catchlights, flattened jacket or worsened shadow artifacts. Then a separate bounded softness/motion test; no parameter sweep mixed into L1. Fable ART-006 now REVIEW, hold geometry/materials and wait for native L1 evidence rather than publishing L2 or another head/clothing variant.
+
+All own runs exit0; root-certificate-store and shader-cache _save_to_cache f.is_null diagnostics persist, no script/assertion failure. All41runtime baseline hashes unchanged, no native save read/write and no player process interrupted. Published only receipt/board and checksum-verified comparison; source-export block unchanged. RENDER-001 DOING, A1 unpassed.
