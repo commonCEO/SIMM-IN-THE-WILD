@@ -1,0 +1,216 @@
+{
+ "packet": "ART-014 E1 eye-only (Codex brief 975040e)",
+ "files": {
+  "simm_eye_e1_albedo.png": {
+   "sha256": "ec3932b9716ecc34f82c27994e1efbcf48509fe81f86406d0410948b0e34e8a6",
+   "size": [
+    512,
+    512
+   ],
+   "encoding": "8-bit RGB PNG, sRGB-encoded"
+  },
+  "simm_eye_e1_carrier.glb": {
+   "sha256": "61c34fc958d437fbbcf72b50101af2e3c8820bc5434bd3418a356cb211e3d61f",
+   "bytes": 127412
+  },
+  "held_v012_glb_sha256": "e5a47d01d203f1438226850632b58a2c7b1e657eaec05d4a6c4faf8019e1e2de"
+ },
+ "identity_vs_held_v012": {
+  "SCULPT_EYE_L": {
+   "vertices": [
+    922,
+    922
+   ],
+   "triangles": [
+    1840,
+    1840
+   ],
+   "uv_layers": [
+    1,
+    1
+   ],
+   "position_uv_corner_records_identical": true,
+   "triangles_identical_as_sets": true,
+   "bounds_min": [
+    0.026,
+    -0.10425,
+    1.116
+   ],
+   "bounds_max": [
+    0.098,
+    -0.03225,
+    1.188
+   ]
+  },
+  "SCULPT_EYE_R": {
+   "vertices": [
+    922,
+    922
+   ],
+   "triangles": [
+    1840,
+    1840
+   ],
+   "uv_layers": [
+    1,
+    1
+   ],
+   "position_uv_corner_records_identical": true,
+   "triangles_identical_as_sets": true,
+   "bounds_min": [
+    -0.098,
+    -0.10425,
+    1.116
+   ],
+   "bounds_max": [
+    -0.026,
+    -0.03225,
+    1.188
+   ]
+  }
+ },
+ "parameters": {
+  "iris_half_sizes_m": [
+   0.0182,
+   0.0272
+  ],
+  "lid_opening_half_sizes_m": [
+   0.0174,
+   0.0264
+  ],
+  "pupil_half_sizes_m": [
+   0.0082,
+   0.0136
+  ],
+  "iris_top_srgb": [
+   58,
+   34,
+   22
+  ],
+  "iris_bottom_srgb": [
+   122,
+   78,
+   46
+  ],
+  "pupil_srgb": [
+   30,
+   18,
+   12
+  ],
+  "sclera_srgb": [
+   214,
+   190,
+   168
+  ],
+  "iris_outer_ring_darkening": 0.35,
+  "catchlight": {
+   "centre_m": [
+    0.0045,
+    0.0105
+   ],
+   "half_sizes_m": [
+    0.0034,
+    0.004
+   ],
+   "srgb": [
+    225,
+    215,
+    200
+   ],
+   "opacity": 0.8
+  },
+  "second_catchlight": "removed",
+  "emission": "none (no emissive texture, emissive factor 0)",
+  "roughness": 0.55,
+  "blender_specular": 0.25
+ },
+ "exported_gltf": {
+  "materials": [
+   {
+    "doubleSided": true,
+    "extensions": {
+     "KHR_materials_specular": {
+      "specularColorFactor": [
+       0.5928394036103495,
+       0.5928394036103495,
+       0.5928394036103495
+      ]
+     },
+     "KHR_materials_ior": {
+      "ior": 1.4500000476837158
+     }
+    },
+    "name": "SCULPT_MAT_EYE",
+    "pbrMetallicRoughness": {
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0,
+     "roughnessFactor": 0.550000011920929
+    }
+   }
+  ],
+  "textures": [
+   {
+    "sampler": 0,
+    "source": 0
+   }
+  ],
+  "samplers": [
+   {
+    "magFilter": 9729,
+    "minFilter": 9987
+   }
+  ],
+  "images": [
+   {
+    "name": "simm_eye_e1_albedo",
+    "mimeType": "image/png",
+    "sha256": "ec3932b9716ecc34f82c27994e1efbcf48509fe81f86406d0410948b0e34e8a6"
+   }
+  ],
+  "meshes": [
+   "SCULPT_EYE_L",
+   "SCULPT_EYE_R"
+  ],
+  "nodes": [
+   "SCULPT_EYE_L",
+   "SCULPT_EYE_R"
+  ],
+  "skins": 0,
+  "animations": 0,
+  "cameras": 0,
+  "extensionsUsed": [
+   "KHR_materials_specular",
+   "KHR_materials_ior"
+  ]
+ },
+ "sample_colours_srgb": {
+  "iris_upper (0, +0.020)": [
+   58,
+   34,
+   22
+  ],
+  "iris_lower (0, -0.022)": [
+   122,
+   78,
+   46
+  ],
+  "pupil (0, -0.0015)": [
+   30,
+   18,
+   12
+  ],
+  "catchlight centre": [
+   205,
+   195,
+   181
+  ],
+  "sclera corner (0.034, 0.034)": [
+   214,
+   190,
+   168
+  ]
+ },
+ "eye_radius_m": 0.036
+}

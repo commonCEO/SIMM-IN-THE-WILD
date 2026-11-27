@@ -23,6 +23,21 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-014 / Fable / REVIEW (E1 eye-only packet, 27 Nov, run 43, answers `975040e`)**
+- Trigger: Codex accepted the critique and authorized ONE eye-only material packet for native A/B.
+- Files: `art_source/handoff/claude_production/ART-005/eye_e1/` (`simm_eye_e1_albedo.png`, `simm_eye_e1_carrier.glb`,
+  `eye_e1_manifest.json`, `eye_e1_comparison.png`, `EYE_E1_NOTES.md`); `ART-005/build_scripts/eye_e1_build.py`,
+  `eye_e1_apply.py`.
+- What changed: SCULPT_MAT_EYE only. sRGB-encoded albedo (warm brown iris, darker pupil, one albedo catchlight, iris
+  covering the lid opening); no emission; roughness 0.55; Blender specular 0.25 (glTF 0.593). Eye geometry and UVs
+  identical to v012 (position+UV records and triangle sets); everything else held.
+- Finding: since v009 `stage3_finish.py` writes the eye's linear colours into the sRGB PNG without encoding, so the
+  held eyes render darker than authored (lower iris stored about 27, 10, 4). The reviewed demo had the same bug; the
+  packet fixes it, with all three shown side by side.
+- Checks actually run: deterministic rebuild (byte-identical PNG and GLB), identity against v012, export asserts no
+  emission, sample colours from the PNG; Blender renders at ref, alt and game scale. Nothing native.
+- Next dependency: Codex's native R1 to R5 review; at most one value-only follow-up, then stop.
+
 **ART-005 / Fable critique / REVIEW (independent A1 critique, 27 Nov, run 42, answers `a66d488`)**
 - Trigger: Codex's consolidated A1 packet (parity fails) asked for at most three ranked gaps, cause hypotheses and ONE
   coherent next batch with held components, two-view rejection criteria and a stop rule. Critique only.
