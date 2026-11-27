@@ -1724,3 +1724,31 @@ Independent VM oracle executes ACTUAL current browser sleepUntilMorning/updateDe
 Explicit limits added to CORE-001-CONTRACT.md: these are direct function-boundary inputs, not normal0.05s playback; actual overlay, nodes, base placement, effect-timer wrapper, zombie routes, saving and other world callbacks remain unintegrated. No false full-recovery pass inferred from stubs.
 
 Run exit0 with root-certificate-store error, no script/assertion failure. All41runtime baseline hashes unchanged; no native save read/write, live gameplay hook or user process disruption. Code/data stay work-only; only prose results published while source-export approval remains pending. CORE-001 DOING; next short-step dawn/dusk and complete legacy-schema fixture path.
+
+## A1 consolidated gap review / next Fable pull — 27 November,00:31UTC check
+
+Consumed Claude39e2270eab77eda2ee2e1b142a20af60e824bb57 D1_LEVERS_NOTES.md and inspected its matched clay sheet. Both alternatives are visibly too close to the control to justify a candidate. Accept the negative result: STOP D1/per-lock hair profile tweaking. No v013. v012+m001-B remains a working baseline, not likeness approval. Sparse section support and corrected metrics cannot substitute for an image improvement.
+
+### Consolidated Simm gaps, ranked by visible impact
+
+Reviewed the existing native v012 whole-figure frame beside the original reference crop. Camera, pose and figure scale are not solved identically; this is a qualitative design review, not a measured proportion verdict. Do not infer a new head/eye ratio or change bone lengths from it.
+
+1. **Clothing still reads as smooth constructed pieces.** The native yellow panels have little broad cloth response, the white neck band is conspicuous and rigid, the cuffs/front edges read as tubing, and the reference's pocket/fold/hood layering is not conveyed. Holding the fit is useful but is not finished art. This is now the highest-return bounded production task.
+2. **Material and lighting response lacks the reference's depth.** Hair reads uniformly matte brown with shallow, merged masses; the reference has a clearer warm highlight-to-deep-chestnut range. Skin and fabric separation and contact shadows also need work. Roughness0.5 was already rejected as waxy; do not repeat it. Godot shader/import parameters must be measured natively. The reference contains painted/blurred cues that cannot be assumed to be geometry.
+3. **Hair silhouette/face expression still differ.** Numerous broad overlapping locks remain, while the target has a clearer asymmetrical primary sweep and lively broken outline. The face has a different smile and eye highlight treatment. More per-lock roundness tuning did not address this. Freeze these now while finishing clothing; any later hair rebuild needs a designed whole-mass silhouette proposal, not another numeric micro-variant. Previously rejected eye-spacing widening stays rejected.
+
+The held boot/hem fit and the motion study remain provisional. This review does not approve the full silhouette, underlying body proportions, physical-controller journey, game-scale readability or performance. A1 remains unpassed; no live swap or NPC/world production.
+
+### Next Fable pull: ART-004 one Simm clothing finish packet
+
+Use held jacketv004/collarv004/bootsv002 as fit controls, with headv012+m001-B held. Make exactly ONE comparison candidate for jacket+neck treatment, keeping the long-jacket envelope, hem length, hand-clear fit, strap paths and original skeleton/rest/actions/socket. No body/head/boots/rig edits. Do not reopen garment length/weight experiments.
+
+Target visible reference cues: soften the broad jacket panels with a few deliberate, low-frequency folds at shoulder/elbow/pocket/hem; give the front edges and cuffs cloth thickness without separate tube-like trim; add the visible lower utility-pocket structure and restrained stitching where it is actually supported by the original image. Replace the conspicuous rigid white ring appearance with a subdued layered cloth neck/hood treatment, seated at the held collar. The low-resolution image does not establish an exact scarf pattern: label any interpretation, and do not invent decorative hardware or dress Simm in a new outfit.
+
+Candidate-only new pocket/fold details may be weighted to the existing jacket/chest/arm bones, but existing protected body/rest/actions and the jacket's accepted base skin weights remain unchanged. Verify no new hand/strap/collar intersections in idle, walk and the corrected study-gather, retaining original gather as negative control. Do not claim clearance from only the rest pose. Archive held candidates and provide changed-vs-held vertex/weight and triangle manifests.
+
+Deliver clay plus colour whole-figure and close views at BOTH held cameras, side-by-side held versus candidate; use the original reference alongside, clearly label camera/pose/scale limitations. Keep light and head materials fixed so the clothing change can be assessed. Provide named material parameters/textures/source/GLB checksums and frozen rig/rest/action/socket verification. One packet only; report if the protected fit prevents the intended shape instead of silently changing weights or bones. Codex will reproduce in a non-saving Godot study before selecting it. No new GLB for the rejected D1 tests.
+
+Codex owns the native material/contact-shadow study and CORE-001 work independently. Preserve controlled lighting comparisons and avoid a warm post-process hiding geometry deficiencies. No paid tools or source export workaround.
+
+Safety check: all41runtime baseline hashes unchanged. No live process interruption, player-save read/write or runtime asset/config change in this review. Source packet publication remains blocked pending existing approval; prose coordination only.
