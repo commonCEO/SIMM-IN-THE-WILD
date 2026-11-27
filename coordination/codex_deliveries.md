@@ -1989,3 +1989,26 @@ Consumed Claudee909d36b13f9a7b599f122e166686843872d0552 and read the L2 method. 
 Next Codex bounded renderer check: complete the corrected-frustum angular-softness/static-motion test already queued, then compare an occlusion-respecting low-energy fill against L2 if needed. Any shadow-enabled fill is a distinct controlled variant: report the second-shadow cost/readability instead of assuming it fixes leakage. Keep default geometric baselines, cool ambient and pose controls; do not compensate with new AO strength, roughness/noise sweeps or grading. Fable ART-006 now REVIEW; preserve L1/L2 notes and wait for this native evidence, no L3/mesh/material revision automatically requested.
 
 Native exit0 with root-certificate-store and shader-cache _save_to_cache f.is_null diagnostics; no script/assertion failure. No clean-log, GPU budget or complete motion pass. All41runtime baseline hashes unchanged; native save never read/written and no player process interrupted. Published only owned receipt/board, hash-verified static comparison and hash-verified video; source-export block unchanged. RENDER-001 DOING, A1 unpassed.
+
+## RENDER-001 corrected-frustum angular softness —27November,07:00UTC check
+
+Peer unchanged ate909d36; completed the queued independent softness check instead of another light-method revision. Same far20/near0.05 original-key0.8/#fff0df/direction(-40,-30,0), cool ambient0.35,8192/ULTRA/TAA/default bias0.1/normal2; held actor/assets/p001/f002+m002 unchanged. NO L2 fill or warm-A ambient mixed in.
+
+[Native0.25 /1.0 /2.0degree angular controls, left-to-right; reference/alternate](reviews/fitted-simm-native-softness-controls.png). Each has colour/clay static directions,8consecutive static frames and48continuously advanced original-walk frames at1/30s.17rest matrices asserted unchanged per sample. All144walk PNGs exist. Inspected sampled frames8/16/20/32;8and32 repeat a gait phase,16/20 provide different phases. Full perceptual playback, camera travel and actual camp motion remain unapproved.
+
+Result: the larger angles now soften the coherent Simm silhouette and hand/strap self-shadow instead of merely blurring the old blocks.1degree is a reasonable provisional STUDIO working control: clearer soft contact than0.25 while retaining cast-shape definition.2degrees is a softer alternative, not a selected runtime setting. The old2degree stipple rejection came from the old far4000 context and is not a universal limit; equally, these new short captures do not prove all speckling fixed.
+
+Eight-frame native RGB8 variation measured in fixed image patch[1250,775,1790,1100] containing floor-shadow AND boot/leg pixels (not a pure shadow mask):
+| angle | mean per-channel temporal std | p99 std | max adjacent change |
+|---|---|---|---|
+|0.25|0.0366|0.7071|34|
+|1.0|0.0383|0.6960|28|
+|2.0|0.0552|0.6960|29|
+
+There is no large average static-sampling blowup in this tiny burst, but nonzero/high local adjacent changes remain. Mixed foreground/background pixels, TAA edge effects, short duration and a stationary camera limit interpretation. No noise-free, motion-stable or performance claim; these values must not be compared directly with the earlier different-ROI far4000 test as a calibrated quality score.
+
+Next Codex bounded task: query the ACTUAL non-saving camp camera/frustum and scene bounds, then test a conservative far-plane correction with current camp controls at gameplay scale/day/torch. Studio far20 is NOT a safe copy-paste world limit. Keep terrain/foliage visible and distinguish existing runtime assets from this fitted studio actor. Do not stop/restart the user's game or touch its save. Test any camp change only in an isolated persist=false study before discussing runtime integration. L2 occlusion-respecting fill comparison remains pending; no new grade/material/geometry change is justified yet.
+
+Fable ART-006 remains REVIEW: use the published corrected-frustum/softness evidence for a concise art-direction recommendation (1vs2degree studio read, remaining highest-impact gap); no automatic L3, mesh/palette/material exports or new numeric sweep. The ultimate A1 full-figure/sides/back/motion/game-scale/performance and user checkpoint remain outstanding.
+
+Native exit0; root-certificate-store and shader-cache _save_to_cache f.is_null diagnostics persist, no script/assertion failure. All41runtime baseline hashes unchanged, no native save read/write and no player process interrupted. Published only receipt/board and checksum-verified native control sheet; all code/harnesses stay local while source-export approval remains pending. RENDER-001 DOING; no final runtime preset, A1 unpassed.
