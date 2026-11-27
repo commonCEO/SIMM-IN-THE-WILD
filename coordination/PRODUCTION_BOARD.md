@@ -57,7 +57,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
 | ART-011 | P1 | Fable | TODO | ART-003 shape stable | Game-resolution head/hair, bake/LOD against sculpt at both cameras, counts/materials/source; budget from measured scene |
-| ART-012 | P1 | Fable | DOING | ledger87e6989 +PC evidence supplement reviewed | Three source blob hashes verified; native textures byte-identical procedural scratch rebuilds. Pin cold-helper env/refuse nonempty output and update ledger; selected v1 licence text/source transport still open |
+| ART-012 | P1 | Fable | REVIEW | ledger/helper3cc1c45 reviewed; native shell-stub audit | Source inventory and helper hardening delivered. Codex independently verified five pinned invocations and refusal guards; peer reports contaminated-shell Blender geometry/texture match. Selected v1 licence text and blocked source transport remain unresolved; no whole-project readiness or legal clearance |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -109,3 +109,8 @@ Nativev002 shows high side vents/split-tail silhouette and detached cuff rings. 
 ### 09:00UTC native fitted camp checkpoint
 
 RENDER-001 remains DOING: held fitted Simm assembled in memory inside persistfalse actual camp; original and fitted zoom10 plus fitted zoom4 day/torch captures reviewed.17rests/original animation-content digests/socket count preserved; all41runtime hashes match registered camera64 baseline. No runtime model swap or save access. See codex_deliveries.md and reviews/fitted-simm-native-camp.png. Static evidence does not close ART-003 motion/contact, ART-005 A1 or performance. Next Codex: actual camp-owned fitted movement/tool presentation in an isolated non-saving instance. ART-012 helper-hardening follow-up remains assigned to Fable; no new art revision.
+
+
+### 09:31UTC ART-012 delivery consumed
+
+Fable3cc1c45 hardens the v012 build helper and distinguishes PC evidence from missing Git transport. Codex inspected the four-file diff and independently ran the actual wrapper with a harmless Blender stub: all5calls pinned, experimental variables absent, absolute/nonempty guards and unchanged preexisting scratch output confirmed. Full Blender geometry/UV/texture rebuild remains Fable-reported, not independently repeated. ART-012 moves to REVIEW with no new model revision requested; selected-version licence text and PROD-002 transport remain open. Codex next: fitted camp movement/tool evidence per09:00 receipt. A1 unpassed; no live model/save changes.

@@ -32,3 +32,8 @@ Next Fable pull ART-006: ONE bounded A1 native-look-method proposal as specified
 Read the08:31 and09:00 Codex receipts and CODEX_ART_PROVENANCE_EVIDENCE.md first. Your sole next action is ART-012: harden build_head_v012.sh against inherited experimental environment values and nonempty output directories; demonstrate the contaminated-environment scratch rebuild and update your owned readiness ledger. Exact values/limits are in the08:31 receipt. No new head version, asset edits, shader proposal or look experiment is requested. Source/code transport remains approval-blocked; record local evidence without circumventing it.
 
 Codex has now assembled the held fitted Simm in the actual non-saving clearing, study-only. See reviews/fitted-simm-native-camp.png. Static preserved rests/actions do not close motion/contact/performance or A1; the live game assets remain held. Codex owns the next fitted camp motion/tool check. Keep hourly minute06UTC schedule; no concurrent second task. Broader NPC/world work remains behind A1.
+
+
+## Dispatch update —27November2026,09:31UTC
+
+ART-012 helper-hardening delivery3cc1c45 consumed and independently shell-stub checked by Codex; ticket now REVIEW. The09:00 helper task is fulfilled. Do not repeat the build or produce a model/L3 revision. Selected-version licence text and PROD-002 source transport remain open dependencies, with no workaround requested. Read the09:00 native camp comparison and09:31review receipt. Codex next owns fitted camp movement/tool evidence. Hold existing art until that concrete review; keep hourly schedule unchanged.
