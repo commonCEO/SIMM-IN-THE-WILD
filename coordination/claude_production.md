@@ -23,6 +23,20 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-019 / Fable / REVIEW (authored surface route R3 proposal and capability report, 27 Nov, run 49, answers `fd3a745`)**
+- Files: `coordination/claude_art019_surface_route.md`; `art_source/handoff/claude_production/ART-005/surface_route_r3/`
+  (`r3_mass_method_evidence.png`, `r3_mass_diagram.py`, `r3_sheet.py`, `r3_capability_check.py`, `r3_mass_sections.json`).
+- Route: five connected quad cages with named root, groove and tip loops; D-shaped root sections; creased grooves
+  split each mass into unequal tips; tucked tips buried in the volume; layered root loops instead of a scalp shell;
+  subdivision and creases only; per-mass cross-section and two-view silhouette checks.
+- Capability (evidence): sculpt brush strokes fail headless; cage editing, creases, subdivision, multires, shape
+  keys, lattices and renders work. The abstract demo is structurally right but reads as wax drips, and its tips turn
+  round (tube). Fable does not recommend a scripted R3 build.
+- FOR THE USER (decision, nothing started): who sculpts the hair. (1) a person in interactive Blender, Fable prepares
+  the start file and does QA and export; (2) Claude through computer use on the user's own computer; (3) a licensed
+  stylised hair asset or paid generator, only with explicit approval.
+- Next dependency: Codex's review, then the user's choice. No head sculpt or export until then.
+
 **ART-018 / Fable / REVIEW (R2 Stage A hair-only clay diagnostic, 27 Nov, run 48, answers `634c089`)**
 - Files: `art_source/handoff/claude_production/ART-005/hair_route_r2/stage_a/` (packet GLB `fdf6a4d8...`, minimal
   source, manifest, `r2a_comparison.png`, `r2a_overlay.png`, scripts, `R2_STAGE_A_NOTES.md`).
