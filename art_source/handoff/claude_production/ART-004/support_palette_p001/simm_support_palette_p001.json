@@ -1,0 +1,57 @@
+{
+ "packet": "simm_support_palette_p001",
+ "brief": "Codex 2625b68: ONE whole-Simm supporting palette, material-only JSON override, geometry held",
+ "status": "proposal for Codex's native study; not approved; A1 unpassed",
+ "how_the_source_materials_are_built": "Each target is Principled BSDF with Base Color = Mix (MULTIPLY, fac 1) of Color1 (a flat factor) and cloth_tone.png. Blender's glTF exporter writes this as baseColorFactor = Color1 with baseColorTexture = cloth_tone.png. The override replaces ONLY Color1 / baseColorFactor; the cloth_tone texture, UVs, roughness, specular and everything else stay as they are.",
+ "colour_conventions": "factor_linear is the multiply factor in linear RGB (Blender Color1, glTF baseColorFactor). factor_srgb is the same factor encoded to sRGB 0-255, for reading only. The visible colour is factor x cloth_tone texel, so final pixels are darker than factor_srgb.",
+ "overrides": [
+  {
+   "source_material": "Simm charcoal olive trousers",
+   "candidate_copy": "Simm charcoal olive trousers P001",
+   "region": "trousers only: 1,080 body faces, rest Z 0.160 to 0.590 (top of the boot to the hip), weighted to thigh and shin bones",
+   "current_factor_linear": [0.0529, 0.0648, 0.0437], "current_factor_srgb": [65, 72, 59],
+   "proposed_factor_linear": [0.0872, 0.0680, 0.0392], "proposed_factor_srgb": [83, 74, 56],
+   "luminance_current_proposed": [0.0607, 0.0700],
+   "intent": "brown-olive, still the darkest cloth mass under the yellow jacket; slightly lighter and warmer than the charcoal green",
+   "roughness": 0.82, "specular_blender": 0.25, "roughness_specular_changed": false
+  },
+  {
+   "source_material": "Simm olive canvas",
+   "candidate_copy": "Simm olive canvas P001",
+   "region": "backpack: 628 faces, all behind the back (rest Y 0.079 to 0.234, Z 0.613 to 0.987), weighted to the chest bone",
+   "current_factor_linear": [0.1329, 0.1683, 0.0578], "current_factor_srgb": [102, 114, 68],
+   "proposed_factor_linear": [0.2261, 0.1357, 0.0678], "proposed_factor_srgb": [131, 103, 74],
+   "luminance_current_proposed": [0.1528, 0.1500],
+   "intent": "warm khaki-brown canvas, same value as now; yellower and lighter than the red-brown boot leather so the two browns stay apart",
+   "roughness": 0.82, "specular_blender": 0.25, "roughness_specular_changed": false
+  },
+  {
+   "source_material": "Simm woven olive straps",
+   "candidate_copy": "Simm woven olive straps P001",
+   "region": "the two front shoulder straps: 56 faces, rest Y -0.147 to 0.072, Z 0.629 to 0.980, chest bone",
+   "current_factor_linear": [0.0999, 0.1221, 0.0437], "current_factor_srgb": [89, 98, 59],
+   "proposed_factor_linear": [0.0880, 0.0545, 0.0317], "proposed_factor_srgb": [84, 66, 50],
+   "luminance_current_proposed": [0.1117, 0.0600],
+   "intent": "dark brown webbing, darker than the pack and the undershirt so the straps read against the jacket",
+   "roughness": 0.97, "specular_blender": 0.25, "roughness_specular_changed": false
+  },
+  {
+   "source_material": "Simm canvas seams",
+   "candidate_copy": "Simm canvas seams P001",
+   "region": "pack seams and top binding only: 192 faces, rest Y 0.109 to 0.240, Z 0.861 to 0.991, chest bone",
+   "current_factor_linear": [0.0648, 0.0908, 0.0395], "current_factor_srgb": [72, 85, 56],
+   "proposed_factor_linear": [0.1249, 0.0774, 0.0425], "proposed_factor_srgb": [99, 79, 58],
+   "luminance_current_proposed": [0.0816, 0.0850],
+   "intent": "a darker brown than the pack canvas, keeping the seam contrast it has now",
+   "roughness": 0.82, "specular_blender": 0.25, "roughness_specular_changed": false
+  }
+ ],
+ "shared_use": "Each target is used on PROTECTED_BODY only in the region listed (checked face by face). The four materials also sit in material slots of the hidden REFERENCE_FAILED_OLD_HEAD object, but on 0 of its faces. In review the copies are applied only to the shown body; the source file is unchanged. No unintended body region found, so nothing was split or edited.",
+ "unchanged_for_comparison": ["Simm brown boot leather (factor 0.1812, 0.0802, 0.0331)", "Simm warm dark undershirt (0.1301, 0.0802, 0.0423)", "Simm brass fasteners", "Simm dark soles", "skin, head, hair, eyes", "jacket f002 + m002", "collar v004 + brown neck layer", "boots v002"],
+ "reference_reading": "Full approved reference, Simm region, lit pixels (median sRGB): pack about 122, 76, 33; trousers about 95 to 110, 64 to 78, 28 to 39; boots about 104, 57, 27. These include warm sunlight, so the proposal keeps the hue direction (warm brown pack, brown-olive trousers) but not their saturation or value.",
+ "godot_untested": {
+  "apply_as": "for each source material: albedo_color = proposed_factor_linear converted the way the importer converts baseColorFactor (expected but not verified here: Godot 4's glTF importer converts the linear baseColorFactor to an sRGB albedo_color, so the inspector should show factor_srgb / 255); keep albedo_texture = cloth_tone",
+  "roughness": "unchanged",
+  "specular": "unchanged"
+ }
+}

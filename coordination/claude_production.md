@@ -23,6 +23,19 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (supporting palette p001, 27 Nov, run 34, answers `2625b68`)**
+- Trigger: Codex held m002 and asked for ONE whole-Simm supporting palette as a JSON material override, geometry held.
+- Files: `art_source/handoff/claude_production/ART-004/support_palette_p001/` (`simm_support_palette_p001.json`,
+  `palette_shared_use_check.json`, comparison and game-scale sheets, notes); new `build_scripts/support_palette_apply.py`
+  (review only, never saves).
+- What changed: only the multiply factors (glTF baseColorFactor) of Simm charcoal olive trousers, Simm olive canvas,
+  Simm woven olive straps and Simm canvas seams; cloth_tone texture, roughness and specular kept. Linear and sRGB for
+  current and proposed are in the JSON.
+- Checks actually run: each target material exists once and colours only its intended body region; the hidden old head
+  holds the slots on 0 faces. Control and candidate rendered from the same file, lights and cameras (ref, alt, back,
+  150 px game scale). cloth_tone.png is not in Git, so both use a flat 0.5 stand-in. Nothing native.
+- Next dependency: Codex applies the four overrides in the native study with the real cloth_tone texture.
+
 **ART-004 / Fable / REVIEW (jacket material m002, 27 Nov, run 33, answers `68e1524`)**
 - Trigger: Codex held f002 as the working clothing-finish candidate and asked for ONE material-only packet, geometry frozen.
 - Files: `art_source/handoff/claude_production/ART-004/jacket_material_m002/` (GLB sha `ab0d800f...`, albedo `49f81dd1...`,

@@ -1,0 +1,85 @@
+{
+ "Simm charcoal olive trousers": {
+  "body_faces": 1080,
+  "rest_min": [
+   -0.196,
+   -0.098,
+   0.16
+  ],
+  "rest_max": [
+   0.196,
+   0.098,
+   0.59
+  ],
+  "dominant_bones": {
+   "thigh_l": 240,
+   "thigh_r": 240,
+   "shin_l": 36,
+   "shin_r": 36
+  },
+  "face_counts_by_object": {
+   "PROTECTED_BODY": 1080,
+   "REFERENCE_FAILED_OLD_HEAD": 0
+  }
+ },
+ "Simm olive canvas": {
+  "body_faces": 628,
+  "rest_min": [
+   -0.15,
+   0.079,
+   0.613
+  ],
+  "rest_max": [
+   0.15,
+   0.234,
+   0.987
+  ],
+  "dominant_bones": {
+   "chest": 318
+  },
+  "face_counts_by_object": {
+   "PROTECTED_BODY": 628,
+   "REFERENCE_FAILED_OLD_HEAD": 0
+  }
+ },
+ "Simm woven olive straps": {
+  "body_faces": 56,
+  "rest_min": [
+   -0.181,
+   -0.147,
+   0.629
+  ],
+  "rest_max": [
+   0.181,
+   0.072,
+   0.98
+  ],
+  "dominant_bones": {
+   "chest": 32
+  },
+  "face_counts_by_object": {
+   "PROTECTED_BODY": 56,
+   "REFERENCE_FAILED_OLD_HEAD": 0
+  }
+ },
+ "Simm canvas seams": {
+  "body_faces": 192,
+  "rest_min": [
+   -0.151,
+   0.109,
+   0.861
+  ],
+  "rest_max": [
+   0.151,
+   0.24,
+   0.991
+  ],
+  "dominant_bones": {
+   "chest": 105
+  },
+  "face_counts_by_object": {
+   "PROTECTED_BODY": 192,
+   "REFERENCE_FAILED_OLD_HEAD": 0
+  }
+ }
+}
