@@ -12,8 +12,8 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-003 | P0 | Codex | REVIEW | held headv010/jacketv004/collarv004/bootsv002 |168frame native idle/walk/corrected-study-gather video and socket/rest checks delivered; full playback/camp motion/controller/performance acceptance pending; no live swap |
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
-| ART-006 | P1 | Fable | DOING | native L1 controls reviewed | ONE L2 world-space fill-method proposal; L1 side key rejected for harsh lower-face shadows, A-only still candidate; no geometry/material/palette revisions |
-| RENDER-001 | P1 | Codex | DOING | far20 studio +L1 controlled native captures | L1 B-family visually rejected, no final preset. Next fixed-frustum angular softness/static-motion test; camp/torch/performance pending |
+| ART-006 | P1 | Fable | REVIEW | L2 native controls e909d36 evaluated | L2 improves directional read/friendly face but occlusion/leak and floor wash remain; no accepted preset or automatic L3; hold assets pending native softness/occlusion evidence |
+| RENDER-001 | P1 | Codex | DOING | far20/L1/L2 controls +48frame paired walk | L2 exploratory only;96walk PNGs/rest checks, selected poses inspected, full playback pending. Next angular softness/static-motion, then occluded-fill check; no runtime change |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: Codex RENDER-001 angular-softness/motion on far20 baseline; Fable ART-006 one L2 fill-method proposal after L1 side-key rejection. Headv012/clothingf002+m002/p001 held. CORE-001 remains independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
+Current active: Codex RENDER-001 corrected-frustum angular-softness/static-motion; Fable ART-006 REVIEW after L2 native evidence, no automatic L3. Headv012/clothingf002+m002/p001 held. CORE-001 remains independent. A1 unpassed; no live swap or wider NPC/world production. PROD-002 publication awaits approval.
 
 ## Ticket update format
 
