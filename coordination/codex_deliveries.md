@@ -2152,3 +2152,12 @@ Consumed Fable372ec64 (receipt only, art still held). [Simm A1 evidence review](
 **Producer verdict: not parity, A1 not passed.** Bright eye rims/catchlights and face expression, organized radial hair silhouette and assembled costume finish remain visible gaps. Camera/lighting differences prohibit blind dimension/RGB conclusions. Do not ask the user to approve the target match as complete.
 
 ART-005 moves to REVIEW for this concrete evidence and one independent Fable critique. New bounded Fable task in A1-SIMM-REVIEW.md: at most3ranked remaining Simm gaps, source-informed cause hypotheses and ONE coherent next correction/method proposal with held components, two-view rejection criteria and stop rule. Critique only, no mesh/material/rig/action/runtime/L3 production or paid service. It supersedes wait-only dispatch; schedule unchanged. Codex reviews before assigning another art batch. ART-013 inherited tool presentation remains separate; wider art still behind A1.
+
+
+## Independent CORE-001 recovery/drop boundary —27November,12:00UTC
+
+Peer unchanged372ec64; Fable's new A1 critique remains pending. Advanced an independent local foundation task rather than another art revision: canonical absolute drop expiry versus native remaining-lifetime projection around sleep, repeated sleep, defeat, synthetic save/reload and next active tick. [Updated CORE-001 contract](CORE-001-CONTRACT.md) records methods and limits.
+
+Native2060assertions PASS/exit0 against54actual-browser-function oracle sequences. Source hashes checked, original advanceTime owns each test clock step once. Identity/content/position/optional scene metadata and strict expiry survivors match; projected entries pass actual complete v4 validator. Critical semantic: immediate sleep saves retain expired entries as lifetime0; prune only on next active step, including dt0. Defeat does not skip worldAge. No actual file/save-loader/scene integration or full frame/survival/fuel ownership claim.
+
+All new source/oracle/harness files remain LOCAL in work/core001/ while PROD-002 export approval is pending. Initial synthetic fixture/validator-method setup errors corrected; final certificate-store diagnostic remains. No runtime/live game/native save access. Fable art task/held versions unchanged; next peer check consumes the A1 critique when available. Next independent foundation is a combined single-clock-owner sequence, not chaining helper advances.

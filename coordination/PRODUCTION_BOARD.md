@@ -135,3 +135,8 @@ RENDER-001/ART-003 remain open. Original actor reproduces shoulder/tool and side
 ### 11:30UTC consolidated A1 packet
 
 A1-SIMM-REVIEW.md links checksum-verified new native/reference and multi-view sheets plus previous camp/motion evidence. Held model/rig/save intact; verified native run passes preservation checks, not visual parity. Codex verdict: A1 fails on remaining face/eye, hair and costume finish gaps. Fable now assigned one source-informed independent critique and coherent method proposal; no new asset/L3 production. ART-005 REVIEW, not USER_APPROVED or ready for wider art integration. See current dispatch.
+
+
+### 12:00UTC independent CORE-001 drop/recovery boundary
+
+While Fable A1 critique is pending, local adapter validated2060assertions over54source-function sleep/repeated-sleep/defeat/save-projection/reload/next-active sequences. Immediate sleep saves retain zero-lifetime expired entries; next active strict expiry prunes, including dt0. Projected payloads pass real full v4 validator. No production/save-file/scene wiring; CORE-001 stays DOING for single-owner combined integration and migrations. Evidence/limits in CORE-001-CONTRACT.md; code remains local behind PROD-002. Live game/rig/save untouched; art dispatch unchanged.

@@ -106,3 +106,18 @@ Single-owner integration plan:
 - Before live wiring: isolated combined-controller sequence with sleep/save/drop conversion and pause/death/clock transitions; then actual non-saving scene/controller checks and production version/migration fault path. Current tests do not install any of that behavior.
 
 All41runtime baselines unchanged; no native player save read/write. Code/data remain work-only; source export approval is still pending.
+
+
+## Recovery/drop lifetime adapter evidence —27November,12:00UTC
+
+Work-only drop_clock_adapter.gd bridges fully validated native v4 remaining-lifetime entries to canonical absolute expiries. It does NOT advance time, own a frame tick, write a file or alter the production schema. A single caller-owned Clock.advance runs before strict expiry pruning. Native drop IDs/items/amounts/positions and optional source_scene survive unchanged; absent source_scene remains absent. This is not a browser-save import or cave/interior coordinate migration.
+
+Source oracle executes the actual browser sleepUntilMorning/updateDeath functions in a VM and imports original advanceTime.54sequences across3ages x6day times x sleep/two sleeps/defeat, each followed by active deltas0/.01/.04/.05. Tests compare immediate save projection AND next-active survivors, with synthetic save/reload roundtrip. Native2060assertions PASS/exit0; current game/model source hashes verified. Each projected drop payload is accepted by the real full native v4 validator using an existing synthetic full-document fixture. No native player save opened.
+
+Important ordering: sleep advances worldAge but does NOT immediately filter drops before save. The native projection retains expired entries at lifetime0 until the next active advance, including delta0, whose strict expires>worldAge filter removes them. Filtering during sleep/save would change browser-visible saved state/order. Reload may map old expired absolute timestamps to current age at lifetime0; tested next-active survivor semantics remain equal, not byte-identical absolute browser timestamps. Two consecutive sleeps before an active step are covered.
+
+Defeat increments the day without worldAge skip, so drop remaining lifetimes do not bulk drain. Sleep/recovery do not bulk drain the fixture effects/fuel either; this is recovery-slice evidence, NOT a full combined frame/effect/fuel integration. Source save/scene/house/regrowth callbacks remain stubs. Tests also cover non-mutating rejection of malformed lifetime fields and the native600second cap.
+
+Local files work/core001/export-drop-recovery.mjs, drop-recovery-oracle.json, drop_clock_adapter.gd and drop_recovery_audit.gd. Initial fixture/validator-method harness setup errors corrected before successful final run. Root-certificate-store diagnostic remains; no clean-log claim. All runtime/source/save hooks held, all new code stays local behind PROD-002.
+
+Next: combine independent night/survival/frame helpers into pre/post phases under ONE clock owner; do not chain their present Clock.advance calls. Use this adapter when sleep/save/drop representation crosses that owner. Production migrations/OS-fault/native non-saving scene tests remain necessary before live wiring.
