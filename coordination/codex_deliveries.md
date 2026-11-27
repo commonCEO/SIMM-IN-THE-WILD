@@ -1908,3 +1908,21 @@ Fable pulls ONE ART-006 A1-look-method note, using this new native palette evide
 Fable may demonstrate the one hypothesis in Blender on held assets, but must disclose the missing cloth_tone stand-in and cannot claim absolute colour/native results. No paid generator/reference upload. Deliver the method as prose/parameter mapping and optional labelled comparison, not a new GLB, texture sweep or another character. Godot values are proposals until Codex measures them; specular/IOR/roughness are not one-to-one across engines. Existing native baseline: warm key0.8/#fff0df, ambient0.35/#b7c9d2, Filmic, SSAO0.45/radius0.20, directional8192/ULTRA/TAA, angle0.25/range3m, original same cameras. Suspected inadequate full-body shadow coverage is to be tested, not asserted as the sole cause.
 
 ART-004 now REVIEW for pending full fit/motion; ART-006 method preparation DOING; A1 unpassed and broader NPC/world production still gated. Updated dispatch to remove obsolete v007/scheduler-refusal instructions; latest receipt remains authoritative. Published only owned prose and checksum-verified native comparison; source-export block remains untouched.
+
+## RENDER-001 fitted shadow source/range/bias diagnostics —27November,05:01UTC check
+
+Peer unchanged at970029d. Advanced the assigned native renderer task on held headv012/hairm001-B/clothingf002+m002/p001/collarv004/bootsv002. No asset, palette, camera or exposure change. All runs were own offscreen study processes, not the live game.
+
+[Native diagnostic sheet](reviews/fitted-simm-native-shadow-diagnostics.png), cropped pixels only: control range3/default bias, range30, sun-shadow-disabled source isolation, and rejected fine-bias banding. These images show tests, NOT an approved new look.
+
+Results and decisions:
+1. Max shadow distance3/12/30m at both full-figure directions did NOT visibly repair the detached rectangular floor-shadow blocks. Mode2/four-split shadow, camera near0.05/far4000, angle0.25,8192/ULTRA/TAA and all material/geometry held. The previous insufficient-range hypothesis is not supported as a sufficient fix. Do not promote12m or30m as a solved preset.
+2. Disabling directional sun shadows removes the rectangular floor mark; disabling SSAO leaves it. This isolates the visible floor defect to the sun shadow path rather than SSAO or an albedo painting. Turning sun shadows off is only a diagnostic, not the production solution; contact/form grounding must be retained.
+3. Default depth bias0.1/normal bias2 suppresses much self-shadow. Normal bias0 alone at depth0.1 does not solve the floor. Depth0.02/normal0.4 restores some chin/form shadow but introduces visible facet/terminator marks. Depth0.002/normal0.1 and zero-bias control show severe bands/acne and are REJECTED. Lowering bias blindly trades one defect for another. No finer numeric sweep assigned.
+4. Making the200m study floor receive-only (cast shadow OFF) at the same12m/default biases does not visibly solve the floor blocks. Source GLB has one actor mesh, not an extra baked shadow plane. These checks do not prove caster import/shadow mesh data is correct; that remains to isolate.
+
+All native runs exit0 but retain root-certificate-store and shader-cache _save_to_cache f.is_null errors; no script/assertion failure. No clean-log/performance or motion-stability claim. This was static studio isolation, not actual camp day/torch verification or a GPU-frame benchmark.
+
+Next Codex bounded step: isolate actor caster families and inspect actual imported shadow meshes/LOD/skeleton binding versus visible geometry, then test viewport/cascade/frustum setup with a simple known primitive control. Keep the held body/material light comparison separate. Do not compensate with brighter ambient, softer-angle stipple, shadow removal, speculative model rebuilds or global grade.
+
+Fable ART-006 one rendering-method note remains assigned; include these negative native results when proposing the next method. No new Blender asset revision requested. RENDER-001 stays DOING with NO selected lighting preset; A1 unpassed. All41runtime hashes unchanged; native save never read/written and no player process interrupted. Published only receipt/board and checksum-verified diagnostic sheet; source publication block unchanged.

@@ -13,7 +13,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | ART-004 | P0 | Fable | REVIEW | p001 native review970029d held | f002+m002+p001 working finish/material baselines; geometry/palette freeze; full motion/contact depth/game-scale acceptance pending |
 | ART-005 | P0 | Codex | TODO | ART-003/004 | Simm user checkpoint A1 with side-by-side and motion evidence; integrate only after validated fit/quality |
 | ART-006 | P1 | Fable | DOING | native supporting-palette evidence | ONE A1 lighting/material method note, max3ranked gaps with controlled hypothesis/failure criteria; no mesh or material revision; prior clearing audit retained |
-| RENDER-001 | P1 | Codex | DOING | held Simm fit candidates | Actual non-saving camp day/torch controls captured;1deg contact readable, warm fill lifts shadows but flattens form; omni/self-shadow and moving fitted-character evidence/performance pending |
+| RENDER-001 | P1 | Codex | DOING | fitted p001/f002/m002 studio controls | Sun-shadow path isolated;3/12/30m ranges and receive-only floor not fixes; low biases cause banding. Next caster/shadow-mesh/primitive-control diagnosis; no preset selected |
 | ART-007 | P1 | Fable | TODO | A1 | Leina then Bronkings, rig-compatible idle/talk packets; approved identity refs, review per character |
 | ART-008 | P1 | Fable | TODO | A1,ART-006 | Tent/workbench/forest/ground asset batches; one style family per packet; no collision/layout changes |
 | RENDER-002 | P1 | Codex | TODO | ART-007/008 | Matched clearing camera/material/light integration, day/torch/readability; A2 user checkpoint |
