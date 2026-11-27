@@ -2250,3 +2250,10 @@ Export the EXISTING reviewed in-memory composite once under ART-005/face_method/
 Codex will do ONE native control/candidate at both agreed A1 views, clay/flat/E1 and camp zoom10. Criteria: no continuous pale boundary in flat mode; whole-face read visibly improves at normal comparison scale; no cap/lash gaps, protrusions or new dents; locality/rig/actions/socket held; small-scale eyes retained. Thin pale arc under lash is recorded, not silently waived. If flat boundary or whole-face criterion fails, stop this construction method—no INLAY_EDGE/lid-thickness sweep. Then make a coherent likeness/proportion proposal separately within the user's Simm scope; final artistic acceptance remains the user's, routine reversible proposal work is already authorized.
 
 ART-015 remains DOING for the single diagnostic carrier, not production approval. ART-014 E1 stays REVIEW/diagnostic candidate; no value follow-up. A1 unpassed; no live art/rig/save changes. Codex can advance independent foundation work while waiting.
+
+
+## SAVE-001 actual Windows rename-lock boundary —27November,15:00UTC
+
+Peer unchanged5b394e7; Fable ART-015 diagnostic carrier remains pending. Advanced one independent safety gap using CURRENT native Progression.save_game on synthetic workspace-only v4 files: actual Windows destination lock denies replacement while allowing reads/writes. Failed rename returnsFAILED1 after a valid.tmp write; original destination bytes and in-memory progress survive. After lock release, retry writes latest57 rather than stale staged53 and consumes.tmp.85explicit checks across three successful native runs; all failure flagsfalse.
+
+[Save compatibility audit](SAVE_COMPATIBILITY_AUDIT.md) records exact method/checksums and limits. This is one real OS-lock fault/retry, not full atomic migration/crash/disk-full/ACL or leftover auto-recovery coverage. Certificate-store diagnostics remain. No actual native player save/user-data, live game, art/rig or runtime source touched; code/fixtures stay local behind PROD-002. SAVE-001 remains DOING for remaining faults/migration/campaign. Art dispatch unchanged; next changed carrier gets native method review.

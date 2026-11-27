@@ -27,7 +27,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 | UX-001 | P1 | Codex | TODO | PROD-003 | Complete quest/build/map tabs; exact controller context/focus/scroll; UI parity and EN/ET at3resolutions |
 | ART-010 | P2 | Fable | TODO | A2,UX-001 spec | Approved icon/UI illustration and world feedback art; source/license/export evidence |
 | AUDIO-001 | P2 | Codex | TODO | B1 | Baseline sound behavior and volume/mute, gather/craft/damage cues; no unlicensed external audio |
-| SAVE-001 | P0 | Codex | DOING | local sources; remote snapshot approval pending | Migration/save compatibility matrix and isolated test harness across supported local versions; no native save publish |
+| SAVE-001 | P0 | Codex | DOING | synthetic v1-v4 and current native save code; source export pending | Prior compatibility tests +85real Windows destination-lock/retry checks pass; no player save access. Crash/disk-full/ACL, leftover auto-recovery, proposed v5 migration and campaign-scene coverage remain |
 | ADD-001 | P2 | Fable | TODO | A2 | Bucket/penguin/boss design proposals grounded in Mattias's drawings; separate assumptions/questions from approved facts |
 | ADD-002 | P2 | Codex | BLOCKED | ADD-001 design gate | Size user additions for beta, assign implementation/art packets; no invented combat mechanics; record deferrals explicitly |
 | QA-001 | P1 | Codex | TODO | B2 | Fresh-start through ending with physical controller and save/reload, no injected progression; Mattias playtest |
@@ -167,3 +167,8 @@ Work-only combined owner now handles actual-source defeat transition through res
 ### 14:30UTC inlay method reviewed
 
 Fable5b394e7 source/patch/local composite and Blender demo reviewed; native result still UNKNOWN. Accept ONE diagnostic carrier of existing composite, not full-stage rebuild (reported brow/hair drift rejected). Require exported locality/UV/topology proof and periorbital-mask halo bounds; no blanket cheek/forehead identity claim. Whole-face Blender difference small; native normal-scale benefit and flat boundary must both pass or method stops. ART-015 DOING for that packet only; art/save/rig/live game untouched.
+
+
+### 15:00UTC actual Windows save-replace failure/retry
+
+CURRENT native v4 serializer tested under .NET-held no-delete-share destination lock: failed rename preserves original bytes/in-memory state and leaves valid.tmp. Released-lock retry writes newest state and consumes.tmp.85explicit checks PASS across setup/locked/retry; workspace-only fixture, no native player save/runtime/rig/art changes. SAVE-001 still DOING for broader IO/migration/campaign faults; see SAVE_COMPATIBILITY_AUDIT.md. Fable ART-015 dispatch unchanged.

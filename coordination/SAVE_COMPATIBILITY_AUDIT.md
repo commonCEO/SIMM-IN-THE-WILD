@@ -106,3 +106,16 @@ recovery of leftover.tmp files, permissions/disk-full faults, browser import,
 and full campaign-scene migration. No guarantee of those behaviors is made.
 The audit project is isolated and source-only publication remains pending
 approval; no test code or save fixture was added to the remote branch.
+
+
+## Real Windows destination-lock fault —27November2026,15:00UTC
+
+Exercised the CURRENT production Progression.load_game/save_game code with explicit absolute SYNTHETIC paths under work/save-rename-lock-study/. No user:// path or native player save read/write. The full v4 fixture is the previously generated test document, not a copy of player progress.
+
+A parent PowerShell .NET FileStream held the existing fixture open with FileShare.ReadWrite but without delete sharing. This permits reads/writes while blocking destination replacement. Under that real OS lock, the native serializer wrote/flushed its complete temporary candidate (wood53) but DirAccess.rename_absolute returned FAILED(1). Eight checks passed: destination SHA256 stayed exactly30ada6a946a89a1556d9de56e46886bf2a0d589df31e1b186f9e8180c894bc4d, a fresh loader still read original wood37, in-memory wood53 was preserved, and the leftover.tmp validated as the intended full v4 candidate.
+
+After the parent released its own lock in finally, a fresh invocation changed the synthetic desired state to wood57 and called the actual save path again.76checks passed: replacement returnedOK, .tmp was consumed, a fresh loader read57 rather than stale staged53, complete schema validated and all other populated fixture fields/ingredients were preserved. Setup1 +locked8 +retry76 =85checks; all three native runs exited0 with explicit failure flagsfalse.
+
+This is real Windows replacement-lock failure/retry evidence for CURRENT v4 saving, not an injected fake return code. It closes one concrete OS-fault case. It does NOT establish v5 migration atomicity, crash/power-loss durability, disk-full/ACL behavior, automatic recovery/promotion of leftovers, multi-process race safety or full campaign migration. Retry regenerates the temporary state through save_game; no automatic stale.tmp promotion was implemented or claimed.
+
+Local script work/save-rename-lock-study.gd, per-phase own logs and synthetic manifests/result JSONs under work/save-rename-lock-study/. Native certificate-store diagnostic persists; no clean-log claim. All test code/fixtures remain local behind PROD-002; only these owned findings published. Runtime source, art, rig, live game and native save untouched.
