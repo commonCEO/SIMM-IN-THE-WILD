@@ -16,6 +16,8 @@ from mathutils import Vector, kdtree
 from mathutils.bvhtree import BVHTree
 sys.dont_write_bytecode = True
 out = sys.argv[sys.argv.index("--")+1]
+import os
+STEPS = set(os.environ.get("FIN_STEPS", "sub,folds,flatten,cuff,pockets,neck").split(","))   # f002 diagnostic: run a subset
 sstep = lambda x: np.clip(x, 0, 1)**2*(3 - 2*np.clip(x, 0, 1))
 rig = bpy.data.objects["SimmRig"]; jk = bpy.data.objects["SCULPT_JACKET_LONG"]; tr = bpy.data.objects["SCULPT_JACKET_LONG_TRIM"]
 def co_of(o): a = np.empty(len(o.data.vertices)*3); o.data.vertices.foreach_get("co", a); return a.reshape(-1, 3)
@@ -64,13 +66,15 @@ w_before = {o.name: [sorted((g.group, round(g.weight, 7)) for g in v.groups) for
 # weights interpolated by the subdivision and orig_index -1.
 n_old = len(jk.data.vertices)
 bmj = bmesh.new(); bmj.from_mesh(jk.data)
+if "sub" not in STEPS: bmj.free(); bmj = None
 # edges of many-sided faces (the closed sleeve ends) are not cut: cutting them puts a new vertex at the cap's centre,
 # on the arm axis, inside the wrist
-ngon_e = {e for f in bmj.faces if len(f.verts) > 4 for e in f.edges}
-bmesh.ops.subdivide_edges(bmj, edges=[e for e in bmj.edges if e not in ngon_e], cuts=1, use_grid_fill=True, smooth=0.0)
-oil_ = bmj.verts.layers.int["orig_index"]; bmj.verts.ensure_lookup_table()
-for v in bmj.verts[n_old:]: v[oil_] = -1
-bmj.to_mesh(jk.data); bmj.free(); jk.data.update()
+if bmj is not None:
+    ngon_e = {e for f in bmj.faces if len(f.verts) > 4 for e in f.edges}
+    bmesh.ops.subdivide_edges(bmj, edges=[e for e in bmj.edges if e not in ngon_e], cuts=1, use_grid_fill=True, smooth=0.0)
+    oil_ = bmj.verts.layers.int["orig_index"]; bmj.verts.ensure_lookup_table()
+    for v in bmj.verts[n_old:]: v[oil_] = -1
+    bmj.to_mesh(jk.data); bmj.free(); jk.data.update()
 for p_ in jk.data.polygons: p_.use_smooth = True
 # new vertices only: drop interpolated weights under 0.01, keep at most 4, renormalise (clean export)
 for v in jk.data.vertices[n_old:]:
@@ -93,16 +97,16 @@ for a, b in ed: par[fnd(a)] = fnd(b)
 root = np.array([fnd(i) for i in range(len(J0))]); ids, cnt = np.unique(root, return_counts=True); torso_id = ids[cnt.argmax()]
 side = np.array(["" if r == torso_id else ("l" if J0[root == r][:, 0].mean() < 0 else "r") for r in root])
 print("PIECES jacket: torso %d vertices, sleeves %d (l) and %d (r)" % ((side == "").sum(), (side == "l").sum(), (side == "r").sum()))
-set_co(jk, J0 + fold_field(J0, side))
+if "folds" in STEPS: set_co(jk, J0 + fold_field(J0, side))
 J1 = co_of(jk)
 jt = BVHTree.FromPolygons([tuple(p) for p in J1], [tuple(p.vertices) for p in jk.data.polygons])
 tkd = kdtree.KDTree(len(J0))
 for i, p in enumerate(J0): tkd.insert(Vector(p), i)
 tkd.balance()
 tside = np.array([side[tkd.find(Vector(p))[1]] for p in T0])             # trim follows the piece it sits on
-T1 = T0 + fold_field(T0, tside)
+T1 = T0 + fold_field(T0, tside) if "folds" in STEPS else T0.copy()
 FLAT = 0.40
-for i, p in enumerate(T1):
+for i, p in (enumerate(T1) if "flatten" in STEPS else []):
     loc, nrm, _, d = jt.find_nearest(Vector(p), 0.05)
     if loc is None: continue
     loc = np.array(loc); nrm = np.array(nrm); off = p - loc; dn = float(off @ nrm)
@@ -122,7 +126,7 @@ for v in tb_.verts:
     comps.append(c)
 tb_.free()
 cuffs = [c for c in comps if len(c) == 726]; assert len(cuffs) == 2, [len(c) for c in comps]
-for c in cuffs:
+for c in (cuffs if "cuff" in STEPS else []):
     P_ = T1[c]; cen = P_.mean(0); sd = "l" if cen[0] < 0 else "r"; h, t = B["forearm_" + sd]; ax = (t - h)/np.linalg.norm(t - h)
     along = (P_ - cen) @ ax; lo = along.max()                                       # ax points toward the wrist
     T1[c] = P_ + np.outer((along - lo)*1.0, ax)                                    # wrist edge fixed, band doubles toward the elbow
@@ -131,6 +135,8 @@ for o in (jk, tr):
     assert [sorted((g.group, round(g.weight, 7)) for g in v.groups) for v in o.data.vertices] == w_before[o.name], o.name + ": weights changed"
 print("FOLDS jacket: %d of %d vertices moved over 0.1 mm, max %.1f mm; trim: max move %.1f mm" % (int((np.linalg.norm(J1 - J0, axis=1) > 1e-4).sum()), len(J0), np.linalg.norm(J1 - J0, axis=1).max()*1000, np.linalg.norm(T1 - T0, axis=1).max()*1000))
 
+if "pockets" not in STEPS:
+    bpy.ops.wm.save_as_mainfile(filepath=out); raise SystemExit(0)
 # 3: pockets ----------------------------------------------------------------------------------------------------
 kd = kdtree.KDTree(len(J1))
 for i, p in enumerate(J1): kd.insert(Vector(p), i)

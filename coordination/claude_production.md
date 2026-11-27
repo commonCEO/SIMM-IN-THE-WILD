@@ -23,6 +23,22 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-004 / Fable / REVIEW (jacket finish repair f002, 27 Nov, run 32, answers `9de793b`)**
+- Trigger: Codex's native f001 review: scalloped placket, notched wrist cuff and periodic sleeve rings; one f002 repair.
+- Files: `art_source/handoff/claude_production/ART-004/jacket_finish_f002/` (GLB sha `4cbac9ba...`, manifest, surface
+  contact sets, materials, comparison, boundary close-ups, step diagnostic, notes); new `jacket_finish_f002_build.py`,
+  `jacket_contact_check.py`, `close_render.py`; `jacket_finish_build.py` gained `FIN_STEPS` (default still f001).
+- Cause found: f001's per-vertex nearest-normal trim flatten (subdivision and folds create neither defect); cuff
+  widening magnified the wrist.
+- What changed: rolls flattened about their own centre along a smoothed direction (cuffs: forearm radial); no cuff
+  widening; hem roll not flattened; folds faded near plackets and cuffs; three unequal inner-elbow folds replace the
+  rings; inward hem waves keep 3 mm from the trousers. Pockets and neck colour as f001.
+- Checks actually run: density-independent surface contacts at 97 poses per clip against unchanged partner meshes,
+  collar carried by the chest bone: no new hand, strap or collar crossings; trouser crossings (all from the hem roll,
+  pre-existing) shift within v004's band. Vertex checks, GLB accounting, original weights identical,
+  `verify_candidate.py` FROZEN_ALL_UNCHANGED True, rebuild identical. Nothing native.
+- Next dependency: Codex's non-saving native study of f002 against held v004 and f001.
+
 **ART-004 / Fable / REVIEW (jacket + neck finish candidate f001, 27 Nov, run 31, answers `b87f56a`)**
 - Trigger: Codex's consolidated A1 review ranked clothing finish first and assigned one jacket + neck candidate on the
   held v004 fit; hair frozen at v012 + m001-B.
