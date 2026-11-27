@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: inlay native whole-face gate failed; ART-015 stopped. ART-016 Fable ONE holistic silhouette/face clay head blockout, no material microcycles. Heldv012/E1 remain controls; A1 unpassed, no live swap/wider art. Rig/save/body and source-export protections held.
+Current active: ART-016 B1 native gate failed; method stopped. ART-017 Fable different topology/control construction proposal and analytical silhouette/flow sketch before another export. Heldv012 remains control; A1 unpassed; no live swap/wider art. Rig/save/source-export protections held.
 
 ## Ticket update format
 
@@ -61,7 +61,7 @@ Codex READY production tickets remain actionable despite that restriction.
 | ART-013 | P1 | Codex | TODO | inherited tool diagnostics10:31 / rejected common tilt11:00 | Per-tool/per-state carry/action presentation with grip preserved and true turning/motion/depth controls; protect original rig/actions. Not fixed by a universal offset; known issue retained during A1 evidence preparation |
 | ART-014 | P0 | Fable; Codex native review | REVIEW | d53fde4 native A/B13:30 | E1 colour/emission improved; R3/R5 pass, normal-view R2 retains highlight, R4 highlight unresolved at zoom10, R1 boundary FAIL persists with flat unlit eye materials. Hold E1 diagnostic, stop material tuning; no live baseline |
 | ART-015 | P0 | Fable; Codex | REVIEW | carrierd5a0b9d native gate15:30 | STOPPED: flat lip improves but E1 arc worsens and whole-face likeness does not clearly improve; strict nose freeze fails. Diagnosis retained, carrier not adopted; no parameter sweep or production head |
-| ART-016 | P0 | Fable; Codex native gate | DOING | eye/hair micro-method stop rules; user Simm likeness scope | ONE whole-head silhouette/face clay blockout B1,6–10major hair clumps + facial landmark relationships; static diagnostic/source only, protected neck/body/rig/actions/save. Clear whole-head two-view improvement required before detail |
+| ART-016 | P0 | Fable; Codex native gate | REVIEW | peer0ed18b4; four matched native clay captures | STOPPED/rejected: crown horns, dangling fringe lobes and helmet side wall worsen whole-head likeness in both views. Smaller eyes hypothesis only; no live adoption or parameter sweep |
 | EVID-001 | P1 | Codex | DONE | none |3current native clearing frames: reference, alternate, gameplay zoom; no saving or live game disruption; unblock ART-006 |
 
 
@@ -183,3 +183,5 @@ Raw GLB topology/UV/transforms/images independently verified;16native studio/cam
 ### 16:00UTC rich nested save fixture
 
 131checks PASS for actual native v4 load/save and proposed-v5 roundtrip of populated world/drop/resource/wildlife/skills/gear/bow/companion state, optional scene absence and future-version rejection preserving rich object state.11nested corruptions reject without mutation. Representative synthetic current-v4 coverage, not production migration/campaign parity. SAVE-001/CORE-001 remain DOING; code/fixtures local, runtime/player save untouched. Fable ART-016 unchanged.
+
+| ART-017 | P0 | Fable | DOING | ART-016 B1 native rejection | ONE different hair construction route proposal + analytical silhouette/flow sketch, two-view early rejection gate; no sculpt/export until reviewed implementation brief. See latest Codex receipt |
