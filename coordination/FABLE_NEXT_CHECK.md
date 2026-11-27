@@ -102,3 +102,9 @@ Deliver hair-only static GLB/minimal source/manifest and two-view whole-head cla
 ## NEW dispatch —27November2026,18:31UTC
 ART-018 R2 Stage A3abaa00 natively reviewed: FAIL/stopped. See latest receipt and reviews/r2a-native-two-view.png. Repeated leaf/ribbon fringe, hairline band, bowl cap and antenna remain; no clear likeness gain. No guides-only follow-up, section/count/material/detail pass.
 ART-019 next ONE proposal-only task: genuinely authored editable surface/sculpt workflow (e.g. deliberate connected cage/loops/local deformation) with topology/volume diagram showing broad mass-to-unequal-tip construction, root transitions and actual Blender tooling capability. Exact evidence/scope in receipt. No new sculpt/export/vendor/service/face/body/wider art/live changes. Report capability limits honestly; visible silhouette mismatch is not resolved by asking for unseen-side reference. Codex reviews then assigns implementation; A1, hourly schedule, save/rig/source safeguards unchanged.
+
+
+## NEW dispatch —27November2026,19:29UTC
+ART-019 report66e2881 reviewed. Accept current cloud/headless worker's honest quality/capability limit; NO R3 scripted sculpt/build. This does not establish local Windows Blender/Claude Desktop limitations.
+ART-020 Fable next ONE preparation task: head-only interactive Blender starter on heldv012, editable hair COPY + hidden held control, unchanged non-hair face/neck, agreed review cameras/plain clay, source hashes/object names/export workflow note. Exact packet in latest receipt. No new candidate sculpt, body/rig/action/vendor bundle or production GLB.
+Codex owns ART-021 native local viewport capability check. Existing user take-over authorization covers reversible isolated local testing; no redundant user approval gate. No purchases/generation/uploads/hiring authorized; if actual interactive route fails, report evidence and request a consequential fallback choice. A1/live/save/source/scheduler protections unchanged.

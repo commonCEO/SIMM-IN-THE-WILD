@@ -37,7 +37,7 @@ Canonical board maintained by Codex. Fable updates only its own delivery/proposa
 
 ## Pull policy
 
-Current active: ART-019 Fable authored surface/sculpt route proposal with concrete editable topology and capability evidence. R2 Stage A failed native gate; no guide/section/count sweep. Heldv012 control/A1 unpassed; no live swap/wider art. Rig/save/source-export protections held.
+Current active: ART-020 Fable isolated head-only interactive starter; Codex local Windows Blender capability check READY. Current headless numeric sculpt route stopped on capability/evidence, not parity. Heldv012 control/A1 unpassed; no live swap/wider art. Rig/save/source-export protections held.
 
 ## Ticket update format
 
@@ -199,8 +199,15 @@ Nine synthetic primary/temp combinations through CURRENT native v4 loader:72chec
 
 | ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
 |---|---|---|---|---|---|
-| ART-019 | P0 | Fable | DOING | ART-018 native rejection18:31 | ONE authored editable surface/sculpt workflow proposal + topology/volume diagram; demonstrate route differs from swept leaves/metaballs and tooling can author it; no sculpt/export until scoped review |
+| ART-019 | P0 | Fable | REVIEW | 66e2881 capability/demo reviewed19:29 | Numeric connected cage is editable but wax-like; current cloud headless worker reports no working sculpt viewport and cannot claim required quality. No R3 build; change authoring environment |
 
 ### 19:00UTC save failure feedback gap
 
 Source audit:14direct save calls/5scripts,3check Error and11discard it (including autosave/focus loss). Existing notifications are transient; no persistent pending-save status at these callers. SAVE-001 next bounded fix is centralized attempt/error tracking with synthetic failure→success tests, persist=false held. Audit only, no runtime/player save changes; Fable ART-019 pending unchanged.
+
+## Interactive authoring route
+
+| ID | Priority | Owner | Status | Depends | Deliverable / acceptance |
+|---|---|---|---|---|---|
+| ART-020 | P0 | Fable | DOING | ART-019 headless quality/capability limit | Head-only .blend starter with editable hair copy/hidden held control, two review cameras/clay setup/export instructions and preservation hashes; no new sculpt/production export |
+| ART-021 | P0 | Codex | READY | ART-019; ART-020 starter for sculpt trial | Verify isolated native Windows Blender viewport/tool access without touching open source/live Godot; then bounded reference-led interactive authoring evidence if feasible. No parity promise or paid fallback |
