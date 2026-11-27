@@ -1,0 +1,177 @@
+{
+ "packet": "ART-016 head blockout B1, CLAY diagnostic (Codex brief faa8749); not a production head",
+ "glb": {
+  "file": "simm_head_b1_clay.glb",
+  "sha256": "c65c3836688a99f20e381924de56684fe16f5ff8eced06c2faabfe82b7c1ad68",
+  "bytes": 1904264,
+  "total_triangles": 87444,
+  "bounds_min_blender_zup": [
+   -0.2198,
+   -0.1498,
+   0.9361
+  ],
+  "bounds_max_blender_zup": [
+   0.1849,
+   0.2252,
+   1.4548
+  ],
+  "root": "SCULPT_HEAD_ROOT at the origin, identity (as v012)",
+  "armatures": 0,
+  "animations": 0,
+  "cameras": 0,
+  "lights": 0
+ },
+ "parts": {
+  "SCULPT_HEAD": {
+   "base_vertices": 4118,
+   "held_base_vertices": 4118,
+   "base_moved_over_0.05mm": 1235,
+   "base_max_move_mm": 7.86,
+   "neck_vertices_z_below_1.02": 308,
+   "neck_max_move_mm": 0.0,
+   "lower_face_below_z_1.10_max_move_mm": 0.0,
+   "moved_region_min": [
+    -0.132,
+    -0.116,
+    1.102
+   ],
+   "moved_region_max": [
+    0.132,
+    -0.055,
+    1.256
+   ],
+   "glb_vertices": 21673,
+   "glb_triangles": 33000,
+   "glb_bounds_min": [
+    -0.1799,
+    -0.1298,
+    0.9361
+   ],
+   "glb_bounds_max": [
+    0.1799,
+    0.1964,
+    1.3131
+   ],
+   "glb_materials": [
+    "B1_CLAY"
+   ]
+  },
+  "SCULPT_EYE_L": {
+   "base_vertices": 922,
+   "held_base_vertices": 922,
+   "base_moved_over_0.05mm": 0,
+   "base_max_move_mm": 0.0,
+   "glb_vertices": 922,
+   "glb_triangles": 1840,
+   "glb_bounds_min": [
+    0.026,
+    -0.1043,
+    1.116
+   ],
+   "glb_bounds_max": [
+    0.098,
+    -0.0323,
+    1.188
+   ],
+   "glb_materials": [
+    "B1_EYE_DARK"
+   ]
+  },
+  "SCULPT_EYE_R": {
+   "base_vertices": 922,
+   "held_base_vertices": 922,
+   "base_moved_over_0.05mm": 0,
+   "base_max_move_mm": 0.0,
+   "glb_vertices": 922,
+   "glb_triangles": 1840,
+   "glb_bounds_min": [
+    -0.098,
+    -0.1043,
+    1.116
+   ],
+   "glb_bounds_max": [
+    -0.026,
+    -0.0323,
+    1.188
+   ],
+   "glb_materials": [
+    "B1_EYE_DARK"
+   ]
+  },
+  "SCULPT_BROWS": {
+   "base_vertices": 284,
+   "held_base_vertices": 284,
+   "base_moved_over_0.05mm": 284,
+   "base_max_move_mm": 1.65,
+   "glb_vertices": 348,
+   "glb_triangles": 560,
+   "glb_bounds_min": [
+    -0.0776,
+    -0.1131,
+    1.1985
+   ],
+   "glb_bounds_max": [
+    0.0776,
+    -0.1016,
+    1.2084
+   ],
+   "glb_materials": [
+    "B1_CLAY"
+   ]
+  },
+  "SCULPT_LASHES": {
+   "base_vertices": 564,
+   "held_base_vertices": 564,
+   "base_moved_over_0.05mm": 564,
+   "base_max_move_mm": 7.54,
+   "glb_vertices": 656,
+   "glb_triangles": 1120,
+   "glb_bounds_min": [
+    -0.0794,
+    -0.1015,
+    1.1593
+   ],
+   "glb_bounds_max": [
+    0.0794,
+    -0.0993,
+    1.1761
+   ],
+   "glb_materials": [
+    "B1_CLAY"
+   ]
+  },
+  "SCULPT_HAIR": {
+   "base_vertices": 24544,
+   "held_base_vertices": 21387,
+   "note": "rebuilt from scratch (different vertex count)",
+   "glb_vertices": 24544,
+   "glb_triangles": 49084,
+   "glb_bounds_min": [
+    -0.2198,
+    -0.1498,
+    1.0663
+   ],
+   "glb_bounds_max": [
+    0.1849,
+    0.2252,
+    1.4548
+   ],
+   "glb_materials": [
+    "B1_CLAY"
+   ]
+  }
+ },
+ "source_blend": {
+  "file": "head_b1_source.blend",
+  "sha256": "7d3d733862be71a50fb351a0123f769cd253362a8c68a3ea434eed2bcb0f6dfb",
+  "objects": [
+   "SCULPT_BROWS",
+   "SCULPT_EYE_L",
+   "SCULPT_EYE_R",
+   "SCULPT_HAIR",
+   "SCULPT_HEAD",
+   "SCULPT_HEAD_ROOT",
+   "SCULPT_LASHES"
+  ]
+ }
+}

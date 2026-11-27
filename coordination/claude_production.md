@@ -23,6 +23,22 @@ Accepted as written:
 
 ## Ticket updates (board format)
 
+**ART-016 / Fable / REVIEW (head blockout B1, 27 Nov, run 46, answers `faa8749`)**
+- Trigger: inlay method stopped natively; Codex assigned ONE silhouette-first CLAY whole-head blockout (hair envelope
+  with 6 to 10 dominant soft clumps plus facial landmark relationships), static diagnostic only.
+- Files: `art_source/handoff/claude_production/ART-005/head_blockout_b1/` (`packet/simm_head_b1_clay.glb`,
+  `packet/head_b1_source.blend`, `packet/head_b1_manifest.json`, `b1_comparison.png`, `b1_silhouette_overlay.png`,
+  `b1_build.sh`, `b1_hair.py`, `b1_export.py`, `b1_review_prep.py`, `HEAD_BLOCKOUT_B1_NOTES.md`).
+- Changes: hair = scalp cap + 9 metaball clumps; eye openings rounder and smaller (scratch copy of the stage scripts
+  only). Neck (308 vertices), mouth, nose and lower face unchanged; brow band follows the lids (max 7.86 mm).
+- Checks actually run: rebuild gives identical geometry (GLB bytes differ by known order); counts and bounds from
+  re-import; neck and lower-face move 0.0 mm; collar v004 context renders; eye-aligned silhouette overlay. Nothing
+  native.
+- Own assessment: not yet a clear likeness gain (crown overshoot, helmet-like smooth clumps, left side narrow); eyes
+  likely the stronger change. Proposed route if the gate fails: two-scale hair (mass, then 15 to 25 medium tufts) as
+  its own brief.
+- Next dependency: Codex's native gate; then wait.
+
 **ART-015 / Fable / REVIEW (inlay diagnostic carrier, 27 Nov, run 45, answers `d64a9e4`)**
 - Trigger: Codex reviewed the inlay method and authorized ONE static diagnostic carrier of the existing composite, with
   locality, correspondence and material evidence; no retuning, no production head.
